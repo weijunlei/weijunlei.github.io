@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>UNC多粒度支撑段落和支撑句</title>
+      <link href="/2019/12/08/unc-duo-li-du-zhi-cheng-duan-luo-he-zhi-cheng-ju/"/>
+      <url>/2019/12/08/unc-duo-li-du-zhi-cheng-duan-luo-he-zhi-cheng-ju/</url>
+      
+        <content type="html"><![CDATA[<h1 id="UNC多粒度支撑段落和支撑句"><a href="#UNC多粒度支撑段落和支撑句" class="headerlink" title="UNC多粒度支撑段落和支撑句"></a>UNC多粒度支撑段落和支撑句</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1909.08041.pdf" target="_blank" rel="noopener">Revealing the Importance of Semantic Retrieval<br>for Machine Reading at Scale</a></p><h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>通过term按照文本相关性搜索到可靠数量的段落，然后通过神经网络模型召回支撑段落，然后再在支撑段落里召回支撑句，并且文章做了大量的消融实验证明了支撑段落具有重大意义，支撑句需要有一些噪音效果才比较好。</p><h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><p>开源</p><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p><a href="easonnie/semanticRetrievalMRS">easonnie/semanticRetrievalMRS</a></p><h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>无</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> NLP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 论文阅读 IR 信息检索 hotpotqa emnlp 2019 multi-hot 消融实验 需要精读 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微软实验室HGN分层图网络</title>
+      <link href="/2019/12/08/wei-ruan-shi-yan-shi-hgn-fen-ceng-tu-wang-luo/"/>
+      <url>/2019/12/08/wei-ruan-shi-yan-shi-hgn-fen-ceng-tu-wang-luo/</url>
+      
+        <content type="html"><![CDATA[<h1 id="微软实验室HGN分层图网络"><a href="#微软实验室HGN分层图网络" class="headerlink" title="微软实验室HGN分层图网络"></a>微软实验室HGN分层图网络</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.03631.pdf" target="_blank" rel="noopener">Hierarchical Graph Network for Multi-hop Question Answering</a></p><h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>使用图神经网络实现段落、句子、实体关联加入到多步问答中，做了大量消融实验，包含各个层之间的消融以及不同预训练模型的消融</p><h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><p>非开源</p><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p>无</p><h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>无</p><h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><p>EMNLP2019 hotpotqa GNN 分层 multi-hop</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> NLP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 阅读理解 图神经网络 多层图神经网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>blog_builder</title>
       <link href="/2019/12/08/blog-builder/"/>
       <url>/2019/12/08/blog-builder/</url>
