@@ -363,14 +363,14 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">3</a></span>
+    <span class="count"><a href="/categories">2</a></span>
     <span class="name">Categories</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">4</a></span>
+    <span class="count"><a href="/tags">17</a></span>
     <span class="name">Tags</span>
 </div>
 
@@ -393,14 +393,14 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">3</a></span>
+    <span class="count"><a href="/categories">2</a></span>
     <span class="name">Categories</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">4</a></span>
+    <span class="count"><a href="/tags">17</a></span>
     <span class="name">Tags</span>
 </div>
 
@@ -586,7 +586,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"NLP","value":2},{"name":"实用技巧","value":1},{"name":"NLP 阅读理解","value":1}],
+                data: [{"name":"NLP","value":4},{"name":"实用技巧","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -610,7 +610,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["论文阅读 IR 信息检索 hotpotqa emnlp 2019 multi-hot 消融实验 需要精读","博客搭建","阅读理解 图神经网络 多层图神经网络","阅读理解 个人论文理解"]
+                data: ["阅读理解","信息检索","网络结构","博客搭建","Attention","个人论文理解","论文阅读","IR","BERT","hotpotqa"]
             }
         ],
         yAxis: [
@@ -623,7 +623,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [1,1,1,1],
+                data: [2,1,1,1,1,1,1,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -756,8 +756,20 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-IR-%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2-hotpotqa-emnlp-2019-multi-hot-%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C-%E9%9C%80%E8%A6%81%E7%B2%BE%E8%AF%BB/">
-                <span class="chip center-align waves-effect waves-light chip-default">论文阅读 IR 信息检索 hotpotqa emnlp 2019 multi-hot 消融实验 需要精读</span>
+            <a href="/tags/Attention/">
+                <span class="chip center-align waves-effect waves-light chip-default">Attention</span>
+            </a>
+            
+            
+            
+            <a href="/tags/BERT/">
+                <span class="chip center-align waves-effect waves-light chip-default">BERT</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">
+                <span class="chip center-align waves-effect waves-light chip-default">网络结构</span>
             </a>
             
             
@@ -768,14 +780,80 @@
             
             
             
-            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3-%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E5%A4%9A%E5%B1%82%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                <span class="chip center-align waves-effect waves-light chip-default">阅读理解 图神经网络 多层图神经网络</span>
+            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
+                <span class="chip center-align waves-effect waves-light chip-default">阅读理解</span>
             </a>
             
             
             
-            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3-%E4%B8%AA%E4%BA%BA%E8%AE%BA%E6%96%87%E7%90%86%E8%A7%A3/">
-                <span class="chip center-align waves-effect waves-light chip-default">阅读理解 个人论文理解</span>
+            <a href="/tags/%E4%B8%AA%E4%BA%BA%E8%AE%BA%E6%96%87%E7%90%86%E8%A7%A3/">
+                <span class="chip center-align waves-effect waves-light chip-default">个人论文理解</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+                <span class="chip center-align waves-effect waves-light chip-default">论文阅读</span>
+            </a>
+            
+            
+            
+            <a href="/tags/IR/">
+                <span class="chip center-align waves-effect waves-light chip-default">IR</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2/">
+                <span class="chip center-align waves-effect waves-light chip-default">信息检索</span>
+            </a>
+            
+            
+            
+            <a href="/tags/hotpotqa/">
+                <span class="chip center-align waves-effect waves-light chip-default">hotpotqa</span>
+            </a>
+            
+            
+            
+            <a href="/tags/emnlp/">
+                <span class="chip center-align waves-effect waves-light chip-default">emnlp</span>
+            </a>
+            
+            
+            
+            <a href="/tags/2019/">
+                <span class="chip center-align waves-effect waves-light chip-default">2019</span>
+            </a>
+            
+            
+            
+            <a href="/tags/multi-hot/">
+                <span class="chip center-align waves-effect waves-light chip-default">multi-hot</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C/">
+                <span class="chip center-align waves-effect waves-light chip-default">消融实验</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E9%9C%80%E8%A6%81%E7%B2%BE%E8%AF%BB/">
+                <span class="chip center-align waves-effect waves-light chip-default">需要精读</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                <span class="chip center-align waves-effect waves-light chip-default">图神经网络</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%A4%9A%E5%B1%82%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                <span class="chip center-align waves-effect waves-light chip-default">多层图神经网络</span>
             </a>
             
             
