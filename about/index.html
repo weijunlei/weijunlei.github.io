@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="zh-CN">
 
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="About, 小风雷">
-    <meta name="description" content="About | 小风雷">
+    <meta name="keywords" content="关于, 小风雷">
+    <meta name="description" content="关于 | 小风雷">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>About | 小风雷</title>
+    <title>关于 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -107,25 +107,14 @@
       
       <i class="fas fa-comments" style="zoom: 0.6;"></i>
       
-      <span>链接</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友链</span>
+      <span>留言板</span>
     </a>
     
   </li>
   
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -209,18 +198,7 @@
 			
 			    <i class="fa-fw fas fa-comments"></i>
 			
-			链接
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友链
+			留言板
 		</a>
           
         </li>
@@ -294,21 +272,21 @@
                         
 <div class="statis">
     <span class="count"><a href="/">6</a></span>
-    <span class="name">Posts</span>
+    <span class="name">文章</span>
 </div>
 
 
 
 <div class="statis">
     <span class="count"><a href="/categories">2</a></span>
-    <span class="name">Categories</span>
+    <span class="name">分类</span>
 </div>
 
 
 
 <div class="statis">
     <span class="count"><a href="/tags">18</a></span>
-    <span class="name">Tags</span>
+    <span class="name">标签</span>
 </div>
 
 
@@ -324,21 +302,21 @@
                                     
 <div class="statis">
     <span class="count"><a href="/">6</a></span>
-    <span class="name">Posts</span>
+    <span class="name">文章</span>
 </div>
 
 
 
 <div class="statis">
     <span class="count"><a href="/categories">2</a></span>
-    <span class="name">Categories</span>
+    <span class="name">分类</span>
 </div>
 
 
 
 <div class="statis">
     <span class="count"><a href="/tags">18</a></span>
-    <span class="name">Tags</span>
+    <span class="name">标签</span>
 </div>
 
 
@@ -435,7 +413,7 @@
 
 <div id="postCharts" class="post-charts">
     <div class="title center-align" data-aos="zoom-in-up">
-        <i class="far fa-bar-chart"></i>&nbsp;&nbsp;Post Charts
+        <i class="far fa-bar-chart"></i>&nbsp;&nbsp;文章统计图
     </div>
     <div class="row">
         <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
@@ -462,7 +440,7 @@
 
     let postsOption = {
         title: {
-            text: 'Post Publish Chart',
+            text: '文章发布统计图',
             top: -5,
             x: 'center'
         },
@@ -478,7 +456,7 @@
         },
         series: [
             {
-                name: 'Number of posts',
+                name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
                 data: [0,0,0,0,0,0,0,0,0,0,0,0,6],
@@ -488,17 +466,17 @@
                     data: [{
                         type: 'max',
                         itemStyle: {color: ['#3ecf8e']},
-                        name: 'Maximum'
+                        name: '最大值'
                     }, {
                         type: 'min',
                         itemStyle: {color: ['#fa755a']},
-                        name: 'Minimum'
+                        name: '最小值'
                     }]
                 },
                 markLine: {
                     itemStyle: {color: ['#ab47bc']},
                     data: [
-                        {type: 'average', name: 'Average'}
+                        {type: 'average', name: '平均值'}
                     ]
                 }
             }
@@ -509,7 +487,7 @@
 
     let categoriesOption = {
         title: {
-            text: 'Categories Chart',
+            text: '文章分类统计图',
             top: -4,
             x: 'center'
         },
@@ -519,7 +497,7 @@
         },
         series: [
             {
-                name: 'Categories',
+                name: '分类',
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
@@ -539,7 +517,7 @@
 
     let tagsOption = {
         title: {
-            text: 'TOP10 Tags Chart',
+            text: 'TOP10 标签统计图',
             top: -5,
             x: 'center'
         },
@@ -547,7 +525,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["阅读理解","论文阅读","信息检索","hotpotqa","emnlp","2019","multi-hot","消融实验","需要精读","IR"]
+                data: ["阅读理解","multi-hot","网络结构","论文阅读","IR","信息检索","hotpotqa","emnlp","2019","BERT"]
             }
         ],
         yAxis: [
@@ -566,17 +544,17 @@
                     data: [{
                         type: 'max',
                         itemStyle: {color: ['#3ecf8e']},
-                        name: 'Maximum'
+                        name: '最大值'
                     }, {
                         type: 'min',
                         itemStyle: {color: ['#fa755a']},
-                        name: 'Minimum'
+                        name: '最小值'
                     }],
                 },
                 markLine: {
                     itemStyle: {color: ['#ab47bc']},
                     data: [
-                        {type: 'average', name: 'Average'}
+                        {type: 'average', name: '平均值'}
                     ]
                 }
             }
@@ -593,7 +571,7 @@
                 
 <div class="my-projects">
     <div class="title center-align" data-aos="zoom-in-up">
-        <i class="fas fa-gift"></i>&nbsp;&nbsp;My Projects
+        <i class="fas fa-gift"></i>&nbsp;&nbsp;我的项目
     </div>
     <div class="row">
         
@@ -633,7 +611,7 @@
                 
 <div class="my-skills">
     <div class="title center-align" data-aos="zoom-in-up">
-        <i class="fas fa-wrench"></i>&nbsp;&nbsp;My Skills
+        <i class="fas fa-wrench"></i>&nbsp;&nbsp;我的技能
     </div>
     <div class="row">
         
@@ -689,8 +667,26 @@
 
     
     <div class="other-skills chip-container" data-aos="zoom-in-up">
-        <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;Other Skills</div>
+        <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
         <div class="tag-chips center-align">
+            
+            
+            <a href="/tags/Attention/">
+                <span class="chip center-align waves-effect waves-light chip-default">Attention</span>
+            </a>
+            
+            
+            
+            <a href="/tags/BERT/">
+                <span class="chip center-align waves-effect waves-light chip-default">BERT</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">
+                <span class="chip center-align waves-effect waves-light chip-default">网络结构</span>
+            </a>
+            
             
             
             <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
@@ -747,6 +743,12 @@
             
             
             
+            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
+                <span class="chip center-align waves-effect waves-light chip-default">博客搭建</span>
+            </a>
+            
+            
+            
             <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
                 <span class="chip center-align waves-effect waves-light chip-default">阅读理解</span>
             </a>
@@ -755,30 +757,6 @@
             
             <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">
                 <span class="chip center-align waves-effect waves-light chip-default">数据集</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Attention/">
-                <span class="chip center-align waves-effect waves-light chip-default">Attention</span>
-            </a>
-            
-            
-            
-            <a href="/tags/BERT/">
-                <span class="chip center-align waves-effect waves-light chip-default">BERT</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">
-                <span class="chip center-align waves-effect waves-light chip-default">网络结构</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                <span class="chip center-align waves-effect waves-light chip-default">博客搭建</span>
             </a>
             
             
@@ -812,7 +790,7 @@
                 
 <div id="myGallery" class="my-gallery">
     <div class="title center-align" data-aos="zoom-in-up">
-        <i class="far fa-image"></i>&nbsp;&nbsp;Gallery
+        <i class="far fa-image"></i>&nbsp;&nbsp;相册
     </div>
     <div class="row">
         
@@ -974,8 +952,8 @@
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
