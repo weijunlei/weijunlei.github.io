@@ -231,10 +231,10 @@ mySkills:
   data:
     Python:
       background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
-      percent: 70%
+      percent: 60%
     Java:
       background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
-      percent: 70%
+      percent: 60%
     机器学习:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
       percent: 60%
@@ -388,24 +388,16 @@ libs:
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
 featureImages:
-- /medias/featureimages/6.jpg
-- /medias/featureimages/7.jpg
-- /medias/featureimages/8.jpg
-- /medias/featureimages/9.jpg
-- /medias/featureimages/10.jpg
-- /medias/featureimages/11.jpg
-- /medias/featureimages/12.jpg
-- /medias/featureimages/13.jpg
-- /medias/featureimages/14.jpg
-- /medias/featureimages/15.jpg
-- /medias/featureimages/16.jpg
-- /medias/featureimages/17.jpg
-- /medias/featureimages/18.jpg
-- /medias/featureimages/19.jpg
-- /medias/featureimages/20.jpg
-- /medias/featureimages/21.jpg
-- /medias/featureimages/22.jpg
-- /medias/featureimages/23.jpg
+- https://i.loli.net/2020/03/03/F4W1z6Cyjq8hDsH.jpg
+- https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg
+- https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg
+- https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg
+- https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg
+- https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg
+- https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg
+- https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg
+- https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg
+- https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg
 
 # default configs that the default policy for every articles/posts
 # default 配置文章的默认转载规则
