@@ -248,7 +248,15 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    var picList=new Array(7)
+    picList[1]='https://i.loli.net/2020/03/02/vspzqOFdrbfA93h.jpg'
+    picList[2]='https://i.loli.net/2020/03/02/mgbTjPYOen2Lcvk.jpg'
+    picList[3]='https://i.loli.net/2020/03/02/FmTtCBNx6PEOezD.jpg'
+    picList[4]='https://i.loli.net/2020/03/02/vMWbfqQp4YTHECy.jpg'
+    picList[5]='https://i.loli.net/2020/03/02/sOnTaMlKJejE2xq.jpg'
+    picList[6]='https://i.loli.net/2020/03/02/pc4xvjrtyLgkmFD.jpg'
+    picList[7]='https://i.loli.net/2020/03/02/NrHaPnhXcMS63bu.jpg'
+    $('.bg-cover').css('background-image', 'url(' + picList[new Date().getDay()] + ')');
 </script>
 
 
@@ -446,7 +454,7 @@
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="hotpotqa分析">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hotpotqa分析">
                             
                             <span class="card-title">hotpotqa分析</span>
                         </div>
@@ -478,7 +486,7 @@
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="微软实验室HGN分层图网络">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="微软实验室HGN分层图网络">
                             
                             <span class="card-title">微软实验室HGN分层图网络</span>
                         </div>
@@ -583,19 +591,11 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=11111111" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 11111111" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>

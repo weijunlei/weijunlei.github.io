@@ -295,7 +295,15 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    var picList=new Array(7)
+    picList[1]='https://i.loli.net/2020/03/02/vspzqOFdrbfA93h.jpg'
+    picList[2]='https://i.loli.net/2020/03/02/mgbTjPYOen2Lcvk.jpg'
+    picList[3]='https://i.loli.net/2020/03/02/FmTtCBNx6PEOezD.jpg'
+    picList[4]='https://i.loli.net/2020/03/02/vMWbfqQp4YTHECy.jpg'
+    picList[5]='https://i.loli.net/2020/03/02/sOnTaMlKJejE2xq.jpg'
+    picList[6]='https://i.loli.net/2020/03/02/pc4xvjrtyLgkmFD.jpg'
+    picList[7]='https://i.loli.net/2020/03/02/NrHaPnhXcMS63bu.jpg'
+    $('.bg-cover').css('background-image', 'url(' + picList[new Date().getDay()] + ')');
 </script>
 
 
@@ -328,19 +336,11 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=11111111" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 11111111" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
         </div>
@@ -403,12 +403,12 @@
                         <div class="dream">
     
     <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
+        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的信条
     </div>
     
     <div class="row">
         <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
+            消灭你，与你无关
         </div>
     </div>
 </div>
@@ -446,7 +446,7 @@
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="hotpotqa分析">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="hotpotqa分析">
                             
                             <span class="card-title">hotpotqa分析</span>
                         </div>
@@ -500,7 +500,7 @@
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Attention详细解析">
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Attention详细解析">
                             
                             <span class="card-title">Attention详细解析</span>
                         </div>
@@ -556,7 +556,7 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="UNC多粒度支撑段落和支撑句">
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="UNC多粒度支撑段落和支撑句">
                             
                             <span class="card-title">UNC多粒度支撑段落和支撑句</span>
                         </div>
@@ -636,7 +636,7 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="微软实验室HGN分层图网络">
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="微软实验室HGN分层图网络">
                             
                             <span class="card-title">微软实验室HGN分层图网络</span>
                         </div>
@@ -692,7 +692,7 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="博客搭建">
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="博客搭建">
                             
                             <span class="card-title">博客搭建</span>
                         </div>
@@ -798,7 +798,7 @@ gittalk集成
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="404">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="404">
                             
                             <span class="card-title">404</span>
                         </div>
@@ -876,19 +876,11 @@ gittalk集成
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=11111111" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 11111111" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
