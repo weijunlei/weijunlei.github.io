@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                <% if (config.subtitle && config.subtitle.length > 0) { %>
+                <%= config.subtitle %>
+                <% } else { %>
+                subtitle
+                <% } %>
+            </div>
+
+            <div class="description center-align">
+                <% if (theme.subtitle.enable) { %>
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['<%= theme.subtitle.sub1 %>','<%= theme.subtitle.sub2 %>'],
+                        startDelay: <%= theme.subtitle.startDelay %>,
+                        typeSpeed: <%= theme.subtitle.typeSpeed %>,
+                        loop: <%= theme.subtitle.loop %>,
+                        backSpeed: <%= theme.subtitle.backSpeed %>,
+                        showCursor: <%= theme.subtitle.showCursor %>
+                    });
+                </script>
+                <% } else { %>
+                <%= config.description %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if (theme.banner.enable) { %>
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    var picList=new Array(7)
+    picList[1]='https://i.loli.net/2020/03/02/vspzqOFdrbfA93h.jpg'
+    picList[2]='https://i.loli.net/2020/03/02/mgbTjPYOen2Lcvk.jpg'
+    picList[3]='https://i.loli.net/2020/03/02/FmTtCBNx6PEOezD.jpg'
+    picList[4]='https://i.loli.net/2020/03/02/vMWbfqQp4YTHECy.jpg'
+    picList[5]='https://i.loli.net/2020/03/02/sOnTaMlKJejE2xq.jpg'
+    picList[6]='https://i.loli.net/2020/03/02/pc4xvjrtyLgkmFD.jpg'
+    picList[7]='https://i.loli.net/2020/03/02/NrHaPnhXcMS63bu.jpg'
+    $('.bg-cover').css('background-image', 'url(' + picList[new Date().getDay()] + ')');
+</script>
+<% } else { %>
+<script>
+    $('.bg-cover').css('background-image', 'url(https://i.loli.net/2020/03/02/vspzqOFdrbfA93h.jpg)');
+</script>
+<% } %>
