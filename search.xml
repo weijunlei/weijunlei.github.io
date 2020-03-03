@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title>SAE reading</title>
+      <title>SAE：rank+(预训练+GNN联合训练)</title>
       <link href="/2020/03/04/sae-yue-du/"/>
       <url>/2020/03/04/sae-yue-du/</url>
       
-        <content type="html"><![CDATA[<h1 id="UNC多粒度支撑段落和支撑句"><a href="#UNC多粒度支撑段落和支撑句" class="headerlink" title="UNC多粒度支撑段落和支撑句"></a>UNC多粒度支撑段落和支撑句</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.00484.pdf" target="_blank" rel="noopener">Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension<br>over Multiple Documents</a></p><h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><p>开源</p><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p>无</p><h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>无</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="SAE：rank-预训练-GNN联合训练"><a href="#SAE：rank-预训练-GNN联合训练" class="headerlink" title="SAE：rank+(预训练+GNN联合训练)"></a>SAE：rank+(预训练+GNN联合训练)</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.00484.pdf" target="_blank" rel="noopener">Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension<br>over Multiple Documents</a></p><h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>首先Multi-Head Attention以rank方式挑选问题相关文章，然后使用预训练模型得到span信息 + GNN获取支撑句以及回答类型的联合训练的方式得到最终阅读理解的答案以及解释。</p><h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><p>开源</p><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p>无</p><h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>无</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 阅读理解 </tag>
+            
+            <tag> NLP </tag>
+            
+            <tag> SOTA </tag>
+            
+            <tag> HotpotQA </tag>
+            
+        </tags>
       
     </entry>
     
