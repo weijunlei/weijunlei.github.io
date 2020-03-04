@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SAE：Rank+(预训练+GNN联合训练), 小风雷">
-    <meta name="description" content="SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume">
+    <meta name="keywords" content="LeetCode 32:最长有效括号, 小风雷">
+    <meta name="description" content="最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
+示例1:输入: &amp;quot;(()&amp;quot;
+输出: 2
+解释: 最长有效括号子串为 &amp;quot;()&amp;quot;示例2:输入: &amp;q">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SAE：Rank+(预训练+GNN联合训练) | 小风雷</title>
+    <title>LeetCode 32:最长有效括号 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -218,7 +221,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = 'xiao957';
+        let pwd = '';
         // if (pwd && pwd.length > 0) {
         //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
         //         alert('密码错误，将返回主页！');
@@ -237,13 +240,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SAE：Rank+(预训练+GNN联合训练)
+                        LeetCode 32:最长有效括号
                     </div>
                 </div>
             </div>
@@ -361,20 +364,20 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
-                                <span class="chip bg-color">论文阅读</span>
+                            <a href="/tags/Leetcode/">
+                                <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
-                                <span class="chip bg-color">阅读理解</span>
+                            <a href="/tags/Hard/">
+                                <span class="chip bg-color">Hard</span>
                             </a>
                         
-                            <a href="/tags/NLP/">
-                                <span class="chip bg-color">NLP</span>
+                            <a href="/tags/DP/">
+                                <span class="chip bg-color">DP</span>
                             </a>
                         
-                            <a href="/tags/HotpotQA/">
-                                <span class="chip bg-color">HotpotQA</span>
+                            <a href="/tags/Stack/">
+                                <span class="chip bg-color">Stack</span>
                             </a>
                         
                     </div>
@@ -385,8 +388,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/NLP/" class="post-category">
-                                NLP
+                            <a href="/categories/Leetcode/" class="post-category">
+                                Leetcode
                             </a>
                         
                     </div>
@@ -415,22 +418,85 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SAE：rank-预训练-GNN联合训练"><a href="#SAE：rank-预训练-GNN联合训练" class="headerlink" title="SAE：rank+(预训练+GNN联合训练)"></a>SAE：rank+(预训练+GNN联合训练)</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.00484.pdf" target="_blank" rel="noopener">Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents</a></p>
-<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>首先Multi-Head Attention以Rank方式挑选问题相关文章，然后使用预训练模型得到Span信息 + GNN获取支撑句以及回答类型的联合训练的方式得到最终阅读理解的答案以及解释。</p>
-<h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>构建目前阅读理解通用流程，并在各个流程中提出自己的优化方法。首先通过对比排序的方式过滤掉答案无关段落，然后通过答案预测任务和支撑句预测任务联合训练得到最终的结果。</p>
-<h3 id="实现亮点"><a href="#实现亮点" class="headerlink" title="实现亮点"></a>实现亮点</h3><ol>
-<li>使用Multi-Head Attention实现对段落的rank<br><img src="https://i.loli.net/2020/03/04/txmFIgXZ8S6quar.png" alt="document_selector.png"><br>rank策略是为段落设定不同的rank值，如果段落为支撑句则rank值为1，若段落包含答案则rank值为2，其余为零。在训练过程中使用句对比较使用Multi-Head Attention进行训练。然后取top k相关段落。</li>
-<li>使用GNN得到支撑句以及答案类型<br><img src="https://i.loli.net/2020/03/04/jFKb8pgYSdMVTCq.png" alt="sup_type_gnn.png"><br>将BERT编码后的Sentence节点输入到GNN中，然后使用GCN的训练策略达到图平衡。然后对平衡后的节点接两层感知机进行支撑句预测，同时使用支撑句label+graph attention+两层感知机的方式获取答案类型</li>
-<li>将span预测、支撑句和答案类型预测联合训练<br><img src="https://i.loli.net/2020/03/04/YDywU7eLtdIcbmp.png" alt="answer_span_sup.png"><br>以上图的方式获得答案span，然后加上上个亮点的支撑段落抽取以及答案类型判断获取联合损失进行训练。<br>$$ L = \gamma L^{span} + BCE(\hat{y}^{sp}, y^{sp}) + CE(\hat{y}^{ans}, y^{ans}) $$<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3>在HotpotQA的非开放域的数据集上实现次SOTA(截止该文章发表)<h4 id="消融实验分析"><a href="#消融实验分析" class="headerlink" title="消融实验分析"></a>消融实验分析</h4></li>
-</ol>
-<ul>
-<li>整体分析<br><img src="https://i.loli.net/2020/03/04/WbyeoSvV7dGU4uP.png" alt="compare.png"><br>整体上比上一轮顶会方法效果提升绝对值较大</li>
-<li>段落挑选分析<br><img src="https://i.loli.net/2020/03/04/LTfGYwjOiI9h75M.png" alt="selector_compare.png"><br>加上支撑段落挑选之后最终效果提升有3%~4%,但是在挑选支撑段落上加上MHSA EM可以提升15%+，该方法提升效果还是很明显的，rank的好处:smile:</li>
-<li>GNN实现效果分析<br><img src="https://i.loli.net/2020/03/04/Jg6PvsA4mZj3YXl.png" alt="gnn_compare.png"><br>从实验来看是否从一个段落中的节点边最有效，有问题实体边以及相同实体效果替身不是很明显 :s。整体来看提升1.4%,提升较小，但是同样重点使用GNN的<a href="https://arxiv.org/pdf/1911.03631.pdf" target="_blank" rel="noopener">HGN</a>提升较大,分层GNN赛高<h3 id="细节发现"><a href="#细节发现" class="headerlink" title="细节发现"></a>细节发现</h3></li>
-<li>在进行段落挑选时选用2效果较好，和齐鹏的<a href="https://arxiv.org/pdf/1910.07000.pdf" target="_blank" rel="noopener">GoldEn Retriever</a>定的参数一样:joy:</li>
-<li>在最后预测时答案和答案类型使用的是两层多层感知机，而是否是支撑段落使用的一层感知机。炼丹++ :s<h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3>无<h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3>无</li>
+                <h1 id="最长有效括号"><a href="#最长有效括号" class="headerlink" title="最长有效括号"></a>最长有效括号</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。</p>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1:"></a>示例1:</h3><pre><code>输入: &quot;(()&quot;
+输出: 2
+解释: 最长有效括号子串为 &quot;()&quot;</code></pre><h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><pre><code>输入: &quot;)()())&quot;
+输出: 4
+解释: 最长有效括号子串为 &quot;()()&quot;</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP-Stack"><a href="#思路1-DP-Stack" class="headerlink" title="思路1 DP + Stack"></a>思路1 DP + Stack</h3><p>存在括号匹配可用栈进行存储，寻找满足括号对的存在，但是在本题中光有匹配的数目是不够的，需要从整体上计算匹配上的括号数目，且存在括号包含和括号不包含两种情况，如果非包含关系的话可以使用DP思想将匹配好的为止进行存储</p>
+<h3 id="思路2-Stack"><a href="#思路2-Stack" class="headerlink" title="思路2 Stack"></a>思路2 Stack</h3><p>其实与思路1类似可以直接只是用栈作为容器完成程序，主要在于满足匹配的最长子串的”)”开始索引，然后使用最后匹配的”)”进行位置计算，“(”和中间”)”全部pop,注意的关键点在于初始化栈是将-1引入为第一个元素，充当于”)”</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h4><h4 id="DP-Stack"><a href="#DP-Stack" class="headerlink" title="DP + Stack"></a>DP + Stack</h4><ul>
+<li>Java<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">longestValidParentheses</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> null <span class="token operator">||</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">int</span> matchIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">int</span> curLength <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      Stack<span class="token operator">&lt;</span>Integer<span class="token operator">></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">char</span> newChar <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>newChar <span class="token operator">==</span> <span class="token string">'('</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">else</span><span class="token punctuation">{</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>stack<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  matchIndex <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  curLength <span class="token operator">=</span> i <span class="token operator">-</span> matchIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                  <span class="token keyword">if</span> <span class="token punctuation">(</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                      curLength <span class="token operator">+=</span> dps<span class="token punctuation">[</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span>
+                  dps<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
+                  <span class="token keyword">if</span> <span class="token punctuation">(</span>curLength <span class="token operator">></span> result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                      result <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+<li>Python<pre class=" language-Python"><code class="language-Python">class Solution:
+  def longestValidParentheses(self, s: str) -> int:
+      dp = [0, ] * len(s)
+      result = 0
+      cache = []
+      for i in range(0, len(s)):
+          cur_char = s[i]
+          if cur_char == '(':
+              cache.append(i)
+          else:
+              if len(cache) == 0:
+                  continue
+              else:
+                  match_index = cache.pop()
+                  cur_len = i - match_index + 1
+                  if match_index - 1 > 0:
+                      cur_len += dp[match_index - 1]
+                  dp[i] = cur_len
+                  if cur_len > result:
+                      result = cur_len
+      return result</code></pre>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4></li>
+<li>Java <pre class=" language-Java"><code class="language-Java">import java.util.Stack;
+</code></pre>
+</li>
 </ul>
-
+<p>public class Solution2 {<br>    public int longestValidParentheses(String s) {<br>        if (s == null || s.length() &lt; 2) {<br>            return 0;<br>        }<br>        Stack<Integer> stack = new Stack&lt;&gt;();<br>        stack.push(-1);<br>        int result = 0;<br>        int tmp = 0;<br>        for (int i = 0; i &lt; s.length(); i ++) {<br>            if (s.charAt(i) == ‘(‘) {<br>                stack.push(i);<br>            } else {<br>                stack.pop();<br>                if (stack.isEmpty()) {<br>                    stack.push(i);<br>                } else {<br>                    tmp = i - stack.peek();<br>                    result = result &gt; tmp ? result : tmp;<br>                }<br>            }<br>        }<br>        return result;<br>    }<br>}</p>
+<pre><code>## 实验效果分析
+### 时间复杂度
+#### Stack + DP
+$n$
+#### Stack
+$n$
+### 空间复杂度
+#### Stack + DP
+$2n$
+#### Stack
+$n$</code></pre>
             </div>
             <hr/>
 
@@ -455,7 +521,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/04/sae-yue-du/">https://weijunlei.github.io/2020/03/04/sae-yue-du/</a>
+                    <a href="https://weijunlei.github.io/2020/03/04/leetcode-32/">https://weijunlei.github.io/2020/03/04/leetcode-32/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -493,20 +559,20 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
-                                    <span class="chip bg-color">论文阅读</span>
+                                <a href="/tags/Leetcode/">
+                                    <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
-                                    <span class="chip bg-color">阅读理解</span>
+                                <a href="/tags/Hard/">
+                                    <span class="chip bg-color">Hard</span>
                                 </a>
                             
-                                <a href="/tags/NLP/">
-                                    <span class="chip bg-color">NLP</span>
+                                <a href="/tags/DP/">
+                                    <span class="chip bg-color">DP</span>
                                 </a>
                             
-                                <a href="/tags/HotpotQA/">
-                                    <span class="chip bg-color">HotpotQA</span>
+                                <a href="/tags/Stack/">
+                                    <span class="chip bg-color">Stack</span>
                                 </a>
                             
                         </div>
@@ -552,7 +618,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-04T01-08-04',
+        id: '2020-03-04T22-34-50',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -573,9 +639,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/04/leetcode-32/">
                     <div class="card-image">
@@ -596,9 +663,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -611,6 +678,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -641,27 +709,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/09/hotpotqa-fen-xi/">
+                <a href="/2020/03/04/sae-yue-du/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="hotpotqa分析">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="SAE：Rank+(预训练+GNN联合训练)">
                         
-                        <span class="card-title">hotpotqa分析</span>
+                        <span class="card-title">SAE：Rank+(预训练+GNN联合训练)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            hotpotqa分析数据说明HOTPOTQA: A Dataset for Diverse, ExplainableMulti-hop Question Answering
-简单数据分析数据样例
-答案长度分布
-
+                            SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
                             </span>
                         <span class="publish-author">
                             
@@ -678,12 +743,20 @@
                 
                 <div class="card-action article-tags">
                     
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+                        <span class="chip bg-color">论文阅读</span>
+                    </a>
+                    
                     <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
                         <span class="chip bg-color">阅读理解</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">
-                        <span class="chip bg-color">数据集</span>
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
+                    </a>
+                    
+                    <a href="/tags/HotpotQA/">
+                        <span class="chip bg-color">HotpotQA</span>
                     </a>
                     
                 </div>
