@@ -66,11 +66,11 @@
     
     
     <entry>
-      <title>hotpotqa分析</title>
+      <title>HotpotQA分析</title>
       <link href="/2019/12/09/hotpotqa-fen-xi/"/>
       <url>/2019/12/09/hotpotqa-fen-xi/</url>
       
-        <content type="html"><![CDATA[<h1 id="hotpotqa分析"><a href="#hotpotqa分析" class="headerlink" title="hotpotqa分析"></a>hotpotqa分析</h1><h2 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h2><p><a href="https://arxiv.org/pdf/1809.09600.pdf" target="_blank" rel="noopener">HOTPOTQA: A Dataset for Diverse, Explainable<br>Multi-hop Question Answering</a></p><h2 id="简单数据分析"><a href="#简单数据分析" class="headerlink" title="简单数据分析"></a>简单数据分析</h2><h3 id="数据样例"><a href="#数据样例" class="headerlink" title="数据样例"></a>数据样例</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="数据样例.png"></p><h3 id="答案长度分布"><a href="#答案长度分布" class="headerlink" title="答案长度分布"></a>答案长度分布</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="答案长度分布.png"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="HotpotQA分析"><a href="#HotpotQA分析" class="headerlink" title="HotpotQA分析"></a>HotpotQA分析</h1><h2 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h2><p><a href="https://arxiv.org/pdf/1809.09600.pdf" target="_blank" rel="noopener">HOTPOTQA: A Dataset for Diverse, Explainable<br>Multi-hop Question Answering</a></p><h2 id="简单数据分析"><a href="#简单数据分析" class="headerlink" title="简单数据分析"></a>简单数据分析</h2><h3 id="数据样例"><a href="#数据样例" class="headerlink" title="数据样例"></a>数据样例</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="数据样例.png"></p><h3 id="答案长度分布"><a href="#答案长度分布" class="headerlink" title="答案长度分布"></a>答案长度分布</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="答案长度分布.png"></p>]]></content>
       
       
       <categories>
