@@ -481,22 +481,34 @@
                       result = cur_len
       return result</code></pre>
 <h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4></li>
-<li>Java <pre class=" language-Java"><code class="language-Java">import java.util.Stack;
-</code></pre>
-</li>
+<li>Java <pre class=" language-Java"><code class="language-Java">public class Solution2 {
+  public int longestValidParentheses(String s) {
+      if (s == null || s.length() < 2) {
+          return 0;
+      }
+      Stack<Integer> stack = new Stack<>();
+      stack.push(-1);
+      int result = 0;
+      int tmp = 0;
+      for (int i = 0; i < s.length(); i ++) {
+          if (s.charAt(i) == '(') {
+              stack.push(i);
+          } else {
+              stack.pop();
+              if (stack.isEmpty()) {
+                  stack.push(i);
+              } else {
+                  tmp = i - stack.peek();
+                  result = result > tmp ? result : tmp;
+              }
+          }
+      }
+      return result;
+  }
+}</code></pre>
+<h2 id="实验效果分析"><a href="#实验效果分析" class="headerlink" title="实验效果分析"></a>实验效果分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><h4 id="Stack-DP"><a href="#Stack-DP" class="headerlink" title="Stack + DP"></a>Stack + DP</h4>$n$<h4 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h4>$n$<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><h4 id="Stack-DP-1"><a href="#Stack-DP-1" class="headerlink" title="Stack + DP"></a>Stack + DP</h4>$2n$<h4 id="Stack-2"><a href="#Stack-2" class="headerlink" title="Stack"></a>Stack</h4>$n$</li>
 </ul>
-<p>public class Solution2 {<br>    public int longestValidParentheses(String s) {<br>        if (s == null || s.length() &lt; 2) {<br>            return 0;<br>        }<br>        Stack<Integer> stack = new Stack&lt;&gt;();<br>        stack.push(-1);<br>        int result = 0;<br>        int tmp = 0;<br>        for (int i = 0; i &lt; s.length(); i ++) {<br>            if (s.charAt(i) == ‘(‘) {<br>                stack.push(i);<br>            } else {<br>                stack.pop();<br>                if (stack.isEmpty()) {<br>                    stack.push(i);<br>                } else {<br>                    tmp = i - stack.peek();<br>                    result = result &gt; tmp ? result : tmp;<br>                }<br>            }<br>        }<br>        return result;<br>    }<br>}</p>
-<pre><code>## 实验效果分析
-### 时间复杂度
-#### Stack + DP
-$n$
-#### Stack
-$n$
-### 空间复杂度
-#### Stack + DP
-$2n$
-#### Stack
-$n$</code></pre>
+
             </div>
             <hr/>
 
@@ -511,7 +523,7 @@ $n$</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io" rel="external nofollow noreferrer">雷伟俊</a>
+                    <a href="https://weijunlei.github.io" rel="external nofollow noreferrer">小风雷</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -534,7 +546,7 @@ $n$</code></pre>
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="https://weijunlei.github.io" target="_blank">雷伟俊</a>
+                    <a href="https://weijunlei.github.io" target="_blank">小风雷</a>
                     !
                 </span>
             </div>
@@ -798,7 +810,7 @@ $n$</code></pre>
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
             + '来源: 小风雷<br />'
-            + '文章作者: 雷伟俊<br />'
+            + '文章作者: 小风雷<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
