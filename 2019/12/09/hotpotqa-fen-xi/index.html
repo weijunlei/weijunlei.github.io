@@ -222,10 +222,16 @@
 <script>
     (function() {
         let pwd = '';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
         if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
                 alert('密码错误，将返回主页！');
-                location.href = '/';
+        //      location.href = '/';
             }
         }
     })();
@@ -550,9 +556,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="SAE：rank+(预训练+GNN联合训练)">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="SAE：Rank+(预训练+GNN联合训练)">
                         
-                        <span class="card-title">SAE：rank+(预训练+GNN联合训练)</span>
+                        <span class="card-title">SAE：Rank+(预训练+GNN联合训练)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

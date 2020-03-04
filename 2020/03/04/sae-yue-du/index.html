@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SAE：rank+(预训练+GNN联合训练), 小风雷">
+    <meta name="keywords" content="SAE：Rank+(预训练+GNN联合训练), 小风雷">
     <meta name="description" content="SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SAE：rank+(预训练+GNN联合训练) | 小风雷</title>
+    <title>SAE：Rank+(预训练+GNN联合训练) | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -218,11 +218,17 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = 'xiao957';
+        let pwd = 'b5f09e275ebeb0891760759e2079d95bd657a842571d9e2dcd1164307be3dae0';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
         if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
                 alert('密码错误，将返回主页！');
-                location.href = '/';
+        //      location.href = '/';
             }
         }
     })();
@@ -231,13 +237,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SAE：rank+(预训练+GNN联合训练)
+                        SAE：Rank+(预训练+GNN联合训练)
                     </div>
                 </div>
             </div>
@@ -401,7 +407,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="SAE：rank-预训练-GNN联合训练"><a href="#SAE：rank-预训练-GNN联合训练" class="headerlink" title="SAE：rank+(预训练+GNN联合训练)"></a>SAE：rank+(预训练+GNN联合训练)</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.00484.pdf" target="_blank" rel="noopener">Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents</a></p>
-<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>首先Multi-Head Attention以rank方式挑选问题相关文章，然后使用预训练模型得到span信息 + GNN获取支撑句以及回答类型的联合训练的方式得到最终阅读理解的答案以及解释。</p>
+<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>首先Multi-Head Attention以Rank方式挑选问题相关文章，然后使用预训练模型得到Span信息 + GNN获取支撑句以及回答类型的联合训练的方式得到最终阅读理解的答案以及解释。</p>
 <h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>构建目前阅读理解通用流程，并在各个流程中提出自己的优化方法。首先通过对比排序的方式过滤掉答案无关段落，然后通过答案预测任务和支撑句预测任务联合训练得到最终的结果。</p>
 <h3 id="实现亮点"><a href="#实现亮点" class="headerlink" title="实现亮点"></a>实现亮点</h3><ol>
 <li>使用Multi-Head Attention实现对段落的rank<br><img src="https://i.loli.net/2020/03/04/txmFIgXZ8S6quar.png" alt="document_selector.png"><br>rank策略是为段落设定不同的rank值，如果段落为支撑句则rank值为1，若段落包含答案则rank值为2，其余为零。在训练过程中使用句对比较使用Multi-Head Attention进行训练。然后取top k相关段落。</li>
@@ -567,9 +573,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="SAE：rank+(预训练+GNN联合训练)">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="SAE：Rank+(预训练+GNN联合训练)">
                         
-                        <span class="card-title">SAE：rank+(预训练+GNN联合训练)</span>
+                        <span class="card-title">SAE：Rank+(预训练+GNN联合训练)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
