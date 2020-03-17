@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Leetcode 131: 分割回文串</title>
+      <link href="/2020/03/17/leetcode-131-fen-ge-hui-wen-chuan/"/>
+      <url>/2020/03/17/leetcode-131-fen-ge-hui-wen-chuan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-131-分割回文串"><a href="#Leetcode-131-分割回文串" class="headerlink" title="Leetcode 131: 分割回文串"></a>Leetcode 131: 分割回文串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。<br>返回 s 所有可能的分割方案。</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre><code>输入: &quot;aab&quot;输出:[    [&quot;aa&quot;,&quot;b&quot;],    [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：-回溯-判断"><a href="#思路1：-回溯-判断" class="headerlink" title="思路1： 回溯+判断"></a>思路1： 回溯+判断</h3><p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {    public List<List<String>> partition(String s) {        List<List<String>> result = new LinkedList<>();        if (s.length() == 0) {            return result;        }        List<String> temp = new LinkedList<>();        partitionHelper(result, s, 0, temp);        return result;    }    private boolean canReverse(String s, int i, int j) {        if (i >= j) {            return true;        }        if (s.charAt(i++) == s.charAt(j--)) {            return canReverse(s, i, j);        } else {            return false;        }    }    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp) {        int size = s.length();        if (size <= startIndex) {            res.add(new LinkedList<String>(temp));            return;        }        for(int i = startIndex; i < size; i++) {            if (canReverse(s, startIndex, i)) {                temp.add(s.substring(startIndex, i + 1));                partitionHelper(res, s, i + 1, temp);                temp.remove(temp.size() - 1);            }        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>$n*2^n?$</p><h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>$n*2^n?$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Middle </tag>
+            
+            <tag> 回溯 </tag>
+            
+            <tag> DFS </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode 25:验证回文串</title>
       <link href="/2020/03/12/leetcode-25-yan-zheng-hui-wen-chuan/"/>
       <url>/2020/03/12/leetcode-25-yan-zheng-hui-wen-chuan/</url>
@@ -169,9 +202,9 @@
       
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 阅读理解 </tag>
+            
+            <tag> 论文阅读 </tag>
             
             <tag> NLP </tag>
             
@@ -310,6 +343,31 @@
     
     
     <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -329,31 +387,6 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
             
         </tags>
       
