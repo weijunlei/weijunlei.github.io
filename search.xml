@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode 208:实现Trie(前缀树)</title>
+      <link href="/2020/03/20/leetcode-208-shi-xian-trie-qian-zhui-shu/"/>
+      <url>/2020/03/20/leetcode-208-shi-xian-trie-qian-zhui-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-208-实现Trie-前缀树"><a href="#Leetcode-208-实现Trie-前缀树" class="headerlink" title="Leetcode 208:实现Trie(前缀树)"></a><a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">Leetcode 208:实现Trie(前缀树)</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>Trie trie = new Trie();trie.insert(&quot;apple&quot;);trie.search(&quot;apple&quot;);   // 返回 truetrie.search(&quot;app&quot;);     // 返回 falsetrie.startsWith(&quot;app&quot;); // 返回 truetrie.insert(&quot;app&quot;);   trie.search(&quot;app&quot;);     // 返回 true</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设所有的输入都是由小写字母 a-z 构成的。保证所有输入均为非空字符串。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-前缀树基本实现"><a href="#思路1-前缀树基本实现" class="headerlink" title="思路1: 前缀树基本实现"></a>思路1: 前缀树基本实现</h3><p>主要是使用前缀树的基本概念，将前缀字母连接到下一个后缀节点,以及标记好结束节点</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Trie {    private final int alphaSize = 26;    private Trie[] children = new Trie[alphaSize];    private boolean isEnd = false;    /** Initialize your data structure here. */    public Trie() {    }    /** Inserts a word into the trie. */    public void insert(String word) {        Trie temp = this;        for(var ch: word.toCharArray()){            if (temp.children[ch - 'a'] == null){                temp.children[ch - 'a'] = new Trie();            }            temp = temp.children[ch - 'a'];        }        temp.isEnd=true;    }    /** Returns if the word is in the trie. */    public boolean search(String word) {        Trie temp = this;        for(var ch: word.toCharArray()){            if (temp.children[ch - 'a'] == null){                return false;            }            temp = temp.children[ch - 'a'];        }        return temp.isEnd;    }    /** Returns if there is any word in the trie that starts with the given prefix. */    public boolean startsWith(String prefix) {        Trie temp = this;        for(var ch: prefix.toCharArray()){            if (temp.children[ch - 'a'] == null){                return false;            }            temp = temp.children[ch - 'a'];        }        return true;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$n$均可看作是链表的查找插入</p><h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$n$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 树 </tag>
+            
+            <tag> 字符串 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode 140: 单词切分II</title>
       <link href="/2020/03/19/leetcode-140-dan-ci-qie-fen-ii/"/>
       <url>/2020/03/19/leetcode-140-dan-ci-qie-fen-ii/</url>
@@ -53,9 +84,9 @@
             
             <tag> 回溯 </tag>
             
-            <tag> DP </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> DP </tag>
             
             <tag> BFS </tag>
             
@@ -266,9 +297,9 @@
       
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 阅读理解 </tag>
+            
+            <tag> 论文阅读 </tag>
             
             <tag> NLP </tag>
             
