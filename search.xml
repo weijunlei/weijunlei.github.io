@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode 212: 单词搜索II</title>
+      <link href="/2020/03/21/leetcode-212-dan-ci-sou-suo-ii/"/>
+      <url>/2020/03/21/leetcode-212-dan-ci-sou-suo-ii/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-212-单词搜索II"><a href="#Leetcode-212-单词搜索II" class="headerlink" title="Leetcode 212: 单词搜索II"></a><a href="https://leetcode-cn.com/problems/word-search-ii/" target="_blank" rel="noopener">Leetcode 212: 单词搜索II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =[[&#39;o&#39;,&#39;a&#39;,&#39;a&#39;,&#39;n&#39;],[&#39;e&#39;,&#39;t&#39;,&#39;a&#39;,&#39;e&#39;],[&#39;i&#39;,&#39;h&#39;,&#39;k&#39;,&#39;r&#39;],[&#39;i&#39;,&#39;f&#39;,&#39;l&#39;,&#39;v&#39;]]输出: [&quot;eat&quot;,&quot;oath&quot;]说明:你可以假设所有输入都由小写字母 a-z 组成。</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>你需要优化回溯算法以通过更大数据量的测试。你能否早点停止回溯？如果当前单词不存在于所有单词的前缀中，则可以立即停止回溯。什么样的数据结构可以有效地执行这样的操作？散列表是否可行？为什么？ 前缀树如何？如果你想学习如何实现一个基本的前缀树，请先查看这个问题： 实现Trie（前缀树）。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯-DFS"><a href="#思路1-回溯-DFS" class="headerlink" title="思路1: 回溯+DFS"></a>思路1: 回溯+DFS</h3><p>直接使用回溯+DFS判断每个单词是否存在，需要注意一个单词不能使用两次以上一个字符。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-Java"><code class="language-Java">public class Solution {    public List<String> findWords(char[][] board, String[] words) {        List<String> result = new LinkedList<>();        if (words.length == 0 || board.length == 0 || board[0].length == 0){            return result;        }        for(String word: words){            if(hasWord(word, board)) {                result.add(word);            }        }        return result;    }    private boolean hasWord(String s, char[][] board){        boolean canFind = false;        for(int i = 0; i < board.length; i++){            for(int j = 0; j < board[0].length; j++){                if (s.charAt(0) == board[i][j] && wordDFS(s, board, 0, i, j)) {                    canFind = true;                    break;                }            }            if (canFind){                break;            }        }        return canFind;    }    private boolean wordDFS(String s, char[][] board, int startIndex, int i, int j){        if (startIndex == s.length() - 1){            return true;        }        boolean canFind = false;        char temp = s.charAt(startIndex);        char getCh = s.charAt(startIndex + 1);        board[i][j] = '$';        if(canGetCh(getCh, board, i + 1, j)){            canFind = canFind || wordDFS(s, board, startIndex+1, i+1, j);            if (canFind){                board[i][j] = temp;            }        }        if (!canFind && canGetCh(getCh, board, i -1, j)){            canFind = canFind || wordDFS(s, board, startIndex+1, i-1, j);            if (canFind){                board[i][j] = temp;            }        }        if (!canFind && canGetCh(getCh, board, i, j+1)){            canFind = canFind || wordDFS(s, board, startIndex+1, i, j+1);            if (canFind){                board[i][j] = temp;            }        }        if (!canFind && canGetCh(getCh, board, i, j-1)){            canFind = canFind || wordDFS(s, board, startIndex+1, i, j-1);            if (canFind){                board[i][j] = temp;            }        }        board[i][j] = temp;        return canFind;    }    private boolean canGetCh(char getCh, char[][] board, int i, int j){        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length){            return false;        }        return board[i][j] == getCh;    }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> 回溯 </tag>
+            
+            <tag> Medium </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode 208:实现Trie(前缀树)</title>
       <link href="/2020/03/20/leetcode-208-shi-xian-trie-qian-zhui-shu/"/>
       <url>/2020/03/20/leetcode-208-shi-xian-trie-qian-zhui-shu/</url>
@@ -84,9 +113,9 @@
             
             <tag> 回溯 </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Medium </tag>
             
             <tag> BFS </tag>
             
@@ -297,9 +326,9 @@
       
         <tags>
             
-            <tag> 阅读理解 </tag>
-            
             <tag> 论文阅读 </tag>
+            
+            <tag> 阅读理解 </tag>
             
             <tag> NLP </tag>
             
@@ -438,31 +467,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -482,6 +486,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
