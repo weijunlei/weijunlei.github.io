@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HotpotQA分析, 小风雷">
-    <meta name="description" content="HotpotQA分析数据说明HOTPOTQA: A Dataset for Diverse, ExplainableMulti-hop Question Answering
-简单数据分析数据样例
-答案长度分布
-">
+    <meta name="keywords" content="Leetcode:242. 有效的字母异位词, 小风雷">
+    <meta name="description" content="Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。示例 1:输入: s = &amp;quot;anagram&amp;quot;, t = &amp;quot;nagaram&amp;qu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>HotpotQA分析 | 小风雷</title>
+    <title>Leetcode:242. 有效的字母异位词 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -246,7 +243,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        HotpotQA分析
+                        Leetcode:242. 有效的字母异位词
                     </div>
                 </div>
             </div>
@@ -364,12 +361,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
-                                <span class="chip bg-color">阅读理解</span>
+                            <a href="/tags/Leetcode/">
+                                <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">
-                                <span class="chip bg-color">数据集</span>
+                            <a href="/tags/easy/">
+                                <span class="chip bg-color">easy</span>
+                            </a>
+                        
+                            <a href="/tags/Map/">
+                                <span class="chip bg-color">Map</span>
                             </a>
                         
                     </div>
@@ -380,8 +381,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/NLP/" class="post-category">
-                                NLP
+                            <a href="/categories/Leetcode/" class="post-category">
+                                Leetcode
                             </a>
                         
                     </div>
@@ -393,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-09
+                    2020-03-22
                 </div>
                 
 
@@ -410,9 +411,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HotpotQA分析"><a href="#HotpotQA分析" class="headerlink" title="HotpotQA分析"></a>HotpotQA分析</h1><h2 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h2><p><a href="https://arxiv.org/pdf/1809.09600.pdf" target="_blank" rel="noopener">HOTPOTQA: A Dataset for Diverse, Explainable<br>Multi-hop Question Answering</a></p>
-<h2 id="简单数据分析"><a href="#简单数据分析" class="headerlink" title="简单数据分析"></a>简单数据分析</h2><h3 id="数据样例"><a href="#数据样例" class="headerlink" title="数据样例"></a>数据样例</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="数据样例.png"></p>
-<h3 id="答案长度分布"><a href="#答案长度分布" class="headerlink" title="答案长度分布"></a>答案长度分布</h3><p><img src="https://i.loli.net/2019/12/09/Xru7oOWUNjbLk1M.png" alt="答案长度分布.png"></p>
+                <h1 id="Leetcode-242-有效的字母异位词"><a href="#Leetcode-242-有效的字母异位词" class="headerlink" title="Leetcode:242. 有效的字母异位词"></a><a href="https://leetcode-cn.com/problems/valid-anagram/" target="_blank" rel="noopener">Leetcode:242. 有效的字母异位词</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;
+输出: true
+示例 2:
+
+输入: s = &quot;rat&quot;, t = &quot;car&quot;
+输出: false
+说明:
+你可以假设字符串只包含小写字母。</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-哈希表"><a href="#思路1-哈希表" class="headerlink" title="思路1: 哈希表"></a>思路1: 哈希表</h3><p>直接使用哈希表计数，先计算s的每个字母个数相加，然后计算t中个数相减</p>
+<h3 id="思路2：数组-计数"><a href="#思路2：数组-计数" class="headerlink" title="思路2：数组+计数"></a>思路2：数组+计数</h3><p>鉴于只有26个字母，所以可以只用一个数组计数，解法可同上，但是常数空间消耗更少</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：哈希表"><a href="#代码1：哈希表" class="headerlink" title="代码1：哈希表"></a>代码1：哈希表</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public boolean isAnagram(String s, String t) {
+        if ((s == null && t != null) || (s != null && t == null) || s.length() != t.length()) {
+            return false;
+        }
+        Map<Character, Integer> chMap = new HashMap<>();
+        for(char ch: s.toCharArray()){
+            if (!chMap.containsKey(ch)){
+                chMap.put(ch, 1);
+            }
+            chMap.put(ch, chMap.get(ch) + 1);
+        }
+        for(char ch: t.toCharArray()){
+            if(!chMap.containsKey(ch) || chMap.get(ch) != 0){
+                return false;
+            } else{
+                chMap.put(ch, chMap.get(ch) - 1);
+            }
+        }
+        return true;
+    }
+}</code></pre>
+<h3 id="代码2：数组-计数"><a href="#代码2：数组-计数" class="headerlink" title="代码2：数组+计数"></a>代码2：数组+计数</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public boolean isAnagram(String s, String t) {
+        if ((s == null && t != null) || (s != null && t == null) || s.length() != t.length()) {
+            return false;
+        }
+        int[] count = new int[26];
+        for(int i=0; i < s.length(); i++){
+            count[s.charAt(i) - 'a'] += 1;
+            count[t.charAt(i) - 'a'] -= 1;
+        }
+        for(int i=0; i < 26; i++){
+            if(count[i] != 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>n</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>1,常数</p>
 
             </div>
             <hr/>
@@ -438,7 +487,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2019/12/09/hotpotqa-fen-xi/">https://weijunlei.github.io/2019/12/09/hotpotqa-fen-xi/</a>
+                    <a href="https://weijunlei.github.io/2020/03/22/leetcode-242-you-xiao-de-zi-mu-yi-wei-ci/">https://weijunlei.github.io/2020/03/22/leetcode-242-you-xiao-de-zi-mu-yi-wei-ci/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -476,12 +525,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
-                                    <span class="chip bg-color">阅读理解</span>
+                                <a href="/tags/Leetcode/">
+                                    <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">
-                                    <span class="chip bg-color">数据集</span>
+                                <a href="/tags/easy/">
+                                    <span class="chip bg-color">easy</span>
+                                </a>
+                            
+                                <a href="/tags/Map/">
+                                    <span class="chip bg-color">Map</span>
                                 </a>
                             
                         </div>
@@ -527,7 +580,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2019-12-09T23-33-20',
+        id: '2020-03-22T20-31-40',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -548,58 +601,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/04/sae-yue-du/">
+                <a href="/2020/03/22/leetcode-242-you-xiao-de-zi-mu-yi-wei-ci/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="SAE：Rank+(预训练+GNN联合训练)">
+                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="Leetcode:242. 有效的字母异位词">
                         
-                        <span class="card-title">SAE：Rank+(预训练+GNN联合训练)</span>
+                        <span class="card-title">Leetcode:242. 有效的字母异位词</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume
+                            Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&qu
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/NLP/" class="post-category">
-                                    NLP
+                            <a href="/categories/Leetcode/" class="post-category">
+                                    Leetcode
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
-                        <span class="chip bg-color">阅读理解</span>
+                    <a href="/tags/Leetcode/">
+                        <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
-                        <span class="chip bg-color">论文阅读</span>
+                    <a href="/tags/easy/">
+                        <span class="chip bg-color">easy</span>
                     </a>
                     
-                    <a href="/tags/NLP/">
-                        <span class="chip bg-color">NLP</span>
-                    </a>
-                    
-                    <a href="/tags/HotpotQA/">
-                        <span class="chip bg-color">HotpotQA</span>
+                    <a href="/tags/Map/">
+                        <span class="chip bg-color">Map</span>
                     </a>
                     
                 </div>
@@ -613,32 +664,32 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/08/attention-xiang-xi-jie-xi/">
+                <a href="/2020/03/21/leetcode-212-dan-ci-sou-suo-ii/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Attention详细解析">
+                        <img src="https://i.loli.net/2020/03/03/F4W1z6Cyjq8hDsH.jpg" class="responsive-img" alt="Leetcode 212: 单词搜索II">
                         
-                        <span class="card-title">Attention详细解析</span>
+                        <span class="card-title">Leetcode 212: 单词搜索II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Attention机制理解原文Attention机制详解（一）——Seq2Seq中的Attention
-Attention提出理由解决痛点在传统的机器翻译中采用encoder-decoder结构，encoder将输入的句子将其转换为定长的向
+                            Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/NLP/" class="post-category">
-                                    NLP
+                            <a href="/categories/Leetcode/" class="post-category">
+                                    Leetcode
                                 </a>
                             
                             
@@ -648,16 +699,20 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Attention/">
-                        <span class="chip bg-color">Attention</span>
+                    <a href="/tags/Leetcode/">
+                        <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/BERT/">
-                        <span class="chip bg-color">BERT</span>
+                    <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">回溯</span>
                     </a>
                     
-                    <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">网络结构</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/">
+                        <span class="chip bg-color">前缀树</span>
                     </a>
                     
                 </div>
