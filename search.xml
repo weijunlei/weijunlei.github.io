@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Leetcode:387. 字符串中的第一个唯一字符</title>
+      <link href="/2020/03/23/leetcode-387-zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-fu/"/>
+      <url>/2020/03/23/leetcode-387-zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-fu/</url>
+      
+        <content type="html"><![CDATA[<p>#<a href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/" target="_blank" rel="noopener">Leetcode:387. 字符串中的第一个唯一字符</a></p><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</code></pre><h3 id="案例"><a href="#案例" class="headerlink" title="案例:"></a>案例:</h3><pre><code>s = &quot;leetcode&quot;返回 0.s = &quot;loveleetcode&quot;,返回 2.注意事项：您可以假定该字符串只包含小写字母。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路：数组-字典"><a href="#思路：数组-字典" class="headerlink" title="思路：数组 字典"></a>思路：数组 字典</h3><p>直接使用数组对字母计数二次遍历</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int firstUniqChar(String s) {        if (s == null || s.length() == 0){            return -1;        }        int[] chDict = new int[26];        for(int i = 0; i < s.length(); i++){            chDict[s.charAt(i) - 'a'] += 1;        }        for(int i = 0; i < s.length(); i++){            if(chDict[s.charAt(i) - 'a'] == 1){                return i;            }        }        return -1;    }}</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> Map </tag>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:242. 有效的字母异位词</title>
       <link href="/2020/03/22/leetcode-242-you-xiao-de-zi-mu-yi-wei-ci/"/>
       <url>/2020/03/22/leetcode-242-you-xiao-de-zi-mu-yi-wei-ci/</url>
@@ -22,9 +47,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> easy </tag>
-            
             <tag> Map </tag>
+            
+            <tag> easy </tag>
             
         </tags>
       
@@ -51,9 +76,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 回溯 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> 前缀树 </tag>
             
@@ -142,11 +167,11 @@
             
             <tag> Leetcode </tag>
             
+            <tag> Medium </tag>
+            
             <tag> 回溯 </tag>
             
             <tag> DP </tag>
-            
-            <tag> Medium </tag>
             
             <tag> BFS </tag>
             
@@ -357,9 +382,9 @@
       
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 阅读理解 </tag>
+            
+            <tag> 论文阅读 </tag>
             
             <tag> NLP </tag>
             
@@ -498,31 +523,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -542,6 +542,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
