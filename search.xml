@@ -4,6 +4,66 @@
   
     
     <entry>
+      <title>Leetcode:152. 乘积最大子数组</title>
+      <link href="/2020/03/24/leetcode-152-cheng-ji-zui-da-zi-shu-zu/"/>
+      <url>/2020/03/24/leetcode-152-cheng-ji-zui-da-zi-shu-zu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="乘积最大子数组"><a href="#乘积最大子数组" class="headerlink" title="乘积最大子数组"></a><a href="https://leetcode-cn.com/problems/maximum-product-subarray/" target="_blank" rel="noopener">乘积最大子数组</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [2,3,-2,4]输出: 6解释: 子数组 [2,3] 有最大乘积 6。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [-2,0,-1]输出: 0解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>可以维护两个DP,表示最大值和最小值（因为数据中包含正负),转移方程为$maxDP[i+1] = max(nums[i+1], maxDP[i+1]<em>nums[i+1], minDP[i+1]</em>nums[i+1])$以及$minDP[i+1] = min(nums[i+1], maxDP[i+1]<em>nums[i+1], minDP[i+1]</em>nums[i+1])$,由于只涉及DP的两个状态值，所以去除掉所有状态的存储，只存储上一状态即可。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {    public int maxProduct(int[] nums) {        int result = nums[0];        int maxNum = 1;        int minNum = 1;        for(int i = 0; i < nums.length; i++){            if (nums[i] < 0){                maxNum = maxNum + minNum;                minNum = maxNum - minNum;                maxNum = maxNum - minNum;            }            maxNum = nums[i] > maxNum * nums[i] ? nums[i]: maxNum * nums[i];            minNum = nums[i] < minNum * nums[i] ? nums[i]: minNum * nums[i];            if(result < maxNum){                result = maxNum;            }        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p><h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>可以使用多个DP过程存储中间可能状态</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> DP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:344. 反转字符串</title>
+      <link href="/2020/03/24/leetcode-344-fan-zhuan-zi-fu-chuan/"/>
+      <url>/2020/03/24/leetcode-344-fan-zhuan-zi-fu-chuan/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接使用前后指针swap</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {    public void reverseString(char[] s) {        if(s == null || s.length == 0){            return;        }        int left = 0;        int right = s.length - 1;        while (left < right){            char temp = s[left];            s[left++] = s[right];            s[right--] = temp;        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p><h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> 字符串 </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 双指针 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:387. 字符串中的第一个唯一字符</title>
       <link href="/2020/03/23/leetcode-387-zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-fu/"/>
       <url>/2020/03/23/leetcode-387-zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-fu/</url>
@@ -16,9 +76,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Easy </tag>
-            
             <tag> Map </tag>
+            
+            <tag> Easy </tag>
             
             <tag> 数组 </tag>
             
@@ -47,9 +107,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Map </tag>
-            
             <tag> easy </tag>
+            
+            <tag> Map </tag>
             
         </tags>
       
@@ -136,11 +196,11 @@
       
         <tags>
             
-            <tag> 回溯 </tag>
+            <tag> DP </tag>
             
             <tag> Hard </tag>
             
-            <tag> DP </tag>
+            <tag> 回溯 </tag>
             
         </tags>
       
@@ -169,9 +229,9 @@
             
             <tag> Medium </tag>
             
-            <tag> 回溯 </tag>
-            
             <tag> DP </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> BFS </tag>
             
@@ -202,9 +262,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Middle </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Middle </tag>
             
             <tag> DFS </tag>
             
@@ -264,9 +324,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
         </tags>
       
@@ -353,9 +413,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
             <tag> Stack </tag>
             
