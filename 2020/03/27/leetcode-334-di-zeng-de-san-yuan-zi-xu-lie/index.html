@@ -4,12 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:169. 多数元素, 小风雷">
-    <meta name="description" content="多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
-你可以假设数组是非空的，并且给定的数组总是存在多数元素。
-示例示例1：
-    输入: [3,2,3]
-    输出">
+    <meta name="keywords" content="Leetcode:334. 递增的三元子序列, 小风雷">
+    <meta name="description" content="334. 递增的三元子序列题目描述给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+
+数学表达式如下:
+
+如果存在这样的 i, j, k,  且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1，
+使得 arr[">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:169. 多数元素 | 小风雷</title>
+    <title>Leetcode:334. 递增的三元子序列 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,13 +242,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:169. 多数元素
+                        Leetcode:334. 递增的三元子序列
                     </div>
                 </div>
             </div>
@@ -369,16 +370,20 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Easy/">
-                                <span class="chip bg-color">Easy</span>
+                            <a href="/tags/DP/">
+                                <span class="chip bg-color">DP</span>
+                            </a>
+                        
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                             <a href="/tags/%E6%95%B0%E7%BB%84/">
                                 <span class="chip bg-color">数组</span>
                             </a>
                         
-                            <a href="/tags/%E8%AE%A1%E6%95%B0/">
-                                <span class="chip bg-color">计数</span>
+                            <a href="/tags/%E5%93%A8%E5%85%B5/">
+                                <span class="chip bg-color">哨兵</span>
                             </a>
                         
                     </div>
@@ -402,7 +407,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-03-27
                 </div>
                 
 
@@ -419,35 +424,58 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="多数元素"><a href="#多数元素" class="headerlink" title="多数元素"></a><a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">多数元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
-<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>示例1：
-    输入: [3,2,3]
-    输出: 3
-示例2:
-    输入: [2,2,1,1,1,2,2]
-    输出: 2</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：hash"><a href="#思路1：hash" class="headerlink" title="思路1：hash"></a>思路1：hash</h3><p>使用hash表存储&lt;num, numCount&gt;数与数出现次数，如果数超过⌊ n/2 ⌋，则该数为众数</p>
-<h3 id="思路2-Boyer-Moore-投票算法"><a href="#思路2-Boyer-Moore-投票算法" class="headerlink" title="思路2: Boyer-Moore 投票算法"></a>思路2: Boyer-Moore 投票算法</h3><p>直接使用计数标记，记录好候选的最多元素，然后因为多数元素超过一半，所以可以不断使用count计数完成候选元素替换、增加、减小。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">majorityElement</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">int</span> result <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> result<span class="token punctuation">)</span><span class="token punctuation">{</span>
-                count <span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">else</span><span class="token punctuation">{</span>
-                count <span class="token operator">--</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-                    result <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                    count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>思路1和思路2都是n</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>思路1会额外有n的字典，思路2不占用新的空间</p>
+                <h1 id="334-递增的三元子序列"><a href="#334-递增的三元子序列" class="headerlink" title="334. 递增的三元子序列"></a><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/" target="_blank" rel="noopener">334. 递增的三元子序列</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+
+数学表达式如下:
+
+如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
+使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。
+说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
+输出: true</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
+输出: false</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] = max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
+<h3 id="思路2：加入两个哨兵元素"><a href="#思路2：加入两个哨兵元素" class="headerlink" title="思路2：加入两个哨兵元素"></a>思路2：加入两个哨兵元素</h3><p>使用两个哨兵元素记录值，即记录两个最小的数</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        if (nums == null || nums.length < 3){
+            return false;
+        }
+        int[] dps = new int[nums.length];
+        for(int i = 1; i < nums.length; i++){
+            for(int j = 0; j < i; j++){
+                if (nums[i] > nums[j]){
+                    dps[i] = Math.max(dps[i], dps[j] + 1);
+                    if (dps[i] == 2){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        if (nums == null || nums.length < 3){
+            return false;
+        }
+        int max1 = Integer.MAX_VALUE;
+        int max2 = Integer.MAX_VALUE;
+        for(int num: nums){
+            if (num <= max1){
+                max1 = num;
+            } else if (num <= max2){
+                max2 = num;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+}</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -473,7 +501,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/05/leetcode-169-duo-shu-yuan-su/">https://weijunlei.github.io/2020/03/05/leetcode-169-duo-shu-yuan-su/</a>
+                    <a href="https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/">https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -515,16 +543,20 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Easy/">
-                                    <span class="chip bg-color">Easy</span>
+                                <a href="/tags/DP/">
+                                    <span class="chip bg-color">DP</span>
+                                </a>
+                            
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                                 <a href="/tags/%E6%95%B0%E7%BB%84/">
                                     <span class="chip bg-color">数组</span>
                                 </a>
                             
-                                <a href="/tags/%E8%AE%A1%E6%95%B0/">
-                                    <span class="chip bg-color">计数</span>
+                                <a href="/tags/%E5%93%A8%E5%85%B5/">
+                                    <span class="chip bg-color">哨兵</span>
                                 </a>
                             
                         </div>
@@ -570,7 +602,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-05T22-09-03',
+        id: '2020-03-27T23-03-33',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -591,31 +623,35 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/09/leetcode-887-ji-dan-diao-luo/">
+                <a href="/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/F4W1z6Cyjq8hDsH.jpg" class="responsive-img" alt="Leetcode 887:鸡蛋掉落">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="Leetcode:334. 递增的三元子序列">
                         
-                        <span class="card-title">Leetcode 887:鸡蛋掉落</span>
+                        <span class="card-title">Leetcode:334. 递增的三元子序列</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
-每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
-你知道存在楼层 F ，满足 0 &lt;= F &lt;
+                            334. 递增的三元子序列题目描述给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+
+数学表达式如下:
+
+如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
+使得 arr[
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -628,6 +664,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -635,12 +672,20 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
-                    </a>
-                    
                     <a href="/tags/DP/">
                         <span class="chip bg-color">DP</span>
+                    </a>
+                    
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E7%BB%84/">
+                        <span class="chip bg-color">数组</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%93%A8%E5%85%B5/">
+                        <span class="chip bg-color">哨兵</span>
                     </a>
                     
                 </div>
@@ -654,28 +699,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/05/leetcode-240/">
+                <a href="/2020/03/27/leetcode-350-liang-ge-shu-zu-de-jiao-ji-ii/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="Leetcode 240:搜索二维矩阵II">
+                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:350. 两个数组的交集 II">
                         
-                        <span class="card-title">Leetcode 240:搜索二维矩阵II</span>
+                        <span class="card-title">Leetcode:350. 两个数组的交集 II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
-
-每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。示例现有矩阵 matrix 如下：
-    [
+                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
                             </span>
                         <span class="publish-author">
                             
@@ -700,12 +742,12 @@
                         <span class="chip bg-color">Easy</span>
                     </a>
                     
-                    <a href="/tags/%E9%81%8D%E5%8E%86/">
-                        <span class="chip bg-color">遍历</span>
+                    <a href="/tags/%E6%95%B0%E7%BB%84/">
+                        <span class="chip bg-color">数组</span>
                     </a>
                     
-                    <a href="/tags/%E8%BE%B9%E7%95%8C/">
-                        <span class="chip bg-color">边界</span>
+                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">排序</span>
                     </a>
                     
                 </div>
