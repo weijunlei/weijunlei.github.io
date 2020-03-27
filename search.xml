@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:384.打乱数组</title>
+      <link href="/2020/03/27/leetcode-384-da-luan-shu-zu/"/>
+      <url>/2020/03/27/leetcode-384-da-luan-shu-zu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-384-打乱数组"><a href="#Leetcode-384-打乱数组" class="headerlink" title="Leetcode: 384.打乱数组"></a><a href="https://leetcode-cn.com/problems/shuffle-an-array/" target="_blank" rel="noopener">Leetcode: 384.打乱数组</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>打乱一个没有重复元素的数组。</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>// 以数字集合 1, 2 和 3 初始化数组。int[] nums = {1,2,3};Solution solution = new Solution(nums);// 打乱数组 [1,2,3] 并返回结果。任何 [1,2,3]的排列返回的概率应该相同。solution.shuffle();// 重设数组到它的初始状态[1,2,3]。solution.reset();// 随机返回数组[1,2,3]打乱后的结果。solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：复制数组-移除"><a href="#思路1：复制数组-移除" class="headerlink" title="思路1：复制数组+移除"></a>思路1：复制数组+移除</h3><p>复制一个新数组，然后随机置入数组，将置入数组的数移除</p><h3 id="思路2：Fisher–Yates-shuffle"><a href="#思路2：Fisher–Yates-shuffle" class="headerlink" title="思路2：Fisher–Yates shuffle"></a>思路2：Fisher–Yates shuffle</h3><p>遍历数组，随机化得到一个从当前位置到最后位置的数进行交换，该方法产生n!种可能，但是如果采用随机产生两个随机数则是错的，其产生的可能性为$n^n$,简单证明为n!可能不能被$n^n$整除</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-复制数组-移除"><a href="#代码1-复制数组-移除" class="headerlink" title="代码1: 复制数组+移除"></a>代码1: 复制数组+移除</h3><pre class=" language-Java"><code class="language-Java">class Solution {    private int[] nums;    private int[] origins;    private Random rand = new Random();    public Solution(int[] nums) {        this.nums = nums;        origins = this.nums.clone();    }    /** Resets the array to its original configuration and return it. */    public int[] reset() {        this.nums = this.origins;        this.origins = this.origins.clone();        return this.nums;    }    /** Returns a random shuffling of the array. */    public int[] shuffle() {        List<Integer> copyList = new ArrayList<>();        for(int num: this.nums){            copyList.add(num);        }        for(int i = 0; i < this.nums.length; i++){            int removeIndex = rand.nextInt(copyList.size());            this.nums[i] = copyList.get(removeIndex);            copyList.remove(removeIndex);        }        return this.nums;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    private int[] nums;    private int[] origins;    private Random rand = new Random();    public Solution(int[] nums) {        this.nums = nums;        origins = this.nums.clone();    }    /** Resets the array to its original configuration and return it. */    public int[] reset() {        this.nums = this.origins;        this.origins = this.origins.clone();        return this.nums;    }    /** Returns a random shuffling of the array. */    public int[] shuffle() {        for(int i = 0; i < this.nums.length; i++){            int swapIndex = rand.nextInt(this.nums.length - i) + i;            int temp = this.nums[i];            this.nums[i] = this.nums[swapIndex];            this.nums[swapIndex] = temp;        }        return this.nums;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$没有了移除操作</p><h3 id="思路1空间复杂度-1"><a href="#思路1空间复杂度-1" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 数组 </tag>
+            
+            <tag> 随机数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:283. 移动零</title>
       <link href="/2020/03/26/leetcode-283-yi-dong-ling/"/>
       <url>/2020/03/26/leetcode-283-yi-dong-ling/</url>
