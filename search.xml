@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:155. 最小栈</title>
+      <link href="/2020/03/28/leetcode-155-zui-xiao-zhan/"/>
+      <url>/2020/03/28/leetcode-155-zui-xiao-zhan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-155-最小栈"><a href="#Leetcode-155-最小栈" class="headerlink" title="Leetcode:155. 最小栈"></a><a href="https://leetcode-cn.com/problems/min-stack/" target="_blank" rel="noopener">Leetcode:155. 最小栈</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。push(x) -- 将元素 x 推入栈中。pop() -- 删除栈顶的元素。top() -- 获取栈顶元素。getMin() -- 检索栈中的最小元素。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>MinStack minStack = new MinStack();minStack.push(-2);minStack.push(0);minStack.push(-3);minStack.getMin();   --&gt; 返回 -3.minStack.pop();minStack.top();      --&gt; 返回 0.minStack.getMin();   --&gt; 返回 -2.</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class MinStack {    /** initialize your data structure here. */    private Stack<Integer> stack;    private Stack<Integer> stackHelper;    public MinStack() {        stack = new Stack<>();        stackHelper = new Stack<>();    }    public void push(int x) {        stack.add(x);        if (stackHelper.isEmpty() || x < stackHelper.peek()){            stackHelper.add(x);        }else {            stackHelper.add(stackHelper.peek());        }    }    public void pop() {        if (!stack.isEmpty()){            stack.pop();            stackHelper.pop();        } else {            throw new RuntimeException("Stack is empty!");        }    }    public int top() {        if (!stack.isEmpty()){            return stack.peek();        } else {            throw new RuntimeException("Stack is empty!");        }    }    public int getMin() {        if (!stackHelper.isEmpty()){            return stackHelper.peek();        } else {            throw new RuntimeException("Stack is empty!");        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:238. 除自身以外数组的乘积</title>
       <link href="/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/"/>
       <url>/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/</url>
@@ -51,11 +80,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> 数组 </tag>
             
             <tag> Medium </tag>
+            
+            <tag> DP </tag>
             
             <tag> 哨兵 </tag>
             
@@ -237,9 +266,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
@@ -357,9 +386,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 回溯 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> 前缀树 </tag>
             
@@ -417,11 +446,11 @@
       
         <tags>
             
+            <tag> DP </tag>
+            
             <tag> 回溯 </tag>
             
             <tag> Hard </tag>
-            
-            <tag> DP </tag>
             
         </tags>
       
@@ -448,11 +477,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 回溯 </tag>
+            <tag> Medium </tag>
             
             <tag> DP </tag>
             
-            <tag> Medium </tag>
+            <tag> 回溯 </tag>
             
             <tag> BFS </tag>
             
@@ -545,9 +574,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
         </tags>
       
@@ -636,9 +665,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
             <tag> Stack </tag>
             
@@ -665,9 +694,9 @@
       
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 阅读理解 </tag>
+            
+            <tag> 论文阅读 </tag>
             
             <tag> NLP </tag>
             
