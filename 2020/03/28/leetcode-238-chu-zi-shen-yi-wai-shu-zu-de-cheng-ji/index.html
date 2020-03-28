@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:384.打乱数组, 小风雷">
-    <meta name="description" content="Leetcode: 384.打乱数组题目描述打乱一个没有重复元素的数组。
-示例:// 以数字集合 1, 2 和 3 初始化数组。
-int[] nums = {1,2,3};
-Solution solution = new Solution(">
+    <meta name="keywords" content="Leetcode:238. 除自身以外数组的乘积, 小风雷">
+    <meta name="description" content="Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &amp;gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +13,7 @@ Solution solution = new Solution(">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:384.打乱数组 | 小风雷</title>
+    <title>Leetcode:238. 除自身以外数组的乘积 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -240,13 +237,13 @@ Solution solution = new Solution(">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/F4W1z6Cyjq8hDsH.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:384.打乱数组
+                        Leetcode:238. 除自身以外数组的乘积
                     </div>
                 </div>
             </div>
@@ -376,10 +373,6 @@ Solution solution = new Solution(">
                                 <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/">
-                                <span class="chip bg-color">随机数</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -401,7 +394,7 @@ Solution solution = new Solution(">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-27
+                    2020-03-28
                 </div>
                 
 
@@ -418,85 +411,32 @@ Solution solution = new Solution(">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-384-打乱数组"><a href="#Leetcode-384-打乱数组" class="headerlink" title="Leetcode: 384.打乱数组"></a><a href="https://leetcode-cn.com/problems/shuffle-an-array/" target="_blank" rel="noopener">Leetcode: 384.打乱数组</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>打乱一个没有重复元素的数组。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>// 以数字集合 1, 2 和 3 初始化数组。
-int[] nums = {1,2,3};
-Solution solution = new Solution(nums);
-
-// 打乱数组 [1,2,3] 并返回结果。任何 [1,2,3]的排列返回的概率应该相同。
-solution.shuffle();
-
-// 重设数组到它的初始状态[1,2,3]。
-solution.reset();
-
-// 随机返回数组[1,2,3]打乱后的结果。
-solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：复制数组-移除"><a href="#思路1：复制数组-移除" class="headerlink" title="思路1：复制数组+移除"></a>思路1：复制数组+移除</h3><p>复制一个新数组，然后随机置入数组，将置入数组的数移除</p>
-<h3 id="思路2：Fisher–Yates-shuffle"><a href="#思路2：Fisher–Yates-shuffle" class="headerlink" title="思路2：Fisher–Yates shuffle"></a>思路2：Fisher–Yates shuffle</h3><p>遍历数组，随机化得到一个从当前位置到最后位置的数进行交换，该方法产生n!种可能，但是如果采用随机产生两个随机数则是错的，其产生的可能性为$n^n$,简单证明为n!可能不能被$n^n$整除</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-复制数组-移除"><a href="#代码1-复制数组-移除" class="headerlink" title="代码1: 复制数组+移除"></a>代码1: 复制数组+移除</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    private int[] nums;
-    private int[] origins;
-
-    private Random rand = new Random();
-
-    public Solution(int[] nums) {
-        this.nums = nums;
-        origins = this.nums.clone();
-    }
-
-    /** Resets the array to its original configuration and return it. */
-    public int[] reset() {
-        this.nums = this.origins;
-        this.origins = this.origins.clone();
-        return this.nums;
-    }
-
-    /** Returns a random shuffling of the array. */
-    public int[] shuffle() {
-        List<Integer> copyList = new ArrayList<>();
-        for(int num: this.nums){
-            copyList.add(num);
+                <h1 id="Leetcode-238-除自身以外数组的乘积"><a href="#Leetcode-238-除自身以外数组的乘积" class="headerlink" title="Leetcode: 238. 除自身以外数组的乘积"></a><a href="https://leetcode-cn.com/problems/product-of-array-except-self/" target="_blank" rel="noopener">Leetcode: 238. 除自身以外数组的乘积</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [1,2,3,4]
+输出: [24,12,8,6]
+提示：题目数据保证数组之中任意元素的全部前缀元素和后缀（甚至是整个数组）的乘积都在 32 位整数范围内。
+说明: 请不要使用除法，且在 O(n) 时间复杂度内完成此题。</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><p>你可以在常数空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组不被视为额外空间。）</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：分别进行左右乘法"><a href="#思路1：分别进行左右乘法" class="headerlink" title="思路1：分别进行左右乘法"></a>思路1：分别进行左右乘法</h3><p>对所有位置的结果分为左边乘和右边乘，使用一个临时变量记录左乘(右乘)积，带入到相应位置，详情见代码</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] result = new int[nums.length];
+        for(int i = 0; i < result.length; i++){
+            result[i] = 1;
         }
-        for(int i = 0; i < this.nums.length; i++){
-            int removeIndex = rand.nextInt(copyList.size());
-            this.nums[i] = copyList.get(removeIndex);
-            copyList.remove(removeIndex);
+        int tempResult = 1;
+        for(int i = 0; i < result.length - 1; i++){
+            tempResult *= nums[i];
+            result[i+1] *= tempResult;
         }
-        return this.nums;
+        tempResult = 1;
+        for(int i = result.length - 1; i > 0; i--){
+            tempResult *= nums[i];
+            result[i - 1] *= tempResult;
+        }
+        return result;
     }
 }</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    private int[] nums;
-    private int[] origins;
-
-    private Random rand = new Random();
-
-    public Solution(int[] nums) {
-        this.nums = nums;
-        origins = this.nums.clone();
-    }
-
-    /** Resets the array to its original configuration and return it. */
-    public int[] reset() {
-        this.nums = this.origins;
-        this.origins = this.origins.clone();
-        return this.nums;
-    }
-
-    /** Returns a random shuffling of the array. */
-    public int[] shuffle() {
-        for(int i = 0; i < this.nums.length; i++){
-            int swapIndex = rand.nextInt(this.nums.length - i) + i;
-            int temp = this.nums[i];
-            this.nums[i] = this.nums[swapIndex];
-            this.nums[swapIndex] = temp;
-        }
-        return this.nums;
-    }
-}</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$没有了移除操作</p>
-<h3 id="思路1空间复杂度-1"><a href="#思路1空间复杂度-1" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(N)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$除去结果空间以外</p>
 
             </div>
             <hr/>
@@ -522,7 +462,7 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/27/leetcode-384-da-luan-shu-zu/">https://weijunlei.github.io/2020/03/27/leetcode-384-da-luan-shu-zu/</a>
+                    <a href="https://weijunlei.github.io/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/">https://weijunlei.github.io/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -572,10 +512,6 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                                     <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/">
-                                    <span class="chip bg-color">随机数</span>
-                                </a>
-                            
                         </div>
                     
                 </div>
@@ -619,7 +555,7 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-27T21-16-48',
+        id: '2020-03-28T22-43-31',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -640,30 +576,30 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/27/leetcode-350-liang-ge-shu-zu-de-jiao-ji-ii/">
+                <a href="/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:350. 两个数组的交集 II">
+                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:238. 除自身以外数组的乘积">
                         
-                        <span class="card-title">Leetcode:350. 两个数组的交集 II</span>
+                        <span class="card-title">Leetcode:238. 除自身以外数组的乘积</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
+                            Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -676,6 +612,7 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -683,16 +620,12 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
-                    </a>
-                    
                     <a href="/tags/%E6%95%B0%E7%BB%84/">
                         <span class="chip bg-color">数组</span>
                     </a>
                     
-                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">排序</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>
@@ -706,25 +639,29 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/26/leetcode-283-yi-dong-ling/">
+                <a href="/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="Leetcode:283. 移动零">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="Leetcode:334. 递增的三元子序列">
                         
-                        <span class="card-title">Leetcode:283. 移动零</span>
+                        <span class="card-title">Leetcode:334. 递增的三元子序列</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:283. 移动零题目描述给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。示例:输入: [0,1,0,3,12]
-输出: [1,3,12,0,0]说明:必须在原数组上操作，不能拷
+                            334. 递增的三元子序列题目描述给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+
+数学表达式如下:
+
+如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
+使得 arr[
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
                             </span>
                         <span class="publish-author">
                             
@@ -745,16 +682,20 @@ solution.shuffle();</code></pre><h2 id="思路"><a href="#思路" class="headerl
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/DP/">
+                        <span class="chip bg-color">DP</span>
                     </a>
                     
                     <a href="/tags/%E6%95%B0%E7%BB%84/">
                         <span class="chip bg-color">数组</span>
                     </a>
                     
-                    <a href="/tags/%E9%81%8D%E5%8E%86/">
-                        <span class="chip bg-color">遍历</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%93%A8%E5%85%B5/">
+                        <span class="chip bg-color">哨兵</span>
                     </a>
                     
                 </div>
