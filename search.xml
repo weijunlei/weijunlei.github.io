@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>Leetcode:295. 数据流的中位数</title>
+      <link href="/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/"/>
+      <url>/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-295-数据流的中位数"><a href="#Leetcode-295-数据流的中位数" class="headerlink" title="Leetcode:295. 数据流的中位数"></a><a href="https://leetcode-cn.com/problems/find-median-from-data-stream/" target="_blank" rel="noopener">Leetcode:295. 数据流的中位数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。例如，[2,3,4] 的中位数是 3[2,3] 的中位数是 (2 + 3) / 2 = 2.5设计一个支持以下两种操作的数据结构：void addNum(int num) - 从数据流中添加一个整数到数据结构中。double findMedian() - 返回目前所有元素的中位数。</code></pre><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>addNum(1)addNum(2)findMedian() -&gt; 1.5addNum(3) findMedian() -&gt; 2</code></pre><p>进阶:<br>    如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？<br>    如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：借用插入排序方法，每次插入后保持有序"><a href="#思路1：借用插入排序方法，每次插入后保持有序" class="headerlink" title="思路1：借用插入排序方法，每次插入后保持有序"></a>思路1：借用插入排序方法，每次插入后保持有序</h3><p>使用插入排序思路，每次插入新的数据后数据保持有序，这样时间复杂度主要来自于插入的O(n)<br>// TODO:其他思路</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：插入排序思路"><a href="#代码1：插入排序思路" class="headerlink" title="代码1：插入排序思路"></a>代码1：插入排序思路</h3><pre class=" language-Java"><code class="language-Java">class MedianFinder {    private List<Integer> list;    /** initialize your data structure here. */    public MedianFinder() {        list = new ArrayList<>();    }    public void addNum(int num) {        if (list.isEmpty()){            list.add(num);            return;        }        int insertIndex = 0;        for(; insertIndex < list.size(); insertIndex++){            if(list.get(insertIndex) > num){                break;            }        }        list.add(insertIndex, num);    }    public double findMedian() {        if (list.size() % 2 != 0){            return list.get(list.size() / 2);        } else {            return 1.0 * (list.get(list.size() / 2 - 1) + list.get(list.size() / 2)) / 2;        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>主要是插入排序的时间每次为O(n)</p><h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 插入排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:215. 数组中的第K个最大元素</title>
+      <link href="/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/"/>
+      <url>/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/</url>
+      
+        <content type="html"><![CDATA[<h1 id="215-数组中的第K个最大元素"><a href="#215-数组中的第K个最大元素" class="headerlink" title="215. 数组中的第K个最大元素"></a><a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">215. 数组中的第K个最大元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [3,2,1,5,6,4] 和 k = 2输出: 5</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4输出: 4</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用快排的获取主元排序索引，更新到符合K大的位置</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int findKthLargest(int[] nums, int k) {        if (nums == null || nums.length < k){            return -1;        }        int result = -1;        int start = 0;        int end = nums.length - 1;        result = getIndex(nums, start, end);        while (result != k - 1){            if (result > k - 1){                end = result;                result = getIndex(nums, start, end - 1);            } else if(result < k - 1){                start = result;                result = getIndex(nums, start + 1, end);            }        }        if (result == k - 1){            return nums[k - 1];        }else {            return -1;        }    }    private int getIndex(int[] nums, int s, int e){        int getNum = nums[s];        int getIndex = s;        swap(nums, s, e);        for(int i = s; i < e; i++){            if (nums[i] > getNum){                swap(nums, getIndex, i);                getIndex ++;            }        }        swap(nums, getIndex, e);        return getIndex;    }    private void swap(int[] nums, int i, int j){        int temp = nums[i];        nums[i] = nums[j];        nums[j] = temp;    }}</code></pre><p>// TODO:其他思路</p><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均$O(n)$,最坏$(n^2)$</p><h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 快排 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:155. 最小栈</title>
       <link href="/2020/03/28/leetcode-155-zui-xiao-zhan/"/>
       <url>/2020/03/28/leetcode-155-zui-xiao-zhan/</url>
@@ -51,9 +109,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
@@ -80,11 +138,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 数组 </tag>
+            <tag> DP </tag>
             
             <tag> Medium </tag>
             
-            <tag> DP </tag>
+            <tag> 数组 </tag>
             
             <tag> 哨兵 </tag>
             
@@ -144,9 +202,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 数组 </tag>
             
             <tag> 随机数 </tag>
             
@@ -266,9 +324,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -386,9 +444,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 前缀树 </tag>
             
@@ -446,11 +504,11 @@
       
         <tags>
             
-            <tag> DP </tag>
-            
             <tag> 回溯 </tag>
             
             <tag> Hard </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
@@ -477,11 +535,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
+            <tag> 回溯 </tag>
             
             <tag> DP </tag>
             
-            <tag> 回溯 </tag>
+            <tag> Medium </tag>
             
             <tag> BFS </tag>
             
@@ -574,9 +632,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
@@ -665,9 +723,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> DP </tag>
             
             <tag> Stack </tag>
             
@@ -694,9 +752,9 @@
       
         <tags>
             
-            <tag> 阅读理解 </tag>
-            
             <tag> 论文阅读 </tag>
+            
+            <tag> 阅读理解 </tag>
             
             <tag> NLP </tag>
             
