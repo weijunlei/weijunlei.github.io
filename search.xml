@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:347. 前 K 个高频元素</title>
+      <link href="/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/"/>
+      <url>/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-347-前-K-个高频元素"><a href="#Leetcode-347-前-K-个高频元素" class="headerlink" title="Leetcode:347. 前 K 个高频元素"></a><a href="https://leetcode-cn.com/problems/top-k-frequent-elements/" target="_blank" rel="noopener">Leetcode:347. 前 K 个高频元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空的整数数组，返回其中出现频率前 k 高的元素。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = [1,1,1,2,2,3], k = 2输出: [1,2]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = [1], k = 1输出: [1]</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>维护一个大小为K的最小堆，根据数字出现次数排序</p><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用桶排序，维护一个出现次数的二维数组</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public List<Integer> topKFrequent(int[] nums, int k) {        Map<Integer, Integer> map = new HashMap<Integer, Integer>();        for(int num: nums){            if (!map.containsKey(num)){                map.put(num, 1);            } else{                map.put(num, map.get(num) + 1);            }        }        PriorityQueue<Integer> pq =                new PriorityQueue<Integer>((n1, n2) -> map.get(n1) - map.get(n2));        for(int num: map.keySet()){            pq.add(num);            if (pq.size() > k){                pq.poll();            }        }        List<Integer> maxQueue = new ArrayList<>();        while (pq.size() != 0){            maxQueue.add(pq.poll());        }        Collections.reverse(maxQueue);        return maxQueue;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public List<Integer> topKFrequent(int[] nums, int k) {        Map<Integer, Integer> map = new HashMap<Integer, Integer>();        for(int num: nums){            if (!map.containsKey(num)){                map.put(num, 1);            } else{                map.put(num, map.get(num) + 1);            }        }        List<Integer>[] sizeCount = new List[nums.length];        for(int num: map.keySet()){            int getCount = map.get(num) - 1;            if (sizeCount[getCount] == null){                sizeCount[getCount] = new ArrayList<Integer>();            }            sizeCount[getCount].add(num);        }        List<Integer> maxQueue = new ArrayList<>();        for(int i = nums.length - 1; i >= 0 && maxQueue.size() < k; i--){            if (sizeCount[i] == null){                continue;            }else {                maxQueue.addAll(sizeCount[i]);            }        }        return maxQueue;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路1时间复杂度-1"><a href="#思路1时间复杂度-1" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 优先队列 </tag>
+            
+            <tag> 桶排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:378. 有序矩阵中第K小的元素</title>
       <link href="/2020/03/31/leetcode-378-you-xu-ju-zhen-zhong-di-k-xiao-de-yuan-su/"/>
       <url>/2020/03/31/leetcode-378-you-xu-ju-zhen-zhong-di-k-xiao-de-yuan-su/</url>
@@ -138,9 +169,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -169,9 +200,9 @@
             
             <tag> DP </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 哨兵 </tag>
             
@@ -231,9 +262,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 随机数 </tag>
             
@@ -922,31 +953,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -966,6 +972,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       

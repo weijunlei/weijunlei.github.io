@@ -4,13 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:334. 递增的三元子序列, 小风雷">
-    <meta name="description" content="334. 递增的三元子序列题目描述给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
-
-数学表达式如下:
-
-如果存在这样的 i, j, k,  且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1，
-使得 arr[">
+    <meta name="keywords" content="Leetcode:347. 前 K 个高频元素, 小风雷">
+    <meta name="description" content="Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]示例 2:输入: nums = [1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:334. 递增的三元子序列 | 小风雷</title>
+    <title>Leetcode:347. 前 K 个高频元素 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -242,13 +238,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:334. 递增的三元子序列
+                        Leetcode:347. 前 K 个高频元素
                     </div>
                 </div>
             </div>
@@ -370,20 +366,16 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/DP/">
-                                <span class="chip bg-color">DP</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%95%B0%E7%BB%84/">
-                                <span class="chip bg-color">数组</span>
-                            </a>
-                        
                             <a href="/tags/Medium/">
                                 <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E5%93%A8%E5%85%B5/">
-                                <span class="chip bg-color">哨兵</span>
+                            <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
+                                <span class="chip bg-color">优先队列</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+                                <span class="chip bg-color">桶排序</span>
                             </a>
                         
                     </div>
@@ -407,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-27
+                    2020-04-01
                 </div>
                 
 
@@ -424,58 +416,75 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="334-递增的三元子序列"><a href="#334-递增的三元子序列" class="headerlink" title="334. 递增的三元子序列"></a><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/" target="_blank" rel="noopener">334. 递增的三元子序列</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
-
-数学表达式如下:
-
-如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
-使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。
-说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
-输出: true</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
-输出: false</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] = max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
-<h3 id="思路2：加入两个哨兵元素"><a href="#思路2：加入两个哨兵元素" class="headerlink" title="思路2：加入两个哨兵元素"></a>思路2：加入两个哨兵元素</h3><p>使用两个哨兵元素记录值，即记录两个最小的数</p>
+                <h1 id="Leetcode-347-前-K-个高频元素"><a href="#Leetcode-347-前-K-个高频元素" class="headerlink" title="Leetcode:347. 前 K 个高频元素"></a><a href="https://leetcode-cn.com/problems/top-k-frequent-elements/" target="_blank" rel="noopener">Leetcode:347. 前 K 个高频元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空的整数数组，返回其中出现频率前 k 高的元素。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = [1], k = 1
+输出: [1]</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
+你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>维护一个大小为K的最小堆，根据数字出现次数排序</p>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用桶排序，维护一个出现次数的二维数组</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean increasingTriplet(int[] nums) {
-        if (nums == null || nums.length < 3){
-            return false;
-        }
-        int[] dps = new int[nums.length];
-        for(int i = 1; i < nums.length; i++){
-            for(int j = 0; j < i; j++){
-                if (nums[i] > nums[j]){
-                    dps[i] = Math.max(dps[i], dps[j] + 1);
-                    if (dps[i] == 2){
-                        return true;
-                    }
-                }
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int num: nums){
+            if (!map.containsKey(num)){
+                map.put(num, 1);
+            } else{
+                map.put(num, map.get(num) + 1);
             }
         }
-        return false;
+
+        PriorityQueue<Integer> pq =
+                new PriorityQueue<Integer>((n1, n2) -> map.get(n1) - map.get(n2));
+        for(int num: map.keySet()){
+            pq.add(num);
+            if (pq.size() > k){
+                pq.poll();
+            }
+        }
+
+        List<Integer> maxQueue = new ArrayList<>();
+        while (pq.size() != 0){
+            maxQueue.add(pq.poll());
+        }
+        Collections.reverse(maxQueue);
+        return maxQueue;
     }
 }</code></pre>
 <h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean increasingTriplet(int[] nums) {
-        if (nums == null || nums.length < 3){
-            return false;
-        }
-        int max1 = Integer.MAX_VALUE;
-        int max2 = Integer.MAX_VALUE;
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int num: nums){
-            if (num <= max1){
-                max1 = num;
-            } else if (num <= max2){
-                max2 = num;
-            } else {
-                return true;
+            if (!map.containsKey(num)){
+                map.put(num, 1);
+            } else{
+                map.put(num, map.get(num) + 1);
             }
         }
-        return false;
+
+        List<Integer>[] sizeCount = new List[nums.length];
+
+        for(int num: map.keySet()){
+            int getCount = map.get(num) - 1;
+            if (sizeCount[getCount] == null){
+                sizeCount[getCount] = new ArrayList<Integer>();
+            }
+            sizeCount[getCount].add(num);
+        }
+
+        List<Integer> maxQueue = new ArrayList<>();
+        for(int i = nums.length - 1; i >= 0 && maxQueue.size() < k; i--){
+            if (sizeCount[i] == null){
+                continue;
+            }else {
+                maxQueue.addAll(sizeCount[i]);
+            }
+        }
+        return maxQueue;
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路1时间复杂度-1"><a href="#思路1时间复杂度-1" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -501,7 +510,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/">https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/</a>
+                    <a href="https://weijunlei.github.io/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/">https://weijunlei.github.io/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -543,20 +552,16 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/DP/">
-                                    <span class="chip bg-color">DP</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%95%B0%E7%BB%84/">
-                                    <span class="chip bg-color">数组</span>
-                                </a>
-                            
                                 <a href="/tags/Medium/">
                                     <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E5%93%A8%E5%85%B5/">
-                                    <span class="chip bg-color">哨兵</span>
+                                <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
+                                    <span class="chip bg-color">优先队列</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+                                    <span class="chip bg-color">桶排序</span>
                                 </a>
                             
                         </div>
@@ -602,7 +607,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-27T23-03-33',
+        id: '2020-04-01T20-09-09',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -623,29 +628,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/28/leetcode-238-chu-zi-shen-yi-wai-shu-zu-de-cheng-ji/">
+                <a href="/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:238. 除自身以外数组的乘积">
+                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:347. 前 K 个高频元素">
                         
-                        <span class="card-title">Leetcode:238. 除自身以外数组的乘积</span>
+                        <span class="card-title">Leetcode:347. 前 K 个高频元素</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+                            Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]示例 2:输入: nums = [1
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -658,6 +665,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -665,12 +673,16 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E7%BB%84/">
-                        <span class="chip bg-color">数组</span>
-                    </a>
-                    
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">优先队列</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">桶排序</span>
                     </a>
                     
                 </div>
@@ -684,25 +696,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/27/leetcode-350-liang-ge-shu-zu-de-jiao-ji-ii/">
+                <a href="/2020/03/31/leetcode-378-you-xu-ju-zhen-zhong-di-k-xiao-de-yuan-su/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:350. 两个数组的交集 II">
+                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:378. 有序矩阵中第K小的元素">
                         
-                        <span class="card-title">Leetcode:350. 两个数组的交集 II</span>
+                        <span class="card-title">Leetcode:378. 有序矩阵中第K小的元素</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
+                            Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
+请注意，它是排序后的第k小元素，而不是第k个元素。示例:matrix = [
+[ 1,  5, 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-31
                             </span>
                         <span class="publish-author">
                             
@@ -723,16 +736,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E7%BB%84/">
-                        <span class="chip bg-color">数组</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">排序</span>
+                    <a href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95/">
+                        <span class="chip bg-color">二分法</span>
                     </a>
                     
                 </div>
