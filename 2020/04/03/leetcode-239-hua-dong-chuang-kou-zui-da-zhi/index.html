@@ -4,12 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode 240:搜索二维矩阵II, 小风雷">
-    <meta name="description" content="搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
+    <meta name="keywords" content="Leetcode:239. 滑动窗口最大值, 小风雷">
+    <meta name="description" content="Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 
-每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。示例现有矩阵 matrix 如下：
-    [">
+返回滑动窗口中的最大值。
+
+
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode 240:搜索二维矩阵II | 小风雷</title>
+    <title>Leetcode:239. 滑动窗口最大值 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,13 +242,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode 240:搜索二维矩阵II
+                        Leetcode:239. 滑动窗口最大值
                     </div>
                 </div>
             </div>
@@ -369,16 +370,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Easy/">
-                                <span class="chip bg-color">Easy</span>
+                            <a href="/tags/Hard/">
+                                <span class="chip bg-color">Hard</span>
                             </a>
                         
-                            <a href="/tags/%E9%81%8D%E5%8E%86/">
-                                <span class="chip bg-color">遍历</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%BE%B9%E7%95%8C/">
-                                <span class="chip bg-color">边界</span>
+                            <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">
+                                <span class="chip bg-color">优先级队列</span>
                             </a>
                         
                     </div>
@@ -402,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-04-03
                 </div>
                 
 
@@ -419,47 +416,84 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="搜索二维矩阵II"><a href="#搜索二维矩阵II" class="headerlink" title="搜索二维矩阵II"></a><a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/" target="_blank" rel="noopener">搜索二维矩阵II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
+                <h1 id="Leetcode-239-滑动窗口最大值"><a href="#Leetcode-239-滑动窗口最大值" class="headerlink" title="Leetcode: 239. 滑动窗口最大值"></a><a href="https://leetcode-cn.com/problems/sliding-window-maximum/" target="_blank" rel="noopener">Leetcode: 239. 滑动窗口最大值</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 
-每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。</code></pre><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>现有矩阵 matrix 如下：
-    [
-        [1,   4,  7, 11, 15],
-        [2,   5,  8, 12, 19],
-        [3,   6,  9, 16, 22],
-        [10, 13, 14, 17, 24],
-        [18, 21, 23, 26, 30]
-    ]
-给定 target = 5，返回 true。
-给定 target = 20，返回 false。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力法"><a href="#思路1-暴力法" class="headerlink" title="思路1 暴力法"></a>思路1 暴力法</h3><p>直接二维数组遍历</p>
-<h3 id="思路2-按照已有顺序遍历"><a href="#思路2-按照已有顺序遍历" class="headerlink" title="思路2: 按照已有顺序遍历"></a>思路2: 按照已有顺序遍历</h3><p>按照题目给的信息，则可根据原数组的排序方式，设置index从数组第一行最后一列元素开始遍历，这样以m+n的算法复杂度得出结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路2：代码"><a href="#思路2：代码" class="headerlink" title="思路2：代码"></a>思路2：代码</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">searchMatrix</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> matrix<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix <span class="token operator">==</span> null <span class="token operator">||</span> matrix<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">int</span> rows <span class="token operator">=</span> matrix<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> columns <span class="token operator">=</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> rowIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> colIndex <span class="token operator">=</span> columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">boolean</span> result <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+返回滑动窗口中的最大值。
 
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span> <span class="token operator">></span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                colIndex <span class="token operator">--</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span> <span class="token operator">&lt;</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                rowIndex <span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> target <span class="token operator">==</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                result <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-<h2 id="总结体会"><a href="#总结体会" class="headerlink" title="总结体会"></a>总结体会</h2><p>在实现过程中需要注意下标溢出</p>
+
+
+进阶：
+
+你能在线性时间复杂度内解决此题吗？</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+输出: [3,3,5,5,6,7] 
+解释: 
+
+滑动窗口的位置                最大值
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+1 [3  -1  -3] 5  3  6  7       3
+1  3 [-1  -3  5] 3  6  7       5
+1  3  -1 [-3  5  3] 6  7       5
+1  3  -1  -3 [5  3  6] 7       6
+1  3  -1  -3  5 [3  6  7]      7</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>1 &lt;= nums.length &lt;= 10^5
+-10^4 &lt;= nums[i] &lt;= 10^4
+1 &lt;= k &lt;= nums.length</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：优先级队列"><a href="#思路1：优先级队列" class="headerlink" title="思路1：优先级队列"></a>思路1：优先级队列</h3><p>使用优先级队列存储一个k的最大堆，大于k时每次去除前面的第k个元素</p>
+<h3 id="思路2：动态规划"><a href="#思路2：动态规划" class="headerlink" title="思路2：动态规划"></a>思路2：动态规划</h3><p>将原数组设置为k个一个单元，然后分别求从左至当前位置的最大值（不超过k单元内）和从右至左，这样可以直接求两个边界最大值即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0){
+            return nums;
+        }
+
+        PriorityQueue<Integer> pq = new  PriorityQueue<Integer>(Collections.reverseOrder());
+        int[] result = new int[nums.length - k + 1];
+
+        for(int i = 0; i < nums.length; i++){
+            if (i >= k) pq.remove(nums[i - k]);
+            pq.offer(nums[i]);
+            if (i + 1 >= k) result[i + 1 - k] = pq.peek();
+        }
+
+        return result;
+    }
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0){
+            return nums;
+        }
+
+        int n = nums.length;
+        int[] leftDPs = new int[n];
+        int[] rightDPs = new int[n];
+        leftDPs[0] = nums[0];
+        rightDPs[n - 1] = nums[n - 1];
+        int[] result = new int[n - k + 1];
+
+        for(int i = 1; i < n; i++){
+            if (i % k != 0){
+                leftDPs[i] = Math.max(nums[i], leftDPs[i - 1]);
+            } else {
+                leftDPs[i] = nums[i];
+            }
+
+            int rightIndex = n - i - 1;
+            if (rightIndex % k != 0){
+                rightDPs[rightIndex] = Math.max(nums[rightIndex], rightDPs[rightIndex + 1]);
+            }else {
+                rightDPs[rightIndex] = nums[rightIndex];
+            }
+        }
+        for(int i = 0; i < n - k + 1; i++){
+            result[i] = Math.max(rightDPs[i], leftDPs[i + k - 1]);
+        }
+        return result;
+    }
+}</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -485,7 +519,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/05/leetcode-240/">https://weijunlei.github.io/2020/03/05/leetcode-240/</a>
+                    <a href="https://weijunlei.github.io/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/">https://weijunlei.github.io/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -527,16 +561,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Easy/">
-                                    <span class="chip bg-color">Easy</span>
+                                <a href="/tags/Hard/">
+                                    <span class="chip bg-color">Hard</span>
                                 </a>
                             
-                                <a href="/tags/%E9%81%8D%E5%8E%86/">
-                                    <span class="chip bg-color">遍历</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%BE%B9%E7%95%8C/">
-                                    <span class="chip bg-color">边界</span>
+                                <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">
+                                    <span class="chip bg-color">优先级队列</span>
                                 </a>
                             
                         </div>
@@ -582,7 +612,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-05T21-45-36',
+        id: '2020-04-03T19-56-56',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -603,33 +633,35 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/05/leetcode-169-duo-shu-yuan-su/">
+                <a href="/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:169. 多数元素">
+                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:239. 滑动窗口最大值">
                         
-                        <span class="card-title">Leetcode:169. 多数元素</span>
+                        <span class="card-title">Leetcode:239. 滑动窗口最大值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
-你可以假设数组是非空的，并且给定的数组总是存在多数元素。
-示例示例1：
-    输入: [3,2,3]
-    输出
+                            Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+
+返回滑动窗口中的最大值。
+
+
+
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -642,6 +674,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -649,16 +682,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/Hard/">
+                        <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E7%BB%84/">
-                        <span class="chip bg-color">数组</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%A1%E6%95%B0/">
-                        <span class="chip bg-color">计数</span>
+                    <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">优先级队列</span>
                     </a>
                     
                 </div>
@@ -672,27 +701,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/04/leetcode-32/">
+                <a href="/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="LeetCode 32:最长有效括号">
+                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:347. 前 K 个高频元素">
                         
-                        <span class="card-title">LeetCode 32:最长有效括号</span>
+                        <span class="card-title">Leetcode:347. 前 K 个高频元素</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
-示例1:输入: &quot;(()&quot;
-输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;示例2:输入: &q
+                            Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]示例 2:输入: nums = [1
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-01
                             </span>
                         <span class="publish-author">
                             
@@ -713,16 +740,16 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/DP/">
-                        <span class="chip bg-color">DP</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
+                    <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">优先队列</span>
                     </a>
                     
-                    <a href="/tags/Stack/">
-                        <span class="chip bg-color">Stack</span>
+                    <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">桶排序</span>
                     </a>
                     
                 </div>

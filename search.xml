@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:239. 滑动窗口最大值</title>
+      <link href="/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/"/>
+      <url>/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-239-滑动窗口最大值"><a href="#Leetcode-239-滑动窗口最大值" class="headerlink" title="Leetcode: 239. 滑动窗口最大值"></a><a href="https://leetcode-cn.com/problems/sliding-window-maximum/" target="_blank" rel="noopener">Leetcode: 239. 滑动窗口最大值</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。返回滑动窗口中的最大值。进阶：你能在线性时间复杂度内解决此题吗？</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3输出: [3,3,5,5,6,7] 解释: 滑动窗口的位置                最大值---------------               -----[1  3  -1] -3  5  3  6  7       31 [3  -1  -3] 5  3  6  7       31  3 [-1  -3  5] 3  6  7       51  3  -1 [-3  5  3] 6  7       51  3  -1  -3 [5  3  6] 7       61  3  -1  -3  5 [3  6  7]      7</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>1 &lt;= nums.length &lt;= 10^5-10^4 &lt;= nums[i] &lt;= 10^41 &lt;= k &lt;= nums.length</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：优先级队列"><a href="#思路1：优先级队列" class="headerlink" title="思路1：优先级队列"></a>思路1：优先级队列</h3><p>使用优先级队列存储一个k的最大堆，大于k时每次去除前面的第k个元素</p><h3 id="思路2：动态规划"><a href="#思路2：动态规划" class="headerlink" title="思路2：动态规划"></a>思路2：动态规划</h3><p>将原数组设置为k个一个单元，然后分别求从左至当前位置的最大值（不超过k单元内）和从右至左，这样可以直接求两个边界最大值即可</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int[] maxSlidingWindow(int[] nums, int k) {        if (nums == null || nums.length == 0){            return nums;        }        PriorityQueue<Integer> pq = new  PriorityQueue<Integer>(Collections.reverseOrder());        int[] result = new int[nums.length - k + 1];        for(int i = 0; i < nums.length; i++){            if (i >= k) pq.remove(nums[i - k]);            pq.offer(nums[i]);            if (i + 1 >= k) result[i + 1 - k] = pq.peek();        }        return result;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int[] maxSlidingWindow(int[] nums, int k) {        if (nums == null || nums.length == 0){            return nums;        }        int n = nums.length;        int[] leftDPs = new int[n];        int[] rightDPs = new int[n];        leftDPs[0] = nums[0];        rightDPs[n - 1] = nums[n - 1];        int[] result = new int[n - k + 1];        for(int i = 1; i < n; i++){            if (i % k != 0){                leftDPs[i] = Math.max(nums[i], leftDPs[i - 1]);            } else {                leftDPs[i] = nums[i];            }            int rightIndex = n - i - 1;            if (rightIndex % k != 0){                rightDPs[rightIndex] = Math.max(nums[rightIndex], rightDPs[rightIndex + 1]);            }else {                rightDPs[rightIndex] = nums[rightIndex];            }        }        for(int i = 0; i < n - k + 1; i++){            result[i] = Math.max(rightDPs[i], leftDPs[i + k - 1]);        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 优先级队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:347. 前 K 个高频元素</title>
       <link href="/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/"/>
       <url>/2020/04/01/leetcode-347-qian-k-ge-gao-pin-yuan-su/</url>
@@ -198,9 +227,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> DP </tag>
             
             <tag> 数组 </tag>
             
@@ -384,9 +413,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DP </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> DP </tag>
             
         </tags>
       
@@ -504,9 +533,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 回溯 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> 前缀树 </tag>
             
@@ -564,11 +593,11 @@
       
         <tags>
             
+            <tag> DP </tag>
+            
             <tag> 回溯 </tag>
             
             <tag> Hard </tag>
-            
-            <tag> DP </tag>
             
         </tags>
       
@@ -595,11 +624,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 回溯 </tag>
+            <tag> Medium </tag>
             
             <tag> DP </tag>
             
-            <tag> Medium </tag>
+            <tag> 回溯 </tag>
             
             <tag> BFS </tag>
             
@@ -692,9 +721,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
         </tags>
       
@@ -783,9 +812,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Hard </tag>
             
             <tag> Stack </tag>
             
