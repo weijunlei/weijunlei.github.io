@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:344. 反转字符串, 小风雷">
-    <meta name="description" content="Leetcode:344. 反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+    <meta name="keywords" content="Leetcode:227. 基本计算器 II, 小风雷">
+    <meta name="description" content="Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。">
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &amp;quot;3+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:344. 反转字符串 | 小风雷</title>
+    <title>Leetcode:227. 基本计算器 II | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -239,13 +239,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:344. 反转字符串
+                        Leetcode:227. 基本计算器 II
                     </div>
                 </div>
             </div>
@@ -367,16 +367,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Easy/">
-                                <span class="chip bg-color">Easy</span>
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-                                <span class="chip bg-color">字符串</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">
-                                <span class="chip bg-color">双指针</span>
+                            <a href="/tags/%E6%A0%88/">
+                                <span class="chip bg-color">栈</span>
                             </a>
                         
                     </div>
@@ -400,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-24
+                    2020-04-04
                 </div>
                 
 
@@ -417,29 +413,62 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-344-反转字符串"><a href="#Leetcode-344-反转字符串" class="headerlink" title="Leetcode:344. 反转字符串"></a><a href="https://leetcode-cn.com/explore/interview/card/top-interview-quesitons/275/string/1144/" target="_blank" rel="noopener">Leetcode:344. 反转字符串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+                <h1 id="Leetcode-227-基本计算器-II"><a href="#Leetcode-227-基本计算器-II" class="headerlink" title="Leetcode 227. 基本计算器 II"></a><a href="https://leetcode-cn.com/problems/basic-calculator-ii/" target="_blank" rel="noopener">Leetcode 227. 基本计算器 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;3+2*2&quot;
+输出: 7</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot; 3/2 &quot;
+输出: 1</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot; 3+5 / 2 &quot;
+输出: 5</code></pre><p>说明：<br>    你可以假设所给定的表达式都是有效的。<br>    请不要使用内置的库函数 eval。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：栈"><a href="#思路1：栈" class="headerlink" title="思路1：栈"></a>思路1：栈</h3><p>使用一个栈存储数字，然后使用一个符号记录延后记录运算符，初始为+，最后出栈相加即可得到最后的结果</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int calculate(String s) {
+        if (s == null || s.length() == 0){
+            return 0;
+        }
 
-你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
-输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
-输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接使用前后指针swap</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
-    public void reverseString(char[] s) {
-        if(s == null || s.length == 0){
-            return;
+        int result = 0;
+        int tempNum = 0;
+        char tempOp = '+';
+        int getNum = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if (ch >= '0' && ch <= '9'){
+
+                tempNum = tempNum * 10 + ch - '0';
+            } 
+            if ((ch != ' ' && (ch < '0' || ch  > '9')) || i == s.length() - 1){
+                switch(tempOp){
+                    case '+':
+                        stack.push(tempNum);
+                        break;
+                    case '-':
+                        stack.push(-tempNum);
+                        break;
+                    case '*':
+                        getNum = stack.peek() * tempNum;
+                        stack.pop();
+                        stack.push(getNum);
+                        break;
+                    case '/':
+                        getNum = stack.peek() / tempNum;
+                        stack.pop();
+                        stack.push(getNum);
+                        break;
+                }
+                tempNum = 0;
+                tempOp = ch;
+            }
         }
-        int left = 0;
-        int right = s.length - 1;
-        while (left < right){
-            char temp = s[left];
-            s[left++] = s[right];
-            s[right--] = temp;
+        while(!stack.isEmpty()){
+            result += stack.pop();
         }
+        return result;
     }
 }</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -465,7 +494,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/24/leetcode-344-fan-zhuan-zi-fu-chuan/">https://weijunlei.github.io/2020/03/24/leetcode-344-fan-zhuan-zi-fu-chuan/</a>
+                    <a href="https://weijunlei.github.io/2020/04/04/leetcode-227-ji-ben-ji-suan-qi-ii/">https://weijunlei.github.io/2020/04/04/leetcode-227-ji-ben-ji-suan-qi-ii/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -507,16 +536,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Easy/">
-                                    <span class="chip bg-color">Easy</span>
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
-                                    <span class="chip bg-color">字符串</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">
-                                    <span class="chip bg-color">双指针</span>
+                                <a href="/tags/%E6%A0%88/">
+                                    <span class="chip bg-color">栈</span>
                                 </a>
                             
                         </div>
@@ -562,7 +587,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-24T20-18-26',
+        id: '2020-04-04T23-30-14',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -583,31 +608,32 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/24/leetcode-152-cheng-ji-zui-da-zi-shu-zu/">
+                <a href="/2020/04/04/leetcode-227-ji-ben-ji-suan-qi-ii/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:152. 乘积最大子数组">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:227. 基本计算器 II">
                         
-                        <span class="card-title">Leetcode:152. 乘积最大子数组</span>
+                        <span class="card-title">Leetcode:227. 基本计算器 II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            乘积最大子数组题目描述给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。示例 1:输入: [2,3,-2,4]
-输出: 6
-解释: 子数组 [2,3] 有最大乘积 6。示例 2:输入: [-2,
+                            Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
+
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &quot;3+
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -620,6 +646,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -627,12 +654,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/DP/">
-                        <span class="chip bg-color">DP</span>
-                    </a>
-                    
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A0%88/">
+                        <span class="chip bg-color">栈</span>
                     </a>
                     
                 </div>
@@ -646,27 +673,29 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/23/leetcode-387-zi-fu-chuan-zhong-de-di-yi-ge-wei-yi-zi-fu/">
+                <a href="/2020/04/03/leetcode-239-hua-dong-chuang-kou-zui-da-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg" class="responsive-img" alt="Leetcode:387. 字符串中的第一个唯一字符">
+                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:239. 滑动窗口最大值">
                         
-                        <span class="card-title">Leetcode:387. 字符串中的第一个唯一字符</span>
+                        <span class="card-title">Leetcode:239. 滑动窗口最大值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。案例:s = &quot;leetcode&quot;
-返回 0.
+                            Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 
-s = &quot;lo
+返回滑动窗口中的最大值。
+
+
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
                             </span>
                         <span class="publish-author">
                             
@@ -687,16 +716,12 @@ s = &quot;lo
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/Hard/">
+                        <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E7%BB%84/">
-                        <span class="chip bg-color">数组</span>
-                    </a>
-                    
-                    <a href="/tags/Map/">
-                        <span class="chip bg-color">Map</span>
+                    <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">优先级队列</span>
                     </a>
                     
                 </div>
