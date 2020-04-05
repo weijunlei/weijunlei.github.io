@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:215. 数组中的第K个最大元素, 小风雷">
-    <meta name="description" content="215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例 1:输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5示例">
+    <meta name="keywords" content="Leetcode:341. 扁平化嵌套列表迭代器, 小风雷">
+    <meta name="description" content="Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。示例 1:">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:215. 数组中的第K个最大元素 | 小风雷</title>
+    <title>Leetcode:341. 扁平化嵌套列表迭代器 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -238,13 +239,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:215. 数组中的第K个最大元素
+                        Leetcode:341. 扁平化嵌套列表迭代器
                     </div>
                 </div>
             </div>
@@ -366,12 +367,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
+                            <a href="/tags/DFS/">
+                                <span class="chip bg-color">DFS</span>
                             </a>
                         
-                            <a href="/tags/%E5%BF%AB%E6%8E%92/">
-                                <span class="chip bg-color">快排</span>
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                     </div>
@@ -395,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-05
                 </div>
                 
 
@@ -412,58 +413,68 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="215-数组中的第K个最大元素"><a href="#215-数组中的第K个最大元素" class="headerlink" title="215. 数组中的第K个最大元素"></a><a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">215. 数组中的第K个最大元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
-输出: 4</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用快排的获取主元排序索引，更新到符合K大的位置</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int findKthLargest(int[] nums, int k) {
-        if (nums == null || nums.length < k){
-            return -1;
+                <h1 id="Leetcode-341-扁平化嵌套列表迭代器"><a href="#Leetcode-341-扁平化嵌套列表迭代器" class="headerlink" title="Leetcode:341. 扁平化嵌套列表迭代器"></a><a href="https://leetcode-cn.com/problems/flatten-nested-list-iterator/" target="_blank" rel="noopener">Leetcode:341. 扁平化嵌套列表迭代器</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],2,[1,1]]
+输出: [1,1,2,1,1]
+解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,1,2,1,1]。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [1,[4,[6]]]
+输出: [1,4,6]
+解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,4,6]。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用深度优先遍历获取递归的数字</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">/**
+ * // This is the interface that allows for creating nested lists.
+ * // You should not implement it, or speculate about its implementation
+ * public interface NestedInteger {
+ *
+ *     // @return true if this NestedInteger holds a single integer, rather than a nested list.
+ *     public boolean isInteger();
+ *
+ *     // @return the single integer that this NestedInteger holds, if it holds a single integer
+ *     // Return null if this NestedInteger holds a nested list
+ *     public Integer getInteger();
+ *
+ *     // @return the nested list that this NestedInteger holds, if it holds a nested list
+ *     // Return null if this NestedInteger holds a single integer
+ *     public List<NestedInteger> getList();
+ * }
+ */
+public class NestedIterator implements Iterator<Integer> {
+
+    Queue<Integer> queue;
+    public NestedIterator(List<NestedInteger> nestedList) {
+        queue = new LinkedList<Integer>();
+        for(NestedInteger node: nestedList){
+            DFS(node);
         }
-        int result = -1;
-        int start = 0;
-        int end = nums.length - 1;
-        result = getIndex(nums, start, end);
-        while (result != k - 1){
-            if (result > k - 1){
-                end = result;
-                result = getIndex(nums, start, end - 1);
-            } else if(result < k - 1){
-                start = result;
-                result = getIndex(nums, start + 1, end);
+    }
+
+    @Override
+    public Integer next() {
+        return queue.poll();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !queue.isEmpty();
+    }
+
+    private void DFS(NestedInteger node){
+        if (node.isInteger()){
+            queue.offer(node.getInteger());
+        } else {
+            for(NestedInteger sonNode: node.getList()){
+                DFS(sonNode);
             }
         }
-        if (result == k - 1){
-            return nums[k - 1];
-        }else {
-            return -1;
-        }
     }
+}
 
-    private int getIndex(int[] nums, int s, int e){
-        int getNum = nums[s];
-        int getIndex = s;
-        swap(nums, s, e);
-
-        for(int i = s; i < e; i++){
-            if (nums[i] > getNum){
-                swap(nums, getIndex, i);
-                getIndex ++;
-            }
-        }
-        swap(nums, getIndex, e);
-        return getIndex;
-    }
-
-    private void swap(int[] nums, int i, int j){
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-}</code></pre>
-<p>// TODO:其他思路</p>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均$O(n)$,最坏$(n^2)$</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
+/**
+ * Your NestedIterator object will be instantiated and called as such:
+ * NestedIterator i = new NestedIterator(nestedList);
+ * while (i.hasNext()) v[f()] = i.next();
+ */</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$,n为元素个数</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -489,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/">https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/</a>
+                    <a href="https://weijunlei.github.io/2020/04/05/leetcode-341-bian-ping-hua-qian-tao-lie-biao-die-dai-qi/">https://weijunlei.github.io/2020/04/05/leetcode-341-bian-ping-hua-qian-tao-lie-biao-die-dai-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -531,12 +542,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
+                                <a href="/tags/DFS/">
+                                    <span class="chip bg-color">DFS</span>
                                 </a>
                             
-                                <a href="/tags/%E5%BF%AB%E6%8E%92/">
-                                    <span class="chip bg-color">快排</span>
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                         </div>
@@ -582,7 +593,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-29T20-57-37',
+        id: '2020-04-05T22-27-10',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -607,31 +618,27 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/">
+                <a href="/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:295. 数据流的中位数">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:150. 逆波兰表达式求值">
                         
-                        <span class="card-title">Leetcode:295. 数据流的中位数</span>
+                        <span class="card-title">Leetcode:150. 逆波兰表达式求值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:295. 数据流的中位数题目描述中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
-例如，
+                            Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
 
-[2,3,4] 的中位数是 3
-
-[2,3] 的中位数是 (2 + 3) / 2 = 2.5
-
-设计一
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
+给定逆波兰表达式总是有效的
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-05
                         </span>
                         <span class="publish-author">
                             
@@ -652,12 +659,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">插入排序</span>
+                    <a href="/tags/%E6%A0%88/">
+                        <span class="chip bg-color">栈</span>
                     </a>
                     
                 </div>
@@ -671,28 +678,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/28/leetcode-155-zui-xiao-zhan/">
+                <a href="/2020/04/04/leetcode-227-ji-ben-ji-suan-qi-ii/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:155. 最小栈">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:227. 基本计算器 II">
                         
-                        <span class="card-title">Leetcode:155. 最小栈</span>
+                        <span class="card-title">Leetcode:227. 基本计算器 II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:155. 最小栈题目描述设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+                            Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-push(x) -- 将元素 x 推入栈中。
-pop() -- 删除栈顶的元素。
-top() -- 获取栈顶元素
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &quot;3+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-04
                             </span>
                         <span class="publish-author">
                             
@@ -713,12 +718,12 @@ top() -- 获取栈顶元素
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/%E6%A0%88/">
-                        <span class="chip bg-color">栈</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/%E6%A0%88/">
+                        <span class="chip bg-color">栈</span>
                     </a>
                     
                 </div>

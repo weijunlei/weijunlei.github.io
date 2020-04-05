@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:215. 数组中的第K个最大元素, 小风雷">
-    <meta name="description" content="215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例 1:输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5示例">
+    <meta name="keywords" content="Leetcode:150. 逆波兰表达式求值, 小风雷">
+    <meta name="description" content="Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
+
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
+给定逆波兰表达式总是有效的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:215. 数组中的第K个最大元素 | 小风雷</title>
+    <title>Leetcode:150. 逆波兰表达式求值 | 小风雷</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -238,13 +240,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:215. 数组中的第K个最大元素
+                        Leetcode:150. 逆波兰表达式求值
                     </div>
                 </div>
             </div>
@@ -370,8 +372,8 @@
                                 <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E5%BF%AB%E6%8E%92/">
-                                <span class="chip bg-color">快排</span>
+                            <a href="/tags/%E6%A0%88/">
+                                <span class="chip bg-color">栈</span>
                             </a>
                         
                     </div>
@@ -395,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-05
                 </div>
                 
 
@@ -412,58 +414,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="215-数组中的第K个最大元素"><a href="#215-数组中的第K个最大元素" class="headerlink" title="215. 数组中的第K个最大元素"></a><a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/" target="_blank" rel="noopener">215. 数组中的第K个最大元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
-输出: 4</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用快排的获取主元排序索引，更新到符合K大的位置</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int findKthLargest(int[] nums, int k) {
-        if (nums == null || nums.length < k){
-            return -1;
+                <h1 id="Leetcode-150-逆波兰表达式求值"><a href="#Leetcode-150-逆波兰表达式求值" class="headerlink" title="Leetcode:150. 逆波兰表达式求值"></a><a href="https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/" target="_blank" rel="noopener">Leetcode:150. 逆波兰表达式求值</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>根据逆波兰表示法，求表达式的值。
+
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>整数除法只保留整数部分。
+给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]
+输出: 9
+解释: ((2 + 1) * 3) = 9</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入: [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;]
+输出: 6
+解释: (4 + (13 / 5)) = 6</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入: [&quot;10&quot;, &quot;6&quot;, &quot;9&quot;, &quot;3&quot;, &quot;+&quot;, &quot;-11&quot;, &quot;*&quot;, &quot;/&quot;, &quot;*&quot;, &quot;17&quot;, &quot;+&quot;, &quot;5&quot;, &quot;+&quot;]
+输出: 22
+解释: 
+((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用栈解决，需要注意数字先进后出问题</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int evalRPN(String[] tokens) {
+        if (tokens == null || tokens.length == 0){
+            return 0;
         }
-        int result = -1;
-        int start = 0;
-        int end = nums.length - 1;
-        result = getIndex(nums, start, end);
-        while (result != k - 1){
-            if (result > k - 1){
-                end = result;
-                result = getIndex(nums, start, end - 1);
-            } else if(result < k - 1){
-                start = result;
-                result = getIndex(nums, start + 1, end);
+        Stack<Integer> stack = new Stack<>();
+        int num1 = 0;
+        int num2 = 0;
+        for(String token: tokens){
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")){
+                num1 = stack.pop();
+                num2 = stack.pop();
+                switch(token){
+                    case "+":
+                        stack.push(num1 + num2);
+                        break;
+                    case "-":
+                        stack.push(num2 - num1);
+                        break;
+                    case "*":
+                        stack.push(num2 * num1);
+                        break;
+                    case "/":
+                        stack.push(num2 / num1);
+                }
+            } else {
+                stack.push(Integer.valueOf(token));
             }
         }
-        if (result == k - 1){
-            return nums[k - 1];
-        }else {
-            return -1;
-        }
-    }
-
-    private int getIndex(int[] nums, int s, int e){
-        int getNum = nums[s];
-        int getIndex = s;
-        swap(nums, s, e);
-
-        for(int i = s; i < e; i++){
-            if (nums[i] > getNum){
-                swap(nums, getIndex, i);
-                getIndex ++;
-            }
-        }
-        swap(nums, getIndex, e);
-        return getIndex;
-    }
-
-    private void swap(int[] nums, int i, int j){
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+        return stack.pop();
     }
 }</code></pre>
-<p>// TODO:其他思路</p>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均$O(n)$,最坏$(n^2)$</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -489,7 +490,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/">https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/</a>
+                    <a href="https://weijunlei.github.io/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/">https://weijunlei.github.io/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -535,8 +536,8 @@
                                     <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E5%BF%AB%E6%8E%92/">
-                                    <span class="chip bg-color">快排</span>
+                                <a href="/tags/%E6%A0%88/">
+                                    <span class="chip bg-color">栈</span>
                                 </a>
                             
                         </div>
@@ -582,7 +583,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-03-29T20-57-37',
+        id: '2020-04-05T22-47-19',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -603,36 +604,33 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/">
+                <a href="/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:295. 数据流的中位数">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:150. 逆波兰表达式求值">
                         
-                        <span class="card-title">Leetcode:295. 数据流的中位数</span>
+                        <span class="card-title">Leetcode:150. 逆波兰表达式求值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:295. 数据流的中位数题目描述中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
-例如，
+                            Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
 
-[2,3,4] 的中位数是 3
-
-[2,3] 的中位数是 (2 + 3) / 2 = 2.5
-
-设计一
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
+给定逆波兰表达式总是有效的
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -645,6 +643,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -652,12 +651,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">插入排序</span>
+                    <a href="/tags/%E6%A0%88/">
+                        <span class="chip bg-color">栈</span>
                     </a>
                     
                 </div>
@@ -671,28 +670,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/28/leetcode-155-zui-xiao-zhan/">
+                <a href="/2020/04/05/leetcode-341-bian-ping-hua-qian-tao-lie-biao-die-dai-qi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:155. 最小栈">
+                        <img src="https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg" class="responsive-img" alt="Leetcode:341. 扁平化嵌套列表迭代器">
                         
-                        <span class="card-title">Leetcode:155. 最小栈</span>
+                        <span class="card-title">Leetcode:341. 扁平化嵌套列表迭代器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:155. 最小栈题目描述设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+                            Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
-push(x) -- 将元素 x 推入栈中。
-pop() -- 删除栈顶的元素。
-top() -- 获取栈顶元素
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。示例 1:
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-05
                             </span>
                         <span class="publish-author">
                             
@@ -713,12 +710,12 @@ top() -- 获取栈顶元素
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/%E6%A0%88/">
-                        <span class="chip bg-color">栈</span>
+                    <a href="/tags/DFS/">
+                        <span class="chip bg-color">DFS</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>
