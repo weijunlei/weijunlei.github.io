@@ -4,6 +4,98 @@
   
     
     <entry>
+      <title>Leetcode:160. 相交链表</title>
+      <link href="/2020/04/06/leetcode-160-xiang-jiao-lian-biao/"/>
+      <url>/2020/04/06/leetcode-160-xiang-jiao-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-160-相交链表"><a href="#Leetcode-160-相交链表" class="headerlink" title="[Leetcode:160.相交链表]"></a>[Leetcode:160.相交链表]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，找到两个单链表相交的起始节点。如下面的两个链表：在节点 c1 开始相交。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3输出：Reference of the node with value = 8输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1输出：Reference of the node with value = 2输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2输出：null输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。解释：这两个链表不相交，因此返回 null。</code></pre><h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><pre><code>如果两个链表没有交点，返回 null.在返回结果后，两个链表仍须保持原有的结构。可假定整个链表结构中没有循环。程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {       if ((headA == null && headB != null) || (headA != null && headB == null)){          return null;       }        int countA = 0, countB = 0;        ListNode preA = headA, preB = headB;        while (preA != null){            preA = preA.next;            countA += 1;        }        while (preB != null){            preB = preB.next;            countB += 1;        }        preA = headA;        preB = headB;        while(countA > countB){            preA = preA.next;            countA--;        }        while(countA < countB){            preB = preB.next;            countB--;        }        while(preA != null){            if (preA == preB){                return preA;            }            preA = preA.next;            preB = preB.next;        }        return null;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>$O(n)$</p><h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:148. 排序链表</title>
+      <link href="/2020/04/06/leetcode-148-pai-xu-lian-biao/"/>
+      <url>/2020/04/06/leetcode-148-pai-xu-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<p>#<a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">Leetcode: 141.排序链表</a></p><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 4-&gt;2-&gt;1-&gt;3输出: 1-&gt;2-&gt;3-&gt;4</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用快排实现，值修改</p><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用归并排序，实现平均复杂度$O(n)$,因为链表可以直接引用空间，所以可以不用额外的$O(nlogn)$空间，需要注意获取中间节点的快指针位置初始设置</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">/** * Definition for singly-linked list. * public class ListNode { *     int val; *     ListNode next; *     ListNode(int x) { val = x; } * } */class Solution {    public ListNode sortList(ListNode head) {        if (head == null || head.next == null){            return head;        }        quickSort(head, null);        return head;    }    private void quickSort(ListNode head, ListNode end){        if (head != end){            ListNode midNode = getPartition(head, end);            quickSort(head, midNode);            quickSort(midNode.next, end);        }    }    private ListNode getPartition(ListNode head, ListNode end){        ListNode getNode = head;        int getNum = head.val;        ListNode pre = head.next;        while(pre != null){            if (pre == end){                break;            }            if (pre.val < getNum){                getNode = getNode.next;                int tempNum = pre.val;                pre.val = getNode.val;                getNode.val = tempNum;            }            pre = pre.next;        }        int tempNum = getNode.val;        getNode.val = head.val;        head.val = tempNum;        return getNode;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">/** * Definition for singly-linked list. * public class ListNode { *     int val; *     ListNode next; *     ListNode(int x) { val = x; } * } */class Solution {    public ListNode sortList(ListNode head) {        if (head == null || head.next == null){            return head;        }        ListNode pre = head.next;        ListNode middle = head;        while (pre != null && pre.next != null){            pre = pre.next.next;            middle = middle.next;        }        pre = middle.next;        middle.next = null;        ListNode left = sortList(head);        ListNode right = sortList(pre);        ListNode result = new ListNode(0);        ListNode temp = result;        while (left != null && right != null){            if (left.val < right.val){                temp.next = left;                left = left.next;            }else{                temp.next = right;                right = right.next;            }            temp = temp.next;        }        temp.next = right;        if (left != null){            temp.next = left;        }        return result.next;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlogn)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 快排 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:141. 环形链表</title>
+      <link href="/2020/04/06/leetcode-141-huan-xing-lian-biao/"/>
+      <url>/2020/04/06/leetcode-141-huan-xing-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-141-环形链表"><a href="#Leetcode-141-环形链表" class="headerlink" title="Leetcode:141. 环形链表"></a><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">Leetcode:141. 环形链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个链表，判断链表中是否有环。为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [3,2,0,-4], pos = 1输出：true解释：链表中有一个环，其尾部连接到第二个节点。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [1,2], pos = 0输出：true解释：链表中有一个环，其尾部连接到第一个节点。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [1], pos = -1输出：false解释：链表中没有环。</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能用 O(1)（即，常量）内存解决此问题吗？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>快慢指针，使用快慢指针遍历链表看是否会有相交</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {    public boolean hasCycle(ListNode head) {        if (head == null || head.next == null){            return false;        }        ListNode fast = head;        ListNode slow = head;        do{            slow = slow.next;            fast = fast.next != null ? fast.next.next : null;        }        while (fast != null && slow != null && (fast != slow));        if (fast == slow && fast != null){            return true;        }else{            return false;        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:138. 复制带随机指针的链表</title>
+      <link href="/2020/04/06/leetcode-138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao/"/>
+      <url>/2020/04/06/leetcode-138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-138-复制带随机指针的链表"><a href="#Leetcode-138-复制带随机指针的链表" class="headerlink" title="Leetcode:138. 复制带随机指针的链表"></a><a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer" target="_blank" rel="noopener">Leetcode:138. 复制带随机指针的链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。要求返回这个链表的 深拷贝。 我们用一个由 n 个节点组成的链表来表示输入/输出中的链表。每个节点用一个 [val, random_index] 表示：val：一个表示 Node.val 的整数。random_index：随机指针指向的节点索引（范围从 0 到 n-1）；如果不指向任何节点，则为  null 。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [[1,1],[2,1]]输出：[[1,1],[2,1]]</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [[3,null],[3,0],[3,null]]输出：[[3,null],[3,0],[3,null]]</code></pre><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><pre><code>输入：head = []输出：[]解释：给定的链表为空（空指针），因此返回 null。</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>-10000 &lt;= Node.val &lt;= 10000Node.random 为空（null）或指向链表中的节点。节点数目不超过 1000 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>//TODO：其他思路</p><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接在原来的链表位置旁复制，然后遍历分离</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">/*// Definition for a Node.class Node {    int val;    Node next;    Node random;    public Node(int val) {        this.val = val;        this.next = null;        this.random = null;    }}*/class Solution {    public Node copyRandomList(Node head) {        if (head == null){            return null;        }        Node pre = head;        while(pre != null){            Node newNode = new Node(pre.val);            newNode.next = pre.next;            pre.next = newNode;            pre = pre.next.next;        }        pre = head;        while(pre != null){            if (pre.next != null && pre.random != null){                pre.next.random = pre.random.next;            } else {                pre.next.random = null;            }            pre = pre.next.next;        }        Node origin = head;        pre = head.next;        Node result = head.next;        while(pre != null){            origin.next = origin.next.next;            if (pre.next == null){                pre.next = null;            }else{                pre.next = pre.next.next;            }            origin = origin.next;            pre = pre.next;        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度分析"><a href="#思路1空间复杂度分析" class="headerlink" title="思路1空间复杂度分析"></a>思路1空间复杂度分析</h3><p>$O(1)$如果不算结果空间</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:150. 逆波兰表达式求值</title>
       <link href="/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/"/>
       <url>/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/</url>
@@ -256,9 +348,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Easy </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
