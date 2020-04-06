@@ -69,12 +69,20 @@
         <content type="html"><![CDATA[<h1 id="Leetcode-141-环形链表"><a href="#Leetcode-141-环形链表" class="headerlink" title="Leetcode:141. 环形链表"></a><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">Leetcode:141. 环形链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个链表，判断链表中是否有环。为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [3,2,0,-4], pos = 1输出：true解释：链表中有一个环，其尾部连接到第二个节点。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [1,2], pos = 0输出：true解释：链表中有一个环，其尾部连接到第一个节点。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [1], pos = -1输出：false解释：链表中没有环。</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能用 O(1)（即，常量）内存解决此问题吗？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>快慢指针，使用快慢指针遍历链表看是否会有相交</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {    public boolean hasCycle(ListNode head) {        if (head == null || head.next == null){            return false;        }        ListNode fast = head;        ListNode slow = head;        do{            slow = slow.next;            fast = fast.next != null ? fast.next.next : null;        }        while (fast != null && slow != null && (fast != slow));        if (fast == slow && fast != null){            return true;        }else{            return false;        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>]]></content>
       
       
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
       
         <tags>
             
             <tag> Leetcode </tag>
             
             <tag> Easy </tag>
+            
+            <tag> 快慢指针 </tag>
             
         </tags>
       
@@ -1020,9 +1028,9 @@
       
         <tags>
             
-            <tag> 论文阅读 </tag>
-            
             <tag> 阅读理解 </tag>
+            
+            <tag> 论文阅读 </tag>
             
             <tag> NLP </tag>
             
@@ -1161,31 +1169,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1205,6 +1188,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
