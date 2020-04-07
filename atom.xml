@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-06T15:25:53.664Z</updated>
+  <updated>2020-04-07T10:07:22.922Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,99 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:237. 删除链表中的节点</title>
+    <link href="https://weijunlei.github.io/2020/04/07/leetcode-237-shan-chu-lian-biao-zhong-de-jie-dian/"/>
+    <id>https://weijunlei.github.io/2020/04/07/leetcode-237-shan-chu-lian-biao-zhong-de-jie-dian/</id>
+    <published>2020-04-07T09:33:17.000Z</published>
+    <updated>2020-04-07T10:07:22.922Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-237-删除链表中的节点&quot;&gt;&lt;a href=&quot;#Leetcode-237-删除链表中的节点&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 237. 删除链表中的节点&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="链表" scheme="https://weijunlei.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode:234. 回文链表</title>
+    <link href="https://weijunlei.github.io/2020/04/07/leetcode-234-hui-wen-lian-biao/"/>
+    <id>https://weijunlei.github.io/2020/04/07/leetcode-234-hui-wen-lian-biao/</id>
+    <published>2020-04-07T08:56:39.000Z</published>
+    <updated>2020-04-07T09:26:35.390Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-234-回文链表&quot;&gt;&lt;a href=&quot;#Leetcode-234-回文链表&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:234.回文链表&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="链表" scheme="https://weijunlei.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode:206. 反转链表</title>
+    <link href="https://weijunlei.github.io/2020/04/07/leetcode-206-fan-zhuan-lian-biao/"/>
+    <id>https://weijunlei.github.io/2020/04/07/leetcode-206-fan-zhuan-lian-biao/</id>
+    <published>2020-04-07T08:30:14.000Z</published>
+    <updated>2020-04-07T08:38:38.917Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-206-反转链表&quot;&gt;&lt;a href=&quot;#Leetcode-206-反转链表&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:206.反转链表&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="链表" scheme="https://weijunlei.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:160. 相交链表</title>
@@ -543,103 +636,6 @@
       <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
     
       <category term="随机数" scheme="https://weijunlei.github.io/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:283. 移动零</title>
-    <link href="https://weijunlei.github.io/2020/03/26/leetcode-283-yi-dong-ling/"/>
-    <id>https://weijunlei.github.io/2020/03/26/leetcode-283-yi-dong-ling/</id>
-    <published>2020-03-26T13:22:52.000Z</published>
-    <updated>2020-03-26T13:39:40.907Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-283-移动零&quot;&gt;&lt;a href=&quot;#Leetcode-283-移动零&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:283. 移动零&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="遍历" scheme="https://weijunlei.github.io/tags/%E9%81%8D%E5%8E%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:217. 存在重复元素</title>
-    <link href="https://weijunlei.github.io/2020/03/26/leetcode-217-cun-zai-chong-fu-yuan-su/"/>
-    <id>https://weijunlei.github.io/2020/03/26/leetcode-217-cun-zai-chong-fu-yuan-su/</id>
-    <published>2020-03-26T13:01:17.000Z</published>
-    <updated>2020-03-26T13:09:24.672Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-217-存在重复元素&quot;&gt;&lt;a href=&quot;#Leetcode-217-存在重复元素&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:217. 存在重复元素&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="Hash" scheme="https://weijunlei.github.io/tags/Hash/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:189. 旋转数组</title>
-    <link href="https://weijunlei.github.io/2020/03/25/leetcode-189-xuan-zhuan-shu-zu/"/>
-    <id>https://weijunlei.github.io/2020/03/25/leetcode-189-xuan-zhuan-shu-zu/</id>
-    <published>2020-03-25T14:56:14.000Z</published>
-    <updated>2020-03-25T15:20:56.775Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-189-旋转数组&quot;&gt;&lt;a href=&quot;#Leetcode-189-旋转数组&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:189. 旋转数组&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="反转" scheme="https://weijunlei.github.io/tags/%E5%8F%8D%E8%BD%AC/"/>
     
   </entry>
   

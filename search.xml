@@ -4,6 +4,93 @@
   
     
     <entry>
+      <title>Leetcode:237. 删除链表中的节点</title>
+      <link href="/2020/04/07/leetcode-237-shan-chu-lian-biao-zhong-de-jie-dian/"/>
+      <url>/2020/04/07/leetcode-237-shan-chu-lian-biao-zhong-de-jie-dian/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-237-删除链表中的节点"><a href="#Leetcode-237-删除链表中的节点" class="headerlink" title="Leetcode: 237. 删除链表中的节点"></a><a href="https://leetcode-cn.com/problems/delete-node-in-a-linked-list" target="_blank" rel="noopener">Leetcode: 237. 删除链表中的节点</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。现有一个链表 -- head = [4,5,1,9]，它可以表示为:</code></pre><h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h2><pre><code>输入: head = [4,5,1,9], node = 5输出: [4,1,9]解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: head = [4,5,1,9], node = 1输出: [4,5,9]解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>链表至少包含两个节点。链表中所有节点的值都是唯一的。给定的节点为非末尾节点并且一定是链表中的一个有效节点。不要从你的函数中返回任何结果。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>根据题目描述（不为最后一个节点）可以直接将该节点下一个节点的值赋给当前值，然后删除下一个节点</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public void deleteNode(ListNode node) {        if (node == null || node.next == null){            return;        }        node.val = node.next.val;        node.next = node.next.next;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(1)$</p><h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:234. 回文链表</title>
+      <link href="/2020/04/07/leetcode-234-hui-wen-lian-biao/"/>
+      <url>/2020/04/07/leetcode-234-hui-wen-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-234-回文链表"><a href="#Leetcode-234-回文链表" class="headerlink" title="Leetcode:234.回文链表"></a><a href="https://leetcode-cn.com/problems/palindrome-linked-list" target="_blank" rel="noopener">Leetcode:234.回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>请判断一个链表是否为回文链表。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 1-&gt;2输出: false</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 1-&gt;2-&gt;2-&gt;1输出: true</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-转化为数组再判断"><a href="#思路1-转化为数组再判断" class="headerlink" title="思路1:转化为数组再判断"></a>思路1:转化为数组再判断</h3><p>将链表使用一个列表存储，然后再判断数组是否是回文</p><h3 id="思路2-修改原链表，将后半部分链表反向"><a href="#思路2-修改原链表，将后半部分链表反向" class="headerlink" title="思路2: 修改原链表，将后半部分链表反向"></a>思路2: 修改原链表，将后半部分链表反向</h3><p>使用快慢指针得到链表中间位置，然后对后半部分链表进行反转然后比较判断是否是回文链表</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isPalindrome(ListNode head) {        if (head == null || head.next == null){            return true;        }        ArrayList<Integer> getNums = new ArrayList<>();        ListNode pre = head;        while(pre != null){            getNums.add(pre.val);            pre = pre.next;        }        int arraySize = getNums.size();        for(int i = 0; i < arraySize / 2; i++){            if (!getNums.get(i).equals(getNums.get(arraySize - i - 1))){                return false;            }        }        return true;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isPalindrome(ListNode head) {        if (head == null || head.next == null){            return true;        }        ListNode fast = head, slow = head;        while (fast != null && fast.next != null){            fast = fast.next.next;            slow = slow.next;        }        ListNode pre = null;        ListNode forward = slow.next;        while(slow != null){            slow.next = pre;            pre = slow;            slow = forward;            if (forward != null){                forward = forward.next;            }        }        forward = head;        while(pre != null){            if (forward.val != pre.val){                return false;            }            pre = pre.next;            forward = forward.next;        }        return true;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p><h3 id="思路2空间复杂U盾"><a href="#思路2空间复杂U盾" class="headerlink" title="思路2空间复杂U盾"></a>思路2空间复杂U盾</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:206. 反转链表</title>
+      <link href="/2020/04/07/leetcode-206-fan-zhuan-lian-biao/"/>
+      <url>/2020/04/07/leetcode-206-fan-zhuan-lian-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-206-反转链表"><a href="#Leetcode-206-反转链表" class="headerlink" title="Leetcode:206.反转链表"></a><a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">Leetcode:206.反转链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>反转一个单链表。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL进阶:你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</code></pre><h2 id="思路1-迭代"><a href="#思路1-迭代" class="headerlink" title="思路1:迭代"></a>思路1:迭代</h2><p>使用三个指针分别指向之前，现在和将来的位置，然后遍历逆转即可</p><h2 id="思路2-递归"><a href="#思路2-递归" class="headerlink" title="思路2:递归"></a>思路2:递归</h2><p>需要考虑从尾指针开始，然后开始递归，即考虑从后开始。然后利用当前指针的下一个位置进行递归，然后逆转。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public ListNode reverseList(ListNode head) {        if (head == null || head.next == null){            return head;        }        ListNode pre = null;        ListNode now = head;        ListNode forward = head.next;        while(now != null){            now.next = pre;            pre = now;            now = forward;            if (forward != null){                forward = forward.next;            }        }        return pre;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution2 {    public ListNode reverseList(ListNode head) {        if (head == null || head.next == null){            return head;        }        ListNode pre = reverseList(head.next);        head.next.next = head;        head.next = null;        return pre;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$会使用n层栈空间</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:160. 相交链表</title>
       <link href="/2020/04/06/leetcode-160-xiang-jiao-lian-biao/"/>
       <url>/2020/04/06/leetcode-160-xiang-jiao-lian-biao/</url>
@@ -1169,31 +1256,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1213,6 +1275,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
