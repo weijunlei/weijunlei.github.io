@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-07T10:07:22.922Z</updated>
+  <updated>2020-04-08T14:44:13.494Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,99 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:454. 四数相加 II</title>
+    <link href="https://weijunlei.github.io/2020/04/08/leetcode-454-si-shu-xiang-jia-ii/"/>
+    <id>https://weijunlei.github.io/2020/04/08/leetcode-454-si-shu-xiang-jia-ii/</id>
+    <published>2020-04-08T14:34:26.000Z</published>
+    <updated>2020-04-08T14:44:13.494Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-454-四数相加II&quot;&gt;&lt;a href=&quot;#Leetcode-454-四数相加II&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:454. 四数相加II&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="哈希表" scheme="https://weijunlei.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode:171. Excel表列序号</title>
+    <link href="https://weijunlei.github.io/2020/04/08/leetcode-171-excel-biao-lie-xu-hao/"/>
+    <id>https://weijunlei.github.io/2020/04/08/leetcode-171-excel-biao-lie-xu-hao/</id>
+    <published>2020-04-08T13:56:52.000Z</published>
+    <updated>2020-04-08T14:16:07.642Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-171-Excel表列序号&quot;&gt;&lt;a href=&quot;#Leetcode-171-Excel表列序号&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 171. Excel表列序号&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="字符串" scheme="https://weijunlei.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode:328. 奇偶链表</title>
+    <link href="https://weijunlei.github.io/2020/04/08/leetcode-328-qi-ou-lian-biao/"/>
+    <id>https://weijunlei.github.io/2020/04/08/leetcode-328-qi-ou-lian-biao/</id>
+    <published>2020-04-08T13:32:51.000Z</published>
+    <updated>2020-04-08T13:52:25.763Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-328-奇偶链表&quot;&gt;&lt;a href=&quot;#Leetcode-328-奇偶链表&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:328. 奇偶链表&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="链表" scheme="https://weijunlei.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:237. 删除链表中的节点</title>
@@ -177,7 +270,7 @@
     <link href="https://weijunlei.github.io/2020/04/06/leetcode-141-huan-xing-lian-biao/"/>
     <id>https://weijunlei.github.io/2020/04/06/leetcode-141-huan-xing-lian-biao/</id>
     <published>2020-04-06T13:51:24.000Z</published>
-    <updated>2020-04-06T15:53:59.880Z</updated>
+    <updated>2020-04-08T13:33:05.922Z</updated>
     
     <summary type="html">
     
@@ -282,9 +375,9 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -535,107 +628,6 @@
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:334. 递增的三元子序列</title>
-    <link href="https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/"/>
-    <id>https://weijunlei.github.io/2020/03/27/leetcode-334-di-zeng-de-san-yuan-zi-xu-lie/</id>
-    <published>2020-03-27T15:03:33.000Z</published>
-    <updated>2020-03-27T15:27:01.195Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;334-递增的三元子序列&quot;&gt;&lt;a href=&quot;#334-递增的三元子序列&quot; class=&quot;headerlink&quot; title=&quot;334. 递增的三元子序列&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="DP" scheme="https://weijunlei.github.io/tags/DP/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="哨兵" scheme="https://weijunlei.github.io/tags/%E5%93%A8%E5%85%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:350. 两个数组的交集 II</title>
-    <link href="https://weijunlei.github.io/2020/03/27/leetcode-350-liang-ge-shu-zu-de-jiao-ji-ii/"/>
-    <id>https://weijunlei.github.io/2020/03/27/leetcode-350-liang-ge-shu-zu-de-jiao-ji-ii/</id>
-    <published>2020-03-27T14:34:47.000Z</published>
-    <updated>2020-03-27T14:53:45.796Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;350-两个数组的交集-II&quot;&gt;&lt;a href=&quot;#350-两个数组的交集-II&quot; class=&quot;headerlink&quot; title=&quot;350. 两个数组的交集 II&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="排序" scheme="https://weijunlei.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:384.打乱数组</title>
-    <link href="https://weijunlei.github.io/2020/03/27/leetcode-384-da-luan-shu-zu/"/>
-    <id>https://weijunlei.github.io/2020/03/27/leetcode-384-da-luan-shu-zu/</id>
-    <published>2020-03-27T13:16:48.000Z</published>
-    <updated>2020-03-27T14:05:27.384Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-384-打乱数组&quot;&gt;&lt;a href=&quot;#Leetcode-384-打乱数组&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 384.打乱数组&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="数组" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="随机数" scheme="https://weijunlei.github.io/tags/%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
     
   </entry>
   
