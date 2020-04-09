@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:380. 常数时间插入、删除和获取随机元素</title>
+      <link href="/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/"/>
+      <url>/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-380-常数时间插入、删除和获取随机元素"><a href="#Leetcode-380-常数时间插入、删除和获取随机元素" class="headerlink" title="Leetcode: 380. 常数时间插入、删除和获取随机元素"></a><a href="https://leetcode-cn.com/problems/insert-delete-getrandom-o1/" target="_blank" rel="noopener">Leetcode: 380. 常数时间插入、删除和获取随机元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。insert(val)：当元素 val 不存在时，向集合中插入该项。remove(val)：元素 val 存在时，从集合中移除该项。getRandom：随机返回现有集合中的一项。每个元素应该有相同的概率被返回。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例 :"></a>示例 :</h3><pre><code>// 初始化一个空的集合。RandomizedSet randomSet = new RandomizedSet();// 向集合中插入 1 。返回 true 表示 1 被成功地插入。randomSet.insert(1);// 返回 false ，表示集合中不存在 2 。randomSet.remove(2);// 向集合中插入 2 。返回 true 。集合现在包含 [1,2] 。randomSet.insert(2);// getRandom 应随机返回 1 或 2 。randomSet.getRandom();// 从集合中移除 1 ，返回 true 。集合现在包含 [2] 。randomSet.remove(1);// 2 已在集合中，所以返回 false 。randomSet.insert(2);// 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。randomSet.getRandom();</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>首先满足插入和删除为O(1)的容器会想到哈希表，然后需要返回集合中的随机数，需要一个增长列表。同时需要满足插入和删除为O(1)可以直接将需要删除的数置于末尾，然后删除，插入不变。在插入和删除过程中需要同时更新哈希表和增长列表。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class RandomizedSet {    /** Initialize your data structure here. */    private HashMap<Integer, Integer> numMap;    private List<Integer> nums;    private Random random;    public RandomizedSet() {        numMap = new HashMap<>();        nums = new ArrayList<>();        random = new Random();    }    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */    public boolean insert(int val) {        if (numMap.containsKey(val)){            return false;        }        numMap.put(val, nums.size());        nums.add(val);        return true;    }    /** Removes a value from the set. Returns true if the set contained the specified element. */    public boolean remove(int val) {        if (!numMap.containsKey(val)){            return false;        }        int getIndex = numMap.get(val);        int getNum = nums.get(nums.size() - 1);        numMap.put(getNum, getIndex);        nums.set(getIndex, getNum);        nums.remove(nums.size() - 1);        numMap.remove(val);        return true;    }    /** Get a random element from the set. */    public int getRandom() {        return nums.get(random.nextInt(nums.size()));    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> Collection </tag>
+            
+            <tag> 哈希表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:454. 四数相加 II</title>
       <link href="/2020/04/08/leetcode-454-si-shu-xiang-jia-ii/"/>
       <url>/2020/04/08/leetcode-454-si-shu-xiang-jia-ii/</url>
@@ -325,9 +356,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DFS </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -588,9 +619,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 数组 </tag>
             
@@ -774,9 +805,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -894,9 +925,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 前缀树 </tag>
             
@@ -985,11 +1016,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
             
             <tag> DP </tag>
+            
+            <tag> Medium </tag>
             
             <tag> BFS </tag>
             
@@ -1202,9 +1233,9 @@
       
         <tags>
             
-            <tag> 阅读理解 </tag>
-            
             <tag> 论文阅读 </tag>
+            
+            <tag> 阅读理解 </tag>
             
             <tag> NLP </tag>
             
@@ -1343,6 +1374,31 @@
     
     
     <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1362,31 +1418,6 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
             
         </tags>
       
