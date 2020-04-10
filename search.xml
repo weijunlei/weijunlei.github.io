@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode: 230. 二叉搜索树中第K小的元素</title>
+      <link href="/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/"/>
+      <url>/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-230-二叉搜索树中第K小的元素"><a href="#Leetcode-230-二叉搜索树中第K小的元素" class="headerlink" title="Leetcode: 230. 二叉搜索树中第K小的元素"></a><a href="https://leetcode-cn.com/explore/interview/card/top-interview-quesitons/269/tree/1165/" target="_blank" rel="noopener">Leetcode: 230. 二叉搜索树中第K小的元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,1,4,null,2], k = 13/ \1   4\   2输出: 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [5,3,6,2,4,null,null,1], k = 3    5    / \    3   6    / \2   4/1输出: 3</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化 kthSmallest 函数？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-中序遍历-剪枝-递归"><a href="#思路1-中序遍历-剪枝-递归" class="headerlink" title="思路1 中序遍历+剪枝+递归"></a>思路1 中序遍历+剪枝+递归</h3><p>直接递归使用中序遍历，然后通过设置一个计数器计算数在整个二叉搜索中排序的位置，到达第K小时返回结果（超过K直接返回）</p><h3 id="思路2-中序遍历-剪枝-迭代"><a href="#思路2-中序遍历-剪枝-迭代" class="headerlink" title="思路2 中序遍历+剪枝+迭代"></a>思路2 中序遍历+剪枝+迭代</h3><p>使用一个栈实现中序遍历迭代，通过出栈的数量找到第K个数</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    int numCount;    int result;    public int kthSmallest(TreeNode root, int k) {        numCount = 0;        addSearchNum(root, k);        return result;    }    private void addSearchNum(TreeNode root, int k){        if (root == null || numCount > k){            return;        }        addSearchNum(root.left, k);        numCount ++;        if (numCount == k){            result = root.val;        }        addSearchNum(root.right, k);    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(N+k)$需要考虑为所有节点都在左子树</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(H)$可能会有左子树</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:380. 常数时间插入、删除和获取随机元素</title>
       <link href="/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/"/>
       <url>/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/</url>

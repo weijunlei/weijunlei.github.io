@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-09T15:18:38.989Z</updated>
+  <updated>2020-04-10T15:24:58.614Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode: 230. 二叉搜索树中第K小的元素</title>
+    <link href="https://weijunlei.github.io/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/"/>
+    <id>https://weijunlei.github.io/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/</id>
+    <published>2020-04-10T14:59:53.000Z</published>
+    <updated>2020-04-10T15:24:58.614Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-230-二叉搜索树中第K小的元素&quot;&gt;&lt;a href=&quot;#Leetcode-230-二叉搜索树中第K小的元素&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 230. 二叉搜索树中第K小的元素&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="二叉树" scheme="https://weijunlei.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:380. 常数时间插入、删除和获取随机元素</title>
@@ -599,37 +630,6 @@
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="快排" scheme="https://weijunlei.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:155. 最小栈</title>
-    <link href="https://weijunlei.github.io/2020/03/28/leetcode-155-zui-xiao-zhan/"/>
-    <id>https://weijunlei.github.io/2020/03/28/leetcode-155-zui-xiao-zhan/</id>
-    <published>2020-03-28T15:22:19.000Z</published>
-    <updated>2020-03-28T15:27:35.280Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-155-最小栈&quot;&gt;&lt;a href=&quot;#Leetcode-155-最小栈&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:155. 最小栈&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="栈" scheme="https://weijunlei.github.io/tags/%E6%A0%88/"/>
     
   </entry>
   
