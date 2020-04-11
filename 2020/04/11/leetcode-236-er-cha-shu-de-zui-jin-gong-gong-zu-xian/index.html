@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leetcode: 230. 二叉搜索树中第K小的元素, 小风雷">
-    <meta name="description" content="Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。示例 1:输入: ro">
+    <meta name="keywords" content="Leetcode:236. 二叉树的最近公共祖先, 小风雷">
+    <meta name="description" content="Leetcode: 236. 二叉树的最近公共祖先题目描述给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode: 230. 二叉搜索树中第K小的元素 | 小风雷</title>
+    <title>Leetcode:236. 二叉树的最近公共祖先 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -238,13 +240,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode: 230. 二叉搜索树中第K小的元素
+                        Leetcode:236. 二叉树的最近公共祖先
                     </div>
                 </div>
             </div>
@@ -395,7 +397,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-10
+                    2020-04-11
                 </div>
                 
 
@@ -412,63 +414,43 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-230-二叉搜索树中第K小的元素"><a href="#Leetcode-230-二叉搜索树中第K小的元素" class="headerlink" title="Leetcode: 230. 二叉搜索树中第K小的元素"></a><a href="https://leetcode-cn.com/explore/interview/card/top-interview-quesitons/269/tree/1165/" target="_blank" rel="noopener">Leetcode: 230. 二叉搜索树中第K小的元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,1,4,null,2], k = 1
-3
-/ \
-1   4
-\
-   2
-输出: 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [5,3,6,2,4,null,null,1], k = 3
-    5
-    / \
-    3   6
-    / \
-2   4
-/
-1
-输出: 3</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化 kthSmallest 函数？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-中序遍历-剪枝-递归"><a href="#思路1-中序遍历-剪枝-递归" class="headerlink" title="思路1 中序遍历+剪枝+递归"></a>思路1 中序遍历+剪枝+递归</h3><p>直接递归使用中序遍历，然后通过设置一个计数器计算数在整个二叉搜索中排序的位置，到达第K小时返回结果（超过K直接返回）</p>
-<h3 id="思路2-中序遍历-剪枝-迭代"><a href="#思路2-中序遍历-剪枝-迭代" class="headerlink" title="思路2 中序遍历+剪枝+迭代"></a>思路2 中序遍历+剪枝+迭代</h3><p>使用一个栈实现中序遍历迭代，通过出栈的数量找到第K个数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    int numCount;
-    int result;
+                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="noopener">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
-    public int kthSmallest(TreeNode root, int k) {
-        numCount = 0;
-        addSearchNum(root, k);
-        return result;
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+
+例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+输出: 3
+解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+输出: 5
+解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
+p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode result = new TreeNode(0);
+        commonHelper(root, p, q, result);
+        return result.left;
     }
 
-    private void addSearchNum(TreeNode root, int k){
-        if (root == null || numCount > k){
-            return;
+    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result){
+        if (root == null){
+            return false;
         }
-        addSearchNum(root.left, k);
-        numCount ++;
-        if (numCount == k){
-            result = root.val;
+
+        int left = commonHelper(root.left, p, q, result) ? 1: 0;
+        int right = commonHelper(root.right, p, q, result) ? 1: 0;
+        int mid = 0;
+        if (root == p || root == q){
+            mid = 1;
         }
-        addSearchNum(root.right, k);
+        if (mid + left + right >= 2){
+            System.out.println(root.val);
+            result.left = root;
+        }
+        return (mid + left + right) > 0;
     }
 }</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int kthSmallest(TreeNode root, int k) {
-        Stack<TreeNode> stack = new Stack<>();
-        while(true){
-            while (root != null){
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            k --;
-            if (k == 0) return root.val;
-            root = root.right;
-        }
-    }
-}</code></pre>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(N)$需要考虑为所有节点都在左子树</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(N)$可能会有左子树，会有栈的深度</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(N)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(N)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -494,7 +476,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/">https://weijunlei.github.io/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/</a>
+                    <a href="https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -587,7 +569,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-10T22-59-53',
+        id: '2020-04-11T22-54-22',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -608,9 +590,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">
                     <div class="card-image">
@@ -630,9 +613,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -645,6 +628,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -671,27 +655,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/">
+                <a href="/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg" class="responsive-img" alt="Leetcode:380. 常数时间插入、删除和获取随机元素">
+                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode: 230. 二叉搜索树中第K小的元素">
                         
-                        <span class="card-title">Leetcode:380. 常数时间插入、删除和获取随机元素</span>
+                        <span class="card-title">Leetcode: 230. 二叉搜索树中第K小的元素</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 380. 常数时间插入、删除和获取随机元素题目描述设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。
-
-insert(val)：当元素 val 不存在时，向集合中插入该项。
-remove(val)：元
+                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。示例 1:输入: ro
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-10
                             </span>
                         <span class="publish-author">
                             
@@ -716,12 +697,8 @@ remove(val)：元
                         <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/Collection/">
-                        <span class="chip bg-color">Collection</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">
-                        <span class="chip bg-color">哈希表</span>
+                    <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="chip bg-color">二叉树</span>
                     </a>
                     
                 </div>

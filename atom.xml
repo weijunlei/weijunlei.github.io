@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-10T15:36:01.666Z</updated>
+  <updated>2020-04-11T15:17:33.253Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:236. 二叉树的最近公共祖先</title>
+    <link href="https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/"/>
+    <id>https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</id>
+    <published>2020-04-11T14:54:22.000Z</published>
+    <updated>2020-04-11T15:17:33.253Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-236-二叉树的最近公共祖先&quot;&gt;&lt;a href=&quot;#Leetcode-236-二叉树的最近公共祖先&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 236. 二叉树的最近公共祖先&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="二叉树" scheme="https://weijunlei.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode: 230. 二叉搜索树中第K小的元素</title>
@@ -599,37 +630,6 @@
       <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
     
       <category term="插入排序" scheme="https://weijunlei.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:215. 数组中的第K个最大元素</title>
-    <link href="https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/"/>
-    <id>https://weijunlei.github.io/2020/03/29/leetcode-215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-su/</id>
-    <published>2020-03-29T12:57:37.000Z</published>
-    <updated>2020-03-30T13:03:01.644Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;215-数组中的第K个最大元素&quot;&gt;&lt;a href=&quot;#215-数组中的第K个最大元素&quot; class=&quot;headerlink&quot; title=&quot;215. 数组中的第K个最大元素&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="快排" scheme="https://weijunlei.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
     
   </entry>
   
