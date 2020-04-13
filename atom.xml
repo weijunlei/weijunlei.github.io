@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-11T15:20:19.863Z</updated>
+  <updated>2020-04-13T15:38:48.686Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:297. 二叉树的序列化与反序列化</title>
+    <link href="https://weijunlei.github.io/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/"/>
+    <id>https://weijunlei.github.io/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/</id>
+    <published>2020-04-13T15:33:01.000Z</published>
+    <updated>2020-04-13T15:38:48.686Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-297-二叉树的序列化与反序列化&quot;&gt;&lt;a href=&quot;#Leetcode-297-二叉树的序列化与反序列化&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:297. 二叉树的序列化与反序列化&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
+    
+      <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:236. 二叉树的最近公共祖先</title>
@@ -599,37 +630,6 @@
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="二分法" scheme="https://weijunlei.github.io/tags/%E4%BA%8C%E5%88%86%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:295. 数据流的中位数</title>
-    <link href="https://weijunlei.github.io/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/"/>
-    <id>https://weijunlei.github.io/2020/03/30/leetcode-295-shu-ju-liu-de-zhong-wei-shu/</id>
-    <published>2020-03-30T13:18:31.000Z</published>
-    <updated>2020-03-30T13:24:54.262Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-295-数据流的中位数&quot;&gt;&lt;a href=&quot;#Leetcode-295-数据流的中位数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:295. 数据流的中位数&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
-    
-      <category term="插入排序" scheme="https://weijunlei.github.io/tags/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   

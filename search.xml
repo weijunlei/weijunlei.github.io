@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:297. 二叉树的序列化与反序列化</title>
+      <link href="/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/"/>
+      <url>/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树：    1/ \2   3    / \    4   5序列化为 &quot;[1,2,3,null,null,4,5]&quot;</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p><h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Codec {    // Encodes a tree to a single string.    public String serialize(TreeNode root) {        Queue<TreeNode> queue = new LinkedList<>();        StringBuilder sb = new StringBuilder();        queue.add(root);        while (!queue.isEmpty()){            TreeNode pre = queue.poll();            if (pre == null){                sb.append("n");                sb.append(",");                continue;            }else{                sb.append(String.valueOf(pre.val));                sb.append(",");            }            queue.offer(pre.left);            queue.offer(pre.right);        }        int neededLength = sb.length() - 1;        // strip speed        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n'){            neededLength -= 2;        }        sb.setLength(neededLength);        return sb.toString();    }    // Decodes your encoded data to tree.    public TreeNode deserialize(String data) {        if (data.equals("n")){            return null;        }        String[] vals = data.split(",");        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));        Queue<TreeNode> queue = new LinkedList<>();        queue.offer(root);        for(int i = 1; i < vals.length; i += 2){            if (queue.isEmpty()){                break;            }            TreeNode pre = queue.poll();            if (vals[i].equals("n")){                pre.left = null;            }else{                TreeNode left = new TreeNode(Integer.valueOf(vals[i]));                pre.left = left;                queue.offer(left);            }            if (i + 1 >= vals.length){                break;            }            if (vals[i + 1].equals("n")){                pre.right = null;            }else{                TreeNode right = new TreeNode(Integer.valueOf(vals[i + 1]));                pre.right = right;                queue.offer(right);            }        }        return root;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> BFS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:236. 二叉树的最近公共祖先</title>
       <link href="/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/"/>
       <url>/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</url>
@@ -619,9 +648,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Easy </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -1291,9 +1320,9 @@
       
         <tags>
             
-            <tag> 阅读理解 </tag>
-            
             <tag> 论文阅读 </tag>
+            
+            <tag> 阅读理解 </tag>
             
             <tag> NLP </tag>
             
@@ -1432,31 +1461,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1476,6 +1480,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
