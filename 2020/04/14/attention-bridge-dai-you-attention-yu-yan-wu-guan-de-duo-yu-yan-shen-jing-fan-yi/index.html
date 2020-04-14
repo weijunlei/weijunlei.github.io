@@ -427,7 +427,7 @@
 <li>加上了self-attention层共享所有的语言对完成语言无关层<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3></li>
 </ol>
 <ul>
-<li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M\isin R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<br>  A &amp;= softmax(W_2ReLU(W_1H^T)) \<br>  M &amp;= AH<br>\end{aligned}$$</li>
+<li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M\isin R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<br>  A &amp;= softmax(W_2ReLU(W_1H^T)) \\<br>  M &amp;= AH<br>\end{aligned}$$</li>
 <li>解码器使用通用的带注意力的解码器，该解码器初始向量通过M的平均池化的到。解码器用的是单向的LSTM</li>
 <li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<br>$$L = -log(p(Y|X)) + ||AA^T - I||_F^2$$<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3></li>
 </ul>
