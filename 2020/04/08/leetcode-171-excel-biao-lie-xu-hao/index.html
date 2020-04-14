@@ -3,15 +3,16 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:171. Excel表列序号, 小风雷">
-    <meta name="description" content="Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。例如，A -&amp;gt; 1
+    <meta name="description" content="Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。
+例如，A -&amp;gt; 1
 B -&amp;gt; 2
 C -&amp;gt; 3
 ...
 Z -&amp;gt; 26
 AA -&amp;gt; 27
-AB -&amp;">
+AB -">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,11 +34,11 @@ AB -&amp;">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
@@ -418,18 +419,23 @@ AB -&amp;">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-171-Excel表列序号"><a href="#Leetcode-171-Excel表列序号" class="headerlink" title="Leetcode: 171. Excel表列序号"></a><a href="https://leetcode-cn.com/problems/excel-sheet-column-number/" target="_blank" rel="noopener">Leetcode: 171. Excel表列序号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个Excel表格中的列名称，返回其相应的列序号。</code></pre><h3 id="例如，"><a href="#例如，" class="headerlink" title="例如，"></a>例如，</h3><pre><code>A -&gt; 1
+                <h1 id="Leetcode-171-Excel表列序号"><a href="#Leetcode-171-Excel表列序号" class="headerlink" title="Leetcode: 171. Excel表列序号"></a><a href="https://leetcode-cn.com/problems/excel-sheet-column-number/" target="_blank" rel="noopener">Leetcode: 171. Excel表列序号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个Excel表格中的列名称，返回其相应的列序号。
+</code></pre><h3 id="例如，"><a href="#例如，" class="headerlink" title="例如，"></a>例如，</h3><pre><code>A -&gt; 1
 B -&gt; 2
 C -&gt; 3
 ...
 Z -&gt; 26
 AA -&gt; 27
 AB -&gt; 28 
-...</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;A&quot;
-输出: 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot;AB&quot;
-输出: 28</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot;ZY&quot;
-输出: 701</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接使用26进制思路遍历字符串即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+...
+</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;A&quot;
+输出: 1
+</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot;AB&quot;
+输出: 28
+</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot;ZY&quot;
+输出: 701
+</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接使用26进制思路遍历字符串即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
     public int titleToNumber(String s) {
         if (s == null || s.length() == 0){
             return 0;
@@ -440,7 +446,8 @@ AB -&gt; 28
         }
         return result;
     }
-}</code></pre>
+}
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
@@ -863,7 +870,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
@@ -1038,7 +1045,24 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
     
 
 </body>

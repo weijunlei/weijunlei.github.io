@@ -3,7 +3,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Attention详细解析, 小风雷">
     <meta name="description" content="Attention机制理解原文Attention机制详解（一）——Seq2Seq中的Attention
 Attention提出理由解决痛点在传统的机器翻译中采用encoder-decoder结构，encoder将输入的句子将其转换为定长的向">
@@ -28,11 +28,11 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
@@ -415,7 +415,7 @@ Attention提出理由解决痛点在传统的机器翻译中采用encoder-decode
             <div id="articleContent">
                 <h1 id="Attention机制理解"><a href="#Attention机制理解" class="headerlink" title="Attention机制理解"></a>Attention机制理解</h1><h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p><a href="https://zhuanlan.zhihu.com/p/47063917" target="_blank" rel="noopener">Attention机制详解（一）——Seq2Seq中的Attention</a></p>
 <h2 id="Attention提出理由"><a href="#Attention提出理由" class="headerlink" title="Attention提出理由"></a>Attention提出理由</h2><h3 id="解决痛点"><a href="#解决痛点" class="headerlink" title="解决痛点"></a>解决痛点</h3><p>在传统的机器翻译中采用encoder-decoder结构，encoder将输入的句子将其转换为定长的向量，然后decoder将向量转化为目标文字。且通常是encoder将最后一层hidden vector作为decoder的起始，然后通过decoder翻译为其他语言。这其中会由于RNN自身特性带来长程梯度消失和并行化差的问题。其中较长的句子也较难在最后的vector中保存需要的有效信息</p>
-<h3 id="提出解决方案"><a href="#提出解决方案" class="headerlink" title="提出解决方案"></a>提出解决方案</h3><p>模拟人翻译的过程，当翻译部分词时将注意力或者更多的注意力放在需要关注的词上，通过类似于赋权的方式计算每个输入位置j与输出位置的关联性。例如可以计算每个输入位置j和当前输出位置的关联性$e_{tj} = a(s_{t-1}, h_j)$,所以写成向量形式就可以得到$\stackrel{-&gt;}{e_t} = (a(s_{t-1}, h_1), …, a(s_{t-1}, h_T))$ $a$是一种相关性的算符，常见的有点乘形式$\stackrel{-&gt;}{e_t}=\stackrel{-&gt;}{s_{t-1}}^T\stackrel{-&gt;}{h}$,加权点乘$\stackrel{-&gt;}{s_{t-1}}^TW\stackrel{-&gt;}{h}$, 加和$\stackrel{-&gt;}{v}^Ttanh(W_1\stackrel{-&gt;}{h} + W_2\stackrel{-&gt;}{s_{t - 1}})$,然后$\stackrel{-&gt;}{s_{t - 1}}$进行softmax操作将normalize得到attention的分布</p>
+<h3 id="提出解决方案"><a href="#提出解决方案" class="headerlink" title="提出解决方案"></a>提出解决方案</h3><p>模拟人翻译的过程，当翻译部分词时将注意力或者更多的注意力放在需要关注的词上，通过类似于赋权的方式计算每个输入位置j与输出位置的关联性。例如可以计算每个输入位置j和当前输出位置的关联性$e<em>{tj} = a(s</em>{t-1}, h<em>j)$,所以写成向量形式就可以得到$\stackrel{-&gt;}{e_t} = (a(s</em>{t-1}, h<em>1), …, a(s</em>{t-1}, h<em>T))$ $a$是一种相关性的算符，常见的有点乘形式$\stackrel{-&gt;}{e_t}=\stackrel{-&gt;}{s</em>{t-1}}^T\stackrel{-&gt;}{h}$,加权点乘$\stackrel{-&gt;}{s<em>{t-1}}^TW\stackrel{-&gt;}{h}$, 加和$\stackrel{-&gt;}{v}^Ttanh(W_1\stackrel{-&gt;}{h} + W_2\stackrel{-&gt;}{s</em>{t - 1}})$,然后$\stackrel{-&gt;}{s_{t - 1}}$进行softmax操作将normalize得到attention的分布</p>
 <h3 id="self-attention提出原因"><a href="#self-attention提出原因" class="headerlink" title="self-attention提出原因"></a>self-attention提出原因</h3><p>尽可能的去除RNNs网络结构，解决RNN由于其顺序结构进行训练，训练速度会受到约束。在RNN中需要处理对句子中的词一步步地进行顺序处理，并且当它们相距较远时候效果较差。Self-Attention利用了Attention的机制，计算每个单词和其他所有单词之间的关联。可以更好地考虑上下文的信息</p>
 <h3 id="Transformer整体结构解析"><a href="#Transformer整体结构解析" class="headerlink" title="Transformer整体结构解析"></a>Transformer整体结构解析</h3><p>使用Multi-head Attention将多个Self-Attention结构结合，每个head会学习到不同的表征，给模型更大的容量</p>
 <h3 id="Self-Attention详细解析"><a href="#Self-Attention详细解析" class="headerlink" title="Self-Attention详细解析"></a>Self-Attention详细解析</h3><p>Self-Attention基本结构如下<img src="./scaled_dot_product_attention.jpg" alt="avatar"></p>
@@ -870,7 +870,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
@@ -1045,7 +1045,24 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
     
 
 </body>

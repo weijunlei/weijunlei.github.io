@@ -3,13 +3,14 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 240:搜索二维矩阵II, 小风雷">
     <meta name="description" content="搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
 
 每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。示例现有矩阵 matrix 如下：
-    [">
+每列的元素从上到下升序排列。
+示例现有矩阵 matrix 如下：
+    ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,11 +32,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
@@ -423,7 +424,8 @@
                 <h1 id="搜索二维矩阵II"><a href="#搜索二维矩阵II" class="headerlink" title="搜索二维矩阵II"></a><a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/" target="_blank" rel="noopener">搜索二维矩阵II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
 
 每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。</code></pre><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>现有矩阵 matrix 如下：
+每列的元素从上到下升序排列。
+</code></pre><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>现有矩阵 matrix 如下：
     [
         [1,   4,  7, 11, 15],
         [2,   5,  8, 12, 19],
@@ -432,34 +434,36 @@
         [18, 21, 23, 26, 30]
     ]
 给定 target = 5，返回 true。
-给定 target = 20，返回 false。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力法"><a href="#思路1-暴力法" class="headerlink" title="思路1 暴力法"></a>思路1 暴力法</h3><p>直接二维数组遍历</p>
+给定 target = 20，返回 false。
+</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力法"><a href="#思路1-暴力法" class="headerlink" title="思路1 暴力法"></a>思路1 暴力法</h3><p>直接二维数组遍历</p>
 <h3 id="思路2-按照已有顺序遍历"><a href="#思路2-按照已有顺序遍历" class="headerlink" title="思路2: 按照已有顺序遍历"></a>思路2: 按照已有顺序遍历</h3><p>按照题目给的信息，则可根据原数组的排序方式，设置index从数组第一行最后一列元素开始遍历，这样以m+n的算法复杂度得出结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路2：代码"><a href="#思路2：代码" class="headerlink" title="思路2：代码"></a>思路2：代码</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">searchMatrix</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> matrix<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix <span class="token operator">==</span> null <span class="token operator">||</span> matrix<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">int</span> rows <span class="token operator">=</span> matrix<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> columns <span class="token operator">=</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> rowIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> colIndex <span class="token operator">=</span> columns <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">boolean</span> result <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路2：代码"><a href="#思路2：代码" class="headerlink" title="思路2：代码"></a>思路2：代码</h3><pre class=" language-lang-java"><code class="language-lang-java">public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int rowIndex = 0;
+        int colIndex = columns - 1;
+        boolean result = false;
 
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span> <span class="token operator">></span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                colIndex <span class="token operator">--</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span> <span class="token operator">&lt;</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                rowIndex <span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>rowIndex <span class="token operator">&lt;</span> rows <span class="token operator">&amp;&amp;</span> colIndex <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> target <span class="token operator">==</span> matrix<span class="token punctuation">[</span>rowIndex<span class="token punctuation">]</span><span class="token punctuation">[</span>colIndex<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                result <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
+        while (rowIndex < rows && colIndex >= 0) {
+            while (rowIndex < rows && colIndex >= 0 && matrix[rowIndex][colIndex] > target) {
+                colIndex --;
+            }
+            while (rowIndex < rows && colIndex >= 0 && matrix[rowIndex][colIndex] < target) {
+                rowIndex ++;
+            }
+            if (rowIndex < rows && colIndex >= 0 && target == matrix[rowIndex][colIndex]) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+}
+</code></pre>
 <h2 id="总结体会"><a href="#总结体会" class="headerlink" title="总结体会"></a>总结体会</h2><p>在实现过程中需要注意下标溢出</p>
 
             </div>
@@ -688,7 +692,8 @@
                             最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
 示例1:输入: &quot;(()&quot;
 输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;示例2:输入: &q
+解释: 最长有效括号子串为 &quot;()&quot;
+示例2:输入: &
                         
                     </div>
                     <div class="publish-info">
@@ -898,7 +903,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
@@ -1073,7 +1078,24 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
     
 
 </body>

@@ -3,7 +3,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="SAE：Rank+(预训练+GNN联合训练), 小风雷">
     <meta name="description" content="SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,11 +27,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
@@ -422,7 +422,7 @@
 <h3 id="实现亮点"><a href="#实现亮点" class="headerlink" title="实现亮点"></a>实现亮点</h3><ol>
 <li>使用Multi-Head Attention实现对段落的rank<br><img src="https://i.loli.net/2020/03/04/txmFIgXZ8S6quar.png" alt="document_selector.png"><br>rank策略是为段落设定不同的rank值，如果段落为支撑句则rank值为1，若段落包含答案则rank值为2，其余为零。在训练过程中使用句对比较使用Multi-Head Attention进行训练。然后取top k相关段落。</li>
 <li>使用GNN得到支撑句以及答案类型<br><img src="https://i.loli.net/2020/03/04/jFKb8pgYSdMVTCq.png" alt="sup_type_gnn.png"><br>将BERT编码后的Sentence节点输入到GNN中，然后使用GCN的训练策略达到图平衡。然后对平衡后的节点接两层感知机进行支撑句预测，同时使用支撑句label+graph attention+两层感知机的方式获取答案类型</li>
-<li>将span预测、支撑句和答案类型预测联合训练<br><img src="https://i.loli.net/2020/03/04/YDywU7eLtdIcbmp.png" alt="answer_span_sup.png"><br>以上图的方式获得答案span，然后加上上个亮点的支撑段落抽取以及答案类型判断获取联合损失进行训练。<br>$$ L = \gamma L^{span} + BCE(\hat{y}^{sp}, y^{sp}) + CE(\hat{y}^{ans}, y^{ans}) $$<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3>在HotpotQA的非开放域的数据集上实现次SOTA(截止该文章发表)<h4 id="消融实验分析"><a href="#消融实验分析" class="headerlink" title="消融实验分析"></a>消融实验分析</h4></li>
+<li>将span预测、支撑句和答案类型预测联合训练<br><img src="https://i.loli.net/2020/03/04/YDywU7eLtdIcbmp.png" alt="answer_span_sup.png"><br>以上图的方式获得答案span，然后加上上个亮点的支撑段落抽取以及答案类型判断获取联合损失进行训练。<script type="math/tex; mode=display">L = \gamma L^{span} + BCE(\hat{y}^{sp}, y^{sp}) + CE(\hat{y}^{ans}, y^{ans})</script><h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3>在HotpotQA的非开放域的数据集上实现次SOTA(截止该文章发表)<h4 id="消融实验分析"><a href="#消融实验分析" class="headerlink" title="消融实验分析"></a>消融实验分析</h4></li>
 </ol>
 <ul>
 <li>整体分析<br><img src="https://i.loli.net/2020/03/04/WbyeoSvV7dGU4uP.png" alt="compare.png"><br>整体上比上一轮顶会方法效果提升绝对值较大</li>
@@ -593,7 +593,8 @@
                             最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
 示例1:输入: &quot;(()&quot;
 输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;示例2:输入: &q
+解释: 最长有效括号子串为 &quot;()&quot;
+示例2:输入: &
                         
                     </div>
                     <div class="publish-info">
@@ -859,7 +860,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
         tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
@@ -1034,7 +1035,24 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
     
 
 </body>
