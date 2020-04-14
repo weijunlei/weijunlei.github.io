@@ -4,11 +4,73 @@
   
     
     <entry>
+      <title>Attention Bridge:带有Attention语言无关的多语言神经翻译</title>
+      <link href="/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/"/>
+      <url>/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Multilingual-NMT-with-a-language-independent-attention-bridge"><a href="#Multilingual-NMT-with-a-language-independent-attention-bridge" class="headerlink" title="Multilingual NMT with a language-independent attention bridge"></a><a href="https://www.aclweb.org/anthology/W19-4305.pdf" target="_blank" rel="noopener">Multilingual NMT with a language-independent attention bridge</a></h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inner-attention语言特定的编码和解码器连接进行训练。注意力桥利用每种语言的语义进行翻译，并发展成一种语言无关的意义表示，可以有效地用于迁移学习。作者为有效开发多语言神经网络机器翻译提供了一种新的框架。作者在多平行数据上进行了系统性的测试。该模型在双语模型和零样本的翻译上提升较大，展现了该模型的抽象和迁移能力。</p><h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul><li>提出了一种多语言翻译系统，有效解决学习语言无关的句子表征任务</li><li>验证了模型能够通过共享表征实现有效的迁移学习和零样本翻译。</li><li>证明了经过多语言训练的词嵌入可以改善大多数下流和展示了从组合翻译任务上获取抽象学习的句子探测任务<h2 id="模型实现"><a href="#模型实现" class="headerlink" title="模型实现"></a>模型实现</h2><h3 id="整体上"><a href="#整体上" class="headerlink" title="整体上"></a>整体上</h3></li></ul><ol><li>使用了标准的encoder-decoder加上attention机制</li><li>加上了self-attention层共享所有的语言对完成语言无关层<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3></li></ol><ul><li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M \isin R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<pre><code>A &amp;= softmax(W_2ReLU(W_1H^T)) \\M &amp;= AH</code></pre>\end{aligned}$$</li><li>解码器使用通用的带注意力的解码器，该解码器初始向量通过M的平均池化的到。解码器用的是单向的LSTM</li><li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<br>$$L = -log(p(Y|X)) + ||AA^T - I||_F^2$$<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3></li></ul><ol><li>在双语翻译结果上有所下降，作者解释是因为将有10个self-attention组成的固定的句子向量没有包含多语言信息<br><img src="https://i.loli.net/2020/04/14/KwBSyCF28i7LOq3.png" alt="AB_BLEU_score.png"></li><li>在多对一和一对多的实验中，但是多对一就有一定的效果提升，然后在训练过程中加上了单语数据，具体是将语言A的句子直接复制形成句子对，和平行预料一起进行训练。</li><li>在多对多模型上，在双语模型基础上有了巨大提升，加上单语预料后也有增益。同时在零样本学习上也强于之前的多对一模型。</li><li>训练得到向量在下流任务上结果:在相同预料库下相对于Glove-BoW有所提升，但是可能相对通用的预训练模型微调的效果可能有点不够看，但是为零样本、少样本的跨语言学习提供一种解决方案<br><img src="https://i.loli.net/2020/04/14/NZdJSiUn45mWw7Y.png" alt="AB_DT.png"><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3></li><li>对传统的encoder-decoder进行了三项改造:使用了特定语言的encoder-decoder、语言无关的共享attention bridge以及惩罚项。</li><li>使用Attention Bridge合理地将多语言表征融合。该融合是否可以直接用于预训练任务？</li><li>Multi-Head学习到重复内容是否可以使用其他方法进行一种增加“惩罚项”,因为该方法中的Frobenius其实效果提升较小或者对有些任务有负作用<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2></li></ol><ul><li><a href="https://www.aclweb.org/anthology/W19-4305.pdf" target="_blank" rel="noopener">Multilingual NMT with a language-independent attention bridge</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> NLP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> NLP </tag>
+            
+            <tag> ACL 2019 </tag>
+            
+            <tag> 机器翻译 </tag>
+            
+            <tag> 论文阅读 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MSRA:Unicoder跨语言预训练模型</title>
+      <link href="/2020/04/14/msra-unicoder-kua-yu-yan-yu-xun-lian-mo-xing/"/>
+      <url>/2020/04/14/msra-unicoder-kua-yu-yan-yu-xun-lian-mo-xing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Unicoder-A-Universal-Language-Encoder-by-Pre-training-with-Multiple-Cross-lingual-Tasks"><a href="#Unicoder-A-Universal-Language-Encoder-by-Pre-training-with-Multiple-Cross-lingual-Tasks" class="headerlink" title="Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks"></a><a href="https://www.aclweb.org/anthology/D19-1252.pdf" target="_blank" rel="noopener">Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks</a></h1><h2 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1. 摘要"></a>1. 摘要</h2><p>Unicoder是一个对于不同语言通用的语言编码器。该模型在某个语言的任意NLP任务之后可以直接运用于其他语言。与该方法类似的有Multilingual BERT和XLM，新提出了跨语言的词恢复、释义分类和遮盖语言模型三个预训练任务。这些任务帮助Unicoder学习到了不同语言深层次的内容。同时该方法也发现，在某些任务上进行微调可以让效果得到提升。该模型微调了XNLI和XQA之后，在XLM的基础上，XNLI提升了在15中语言上提升了1.8%，而在XQA上提升了5.5%。</p><h2 id="3-主要贡献"><a href="#3-主要贡献" class="headerlink" title="3. 主要贡献"></a>3. 主要贡献</h2><ol><li>提出了3个跨语言预训练任务，更好的获取语言无关编码</li><li>创建了一个新的跨语言QA数据集XQA</li><li>验证了微调加上语言预训练可以显著提升模型效果</li><li>在XNLI上实现了SOTA<h2 id="4-模型实现"><a href="#4-模型实现" class="headerlink" title="4. 模型实现"></a>4. 模型实现</h2></li><li>在实现上参照了XLM模型，使用BPE共用词表，下采样数据多的语言预料，避免目标语言的词被分为太多的字符级别。</li><li>预训练任务<ul><li>MLM(masked language model) Multilingual Bert</li><li>TLM(translation language model): XLM</li><li>跨语言的词语恢复(Cross-lingual Word Recovery): learn the underlying word alignments between two languages 使用注意力矩阵处理后的X作为input还原X<br>  <img src="https://i.loli.net/2020/04/14/dKLMqOsZuP7clmS.png" alt="Cross-lingual-word-recovery.png"></li><li>跨语言的同义句子分类(Cross-lingual Paraphrase Classification)使用两个不同语言的句子判断两个句子是否是相同的意思，获取两个语言句子层面的对应关系。同时在采样负例时采用两段式的采样方法，首先使用一个轻量级的随机采样方法获取是否是同一含义，然后利用这个模型寻找最相似但是不相等的负样例。该方法主要是使得训练任务难度变高。<br><img src="https://i.loli.net/2020/04/14/3LFxfm6pNSkoMuH.png" alt="Cross-lingual-paraphrase-classfication.png"></li><li>在文档级别上MLM,句子是多语言的。因为跨语言的词级别的多语言较少且可能不通顺，所以需要使用句子组成一个连贯的文档<br><img src="https://i.loli.net/2020/04/14/Qevo1JkBd75qUSP.png" alt="Cross-lingual-masked-language-model.png"></li></ul></li><li>跨语言微调(设目标任务是测试中文数据集)<ul><li>测试数据翻译（Translate Test）将中文的测试数据翻译成英文的测试数据，将问题转化成英文训练、英文测试的问题。<ul><li>训练数据翻译（Translate Train）将英文的训练数据翻译成中文的训练数据，将问题转化成中文训练、中文测试的问题</li><li>跨语言测试（Cross-lingual Test），也就是直接将在英语训练集上训练得到的模型在中文上进行测试。</li></ul></li><li>跨语言微调是通过将英语翻译成其他语言，在英语和其他语言上进行训练，然后再中文数据上进行测试<h2 id="5-实验细节"><a href="#5-实验细节" class="headerlink" title="5. 实验细节"></a>5. 实验细节</h2></li></ul></li><li>训练细节<ul><li>模型结构 12层16头1024个隐层的transformer</li><li>预训练详情 从XLM初始化（节约时间）</li></ul></li><li>数据<ol><li>XNLI：跨语言推理任务</li><li>XQA：新提出数据XQA,Cross-lingual Question Answering,三语数据集，只有英文有训练数据，判断问题和答案是否相关<h2 id="6-实验效果"><a href="#6-实验效果" class="headerlink" title="6. 实验效果"></a>6. 实验效果</h2></li></ol></li><li>XNLI结果:在TRANSLATE-TRAIN的XLM的基础上,多语言微调的整体提升1.8%,其中在使用多语言微调之后提升1.1%,Unicoder相对XLM提升0.7%。所以可以看出Unicoder对多语言的知识掌握能力更强<br><img src="https://i.loli.net/2020/04/14/WiP2mwD4sQq5SFr.png" alt="Unicoder-XNLI-result.png"></li><li>XQA结果:在TRANSLATE-TRAIN的XLM的基础上,多语言微调的整体提升5.5%,其中在使用多语言微调之后提升3.5%,Unicoder相对XLM提升2%<br> <img src="https://i.loli.net/2020/04/14/UNDbA9mfK2jWEdP.png" alt="Unicoder-XQA-result.png"></li><li>总体来说语言越多越好，但是在双语fine-tuning中Vietnamese和Urdu甚至相对单语是有害的<h2 id="7-总结及启迪"><a href="#7-总结及启迪" class="headerlink" title="7. 总结及启迪"></a>7. 总结及启迪</h2></li><li>作者提出了三种全新的预训练任务，三个任务对模型效果均有提升</li><li>提出了一种多语言预训练方案，相对只将原语言翻译效果有提升</li><li>总体而言，在微调阶段，语言越多效果越好</li><li>实践了预训练中多任务的作用，同样也实践了预训练任务的难度对结果影响(Cross-lingual Paraphrase Classification)</li><li>多语言微调是否可以看作是一种数据微调？该模型对于获取翻译之后多语言特征强，所以可以考虑对增强数据的增强捕捉能力？<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2></li></ol><ul><li><a href="https://zhuanlan.zhihu.com/p/86166445" target="_blank" rel="noopener">机器推理系列第三弹：跨语言预训练，提高机器推理的迁移能力</a></li><li><a href="https://www.aclweb.org/anthology/D19-1252.pdf" target="_blank" rel="noopener">Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> NLP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> NLP </tag>
+            
+            <tag> 论文阅读 </tag>
+            
+            <tag> EMNLP 2019 </tag>
+            
+            <tag> 预训练模型 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:297. 二叉树的序列化与反序列化</title>
       <link href="/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/"/>
       <url>/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/</url>
       
-        <content type="html"><![CDATA[<h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树：    1/ \2   3    / \    4   5序列化为 &quot;[1,2,3,null,null,4,5]&quot;</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p><h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Codec {    // Encodes a tree to a single string.    public String serialize(TreeNode root) {        Queue<TreeNode> queue = new LinkedList<>();        StringBuilder sb = new StringBuilder();        queue.add(root);        while (!queue.isEmpty()){            TreeNode pre = queue.poll();            if (pre == null){                sb.append("n");                sb.append(",");                continue;            }else{                sb.append(String.valueOf(pre.val));                sb.append(",");            }            queue.offer(pre.left);            queue.offer(pre.right);        }        int neededLength = sb.length() - 1;        // strip speed        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n'){            neededLength -= 2;        }        sb.setLength(neededLength);        return sb.toString();    }    // Decodes your encoded data to tree.    public TreeNode deserialize(String data) {        if (data.equals("n")){            return null;        }        String[] vals = data.split(",");        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));        Queue<TreeNode> queue = new LinkedList<>();        queue.offer(root);        for(int i = 1; i < vals.length; i += 2){            if (queue.isEmpty()){                break;            }            TreeNode pre = queue.poll();            if (vals[i].equals("n")){                pre.left = null;            }else{                TreeNode left = new TreeNode(Integer.valueOf(vals[i]));                pre.left = left;                queue.offer(left);            }            if (i + 1 >= vals.length){                break;            }            if (vals[i + 1].equals("n")){                pre.right = null;            }else{                TreeNode right = new TreeNode(Integer.valueOf(vals[i + 1]));                pre.right = right;                queue.offer(right);            }        }        return root;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树： 1/ \2   3    / \    4   5序列化为 &quot;[1,2,3,null,null,4,5]&quot;</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p><h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Codec {    // Encodes a tree to a single string.    public String serialize(TreeNode root) {        Queue<TreeNode> queue = new LinkedList<>();        StringBuilder sb = new StringBuilder();        queue.add(root);        while (!queue.isEmpty()){            TreeNode pre = queue.poll();            if (pre == null){                sb.append("n");                sb.append(",");                continue;            }else{                sb.append(String.valueOf(pre.val));                sb.append(",");            }            queue.offer(pre.left);            queue.offer(pre.right);        }        int neededLength = sb.length() - 1;        // strip speed        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n'){            neededLength -= 2;        }        sb.setLength(neededLength);        return sb.toString();    }    // Decodes your encoded data to tree.    public TreeNode deserialize(String data) {        if (data.equals("n")){            return null;        }        String[] vals = data.split(",");        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));        Queue<TreeNode> queue = new LinkedList<>();        queue.offer(root);        for(int i = 1; i < vals.length; i += 2){            if (queue.isEmpty()){                break;            }            TreeNode pre = queue.poll();            if (vals[i].equals("n")){                pre.left = null;            }else{                TreeNode left = new TreeNode(Integer.valueOf(vals[i]));                pre.left = left;                queue.offer(left);            }            if (i + 1 >= vals.length){                break;            }            if (vals[i + 1].equals("n")){                pre.right = null;            }else{                TreeNode right = new TreeNode(Integer.valueOf(vals[i + 1]));                pre.right = right;                queue.offer(right);            }        }        return root;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
       
       
       <categories>
@@ -1320,11 +1382,11 @@
       
         <tags>
             
+            <tag> NLP </tag>
+            
             <tag> 论文阅读 </tag>
             
             <tag> 阅读理解 </tag>
-            
-            <tag> NLP </tag>
             
             <tag> HotpotQA </tag>
             
@@ -1448,11 +1510,38 @@
       
         <tags>
             
+            <tag> 论文阅读 </tag>
+            
             <tag> 阅读理解 </tag>
             
             <tag> 图神经网络 </tag>
             
             <tag> 多层图神经网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
@@ -1480,31 +1569,6 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
             
         </tags>
       
