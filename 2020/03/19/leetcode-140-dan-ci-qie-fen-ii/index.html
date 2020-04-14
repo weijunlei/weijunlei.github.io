@@ -5,8 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 140: 单词切分II, 小风雷">
-    <meta name="description" content="Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
-说明：分隔时可以重复使用字典">
+    <meta name="description" content="Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -413,18 +412,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-140-单词切分II"><a href="#Leetcode-140-单词切分II" class="headerlink" title="Leetcode 140: 单词切分II"></a><a href="https://leetcode-cn.com/problems/word-break-ii/" target="_blank" rel="noopener">Leetcode 140: 单词切分II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
-</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>分隔时可以重复使用字典中的单词。
-你可以假设字典中没有重复的单词。
-</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入:
+                <h1 id="Leetcode-140-单词切分II"><a href="#Leetcode-140-单词切分II" class="headerlink" title="Leetcode 140: 单词切分II"></a><a href="https://leetcode-cn.com/problems/word-break-ii/" target="_blank" rel="noopener">Leetcode 140: 单词切分II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>分隔时可以重复使用字典中的单词。
+你可以假设字典中没有重复的单词。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入:
 s = &quot;catsanddog&quot;
 wordDict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;]
 输出:
 [
 &quot;cats and dog&quot;,
 &quot;cat sand dog&quot;
-]
-</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入:
+]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入:
 s = &quot;pineapplepenapple&quot;
 wordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine&quot;, &quot;pineapple&quot;]
 输出:
@@ -433,16 +429,14 @@ wordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine
 &quot;pineapple pen apple&quot;,
 &quot;pine applepen apple&quot;
 ]
-解释: 注意你可以重复使用字典中的单词。
-</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入:
+解释: 注意你可以重复使用字典中的单词。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入:
 s = &quot;catsandog&quot;
 wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]
 输出:
-[]
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP-回溯"><a href="#思路1：DP-回溯" class="headerlink" title="思路1：DP+回溯"></a>思路1：DP+回溯</h3><p>即利用中等难度的dp单词切分获取到可能的子序列，根据是否可以整体切分以及切分标记回溯这些字序列获取最终的结果</p>
+[]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP-回溯"><a href="#思路1：DP-回溯" class="headerlink" title="思路1：DP+回溯"></a>思路1：DP+回溯</h3><p>即利用中等难度的dp单词切分获取到可能的子序列，根据是否可以整体切分以及切分标记回溯这些字序列获取最终的结果</p>
 <h3 id="思路2-记忆回溯"><a href="#思路2-记忆回溯" class="headerlink" title="思路2: 记忆回溯"></a>思路2: 记忆回溯</h3><p>将每个位置i记为以他为起点，到最后结果的可能切分，最后递归求解。将每个位置记为(i, list<str>),减少无用的后缀计算，以空间换时间</p>
 <h3 id="思路3：DP-直接记录"><a href="#思路3：DP-直接记录" class="headerlink" title="思路3：DP+直接记录"></a>思路3：DP+直接记录</h3><p>将每个位置直接记录可能的前缀串，最后得到记录的全单词切分前缀串。但是在leetcode上会出现内存分配过大而超时的现象，故意需要增加判断是否可以完全完成单词切分</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-DP-回溯"><a href="#代码1-DP-回溯" class="headerlink" title="代码1: DP+回溯"></a>代码1: DP+回溯</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-DP-回溯"><a href="#代码1-DP-回溯" class="headerlink" title="代码1: DP+回溯"></a>代码1: DP+回溯</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
         List<String> result = new LinkedList<>();
         if (s == null || s.length() == 0 || wordDict.size() == 0){
@@ -487,9 +481,8 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
             }
         }
     }
-}
-</code></pre>
-<h3 id="代码2-记忆回溯"><a href="#代码2-记忆回溯" class="headerlink" title="代码2: 记忆回溯"></a>代码2: 记忆回溯</h3><pre class=" language-lang-Java"><code class="language-lang-Java">public class Solution2 {
+}</code></pre>
+<h3 id="代码2-记忆回溯"><a href="#代码2-记忆回溯" class="headerlink" title="代码2: 记忆回溯"></a>代码2: 记忆回溯</h3><pre class=" language-Java"><code class="language-Java">public class Solution2 {
     Map<Integer, List<String>> hashMap = new HashMap<>();
     public List<String> wordBreak(String s, List<String> wordDict){
         List<String> result = new LinkedList<>();
@@ -523,9 +516,8 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
         hashMap.put(startIndex, temp);
         return temp;
     }
-}
-</code></pre>
-<h3 id="代码3-DP-直接记录"><a href="#代码3-DP-直接记录" class="headerlink" title="代码3: DP+直接记录"></a>代码3: DP+直接记录</h3><pre class=" language-lang-Java"><code class="language-lang-Java">public class Solution3 {
+}</code></pre>
+<h3 id="代码3-DP-直接记录"><a href="#代码3-DP-直接记录" class="headerlink" title="代码3: DP+直接记录"></a>代码3: DP+直接记录</h3><pre class=" language-Java"><code class="language-Java">public class Solution3 {
     public List<String> wordBreak(String s, List<String> wordDict) {
         if (s == null || s.length() == 0 || wordDict.size() == 0 || !canWordBreak(s, wordDict)){
             return new LinkedList<String>();
@@ -569,8 +561,7 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
         }
         return dps[s.length()];
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>相当于减枝之后$n^n$？</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$n^3$</p>
@@ -732,10 +723,9 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
-示例:Trie trie = new Trie();
+                            Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();
 
-trie.inse
+trie.inser
                         
                     </div>
                     <div class="publish-info">

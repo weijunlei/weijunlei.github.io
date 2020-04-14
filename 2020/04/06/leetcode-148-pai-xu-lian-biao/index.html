@@ -5,10 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:148. 排序链表, 小风雷">
-    <meta name="description" content="Leetcode: 141.排序链表题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
-示例 1:输入: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3
-输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4
-示例 2:输入">
+    <meta name="description" content="#Leetcode: 141.排序链表
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。示例 1:输入: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3
+输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4示例 2:输入">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -415,14 +414,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-141-排序链表"><a href="#Leetcode-141-排序链表" class="headerlink" title="Leetcode: 141.排序链表"></a><a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">Leetcode: 141.排序链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
-</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 4-&gt;2-&gt;1-&gt;3
-输出: 1-&gt;2-&gt;3-&gt;4
-</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
-输出: -1-&gt;0-&gt;3-&gt;4-&gt;5
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用快排实现，值修改</p>
+                <p>#<a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">Leetcode: 141.排序链表</a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 4-&gt;2-&gt;1-&gt;3
+输出: 1-&gt;2-&gt;3-&gt;4</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
+输出: -1-&gt;0-&gt;3-&gt;4-&gt;5</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用快排实现，值修改</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用归并排序，实现平均复杂度$O(n)$,因为链表可以直接引用空间，所以可以不用额外的$O(nlogn)$空间，需要注意获取中间节点的快指针位置初始设置</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-lang-Java"><code class="language-lang-Java">/**
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -473,9 +470,8 @@ class Solution {
 
         return getNode;
     }
-}
-</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-lang-Java"><code class="language-lang-Java">/**
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -520,8 +516,7 @@ class Solution {
 
         return result.next;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlogn)$</p>
@@ -687,8 +682,7 @@ class Solution {
 
 
 
-在节点 c1 开始相交。
-示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], 
+在节点 c1 开始相交。示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], l
                         
                     </div>
                     <div class="publish-info">
@@ -746,8 +740,7 @@ class Solution {
                     <div class="summary block-with-text">
                         
                             Leetcode:141. 环形链表题目描述给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
-示例 1：输入
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。示例 1：输入：
                         
                     </div>
                     <div class="publish-info">

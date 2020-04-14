@@ -414,8 +414,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Leetcode-454-四数相加II"><a href="#Leetcode-454-四数相加II" class="headerlink" title="Leetcode:454. 四数相加II"></a><a href="https://leetcode-cn.com/problems/4sum-ii" target="_blank" rel="noopener">Leetcode:454. 四数相加II</a></h1><pre><code>给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
-为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -228 到 228 - 1 之间，最终结果不会超过 231 - 1 。
-</code></pre><h3 id="例如"><a href="#例如" class="headerlink" title="例如:"></a>例如:</h3><pre><code>输入:
+为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -228 到 228 - 1 之间，最终结果不会超过 231 - 1 。</code></pre><h3 id="例如"><a href="#例如" class="headerlink" title="例如:"></a>例如:</h3><pre><code>输入:
 A = [ 1, 2]
 B = [-2,-1]
 C = [-1, 2]
@@ -427,9 +426,8 @@ D = [ 0, 2]
 解释:
 两个元组如下:
 1. (0, 0, 0, 1) -&gt; A[0] + B[0] + C[0] + D[1] = 1 + (-2) + (-1) + 2 = 0
-2. (1, 1, 0, 0) -&gt; A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>two sum扩展，直接使用一个哈希表存储A、B列表之和个数，然后遍历满足所有数相交为0的C、D之和，得到最后的结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+2. (1, 1, 0, 0) -&gt; A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>two sum扩展，直接使用一个哈希表存储A、B列表之和个数，然后遍历满足所有数相交为0的C、D之和，得到最后的结果</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         if (A == null || A.length == 0 || B == null || B.length == 0 || C == null || C.length == 0 || D == null || D.length == 0){
             return 0;
@@ -457,8 +455,7 @@ D = [ 0, 2]
         }
         return result;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n^2)$</p>
 
@@ -680,14 +677,13 @@ remove(val)：元
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。
-例如，A -&gt; 1
+                            Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。例如，A -&gt; 1
 B -&gt; 2
 C -&gt; 3
 ...
 Z -&gt; 26
 AA -&gt; 27
-AB -
+AB -&
                         
                     </div>
                     <div class="publish-info">

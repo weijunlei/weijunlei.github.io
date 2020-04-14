@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Attention Bridge:带有Attention语言无关的多语言神经翻译, 小风雷">
+    <meta name="keywords" content="Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译, 小风雷">
     <meta name="description" content="Multilingual NMT with a language-independent attention bridge摘要作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inner-a">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Attention Bridge:带有Attention语言无关的多语言神经翻译 | 小风雷</title>
+    <title>Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -238,13 +238,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Attention Bridge:带有Attention语言无关的多语言神经翻译
+                        Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译
                     </div>
                 </div>
             </div>
@@ -427,12 +427,9 @@
 <li>加上了self-attention层共享所有的语言对完成语言无关层<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3></li>
 </ol>
 <ul>
-<li>编码器用用BiLSTM得到$n<em>d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M \isin R^{d_h </em> k}$,k为attention head数量。<script type="math/tex; mode=display">\begin{aligned}
-    A &= softmax(W_2ReLU(W_1H^T)) \\
-    M &= AH
-\end{aligned}</script></li>
+<li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M\isin R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<br>  A &amp;= softmax(W_2ReLU(W_1H^T)) \<br>  M &amp;= AH<br>\end{aligned}$$</li>
 <li>解码器使用通用的带注意力的解码器，该解码器初始向量通过M的平均池化的到。解码器用的是单向的LSTM</li>
-<li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<script type="math/tex; mode=display">L = -log(p(Y|X)) + ||AA^T - I||_F^2</script><h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3></li>
+<li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<br>$$L = -log(p(Y|X)) + ||AA^T - I||_F^2$$<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3></li>
 </ul>
 <ol>
 <li>在双语翻译结果上有所下降，作者解释是因为将有10个self-attention组成的固定的句子向量没有包含多语言信息<br><img src="https://i.loli.net/2020/04/14/KwBSyCF28i7LOq3.png" alt="AB_BLEU_score.png"></li>
@@ -598,9 +595,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Attention Bridge:带有Attention语言无关的多语言神经翻译">
+                        <img src="https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg" class="responsive-img" alt="Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译">
                         
-                        <span class="card-title">Attention Bridge:带有Attention语言无关的多语言神经翻译</span>
+                        <span class="card-title">Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

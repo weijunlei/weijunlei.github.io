@@ -431,14 +431,11 @@
 
 如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
 使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。
-说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。
-</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
-输出: true
-</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
-输出: false
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] = max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
+说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
+输出: true</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
+输出: false</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] = max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
 <h3 id="思路2：加入两个哨兵元素"><a href="#思路2：加入两个哨兵元素" class="headerlink" title="思路2：加入两个哨兵元素"></a>思路2：加入两个哨兵元素</h3><p>使用两个哨兵元素记录值，即记录两个最小的数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public boolean increasingTriplet(int[] nums) {
         if (nums == null || nums.length < 3){
             return false;
@@ -456,9 +453,8 @@
         }
         return false;
     }
-}
-</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public boolean increasingTriplet(int[] nums) {
         if (nums == null || nums.length < 3){
             return false;
@@ -476,8 +472,7 @@
         }
         return false;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
@@ -702,10 +697,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
-示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]
-示例 2:输入: nums1 = [4,9,5], 
+                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
                         
                     </div>
                     <div class="publish-info">

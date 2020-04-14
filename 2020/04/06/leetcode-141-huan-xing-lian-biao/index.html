@@ -6,8 +6,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:141. 环形链表, 小风雷">
     <meta name="description" content="Leetcode:141. 环形链表题目描述给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
-示例 1：输入">
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。示例 1：输入：">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -415,19 +414,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Leetcode-141-环形链表"><a href="#Leetcode-141-环形链表" class="headerlink" title="Leetcode:141. 环形链表"></a><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">Leetcode:141. 环形链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
-</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [3,2,0,-4], pos = 1
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [3,2,0,-4], pos = 1
 输出：true
-解释：链表中有一个环，其尾部连接到第二个节点。
-</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [1,2], pos = 0
+解释：链表中有一个环，其尾部连接到第二个节点。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [1,2], pos = 0
 输出：true
-解释：链表中有一个环，其尾部连接到第一个节点。
-</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [1], pos = -1
+解释：链表中有一个环，其尾部连接到第一个节点。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [1], pos = -1
 输出：false
-解释：链表中没有环。
-</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能用 O(1)（即，常量）内存解决此问题吗？
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>快慢指针，使用快慢指针遍历链表看是否会有相交</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">public class Solution {
+解释：链表中没有环。</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能用 O(1)（即，常量）内存解决此问题吗？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>快慢指针，使用快慢指针遍历链表看是否会有相交</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
     public boolean hasCycle(ListNode head) {
         if (head == null || head.next == null){
             return false;
@@ -447,8 +441,7 @@
             return false;
         }
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
@@ -606,10 +599,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 141.排序链表题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
-示例 1:输入: 4-&gt;2-&gt;1-&gt;3
-输出: 1-&gt;2-&gt;3-&gt;4
-示例 2:输入
+                            #Leetcode: 141.排序链表
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。示例 1:输入: 4-&gt;2-&gt;1-&gt;3
+输出: 1-&gt;2-&gt;3-&gt;4示例 2:输入
                         
                     </div>
                     <div class="publish-info">

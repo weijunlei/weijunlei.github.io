@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-14T14:37:58.128Z</updated>
+  <updated>2020-04-14T15:26:20.113Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Attention Bridge:带有Attention语言无关的多语言神经翻译</title>
+    <title>Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译</title>
     <link href="https://weijunlei.github.io/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/"/>
     <id>https://weijunlei.github.io/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/</id>
     <published>2020-04-14T14:36:06.000Z</published>
-    <updated>2020-04-14T14:37:58.128Z</updated>
+    <updated>2020-04-14T15:26:20.113Z</updated>
     
     <summary type="html">
     
@@ -438,7 +438,8 @@
       
         
         
-          &lt;h1 id=&quot;Leetcode-141-排序链表&quot;&gt;&lt;a href=&quot;#Leetcode-141-排序链表&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 141.排序链表&quot;&gt;&lt;/a&gt;&lt;a
+          &lt;p&gt;#&lt;a href=&quot;https://leetcode-cn.com/problems/sort-list/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Leetcode: 141.排序链表&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a
         
       
     

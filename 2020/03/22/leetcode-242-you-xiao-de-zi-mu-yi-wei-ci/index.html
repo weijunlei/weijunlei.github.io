@@ -5,8 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:242. 有效的字母异位词, 小风雷">
-    <meta name="description" content="Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
-示例 1:输入: s = &amp;quot;anagram&amp;quot;, t = &amp;quot;nagaram&amp;q">
+    <meta name="description" content="Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。示例 1:输入: s = &amp;quot;anagram&amp;quot;, t = &amp;quot;nagaram&amp;qu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -413,19 +412,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-242-有效的字母异位词"><a href="#Leetcode-242-有效的字母异位词" class="headerlink" title="Leetcode:242. 有效的字母异位词"></a><a href="https://leetcode-cn.com/problems/valid-anagram/" target="_blank" rel="noopener">Leetcode:242. 有效的字母异位词</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
-</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;
+                <h1 id="Leetcode-242-有效的字母异位词"><a href="#Leetcode-242-有效的字母异位词" class="headerlink" title="Leetcode:242. 有效的字母异位词"></a><a href="https://leetcode-cn.com/problems/valid-anagram/" target="_blank" rel="noopener">Leetcode:242. 有效的字母异位词</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;
 输出: true
 示例 2:
 
 输入: s = &quot;rat&quot;, t = &quot;car&quot;
 输出: false
 说明:
-你可以假设字符串只包含小写字母。
-</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-哈希表"><a href="#思路1-哈希表" class="headerlink" title="思路1: 哈希表"></a>思路1: 哈希表</h3><p>直接使用哈希表计数，先计算s的每个字母个数相加，然后计算t中个数相减</p>
+你可以假设字符串只包含小写字母。</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-哈希表"><a href="#思路1-哈希表" class="headerlink" title="思路1: 哈希表"></a>思路1: 哈希表</h3><p>直接使用哈希表计数，先计算s的每个字母个数相加，然后计算t中个数相减</p>
 <h3 id="思路2：数组-计数"><a href="#思路2：数组-计数" class="headerlink" title="思路2：数组+计数"></a>思路2：数组+计数</h3><p>鉴于只有26个字母，所以可以只用一个数组计数，解法可同上，但是常数空间消耗更少</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：哈希表"><a href="#代码1：哈希表" class="headerlink" title="代码1：哈希表"></a>代码1：哈希表</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：哈希表"><a href="#代码1：哈希表" class="headerlink" title="代码1：哈希表"></a>代码1：哈希表</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public boolean isAnagram(String s, String t) {
         if ((s == null && t != null) || (s != null && t == null) || s.length() != t.length()) {
             return false;
@@ -446,9 +442,8 @@
         }
         return true;
     }
-}
-</code></pre>
-<h3 id="代码2：数组-计数"><a href="#代码2：数组-计数" class="headerlink" title="代码2：数组+计数"></a>代码2：数组+计数</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+}</code></pre>
+<h3 id="代码2：数组-计数"><a href="#代码2：数组-计数" class="headerlink" title="代码2：数组+计数"></a>代码2：数组+计数</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public boolean isAnagram(String s, String t) {
         if ((s == null && t != null) || (s != null && t == null) || s.length() != t.length()) {
             return false;
@@ -465,8 +460,7 @@
         }
         return true;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>n</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>1,常数</p>
 
@@ -624,11 +618,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
-案例:s = &quot;leetcode&quot;
+                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。案例:s = &quot;leetcode&quot;
 返回 0.
 
-s = &quot;l
+s = &quot;lo
                         
                     </div>
                     <div class="publish-info">

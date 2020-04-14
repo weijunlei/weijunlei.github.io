@@ -418,8 +418,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Leetcode-212-单词搜索II"><a href="#Leetcode-212-单词搜索II" class="headerlink" title="Leetcode 212: 单词搜索II"></a><a href="https://leetcode-cn.com/problems/word-search-ii/" target="_blank" rel="noopener">Leetcode 212: 单词搜索II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
-单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。
-</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: 
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: 
 words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and board =
 [
 [&#39;o&#39;,&#39;a&#39;,&#39;a&#39;,&#39;n&#39;],
@@ -430,12 +429,10 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
 
 输出: [&quot;eat&quot;,&quot;oath&quot;]
 说明:
-你可以假设所有输入都由小写字母 a-z 组成。
-</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>你需要优化回溯算法以通过更大数据量的测试。你能否早点停止回溯？
-如果当前单词不存在于所有单词的前缀中，则可以立即停止回溯。什么样的数据结构可以有效地执行这样的操作？散列表是否可行？为什么？ 前缀树如何？如果你想学习如何实现一个基本的前缀树，请先查看这个问题： 实现Trie（前缀树）。
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯-DFS"><a href="#思路1-回溯-DFS" class="headerlink" title="思路1: 回溯+DFS"></a>思路1: 回溯+DFS</h3><p>直接使用回溯+DFS判断每个单词是否存在，需要注意一个单词不能使用两次以上一个字符。</p>
+你可以假设所有输入都由小写字母 a-z 组成。</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>你需要优化回溯算法以通过更大数据量的测试。你能否早点停止回溯？
+如果当前单词不存在于所有单词的前缀中，则可以立即停止回溯。什么样的数据结构可以有效地执行这样的操作？散列表是否可行？为什么？ 前缀树如何？如果你想学习如何实现一个基本的前缀树，请先查看这个问题： 实现Trie（前缀树）。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯-DFS"><a href="#思路1-回溯-DFS" class="headerlink" title="思路1: 回溯+DFS"></a>思路1: 回溯+DFS</h3><p>直接使用回溯+DFS判断每个单词是否存在，需要注意一个单词不能使用两次以上一个字符。</p>
 <h3 id="思路2-前缀树-回溯减枝"><a href="#思路2-前缀树-回溯减枝" class="headerlink" title="思路2: 前缀树+回溯减枝"></a>思路2: 前缀树+回溯减枝</h3><p>对所有的单词建立节点，然后回溯board中每个可能的单词，裁剪掉不能满足前缀树的路径</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-lang-Java"><code class="language-lang-Java">public class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
     public List<String> findWords(char[][] board, String[] words) {
         List<String> result = new LinkedList<>();
         if (words.length == 0 || board.length == 0 || board[0].length == 0){
@@ -507,8 +504,7 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
         }
         return board[i][j] == getCh;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1-时间复杂度"><a href="#思路1-时间复杂度" class="headerlink" title="思路1:时间复杂度"></a>思路1:时间复杂度</h3><p>只超过14%</p>
 <h3 id="思路2-空间复杂度"><a href="#思路2-空间复杂度" class="headerlink" title="思路2:空间复杂度"></a>思路2:空间复杂度</h3><p>//TODO</p>
 
@@ -670,8 +666,7 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
-示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&q
+                            Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&qu
                         
                     </div>
                     <div class="publish-info">
@@ -728,10 +723,9 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
-示例:Trie trie = new Trie();
+                            Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();
 
-trie.inse
+trie.inser
                         
                     </div>
                     <div class="publish-info">

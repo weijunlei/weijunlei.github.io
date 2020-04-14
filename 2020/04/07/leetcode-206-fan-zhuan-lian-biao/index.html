@@ -5,11 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:206. 反转链表, 小风雷">
-    <meta name="description" content="Leetcode:206.反转链表题目描述反转一个单链表。
-示例:输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
+    <meta name="description" content="Leetcode:206.反转链表题目描述反转一个单链表。示例:输入: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL
 输出: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL
 进阶:
-你可以迭代">
+你可以迭代或">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -416,14 +415,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-206-反转链表"><a href="#Leetcode-206-反转链表" class="headerlink" title="Leetcode:206.反转链表"></a><a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">Leetcode:206.反转链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>反转一个单链表。
-</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+                <h1 id="Leetcode-206-反转链表"><a href="#Leetcode-206-反转链表" class="headerlink" title="Leetcode:206.反转链表"></a><a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">Leetcode:206.反转链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>反转一个单链表。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
 进阶:
-你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
-</code></pre><h2 id="思路1-迭代"><a href="#思路1-迭代" class="headerlink" title="思路1:迭代"></a>思路1:迭代</h2><p>使用三个指针分别指向之前，现在和将来的位置，然后遍历逆转即可</p>
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</code></pre><h2 id="思路1-迭代"><a href="#思路1-迭代" class="headerlink" title="思路1:迭代"></a>思路1:迭代</h2><p>使用三个指针分别指向之前，现在和将来的位置，然后遍历逆转即可</p>
 <h2 id="思路2-递归"><a href="#思路2-递归" class="headerlink" title="思路2:递归"></a>思路2:递归</h2><p>需要考虑从尾指针开始，然后开始递归，即考虑从后开始。然后利用当前指针的下一个位置进行递归，然后逆转。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null){
             return head;
@@ -442,9 +439,8 @@
         }
         return pre;
     }
-}
-</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution2 {
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution2 {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null){
             return head;
@@ -454,8 +450,7 @@
         head.next = null;
         return pre;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
@@ -615,12 +610,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。
-示例 1:输入: 1-&gt;2
-输出: false
-示例 2:输入: 1-&gt;2-&gt;2-&gt;1
-输出: true
-进阶：你能否用 O(n) 时间复杂度
+                            Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。示例 1:输入: 1-&gt;2
+输出: false示例 2:输入: 1-&gt;2-&gt;2-&gt;1
+输出: true进阶：你能否用 O(n) 时间复杂度和 O
                         
                     </div>
                     <div class="publish-info">
@@ -683,8 +675,7 @@
 
 
 
-在节点 c1 开始相交。
-示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], 
+在节点 c1 开始相交。示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], l
                         
                     </div>
                     <div class="publish-info">

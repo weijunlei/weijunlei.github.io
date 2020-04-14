@@ -421,17 +421,15 @@ top() -- 获取栈顶元素">
 push(x) -- 将元素 x 推入栈中。
 pop() -- 删除栈顶的元素。
 top() -- 获取栈顶元素。
-getMin() -- 检索栈中的最小元素。
-</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>MinStack minStack = new MinStack();
+getMin() -- 检索栈中的最小元素。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>MinStack minStack = new MinStack();
 minStack.push(-2);
 minStack.push(0);
 minStack.push(-3);
 minStack.getMin();   --&gt; 返回 -3.
 minStack.pop();
 minStack.top();      --&gt; 返回 0.
-minStack.getMin();   --&gt; 返回 -2.
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class MinStack {
+minStack.getMin();   --&gt; 返回 -2.</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class MinStack {
 
     /** initialize your data structure here. */
     private Stack<Integer> stack;
@@ -475,8 +473,7 @@ minStack.getMin();   --&gt; 返回 -2.
             throw new RuntimeException("Stack is empty!");
         }
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
@@ -634,10 +631,8 @@ minStack.getMin();   --&gt; 返回 -2.
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
-示例 1:输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5
-
+                            215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例 1:输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5示例
                         
                     </div>
                     <div class="publish-info">

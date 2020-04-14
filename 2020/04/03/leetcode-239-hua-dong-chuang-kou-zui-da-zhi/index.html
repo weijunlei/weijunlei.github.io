@@ -425,8 +425,7 @@
 
 进阶：
 
-你能在线性时间复杂度内解决此题吗？
-</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+你能在线性时间复杂度内解决此题吗？</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
 输出: [3,3,5,5,6,7] 
 解释: 
 
@@ -437,13 +436,11 @@
 1  3 [-1  -3  5] 3  6  7       5
 1  3  -1 [-3  5  3] 6  7       5
 1  3  -1  -3 [5  3  6] 7       6
-1  3  -1  -3  5 [3  6  7]      7
-</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>1 &lt;= nums.length &lt;= 10^5
+1  3  -1  -3  5 [3  6  7]      7</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>1 &lt;= nums.length &lt;= 10^5
 -10^4 &lt;= nums[i] &lt;= 10^4
-1 &lt;= k &lt;= nums.length
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：优先级队列"><a href="#思路1：优先级队列" class="headerlink" title="思路1：优先级队列"></a>思路1：优先级队列</h3><p>使用优先级队列存储一个k的最大堆，大于k时每次去除前面的第k个元素</p>
+1 &lt;= k &lt;= nums.length</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：优先级队列"><a href="#思路1：优先级队列" class="headerlink" title="思路1：优先级队列"></a>思路1：优先级队列</h3><p>使用优先级队列存储一个k的最大堆，大于k时每次去除前面的第k个元素</p>
 <h3 id="思路2：动态规划"><a href="#思路2：动态规划" class="headerlink" title="思路2：动态规划"></a>思路2：动态规划</h3><p>将原数组设置为k个一个单元，然后分别求从左至当前位置的最大值（不超过k单元内）和从右至左，这样可以直接求两个边界最大值即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0){
             return nums;
@@ -460,9 +457,8 @@
 
         return result;
     }
-}
-</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+}</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length == 0){
             return nums;
@@ -494,8 +490,7 @@
         }
         return result;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
@@ -657,8 +652,7 @@
                         
                             Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
-示例 1:输入: &quot;3
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &quot;3+
                         
                     </div>
                     <div class="publish-info">
@@ -715,10 +709,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
-示例 1:输入: nums = [1,1,1,2,2,3], k = 2
-输出: [1,2]
-示例 2:输入: nums = 
+                            Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]示例 2:输入: nums = [1
                         
                     </div>
                     <div class="publish-info">

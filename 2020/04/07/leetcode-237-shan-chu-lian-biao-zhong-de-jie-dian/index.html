@@ -7,8 +7,7 @@
     <meta name="keywords" content="Leetcode:237. 删除链表中的节点, 小风雷">
     <meta name="description" content="Leetcode: 237. 删除链表中的节点题目描述请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
 
-现有一个链表 -- head = [4,5,1,9]，它可以表示为:
-示例 1:输入: he">
+现有一个链表 -- head = [4,5,1,9]，它可以表示为:示例 1:输入: hea">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -417,19 +416,15 @@
             <div id="articleContent">
                 <h1 id="Leetcode-237-删除链表中的节点"><a href="#Leetcode-237-删除链表中的节点" class="headerlink" title="Leetcode: 237. 删除链表中的节点"></a><a href="https://leetcode-cn.com/problems/delete-node-in-a-linked-list" target="_blank" rel="noopener">Leetcode: 237. 删除链表中的节点</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
 
-现有一个链表 -- head = [4,5,1,9]，它可以表示为:
-</code></pre><h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h2><pre><code>输入: head = [4,5,1,9], node = 5
+现有一个链表 -- head = [4,5,1,9]，它可以表示为:</code></pre><h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h2><pre><code>输入: head = [4,5,1,9], node = 5
 输出: [4,1,9]
-解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.
-</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: head = [4,5,1,9], node = 1
+解释: 给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: head = [4,5,1,9], node = 1
 输出: [4,5,9]
-解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.
-</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>链表至少包含两个节点。
+解释: 给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>链表至少包含两个节点。
 链表中所有节点的值都是唯一的。
 给定的节点为非末尾节点并且一定是链表中的一个有效节点。
-不要从你的函数中返回任何结果。
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>根据题目描述（不为最后一个节点）可以直接将该节点下一个节点的值赋给当前值，然后删除下一个节点</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+不要从你的函数中返回任何结果。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>根据题目描述（不为最后一个节点）可以直接将该节点下一个节点的值赋给当前值，然后删除下一个节点</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public void deleteNode(ListNode node) {
         if (node == null || node.next == null){
             return;
@@ -438,8 +433,7 @@
         node.val = node.next.val;
         node.next = node.next.next;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(1)$</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
 
@@ -655,12 +649,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。
-示例 1:输入: 1-&gt;2
-输出: false
-示例 2:输入: 1-&gt;2-&gt;2-&gt;1
-输出: true
-进阶：你能否用 O(n) 时间复杂度
+                            Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。示例 1:输入: 1-&gt;2
+输出: false示例 2:输入: 1-&gt;2-&gt;2-&gt;1
+输出: true进阶：你能否用 O(n) 时间复杂度和 O
                         
                     </div>
                     <div class="publish-info">

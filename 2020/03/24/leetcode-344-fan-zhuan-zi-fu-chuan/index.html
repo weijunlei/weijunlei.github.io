@@ -422,13 +422,10 @@
 
 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
 
-你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
-</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
-输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]
-</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
-输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]
-</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接使用前后指针swap</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
+输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
+输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接使用前后指针swap</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
     public void reverseString(char[] s) {
         if(s == null || s.length == 0){
             return;
@@ -441,8 +438,7 @@
             s[right--] = temp;
         }
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
 
@@ -604,11 +600,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            乘积最大子数组题目描述给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。
-示例 1:输入: [2,3,-2,4]
+                            乘积最大子数组题目描述给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。示例 1:输入: [2,3,-2,4]
 输出: 6
-解释: 子数组 [2,3] 有最大乘积 6。
-示例 2:输入: [-
+解释: 子数组 [2,3] 有最大乘积 6。示例 2:输入: [-2,
                         
                     </div>
                     <div class="publish-info">
@@ -665,11 +659,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
-案例:s = &quot;leetcode&quot;
+                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。案例:s = &quot;leetcode&quot;
 返回 0.
 
-s = &quot;l
+s = &quot;lo
                         
                     </div>
                     <div class="publish-info">

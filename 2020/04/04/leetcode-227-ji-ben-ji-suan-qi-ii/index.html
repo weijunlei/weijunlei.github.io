@@ -7,8 +7,7 @@
     <meta name="keywords" content="Leetcode:227. 基本计算器 II, 小风雷">
     <meta name="description" content="Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
-示例 1:输入: &amp;quot;3">
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &amp;quot;3+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -417,16 +416,12 @@
             <div id="articleContent">
                 <h1 id="Leetcode-227-基本计算器-II"><a href="#Leetcode-227-基本计算器-II" class="headerlink" title="Leetcode 227. 基本计算器 II"></a><a href="https://leetcode-cn.com/problems/basic-calculator-ii/" target="_blank" rel="noopener">Leetcode 227. 基本计算器 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
-</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;3+2*2&quot;
-输出: 7
-</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot; 3/2 &quot;
-输出: 1
-</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot; 3+5 / 2 &quot;
-输出: 5
-</code></pre><p>说明：<br>    你可以假设所给定的表达式都是有效的。<br>    请不要使用内置的库函数 eval。</p>
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;3+2*2&quot;
+输出: 7</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot; 3/2 &quot;
+输出: 1</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot; 3+5 / 2 &quot;
+输出: 5</code></pre><p>说明：<br>    你可以假设所给定的表达式都是有效的。<br>    请不要使用内置的库函数 eval。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：栈"><a href="#思路1：栈" class="headerlink" title="思路1：栈"></a>思路1：栈</h3><p>使用一个栈存储数字，然后使用一个符号记录延后记录运算符，初始为+，最后出栈相加即可得到最后的结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-lang-Java"><code class="language-lang-Java">class Solution {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public int calculate(String s) {
         if (s == null || s.length() == 0){
             return 0;
@@ -472,8 +467,7 @@
         }
         return result;
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
@@ -633,8 +627,7 @@
                         
                             Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
-列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
-示例 1
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。示例 1:
                         
                     </div>
                     <div class="publish-info">
