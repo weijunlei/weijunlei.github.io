@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:179. 最大数</title>
+      <link href="/2020/04/16/leetcode-179-zui-da-shu/"/>
+      <url>/2020/04/16/leetcode-179-zui-da-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-179-最大数"><a href="#Leetcode-179-最大数" class="headerlink" title="Leetcode:179. 最大数"></a><a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener">Leetcode:179. 最大数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [10,2]输出: 210</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,30,34,5,9]输出: 9534330</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>输出结果可能非常大，所以你需要返回一个字符串而不是整数。</code></pre><h2 id="思路1：转化为排序-快排"><a href="#思路1：转化为排序-快排" class="headerlink" title="思路1：转化为排序+快排"></a>思路1：转化为排序+快排</h2><p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p><h2 id="思路2-转化为排序-Java排序"><a href="#思路2-转化为排序-Java排序" class="headerlink" title="思路2: 转化为排序+Java排序"></a>思路2: 转化为排序+Java排序</h2><p>转化为排序然后使用Java内置排序</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public String largestNumber(int[] nums) {        if (nums == null || nums.length == 0){            return "";        }        StringBuilder result = new StringBuilder();        String[] strNums = new String[nums.length];        for(int i = 0; i < nums.length; i++){            strNums[i] = String.valueOf(nums[i]);        }        quickSort(strNums, 0, strNums.length - 1);        if (strNums[0].equals("0")){            return "0";        }        for(int i = 0; i < strNums.length; i++){            result.append(strNums[i]);        }        return result.toString();    }    private void quickSort(String[] nums, int start, int end){        if (start < end){            int getIndex = getPartition(nums, start, end);            quickSort(nums, start, getIndex);            quickSort(nums, getIndex + 1, end);        }    }    private int getPartition(String[] nums, int start, int end){        String getNum = nums[start];        nums[start] = nums[end];        nums[end] = getNum;        int getIndex = start;        for(int i = start; i < end; i++){            if (compare(nums[i], getNum)){                String temp = nums[getIndex];                nums[getIndex] = nums[i];                nums[i] = temp;                getIndex ++;            }        }        nums[end] = nums[getIndex];        nums[getIndex] = getNum;        return getIndex;    }    private boolean compare(String a, String b){        int aCount = a.length();        int bCount = b.length();        int maxCount = aCount > bCount ? aCount : bCount;        char chA = '0';        char chB = '0';        for(int i = 0; i < aCount + bCount; i++){            if (i < aCount){                chA = a.charAt(i);            }else{                chA = b.charAt(i - aCount);            }            if(i < bCount){                chB = b.charAt(i);            }else{                chB = a.charAt(i - bCount);            }            if (chA > chB){                return true;            }else if(chA < chB){                return false;            }        }        return false;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public String largestNumber(int[] nums) {        if (nums == null || nums.length == 0){            return "";        }        StringBuilder result = new StringBuilder();        String[] strNums = new String[nums.length];        for(int i = 0; i < nums.length; i++){            strNums[i] = String.valueOf(nums[i]);        }        Arrays.sort(strNums, new Comparator<String>(){            @Override            public int compare(String a, String b){                int aCount = a.length();                int bCount = b.length();                int maxCount = aCount > bCount ? aCount : bCount;                char chA = '0';                char chB = '0';                for(int i = 0; i < aCount + bCount; i++){                    if (i < aCount){                        chA = a.charAt(i);                    }else{                        chA = b.charAt(i - aCount);                    }                    if(i < bCount){                        chB = b.charAt(i);                    }else{                        chB = a.charAt(i - bCount);                    }                    if (chA != chB){                        return chB - chA;                    }                }                return 0;            }        });        if (strNums[0].equals("0")){            return "0";        }        for(int i = 0; i < strNums.length; i++){            result.append(strNums[i]);        }        return result.toString();    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Attention Bridge:带有Attention Bridge语言无关的多语言神经翻译</title>
       <link href="/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/"/>
       <url>/2020/04/14/attention-bridge-dai-you-attention-yu-yan-wu-guan-de-duo-yu-yan-shen-jing-fan-yi/</url>
@@ -803,9 +832,9 @@
             
             <tag> Easy </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
@@ -1525,31 +1554,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1569,6 +1573,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       
