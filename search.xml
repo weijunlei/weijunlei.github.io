@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:324. 摆动排序 II</title>
+      <link href="/2020/04/16/leetcode-324-bai-dong-pai-xu-ii/"/>
+      <url>/2020/04/16/leetcode-324-bai-dong-pai-xu-ii/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-324-摆动排序-II"><a href="#Leetcode-324-摆动排序-II" class="headerlink" title="Leetcode:324. 摆动排序 II"></a><a href="https://leetcode-cn.com/problems/wiggle-sort-ii/" target="_blank" rel="noopener">Leetcode:324. 摆动排序 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]... 的顺序。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = [1, 5, 1, 1, 6, 4]输出: 一个可能的答案是 [1, 4, 1, 5, 1, 6]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = [1, 3, 2, 2, 3, 1]输出: 一个可能的答案是 [2, 3, 1, 3, 1, 2]</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设所有输入都会得到有效的结果。</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>你能用 O(n) 时间复杂度和 / 或原地 O(1) 额外空间来实现吗？</code></pre><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><pre><code>直接使用排序加取后一半位置进行插入到合适的位置，需要注意需要新建一个前半排序和后半排序后的空间，不然由于交换不能到合适的位置(或者用一个map指示排序后每个元素应该在的位置),同时还需要注意最中间的元素等于(nums.length + 1) /2的情况，所以需要能够前后排序空间都逆序，使其中间元素不在一起即在排序时不产生等号</code></pre><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><pre><code>不适用排序而直接使用三个获取二分点/四分点/四分点的partition（类似快排的）</code></pre><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public void wiggleSort(int[] nums) {        if (nums == null || nums.length == 0){            return;        }        Arrays.sort(nums);        int mid = (nums.length + 1) / 2;        reverse(nums, 0, mid - 1);        reverse(nums, mid, nums.length - 1);        int[] smallNums = new int[mid];        int[] bigNums = new int[nums.length - mid];        for(int i = 0; i < nums.length; i++){            if (i <= mid - 1){                smallNums[i] = nums[i];            }else{                bigNums[i - mid] = nums[i];            }        }        for(int i = 0; i < nums.length; i++){            if (i % 2 == 0){                nums[i] = smallNums[i / 2];            }else{                nums[i] = bigNums[i / 2];            }        }    }    private void reverse(int[] nums,int start,int end){        while (start < end){            int temp = nums[start];            nums[start++] = nums[end];            nums[end--] = temp;        }    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java"></code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogn)$考虑平均情况</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:179. 最大数</title>
       <link href="/2020/04/16/leetcode-179-zui-da-shu/"/>
       <url>/2020/04/16/leetcode-179-zui-da-shu/</url>
@@ -832,9 +861,9 @@
             
             <tag> Easy </tag>
             
-            <tag> 排序 </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -1554,6 +1583,31 @@
     
     
     <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -1573,31 +1627,6 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
             
         </tags>
       
