@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:162. 寻找峰值</title>
+      <link href="/2020/04/17/leetcode-162-xun-zhao-feng-zhi/"/>
+      <url>/2020/04/17/leetcode-162-xun-zhao-feng-zhi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-162-寻找峰值"><a href="#Leetcode-162-寻找峰值" class="headerlink" title="Leetcode:162. 寻找峰值"></a><a href="https://leetcode-cn.com/problems/find-peak-element/" target="_blank" rel="noopener">Leetcode:162. 寻找峰值</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>峰值元素是指其值大于左右相邻值的元素。给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可。你可以假设 nums[-1] = nums[n] = -∞。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = [1,2,3,1]输出: 2解释: 3 是峰值元素，你的函数应该返回其索引 2。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = [1,2,1,3,5,6,4]输出: 1 或 5 解释: 你的函数可以返回索引 1，其峰值元素为 2；     或者返回索引 5， 其峰值元素为 6。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你的解法应该是 O(logN) 时间复杂度的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-遍历"><a href="#思路1-遍历" class="headerlink" title="思路1 遍历"></a>思路1 遍历</h3><p>直接遍历，遍历元素是否大于下一个元素，若大于则返回（从数组列表开始）</p><h3 id="思路2-二分法"><a href="#思路2-二分法" class="headerlink" title="思路2: 二分法"></a>思路2: 二分法</h3><p>可用二分法找峰值，若找的元素大于右侧元素，则需要峰值的元素在mid元素左侧，若小于右侧则为mid右侧</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int findPeakElement(int[] nums) {        if (nums == null){            return -1;        }        for(int i = 0; i < nums.length - 1; i++){            if (nums[i] > nums[i + 1]){                return i;            }        }        return nums.length - 1;    }}</code></pre><h3 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int findPeakElement(int[] nums) {        if (nums == null){            return -1;        }        int left = 0;        int right = nums.length - 1;        while (left < right){            int mid = (left + right) / 2;            if (nums[mid] > nums[mid + 1]){                right = mid;            }else{                left = mid + 1;            }        }        return left;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(logn)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 二分法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:324. 摆动排序 II</title>
       <link href="/2020/04/16/leetcode-324-bai-dong-pai-xu-ii/"/>
       <url>/2020/04/16/leetcode-324-bai-dong-pai-xu-ii/</url>
@@ -140,9 +169,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> BFS </tag>
             
@@ -563,9 +592,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> DFS </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> DFS </tag>
             
         </tags>
       
@@ -619,9 +648,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> 优先级队列 </tag>
             
@@ -708,9 +737,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> 插入排序 </tag>
             
@@ -768,9 +797,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Easy </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> Easy </tag>
             
         </tags>
       
@@ -824,9 +853,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> Medium </tag>
             
@@ -1010,9 +1039,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> DP </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> Medium </tag>
             
@@ -1130,9 +1159,9 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> Medium </tag>
             
@@ -1192,11 +1221,11 @@
       
         <tags>
             
-            <tag> 回溯 </tag>
-            
             <tag> Hard </tag>
             
             <tag> DP </tag>
+            
+            <tag> 回溯 </tag>
             
         </tags>
       
@@ -1221,11 +1250,11 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
+            <tag> DP </tag>
             
             <tag> 回溯 </tag>
             
-            <tag> DP </tag>
+            <tag> Leetcode </tag>
             
             <tag> Medium </tag>
             
@@ -1256,11 +1285,11 @@
       
         <tags>
             
+            <tag> 回溯 </tag>
+            
             <tag> Leetcode </tag>
             
             <tag> Middle </tag>
-            
-            <tag> 回溯 </tag>
             
             <tag> DFS </tag>
             
@@ -1318,11 +1347,11 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> Hard </tag>
             
             <tag> DP </tag>
+            
+            <tag> Leetcode </tag>
             
         </tags>
       
@@ -1409,11 +1438,11 @@
       
         <tags>
             
-            <tag> Leetcode </tag>
-            
             <tag> Hard </tag>
             
             <tag> DP </tag>
+            
+            <tag> Leetcode </tag>
             
             <tag> Stack </tag>
             
