@@ -4,6 +4,66 @@
   
     
     <entry>
+      <title>Leetcode:218. 天际线问题</title>
+      <link href="/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/"/>
+      <url>/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-218-天际线问题"><a href="#Leetcode-218-天际线问题" class="headerlink" title="Leetcode: 218. 天际线问题"></a><a href="https://leetcode-cn.com/problems/the-skyline-problem/" target="_blank" rel="noopener">Leetcode: 218. 天际线问题</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。现在，假设您获得了城市风光照片（图A）上显示的所有建筑物的位置和高度，请编写一个程序以输出由这些建筑物形成的天际线（图B）。每个建筑物的几何信息用三元组 [Li，Ri，Hi] 表示，其中 Li 和 Ri 分别是第 i 座建筑物左右边缘的 x 坐标，Hi 是其高度。可以保证 0 ≤ Li, Ri ≤ INT_MAX, 0 &lt; Hi ≤ INT_MAX 和 Ri - Li &gt; 0。您可以假设所有建筑物都是在绝对平坦且高度为 0 的表面上的完美矩形。例如，图A中所有建筑物的尺寸记录为：[ [2 9 10], [3 7 15], [5 12 12], [15 20 10], [19 24 8] ] 。输出是以 [ [x1,y1], [x2, y2], [x3, y3], ... ] 格式的“关键点”（图B中的红点）的列表，它们唯一地定义了天际线。关键点是水平线段的左端点。请注意，最右侧建筑物的最后一个关键点仅用于标记天际线的终点，并始终为零高度。此外，任何两个相邻建筑物之间的地面都应被视为天际线轮廓的一部分。例如，图B中的天际线应该表示为：[ [2 10], [3 15], [7 12], [12 0], [15 10], [20 8], [24, 0] ]。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>任何输入列表中的建筑物数量保证在 [0, 10000] 范围内。输入列表已经按左 x 坐标 Li  进行升序排列。输出列表必须按 x 位排序。输出天际线中不得有连续的相同高度的水平线。例如 [...[2 3], [4 5], [7 5], [11 5], [12 7]...] 是不正确的答案；三条高度为 5 的线应该在最终输出中合并为一个：[...[2 3], [4 5], [12 7], ...]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用分治法，类似与插入排序思路。重点在于看到单个建筑物的应该如何存储。如[1, 5, 9]存为[1, 9],[5, 0],即分好左右节点.<a href="https://leetcode-cn.com/problems/the-skyline-problem/solution/tian-ji-xian-wen-ti-by-leetcode/" target="_blank" rel="noopener">参考</a></p><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用最大优先级队列保存最高点，然后根据左右节点以类似入栈出栈形式得到结果。关键在于存储左右节点</p><h3 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h3><p>可以使用TreeMap使得时间复杂度为$O(nlogn)$<a href="https://leetcode-cn.com/problems/the-skyline-problem/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--45/" target="_blank" rel="noopener">思路</a></p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public List<List<Integer>> getSkyline(int[][] buildings) {        List<List<Integer>> result = new ArrayList<>();        int n = buildings.length;        if (n == 0){return result;}        if (n == 1){            result.add(new ArrayList<Integer>() {{add(buildings[0][0]); add(buildings[0][2]);}});            result.add(new ArrayList<Integer>() {{add(buildings[0][1]); add(0);}});            return result;        }        List<List<Integer>> left, right;        left = getSkyline(Arrays.copyOfRange(buildings,0, n / 2));        right = getSkyline(Arrays.copyOfRange(buildings, n/2, n));        return mergeResult(left, right);    }    private List<List<Integer>> mergeResult(List<List<Integer>> left, List<List<Integer>> right){        int ls = 0, rs = 0;        int le = left.size(), re = right.size();        int leftY = 0, rightY = 0, curY = 0;        int x, maxY;        List<List<Integer>> result = new ArrayList<>();        while (ls < le && rs < re){            List<Integer> leftP = left.get(ls);            List<Integer> rightP = right.get(rs);            if (leftP.get(0) < rightP.get(0)){                x = leftP.get(0);                ls ++;                leftY = leftP.get(1);            }else{                x = rightP.get(0);                rs ++;                rightY = rightP.get(1);            }            maxY = Math.max(leftY, rightY);            if (curY != maxY){                updateResult(result, x, maxY);                curY = maxY;            }        }        addRest(result, left, ls, le, curY);        addRest(result, right, rs, re, curY);        return result;      }    private void updateResult(List<List<Integer>> result, int x, int y){        if (result.isEmpty() || result.get(result.size() - 1).get(0) != x){            result.add(new ArrayList<Integer>(){{add(x); add(y);}});        }else{            result.get(result.size() - 1).set(1, y);        }    }    private void addRest(List<List<Integer>> result, List<List<Integer>> left, int s, int e, int curY){        while (s < e){            List<Integer> point = left.get(s);            int x = point.get(0);            int y = point.get(1);            s ++;            if (y != curY){                updateResult(result, x, y);                curY = y;            }        }    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public List<List<Integer>> getSkyline(int[][] buildings) {        List<List<Integer>> result = new ArrayList<>();        if (buildings.length == 0){            return result;        }        List<List<Integer>> marks = new ArrayList<>();        for(int[] nums: buildings){            marks.add(new ArrayList<Integer>(){{add(nums[0]);add(-nums[2]);}});            marks.add(new ArrayList<Integer>(){{add(nums[1]); add(nums[2]);}});        }        Collections.sort(marks, new Comparator<List<Integer>>(){            @Override            public int compare(List<Integer> o1, List<Integer> o2){                int x1 = o1.get(0);                int x2 = o2.get(0);                int y1 = o1.get(1);                int y2 = o2.get(1);                if (x1 != x2){                    return x1 - x2;                }else{                    return y1 - y2;                }            }        });        Queue<Integer> queue = new PriorityQueue<Integer>(new Comparator<Integer>(){            @Override            public int compare(Integer o1, Integer o2){                return o2 - o1;            }        });        queue.offer(0);        int preY = 0;        for(List<Integer> nums: marks){            int x = nums.get(0);            int y = nums.get(1);            if (y < 0){                queue.offer(-y);            }else{                queue.remove(y);            }            int curMax = queue.peek();            if (preY != curMax){                result.add(new ArrayList<Integer>(){{add(x); add(curMax);}});                preY = curMax;            }        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogn)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n^2)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 分治 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:287. 寻找重复数</title>
+      <link href="/2020/04/17/leetcode-287-xun-zhao-chong-fu-shu/"/>
+      <url>/2020/04/17/leetcode-287-xun-zhao-chong-fu-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-287-寻找重复数"><a href="#Leetcode-287-寻找重复数" class="headerlink" title="Leetcode:287. 寻找重复数"></a><a href="https://leetcode-cn.com/problems/find-the-duplicate-number/" target="_blank" rel="noopener">Leetcode:287. 寻找重复数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,3,4,2,2]输出: 2</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,1,3,4,2]输出: 3</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>不能更改原数组（假设数组是只读的）。只能使用额外的 O(1) 的空间。时间复杂度小于 O(n2) 。数组中只有一个重复的数字，但它可能不止重复出现一次。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用二分法统计小于mid数量，因为数字在1~n（n+1数组）,若大于mid数量则在左侧，反之右侧</p><h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>快慢指针的思路,因为范围有限以及有重复元素，所以可以看作是链表有环求交点位置</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int findDuplicate(int[] nums) {        int left = 1;        int right = nums.length - 1;        while (left < right){            int mid = (left + right) / 2;            int count = 0;            for(int num: nums){                if (num <= mid){                    count += 1;                }            }            if (count > mid){                right = mid;            }else{                left = mid + 1;            }        }        return left;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int findDuplicate(int[] nums) {        int slow = nums[0];        int fast = nums[0];        do{            slow = nums[slow];            fast = nums[nums[fast]];        }while(slow != fast);        fast = nums[0];        while(slow != fast){            slow = nums[slow];            fast = nums[fast];        }        return slow;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$Onlog(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 快慢指针 </tag>
+            
+            <tag> 二分法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:162. 寻找峰值</title>
       <link href="/2020/04/17/leetcode-162-xun-zhao-feng-zhi/"/>
       <url>/2020/04/17/leetcode-162-xun-zhao-feng-zhi/</url>
@@ -169,9 +229,9 @@
       
         <tags>
             
-            <tag> Hard </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
             
             <tag> BFS </tag>
             
@@ -260,9 +320,9 @@
             
             <tag> Medium </tag>
             
-            <tag> Collection </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> Collection </tag>
             
         </tags>
       
@@ -563,9 +623,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -592,9 +652,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DFS </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -621,9 +681,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -648,9 +708,9 @@
       
         <tags>
             
-            <tag> Hard </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
             
             <tag> 优先级队列 </tag>
             
@@ -737,9 +797,9 @@
       
         <tags>
             
-            <tag> Hard </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
             
             <tag> 插入排序 </tag>
             
@@ -797,9 +857,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Easy </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -853,9 +913,9 @@
       
         <tags>
             
-            <tag> DP </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> DP </tag>
             
             <tag> Medium </tag>
             
@@ -1039,9 +1099,9 @@
       
         <tags>
             
-            <tag> DP </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> DP </tag>
             
             <tag> Medium </tag>
             
@@ -1159,9 +1219,9 @@
       
         <tags>
             
-            <tag> 回溯 </tag>
-            
             <tag> Leetcode </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> Medium </tag>
             
@@ -1221,11 +1281,11 @@
       
         <tags>
             
+            <tag> 回溯 </tag>
+            
             <tag> Hard </tag>
             
             <tag> DP </tag>
-            
-            <tag> 回溯 </tag>
             
         </tags>
       
@@ -1250,11 +1310,11 @@
       
         <tags>
             
-            <tag> DP </tag>
+            <tag> Leetcode </tag>
             
             <tag> 回溯 </tag>
             
-            <tag> Leetcode </tag>
+            <tag> DP </tag>
             
             <tag> Medium </tag>
             
@@ -1285,11 +1345,11 @@
       
         <tags>
             
-            <tag> 回溯 </tag>
-            
             <tag> Leetcode </tag>
             
             <tag> Middle </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> DFS </tag>
             
@@ -1347,11 +1407,11 @@
       
         <tags>
             
+            <tag> Leetcode </tag>
+            
             <tag> Hard </tag>
             
             <tag> DP </tag>
-            
-            <tag> Leetcode </tag>
             
         </tags>
       
@@ -1438,11 +1498,11 @@
       
         <tags>
             
+            <tag> Leetcode </tag>
+            
             <tag> Hard </tag>
             
             <tag> DP </tag>
-            
-            <tag> Leetcode </tag>
             
             <tag> Stack </tag>
             
