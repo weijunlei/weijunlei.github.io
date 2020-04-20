@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>Leetcode:315. 计算右侧小于当前元素的个数</title>
+      <link href="/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/"/>
+      <url>/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-315-计算右侧小于当前元素的个数"><a href="#Leetcode-315-计算右侧小于当前元素的个数" class="headerlink" title="Leetcode:315. 计算右侧小于当前元素的个数"></a><a href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/" target="_blank" rel="noopener">Leetcode:315. 计算右侧小于当前元素的个数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [5,2,6,1]输出: [2,1,1,0] 解释:5 的右侧有 2 个更小的元素 (2 和 1).2 的右侧仅有 1 个更小的元素 (1).6 的右侧有 1 个更小的元素 (1).1 的右侧有 0 个更小的元素.</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力遍历比较"><a href="#思路1-暴力遍历比较" class="headerlink" title="思路1 暴力遍历比较"></a>思路1 暴力遍历比较</h3><p>直接对每个位置的数和之后的数比较</p><h3 id="思路2-归并排序-索引数组"><a href="#思路2-归并排序-索引数组" class="headerlink" title="思路2 归并排序+索引数组"></a>思路2 归并排序+索引数组</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public List<Integer> countSmaller(int[] nums) {        ArrayList<Integer> result = new ArrayList<>();        for(int i = 0; i < nums.length; i++){            int count = 0;            for(int j = i + 1; j < nums.length; j++){                if (nums[i] > nums[j]){                    count += 1;                }            }            result.add(count);        }        return result;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    private int[] indexs;    private int[] counters;    private int[] temp;    public List<Integer> countSmaller(int[] nums) {        ArrayList<Integer> result = new ArrayList<>();        indexs = new int[nums.length];        counters = new int[nums.length];        temp = new int[nums.length];        for(int i = 0; i < nums.length; i++){            indexs[i] = i;            counters[i] = 0;        }        mergeSort(nums, 0, nums.length - 1);        // for(int i = 0; i < nums.length; i++){        //     System.out.printf("%d\t", nums[indexs[i]]);        // }        // System.out.println();        for(int i = 0; i < counters.length; i++){            result.add(counters[i]);        }        return result;    }    private void mergeSort(int[] nums, int left, int right){        if (left < right){            int mid = (left + right) / 2;            mergeSort(nums, left, mid);            mergeSort(nums, mid + 1, right);            mergeHelper(nums, left, mid, right);        }    }    private void mergeHelper(int[] nums, int left, int mid , int right){        int tempIndex = left;        int leftIndex = left;        int rightIndex = mid + 1;        while (leftIndex <= mid && rightIndex <= right){            if (nums[indexs[leftIndex]] <= nums[indexs[rightIndex]]){                temp[tempIndex] = indexs[leftIndex];                counters[indexs[leftIndex]] += rightIndex - mid - 1;                leftIndex++;            }else{                temp[tempIndex] = indexs[rightIndex];                rightIndex++;            }            tempIndex++;        }        while(leftIndex <= mid){            temp[tempIndex] = indexs[leftIndex];            counters[indexs[leftIndex]] += rightIndex - mid - 1;            leftIndex++;            tempIndex++;        }        while(rightIndex <= right){            temp[tempIndex] = indexs[rightIndex];            rightIndex++;            tempIndex++;        }        for(int i = left; i <= right; i++){            indexs[i] = temp[i];        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlog(n))$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 逆序对 </tag>
+            
+            <tag> 归并排序 </tag>
+            
+            <tag> 索引数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:218. 天际线问题</title>
       <link href="/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/"/>
       <url>/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/</url>
@@ -51,9 +84,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 快慢指针 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 二分法 </tag>
             
@@ -320,9 +353,9 @@
             
             <tag> Medium </tag>
             
-            <tag> 哈希表 </tag>
-            
             <tag> Collection </tag>
+            
+            <tag> 哈希表 </tag>
             
         </tags>
       
@@ -623,9 +656,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -681,9 +714,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
