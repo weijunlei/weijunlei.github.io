@@ -4,8 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:315. 计算右侧小于当前元素的个数, 小风雷">
-    <meta name="description" content="Leetcode:315. 计算右侧小于当前元素的个数题目描述给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数">
+    <meta name="keywords" content="Leetcode:395. 至少有K个重复字符的最长子串, 小风雷">
+    <meta name="description" content="Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。示例 1:输入:
+s = &amp;quot;aaabb&amp;quot">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:315. 计算右侧小于当前元素的个数 | 小风雷</title>
+    <title>Leetcode:395. 至少有K个重复字符的最长子串 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -238,13 +239,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:315. 计算右侧小于当前元素的个数
+                        Leetcode:395. 至少有K个重复字符的最长子串
                     </div>
                 </div>
             </div>
@@ -366,20 +367,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Hard/">
-                                <span class="chip bg-color">Hard</span>
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/">
-                                <span class="chip bg-color">逆序对</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-                                <span class="chip bg-color">归并排序</span>
-                            </a>
-                        
-                            <a href="/tags/%E7%B4%A2%E5%BC%95%E6%95%B0%E7%BB%84/">
-                                <span class="chip bg-color">索引数组</span>
+                            <a href="/tags/%E5%88%86%E6%B2%BB/">
+                                <span class="chip bg-color">分治</span>
                             </a>
                         
                     </div>
@@ -403,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-20
+                    2020-04-21
                 </div>
                 
 
@@ -420,94 +413,59 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-315-计算右侧小于当前元素的个数"><a href="#Leetcode-315-计算右侧小于当前元素的个数" class="headerlink" title="Leetcode:315. 计算右侧小于当前元素的个数"></a><a href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/" target="_blank" rel="noopener">Leetcode:315. 计算右侧小于当前元素的个数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [5,2,6,1]
-输出: [2,1,1,0] 
-解释:
-5 的右侧有 2 个更小的元素 (2 和 1).
-2 的右侧仅有 1 个更小的元素 (1).
-6 的右侧有 1 个更小的元素 (1).
-1 的右侧有 0 个更小的元素.</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力遍历比较"><a href="#思路1-暴力遍历比较" class="headerlink" title="思路1 暴力遍历比较"></a>思路1 暴力遍历比较</h3><p>直接对每个位置的数和之后的数比较</p>
-<h3 id="思路2-归并排序-索引数组"><a href="#思路2-归并排序-索引数组" class="headerlink" title="思路2 归并排序+索引数组"></a>思路2 归并排序+索引数组</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public List<Integer> countSmaller(int[] nums) {
-        ArrayList<Integer> result = new ArrayList<>();
-        for(int i = 0; i < nums.length; i++){
-            int count = 0;
-            for(int j = i + 1; j < nums.length; j++){
-                if (nums[i] > nums[j]){
-                    count += 1;
-                }
-            }
-            result.add(count);
+                <h1 id="Leetcode-395-至少有K个重复字符的最长子串"><a href="#Leetcode-395-至少有K个重复字符的最长子串" class="headerlink" title="Leetcode:395. 至少有K个重复字符的最长子串"></a><a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/" target="_blank" rel="noopener">Leetcode:395. 至少有K个重复字符的最长子串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
+s = &quot;aaabb&quot;, k = 3
+输出:
+3
+最长子串为 &quot;aaa&quot; ，其中 &#39;a&#39; 重复了 3 次。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:
+s = &quot;ababbc&quot;, k = 2
+
+输出:
+5
+
+最长子串为 &quot;ababb&quot; ，其中 &#39;a&#39; 重复了 2 次， &#39;b&#39; 重复了 3 次。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>计算字符串中每个字符出现次数，然后是用双指针去除前后不满足的字符。中间字符串遍历，如有少于k次地则切割分治分别计算，并取最大值</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int longestSubstring(String s, int k) {
+        if (s == null || s.length() == 0 || k > s.length()){
+            return 0;
         }
-        return result;
+        if (k < 2){
+            return s.length();
+        }
+
+        return subStringHelper(s, 0, s.length() - 1, k);
+    }
+
+
+    private int subStringHelper(String s, int start, int end, int k){
+        if (end - start + 1 < k){
+            return 0;
+        }
+
+        int[] chNum = new int[26];
+        for(int i = start; i <= end; i++){
+            chNum[s.charAt(i) - 'a'] += 1;
+        }
+        while(end - start + 1 >= k && chNum[s.charAt(start) - 'a'] < k){
+            start++;
+        }
+        while(end - start + 1 >= k && chNum[s.charAt(end) - 'a'] < k){
+            end--;
+        }
+
+        if (end - start + 1 < k){
+            return 0;
+        }
+        for(int i = start; i <= end; i++){
+            if (chNum[s.charAt(i) - 'a'] < k){
+                return Math.max(subStringHelper(s, start, i - 1, k), subStringHelper(s, i + 1, end, k));
+            }
+        }
+        return end - start + 1;
     }
 }</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    private int[] indexs;
-    private int[] counters;
-    private int[] temp;
-
-    public List<Integer> countSmaller(int[] nums) {
-        ArrayList<Integer> result = new ArrayList<>();
-        indexs = new int[nums.length];
-        counters = new int[nums.length];
-        temp = new int[nums.length];
-        for(int i = 0; i < nums.length; i++){
-            indexs[i] = i;
-            counters[i] = 0;
-        }
-        mergeSort(nums, 0, nums.length - 1);
-        for(int i = 0; i < counters.length; i++){
-            result.add(counters[i]);
-        }
-        return result;
-    }
-
-
-    private void mergeSort(int[] nums, int left, int right){
-        if (left < right){
-            int mid = (left + right) / 2;
-            mergeSort(nums, left, mid);
-            mergeSort(nums, mid + 1, right);
-            mergeHelper(nums, left, mid, right);
-        }
-    }
-
-    private void mergeHelper(int[] nums, int left, int mid , int right){
-        int tempIndex = left;
-        int leftIndex = left;
-        int rightIndex = mid + 1;
-        while (leftIndex <= mid && rightIndex <= right){
-            if (nums[indexs[leftIndex]] <= nums[indexs[rightIndex]]){
-                temp[tempIndex] = indexs[leftIndex];
-                counters[indexs[leftIndex]] += rightIndex - mid - 1;
-                leftIndex++;
-            }else{
-                temp[tempIndex] = indexs[rightIndex];
-                rightIndex++;
-            }
-            tempIndex++;
-        }
-        while(leftIndex <= mid){
-            temp[tempIndex] = indexs[leftIndex];
-            counters[indexs[leftIndex]] += rightIndex - mid - 1;
-            leftIndex++;
-            tempIndex++;
-        }
-        while(rightIndex <= right){
-            temp[tempIndex] = indexs[rightIndex];
-            rightIndex++;
-            tempIndex++;
-        }
-        for(int i = left; i <= right; i++){
-            indexs[i] = temp[i];
-        }
-    }
-}</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlog(n))$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -533,7 +491,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/">https://weijunlei.github.io/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/</a>
+                    <a href="https://weijunlei.github.io/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/">https://weijunlei.github.io/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -575,20 +533,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Hard/">
-                                    <span class="chip bg-color">Hard</span>
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/">
-                                    <span class="chip bg-color">逆序对</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-                                    <span class="chip bg-color">归并排序</span>
-                                </a>
-                            
-                                <a href="/tags/%E7%B4%A2%E5%BC%95%E6%95%B0%E7%BB%84/">
-                                    <span class="chip bg-color">索引数组</span>
+                                <a href="/tags/%E5%88%86%E6%B2%BB/">
+                                    <span class="chip bg-color">分治</span>
                                 </a>
                             
                         </div>
@@ -634,7 +584,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-20T16-25-27',
+        id: '2020-04-21T21-12-19',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -655,9 +605,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/">
                     <div class="card-image">
@@ -676,9 +627,9 @@ s = &quot;aaabb&quot
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -691,6 +642,7 @@ s = &quot;aaabb&quot
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -717,26 +669,24 @@ s = &quot;aaabb&quot
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/">
+                <a href="/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:218. 天际线问题">
+                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:315. 计算右侧小于当前元素的个数">
                         
-                        <span class="card-title">Leetcode:218. 天际线问题</span>
+                        <span class="card-title">Leetcode:315. 计算右侧小于当前元素的个数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 218. 天际线问题题目描述城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。现在，假设您获得了城市风光照片（图A）上显示的所有建筑物的位置和高度，请编写一个程序以输出由这些建筑物形成的天际线（图B）。
-
-
+                            Leetcode:315. 计算右侧小于当前元素的个数题目描述给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-20
                             </span>
                         <span class="publish-author">
                             
@@ -761,8 +711,16 @@ s = &quot;aaabb&quot
                         <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/%E5%88%86%E6%B2%BB/">
-                        <span class="chip bg-color">分治</span>
+                    <a href="/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/">
+                        <span class="chip bg-color">逆序对</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">归并排序</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%B4%A2%E5%BC%95%E6%95%B0%E7%BB%84/">
+                        <span class="chip bg-color">索引数组</span>
                     </a>
                     
                 </div>
