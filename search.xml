@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:124. 二叉树中的最大路径和</title>
+      <link href="/2020/04/22/leetcode-124-er-cha-shu-zhong-de-zui-da-lu-jing-he/"/>
+      <url>/2020/04/22/leetcode-124-er-cha-shu-zhong-de-zui-da-lu-jing-he/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-124-二叉树中的最大路径和"><a href="#Leetcode-124-二叉树中的最大路径和" class="headerlink" title="[Leetcode:124. 二叉树中的最大路径和]"></a>[Leetcode:124. 二叉树中的最大路径和]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空二叉树，返回其最大路径和。本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3]    1    / \    2   3输出: 6</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [-10,9,20,null,null,15,7]   -10   / \  9  20    /  \   15   7输出: 42</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>后序遍历递归实现，最大路径只能为node+left son + right son或node + left son + node的父节点或node + right son + 父节点，所以在具体实现中后序遍历二叉数，并分别计算比较这三个值即可，递归得到以left son为最高节点的最大路径和right son为最高节点的路径和</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java"></code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(logn)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 递归 </tag>
+            
+            <tag> 后序遍历 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:395. 至少有K个重复字符的最长子串</title>
       <link href="/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/"/>
       <url>/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/</url>
@@ -1343,9 +1374,9 @@
       
         <tags>
             
-            <tag> 回溯 </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> 回溯 </tag>
             
             <tag> DP </tag>
             
