@@ -435,7 +435,28 @@
    15   7
 
 输出: 42</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>后序遍历递归实现，最大路径只能为node+left son + right son或node + left son + node的父节点或node + right son + 父节点，所以在具体实现中后序遍历二叉数，并分别计算比较这三个值即可，递归得到以left son为最高节点的最大路径和right son为最高节点的路径和</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java"></code></pre>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    private int result = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        maxPathCount(root);
+        return result;
+    }
+
+    private int maxPathCount(TreeNode node){
+        if (node == null){
+            return 0;
+        }
+
+        int leftSum = Math.max(maxPathCount(node.left), 0);
+        int rightSum = Math.max(maxPathCount(node.right), 0);
+
+        int newSum = node.val + leftSum + rightSum;
+        result = Math.max(result, newSum);
+
+        return node.val + Math.max(leftSum, rightSum);
+    }
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(logn)$</p>
 
