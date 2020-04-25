@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:322. 零钱兑换</title>
+      <link href="/2020/04/25/leetcode-322-ling-qian-dui-huan/"/>
+      <url>/2020/04/25/leetcode-322-ling-qian-dui-huan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-322-零钱兑换"><a href="#Leetcode-322-零钱兑换" class="headerlink" title="Leetcode: 322.零钱兑换"></a><a href="https://leetcode-cn.com/problems/coin-change/" target="_blank" rel="noopener">Leetcode: 322.零钱兑换</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: coins = [1, 2, 5], amount = 11输出: 3 解释: 11 = 5 + 5 + 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: coins = [2], amount = 3输出: -1</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以认为每种硬币的数量是无限的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>从0开始计算到amount的每个位置的需要硬币的数量，然后按照$dp[i] = min(dp[i - coin] + 1)　coin \in coins$更新状态</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int coinChange(int[] coins, int amount) {        if (coins == null || coins.length == 0){            return -1;        }        int[] dps = new int[amount + 1];        for(int i = 1; i <= amount; i++){            dps[i] = amount + 1;            for(int coin: coins){                if (i - coin >= 0){                    dps[i] = Math.min(dps[i], dps[i - coin] + 1);                }            }        }        return dps[amount] > amount ? -1 : dps[amount];    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(AN)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(A)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> 动态规划 </tag>
+            
+            <tag> Medium </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:300. 最长上升子序列</title>
       <link href="/2020/04/24/leetcode-300-zui-chang-shang-sheng-zi-xu-lie/"/>
       <url>/2020/04/24/leetcode-300-zui-chang-shang-sheng-zi-xu-lie/</url>

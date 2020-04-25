@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-24T15:21:59.749Z</updated>
+  <updated>2020-04-25T15:21:32.318Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:322. 零钱兑换</title>
+    <link href="https://weijunlei.github.io/2020/04/25/leetcode-322-ling-qian-dui-huan/"/>
+    <id>https://weijunlei.github.io/2020/04/25/leetcode-322-ling-qian-dui-huan/</id>
+    <published>2020-04-25T15:01:11.000Z</published>
+    <updated>2020-04-25T15:21:32.318Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-322-零钱兑换&quot;&gt;&lt;a href=&quot;#Leetcode-322-零钱兑换&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 322.零钱兑换&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:300. 最长上升子序列</title>
@@ -628,37 +659,6 @@
       <category term="哈希表" scheme="https://weijunlei.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:171. Excel表列序号</title>
-    <link href="https://weijunlei.github.io/2020/04/08/leetcode-171-excel-biao-lie-xu-hao/"/>
-    <id>https://weijunlei.github.io/2020/04/08/leetcode-171-excel-biao-lie-xu-hao/</id>
-    <published>2020-04-08T13:56:52.000Z</published>
-    <updated>2020-04-08T14:16:07.642Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-171-Excel表列序号&quot;&gt;&lt;a href=&quot;#Leetcode-171-Excel表列序号&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 171. Excel表列序号&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-      <category term="字符串" scheme="https://weijunlei.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
