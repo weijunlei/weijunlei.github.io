@@ -4,8 +4,13 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:322. 零钱兑换, 小风雷">
-    <meta name="description" content="Leetcode: 322.零钱兑换题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。示例 1:输入: coins =">
+    <meta name="keywords" content="Leetcode:329. 矩阵中的最长递增路径, 小风雷">
+    <meta name="description" content="Leetcode题目描述给定一个整数矩阵，找出最长递增路径的长度。
+
+对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。示例 1:输入: nums = 
+[
+[9,9,4],
+[6">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:322. 零钱兑换 | 小风雷</title>
+    <title>Leetcode:329. 矩阵中的最长递增路径 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -238,13 +243,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:322. 零钱兑换
+                        Leetcode:329. 矩阵中的最长递增路径
                     </div>
                 </div>
             </div>
@@ -366,12 +371,16 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                <span class="chip bg-color">动态规划</span>
+                            <a href="/tags/Hard/">
+                                <span class="chip bg-color">Hard</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
+                            <a href="/tags/DFS/">
+                                <span class="chip bg-color">DFS</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                <span class="chip bg-color">动态规划</span>
                             </a>
                         
                     </div>
@@ -395,7 +404,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-25
+                    2020-04-26
                 </div>
                 
 
@@ -412,30 +421,56 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-322-零钱兑换"><a href="#Leetcode-322-零钱兑换" class="headerlink" title="Leetcode: 322.零钱兑换"></a><a href="https://leetcode-cn.com/problems/coin-change/" target="_blank" rel="noopener">Leetcode: 322.零钱兑换</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: coins = [1, 2, 5], amount = 11
-输出: 3 
-解释: 11 = 5 + 5 + 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: coins = [2], amount = 3
-输出: -1</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以认为每种硬币的数量是无限的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>从0开始计算到amount的每个位置的需要硬币的数量，然后按照$dp[i] = min(dp[i - coin] + 1)　coin \in coins$更新状态</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int coinChange(int[] coins, int amount) {
-        if (coins == null || coins.length == 0){
-            return -1;
-        }
+                <h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a><a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener">Leetcode</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数矩阵，找出最长递增路径的长度。
 
-        int[] dps = new int[amount + 1];
-        for(int i = 1; i <= amount; i++){
-            dps[i] = amount + 1;
-            for(int coin: coins){
-                if (i - coin >= 0){
-                    dps[i] = Math.min(dps[i], dps[i - coin] + 1);
-                }
+对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = 
+[
+[9,9,4],
+[6,6,8],
+[2,1,1]
+] 
+输出: 4 
+解释: 最长递增路径为 [1, 2, 6, 9]。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = 
+[
+[3,4,5],
+[3,2,6],
+[2,2,1]
+] 
+输出: 4 
+解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    private int[][] paths = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private int[][] dps;
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
+            return 0;
+        }
+        dps = new int[matrix.length][matrix[0].length];
+        int result = 0;
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                result = Math.max(dfs(matrix, i, j), result);
             }
         }
-        return dps[amount] > amount ? -1 : dps[amount];
+        return result;
+    }
+
+    private int dfs(int[][] matrix, int i, int j){
+        if(dps[i][j] != 0){
+            return dps[i][j];
+        }
+        for(int[] path: paths){
+            int x = i + path[0];
+            int y = j + path[1];
+            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y]){
+                dps[i][j] = Math.max(dps[i][j], dfs(matrix, x, y));
+            }
+        }
+        return ++dps[i][j];
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(AN)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(A)$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$每个单元格仅被计算一次</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$</p>
 
             </div>
             <hr/>
@@ -461,7 +496,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/25/leetcode-322-ling-qian-dui-huan/">https://weijunlei.github.io/2020/04/25/leetcode-322-ling-qian-dui-huan/</a>
+                    <a href="https://weijunlei.github.io/2020/04/26/leetcode-329-ju-zhen-zhong-de-zui-chang-di-zeng-lu-jing/">https://weijunlei.github.io/2020/04/26/leetcode-329-ju-zhen-zhong-de-zui-chang-di-zeng-lu-jing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -503,12 +538,16 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                                    <span class="chip bg-color">动态规划</span>
+                                <a href="/tags/Hard/">
+                                    <span class="chip bg-color">Hard</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
+                                <a href="/tags/DFS/">
+                                    <span class="chip bg-color">DFS</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                    <span class="chip bg-color">动态规划</span>
                                 </a>
                             
                         </div>
@@ -554,7 +593,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-25T23-01-11',
+        id: '2020-04-26T22-53-26',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -575,9 +614,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/04/26/leetcode-329-ju-zhen-zhong-de-zui-chang-di-zeng-lu-jing/">
                     <div class="card-image">
@@ -600,9 +640,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -615,6 +655,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -645,26 +686,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/24/leetcode-300-zui-chang-shang-sheng-zi-xu-lie/">
+                <a href="/2020/04/25/leetcode-322-ling-qian-dui-huan/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="Leetcode:300. 最长上升子序列">
+                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="Leetcode:322. 零钱兑换">
                         
-                        <span class="card-title">Leetcode:300. 最长上升子序列</span>
+                        <span class="card-title">Leetcode:322. 零钱兑换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:300.最长上升子序列题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。示例:输入: [10,9,2,5,3,7,101,18]
-输出: 4 
-解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4
+                            Leetcode: 322.零钱兑换题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。示例 1:输入: coins =
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
                             </span>
                         <span class="publish-author">
                             
@@ -691,14 +730,6 @@
                     
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%B4%AA%E5%BF%83/">
-                        <span class="chip bg-color">贪心</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">
-                        <span class="chip bg-color">二分查找</span>
                     </a>
                     
                 </div>
