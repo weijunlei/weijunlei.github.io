@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-26T15:23:57.542Z</updated>
+  <updated>2020-04-26T16:01:47.643Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:200. 岛屿数量</title>
+    <link href="https://weijunlei.github.io/2020/04/26/leetcode-200-dao-yu-shu-liang/"/>
+    <id>https://weijunlei.github.io/2020/04/26/leetcode-200-dao-yu-shu-liang/</id>
+    <published>2020-04-26T15:46:15.000Z</published>
+    <updated>2020-04-26T16:01:47.643Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-200-岛屿数量&quot;&gt;&lt;a href=&quot;#Leetcode-200-岛屿数量&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:200. 岛屿数量&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:329. 矩阵中的最长递增路径</title>
@@ -628,39 +659,6 @@
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="二叉树" scheme="https://weijunlei.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:380. 常数时间插入、删除和获取随机元素</title>
-    <link href="https://weijunlei.github.io/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/"/>
-    <id>https://weijunlei.github.io/2020/04/09/leetcode-380-chang-shu-shi-jian-cha-ru-shan-chu-he-huo-qu-sui-ji-yuan-su/</id>
-    <published>2020-04-09T15:10:21.000Z</published>
-    <updated>2020-04-09T15:18:38.989Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-380-常数时间插入、删除和获取随机元素&quot;&gt;&lt;a href=&quot;#Leetcode-380-常数时间插入、删除和获取随机元素&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 380.
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="哈希表" scheme="https://weijunlei.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="Collection" scheme="https://weijunlei.github.io/tags/Collection/"/>
     
   </entry>
   
