@@ -437,6 +437,7 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
 输出: 0
 
 解释: endWord &quot;cog&quot; 不在字典中，所以无法进行转换。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p>
+<h3 id="思路2-双向"><a href="#思路2-双向" class="headerlink" title="思路2 双向"></a>思路2 双向</h3><p>同时从开始词和末尾词进行BFS,减少无用边，更快找到路径，结果为路径加和即可</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
@@ -491,8 +492,82 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
 
     }
 }</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
+            return 0;
+        }
+        Map<String, List<String>> wordDict = new HashMap<>();
+        Map<String, Integer> beginVisit = new HashMap<>();
+        Map<String, Integer> endVisit = new HashMap<>();
+        Queue<String> beginQueue = new LinkedList<>();
+        Queue<String> endQueue = new LinkedList<>();
+
+        beginVisit.put(beginWord, 1);
+        endVisit.put(endWord, 1);
+        beginQueue.offer(beginWord);
+        endQueue.offer(endWord);
+        boolean hasEndWord = false;
+
+        for(String word: wordList){
+            int l = word.length();
+            if (word.equals(endWord)){
+                hasEndWord = true;
+            }
+            for(int i = 0; i < l; i++){
+                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
+                if (!wordDict.containsKey(tempStr)){
+                    wordDict.put(tempStr, new ArrayList<String>());
+                }
+                List<String> tempList = wordDict.get(tempStr);
+                tempList.add(word);
+                wordDict.put(tempStr, tempList);
+            }
+        }
+        System.out.println(hasEndWord);
+        if (!hasEndWord){
+            return 0;
+        }
+
+        while(!beginQueue.isEmpty() && !endQueue.isEmpty()){
+            int getSame = updateQueue(wordDict, beginQueue, beginVisit, endVisit);
+            if (getSame != -1){
+                return getSame;
+            }
+            getSame = updateQueue(wordDict, endQueue, endVisit, beginVisit);
+            if (getSame != -1){
+                return getSame;
+            }
+        }
+        return 0;
+    }
+
+    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1){
+        String getStr = queue.remove();
+        int l = getStr.length();
+        int getLever = visit.get(getStr);
+        for(int i = 0; i < l; i++){
+            String tempStr = getStr.substring(0, i) + "*" + getStr.substring(i + 1, l);
+            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0){
+                continue;
+            }
+            for(String getWord: wordDict.get(tempStr)){
+                if (!visit.containsKey(getWord)){
+                    if (visit1.containsKey(getWord)){
+                        return getLever + visit1.get(getWord);
+                    }
+                    queue.offer(getWord);
+                    visit.put(getWord, getLever + 1);
+                }
+            }
+        }
+        return -1;
+    }
+}</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>
 
             </div>
             <hr/>

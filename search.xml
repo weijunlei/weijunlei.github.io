@@ -8,7 +8,7 @@
       <link href="/2020/04/28/leetcode-127-dan-ci-jie-long/"/>
       <url>/2020/04/28/leetcode-127-dan-ci-jie-long/</url>
       
-        <content type="html"><![CDATA[<h1 id="Leetcode-127-单词接龙"><a href="#Leetcode-127-单词接龙" class="headerlink" title="Leetcode: 127. 单词接龙"></a><a href="https://leetcode-cn.com/problems/word-ladder/" target="_blank" rel="noopener">Leetcode: 127. 单词接龙</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：每次转换只能改变一个字母。转换过程中的中间单词必须是字典中的单词。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果不存在这样的转换序列，返回 0。所有单词具有相同的长度。所有单词只由小写字母组成。字典中不存在重复的单词。你可以假设 beginWord 和 endWord 是非空的，且二者不相同。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:beginWord = &quot;hit&quot;,endWord = &quot;cog&quot;,wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]输出: 5解释: 一个最短转换序列是 &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;,    返回它的长度 5。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:beginWord = &quot;hit&quot;endWord = &quot;cog&quot;wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]输出: 0解释: endWord &quot;cog&quot; 不在字典中，所以无法进行转换。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int ladderLength(String beginWord, String endWord, List<String> wordList) {        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){            return 0;        }        Map<String, List<String>> wordDict = new HashMap<>();        Map<String, Boolean> hasVisit = new HashMap();        Queue<Map<String, Integer>> queue = new LinkedList<>();        hasVisit.put(beginWord, true);        queue.offer(new HashMap<>(){{put(beginWord, 1);}});        for(String word: wordList){            int l = word.length();            if (!word.equals(beginWord)){                hasVisit.put(word, false);            }            for(int i = 0; i < l; i++){                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);                if (!wordDict.containsKey(tempStr)){                    wordDict.put(tempStr, new ArrayList<String>());                }                List<String> tempList = wordDict.get(tempStr);                tempList.add(word);                wordDict.put(tempStr, tempList);            }        }        while(!queue.isEmpty()){            Map<String, Integer> node = queue.remove();            String word = node.keySet().toArray()[0].toString();            int getLevel = node.get(word);            if (word.equals(endWord)){                return getLevel;            }            int l = word.length();            for(int i = 0; i < l; i++){                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0){                    continue;                }                for(String getWord: wordDict.get(tempStr)){                    if (getWord.equals(endWord)){                        return getLevel + 1;                    }                    if (!hasVisit.get(getWord)){                        queue.offer(new HashMap<>(){{put(getWord, getLevel + 1);}});                        hasVisit.put(getWord, true);                    }                }            }        }        return 0;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Leetcode-127-单词接龙"><a href="#Leetcode-127-单词接龙" class="headerlink" title="Leetcode: 127. 单词接龙"></a><a href="https://leetcode-cn.com/problems/word-ladder/" target="_blank" rel="noopener">Leetcode: 127. 单词接龙</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：每次转换只能改变一个字母。转换过程中的中间单词必须是字典中的单词。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果不存在这样的转换序列，返回 0。所有单词具有相同的长度。所有单词只由小写字母组成。字典中不存在重复的单词。你可以假设 beginWord 和 endWord 是非空的，且二者不相同。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:beginWord = &quot;hit&quot;,endWord = &quot;cog&quot;,wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]输出: 5解释: 一个最短转换序列是 &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;,    返回它的长度 5。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:beginWord = &quot;hit&quot;endWord = &quot;cog&quot;wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]输出: 0解释: endWord &quot;cog&quot; 不在字典中，所以无法进行转换。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p><h3 id="思路2-双向"><a href="#思路2-双向" class="headerlink" title="思路2 双向"></a>思路2 双向</h3><p>同时从开始词和末尾词进行BFS,减少无用边，更快找到路径，结果为路径加和即可</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int ladderLength(String beginWord, String endWord, List<String> wordList) {        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){            return 0;        }        Map<String, List<String>> wordDict = new HashMap<>();        Map<String, Boolean> hasVisit = new HashMap();        Queue<Map<String, Integer>> queue = new LinkedList<>();        hasVisit.put(beginWord, true);        queue.offer(new HashMap<>(){{put(beginWord, 1);}});        for(String word: wordList){            int l = word.length();            if (!word.equals(beginWord)){                hasVisit.put(word, false);            }            for(int i = 0; i < l; i++){                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);                if (!wordDict.containsKey(tempStr)){                    wordDict.put(tempStr, new ArrayList<String>());                }                List<String> tempList = wordDict.get(tempStr);                tempList.add(word);                wordDict.put(tempStr, tempList);            }        }        while(!queue.isEmpty()){            Map<String, Integer> node = queue.remove();            String word = node.keySet().toArray()[0].toString();            int getLevel = node.get(word);            if (word.equals(endWord)){                return getLevel;            }            int l = word.length();            for(int i = 0; i < l; i++){                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0){                    continue;                }                for(String getWord: wordDict.get(tempStr)){                    if (getWord.equals(endWord)){                        return getLevel + 1;                    }                    if (!hasVisit.get(getWord)){                        queue.offer(new HashMap<>(){{put(getWord, getLevel + 1);}});                        hasVisit.put(getWord, true);                    }                }            }        }        return 0;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int ladderLength(String beginWord, String endWord, List<String> wordList) {        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){            return 0;        }        Map<String, List<String>> wordDict = new HashMap<>();        Map<String, Integer> beginVisit = new HashMap<>();        Map<String, Integer> endVisit = new HashMap<>();        Queue<String> beginQueue = new LinkedList<>();        Queue<String> endQueue = new LinkedList<>();        beginVisit.put(beginWord, 1);        endVisit.put(endWord, 1);        beginQueue.offer(beginWord);        endQueue.offer(endWord);        boolean hasEndWord = false;        for(String word: wordList){            int l = word.length();            if (word.equals(endWord)){                hasEndWord = true;            }            for(int i = 0; i < l; i++){                String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);                if (!wordDict.containsKey(tempStr)){                    wordDict.put(tempStr, new ArrayList<String>());                }                List<String> tempList = wordDict.get(tempStr);                tempList.add(word);                wordDict.put(tempStr, tempList);            }        }        System.out.println(hasEndWord);        if (!hasEndWord){            return 0;        }        while(!beginQueue.isEmpty() && !endQueue.isEmpty()){            int getSame = updateQueue(wordDict, beginQueue, beginVisit, endVisit);            if (getSame != -1){                return getSame;            }            getSame = updateQueue(wordDict, endQueue, endVisit, beginVisit);            if (getSame != -1){                return getSame;            }        }        return 0;    }    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1){        String getStr = queue.remove();        int l = getStr.length();        int getLever = visit.get(getStr);        for(int i = 0; i < l; i++){            String tempStr = getStr.substring(0, i) + "*" + getStr.substring(i + 1, l);            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0){                continue;            }            for(String getWord: wordDict.get(tempStr)){                if (!visit.containsKey(getWord)){                    if (visit1.containsKey(getWord)){                        return getLever + visit1.get(getWord);                    }                    queue.offer(getWord);                    visit.put(getWord, getLever + 1);                }            }        }        return -1;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(m*n)$存储可变换状态</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>]]></content>
       
       
       <categories>
@@ -179,9 +179,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 数学公式 </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -208,9 +208,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Easy </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> Easy </tag>
             
         </tags>
       
@@ -570,9 +570,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> BFS </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> BFS </tag>
             
         </tags>
       
@@ -1196,9 +1196,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Easy </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> Easy </tag>
             
         </tags>
       
@@ -1256,9 +1256,9 @@
             
             <tag> Medium </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> DP </tag>
+            
+            <tag> 数组 </tag>
             
             <tag> 哨兵 </tag>
             
