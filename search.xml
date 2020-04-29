@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:207. 课程表</title>
+      <link href="/2020/04/29/leetcode-207-ke-cheng-biao/"/>
+      <url>/2020/04/29/leetcode-207-ke-cheng-biao/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-207-课程表"><a href="#Leetcode-207-课程表" class="headerlink" title="[Leetcode: 207.课程表]"></a>[Leetcode: 207.课程表]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们：[0,1]给定课程总量以及它们的先决条件，请你判断是否可能完成所有课程的学习？</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 2, [[1,0]] 输出: true解释: 总共有 2 门课程。学习课程 1 之前，你需要完成课程 0。所以这是可能的。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 2, [[1,0],[0,1]]输出: false解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成​课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>输入的先决条件是由 边缘列表 表示的图形，而不是 邻接矩阵 。详情请参见图的表示法。你可以假定输入的先决条件中没有重复的边。1 &lt;= numCourses &lt;= 10^5</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用DFS思想，将无前置课程的课程作为初始节点进行DFS遍历，在遍历过程中通过减少子节点依赖前置课程数的方式遍历（当该课程无前置课程时），判断最终的课程数目是否和需要修的课程数相等</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean canFinish(int numCourses, int[][] prerequisites) {        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0){            return true;        }        int[] dps = new int[numCourses];        List<List<Integer>> numOutput = new ArrayList();        for(int i = 0; i < numCourses; i++){            numOutput.add(new ArrayList<Integer>());        }        for(int[] pre: prerequisites){            numOutput.get(pre[0]).add(pre[1]);            dps[pre[1]] += 1;        }        Queue<Integer> queue = new LinkedList<>();        for(int i = 0; i < numCourses; i++){            if (dps[i] == 0){                queue.offer(i);            }        }        int amount = 0;        while (!queue.isEmpty()){            int getNum = queue.remove();            amount += 1;            for(int num: numOutput.get(getNum)){                dps[num] -= 1;                if (dps[num] == 0){                    queue.offer(num);                }            }        }        return amount == numCourses;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(V+E)$所有节点和边数目</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> BFS </tag>
+            
+            <tag> DFS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:127. 单词接龙</title>
       <link href="/2020/04/28/leetcode-127-dan-ci-jie-long/"/>
       <url>/2020/04/28/leetcode-127-dan-ci-jie-long/</url>
@@ -1196,9 +1227,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> Easy </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
