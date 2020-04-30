@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-04-30T15:08:15.086Z</updated>
+  <updated>2020-04-30T15:32:10.412Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:136. 只出现一次的数字</title>
+    <link href="https://weijunlei.github.io/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/"/>
+    <id>https://weijunlei.github.io/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/</id>
+    <published>2020-04-30T15:29:04.000Z</published>
+    <updated>2020-04-30T15:32:10.412Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-136-只出现一次的数字&quot;&gt;&lt;a href=&quot;#Leetcode-136-只出现一次的数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:136. 只出现一次的数字&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="异或" scheme="https://weijunlei.github.io/tags/%E5%BC%82%E6%88%96/"/>
+    
+      <category term="位运算" scheme="https://weijunlei.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:210. 课程表 II</title>
@@ -630,39 +663,6 @@
       <category term="机器翻译" scheme="https://weijunlei.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
     
       <category term="论文阅读" scheme="https://weijunlei.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MSRA:Unicoder跨语言预训练模型</title>
-    <link href="https://weijunlei.github.io/2020/04/14/msra-unicoder-kua-yu-yan-yu-xun-lian-mo-xing/"/>
-    <id>https://weijunlei.github.io/2020/04/14/msra-unicoder-kua-yu-yan-yu-xun-lian-mo-xing/</id>
-    <published>2020-04-14T13:51:05.000Z</published>
-    <updated>2020-04-14T14:39:49.473Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Unicoder-A-Universal-Language-Encoder-by-Pre-training-with-Multiple-Cross-lingual-Tasks&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="NLP" scheme="https://weijunlei.github.io/categories/NLP/"/>
-    
-    
-      <category term="NLP" scheme="https://weijunlei.github.io/tags/NLP/"/>
-    
-      <category term="论文阅读" scheme="https://weijunlei.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="EMNLP 2019" scheme="https://weijunlei.github.io/tags/EMNLP-2019/"/>
-    
-      <category term="预训练模型" scheme="https://weijunlei.github.io/tags/%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   

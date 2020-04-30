@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:136. 只出现一次的数字</title>
+      <link href="/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/"/>
+      <url>/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-136-只出现一次的数字"><a href="#Leetcode-136-只出现一次的数字" class="headerlink" title="Leetcode:136. 只出现一次的数字"></a><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">Leetcode:136. 只出现一次的数字</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [2,2,1]输出: 1</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [4,1,2,1,2]输出: 4</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接对所有数字异或，相同的两个数字会直接运算为零</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public int singleNumber(int[] nums) {        if (nums == null || nums.length == 0){            return 0;        }        int result = 0;        for(int num:nums){            result = result ^ num;        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 异或 </tag>
+            
+            <tag> 位运算 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:210. 课程表 II</title>
       <link href="/2020/04/30/leetcode-210-ke-cheng-biao-ii/"/>
       <url>/2020/04/30/leetcode-210-ke-cheng-biao-ii/</url>
