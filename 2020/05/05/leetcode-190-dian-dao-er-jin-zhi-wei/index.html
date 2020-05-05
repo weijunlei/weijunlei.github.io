@@ -4,10 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:200. 岛屿数量, 小风雷">
-    <meta name="description" content="Leetcode:200. 岛屿数量题目描述给你一个由 &amp;#39;1&amp;#39;（陆地）和 &amp;#39;0&amp;#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
-
-岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成">
+    <meta name="keywords" content="Leetcode:190. 颠倒二进制位, 小风雷">
+    <meta name="description" content="Leetcode:190. 颠倒二进制位题目描述颠倒给定的 32 位无符号整数的二进制位。示例 1：输入: 00000010100101000001111010011100
+输出: 00111001011110000010100101000">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:200. 岛屿数量 | 小风雷</title>
+    <title>Leetcode:190. 颠倒二进制位 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -240,13 +239,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:200. 岛屿数量
+                        Leetcode:190. 颠倒二进制位
                     </div>
                 </div>
             </div>
@@ -368,12 +367,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
+                            <a href="/tags/Easy/">
+                                <span class="chip bg-color">Easy</span>
                             </a>
                         
-                            <a href="/tags/DFS/">
-                                <span class="chip bg-color">DFS</span>
+                            <a href="/tags/%E6%95%B0%E8%BF%90%E7%AE%97/">
+                                <span class="chip bg-color">数运算</span>
                             </a>
                         
                     </div>
@@ -397,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-26
+                    2020-05-05
                 </div>
                 
 
@@ -414,63 +413,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-200-岛屿数量"><a href="#Leetcode-200-岛屿数量" class="headerlink" title="Leetcode:200. 岛屿数量"></a><a href="https://leetcode-cn.com/problems/number-of-islands/" target="_blank" rel="noopener">Leetcode:200. 岛屿数量</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
-
-岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
-
-此外，你可以假设该网格的四条边均被水包围。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
-11110
-11010
-11000
-00000
-输出: 1
-示例 2:</code></pre><h3 id="输入"><a href="#输入" class="headerlink" title="输入:"></a>输入:</h3><pre><code>11000
-11000
-00100
-00011
-输出: 3
-解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS"><a href="#思路1-DFS" class="headerlink" title="思路1 DFS"></a>思路1 DFS</h3><p>在先判断是否是岛屿之后使用DFS对为’1’的岛屿进行深度优先遍历，将状态改为’0’</p>
-<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><p>并查集和BFS</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
-    private int[][] paths = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-    public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0){
-            return 0;
-        }
-        int m = grid.length;
-        int n = grid[0].length;
+                <h1 id="Leetcode-190-颠倒二进制位"><a href="#Leetcode-190-颠倒二进制位" class="headerlink" title="Leetcode:190. 颠倒二进制位"></a><a href="https://leetcode-cn.com/problems/reverse-bits/" target="_blank" rel="noopener">Leetcode:190. 颠倒二进制位</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>颠倒给定的 32 位无符号整数的二进制位。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入: 00000010100101000001111010011100
+输出: 00111001011110000010100101000000
+解释: 输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，
+  因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：11111111111111111111111111111101
+输出：10111111111111111111111111111111
+解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，
+      因此返回 3221225471 其二进制表示形式为 10101111110010110010011101101001。</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。
+在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果多次调用这个函数，你将如何优化你的算法？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>取特定位与移位迭代进行</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
         int result = 0;
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                if (grid[i][j] == '1'){
-                    result += 1;
-                }
-                dfs(grid, i, j);
-            }
+        int moveNum = 31;
+        while (n != 0){
+            result += (n & 1) << moveNum;
+            n = n >>> 1;
+            moveNum--;
         }
         return result;
     }
-
-    private void dfs(char[][] grid, int i, int j){
-        if(grid[i][j] == '0'){
-            return;
-        }
-        int m = grid.length;
-        int n = grid[0].length;
-        grid[i][j] = '0';
-        for(int[] path: paths){
-            int x = i + path[0];
-            int y = j + path[1];
-            if (x >= 0 && x < m && y >= 0 && y < n){
-                if (grid[x][y] == '1'){
-                    dfs(grid, x, y);
-                }
-            }
-        }
-    }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$,栈空间m*n</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -496,7 +461,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/26/leetcode-200-dao-yu-shu-liang/">https://weijunlei.github.io/2020/04/26/leetcode-200-dao-yu-shu-liang/</a>
+                    <a href="https://weijunlei.github.io/2020/05/05/leetcode-190-dian-dao-er-jin-zhi-wei/">https://weijunlei.github.io/2020/05/05/leetcode-190-dian-dao-er-jin-zhi-wei/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -538,12 +503,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
+                                <a href="/tags/Easy/">
+                                    <span class="chip bg-color">Easy</span>
                                 </a>
                             
-                                <a href="/tags/DFS/">
-                                    <span class="chip bg-color">DFS</span>
+                                <a href="/tags/%E6%95%B0%E8%BF%90%E7%AE%97/">
+                                    <span class="chip bg-color">数运算</span>
                                 </a>
                             
                         </div>
@@ -589,7 +554,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-26T23-46-15',
+        id: '2020-05-05T22-23-21',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -610,32 +575,31 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/28/leetcode-127-dan-ci-jie-long/">
+                <a href="/2020/05/05/leetcode-190-dian-dao-er-jin-zhi-wei/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:127. 单词接龙">
+                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:190. 颠倒二进制位">
                         
-                        <span class="card-title">Leetcode:127. 单词接龙</span>
+                        <span class="card-title">Leetcode:190. 颠倒二进制位</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 127. 单词接龙题目描述给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
-
-每次转换只能改变一个字母。
-转换过
+                            Leetcode:190. 颠倒二进制位题目描述颠倒给定的 32 位无符号整数的二进制位。示例 1：输入: 00000010100101000001111010011100
+输出: 00111001011110000010100101000
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -648,6 +612,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -655,12 +620,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
+                    <a href="/tags/Easy/">
+                        <span class="chip bg-color">Easy</span>
                     </a>
                     
-                    <a href="/tags/BFS/">
-                        <span class="chip bg-color">BFS</span>
+                    <a href="/tags/%E6%95%B0%E8%BF%90%E7%AE%97/">
+                        <span class="chip bg-color">数运算</span>
                     </a>
                     
                 </div>
@@ -674,29 +639,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/26/leetcode-329-ju-zhen-zhong-de-zui-chang-di-zeng-lu-jing/">
+                <a href="/2020/05/04/leetcode-204-ji-shu-zhi-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:329. 矩阵中的最长递增路径">
+                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:204. 计数质数">
                         
-                        <span class="card-title">Leetcode:329. 矩阵中的最长递增路径</span>
+                        <span class="card-title">Leetcode:204. 计数质数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode题目描述给定一个整数矩阵，找出最长递增路径的长度。
-
-对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。示例 1:输入: nums = 
-[
-[9,9,4],
-[6
+                            Leetcode:204. 计数质数题目描述统计所有小于非负整数 n 的质数的数量。示例:输入: 10
+输出: 4
+解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。思路思路1统计从2开始到n的所有数进行非质数标记
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-04
                             </span>
                         <span class="publish-author">
                             
@@ -717,16 +679,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
+                    <a href="/tags/Easy/">
+                        <span class="chip bg-color">Easy</span>
                     </a>
                     
-                    <a href="/tags/DFS/">
-                        <span class="chip bg-color">DFS</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">动态规划</span>
+                    <a href="/tags/%E6%95%B0%E8%AE%A1%E7%AE%97/">
+                        <span class="chip bg-color">数计算</span>
                     </a>
                     
                 </div>

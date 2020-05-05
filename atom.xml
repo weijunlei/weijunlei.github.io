@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-05-04T16:24:26.153Z</updated>
+  <updated>2020-05-05T14:26:51.018Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:190. 颠倒二进制位</title>
+    <link href="https://weijunlei.github.io/2020/05/05/leetcode-190-dian-dao-er-jin-zhi-wei/"/>
+    <id>https://weijunlei.github.io/2020/05/05/leetcode-190-dian-dao-er-jin-zhi-wei/</id>
+    <published>2020-05-05T14:23:21.000Z</published>
+    <updated>2020-05-05T14:26:51.018Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-190-颠倒二进制位&quot;&gt;&lt;a href=&quot;#Leetcode-190-颠倒二进制位&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:190. 颠倒二进制位&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="数运算" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:204. 计数质数</title>
@@ -229,11 +260,11 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
+    
+      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -262,11 +293,11 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
+    
+      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -326,9 +357,9 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -357,11 +388,11 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
+      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
+    
       <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
       <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
     
   </entry>
   
@@ -390,9 +421,9 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
@@ -421,9 +452,9 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="贪心" scheme="https://weijunlei.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     
@@ -456,11 +487,11 @@
     
       <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
-      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
+    
+      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="数学公式" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"/>
     
@@ -628,37 +659,6 @@
       <category term="归并排序" scheme="https://weijunlei.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
     
       <category term="索引数组" scheme="https://weijunlei.github.io/tags/%E7%B4%A2%E5%BC%95%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:218. 天际线问题</title>
-    <link href="https://weijunlei.github.io/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/"/>
-    <id>https://weijunlei.github.io/2020/04/19/leetcode-218-tian-ji-xian-wen-ti/</id>
-    <published>2020-04-19T13:32:52.000Z</published>
-    <updated>2020-04-19T15:41:20.077Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-218-天际线问题&quot;&gt;&lt;a href=&quot;#Leetcode-218-天际线问题&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 218. 天际线问题&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
-    
-      <category term="分治" scheme="https://weijunlei.github.io/tags/%E5%88%86%E6%B2%BB/"/>
     
   </entry>
   
