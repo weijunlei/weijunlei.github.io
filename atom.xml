@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-05-05T14:26:51.018Z</updated>
+  <updated>2020-05-06T14:45:20.118Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:268. 缺失数字</title>
+    <link href="https://weijunlei.github.io/2020/05/06/leetcode-268-que-shi-shu-zi/"/>
+    <id>https://weijunlei.github.io/2020/05/06/leetcode-268-que-shi-shu-zi/</id>
+    <published>2020-05-06T14:39:48.000Z</published>
+    <updated>2020-05-06T14:45:20.118Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-268-缺失数字&quot;&gt;&lt;a href=&quot;#Leetcode-268-缺失数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:268. 缺失数字&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="数计算" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:190. 颠倒二进制位</title>
@@ -624,41 +655,6 @@
       <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
     
       <category term="分治" scheme="https://weijunlei.github.io/tags/%E5%88%86%E6%B2%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:315. 计算右侧小于当前元素的个数</title>
-    <link href="https://weijunlei.github.io/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/"/>
-    <id>https://weijunlei.github.io/2020/04/20/leetcode-315-ji-suan-you-ce-xiao-yu-dang-qian-yuan-su-de-ge-shu/</id>
-    <published>2020-04-20T08:25:27.000Z</published>
-    <updated>2020-04-20T10:11:40.225Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-315-计算右侧小于当前元素的个数&quot;&gt;&lt;a href=&quot;#Leetcode-315-计算右侧小于当前元素的个数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:315. 计算右侧小于当前元素的个数&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
-    
-      <category term="逆序对" scheme="https://weijunlei.github.io/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/"/>
-    
-      <category term="归并排序" scheme="https://weijunlei.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
-    
-      <category term="索引数组" scheme="https://weijunlei.github.io/tags/%E7%B4%A2%E5%BC%95%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
