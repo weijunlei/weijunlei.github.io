@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-05-06T14:45:20.118Z</updated>
+  <updated>2020-05-07T15:28:11.986Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,68 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:202. 快乐数</title>
+    <link href="https://weijunlei.github.io/2020/05/07/leetcode-202-kuai-le-shu/"/>
+    <id>https://weijunlei.github.io/2020/05/07/leetcode-202-kuai-le-shu/</id>
+    <published>2020-05-07T15:12:20.000Z</published>
+    <updated>2020-05-07T15:28:11.986Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-202-快乐数&quot;&gt;&lt;a href=&quot;#Leetcode-202-快乐数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:202. 快乐数&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="哈希表" scheme="https://weijunlei.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode:326. 3的幂</title>
+    <link href="https://weijunlei.github.io/2020/05/07/leetcode-326-3-de-mi/"/>
+    <id>https://weijunlei.github.io/2020/05/07/leetcode-326-3-de-mi/</id>
+    <published>2020-05-07T14:26:50.000Z</published>
+    <updated>2020-05-07T15:02:16.376Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-326-3的幂&quot;&gt;&lt;a href=&quot;#Leetcode-326-3的幂&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:326. 3的幂&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
+    
+      <category term="数计算" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:268. 缺失数字</title>
@@ -591,70 +653,6 @@
       <category term="排序" scheme="https://weijunlei.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
     
       <category term="哈希表" scheme="https://weijunlei.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:124. 二叉树中的最大路径和</title>
-    <link href="https://weijunlei.github.io/2020/04/22/leetcode-124-er-cha-shu-zhong-de-zui-da-lu-jing-he/"/>
-    <id>https://weijunlei.github.io/2020/04/22/leetcode-124-er-cha-shu-zhong-de-zui-da-lu-jing-he/</id>
-    <published>2020-04-22T13:46:58.000Z</published>
-    <updated>2020-04-22T15:43:13.078Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-124-二叉树中的最大路径和&quot;&gt;&lt;a href=&quot;#Leetcode-124-二叉树中的最大路径和&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:124. 二叉树中的最大路径和&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
-    
-      <category term="递归" scheme="https://weijunlei.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="后序遍历" scheme="https://weijunlei.github.io/tags/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:395. 至少有K个重复字符的最长子串</title>
-    <link href="https://weijunlei.github.io/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/"/>
-    <id>https://weijunlei.github.io/2020/04/21/leetcode-395-zhi-shao-you-k-ge-chong-fu-zi-fu-de-zui-chang-zi-chuan/</id>
-    <published>2020-04-21T13:12:19.000Z</published>
-    <updated>2020-04-21T13:39:28.185Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-395-至少有K个重复字符的最长子串&quot;&gt;&lt;a href=&quot;#Leetcode-395-至少有K个重复字符的最长子串&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:395. 至少有K个重复字符的最长子串&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="分治" scheme="https://weijunlei.github.io/tags/%E5%88%86%E6%B2%BB/"/>
     
   </entry>
   

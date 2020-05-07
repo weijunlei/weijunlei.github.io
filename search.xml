@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>Leetcode:202. 快乐数</title>
+      <link href="/2020/05/07/leetcode-202-kuai-le-shu/"/>
+      <url>/2020/05/07/leetcode-202-kuai-le-shu/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-202-快乐数"><a href="#Leetcode-202-快乐数" class="headerlink" title="Leetcode:202. 快乐数"></a><a href="https://leetcode-cn.com/problems/happy-number/" target="_blank" rel="noopener">Leetcode:202. 快乐数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个算法来判断一个数 n 是不是快乐数。「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。如果 n 是快乐数就返回 True ；不是，则返回 False 。</code></pre><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>输入：19输出：true解释：12 + 92 = 8282 + 22 = 6862 + 82 = 10012 + 02 + 02 = 1</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-递推-哈希表记录"><a href="#思路1-递推-哈希表记录" class="headerlink" title="思路1 递推+哈希表记录"></a>思路1 递推+哈希表记录</h3><p>使用一个哈希表依次记录10进制各个位的平方和，最后判断最后输入的值是否为1</p><h3 id="思路2-递推-快慢指针"><a href="#思路2-递推-快慢指针" class="headerlink" title="思路2 递推+快慢指针"></a>思路2 递推+快慢指针</h3><p>递推下一个数是一样的，可以通过快慢指针的方式判断是否是快乐数</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isHappy(int n) {        if (n <= 0){            return false;        }        Set<Integer> intSet = new HashSet<Integer>();        while (n != 1 && !intSet.contains(n)){            intSet.add(n);            n = getHappy(n);        }        return n == 1;    }    private int getHappy(int n){        int result = 0;        int tempNum = 0;        while (n != 0){            tempNum = n % 10;            result += tempNum * tempNum;            n /= 10;        }        return result;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isHappy(int n) {        if (n <= 0){            return false;        }        int fast = getHappy(n);        int slow = n;        while (fast != 1 && slow != fast){            fast = getHappy(getHappy(fast));            slow = getHappy(slow);        }        return fast == 1;    }    private int getHappy(int n){        int result = 0;        int tempNum = 0;        while (n != 0){            tempNum = n % 10;            result += tempNum * tempNum;            n /= 10;        }        return result;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(logn)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(logn)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(logn)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> 哈希表 </tag>
+            
+            <tag> Easy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode:326. 3的幂</title>
+      <link href="/2020/05/07/leetcode-326-3-de-mi/"/>
+      <url>/2020/05/07/leetcode-326-3-de-mi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-326-3的幂"><a href="#Leetcode-326-3的幂" class="headerlink" title="Leetcode:326. 3的幂"></a><a href="https://leetcode-cn.com/problems/power-of-three/" target="_blank" rel="noopener">Leetcode:326. 3的幂</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数，写一个函数来判断它是否是 3 的幂次方。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 27输出: true</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 0输出: false</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: 9输出: true</code></pre><h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例 4:"></a>示例 4:</h3><pre><code>输入: 45输出: false</code></pre><h3 id="进阶："><a href="#进阶：" class="headerlink" title="进阶："></a>进阶：</h3><pre><code>你能不使用循环或者递归来完成本题吗？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-直接循环取模"><a href="#思路1-直接循环取模" class="headerlink" title="思路1 直接循环取模"></a>思路1 直接循环取模</h3><p>如果模3为0,则除以3，最后判断数是否为1</p><h3 id="思路2-转换为3为基底，然后匹配字符串以1开头"><a href="#思路2-转换为3为基底，然后匹配字符串以1开头" class="headerlink" title="思路2 转换为3为基底，然后匹配字符串以1开头"></a>思路2 转换为3为基底，然后匹配字符串以1开头</h3><p>使用Java基底转换函数，然后字符串匹配是否以1为开头</p><h3 id="思路3-使用以3为基底的最大整数对n取余"><a href="#思路3-使用以3为基底的最大整数对n取余" class="headerlink" title="思路3 使用以3为基底的最大整数对n取余"></a>思路3 使用以3为基底的最大整数对n取余</h3><p>若余数为零则n是以3为底</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isPowerOfThree(int n) {        if (n < 1){            return false;        }        while (n % 3 == 0 && n != 0){            n /= 3;        }        return n == 1;    }}</code></pre><h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isPowerOfThree(int n) {        if (n < 1){            return false;        }        return Integer.toString(n, 3).matches("^10*$");    }}</code></pre><h3 id="代码3"><a href="#代码3" class="headerlink" title="代码3"></a>代码3</h3><pre class=" language-Java"><code class="language-Java">class Solution {    public boolean isPowerOfThree(int n) {        if (n < 1){            return false;        }        return n > 0 && 1162261467 % n == 0;    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>###　思路1时间复杂度<br>$O(logn)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p><h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(logn)$</p><h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p><h3 id="思路3时间复杂度"><a href="#思路3时间复杂度" class="headerlink" title="思路3时间复杂度"></a>思路3时间复杂度</h3><p>$O(1)$</p><h3 id="思路3空间复杂度"><a href="#思路3空间复杂度" class="headerlink" title="思路3空间复杂度"></a>思路3空间复杂度</h3><p>$O(1)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Easy </tag>
+            
+            <tag> 数计算 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:268. 缺失数字</title>
       <link href="/2020/05/06/leetcode-268-que-shi-shu-zi/"/>
       <url>/2020/05/06/leetcode-268-que-shi-shu-zi/</url>
