@@ -4,10 +4,10 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:236. 二叉树的最近公共祖先, 小风雷">
-    <meta name="description" content="Leetcode: 236. 二叉树的最近公共祖先题目描述给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+    <meta name="keywords" content="Leetcode:134. 加油站, 小风雷">
+    <meta name="description" content="[Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q">
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:236. 二叉树的最近公共祖先 | 小风雷</title>
+    <title>Leetcode:134. 加油站 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -240,13 +240,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:236. 二叉树的最近公共祖先
+                        Leetcode:134. 加油站
                     </div>
                 </div>
             </div>
@@ -372,10 +372,6 @@
                                 <span class="chip bg-color">Medium</span>
                             </a>
                         
-                            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                                <span class="chip bg-color">二叉树</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -397,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-11
+                    2020-05-13
                 </div>
                 
 
@@ -414,44 +410,96 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="noopener">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+                <h1 id="Leetcode-134-加油站"><a href="#Leetcode-134-加油站" class="headerlink" title="[Leetcode: 134. 加油站]"></a>[Leetcode: 134. 加油站]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
 
-例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果题目有解，该答案即为唯一答案。
+输入数组均为非空数组，且长度相同。
+输入数组中的元素均为非负数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 
+gas  = [1,2,3,4,5]
+cost = [3,4,5,1,2]
+
 输出: 3
-解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
-输出: 5
-解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
-p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br>// TODO:其他思路</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        TreeNode result = new TreeNode(0);
-        commonHelper(root, p, q, result);
-        return result.left;
+
+解释:
+从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油
+开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油
+开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油
+开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油
+开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油
+开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。
+因此，3 可为起始索引。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 
+gas  = [2,3,4]
+cost = [3,4,3]
+
+输出: -1
+
+解释:
+你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。
+我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油
+开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油
+开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油
+你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。
+因此，无论怎样，你都不可能绕环路行驶一周。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="[思路]"></a>[思路]</h2><h3 id="思路1-暴力判断每个位置是否可以作为起点"><a href="#思路1-暴力判断每个位置是否可以作为起点" class="headerlink" title="思路1 暴力判断每个位置是否可以作为起点"></a>思路1 暴力判断每个位置是否可以作为起点</h3><p>直接判断每个位置是否可以作为起点</p>
+<h3 id="思路2-利用当前油量和总油量记录状态"><a href="#思路2-利用当前油量和总油量记录状态" class="headerlink" title="思路2 利用当前油量和总油量记录状态"></a>思路2 利用当前油量和总油量记录状态</h3><p>使用cur_gas和gas_sum记录当前油量和总油量，当当前油量小于零时则该位置不可作为起点，且之前节点也不行，依次类推，详情见代码</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length){
+            return -1;
+        }
+        int length = gas.length;
+        Set<Integer> notZeroSet = new HashSet<>();
+        for(int i = 0; i < gas.length; i++){
+            gas[i] = gas[i] - cost[i];
+            if (gas[i] >= 0){
+                notZeroSet.add(i);
+            }
+        }
+        for(int num: notZeroSet){
+            if (canLoop(num, gas, length)){
+                return num;
+            }
+        }
+        return -1;
     }
 
-    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result){
-        if (root == null){
-            return false;
+    private boolean canLoop(int num, int[] lefts, int length){
+        int left = lefts[num];
+        for(int i = 1; i < length; i++){
+            left = left + lefts[(i + num) % length];
+            if (left < 0){
+                return false;
+            }
         }
-
-        int left = commonHelper(root.left, p, q, result) ? 1: 0;
-        int right = commonHelper(root.right, p, q, result) ? 1: 0;
-        int mid = 0;
-        if (root == p || root == q){
-            mid = 1;
-        }
-        if (mid + left + right >= 2){
-            System.out.println(root.val);
-            result.left = root;
-        }
-        return (mid + left + right) > 0;
+        return true;
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<p>###　代码2</p>
+<pre class=" language-Java"><code class="language-Java">class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length){
+            return -1;
+        }
 
+
+        int cur_gas = 0;
+        int gas_sum = 0;
+        int result = 0;
+        for(int i = 0; i < gas.length; i ++){
+            cur_gas += gas[i] - cost[i];
+            gas_sum += gas[i] - cost[i];
+            if (cur_gas < 0){
+                result = i + 1;
+                cur_gas = 0;
+            }
+        }
+        return gas_sum >= 0 ? result : -1;
+    }
+}</code></pre>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3>
             </div>
             <hr/>
 
@@ -476,7 +524,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</a>
+                    <a href="https://weijunlei.github.io/2020/05/13/leetcode-134-jia-you-zhan/">https://weijunlei.github.io/2020/05/13/leetcode-134-jia-you-zhan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -522,10 +570,6 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                                     <span class="chip bg-color">Medium</span>
                                 </a>
                             
-                                <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                                    <span class="chip bg-color">二叉树</span>
-                                </a>
-                            
                         </div>
                     
                 </div>
@@ -569,7 +613,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-11T22-54-22',
+        id: '2020-05-13T00-02-29',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -590,31 +634,32 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/">
+                <a href="/2020/05/13/leetcode-134-jia-you-zhan/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:297. 二叉树的序列化与反序列化">
+                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:134. 加油站">
                         
-                        <span class="card-title">Leetcode:297. 二叉树的序列化与反序列化</span>
+                        <span class="card-title">Leetcode:134. 加油站</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:297. 二叉树的序列化与反序列化题目描述序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+                            [Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-请
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -627,6 +672,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -634,12 +680,8 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
-                    </a>
-                    
-                    <a href="/tags/BFS/">
-                        <span class="chip bg-color">BFS</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>
@@ -653,24 +695,25 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/">
+                <a href="/2020/05/08/leetcode-371-liang-zheng-shu-zhi-he/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode: 230. 二叉搜索树中第K小的元素">
+                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:371. 两整数之和">
                         
-                        <span class="card-title">Leetcode: 230. 二叉搜索树中第K小的元素</span>
+                        <span class="card-title">Leetcode:371. 两整数之和</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。示例 1:输入: ro
+                            [Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。示例 1:输入: a = 1, b = 2
+输出: 3示例 2:输入: a = -2, b
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
                             </span>
                         <span class="publish-author">
                             
@@ -691,12 +734,12 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
+                    <a href="/tags/Easy/">
+                        <span class="chip bg-color">Easy</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                        <span class="chip bg-color">二叉树</span>
+                    <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                        <span class="chip bg-color">位运算</span>
                     </a>
                     
                 </div>
