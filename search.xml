@@ -8,7 +8,7 @@
       <link href="/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/"/>
       <url>/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/</url>
       
-        <content type="html"><![CDATA[<h1 id="Leetcode-146-LRU缓存机制"><a href="#Leetcode-146-LRU缓存机制" class="headerlink" title="Leetcode:146. LRU缓存机制"></a><a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">Leetcode:146. LRU缓存机制</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p><p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p><p>进阶:</p><p>你是否可以在 O(1) 时间复杂度内完成这两种操作？</p><p>示例:</p><p>LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</p><p>cache.put(1, 1);<br>cache.put(2, 2);<br>cache.get(1);       // 返回  1<br>cache.put(3, 3);    // 该操作会使得密钥 2 作废<br>cache.get(2);       // 返回 -1 (未找到)<br>cache.put(4, 4);    // 该操作会使得密钥 1 作废<br>cache.get(1);       // 返回 -1 (未找到)<br>cache.get(3);       // 返回  3<br>cache.get(4);       // 返回  4</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-HashMap-双向链表"><a href="#思路1-HashMap-双向链表" class="headerlink" title="思路1 HashMap + 双向链表"></a>思路1 HashMap + 双向链表</h3><p>因为要满足存取都是O(1)复杂度，且有容量限制（所以重点在于如何删除以及置于最前），所以可以使用一个HashMap和双向链表实现</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3>]]></content>
+        <content type="html"><![CDATA[<h1 id="Leetcode-146-LRU缓存机制"><a href="#Leetcode-146-LRU缓存机制" class="headerlink" title="Leetcode:146. LRU缓存机制"></a><a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">Leetcode:146. LRU缓存机制</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p><p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p><p>进阶:</p><p>你是否可以在 O(1) 时间复杂度内完成这两种操作？</p><p>示例:</p><p>LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</p><p>cache.put(1, 1);<br>cache.put(2, 2);<br>cache.get(1);       // 返回  1<br>cache.put(3, 3);    // 该操作会使得密钥 2 作废<br>cache.get(2);       // 返回 -1 (未找到)<br>cache.put(4, 4);    // 该操作会使得密钥 1 作废<br>cache.get(1);       // 返回 -1 (未找到)<br>cache.get(3);       // 返回  3<br>cache.get(4);       // 返回  4</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-HashMap-双向链表"><a href="#思路1-HashMap-双向链表" class="headerlink" title="思路1 HashMap + 双向链表"></a>思路1 HashMap + 双向链表</h3><p>因为要满足存取都是O(1)复杂度，且有容量限制（所以重点在于如何删除以及置于最前），所以可以使用一个HashMap和双向链表实现</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">import java.util.Hashtable;class LRUCache {    class DNode{        int key;        int value;        DNode pre;        DNode next;    }    private void addNode(DNode node){        node.pre = head;        node.next = head.next;        head.next.pre = node;        head.next = node;    }    private void removeNode(DNode node){        DNode pre = node.pre;        DNode next = node.next;        pre.next = next;        next.pre = pre;    }    private void toHead(DNode node){        removeNode(node);        addNode(node);    }    private DNode removeTail(){        DNode pre = tail.pre;        removeNode(pre);        return pre;    }    private DNode head, tail;    private HashMap<Integer, DNode> cache =          new HashMap<Integer, DNode>();    int maxSize;    int size;    public LRUCache(int capacity) {        this.maxSize = capacity;        this.size = 0;        this.head = new DNode();        this.tail = new DNode();        this.head.next = tail;        this.tail.pre = head;    }    public int get(int key) {        DNode node = cache.get(key);        if (node == null){            return -1;        }else{            toHead(node);            return node.value;        }    }    public void put(int key, int value) {        DNode pre = cache.get(key);        if (pre == null){            pre = new DNode();            pre.key = key;            pre.value = value;            this.size += 1;            if (this.size > this.maxSize){                DNode removeNode = removeTail();                cache.remove(removeNode.key);                this.size = this.maxSize;            }            addNode(pre);            cache.put(key, pre);        }else{            pre.value = value;            toHead(pre);        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>]]></content>
       
       
       <categories>
@@ -618,9 +618,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 贪心 </tag>
-            
             <tag> 数学公式 </tag>
+            
+            <tag> 贪心 </tag>
             
         </tags>
       
@@ -647,9 +647,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Easy </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> Easy </tag>
             
         </tags>
       
@@ -889,9 +889,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 排序 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -918,9 +918,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 排序 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -1009,9 +1009,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Hard </tag>
-            
             <tag> BFS </tag>
+            
+            <tag> Hard </tag>
             
         </tags>
       
@@ -1096,9 +1096,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 哈希表 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 哈希表 </tag>
             
             <tag> Collection </tag>
             
@@ -1127,9 +1127,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 哈希表 </tag>
-            
             <tag> Medium </tag>
+            
+            <tag> 哈希表 </tag>
             
         </tags>
       
