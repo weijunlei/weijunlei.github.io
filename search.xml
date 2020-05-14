@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:146. LRU缓存机制</title>
+      <link href="/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/"/>
+      <url>/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-146-LRU缓存机制"><a href="#Leetcode-146-LRU缓存机制" class="headerlink" title="Leetcode:146. LRU缓存机制"></a><a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">Leetcode:146. LRU缓存机制</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p><p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p><p>进阶:</p><p>你是否可以在 O(1) 时间复杂度内完成这两种操作？</p><p>示例:</p><p>LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</p><p>cache.put(1, 1);<br>cache.put(2, 2);<br>cache.get(1);       // 返回  1<br>cache.put(3, 3);    // 该操作会使得密钥 2 作废<br>cache.get(2);       // 返回 -1 (未找到)<br>cache.put(4, 4);    // 该操作会使得密钥 1 作废<br>cache.get(1);       // 返回 -1 (未找到)<br>cache.get(3);       // 返回  3<br>cache.get(4);       // 返回  4</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-HashMap-双向链表"><a href="#思路1-HashMap-双向链表" class="headerlink" title="思路1 HashMap + 双向链表"></a>思路1 HashMap + 双向链表</h3><p>因为要满足存取都是O(1)复杂度，且有容量限制（所以重点在于如何删除以及置于最前），所以可以使用一个HashMap和双向链表实现</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 系统设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:134. 加油站</title>
       <link href="/2020/05/13/leetcode-134-jia-you-zhan/"/>
       <url>/2020/05/13/leetcode-134-jia-you-zhan/</url>
@@ -589,9 +618,9 @@
             
             <tag> 动态规划 </tag>
             
-            <tag> 数学公式 </tag>
-            
             <tag> 贪心 </tag>
+            
+            <tag> 数学公式 </tag>
             
         </tags>
       
@@ -618,9 +647,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> Easy </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
@@ -860,9 +889,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -889,9 +918,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -1067,9 +1096,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> Collection </tag>
             
@@ -1098,9 +1127,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -2421,31 +2450,6 @@
     
     
     <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -2465,6 +2469,31 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
             
         </tags>
       

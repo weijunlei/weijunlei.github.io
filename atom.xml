@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-05-13T16:19:58.972Z</updated>
+  <updated>2020-05-14T15:59:30.437Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode:146. LRU缓存机制</title>
+    <link href="https://weijunlei.github.io/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/"/>
+    <id>https://weijunlei.github.io/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/</id>
+    <published>2020-05-14T15:56:54.000Z</published>
+    <updated>2020-05-14T15:59:30.437Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Leetcode-146-LRU缓存机制&quot;&gt;&lt;a href=&quot;#Leetcode-146-LRU缓存机制&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:146. LRU缓存机制&quot;&gt;&lt;/a&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
+    
+      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
+    
+      <category term="系统设计" scheme="https://weijunlei.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:134. 加油站</title>
@@ -612,43 +643,6 @@
       <category term="贪心" scheme="https://weijunlei.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     
       <category term="二分查找" scheme="https://weijunlei.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:279. 完全平方数</title>
-    <link href="https://weijunlei.github.io/2020/04/23/leetcode-279-wan-quan-ping-fang-shu/"/>
-    <id>https://weijunlei.github.io/2020/04/23/leetcode-279-wan-quan-ping-fang-shu/</id>
-    <published>2020-04-22T16:08:05.000Z</published>
-    <updated>2020-04-22T17:14:02.006Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Leetcode-279-完全平方数&quot;&gt;&lt;a href=&quot;#Leetcode-279-完全平方数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:279. 完全平方数&quot;&gt;&lt;/a&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-      <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-      <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
-    
-      <category term="动态规划" scheme="https://weijunlei.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-      <category term="数学公式" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"/>
-    
-      <category term="贪心" scheme="https://weijunlei.github.io/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
