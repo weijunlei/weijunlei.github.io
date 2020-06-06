@@ -4,10 +4,14 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:236. 二叉树的最近公共祖先, 小风雷">
-    <meta name="description" content="Leetcode: 236. 二叉树的最近公共祖先题目描述给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+    <meta name="keywords" content="Leetcode:37. 解数独, 小风雷">
+    <meta name="description" content="Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q">
+一个数独的解法需遵循如下规则：
+
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +19,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:236. 二叉树的最近公共祖先 | 小风雷</title>
+    <title>Leetcode:37. 解数独 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -240,13 +244,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:236. 二叉树的最近公共祖先
+                        Leetcode:37. 解数独
                     </div>
                 </div>
             </div>
@@ -368,12 +372,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
+                            <a href="/tags/Hard/">
+                                <span class="chip bg-color">Hard</span>
                             </a>
                         
-                            <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                                <span class="chip bg-color">二叉树</span>
+                            <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                                <span class="chip bg-color">回溯</span>
                             </a>
                         
                     </div>
@@ -397,7 +401,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-11
+                    2020-06-06
                 </div>
                 
 
@@ -414,44 +418,96 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="noopener">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+                <h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a href="https://leetcode-cn.com/problems/sudoku-solver/" target="_blank" rel="noopener">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
+一个数独的解法需遵循如下规则：
 
-例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
-输出: 3
-解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
-输出: 5
-解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
-p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br>// TODO:其他思路</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        TreeNode result = new TreeNode(0);
-        commonHelper(root, p, q, result);
-        return result.left;
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+空白格用 &#39;.&#39; 表示。
+
+
+
+一个数独。
+
+
+
+答案被标成红色。</code></pre><h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。
+你可以假设给定的数独只有唯一解。
+给定数独永远是 9x9 形式的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    char[][] board;
+    int[][] rowCount = new int[9][9];
+    int[][] columnCount = new int[9][9];
+    int[][] matrixCount = new int[9][9];
+    boolean canSolve = false;
+
+    private boolean canSet(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;
     }
 
-    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result){
-        if (root == null){
-            return false;
-        }
+    private void setNum(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        rowCount[row][num - 1] += 1;
+        columnCount[column][num - 1] += 1;
+        matrixCount[matrixIndex][num - 1] += 1;
+        board[row][column] = (char)('0' + num);
+    }
 
-        int left = commonHelper(root.left, p, q, result) ? 1: 0;
-        int right = commonHelper(root.right, p, q, result) ? 1: 0;
-        int mid = 0;
-        if (root == p || root == q){
-            mid = 1;
+    private void removeNum(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        rowCount[row][num - 1] -= 1;
+        columnCount[column][num - 1] -= 1;
+        matrixCount[matrixIndex][num - 1] -= 1;
+        board[row][column] = '.';
+    }
+
+    private void setNext(int row, int column){
+        if (row == 8 && column == 8){
+            this.canSolve = true;
         }
-        if (mid + left + right >= 2){
-            System.out.println(root.val);
-            result.left = root;
+        if (column != 8){
+            backTrack(row, column + 1);
+        }else{
+            backTrack(row + 1, 0);
         }
-        return (mid + left + right) > 0;
+    }
+
+    private void backTrack(int row, int column){
+        if (row > 8 || column > 8){
+            return;
+        }
+        if (this.board[row][column] == '.'){
+            for(int i = 1; i < 10; i++){
+                if (canSet(row, column, i)){
+                    setNum(row, column, i);
+                    setNext(row, column);
+                    if (!this.canSolve){
+                        removeNum(row, column, i);
+                    }
+                }
+            }
+        }else{
+            setNext(row, column);
+        }
+    }
+
+    public void solveSudoku(char[][] board) {
+        this.board = board;
+        for(int i = 0; i < 9; i++){
+            for(int j=0; j < 9; j++){
+                if (this.board[i][j] != '.'){
+                    int num = (int)(this.board[i][j] - '0');
+                    setNum(i, j, num);
+                }
+            }
+        }
+        backTrack(0, 0);
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
             </div>
             <hr/>
 
@@ -476,7 +532,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/">https://weijunlei.github.io/2020/04/11/leetcode-236-er-cha-shu-de-zui-jin-gong-gong-zu-xian/</a>
+                    <a href="https://weijunlei.github.io/2020/06/06/leetcode-37-jie-shu-du/">https://weijunlei.github.io/2020/06/06/leetcode-37-jie-shu-du/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -518,12 +574,12 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
+                                <a href="/tags/Hard/">
+                                    <span class="chip bg-color">Hard</span>
                                 </a>
                             
-                                <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                                    <span class="chip bg-color">二叉树</span>
+                                <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                                    <span class="chip bg-color">回溯</span>
                                 </a>
                             
                         </div>
@@ -569,7 +625,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-11T22-54-22',
+        id: '2020-06-06T23-51-39',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -590,31 +646,36 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/13/leetcode-297-er-cha-shu-de-xu-lie-hua-yu-fan-xu-lie-hua/">
+                <a href="/2020/06/06/leetcode-37-jie-shu-du/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:297. 二叉树的序列化与反序列化">
+                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:37. 解数独">
                         
-                        <span class="card-title">Leetcode:297. 二叉树的序列化与反序列化</span>
+                        <span class="card-title">Leetcode:37. 解数独</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:297. 二叉树的序列化与反序列化题目描述序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+                            Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
 
-请
+一个数独的解法需遵循如下规则：
+
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -627,6 +688,7 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -638,8 +700,8 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/BFS/">
-                        <span class="chip bg-color">BFS</span>
+                    <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">回溯</span>
                     </a>
                     
                 </div>
@@ -653,24 +715,25 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/10/leetcode-230-er-cha-sou-suo-shu-zhong-di-k-xiao-de-yuan-su/">
+                <a href="/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode: 230. 二叉搜索树中第K小的元素">
+                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:146. LRU缓存机制">
                         
-                        <span class="card-title">Leetcode: 230. 二叉搜索树中第K小的元素</span>
+                        <span class="card-title">Leetcode:146. LRU缓存机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。示例 1:输入: ro
+                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+获取数据 get(key) - 如果密钥 (k
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-14
                             </span>
                         <span class="publish-author">
                             
@@ -695,8 +758,8 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                         <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/">
-                        <span class="chip bg-color">二叉树</span>
+                    <a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+                        <span class="chip bg-color">系统设计</span>
                     </a>
                     
                 </div>

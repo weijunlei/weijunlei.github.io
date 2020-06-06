@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Leetcode:37. 解数独</title>
+      <link href="/2020/06/06/leetcode-37-jie-shu-du/"/>
+      <url>/2020/06/06/leetcode-37-jie-shu-du/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a href="https://leetcode-cn.com/problems/sudoku-solver/" target="_blank" rel="noopener">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。一个数独的解法需遵循如下规则：数字 1-9 在每一行只能出现一次。数字 1-9 在每一列只能出现一次。数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。空白格用 &#39;.&#39; 表示。一个数独。答案被标成红色。</code></pre><h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。你可以假设给定的数独只有唯一解。给定数独永远是 9x9 形式的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    char[][] board;    int[][] rowCount = new int[9][9];    int[][] columnCount = new int[9][9];    int[][] matrixCount = new int[9][9];    boolean canSolve = false;    private boolean canSet(int row, int column, int num){        int matrixIndex = (row / 3) * 3 + column / 3;        return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;    }    private void setNum(int row, int column, int num){        int matrixIndex = (row / 3) * 3 + column / 3;        rowCount[row][num - 1] += 1;        columnCount[column][num - 1] += 1;        matrixCount[matrixIndex][num - 1] += 1;        board[row][column] = (char)('0' + num);    }    private void removeNum(int row, int column, int num){        int matrixIndex = (row / 3) * 3 + column / 3;        rowCount[row][num - 1] -= 1;        columnCount[column][num - 1] -= 1;        matrixCount[matrixIndex][num - 1] -= 1;        board[row][column] = '.';    }    private void setNext(int row, int column){        if (row == 8 && column == 8){            this.canSolve = true;        }        if (column != 8){            backTrack(row, column + 1);        }else{            backTrack(row + 1, 0);        }    }    private void backTrack(int row, int column){        if (row > 8 || column > 8){            return;        }        if (this.board[row][column] == '.'){            for(int i = 1; i < 10; i++){                if (canSet(row, column, i)){                    setNum(row, column, i);                    setNext(row, column);                    if (!this.canSolve){                        removeNum(row, column, i);                    }                }            }        }else{            setNext(row, column);        }    }    public void solveSudoku(char[][] board) {        this.board = board;        for(int i = 0; i < 9; i++){            for(int j=0; j < 9; j++){                if (this.board[i][j] != '.'){                    int num = (int)(this.board[i][j] - '0');                    setNum(i, j, num);                }            }        }        backTrack(0, 0);    }}</code></pre><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Hard </tag>
+            
+            <tag> 回溯 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:146. LRU缓存机制</title>
       <link href="/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/"/>
       <url>/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/</url>
@@ -1009,9 +1038,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> BFS </tag>
-            
             <tag> Hard </tag>
+            
+            <tag> BFS </tag>
             
         </tags>
       
@@ -2450,6 +2479,31 @@
     
     
     <entry>
+      <title>博客搭建</title>
+      <link href="/2019/12/08/blog-builder/"/>
+      <url>/2019/12/08/blog-builder/</url>
+      
+        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 实用技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</title>
       <link href="/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/"/>
       <url>/2019/12/08/si-tan-fu-nlp-qi-peng-duo-bu-wen-ti-sheng-cheng-shi-xian-hotpotqa-kai-fang-yu-wen-da/</url>
@@ -2469,31 +2523,6 @@
             <tag> 阅读理解 </tag>
             
             <tag> 个人论文理解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>博客搭建</title>
-      <link href="/2019/12/08/blog-builder/"/>
-      <url>/2019/12/08/blog-builder/</url>
-      
-        <content type="html"><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://godweiyang.com/about/" target="_blank" rel="noopener">韦阳的博客</a></p><h2 id="实际使用主题"><a href="#实际使用主题" class="headerlink" title="实际使用主题"></a>实际使用主题</h2><p><a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="noopener">hexo-theme-matery</a></p><h2 id="主题目前特色实现功能"><a href="#主题目前特色实现功能" class="headerlink" title="主题目前特色实现功能"></a>主题目前特色实现功能</h2><ul><li>标签和分类</li><li>文档搜索</li><li>gittalk集成</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 实用技巧 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 博客搭建 </tag>
             
         </tags>
       
