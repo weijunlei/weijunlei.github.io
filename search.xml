@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Leetcode:40. 组合总和 II</title>
+      <link href="/2020/06/07/leetcode-40-zu-he-zong-he-ii/"/>
+      <url>/2020/06/07/leetcode-40-zu-he-zong-he-ii/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Leetcode-40-组合总和-II"><a href="#Leetcode-40-组合总和-II" class="headerlink" title="Leetcode: 40. 组合总和 II"></a><a href="https://leetcode-cn.com/problems/combination-sum-ii/" target="_blank" rel="noopener">Leetcode: 40. 组合总和 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的每个数字在每个组合中只能使用一次。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>所有数字（包括目标数）都是正整数。解集不能包含重复的组合。 </code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>    所求解集为:<br>    [<br>    [1, 7],<br>    [1, 2, 5],<br>    [2, 6],<br>    [1, 1, 6]<br>    ]</p><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: candidates = [2,5,2,1,2], target = 5,所求解集为:[  [1,2,2],  [5]]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS-剪枝"><a href="#思路1-DFS-剪枝" class="headerlink" title="思路1: DFS+剪枝"></a>思路1: DFS+剪枝</h3><p>与lc39类似，但是每个数只能出现一次，所以节点数量为当前位置+1到最后位置，同时，要避免同一层相同元素，避免出现重复结果（因为会选到），所以可以通过剪枝去除</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {    List<List<Integer>> results;    public List<List<Integer>> combinationSum2(int[] candidates, int target) {        results = new ArrayList<>();        if (candidates == null || candidates.length == 0){            return results;        }        Arrays.sort(candidates);        List<Integer> result = new ArrayList<Integer>();        dfs(candidates, target, 0, result);        return results;    }    private void dfs(int[] candidates, int target, int idx, List<Integer> result){        if (target == 0){            this.results.add(new ArrayList<>(result));        }        for(int i = idx; i < candidates.length; i++){            if (target < 0){                break;            }            if (i > idx && candidates[i] == candidates[i - 1]){                continue;            }            result.add(candidates[i]);            dfs(candidates, target - candidates[i], i + 1, result);            result.remove(result.size() - 1);        }    }}</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n!)$</p><h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n!)$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode </tag>
+            
+            <tag> Medium </tag>
+            
+            <tag> 回溯 </tag>
+            
+            <tag> 剪枝 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Leetcode:39. 组合总和</title>
       <link href="/2020/06/07/leetcode-39-zu-he-zong-he/"/>
       <url>/2020/06/07/leetcode-39-zu-he-zong-he/</url>

@@ -4,10 +4,10 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:39. 组合总和, 小风雷">
-    <meta name="description" content="[Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+    <meta name="keywords" content="Leetcode:40. 组合总和 II, 小风雷">
+    <meta name="description" content="Leetcode: 40. 组合总和 II题目描述给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-candidate">
+candidates 中的每个数字在每个组合中只">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@ candidate">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:39. 组合总和 | 小风雷</title>
+    <title>Leetcode:40. 组合总和 II | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -246,7 +246,7 @@ candidate">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:39. 组合总和
+                        Leetcode:40. 组合总和 II
                     </div>
                 </div>
             </div>
@@ -376,8 +376,8 @@ candidate">
                                 <span class="chip bg-color">回溯</span>
                             </a>
                         
-                            <a href="/tags/DFS/">
-                                <span class="chip bg-color">DFS</span>
+                            <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                                <span class="chip bg-color">剪枝</span>
                             </a>
                         
                     </div>
@@ -418,50 +418,49 @@ candidate">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-Leetcode-39-组合总和"><a href="#Leetcode-Leetcode-39-组合总和" class="headerlink" title="[Leetcode](Leetcode: 39. 组合总和)"></a>[Leetcode](Leetcode: 39. 组合总和)</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+                <h1 id="Leetcode-40-组合总和-II"><a href="#Leetcode-40-组合总和-II" class="headerlink" title="Leetcode: 40. 组合总和 II"></a><a href="https://leetcode-cn.com/problems/combination-sum-ii/" target="_blank" rel="noopener">Leetcode: 40. 组合总和 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>所有数字（包括 target）都是正整数。
-解集不能包含重复的组合。 </code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: candidates = [2,3,6,7], target = 7,
+candidates 中的每个数字在每个组合中只能使用一次。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>所有数字（包括目标数）都是正整数。
+解集不能包含重复的组合。 </code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>    所求解集为:<br>    [<br>    [1, 7],<br>    [1, 2, 5],<br>    [2, 6],<br>    [1, 1, 6]<br>    ]</p>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: candidates = [2,5,2,1,2], target = 5,
 所求解集为:
 [
-[7],
-[2,2,3]
-]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: candidates = [2,3,5], target = 8,
-所求解集为:
-[
-  [2,2,2,2],
-  [2,3,3],
-  [3,5]
-]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯"><a href="#思路1-回溯" class="headerlink" title="思路1 回溯"></a>思路1 回溯</h3><p>将题目看成回溯，每次可以从排序后的候选中选择一个数字，如最后满足条件则加入结果中。同时也可以看作是DFS过程，每个节点有从当前值到最后值的叶子<br>节点，然后DFS实现，其实也可以BFS</p>
+  [1,2,2],
+  [5]
+]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS-剪枝"><a href="#思路1-DFS-剪枝" class="headerlink" title="思路1: DFS+剪枝"></a>思路1: DFS+剪枝</h3><p>与lc39类似，但是每个数只能出现一次，所以节点数量为当前位置+1到最后位置，同时，要避免同一层相同元素，避免出现重复结果（因为会选到），所以可以通过剪枝去除</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
     List<List<Integer>> results;
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         results = new ArrayList<>();
-        if(candidates == null || candidates.length == 0){
+        if (candidates == null || candidates.length == 0){
             return results;
         }
         Arrays.sort(candidates);
-        List<Integer> result = new ArrayList<>();
-        trackback(candidates, 0, target, result);
+        List<Integer> result = new ArrayList<Integer>();
+        dfs(candidates, target, 0, result);
         return results;
     }
 
-    private void trackback(int[] candidates, int idx, int target, List<Integer> result){
+    private void dfs(int[] candidates, int target, int idx, List<Integer> result){
         if (target == 0){
             this.results.add(new ArrayList<>(result));
         }
+
         for(int i = idx; i < candidates.length; i++){
-            if (candidates[i] > target){
+            if (target < 0){
                 break;
             }
+            if (i > idx && candidates[i] == candidates[i - 1]){
+                continue;
+            }
             result.add(candidates[i]);
-            trackback(candidates, i, target - candidates[i], result);
+            dfs(candidates, target - candidates[i], i + 1, result);
             result.remove(result.size() - 1);
         }
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$n!$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n!$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n!)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n!)$</p>
 
             </div>
             <hr/>
@@ -487,7 +486,7 @@ candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/06/07/leetcode-39-zu-he-zong-he/">https://weijunlei.github.io/2020/06/07/leetcode-39-zu-he-zong-he/</a>
+                    <a href="https://weijunlei.github.io/2020/06/07/leetcode-40-zu-he-zong-he-ii/">https://weijunlei.github.io/2020/06/07/leetcode-40-zu-he-zong-he-ii/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -537,8 +536,8 @@ candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说
                                     <span class="chip bg-color">回溯</span>
                                 </a>
                             
-                                <a href="/tags/DFS/">
-                                    <span class="chip bg-color">DFS</span>
+                                <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                                    <span class="chip bg-color">剪枝</span>
                                 </a>
                             
                         </div>
@@ -584,7 +583,7 @@ candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-06-07T21-52-16',
+        id: '2020-06-07T23-02-09',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -605,9 +604,10 @@ candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/06/07/leetcode-40-zu-he-zong-he-ii/">
                     <div class="card-image">
@@ -627,9 +627,9 @@ candidates 中的每个数字在每个组合中只
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -642,6 +642,7 @@ candidates 中的每个数字在每个组合中只
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -672,30 +673,26 @@ candidates 中的每个数字在每个组合中只
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/06/leetcode-37-jie-shu-du/">
+                <a href="/2020/06/07/leetcode-39-zu-he-zong-he/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:37. 解数独">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:39. 组合总和">
                         
-                        <span class="card-title">Leetcode:37. 解数独</span>
+                        <span class="card-title">Leetcode:39. 组合总和</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
+                            [Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-一个数独的解法需遵循如下规则：
-
-数字 1-9 在每一行只能出现一次。
-数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分隔的 3
+candidate
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
                             </span>
                         <span class="publish-author">
                             
@@ -716,12 +713,16 @@ candidates 中的每个数字在每个组合中只
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Hard/">
-                        <span class="chip bg-color">Hard</span>
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                     <a href="/tags/%E5%9B%9E%E6%BA%AF/">
                         <span class="chip bg-color">回溯</span>
+                    </a>
+                    
+                    <a href="/tags/DFS/">
+                        <span class="chip bg-color">DFS</span>
                     </a>
                     
                 </div>
