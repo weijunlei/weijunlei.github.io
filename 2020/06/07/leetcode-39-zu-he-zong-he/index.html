@@ -4,14 +4,10 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:37. 解数独, 小风雷">
-    <meta name="description" content="Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
+    <meta name="keywords" content="Leetcode:39. 组合总和, 小风雷">
+    <meta name="description" content="[Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-一个数独的解法需遵循如下规则：
-
-数字 1-9 在每一行只能出现一次。
-数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分隔的 3">
+candidate">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:37. 解数独 | 小风雷</title>
+    <title>Leetcode:39. 组合总和 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -244,13 +240,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:37. 解数独
+                        Leetcode:39. 组合总和
                     </div>
                 </div>
             </div>
@@ -372,12 +368,16 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Hard/">
-                                <span class="chip bg-color">Hard</span>
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                             <a href="/tags/%E5%9B%9E%E6%BA%AF/">
                                 <span class="chip bg-color">回溯</span>
+                            </a>
+                        
+                            <a href="/tags/DFS/">
+                                <span class="chip bg-color">DFS</span>
                             </a>
                         
                     </div>
@@ -401,7 +401,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-06
+                    2020-06-07
                 </div>
                 
 
@@ -418,97 +418,50 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a href="https://leetcode-cn.com/problems/sudoku-solver/" target="_blank" rel="noopener">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。
+                <h1 id="Leetcode-Leetcode-39-组合总和"><a href="#Leetcode-Leetcode-39-组合总和" class="headerlink" title="[Leetcode](Leetcode: 39. 组合总和)"></a>[Leetcode](Leetcode: 39. 组合总和)</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-一个数独的解法需遵循如下规则：
-
-数字 1-9 在每一行只能出现一次。
-数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
-空白格用 &#39;.&#39; 表示。
-
-
-
-一个数独。
-
-
-
-答案被标成红色。</code></pre><h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。
-你可以假设给定的数独只有唯一解。
-给定数独永远是 9x9 形式的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
+candidates 中的数字可以无限制重复被选取。</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>所有数字（包括 target）都是正整数。
+解集不能包含重复的组合。 </code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: candidates = [2,3,6,7], target = 7,
+所求解集为:
+[
+[7],
+[2,2,3]
+]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: candidates = [2,3,5], target = 8,
+所求解集为:
+[
+  [2,2,2,2],
+  [2,3,3],
+  [3,5]
+]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯"><a href="#思路1-回溯" class="headerlink" title="思路1 回溯"></a>思路1 回溯</h3><p>将题目看成回溯，每次可以从排序后的候选中选择一个数字，如最后满足条件则加入结果中。同时也可以看作是DFS过程，每个节点有从当前值到最后值的叶子<br>节点，然后DFS实现，其实也可以BFS</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    char[][] board;
-    int[][] rowCount = new int[9][9];
-    int[][] columnCount = new int[9][9];
-    int[][] matrixCount = new int[9][9];
-    boolean canSolve = false;
-
-    private boolean canSet(int row, int column, int num){
-        int matrixIndex = (row / 3) * 3 + column / 3;
-        return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;
-    }
-
-    private void setNum(int row, int column, int num){
-        int matrixIndex = (row / 3) * 3 + column / 3;
-        rowCount[row][num - 1] += 1;
-        columnCount[column][num - 1] += 1;
-        matrixCount[matrixIndex][num - 1] += 1;
-        board[row][column] = (char)('0' + num);
-    }
-
-    private void removeNum(int row, int column, int num){
-        int matrixIndex = (row / 3) * 3 + column / 3;
-        rowCount[row][num - 1] -= 1;
-        columnCount[column][num - 1] -= 1;
-        matrixCount[matrixIndex][num - 1] -= 1;
-        board[row][column] = '.';
-    }
-
-    private void setNext(int row, int column){
-        if (row == 8 && column == 8){
-            this.canSolve = true;
+    List<List<Integer>> results;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        results = new ArrayList<>();
+        if(candidates == null || candidates.length == 0){
+            return results;
         }
-        if (column != 8){
-            backTrack(row, column + 1);
-        }else{
-            backTrack(row + 1, 0);
-        }
+        Arrays.sort(candidates);
+        List<Integer> result = new ArrayList<>();
+        trackback(candidates, 0, target, result);
+        return results;
     }
 
-    private void backTrack(int row, int column){
-        if (row > 8 || column > 8){
-            return;
+    private void trackback(int[] candidates, int idx, int target, List<Integer> result){
+        if (target == 0){
+            this.results.add(new ArrayList<>(result));
         }
-        if (this.board[row][column] == '.'){
-            for(int i = 1; i < 10; i++){
-                if (canSet(row, column, i)){
-                    setNum(row, column, i);
-                    setNext(row, column);
-                    if (!this.canSolve){
-                        removeNum(row, column, i);
-                    }
-                }
+        for(int i = idx; i < candidates.length; i++){
+            if (candidates[i] > target){
+                break;
             }
-        }else{
-            setNext(row, column);
+            result.add(candidates[i]);
+            trackback(candidates, i, target - candidates[i], result);
+            result.remove(result.size() - 1);
         }
-    }
-
-    public void solveSudoku(char[][] board) {
-        this.board = board;
-        for(int i = 0; i < 9; i++){
-            for(int j=0; j < 9; j++){
-                if (this.board[i][j] != '.'){
-                    int num = (int)(this.board[i][j] - '0');
-                    setNum(i, j, num);
-                }
-            }
-        }
-        backTrack(0, 0);
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$(n!)^9$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n^2$</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$n!$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n!$</p>
 
             </div>
             <hr/>
@@ -534,7 +487,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/06/06/leetcode-37-jie-shu-du/">https://weijunlei.github.io/2020/06/06/leetcode-37-jie-shu-du/</a>
+                    <a href="https://weijunlei.github.io/2020/06/07/leetcode-39-zu-he-zong-he/">https://weijunlei.github.io/2020/06/07/leetcode-39-zu-he-zong-he/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -576,12 +529,16 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Hard/">
-                                    <span class="chip bg-color">Hard</span>
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                                 <a href="/tags/%E5%9B%9E%E6%BA%AF/">
                                     <span class="chip bg-color">回溯</span>
+                                </a>
+                            
+                                <a href="/tags/DFS/">
+                                    <span class="chip bg-color">DFS</span>
                                 </a>
                             
                         </div>
@@ -627,7 +584,7 @@
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-06-06T23-51-39',
+        id: '2020-06-07T21-52-16',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -648,9 +605,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/06/07/leetcode-39-zu-he-zong-he/">
                     <div class="card-image">
@@ -670,9 +628,9 @@ candidate
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -685,6 +643,7 @@ candidate
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -715,25 +674,30 @@ candidate
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/14/leetcode-146-lru-huan-cun-ji-zhi/">
+                <a href="/2020/06/06/leetcode-37-jie-shu-du/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:146. LRU缓存机制">
+                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:37. 解数独">
                         
-                        <span class="card-title">Leetcode:146. LRU缓存机制</span>
+                        <span class="card-title">Leetcode:37. 解数独</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
-获取数据 get(key) - 如果密钥 (k
+                            Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
+
+一个数独的解法需遵循如下规则：
+
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-06
                             </span>
                         <span class="publish-author">
                             
@@ -754,12 +718,12 @@ candidate
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
+                    <a href="/tags/Hard/">
+                        <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
-                        <span class="chip bg-color">系统设计</span>
+                    <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">回溯</span>
                     </a>
                     
                 </div>
