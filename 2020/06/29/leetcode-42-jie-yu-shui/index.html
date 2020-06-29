@@ -4,12 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Leetcode:138. 复制带随机指针的链表, 小风雷">
-    <meta name="description" content="Leetcode:138. 复制带随机指针的链表题目描述给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。
-
-要求返回这个链表的 深拷贝。 
-
-我们用一个由 n 个节点组成的链表来表示输入/输出中的链">
+    <meta name="keywords" content="Leetcode:42. 接雨水, 小风雷">
+    <meta name="description" content="Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Leetcode:138. 复制带随机指针的链表 | 小风雷</title>
+    <title>Leetcode:42. 接雨水 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -242,13 +239,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Leetcode:138. 复制带随机指针的链表
+                        Leetcode:42. 接雨水
                     </div>
                 </div>
             </div>
@@ -364,12 +361,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Leetcode/">
+                                <span class="chip bg-color">Leetcode</span>
+                            </a>
+                        
+                            <a href="/tags/Hard/">
+                                <span class="chip bg-color">Hard</span>
+                            </a>
+                        
+                            <a href="/tags/DP/">
+                                <span class="chip bg-color">DP</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Leetcode/" class="post-category">
+                                Leetcode
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -378,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-06
+                    2020-06-29
                 </div>
                 
 
@@ -395,83 +413,92 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-138-复制带随机指针的链表"><a href="#Leetcode-138-复制带随机指针的链表" class="headerlink" title="Leetcode:138. 复制带随机指针的链表"></a><a href="https://leetcode-cn.com/problems/copy-list-with-random-pointer" target="_blank" rel="noopener">Leetcode:138. 复制带随机指针的链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个链表，每个节点包含一个额外增加的随机指针，该指针可以指向链表中的任何节点或空节点。
-
-要求返回这个链表的 深拷贝。 
-
-我们用一个由 n 个节点组成的链表来表示输入/输出中的链表。每个节点用一个 [val, random_index] 表示：
-
-val：一个表示 Node.val 的整数。
-random_index：随机指针指向的节点索引（范围从 0 到 n-1）；如果不指向任何节点，则为  null 。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
-输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：head = [[1,1],[2,1]]
-输出：[[1,1],[2,1]]</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：head = [[3,null],[3,0],[3,null]]
-输出：[[3,null],[3,0],[3,null]]</code></pre><h3 id="示例-4："><a href="#示例-4：" class="headerlink" title="示例 4："></a>示例 4：</h3><pre><code>输入：head = []
-输出：[]
-解释：给定的链表为空（空指针），因此返回 null。</code></pre><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>-10000 &lt;= Node.val &lt;= 10000
-Node.random 为空（null）或指向链表中的节点。
-节点数目不超过 1000 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>//TODO：其他思路</p>
-<h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接在原来的链表位置旁复制，然后遍历分离</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">/*
-// Definition for a Node.
-class Node {
-    int val;
-    Node next;
-    Node random;
-
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
-    }
-}
-*/
-
-class Solution {
-    public Node copyRandomList(Node head) {
-        if (head == null){
-            return null;
+                <h1 id="Leetcode-42-接雨水"><a href="#Leetcode-42-接雨水" class="headerlink" title="Leetcode:42. 接雨水"></a><a href="https://leetcode-cn.com/problems/trapping-rain-water/" target="_blank" rel="noopener">Leetcode:42. 接雨水</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+输出: 6</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力解决"><a href="#思路1-暴力解决" class="headerlink" title="思路1:暴力解决"></a>思路1:暴力解决</h3><p>对每个位置找最大左右边界的最小值</p>
+<h3 id="思路2-DP"><a href="#思路2-DP" class="headerlink" title="思路2:DP"></a>思路2:DP</h3><p>记录每个位置的最大左边界和右边界，然后利用dp[i] = max(dp[i], dp[i - 1])进行状态更新，使用记录的左右边界的最小值减去当前高度获取结果</p>
+<h3 id="思路3-双指针法"><a href="#思路3-双指针法" class="headerlink" title="思路3: 双指针法"></a>思路3: 双指针法</h3><p>实际上两个状态转移都只用到了一个原状态，故可以只记录左右最大值即可，在这个过程中，若左边最大值小于右边最小值，这取左边最大值减去当前值即获得当且可接雨水量</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length < 3){
+            return 0;
         }
-
-        Node pre = head;
-
-        while(pre != null){
-            Node newNode = new Node(pre.val);
-            newNode.next = pre.next;
-            pre.next = newNode;
-            pre = pre.next.next;
-        }
-
-        pre = head;
-
-        while(pre != null){
-            if (pre.next != null && pre.random != null){
-                pre.next.random = pre.random.next;
-            } else {
-                pre.next.random = null;
+        int result = 0;
+        int height_size = height.length;
+        for(int i = 1; i < height_size - 1; i++){
+            int left_height = height[i];
+            int right_heigh = height[i];
+            for(int j = 0; j < height_size; j++){
+                if(j < i && height[j] > left_height){
+                    left_height = height[j];
+                }
+                if (j > i && height[j] > right_heigh){
+                    right_heigh = height[j];
+                }
             }
-            pre = pre.next.next;
+            result += Math.min(left_height, right_heigh) - height[i];
         }
-
-        Node origin = head;
-        pre = head.next;
-        Node result = head.next;
-
-        while(pre != null){
-            origin.next = origin.next.next;
-            if (pre.next == null){
-                pre.next = null;
-            }else{
-                pre.next = pre.next.next;
-            }
-            origin = origin.next;
-            pre = pre.next;
-        }
-
         return result;
     }
 }</code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路1空间复杂度分析"><a href="#思路1空间复杂度分析" class="headerlink" title="思路1空间复杂度分析"></a>思路1空间复杂度分析</h3><p>$O(1)$如果不算结果空间</p>
+<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0){
+            return 0;
+        }
+        int height_size = height.length;
+        int[] leftMaxs = new int[height_size];
+        int[] rightMaxs = new int[height_size];
+        leftMaxs[0] = height[0];
+        rightMaxs[height_size - 1] = height[height_size - 1];
+
+        for(int i = 1; i < height_size; i++){
+            leftMaxs[i] = Math.max(height[i], leftMaxs[i - 1]);
+            rightMaxs[height_size - i - 1] = Math.max(height[height_size - i - 1], rightMaxs[height_size - i]);
+        }
+        int result = 0;
+        for(int i = 1; i < height_size - 1; i++){
+            result += Math.min(leftMaxs[i], rightMaxs[i]) - height[i];
+        }
+        return result;
+    }
+}</code></pre>
+<h3 id="思路三代码"><a href="#思路三代码" class="headerlink" title="思路三代码"></a>思路三代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length < 3){
+            return 0;
+        }
+        int result = 0;
+        int left = 0;
+        int right = height.length - 1;
+        int maxRight = 0;
+        int maxLeft = 0;
+        while (left < right){
+            if (height[left] < height[right]){
+                if(maxLeft < height[left]){
+                    maxLeft = height[left];
+                }else{
+                    result += maxLeft - height[left];
+                }
+                left++;
+            }else{
+                if(maxRight < height[right]){
+                    maxRight = height[right];
+                }else{
+                    result += maxRight - height[right];
+                }
+                right --;
+            }
+        }
+        return result;
+    }
+}</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路3时间复杂度"><a href="#思路3时间复杂度" class="headerlink" title="思路3时间复杂度"></a>思路3时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路3空间复杂度"><a href="#思路3空间复杂度" class="headerlink" title="思路3空间复杂度"></a>思路3空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -497,7 +524,7 @@ class Solution {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://weijunlei.github.io/2020/04/06/leetcode-138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao/">https://weijunlei.github.io/2020/04/06/leetcode-138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-biao/</a>
+                    <a href="https://weijunlei.github.io/2020/06/29/leetcode-42-jie-yu-shui/">https://weijunlei.github.io/2020/06/29/leetcode-42-jie-yu-shui/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -534,7 +561,19 @@ class Solution {
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Leetcode/">
+                                    <span class="chip bg-color">Leetcode</span>
+                                </a>
+                            
+                                <a href="/tags/Hard/">
+                                    <span class="chip bg-color">Hard</span>
+                                </a>
+                            
+                                <a href="/tags/DP/">
+                                    <span class="chip bg-color">DP</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -578,7 +617,7 @@ class Solution {
         repo: 'weijunlei.github.io',
         owner: 'weijunlei',
         admin: "weijunlei",
-        id: '2020-04-06T00-27-28',
+        id: '2020-06-29T11-40-50',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -599,30 +638,31 @@ class Solution {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/06/leetcode-141-huan-xing-lian-biao/">
+                <a href="/2020/06/29/leetcode-42-jie-yu-shui/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:141. 环形链表">
+                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="Leetcode:42. 接雨水">
                         
-                        <span class="card-title">Leetcode:141. 环形链表</span>
+                        <span class="card-title">Leetcode:42. 接雨水</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:141. 环形链表题目描述给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。示例 1：输入：
+                            Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -635,6 +675,7 @@ class Solution {
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -642,12 +683,12 @@ class Solution {
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
+                    <a href="/tags/Hard/">
+                        <span class="chip bg-color">Hard</span>
                     </a>
                     
-                    <a href="/tags/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">
-                        <span class="chip bg-color">快慢指针</span>
+                    <a href="/tags/DP/">
+                        <span class="chip bg-color">DP</span>
                     </a>
                     
                 </div>
@@ -661,27 +702,26 @@ class Solution {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/05/leetcode-150-ni-bo-lan-biao-da-shi-qiu-zhi/">
+                <a href="/2020/06/07/leetcode-40-zu-he-zong-he-ii/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:150. 逆波兰表达式求值">
+                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:40. 组合总和 II">
                         
-                        <span class="card-title">Leetcode:150. 逆波兰表达式求值</span>
+                        <span class="card-title">Leetcode:40. 组合总和 II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
+                            Leetcode: 40. 组合总和 II题目描述给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
-给定逆波兰表达式总是有效的
+candidates 中的每个数字在每个组合中只
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-07
                             </span>
                         <span class="publish-author">
                             
@@ -706,8 +746,12 @@ class Solution {
                         <span class="chip bg-color">Medium</span>
                     </a>
                     
-                    <a href="/tags/%E6%A0%88/">
-                        <span class="chip bg-color">栈</span>
+                    <a href="/tags/%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">回溯</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%AA%E6%9E%9D/">
+                        <span class="chip bg-color">剪枝</span>
                     </a>
                     
                 </div>
