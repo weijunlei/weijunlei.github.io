@@ -6,7 +6,7 @@
   <link href="https://weijunlei.github.io/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2020-06-29T07:23:49.066Z</updated>
+  <updated>2023-10-25T16:53:56.485Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>段永平投资问答录</title>
+    <link href="https://weijunlei.github.io/2023/10/26/duan-yong-ping-tou-zi-wen-da-lu/"/>
+    <id>https://weijunlei.github.io/2023/10/26/duan-yong-ping-tou-zi-wen-da-lu/</id>
+    <published>2023-10-25T16:40:13.000Z</published>
+    <updated>2023-10-25T16:53:56.485Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;雪球特别版：段永平投资问答录（商业逻辑篇）&quot;&gt;&lt;a href=&quot;#雪球特别版：段永平投资问答录（商业逻辑篇）&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="杂书" scheme="https://weijunlei.github.io/categories/%E6%9D%82%E4%B9%A6/"/>
+    
+    
+    <category term="财经" scheme="https://weijunlei.github.io/tags/%E8%B4%A2%E7%BB%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode:42. 接雨水</title>
@@ -572,35 +597,6 @@
     <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
     
     <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:127. 单词接龙</title>
-    <link href="https://weijunlei.github.io/2020/04/28/leetcode-127-dan-ci-jie-long/"/>
-    <id>https://weijunlei.github.io/2020/04/28/leetcode-127-dan-ci-jie-long/</id>
-    <published>2020-04-28T15:05:27.000Z</published>
-    <updated>2020-04-28T16:33:14.537Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Leetcode-127-单词接龙&quot;&gt;&lt;a href=&quot;#Leetcode-127-单词接龙&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 127. 单词接龙&quot;&gt;&lt;/a&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-    <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-    <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
     
   </entry>
   
