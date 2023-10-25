@@ -5,7 +5,8 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="SAE：Rank+(预训练+GNN联合训练), 小风雷">
-    <meta name="description" content="SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume">
+    <meta name="description" content="
+  1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -26,8 +27,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -416,22 +421,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="SAE：rank-预训练-GNN联合训练"><a href="#SAE：rank-预训练-GNN联合训练" class="headerlink" title="SAE：rank+(预训练+GNN联合训练)"></a>SAE：rank+(预训练+GNN联合训练)</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1911.00484.pdf" target="_blank" rel="noopener">Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents</a></p>
-<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>首先Multi-Head Attention以Rank方式挑选问题相关文章，然后使用预训练模型得到Span信息 + GNN获取支撑句以及回答类型的联合训练的方式得到最终阅读理解的答案以及解释。</p>
-<h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>构建目前阅读理解通用流程，并在各个流程中提出自己的优化方法。首先通过对比排序的方式过滤掉答案无关段落，然后通过答案预测任务和支撑句预测任务联合训练得到最终的结果。</p>
-<h3 id="实现亮点"><a href="#实现亮点" class="headerlink" title="实现亮点"></a>实现亮点</h3><ol>
-<li>使用Multi-Head Attention实现对段落的rank<br><img src="https://i.loli.net/2020/03/04/txmFIgXZ8S6quar.png" alt="document_selector.png"><br>rank策略是为段落设定不同的rank值，如果段落为支撑句则rank值为1，若段落包含答案则rank值为2，其余为零。在训练过程中使用句对比较使用Multi-Head Attention进行训练。然后取top k相关段落。</li>
-<li>使用GNN得到支撑句以及答案类型<br><img src="https://i.loli.net/2020/03/04/jFKb8pgYSdMVTCq.png" alt="sup_type_gnn.png"><br>将BERT编码后的Sentence节点输入到GNN中，然后使用GCN的训练策略达到图平衡。然后对平衡后的节点接两层感知机进行支撑句预测，同时使用支撑句label+graph attention+两层感知机的方式获取答案类型</li>
-<li>将span预测、支撑句和答案类型预测联合训练<br><img src="https://i.loli.net/2020/03/04/YDywU7eLtdIcbmp.png" alt="answer_span_sup.png"><br>以上图的方式获得答案span，然后加上上个亮点的支撑段落抽取以及答案类型判断获取联合损失进行训练。<br>$$ L = \gamma L^{span} + BCE(\hat{y}^{sp}, y^{sp}) + CE(\hat{y}^{ans}, y^{ans}) $$<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3>在HotpotQA的非开放域的数据集上实现次SOTA(截止该文章发表)<h4 id="消融实验分析"><a href="#消融实验分析" class="headerlink" title="消融实验分析"></a>消融实验分析</h4></li>
-</ol>
-<ul>
-<li>整体分析<br><img src="https://i.loli.net/2020/03/04/WbyeoSvV7dGU4uP.png" alt="compare.png"><br>整体上比上一轮顶会方法效果提升绝对值较大</li>
-<li>段落挑选分析<br><img src="https://i.loli.net/2020/03/04/LTfGYwjOiI9h75M.png" alt="selector_compare.png"><br>加上支撑段落挑选之后最终效果提升有3%~4%,但是在挑选支撑段落上加上MHSA EM可以提升15%+，该方法提升效果还是很明显的，rank的好处:smile:</li>
-<li>GNN实现效果分析<br><img src="https://i.loli.net/2020/03/04/Jg6PvsA4mZj3YXl.png" alt="gnn_compare.png"><br>从实验来看是否从一个段落中的节点边最有效，有问题实体边以及相同实体效果替身不是很明显 :s。整体来看提升1.4%,提升较小，但是同样重点使用GNN的<a href="https://arxiv.org/pdf/1911.03631.pdf" target="_blank" rel="noopener">HGN</a>提升较大,分层GNN赛高<h3 id="细节发现"><a href="#细节发现" class="headerlink" title="细节发现"></a>细节发现</h3></li>
-<li>在进行段落挑选时选用2效果较好，和齐鹏的<a href="https://arxiv.org/pdf/1910.07000.pdf" target="_blank" rel="noopener">GoldEn Retriever</a>定的参数一样:joy:</li>
-<li>在最后预测时答案和答案类型使用的是两层多层感知机，而是否是支撑段落使用的一层感知机。炼丹++ :s<h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3>无<h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3>无</li>
-</ul>
-
+                <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="2b76aef1a815c82976c14d985ad509b9bc4dfa5beaa486db50c97d04dd5dd987">1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195d108bdc6f624c6df2728114e822c7fe351fd9860c0db17653ff8f889190f004cdc2d295a969ffa5e85856dc253014aa3a3b7cd8a38ad9e17ee988c3f050825f213cba14198ae87255c10765719a12f73f3ea49d3d688160d904810342dbf142ddfa8781dcbb06e53646fe869e5dedb132ce9b33f4c800bae4d9521a5f4aef888d7f6944a2c5615e785110a353bb608e404ca1092928c606a2004317e9a08c3bf571c055d6412b3c9720cf63befcbf20ad56e9fc715811f876b7e9a3043409f5526fa57c3b97dfe05bc02cf8ba517ed522f87db223ae121f2c25731c0bc93dc0f9095c2ac598dc1f27477eabea67b7a00d782be27ae2b5a68c5c8efbbb292706ee983782dbf149ec66d5a333368ebbc971ee4ae2fc9ccd83c71176f5a50be8764a27daa1b4dba4121594c2043667cb819218f07c707f29ae31d6ac662f1f5e8dae7f454fc7d3cd2aa6ec0c6dd6c4a36e498a9dc3dc3492cbbf00afa28d994a9bd2decf828708e0b9f96db343c8b197ebd0ea67b580f346cdc3210eb51288d8e54424b23545210610d705f6cfbf06d523cc9e5d04e9349d67737340d68b6b561480a4ad665d03367295022b23f31da77778063c1383882ad8e16b91fd0d03893755a115ef1c730948e7b0dc4e66750913707b8cc2a075db19dd0845fcf9fc62ca58e29ad078aa925bf745e0a475491ae61845e8b7180a79235b084492a6d249b9cba15f4d57513d374b3d4296548441ff221e51b20f666e1a239a7f1bf7c0a21868a0bf524da0d74a9ac26961231ad0c039f8551603e926af7d69a6fe522eb3edeb2da86398e6d991fa5e04c6a528e2625fd7c0fee6422e05a41393863c2238ced0e9723e5b212b8435c1fdc0bfe8a420d101278d11054ece14065ff2ce0396474156a6a18ad5138396ed1f6468fdf3d1f964333aa8d3f5081e18584803050824bd4941faaf3101d6f2f7e453a4e85882c2be35d3a8a88a78bd42fe378d58bdac5e298aca5ee36fdfedb37b7cf0564b76db392e328c66660329563125b14d4c5c883f73904bb62ed940180ee06b17187e475f83d81dc279ededce0bad1d6515ca58356d08f2baf59f2e8f77eab8b611a73fcdb8695848ba4dddfcd10767759b4db0ab64fa9a0a06e1a080d8f296c9a39b887656141f90f01f7b2cf43ddd518e4e774e6af353a2a1929ad52f3b8153c3572705ec9c7e70ab4515d658f0ea978b6a9a735efebde637eda5221a49af696c16147e684e1f5f7a7461b676f0bbc08d40a52f93f9c708a98dbaa81dbac910bff9f3b339bbf7f948ec18e972eddb8e5c95a88e61906c40bf948eda5a0785282e92df4c6a2a0252630a836ff6e8bdc2856a2af0e246d364cee2c9abf3f953c594f019ea88af1ecaf9a1ce02c15af35e48811c0a2793acf646f95e46140073ffc8d6db44eea5322662e91adaa2268d248136eb2dab151d4fc83d1ee6756769ac934a4f176d78d4257c6015dec083bb1b1a032e0217bc596131ed207a571c4f96bcdd7dd80917199c8e98a40f5ce0d9c3280e4b7cabfc006abce3a92c64e1ea5c041dc61229577b4d1b4c87c1166f983b5e53be5c0302920a4a1ead89356faa1e2ebd95a8e71d87e10aa3751f6e6d26254f6e2f2930ef04dbe8b08b46d62708e51d0f6e3e8e2f80bd50aaff88fb6ff9e814305ef34bf5c4e26bd620d1c807e48b94354e5d93161f11e267d9bf73ae92bde4146bf700db17761b2777a63d7537cb31010a18e2c7dba01b3e96f71be5cc3f15e5c4c8ff66e321a5883d89a359993a818f7eb5624ac33648eb4f5486b29203f24697dc2921ecd218787a2a48faccf6f062f989ed2f0f6b16c9c70f6a53d7296cac082dac9238a378aa150444253fc79efbb83bc8c5092826717cc68e6785566a830e69ddda403652f97edc4e9360430d6afb56212bd3dee3d85348957db5a7dd6e8231b1153e06fd8ff5ce5f3e89ddaac76ce169f5eae395b755a12e00287e3385e355a938eb19022ef2c6f95792cb87e77c70ccebc203ba1a1a470c9c91d46ebc3a901c6930cf0a2b2c6d1f4dd55fabbd307bfe0edbda10494bfdac1c3ce93335e1066302273fc3eaf318007637faf245082a39da9e8f8b8d81f20199f9f16e9019d80161c040ecbfab129e018c1a8cc2df565e369858a82763ab4b6435840f635046a32206fbf60dfcf657f772285f72109770698e7a467a8a1db3c902f330698632cd5b1315fac13bfce6d85b0f36e1e97648e125709c0474e244d054b1c7f276b29b2ed5315d0b888102ee9cb914882b05f49a560f11b6f1ca24384b5c29aead7c18651c2bf0ecc5e9a7c4be6b2249b86bda9cd09d653e6f74776f7e2156bf5ae36ae6b219dc8d26308b753295669d4c140f4c1de8b79ce249b5976e352260015176d7e318e429588123c5687cef694615fca1f837abf3b9aeb41a2e3cfaf4afcf7153adc0219f01b354cae13f9451b32801c7cb815f2a8e85b5a4c4d19ef5f42d34f654d3468c9be7f030c595edfc2d869e25503eff7960a9a4134acdb450f0cd45e3fbea78bb4e16094e54ac9fc8c4c64715d4d36410116c82fb90e93ae0b054ef5a04ad2da97529c6d45540bafcdd373416ebe4115ff2fd735d9a4343adb85a30de47357b896e5974f4582593cac8f7ddb976060e108f1ff7ea217c7aa000c07e684b5601218acc16e875829438c357027ae154f826456d44bf492d09e3e68e831c2d128a3c3c3a529df67fb49547f9404f8edaca7b36343a7bb97265923267b8f70a8c5a114336b4611d851db92c972381af6b67c27454f3749b48480a134de2adfa725dec119f4ac89a0631f0a7cbd66b8def4b187cc2eaade4b8d18b96015350db7a96aa4826b551b23c48f9282865689978c21e31172d3f2201c605629995d662328b2047f1acd348ea2030c6e1ab82388993917cc8a699f96d233bf6c5caf2833862373b16322f89415fd842dd22de5081b69344dcbe9e344f60b70879be68092f0fd72b8640ba86de9fa89f81d320de68f14103f21b90b42b73e31cdc0124dd7c11e1067a0853cc728b8b355943e0b4403b526062644ed278a5c228190ce1ab601da5f2bc39da551d9bb4e4520b26f313c40c9ebf5d2791afbf080b3318bdcb2a2c0d78b802762f852f62664609db25c82d9d8d78c23fe424edd8bd617ce5daf593cec2b84661a2709c9d5271e1a39a11054803bd59290d84636c6ad6cb979898fb68bc8010bc7d5a11b25481bbddef18d60b8dea1ca13e0ed20aedb98f9e2817a2cf2cd9069334ac97135b2f8e571a5bdba7a02add9723877e3e145f8d1e389aa14307cb05f0821ee23aefa9f42a096cccaa8b0120b3c2fba67d2adddf204f166ead3192f2ad14adbce4e1c938b5b2b803a80d4fb75fb674001ee4a087268641bb6e9fdf934befd241aa02b2b5276a657895c347a4ec8c05673d3ab78d3408fb90038c67f75436f14210760c551a926b8b8b514dde2159f672fcd3a8c7046ecb88443fa96617d8eb3ee48b4330d895e243967282134ff8973f708cd81391df692d9c83adceb66243292ee4d6d34de19361f24e1edf9f750e69e5fd9b28f10ba6f9c822c7c50fbcc19fb433ff9197907bcbf7c93c6bb147ce3c805b4b67d02a09c8dc51cef7fa2ca025b1cf2f6da62e590fd4955b23ed0e5fa4fa41688862259bf63c61f2405180db420e2549c65f20b892844918e10766928becae70f833ea15a370163168ddc2b7fd4bae5d0dea8f3644a856fbad13c2a119c5689242523b880bf5804be60c4ef8692ae0196daddfbf43b37da34995ed89199eb26b6cd7ecc3863a6c4bf0a451bdd845b97e3643485b2c2b6119397567d1dd639d85cef4f7bc2ca333a3e850f72ec4c2c2e89eb95bce2f67af8b57486915b06ca1e4c3869b34426aab77e3b7a963f7a55161a2281a00c2896195ace056dc863deeeaca2be1329de40d38e65729eab088953d534df374d57f073ccd12ea021a3aaf2e75bde2b1d235b89fa058b561a959639626cd691d0aaba7d7e8146cafa914b5946c577e6821272cb7380165e364dabbb468d7d0c7ef9d151f7d53c047f2980cea1a363f007ba04939256f63f917e02a40fa894467458ea1d62b13f3cac0ecbe9e554eb05fad6e7b40224c032fddcbaf5eb0e010eff91713c30fec603a89d71d0901f7b2012e077fc4e34b2c39387484ae82462cb05cb9ee31e4d1b90ae0bcbbe45823c661f8fb3239b50c7e31a6efb04bf8cba8651c32ee63d523acb97bbef0c20c24ed6a311c7165d306f4b905f212558965564a65ec50effe9116845ea882e112dbdd5913b1e57e640201be6c055383b6734d9b96d9ac04b421c243930db00e3712978b5b37755af45b3cb5528a678654cdaff815ac83ce039948158317b94c59b65c21c745530bab8ca2eb9189307c8e98f8a02a481ac93bfbb2aa203c184cef80dbebbbb6b7c7f24c773990843d14c8f86088377ccc269e0293514a939cc350b3fc1249532485256d6d81ae24890fa5bb1d7c7fd9a07495721a2415914051ff2dd3075034edbc1cd832cd637af0a4828e07170edc3bf57a6330e5c545681754b19f6e0ebf00b62a533c7f9fca012135fcf2c396453e9770b67fe1f21be3dd9ae01e465479d531d12fb7ac214b585dba2790cbb3e64081d03cfb7580664766c61e50ce44773d4ab33fa6ca43307d90ba8bfb5b7b51027cce25a921200e5a7cce33d5efba3023d86138c92ae96b9cd49433fdc5d30e6acbee13d242f4962735694723932bb62ed83079678237676f50027d221958d87c57ef21f8fc850689849e752073904f6e8590fca4bcf6c15d00f271f9245440ea05e26341793a74ca9f4e05807110696ec12916243201e40588612b5b81356a89655a387692dafe31d83f95961936283762c5a7ec98ecc9273030c5b864e3003d4bdb47d9d41d1ab2cc57c4b5c9bbed56fa098ee3f30c0504eb5c6da9211a62325cfdd5608ad28bb752a1220471a2e8f6d6668f6973479fee4e0a4a5e52b6a974e4e372f9b9fde6b42b32f0ccc2e69141d72955fd301b9284f85c81a48600864d0653318e43dea04f0983d7140b676b07137bd4a42b236acfda5a05e230037d2955798666ff51c4cc06625979a829821c7b46b629843273001cefd6f0d3f8c6cf8bb80c65410abb18e984bc216d6c686fe3c336af70ebcb5a63cd8e4f04d9f3a3509d5ba558ea984317b57616614b1a6e6ffe45b87476028ad9b6b96164950a9fe92110d2b8657a5d2a43da146ea540ae2cf1b3e031dd5382d8ef8b87ee0f31ab15438c700e59507793d17b0ee871617de6bc482781015ac7408eb70c013d7dfacf6e562446cab855cf68f912b89f8828a786b26289ab16d657863107799f7bc8be8bf34088e15bb2789e137696d0c01ad5331b5f7154f5beeda161678b2d80f5b51104e778aa46c1c1e97cfbad3042a9ca12b6ba7f250ffd9e1b75e846fcb8b03c6181289feba2b2ceade60d24ccc246531657f61cd0e924009ef9e181d90b53fbd2b5179b43dfe0c4730f93d73f86054a010936cebf39d2fe6f9d389078265d01f34fb773092a0aa1df77d658126ca3f2cfd3a4a0ca9fc56b2ad4748ae6c720d058c363b7008e1c284bd86efbc0618642129c673fe28d2f7926351b9973df07fc9b82a0215379131b189f5d6d6cfb842dc3ea7759875576d952ae2995b6257ad98865f4d513cd5fee71fa1b6e9a6d68fcbc9be922733ff93394fac235a7888c482cc4f333a05c0633a60d29f070b599f98117ee5544dd688354d12240e15c33061927501b763405b975c78182d4da036dbc595a651a8719c385f7c65b08dc8174ba3d6d9c9505c468792a212b3bb917b733bd50daeebb2e11fa200f20cba5034e2c0d74c11c3825ddfe9e9055f7c4a4acb296c5ab074f385458af37224ae3ebfaaca1391818ee8f189da703d058c10eb92dc73217298d4da6d854c987eaa80161f7f0950a100ae82cd178c08b5345e4f7bd684d6193a10396d737093efa725457b2fb5c9d9b11f666fb217657a74802f4e549f12106416496318aee43ca3fa90802fffb3c8ea887e9f1d3a6cef400c2b098b81257f3621ace3475d65c9c9acef641adc9c29ec516dab940a60c2e29d2f9bfc854df46396336aeeac88a10556e6c94c9329165363ce194b8cbf356e9a5da48079c91fc5a6e5c7b0dfb48833fe3a9802474a72fab5927e25b31056d1275fe452e315e3ace0a94670a3af946791eee2eb4ee8f4725e038e0bad64b225631ad5758122e846d74313edebe704a5f046f703108aa62b12b639933e900bb190cc5f0fee40dc38c18d2444585b85a40eedca4ffd9d8dedd427848e7172c34a28bfb24aa751f323b43809a7d5e4b2661c4ac5b0c7152a87977da0bdd9402e33f621aa36a19c2fef095c56791d73a</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
             </div>
             <hr/>
 
@@ -593,7 +594,9 @@
                             最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
 示例1:输入: &quot;(()&quot;
 输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;示例2:输入: &q
+解释: 最长有效括号子串为 &quot;()&quot;
+
+示例2:输入: 
                         
                     </div>
                     <div class="publish-info">
@@ -1034,24 +1037,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

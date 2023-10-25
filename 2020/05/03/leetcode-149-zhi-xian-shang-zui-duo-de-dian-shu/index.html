@@ -5,13 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:149. 直线上最多的点数, 小风雷">
-    <meta name="description" content="Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。示例 1:输入: [[1,1],[2,2],[3,3]]
+    <meta name="description" content="Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+
+示例 1:输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
 |
-|        o
-|   ">
+|        o
+| ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -32,8 +34,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -418,85 +424,92 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-149-直线上最多的点数"><a href="#Leetcode-149-直线上最多的点数" class="headerlink" title="Leetcode: 149. 直线上最多的点数"></a><a href="https://leetcode-cn.com/problems/max-points-on-a-line/" target="_blank" rel="noopener">Leetcode: 149. 直线上最多的点数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],[2,2],[3,3]]
+                <h1 id="Leetcode-149-直线上最多的点数"><a href="#Leetcode-149-直线上最多的点数" class="headerlink" title="Leetcode: 149. 直线上最多的点数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-points-on-a-line/">Leetcode: 149. 直线上最多的点数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
 |
-|        o
-|     o
-|  o  
+|        o
+|     o
+|  o  
 +-------------&gt;
-0  1  2  3  4</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+0  1  2  3  4
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
 输出: 4
 解释:
 ^
 |
 |  o
-|     o        o
-|        o
-|  o        o
+|     o        o
+|        o
+|  o        o
 +-------------------&gt;
-0  1  2  3  4  5  6</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-点斜法记录直线-hashMap"><a href="#思路1-点斜法记录直线-hashMap" class="headerlink" title="思路1: 点斜法记录直线+hashMap"></a>思路1: 点斜法记录直线+hashMap</h3><p>使用点斜法记录i与i+1开始的斜率值，保存最大值，并记录重复值，最后比较结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int maxPoints(int[][] points) {
-        if (points.length < 3){
+0  1  2  3  4  5  6
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-点斜法记录直线-hashMap"><a href="#思路1-点斜法记录直线-hashMap" class="headerlink" title="思路1: 点斜法记录直线+hashMap"></a>思路1: 点斜法记录直线+hashMap</h3><p>使用点斜法记录i与i+1开始的斜率值，保存最大值，并记录重复值，最后比较结果</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int maxPoints(int[][] points) &#123;
+        if (points.length < 3)&#123;
             return points.length;
-        }
+        &#125;
         int duplicatedNum = 0;
         int num = points.length;
         int result = 0;
-        for(int i = 0;i < num - 1; i++){
-            if (points[i][0] != points[i + 1][0] || points[i][1] != points[i+1][1]){
+        for(int i = 0;i < num - 1; i++)&#123;
+            if (points[i][0] != points[i + 1][0] || points[i][1] != points[i+1][1])&#123;
                 break;
-            }
+            &#125;
             duplicatedNum += 1;
-        }
-        if (duplicatedNum - 1 == num){
+        &#125;
+        if (duplicatedNum - 1 == num)&#123;
             return num;
-        }
-
-        for(int i = 0; i < num - 1; i++){
+        &#125;
+        
+        for(int i = 0; i < num - 1; i++)&#123;
             duplicatedNum = 0;
             Map<String, Integer> tempMap = new HashMap<>();
             int tempMax = 0;
-            for(int j = i + 1; j < num; j++){
+            for(int j = i + 1; j < num; j++)&#123;
                 int x = points[i][0] - points[j][0];
                 int y = points[i][1] - points[j][1];
                 int tempGcb = gcb(x, y);
-                if (x == 0 && y == 0){
+                if (x == 0 && y == 0)&#123;
                     duplicatedNum += 1;
                     continue;
-                }
+                &#125;
                 x = x / tempGcb;
                 y = y / tempGcb;
                 String tempKey = x + "#" + y;
-                if (!tempMap.containsKey(tempKey)){
+                if (!tempMap.containsKey(tempKey))&#123;
                     tempMap.put(tempKey, 0);
-                }
+                &#125;
                 tempMap.put(tempKey, tempMap.get(tempKey) + 1);
-                if (tempMap.get(tempKey) > tempMax){
+                if (tempMap.get(tempKey) > tempMax)&#123;
                     tempMax = tempMap.get(tempKey);
-                }
-
-            }
-            if (tempMax + duplicatedNum + 1 > result){
+                &#125;
+                
+            &#125;
+            if (tempMax + duplicatedNum + 1 > result)&#123;
                 result = tempMax + duplicatedNum + 1;
-            }
-        }
+            &#125;
+        &#125;
         return result;
-
-    }
-
-    private int gcb(int a, int b){
-        while(b != 0){
+        
+    &#125;
+    
+    private int gcb(int a, int b)&#123;
+        while(b != 0)&#123;
             int temp = a % b;
             a = b;
             b = temp;
-        }
+        &#125;
         return a;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n^2)$</p>
 
@@ -654,11 +667,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。示例 1:输入: 3
+                            Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。
+
+示例 1:输入: 3
 输出: 0
-解释: 3! = 6, 尾数中没有零。示例 2:输入: 5
+解释: 3! = 6, 尾数中没有零。
+
+示例 2:输入: 5
 输出: 1
-解释: 5! = 120, 尾数中有 
+解释: 5! = 120, 尾
                         
                     </div>
                     <div class="publish-info">
@@ -715,7 +732,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:191. 位1的个数题目描述编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+                            Leetcode:191. 位1的个数题目描述编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
 示例 1：输入：00000000000000000000000000001011
 输出：
                         
@@ -1098,24 +1115,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

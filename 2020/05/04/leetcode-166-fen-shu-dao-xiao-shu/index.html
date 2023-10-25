@@ -5,8 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:166. 分数到小数, 小风雷">
-    <meta name="description" content="Leetcode:166. 分数到小数题目描述给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
-如果小数部分为循环小数，则将循环的部分括在括号内。示例 1:输入: numerato">
+    <meta name="description" content="Leetcode:166. 分数到小数题目描述给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
+如果小数部分为循环小数，则将循环的部分括在括号内。
+
+示例 1:输入: numera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,8 +29,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -413,53 +419,62 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-166-分数到小数"><a href="#Leetcode-166-分数到小数" class="headerlink" title="Leetcode:166. 分数到小数"></a><a href="https://leetcode-cn.com/problems/fraction-to-recurring-decimal/" target="_blank" rel="noopener">Leetcode:166. 分数到小数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
-如果小数部分为循环小数，则将循环的部分括在括号内。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: numerator = 1, denominator = 2
-输出: &quot;0.5&quot;</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: numerator = 2, denominator = 1
-输出: &quot;2&quot;</code></pre><h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: numerator = 2, denominator = 3
-输出: &quot;0.(6)&quot;</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-长除法"><a href="#思路1-长除法" class="headerlink" title="思路1 长除法"></a>思路1 长除法</h3><p>当余数相等时会重复，需要注意的点是边界问题，正负极值，所以可以改为long类型</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public String fractionToDecimal(int numerator, int denominator) {
-        if (numerator == 0){
+                <h1 id="Leetcode-166-分数到小数"><a href="#Leetcode-166-分数到小数" class="headerlink" title="Leetcode:166. 分数到小数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fraction-to-recurring-decimal/">Leetcode:166. 分数到小数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
+如果小数部分为循环小数，则将循环的部分括在括号内。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: numerator = 1, denominator = 2
+输出: &quot;0.5&quot;
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: numerator = 2, denominator = 1
+输出: &quot;2&quot;
+</code></pre>
+<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: numerator = 2, denominator = 3
+输出: &quot;0.(6)&quot;
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-长除法"><a href="#思路1-长除法" class="headerlink" title="思路1 长除法"></a>思路1 长除法</h3><p>当余数相等时会重复，需要注意的点是边界问题，正负极值，所以可以改为long类型</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public String fractionToDecimal(int numerator, int denominator) &#123;
+        if (numerator == 0)&#123;
             return "0";
-        }
-        if (denominator == 0){
+        &#125;
+        if (denominator == 0)&#123;
             return "";
-        }
+        &#125;
         StringBuilder sb = new StringBuilder();
         long devideNum = Math.abs(Long.valueOf(numerator));
         long devidedNum = Math.abs(Long.valueOf(denominator));
         int negetiveNum = 0;
-        if (numerator < 0){
+        if (numerator < 0)&#123;
             negetiveNum += 1;
-        }
-        if (denominator < 0){
+        &#125;
+        if (denominator < 0)&#123;
             negetiveNum += 1;
-        }
+        &#125;
         long remain = devideNum % devidedNum;
-        if (negetiveNum == 1){
+        if (negetiveNum == 1)&#123;
             sb.append("-");
-        }
+        &#125;
         sb.append(String.valueOf(devideNum / devidedNum));
-        if (remain == 0){
+        if (remain == 0)&#123;
             return sb.toString();
-        }
+        &#125;
         sb.append(".");
         Map<Long, Integer> remainMap = new HashMap<>();
-        while (remain != 0){
-            if (remainMap.containsKey(remain)){
+        while (remain != 0)&#123;
+            if (remainMap.containsKey(remain))&#123;
                 sb.insert(remainMap.get(remain), "(");
                 sb.append(")");
                 break;
-            }
+            &#125;
             remainMap.put(remain, sb.length());
             remain *= 10;
             sb.append(String.valueOf(remain / devidedNum));
             remain = remain % devidedNum;
-        }
+        &#125;
         return sb.toString();
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>非线性时间？（但整数有界）</p>
 <h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>非线性时间？</p>
 
@@ -617,9 +632,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:204. 计数质数题目描述统计所有小于非负整数 n 的质数的数量。示例:输入: 10
+                            Leetcode:204. 计数质数题目描述统计所有小于非负整数 n 的质数的数量。
+
+示例:输入: 10
 输出: 4
-解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。思路思路1统计从2开始到n的所有数进行非质数标记
+解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+
+思路思路1统计从2开始到n的所有数进行非
                         
                     </div>
                     <div class="publish-info">
@@ -676,11 +695,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。示例 1:输入: 3
+                            Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。
+
+示例 1:输入: 3
 输出: 0
-解释: 3! = 6, 尾数中没有零。示例 2:输入: 5
+解释: 3! = 6, 尾数中没有零。
+
+示例 2:输入: 5
 输出: 1
-解释: 5! = 120, 尾数中有 
+解释: 5! = 120, 尾
                         
                     </div>
                     <div class="publish-info">
@@ -1061,24 +1084,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

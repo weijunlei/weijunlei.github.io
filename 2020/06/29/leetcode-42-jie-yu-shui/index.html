@@ -5,7 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:42. 接雨水, 小风雷">
-    <meta name="description" content="Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+    <meta name="description" content="Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -27,8 +27,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -413,86 +417,93 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-42-接雨水"><a href="#Leetcode-42-接雨水" class="headerlink" title="Leetcode:42. 接雨水"></a><a href="https://leetcode-cn.com/problems/trapping-rain-water/" target="_blank" rel="noopener">Leetcode:42. 接雨水</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
-上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [0,1,0,2,1,0,1,3,2,1,2,1]
-输出: 6</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力解决"><a href="#思路1-暴力解决" class="headerlink" title="思路1:暴力解决"></a>思路1:暴力解决</h3><p>对每个位置找最大左右边界的最小值</p>
-<h3 id="思路2-DP"><a href="#思路2-DP" class="headerlink" title="思路2:DP"></a>思路2:DP</h3><p>记录每个位置的最大左边界和右边界，然后利用dp[i] = max(dp[i], dp[i - 1])进行状态更新，使用记录的左右边界的最小值减去当前高度获取结果</p>
+                <h1 id="Leetcode-42-接雨水"><a href="#Leetcode-42-接雨水" class="headerlink" title="Leetcode:42. 接雨水"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">Leetcode:42. 接雨水</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。
+</code></pre>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+输出: 6
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力解决"><a href="#思路1-暴力解决" class="headerlink" title="思路1:暴力解决"></a>思路1:暴力解决</h3><p>对每个位置找最大左右边界的最小值</p>
+<h3 id="思路2-DP"><a href="#思路2-DP" class="headerlink" title="思路2:DP"></a>思路2:DP</h3><p>记录每个位置的最大左边界和右边界，然后利用dp[i] &#x3D; max(dp[i], dp[i - 1])进行状态更新，使用记录的左右边界的最小值减去当前高度获取结果</p>
 <h3 id="思路3-双指针法"><a href="#思路3-双指针法" class="headerlink" title="思路3: 双指针法"></a>思路3: 双指针法</h3><p>实际上两个状态转移都只用到了一个原状态，故可以只记录左右最大值即可，在这个过程中，若左边最大值小于右边最小值，这取左边最大值减去当前值即获得当且可接雨水量</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int trap(int[] height) {
-        if (height == null || height.length < 3){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int trap(int[] height) &#123;
+        if (height == null || height.length < 3)&#123;
             return 0;
-        }
+        &#125;
         int result = 0;
         int height_size = height.length;
-        for(int i = 1; i < height_size - 1; i++){
+        for(int i = 1; i < height_size - 1; i++)&#123;
             int left_height = height[i];
             int right_heigh = height[i];
-            for(int j = 0; j < height_size; j++){
-                if(j < i && height[j] > left_height){
+            for(int j = 0; j < height_size; j++)&#123;
+                if(j < i && height[j] > left_height)&#123;
                     left_height = height[j];
-                }
-                if (j > i && height[j] > right_heigh){
+                &#125;
+                if (j > i && height[j] > right_heigh)&#123;
                     right_heigh = height[j];
-                }
-            }
+                &#125;
+            &#125;
             result += Math.min(left_height, right_heigh) - height[i];
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
-<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int trap(int[] height) {
-        if (height == null || height.length == 0){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int trap(int[] height) &#123;
+        if (height == null || height.length == 0)&#123;
             return 0;
-        }
+        &#125;
         int height_size = height.length;
         int[] leftMaxs = new int[height_size];
         int[] rightMaxs = new int[height_size];
         leftMaxs[0] = height[0];
         rightMaxs[height_size - 1] = height[height_size - 1];
 
-        for(int i = 1; i < height_size; i++){
+        for(int i = 1; i < height_size; i++)&#123;
             leftMaxs[i] = Math.max(height[i], leftMaxs[i - 1]);
             rightMaxs[height_size - i - 1] = Math.max(height[height_size - i - 1], rightMaxs[height_size - i]);
-        }
+        &#125;
         int result = 0;
-        for(int i = 1; i < height_size - 1; i++){
+        for(int i = 1; i < height_size - 1; i++)&#123;
             result += Math.min(leftMaxs[i], rightMaxs[i]) - height[i];
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
-<h3 id="思路三代码"><a href="#思路三代码" class="headerlink" title="思路三代码"></a>思路三代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int trap(int[] height) {
-        if (height == null || height.length < 3){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="思路三代码"><a href="#思路三代码" class="headerlink" title="思路三代码"></a>思路三代码</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int trap(int[] height) &#123;
+        if (height == null || height.length < 3)&#123;
             return 0;
-        }
+        &#125;
         int result = 0;
         int left = 0;
         int right = height.length - 1;
         int maxRight = 0;
         int maxLeft = 0;
-        while (left < right){
-            if (height[left] < height[right]){
-                if(maxLeft < height[left]){
+        while (left < right)&#123;
+            if (height[left] < height[right])&#123;
+                if(maxLeft < height[left])&#123;
                     maxLeft = height[left];
-                }else{
+                &#125;else&#123;
                     result += maxLeft - height[left];
-                }
+                &#125;
                 left++;
-            }else{
-                if(maxRight < height[right]){
+            &#125;else&#123;
+                if(maxRight < height[right])&#123;
                     maxRight = height[right];
-                }else{
+                &#125;else&#123;
                     result += maxRight - height[right];
-                }
+                &#125;
                 right --;
-            }
-        }
+            &#125;
+        &#125;
         return result;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
@@ -655,7 +666,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+                            Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接
                         
                     </div>
@@ -714,9 +725,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 40. 组合总和 II题目描述给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+                            Leetcode: 40. 组合总和 II题目描述给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-candidates 中的每个数字在每个组合中只
+candidates 中的每个数字在每个组合中只
                         
                     </div>
                     <div class="publish-info">
@@ -1101,24 +1112,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

@@ -7,7 +7,9 @@
     <meta name="keywords" content="Leetcode:341. 扁平化嵌套列表迭代器, 小风雷">
     <meta name="description" content="Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
-列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。示例 1:">
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
+
+示例 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,8 +30,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,17 +420,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-341-扁平化嵌套列表迭代器"><a href="#Leetcode-341-扁平化嵌套列表迭代器" class="headerlink" title="Leetcode:341. 扁平化嵌套列表迭代器"></a><a href="https://leetcode-cn.com/problems/flatten-nested-list-iterator/" target="_blank" rel="noopener">Leetcode:341. 扁平化嵌套列表迭代器</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+                <h1 id="Leetcode-341-扁平化嵌套列表迭代器"><a href="#Leetcode-341-扁平化嵌套列表迭代器" class="headerlink" title="Leetcode:341. 扁平化嵌套列表迭代器"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/flatten-nested-list-iterator/">Leetcode:341. 扁平化嵌套列表迭代器</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
-列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],2,[1,1]]
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],2,[1,1]]
 输出: [1,1,2,1,1]
-解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,1,2,1,1]。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [1,[4,[6]]]
+解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,1,2,1,1]。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [1,[4,[6]]]
 输出: [1,4,6]
-解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,4,6]。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用深度优先遍历获取递归的数字</p>
+解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,4,6]。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用深度优先遍历获取递归的数字</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">/**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
- * public interface NestedInteger {
+ * public interface NestedInteger &#123;
  *
  *     // @return true if this NestedInteger holds a single integer, rather than a nested list.
  *     public boolean isInteger();
@@ -436,44 +448,45 @@
  *     // @return the nested list that this NestedInteger holds, if it holds a nested list
  *     // Return null if this NestedInteger holds a single integer
  *     public List<NestedInteger> getList();
- * }
+ * &#125;
  */
-public class NestedIterator implements Iterator<Integer> {
-
+public class NestedIterator implements Iterator<Integer> &#123;
+    
     Queue<Integer> queue;
-    public NestedIterator(List<NestedInteger> nestedList) {
+    public NestedIterator(List<NestedInteger> nestedList) &#123;
         queue = new LinkedList<Integer>();
-        for(NestedInteger node: nestedList){
+        for(NestedInteger node: nestedList)&#123;
             DFS(node);
-        }
-    }
+        &#125;
+    &#125;
 
     @Override
-    public Integer next() {
+    public Integer next() &#123;
         return queue.poll();
-    }
+    &#125;
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNext() &#123;
         return !queue.isEmpty();
-    }
-
-    private void DFS(NestedInteger node){
-        if (node.isInteger()){
+    &#125;
+    
+    private void DFS(NestedInteger node)&#123;
+        if (node.isInteger())&#123;
             queue.offer(node.getInteger());
-        } else {
-            for(NestedInteger sonNode: node.getList()){
+        &#125; else &#123;
+            for(NestedInteger sonNode: node.getList())&#123;
                 DFS(sonNode);
-            }
-        }
-    }
-}
+            &#125;
+        &#125;
+    &#125;
+&#125;
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i = new NestedIterator(nestedList);
  * while (i.hasNext()) v[f()] = i.next();
- */</code></pre>
+ */
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$,n为元素个数</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
@@ -633,8 +646,10 @@ public class NestedIterator implements Iterator<Integer> {
                         
                             Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
 
-有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
-给定逆波兰表达式总是有效的
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
+
+说明：整数除法只保留整数部分。
+给定逆波兰表达式总是有
                         
                     </div>
                     <div class="publish-info">
@@ -693,7 +708,9 @@ public class NestedIterator implements Iterator<Integer> {
                         
                             Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &quot;3+
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
+
+示例 1:输入: &quot;
                         
                     </div>
                     <div class="publish-info">
@@ -1074,24 +1091,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

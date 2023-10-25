@@ -9,9 +9,9 @@
 
 一个数独的解法需遵循如下规则：
 
-数字 1-9 在每一行只能出现一次。
-数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分隔的 3">
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -32,8 +32,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -418,14 +422,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a href="https://leetcode-cn.com/problems/sudoku-solver/" target="_blank" rel="noopener">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。
+                <h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。
 
 一个数独的解法需遵循如下规则：
 
-数字 1-9 在每一行只能出现一次。
-数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
-空白格用 &#39;.&#39; 表示。
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+空白格用 &#39;.&#39; 表示。
 
 
 
@@ -433,80 +437,85 @@
 
 
 
-答案被标成红色。</code></pre><h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。
+答案被标成红色。
+</code></pre>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。
 你可以假设给定的数独只有唯一解。
-给定数独永远是 9x9 形式的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+给定数独永远是 9x9 形式的。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
     char[][] board;
     int[][] rowCount = new int[9][9];
     int[][] columnCount = new int[9][9];
     int[][] matrixCount = new int[9][9];
     boolean canSolve = false;
 
-    private boolean canSet(int row, int column, int num){
+    private boolean canSet(int row, int column, int num)&#123;
         int matrixIndex = (row / 3) * 3 + column / 3;
         return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;
-    }
+    &#125;
 
-    private void setNum(int row, int column, int num){
+    private void setNum(int row, int column, int num)&#123;
         int matrixIndex = (row / 3) * 3 + column / 3;
         rowCount[row][num - 1] += 1;
         columnCount[column][num - 1] += 1;
         matrixCount[matrixIndex][num - 1] += 1;
         board[row][column] = (char)('0' + num);
-    }
+    &#125;
 
-    private void removeNum(int row, int column, int num){
+    private void removeNum(int row, int column, int num)&#123;
         int matrixIndex = (row / 3) * 3 + column / 3;
         rowCount[row][num - 1] -= 1;
         columnCount[column][num - 1] -= 1;
         matrixCount[matrixIndex][num - 1] -= 1;
         board[row][column] = '.';
-    }
+    &#125;
 
-    private void setNext(int row, int column){
-        if (row == 8 && column == 8){
+    private void setNext(int row, int column)&#123;
+        if (row == 8 && column == 8)&#123;
             this.canSolve = true;
-        }
-        if (column != 8){
+        &#125;
+        if (column != 8)&#123;
             backTrack(row, column + 1);
-        }else{
+        &#125;else&#123;
             backTrack(row + 1, 0);
-        }
-    }
+        &#125;
+    &#125;
 
-    private void backTrack(int row, int column){
-        if (row > 8 || column > 8){
+    private void backTrack(int row, int column)&#123;
+        if (row > 8 || column > 8)&#123;
             return;
-        }
-        if (this.board[row][column] == '.'){
-            for(int i = 1; i < 10; i++){
-                if (canSet(row, column, i)){
+        &#125;
+        if (this.board[row][column] == '.')&#123;
+            for(int i = 1; i < 10; i++)&#123;
+                if (canSet(row, column, i))&#123;
                     setNum(row, column, i);
                     setNext(row, column);
-                    if (!this.canSolve){
+                    if (!this.canSolve)&#123;
                         removeNum(row, column, i);
-                    }
-                }
-            }
-        }else{
+                    &#125;
+                &#125;
+            &#125;
+        &#125;else&#123;
             setNext(row, column);
-        }
-    }
+        &#125;
+    &#125;
 
-    public void solveSudoku(char[][] board) {
+    public void solveSudoku(char[][] board) &#123;
         this.board = board;
-        for(int i = 0; i < 9; i++){
-            for(int j=0; j < 9; j++){
-                if (this.board[i][j] != '.'){
+        for(int i = 0; i < 9; i++)&#123;
+            for(int j=0; j < 9; j++)&#123;
+                if (this.board[i][j] != '.')&#123;
                     int num = (int)(this.board[i][j] - '0');
                     setNum(i, j, num);
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         backTrack(0, 0);
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$(n!)^9$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n^2$</p>
 
@@ -664,7 +673,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+                            [Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
 candidate
                         
@@ -727,7 +736,7 @@ candidate
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
 获取数据 get(key) - 如果密钥 (k
                         
                     </div>
@@ -1109,24 +1118,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

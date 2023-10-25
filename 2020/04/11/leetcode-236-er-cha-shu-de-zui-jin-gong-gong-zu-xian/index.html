@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,41 +418,51 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" rel="noopener">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
 
-例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
 输出: 3
-解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
 输出: 5
-解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
-p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br>// TODO:其他思路</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。
+</code></pre>
+<p> </p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
+p、q 为不同节点且均存在于给定的二叉树中。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br>&#x2F;&#x2F; TODO:其他思路</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) &#123;
         TreeNode result = new TreeNode(0);
         commonHelper(root, p, q, result);
         return result.left;
-    }
-
-    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result){
-        if (root == null){
+    &#125;
+    
+    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result)&#123;
+        if (root == null)&#123;
             return false;
-        }
-
+        &#125;
+        
         int left = commonHelper(root.left, p, q, result) ? 1: 0;
         int right = commonHelper(root.right, p, q, result) ? 1: 0;
         int mid = 0;
-        if (root == p || root == q){
+        if (root == p || root == q)&#123;
             mid = 1;
-        }
-        if (mid + left + right >= 2){
+        &#125;
+        if (mid + left + right >= 2)&#123;
             System.out.println(root.val);
             result.left = root;
-        }
+        &#125;
         return (mid + left + right) > 0;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
@@ -665,7 +679,11 @@ p、q 为不同节点且均存在于给定的二叉树中。</code></pre><h2 id=
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。示例 1:输入: ro
+                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
+
+说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
+
+示例 1:输入
                         
                     </div>
                     <div class="publish-info">
@@ -1046,24 +1064,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

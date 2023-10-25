@@ -26,8 +26,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -329,7 +333,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&qu
+                                Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&
                             
                         </div>
                         <div class="publish-info">
@@ -384,7 +390,7 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
+                                Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相
                             
                         </div>
@@ -444,9 +450,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();
+                                Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
-trie.inser
+示例:Trie trie = new Trie();
+
+trie.ins
                             
                         </div>
                         <div class="publish-info">
@@ -505,7 +513,9 @@ trie.inser
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中
+                                Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+
+说明：分隔时可以重复使用字
                             
                         </div>
                         <div class="publish-info">
@@ -753,9 +763,9 @@ trie.inser
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+                                Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
-你知道存在楼层 F ，满足 0 &lt;= F &lt;
+你知道存在楼层 F ，满足 0 &lt;&#x3D; F
                             
                         </div>
                         <div class="publish-info">
@@ -810,11 +820,11 @@ trie.inser
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+                                多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n&#x2F;2 ⌋ 的元素。
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
 示例示例1：
     输入: [3,2,3]
-    输出
+ 
                             
                         </div>
                         <div class="publish-info">
@@ -876,8 +886,10 @@ trie.inser
                                 搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
 
 每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。示例现有矩阵 matrix 如下：
-    [
+每列的元素从上到下升序排列。
+
+示例现有矩阵 matrix 如下：
+   
                             
                         </div>
                         <div class="publish-info">
@@ -1121,24 +1133,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

@@ -8,7 +8,9 @@
     <meta name="description" content="最长有效括号题目描述给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
 示例1:输入: &amp;quot;(()&amp;quot;
 输出: 2
-解释: 最长有效括号子串为 &amp;quot;()&amp;quot;示例2:输入: &amp;q">
+解释: 最长有效括号子串为 &amp;quot;()&amp;quot;
+
+示例2:输入: ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -29,8 +31,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -419,96 +425,111 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="最长有效括号"><a href="#最长有效括号" class="headerlink" title="最长有效括号"></a><a href="https://leetcode-cn.com/problems/longest-valid-parentheses/" target="_blank" rel="noopener">最长有效括号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。</p>
+                <h1 id="最长有效括号"><a href="#最长有效括号" class="headerlink" title="最长有效括号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">最长有效括号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个只包含 ‘(‘ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。</p>
 <h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1:"></a>示例1:</h3><pre><code>输入: &quot;(()&quot;
 输出: 2
-解释: 最长有效括号子串为 &quot;()&quot;</code></pre><h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><pre><code>输入: &quot;)()())&quot;
+解释: 最长有效括号子串为 &quot;()&quot;
+</code></pre>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><pre><code>输入: &quot;)()())&quot;
 输出: 4
-解释: 最长有效括号子串为 &quot;()()&quot;</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP-Stack"><a href="#思路1-DP-Stack" class="headerlink" title="思路1 DP + Stack"></a>思路1 DP + Stack</h3><p>存在括号匹配可用栈进行存储，寻找满足括号对的存在，但是在本题中光有匹配的数目是不够的，需要从整体上计算匹配上的括号数目，且存在括号包含和括号不包含两种情况，如果非包含关系的话可以使用DP思想将匹配好的为止进行存储</p>
+解释: 最长有效括号子串为 &quot;()()&quot;
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP-Stack"><a href="#思路1-DP-Stack" class="headerlink" title="思路1 DP + Stack"></a>思路1 DP + Stack</h3><p>存在括号匹配可用栈进行存储，寻找满足括号对的存在，但是在本题中光有匹配的数目是不够的，需要从整体上计算匹配上的括号数目，且存在括号包含和括号不包含两种情况，如果非包含关系的话可以使用DP思想将匹配好的为止进行存储</p>
 <h3 id="思路2-Stack"><a href="#思路2-Stack" class="headerlink" title="思路2 Stack"></a>思路2 Stack</h3><p>其实与思路1类似可以直接只是用栈作为容器完成程序，主要在于满足匹配的最长子串的”)”开始索引，然后使用最后匹配的”)”进行位置计算，“(”和中间”)”全部pop,注意的关键点在于初始化栈是将-1引入为第一个元素，充当于”)”</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h4><h4 id="DP-Stack"><a href="#DP-Stack" class="headerlink" title="DP + Stack"></a>DP + Stack</h4><ul>
-<li>Java<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-  <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">longestValidParentheses</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> null <span class="token operator">||</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-      <span class="token keyword">int</span> matchIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      <span class="token keyword">int</span> curLength <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-      Stack<span class="token operator">&lt;</span>Integer<span class="token operator">></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">char</span> newChar <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>newChar <span class="token operator">==</span> <span class="token string">'('</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-              stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-          <span class="token keyword">else</span><span class="token punctuation">{</span>
-              <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>stack<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  matchIndex <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                  curLength <span class="token operator">=</span> i <span class="token operator">-</span> matchIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                  <span class="token keyword">if</span> <span class="token punctuation">(</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                      curLength <span class="token operator">+=</span> dps<span class="token punctuation">[</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                  <span class="token punctuation">}</span>
-                  dps<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
-                  <span class="token keyword">if</span> <span class="token punctuation">(</span>curLength <span class="token operator">></span> result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                      result <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
-                  <span class="token punctuation">}</span>
-              <span class="token punctuation">}</span>
-          <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-      <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre>
-</li>
-<li>Python<pre class=" language-Python"><code class="language-Python">class Solution:
-  def longestValidParentheses(self, s: str) -> int:
-      dp = [0, ] * len(s)
-      result = 0
-      cache = []
-      for i in range(0, len(s)):
-          cur_char = s[i]
-          if cur_char == '(':
-              cache.append(i)
-          else:
-              if len(cache) == 0:
-                  continue
-              else:
-                  match_index = cache.pop()
-                  cur_len = i - match_index + 1
-                  if match_index - 1 > 0:
-                      cur_len += dp[match_index - 1]
-                  dp[i] = cur_len
-                  if cur_len > result:
-                      result = cur_len
-      return result</code></pre>
-<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4></li>
-<li>Java <pre class=" language-Java"><code class="language-Java">public class Solution2 {
-  public int longestValidParentheses(String s) {
-      if (s == null || s.length() < 2) {
-          return 0;
-      }
-      Stack<Integer> stack = new Stack<>();
-      stack.push(-1);
-      int result = 0;
-      int tmp = 0;
-      for (int i = 0; i < s.length(); i ++) {
-          if (s.charAt(i) == '(') {
-              stack.push(i);
-          } else {
-              stack.pop();
-              if (stack.isEmpty()) {
-                  stack.push(i);
-              } else {
-                  tmp = i - stack.peek();
-                  result = result > tmp ? result : tmp;
-              }
-          }
-      }
-      return result;
-  }
-}</code></pre>
-<h2 id="实验效果分析"><a href="#实验效果分析" class="headerlink" title="实验效果分析"></a>实验效果分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><h4 id="Stack-DP"><a href="#Stack-DP" class="headerlink" title="Stack + DP"></a>Stack + DP</h4>$n$<h4 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h4>$n$<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><h4 id="Stack-DP-1"><a href="#Stack-DP-1" class="headerlink" title="Stack + DP"></a>Stack + DP</h4>$2n$<h4 id="Stack-2"><a href="#Stack-2" class="headerlink" title="Stack"></a>Stack</h4>$n$</li>
+<li>Java</li>
 </ul>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">longestValidParentheses</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> null <span class="token operator">||</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> matchIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> curLength <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        Stack<span class="token operator">&lt;</span>Integer<span class="token operator">></span> stack <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">char</span> newChar <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>newChar <span class="token operator">==</span> <span class="token string">'('</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                stack<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>stack<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    matchIndex <span class="token operator">=</span> stack<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    curLength <span class="token operator">=</span> i <span class="token operator">-</span> matchIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        curLength <span class="token operator">+=</span> dps<span class="token punctuation">[</span>matchIndex <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                    dps<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>curLength <span class="token operator">></span> result<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        result <span class="token operator">=</span> curLength<span class="token punctuation">;</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Python</li>
+</ul>
+<pre class=" language-Python"><code class="language-Python">class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        dp = [0, ] * len(s)
+        result = 0
+        cache = []
+        for i in range(0, len(s)):
+            cur_char = s[i]
+            if cur_char == '(':
+                cache.append(i)
+            else:
+                if len(cache) == 0:
+                    continue
+                else:
+                    match_index = cache.pop()
+                    cur_len = i - match_index + 1
+                    if match_index - 1 > 0:
+                        cur_len += dp[match_index - 1]
+                    dp[i] = cur_len
+                    if cur_len > result:
+                        result = cur_len
+        return result
+</code></pre>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><ul>
+<li>Java</li>
+</ul>
+<pre class=" language-Java"><code class="language-Java">public class Solution2 &#123;
+    public int longestValidParentheses(String s) &#123;
+        if (s == null || s.length() < 2) &#123;
+            return 0;
+        &#125;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int result = 0;
+        int tmp = 0;
+        for (int i = 0; i < s.length(); i ++) &#123;
+            if (s.charAt(i) == '(') &#123;
+                stack.push(i);
+            &#125; else &#123;
+                stack.pop();
+                if (stack.isEmpty()) &#123;
+                    stack.push(i);
+                &#125; else &#123;
+                    tmp = i - stack.peek();
+                    result = result > tmp ? result : tmp;
+                &#125;
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="实验效果分析"><a href="#实验效果分析" class="headerlink" title="实验效果分析"></a>实验效果分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><h4 id="Stack-DP"><a href="#Stack-DP" class="headerlink" title="Stack + DP"></a>Stack + DP</h4><p>$n$</p>
+<h4 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h4><p>$n$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><h4 id="Stack-DP-1"><a href="#Stack-DP-1" class="headerlink" title="Stack + DP"></a>Stack + DP</h4><p>$2n$</p>
+<h4 id="Stack-2"><a href="#Stack-2" class="headerlink" title="Stack"></a>Stack</h4><p>$n$</p>
 
             </div>
             <hr/>
@@ -671,8 +692,10 @@
                             搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
 
 每行的元素从左到右升序排列。
-每列的元素从上到下升序排列。示例现有矩阵 matrix 如下：
-    [
+每列的元素从上到下升序排列。
+
+示例现有矩阵 matrix 如下：
+   
                         
                     </div>
                     <div class="publish-info">
@@ -733,7 +756,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SAE：rank+(预训练+GNN联合训练)论文地址Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Docume
+                            
+  1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195
                         
                     </div>
                     <div class="publish-info">
@@ -1118,24 +1142,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

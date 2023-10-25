@@ -26,8 +26,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -331,7 +335,9 @@
                             
                                 Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。示例 1:输入: &quot;3+
+字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
+
+示例 1:输入: &quot;
                             
                         </div>
                         <div class="publish-info">
@@ -385,12 +391,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+                                Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 
 返回滑动窗口中的最大值。
 
-
-
+ 
                             
                         </div>
                         <div class="publish-info">
@@ -444,8 +449,12 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。示例 1:输入: nums = [1,1,1,2,2,3], k = 2
-输出: [1,2]示例 2:输入: nums = [1
+                                Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+
+示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+输出: [1,2]
+
+示例 2:输入: nums 
                             
                         </div>
                         <div class="publish-info">
@@ -503,9 +512,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
-请注意，它是排序后的第k小元素，而不是第k个元素。示例:matrix = [
-[ 1,  5, 
+                                Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
+请注意，它是排序后的第k小元素，而不是第k个元素。
+
+示例:matrix = [
+[ 1,  5
                             
                         </div>
                         <div class="publish-info">
@@ -562,7 +573,7 @@
                                 Leetcode:295. 数据流的中位数题目描述中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 例如，
 
-[2,3,4] 的中位数是 3
+[2,3,4] 的中位数是 3
 
 [2,3] 的中位数是 (2 + 3) / 2 = 2.5
 
@@ -620,8 +631,10 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例 1:输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5示例
+                                215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+
+示例 1:输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5
                             
                         </div>
                         <div class="publish-info">
@@ -677,9 +690,9 @@
                             
                                 Leetcode:155. 最小栈题目描述设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
-push(x) -- 将元素 x 推入栈中。
-pop() -- 删除栈顶的元素。
-top() -- 获取栈顶元素
+push(x) -- 将元素 x 推入栈中。
+pop() -- 删除栈顶的元素。
+top() -- 获取栈顶元素
                             
                         </div>
                         <div class="publish-info">
@@ -733,7 +746,7 @@ top() -- 获取栈顶元素
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+                                Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
                             
                         </div>
                         <div class="publish-info">
@@ -854,8 +867,12 @@ top() -- 获取栈顶元素
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
+                                350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
+
+示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]
+
+示例 2:输入: nums1 = [4,9,5]
                             
                         </div>
                         <div class="publish-info">
@@ -1098,24 +1115,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

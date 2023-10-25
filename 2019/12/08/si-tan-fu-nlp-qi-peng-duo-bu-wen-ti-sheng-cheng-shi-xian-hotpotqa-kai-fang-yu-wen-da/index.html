@@ -27,8 +27,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -409,9 +413,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答"><a href="#斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答" class="headerlink" title="斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答"></a>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1910.07000.pdf" target="_blank" rel="noopener">Answering Complex Open-domain Questions Through Iterative Query Generation</a></p>
-<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>使用启发式的方法进行多步问题的细粒度化，在召回量较少的情况下得到高准确率的支撑文档，进而提高开放域问答的效果，并完成一个完整的Pipeline的工作,其中包含很多小技巧，包含在Content和question编码的时候使用0、1而不是cls/sep，提高实验基线。</p>
-<h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p><a href="https://github.com/qipeng/golden-retriever" target="_blank" rel="noopener">golden-retriever</a></p>
+                <h1 id="斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答"><a href="#斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答" class="headerlink" title="斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答"></a>斯坦福NLP齐鹏多步问题生成实现hotpotqa开放域问答</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1910.07000.pdf">Answering Complex Open-domain Questions Through Iterative Query Generation</a></p>
+<h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>使用启发式的方法进行多步问题的细粒度化，在召回量较少的情况下得到高准确率的支撑文档，进而提高开放域问答的效果，并完成一个完整的Pipeline的工作,其中包含很多小技巧，包含在Content和question编码的时候使用0、1而不是cls&#x2F;sep，提高实验基线。</p>
+<h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p><a target="_blank" rel="noopener" href="https://github.com/qipeng/golden-retriever">golden-retriever</a></p>
 <h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>暂无</p>
 <h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><p>hotpotqa 开放域 问答 问题生成 多步 EMNLP2019</p>
 
@@ -1000,24 +1004,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

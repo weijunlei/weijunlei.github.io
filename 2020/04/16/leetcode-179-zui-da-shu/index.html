@@ -5,9 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:179. 最大数, 小风雷">
-    <meta name="description" content="Leetcode:179. 最大数题目描述给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。示例 1:输入: [10,2]
-输出: 210示例 2:输入: [3,30,34,5,9]
-输出: 9534330说明:输出结果可能非常大">
+    <meta name="description" content="Leetcode:179. 最大数题目描述给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+
+示例 1:输入: [10,2]
+输出: 210
+
+示例 2:输入: [3,30,34,5,9]
+输出: 9534330
+
+说明:输出结">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,8 +34,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,127 +424,137 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-179-最大数"><a href="#Leetcode-179-最大数" class="headerlink" title="Leetcode:179. 最大数"></a><a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener">Leetcode:179. 最大数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [10,2]
-输出: 210</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,30,34,5,9]
-输出: 9534330</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>输出结果可能非常大，所以你需要返回一个字符串而不是整数。</code></pre><h2 id="思路1：转化为排序-快排"><a href="#思路1：转化为排序-快排" class="headerlink" title="思路1：转化为排序+快排"></a>思路1：转化为排序+快排</h2><p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p>
+                <h1 id="Leetcode-179-最大数"><a href="#Leetcode-179-最大数" class="headerlink" title="Leetcode:179. 最大数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number/">Leetcode:179. 最大数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [10,2]
+输出: 210
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,30,34,5,9]
+输出: 9534330
+</code></pre>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+</code></pre>
+<h2 id="思路1：转化为排序-快排"><a href="#思路1：转化为排序-快排" class="headerlink" title="思路1：转化为排序+快排"></a>思路1：转化为排序+快排</h2><p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p>
 <h2 id="思路2-转化为排序-Java排序"><a href="#思路2-转化为排序-Java排序" class="headerlink" title="思路2: 转化为排序+Java排序"></a>思路2: 转化为排序+Java排序</h2><p>转化为排序然后使用Java内置排序</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public String largestNumber(int[] nums) {
-        if (nums == null || nums.length == 0){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public String largestNumber(int[] nums) &#123;
+        if (nums == null || nums.length == 0)&#123;
             return "";
-        }
+        &#125;
         StringBuilder result = new StringBuilder();
         String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++){
+        for(int i = 0; i < nums.length; i++)&#123;
             strNums[i] = String.valueOf(nums[i]);
-        }
+        &#125;
         quickSort(strNums, 0, strNums.length - 1);
-        if (strNums[0].equals("0")){
+        if (strNums[0].equals("0"))&#123;
             return "0";
-        }
-        for(int i = 0; i < strNums.length; i++){
+        &#125;
+        for(int i = 0; i < strNums.length; i++)&#123;
             result.append(strNums[i]);
-        }
+        &#125;
         return result.toString();
-    }
-
-    private void quickSort(String[] nums, int start, int end){
-        if (start < end){
+    &#125;
+    
+    private void quickSort(String[] nums, int start, int end)&#123;
+        if (start < end)&#123;
             int getIndex = getPartition(nums, start, end);
             quickSort(nums, start, getIndex);
             quickSort(nums, getIndex + 1, end);
-        }
-    }
-
-    private int getPartition(String[] nums, int start, int end){
+        &#125;
+    &#125;
+    
+    private int getPartition(String[] nums, int start, int end)&#123;
         String getNum = nums[start];
         nums[start] = nums[end];
         nums[end] = getNum;
         int getIndex = start;
-        for(int i = start; i < end; i++){
-            if (compare(nums[i], getNum)){
+        for(int i = start; i < end; i++)&#123;
+            if (compare(nums[i], getNum))&#123;
                 String temp = nums[getIndex];
                 nums[getIndex] = nums[i];
                 nums[i] = temp;
                 getIndex ++;
-            }
-        }
+            &#125;
+        &#125;
         nums[end] = nums[getIndex];
         nums[getIndex] = getNum;
         return getIndex;
-    }
-
-    private boolean compare(String a, String b){
+    &#125;
+    
+    private boolean compare(String a, String b)&#123;
         int aCount = a.length();
         int bCount = b.length();
         int maxCount = aCount > bCount ? aCount : bCount;
         char chA = '0';
         char chB = '0';
-        for(int i = 0; i < aCount + bCount; i++){
-            if (i < aCount){
+        for(int i = 0; i < aCount + bCount; i++)&#123;
+            if (i < aCount)&#123;
                 chA = a.charAt(i);
-            }else{
+            &#125;else&#123;
                 chA = b.charAt(i - aCount);
-            }
-            if(i < bCount){
+            &#125;
+            if(i < bCount)&#123;
                 chB = b.charAt(i);
-            }else{
+            &#125;else&#123;
                 chB = a.charAt(i - bCount);
-            }
-            if (chA > chB){
+            &#125;
+            if (chA > chB)&#123;
                 return true;
-            }else if(chA < chB){
+            &#125;else if(chA < chB)&#123;
                 return false;
-            }
-        }
+            &#125;
+        &#125;
         return false;
-    }
-}</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public String largestNumber(int[] nums) {
-        if (nums == null || nums.length == 0){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public String largestNumber(int[] nums) &#123;
+        if (nums == null || nums.length == 0)&#123;
             return "";
-        }
+        &#125;
         StringBuilder result = new StringBuilder();
         String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++){
+        for(int i = 0; i < nums.length; i++)&#123;
             strNums[i] = String.valueOf(nums[i]);
-        }
-        Arrays.sort(strNums, new Comparator<String>(){
+        &#125;
+        Arrays.sort(strNums, new Comparator<String>()&#123;
             @Override
-            public int compare(String a, String b){
+            public int compare(String a, String b)&#123;
                 int aCount = a.length();
                 int bCount = b.length();
                 int maxCount = aCount > bCount ? aCount : bCount;
                 char chA = '0';
                 char chB = '0';
-                for(int i = 0; i < aCount + bCount; i++){
-                    if (i < aCount){
+                for(int i = 0; i < aCount + bCount; i++)&#123;
+                    if (i < aCount)&#123;
                         chA = a.charAt(i);
-                    }else{
+                    &#125;else&#123;
                         chA = b.charAt(i - aCount);
-                    }
-                    if(i < bCount){
+                    &#125;
+                    if(i < bCount)&#123;
                         chB = b.charAt(i);
-                    }else{
+                    &#125;else&#123;
                         chB = a.charAt(i - bCount);
-                    }
-                    if (chA != chB){
+                    &#125;
+                    if (chA != chB)&#123;
                         return chB - chA;
-                    }
-                }
+                    &#125;
+                &#125;
                 return 0;
-            }
-        });
-        if (strNums[0].equals("0")){
+            &#125;
+        &#125;);
+        if (strNums[0].equals("0"))&#123;
             return "0";
-        }
-        for(int i = 0; i < strNums.length; i++){
+        &#125;
+        for(int i = 0; i < strNums.length; i++)&#123;
             result.append(strNums[i]);
-        }
+        &#125;
         return result.toString();
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
@@ -694,7 +714,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:324. 摆动排序 II题目描述给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]... 的顺序。示例 1:输入: nums = [1
+                            Leetcode:324. 摆动排序 II题目描述给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]... 的顺序。
+
+示例 1:输入: nums = 
                         
                     </div>
                     <div class="publish-info">
@@ -1136,24 +1158,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

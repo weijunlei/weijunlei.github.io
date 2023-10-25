@@ -26,8 +26,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -329,13 +333,15 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。例如，A -&gt; 1
+                                Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。
+
+例如，A -&gt; 1
 B -&gt; 2
 C -&gt; 3
 ...
 Z -&gt; 26
 AA -&gt; 27
-AB -&
+AB 
                             
                         </div>
                         <div class="publish-info">
@@ -446,7 +452,9 @@ AB -&
                             
                                 Leetcode: 237. 删除链表中的节点题目描述请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
 
-现有一个链表 -- head = [4,5,1,9]，它可以表示为:示例 1:输入: hea
+现有一个链表 -- head = [4,5,1,9]，它可以表示为:
+
+示例 1:输入: h
                             
                         </div>
                         <div class="publish-info">
@@ -500,9 +508,15 @@ AB -&
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。示例 1:输入: 1-&gt;2
-输出: false示例 2:输入: 1-&gt;2-&gt;2-&gt;1
-输出: true进阶：你能否用 O(n) 时间复杂度和 O
+                                Leetcode:234.回文链表题目描述请判断一个链表是否为回文链表。
+
+示例 1:输入: 1-&gt;2
+输出: false
+
+示例 2:输入: 1-&gt;2-&gt;2-&gt;1
+输出: true
+
+进阶：你能否用 O(n) 时间
                             
                         </div>
                         <div class="publish-info">
@@ -556,10 +570,12 @@ AB -&
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Leetcode:206.反转链表题目描述反转一个单链表。示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+                                Leetcode:206.反转链表题目描述反转一个单链表。
+
+示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
 进阶:
-你可以迭代或
+你可以迭
                             
                         </div>
                         <div class="publish-info">
@@ -619,7 +635,9 @@ AB -&
 
 
 
-在节点 c1 开始相交。示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], l
+在节点 c1 开始相交。
+
+示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5],
                             
                         </div>
                         <div class="publish-info">
@@ -674,8 +692,12 @@ AB -&
                         <div class="summary block-with-text">
                             
                                 #Leetcode: 141.排序链表
-题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。示例 1:输入: 4-&gt;2-&gt;1-&gt;3
-输出: 1-&gt;2-&gt;3-&gt;4示例 2:输入
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+
+示例 1:输入: 4-&gt;2-&gt;1-&gt;3
+输出: 1-&gt;2-&gt;3-&gt;4
+
+示例 
                             
                         </div>
                         <div class="publish-info">
@@ -730,7 +752,9 @@ AB -&
                         <div class="summary block-with-text">
                             
                                 Leetcode:141. 环形链表题目描述给定一个链表，判断链表中是否有环。
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。示例 1：输入：
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+
+示例 1：输
                             
                         </div>
                         <div class="publish-info">
@@ -786,8 +810,10 @@ AB -&
                             
                                 Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
 
-有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。说明：整数除法只保留整数部分。
-给定逆波兰表达式总是有效的
+有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
+
+说明：整数除法只保留整数部分。
+给定逆波兰表达式总是有
                             
                         </div>
                         <div class="publish-info">
@@ -843,7 +869,9 @@ AB -&
                             
                                 Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
-列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。示例 1:
+列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
+
+示例 
                             
                         </div>
                         <div class="publish-info">
@@ -1082,24 +1110,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

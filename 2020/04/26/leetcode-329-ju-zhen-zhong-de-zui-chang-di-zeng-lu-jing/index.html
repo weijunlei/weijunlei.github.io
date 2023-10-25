@@ -7,10 +7,12 @@
     <meta name="keywords" content="Leetcode:329. 矩阵中的最长递增路径, 小风雷">
     <meta name="description" content="Leetcode题目描述给定一个整数矩阵，找出最长递增路径的长度。
 
-对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。示例 1:输入: nums = 
+对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。
+
+示例 1:输入: nums = 
 [
 [9,9,4],
-[6">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,8 +33,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -421,54 +427,61 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a><a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener">Leetcode</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数矩阵，找出最长递增路径的长度。
+                <h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">Leetcode</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数矩阵，找出最长递增路径的长度。
 
-对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = 
+对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = 
 [
 [9,9,4],
 [6,6,8],
 [2,1,1]
 ] 
 输出: 4 
-解释: 最长递增路径为 [1, 2, 6, 9]。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = 
+解释: 最长递增路径为 [1, 2, 6, 9]。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = 
 [
 [3,4,5],
 [3,2,6],
 [2,2,1]
 ] 
 输出: 4 
-解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    private int[][] paths = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    private int[][] paths = &#123;&#123;0, 1&#125;, &#123;1, 0&#125;, &#123;0, -1&#125;, &#123;-1, 0&#125;&#125;;
     private int[][] dps;
-    public int longestIncreasingPath(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
+    public int longestIncreasingPath(int[][] matrix) &#123;
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0)&#123;
             return 0;
-        }
+        &#125;
         dps = new int[matrix.length][matrix[0].length];
         int result = 0;
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
+        for(int i = 0; i < matrix.length; i++)&#123;
+            for(int j = 0; j < matrix[0].length; j++)&#123;
                 result = Math.max(dfs(matrix, i, j), result);
-            }
-        }
+            &#125;
+        &#125;
         return result;
-    }
-
-    private int dfs(int[][] matrix, int i, int j){
-        if(dps[i][j] != 0){
+    &#125;
+    
+    private int dfs(int[][] matrix, int i, int j)&#123;
+        if(dps[i][j] != 0)&#123;
             return dps[i][j];
-        }
-        for(int[] path: paths){
+        &#125;
+        for(int[] path: paths)&#123;
             int x = i + path[0];
             int y = j + path[1];
-            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y]){
+            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y])&#123;
                 dps[i][j] = Math.max(dps[i][j], dfs(matrix, x, y));
-            }
-        }
+            &#125;
+        &#125;
         return ++dps[i][j];
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$每个单元格仅被计算一次</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$</p>
 
@@ -630,7 +643,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:200. 岛屿数量题目描述给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
+                            Leetcode:200. 岛屿数量题目描述给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
 岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成
                         
@@ -689,7 +702,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 322.零钱兑换题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。示例 1:输入: coins =
+                            Leetcode: 322.零钱兑换题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+
+示例 1:输入: coins
                         
                     </div>
                     <div class="publish-info">
@@ -1070,24 +1085,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

@@ -5,9 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:134. 加油站, 小风雷">
-    <meta name="description" content="[Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+    <meta name="description" content="[Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其">
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -410,13 +414,17 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-134-加油站"><a href="#Leetcode-134-加油站" class="headerlink" title="[Leetcode: 134. 加油站]"></a>[Leetcode: 134. 加油站]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+                <h1 id="Leetcode-134-加油站"><a href="#Leetcode-134-加油站" class="headerlink" title="[Leetcode: 134. 加油站]"></a>[Leetcode: 134. 加油站]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
 
-如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果题目有解，该答案即为唯一答案。
+如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。
+</code></pre>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果题目有解，该答案即为唯一答案。
 输入数组均为非空数组，且长度相同。
-输入数组中的元素均为非负数。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 
+输入数组中的元素均为非负数。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 
 gas  = [1,2,3,4,5]
 cost = [3,4,5,1,2]
 
@@ -429,7 +437,9 @@ cost = [3,4,5,1,2]
 开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油
 开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油
 开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。
-因此，3 可为起始索引。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 
+因此，3 可为起始索引。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 
 gas  = [2,3,4]
 cost = [3,4,3]
 
@@ -441,62 +451,65 @@ cost = [3,4,3]
 开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油
 开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油
 你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。
-因此，无论怎样，你都不可能绕环路行驶一周。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="[思路]"></a>[思路]</h2><h3 id="思路1-暴力判断每个位置是否可以作为起点"><a href="#思路1-暴力判断每个位置是否可以作为起点" class="headerlink" title="思路1 暴力判断每个位置是否可以作为起点"></a>思路1 暴力判断每个位置是否可以作为起点</h3><p>直接判断每个位置是否可以作为起点</p>
+因此，无论怎样，你都不可能绕环路行驶一周。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="[思路]"></a>[思路]</h2><h3 id="思路1-暴力判断每个位置是否可以作为起点"><a href="#思路1-暴力判断每个位置是否可以作为起点" class="headerlink" title="思路1 暴力判断每个位置是否可以作为起点"></a>思路1 暴力判断每个位置是否可以作为起点</h3><p>直接判断每个位置是否可以作为起点</p>
 <h3 id="思路2-利用当前油量和总油量记录状态"><a href="#思路2-利用当前油量和总油量记录状态" class="headerlink" title="思路2 利用当前油量和总油量记录状态"></a>思路2 利用当前油量和总油量记录状态</h3><p>使用cur_gas和gas_sum记录当前油量和总油量，当当前油量小于零时则该位置不可作为起点，且之前节点也不行，依次类推，详情见代码</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int canCompleteCircuit(int[] gas, int[] cost) {
-        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int canCompleteCircuit(int[] gas, int[] cost) &#123;
+        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length)&#123;
             return -1;
-        }
+        &#125;
         int length = gas.length;
         Set<Integer> notZeroSet = new HashSet<>();
-        for(int i = 0; i < gas.length; i++){
+        for(int i = 0; i < gas.length; i++)&#123;
             gas[i] = gas[i] - cost[i];
-            if (gas[i] >= 0){
+            if (gas[i] >= 0)&#123;
                 notZeroSet.add(i);
-            }
-        }
-        for(int num: notZeroSet){
-            if (canLoop(num, gas, length)){
+            &#125;
+        &#125;
+        for(int num: notZeroSet)&#123;
+            if (canLoop(num, gas, length))&#123;
                 return num;
-            }
-        }
+            &#125;
+        &#125;
         return -1;
-    }
-
-    private boolean canLoop(int num, int[] lefts, int length){
+    &#125;
+    
+    private boolean canLoop(int num, int[] lefts, int length)&#123;
         int left = lefts[num];
-        for(int i = 1; i < length; i++){
+        for(int i = 1; i < length; i++)&#123;
             left = left + lefts[(i + num) % length];
-            if (left < 0){
+            if (left < 0)&#123;
                 return false;
-            }
-        }
+            &#125;
+        &#125;
         return true;
-    }
-}</code></pre>
-<p>###　代码2</p>
-<pre class=" language-Java"><code class="language-Java">class Solution {
-    public int canCompleteCircuit(int[] gas, int[] cost) {
-        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int canCompleteCircuit(int[] gas, int[] cost) &#123;
+        if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length)&#123;
             return -1;
-        }
-
-
+        &#125;
+        
+        
         int cur_gas = 0;
         int gas_sum = 0;
         int result = 0;
-        for(int i = 0; i < gas.length; i ++){
+        for(int i = 0; i < gas.length; i ++)&#123;
             cur_gas += gas[i] - cost[i];
             gas_sum += gas[i] - cost[i];
-            if (cur_gas < 0){
+            if (cur_gas < 0)&#123;
                 result = i + 1;
                 cur_gas = 0;
-            }
-        }
+            &#125;
+        &#125;
         return gas_sum >= 0 ? result : -1;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3>
@@ -650,7 +663,7 @@ cost = [3,4,3]
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
 获取数据 get(key) - 如果密钥 (k
                         
                     </div>
@@ -708,8 +721,12 @@ cost = [3,4,3]
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。示例 1:输入: a = 1, b = 2
-输出: 3示例 2:输入: a = -2, b
+                            [Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+
+示例 1:输入: a = 1, b = 2
+输出: 3
+
+示例 2:输入: a = -
                         
                     </div>
                     <div class="publish-info">
@@ -1090,24 +1107,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

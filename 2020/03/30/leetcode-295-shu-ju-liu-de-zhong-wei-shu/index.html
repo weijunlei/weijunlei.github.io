@@ -8,7 +8,7 @@
     <meta name="description" content="Leetcode:295. 数据流的中位数题目描述中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 例如，
 
-[2,3,4] 的中位数是 3
+[2,3,4] 的中位数是 3
 
 [2,3] 的中位数是 (2 + 3) / 2 = 2.5
 
@@ -33,8 +33,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -419,52 +423,57 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-295-数据流的中位数"><a href="#Leetcode-295-数据流的中位数" class="headerlink" title="Leetcode:295. 数据流的中位数"></a><a href="https://leetcode-cn.com/problems/find-median-from-data-stream/" target="_blank" rel="noopener">Leetcode:295. 数据流的中位数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
+                <h1 id="Leetcode-295-数据流的中位数"><a href="#Leetcode-295-数据流的中位数" class="headerlink" title="Leetcode:295. 数据流的中位数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-median-from-data-stream/">Leetcode:295. 数据流的中位数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 例如，
 
-[2,3,4] 的中位数是 3
+[2,3,4] 的中位数是 3
 
 [2,3] 的中位数是 (2 + 3) / 2 = 2.5
 
 设计一个支持以下两种操作的数据结构：
 
 void addNum(int num) - 从数据流中添加一个整数到数据结构中。
-double findMedian() - 返回目前所有元素的中位数。</code></pre><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>addNum(1)
+double findMedian() - 返回目前所有元素的中位数。
+</code></pre>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>addNum(1)
 addNum(2)
 findMedian() -&gt; 1.5
 addNum(3) 
-findMedian() -&gt; 2</code></pre><p>进阶:<br>    如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？<br>    如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：借用插入排序方法，每次插入后保持有序"><a href="#思路1：借用插入排序方法，每次插入后保持有序" class="headerlink" title="思路1：借用插入排序方法，每次插入后保持有序"></a>思路1：借用插入排序方法，每次插入后保持有序</h3><p>使用插入排序思路，每次插入新的数据后数据保持有序，这样时间复杂度主要来自于插入的O(n)<br>// TODO:其他思路</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：插入排序思路"><a href="#代码1：插入排序思路" class="headerlink" title="代码1：插入排序思路"></a>代码1：插入排序思路</h3><pre class=" language-Java"><code class="language-Java">class MedianFinder {
+findMedian() -&gt; 2
+</code></pre>
+<p>进阶:<br>    如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？<br>    如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：借用插入排序方法，每次插入后保持有序"><a href="#思路1：借用插入排序方法，每次插入后保持有序" class="headerlink" title="思路1：借用插入排序方法，每次插入后保持有序"></a>思路1：借用插入排序方法，每次插入后保持有序</h3><p>使用插入排序思路，每次插入新的数据后数据保持有序，这样时间复杂度主要来自于插入的O(n)<br>&#x2F;&#x2F; TODO:其他思路</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1：插入排序思路"><a href="#代码1：插入排序思路" class="headerlink" title="代码1：插入排序思路"></a>代码1：插入排序思路</h3><pre class=" language-Java"><code class="language-Java">class MedianFinder &#123;
     private List<Integer> list;
 
     /** initialize your data structure here. */
-    public MedianFinder() {
+    public MedianFinder() &#123;
         list = new ArrayList<>();
-    }
-
-    public void addNum(int num) {
-        if (list.isEmpty()){
+    &#125;
+    
+    public void addNum(int num) &#123;
+        if (list.isEmpty())&#123;
             list.add(num);
             return;
-        }
+        &#125;
         int insertIndex = 0;
-        for(; insertIndex < list.size(); insertIndex++){
-            if(list.get(insertIndex) > num){
+        for(; insertIndex < list.size(); insertIndex++)&#123;
+            if(list.get(insertIndex) > num)&#123;
                 break;
-            }
-        }
+            &#125;
+        &#125;
         list.add(insertIndex, num);
-    }
-
-    public double findMedian() {
-        if (list.size() % 2 != 0){
+    &#125;
+    
+    public double findMedian() &#123;
+        if (list.size() % 2 != 0)&#123;
             return list.get(list.size() / 2);
-        } else {
+        &#125; else &#123;
             return 1.0 * (list.get(list.size() / 2 - 1) + list.get(list.size() / 2)) / 2;
-        }
-    }
-}</code></pre>
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>主要是插入排序的时间每次为O(n)</p>
 <h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(n)$</p>
 
@@ -622,9 +631,11 @@ findMedian() -&gt; 2</code></pre><p>进阶:<br>    如果数据流中所有整�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
-请注意，它是排序后的第k小元素，而不是第k个元素。示例:matrix = [
-[ 1,  5, 
+                            Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
+请注意，它是排序后的第k小元素，而不是第k个元素。
+
+示例:matrix = [
+[ 1,  5
                         
                     </div>
                     <div class="publish-info">
@@ -681,8 +692,10 @@ findMedian() -&gt; 2</code></pre><p>进阶:<br>    如果数据流中所有整�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。示例 1:输入: [3,2,1,5,6,4] 和 k = 2
-输出: 5示例
+                            215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+
+示例 1:输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5
                         
                     </div>
                     <div class="publish-info">
@@ -1063,24 +1076,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,51 +418,56 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-25-验证回文串"><a href="#Leetcode-25-验证回文串" class="headerlink" title="Leetcode 25:验证回文串"></a><a href="https://leetcode-cn.com/problems/valid-palindrome/" target="_blank" rel="noopener">Leetcode 25:验证回文串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
+                <h1 id="Leetcode-25-验证回文串"><a href="#Leetcode-25-验证回文串" class="headerlink" title="Leetcode 25:验证回文串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome/">Leetcode 25:验证回文串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
 <p>说明：本题中，我们将空字符串定义为有效的回文串。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h4><pre><code>输入: &quot;A man, a plan, a canal: Panama&quot;
-输出: true</code></pre><h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h4><pre><code>输入: &quot;race a car&quot;
-输出: false</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：双指针"><a href="#思路1：双指针" class="headerlink" title="思路1：双指针"></a>思路1：双指针</h3><p>使用头尾指针进行匹配，如头尾指针指向的字符不同则判为错,注意边界处理即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean isPalindrome(String s) {
-        if (s == null || s.length() == 0) {
+输出: true
+</code></pre>
+<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h4><pre><code>输入: &quot;race a car&quot;
+输出: false
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：双指针"><a href="#思路1：双指针" class="headerlink" title="思路1：双指针"></a>思路1：双指针</h3><p>使用头尾指针进行匹配，如头尾指针指向的字符不同则判为错,注意边界处理即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public boolean isPalindrome(String s) &#123;
+        if (s == null || s.length() == 0) &#123;
             return true;
-        }
+        &#125;
         s = s.toLowerCase();
 
         int low_index = 0;
         int high_index= s.length() - 1;
         boolean result = true;
-        while (true) {
-            while (high_index > low_index  && !isAlpha(s.charAt(low_index))) {
+        while (true) &#123;
+            while (high_index > low_index  && !isAlpha(s.charAt(low_index))) &#123;
                 low_index ++;
-            }
-            while (high_index > low_index && !isAlpha(s.charAt(high_index))) {
+            &#125;
+            while (high_index > low_index && !isAlpha(s.charAt(high_index))) &#123;
                 high_index --;
-            }
-            if (high_index <= low_index) {
+            &#125;
+            if (high_index <= low_index) &#123;
                 break;
-            }
-            else if (high_index > low_index && isAlpha(s.charAt(low_index)) && isAlpha(s.charAt(high_index)) && s.charAt(high_index) != s.charAt(low_index)) {
+            &#125;
+            else if (high_index > low_index && isAlpha(s.charAt(low_index)) && isAlpha(s.charAt(high_index)) && s.charAt(high_index) != s.charAt(low_index)) &#123;
                 result = false;
                 break;
-            }
-            else{
+            &#125;
+            else&#123;
                 high_index --;
                 low_index++;
-            }
-        }
+            &#125;
+        &#125;
         return result;
-    }
+    &#125;
 
-    private boolean isAlpha(char ch) {
-        if ((ch >= '0' && ch <= '9') || (ch  >= 'a' && ch <= 'z')) {
+    private boolean isAlpha(char ch) &#123;
+        if ((ch >= '0' && ch <= '9') || (ch  >= 'a' && ch <= 'z')) &#123;
             return true;
-        } else{
+        &#125; else&#123;
             return false;
-        }
-    }
-}</code></pre>
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><h3 id="思路1-1"><a href="#思路1-1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>n</p>
 <h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>1</p>
 
@@ -685,9 +694,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+                            Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
-你知道存在楼层 F ，满足 0 &lt;= F &lt;
+你知道存在楼层 F ，满足 0 &lt;&#x3D; F
                         
                     </div>
                     <div class="publish-info">
@@ -1068,24 +1077,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

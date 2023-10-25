@@ -5,11 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:172. 阶乘后的零, 小风雷">
-    <meta name="description" content="Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。示例 1:输入: 3
+    <meta name="description" content="Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。
+
+示例 1:输入: 3
 输出: 0
-解释: 3! = 6, 尾数中没有零。示例 2:输入: 5
+解释: 3! = 6, 尾数中没有零。
+
+示例 2:输入: 5
 输出: 1
-解释: 5! = 120, 尾数中有 ">
+解释: 5! = 120, 尾">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,8 +34,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -416,25 +424,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-172-阶乘后的零"><a href="#Leetcode-172-阶乘后的零" class="headerlink" title="Leetcode:172. 阶乘后的零"></a><a href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/" target="_blank" rel="noopener">Leetcode:172. 阶乘后的零</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数 n，返回 n! 结果尾数中零的数量。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 3
+                <h1 id="Leetcode-172-阶乘后的零"><a href="#Leetcode-172-阶乘后的零" class="headerlink" title="Leetcode:172. 阶乘后的零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">Leetcode:172. 阶乘后的零</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数 n，返回 n! 结果尾数中零的数量。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 3
 输出: 0
-解释: 3! = 6, 尾数中没有零。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 5
+解释: 3! = 6, 尾数中没有零。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 5
 输出: 1
-解释: 5! = 120, 尾数中有 1 个零.
-说明: 你算法的时间复杂度应为 O(log n) 。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：利用基本数学规则"><a href="#思路1：利用基本数学规则" class="headerlink" title="思路1：利用基本数学规则"></a>思路1：利用基本数学规则</h3><p>每含一个5为约数的数可以提供一个0，含25为约数可以提供两个0，以此类推</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int trailingZeroes(int n) {
-        if (n < 0){
+解释: 5! = 120, 尾数中有 1 个零.
+说明: 你算法的时间复杂度应为 O(log n) 。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：利用基本数学规则"><a href="#思路1：利用基本数学规则" class="headerlink" title="思路1：利用基本数学规则"></a>思路1：利用基本数学规则</h3><p>每含一个5为约数的数可以提供一个0，含25为约数可以提供两个0，以此类推</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int trailingZeroes(int n) &#123;
+        if (n < 0)&#123;
             return -1;
-        }
+        &#125;
         int result = 0;
-        while (n / 5 != 0){
+        while (n / 5 != 0)&#123;
             result += n / 5;
             n = n / 5;
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(log(n))$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
@@ -592,8 +607,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:166. 分数到小数题目描述给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
-如果小数部分为循环小数，则将循环的部分括在括号内。示例 1:输入: numerato
+                            Leetcode:166. 分数到小数题目描述给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
+如果小数部分为循环小数，则将循环的部分括在括号内。
+
+示例 1:输入: numera
                         
                     </div>
                     <div class="publish-info">
@@ -650,13 +667,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。示例 1:输入: [[1,1],[2,2],[3,3]]
+                            Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+
+示例 1:输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
 |
-|        o
-|   
+|        o
+| 
                         
                     </div>
                     <div class="publish-info">
@@ -1037,24 +1056,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

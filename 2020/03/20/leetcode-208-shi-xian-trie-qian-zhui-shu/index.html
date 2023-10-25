@@ -5,9 +5,11 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 208:实现Trie(前缀树), 小风雷">
-    <meta name="description" content="Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();
+    <meta name="description" content="Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
-trie.inser">
+示例:Trie trie = new Trie();
+
+trie.ins">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,8 +30,12 @@ trie.inser">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -418,61 +424,68 @@ trie.inser">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-208-实现Trie-前缀树"><a href="#Leetcode-208-实现Trie-前缀树" class="headerlink" title="Leetcode 208:实现Trie(前缀树)"></a><a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">Leetcode 208:实现Trie(前缀树)</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>Trie trie = new Trie();
+                <h1 id="Leetcode-208-实现Trie-前缀树"><a href="#Leetcode-208-实现Trie-前缀树" class="headerlink" title="Leetcode 208:实现Trie(前缀树)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">Leetcode 208:实现Trie(前缀树)</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+</code></pre>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>Trie trie = new Trie();
 
 trie.insert(&quot;apple&quot;);
 trie.search(&quot;apple&quot;);   // 返回 true
 trie.search(&quot;app&quot;);     // 返回 false
 trie.startsWith(&quot;app&quot;); // 返回 true
 trie.insert(&quot;app&quot;);   
-trie.search(&quot;app&quot;);     // 返回 true</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设所有的输入都是由小写字母 a-z 构成的。
-保证所有输入均为非空字符串。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-前缀树基本实现"><a href="#思路1-前缀树基本实现" class="headerlink" title="思路1: 前缀树基本实现"></a>思路1: 前缀树基本实现</h3><p>主要是使用前缀树的基本概念，将前缀字母连接到下一个后缀节点,以及标记好结束节点</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Trie {
+trie.search(&quot;app&quot;);     // 返回 true
+</code></pre>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设所有的输入都是由小写字母 a-z 构成的。
+保证所有输入均为非空字符串。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-前缀树基本实现"><a href="#思路1-前缀树基本实现" class="headerlink" title="思路1: 前缀树基本实现"></a>思路1: 前缀树基本实现</h3><p>主要是使用前缀树的基本概念，将前缀字母连接到下一个后缀节点,以及标记好结束节点</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">class Trie &#123;
     private final int alphaSize = 26;
     private Trie[] children = new Trie[alphaSize];
     private boolean isEnd = false;
 
     /** Initialize your data structure here. */
-    public Trie() {
+    public Trie() &#123;
 
-    }
+    &#125;
 
     /** Inserts a word into the trie. */
-    public void insert(String word) {
+    public void insert(String word) &#123;
         Trie temp = this;
-        for(var ch: word.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
+        for(var ch: word.toCharArray())&#123;
+            if (temp.children[ch - 'a'] == null)&#123;
                 temp.children[ch - 'a'] = new Trie();
-            }
+            &#125;
             temp = temp.children[ch - 'a'];
-        }
+        &#125;
         temp.isEnd=true;
-    }
+    &#125;
 
     /** Returns if the word is in the trie. */
-    public boolean search(String word) {
+    public boolean search(String word) &#123;
         Trie temp = this;
-        for(var ch: word.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
+        for(var ch: word.toCharArray())&#123;
+            if (temp.children[ch - 'a'] == null)&#123;
                 return false;
-            }
+            &#125;
             temp = temp.children[ch - 'a'];
-        }
+        &#125;
         return temp.isEnd;
-    }
+    &#125;
 
     /** Returns if there is any word in the trie that starts with the given prefix. */
-    public boolean startsWith(String prefix) {
+    public boolean startsWith(String prefix) &#123;
         Trie temp = this;
-        for(var ch: prefix.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
+        for(var ch: prefix.toCharArray())&#123;
+            if (temp.children[ch - 'a'] == null)&#123;
                 return false;
-            }
+            &#125;
             temp = temp.children[ch - 'a'];
-        }
+        &#125;
         return true;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$n$均可看作是链表的查找插入</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$n$</p>
 
@@ -634,7 +647,7 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre><h3 id="说明"><a 
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
+                            Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相
                         
                     </div>
@@ -696,7 +709,9 @@ trie.search(&quot;app&quot;);     // 返回 true</code></pre><h3 id="说明"><a 
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。说明：分隔时可以重复使用字典中
+                            Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+
+说明：分隔时可以重复使用字
                         
                     </div>
                     <div class="publish-info">
@@ -1077,24 +1092,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

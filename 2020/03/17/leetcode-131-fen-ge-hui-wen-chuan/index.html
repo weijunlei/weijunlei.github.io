@@ -30,8 +30,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -430,81 +434,85 @@
 [
     [&quot;aa&quot;,&quot;b&quot;],
     [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
-]</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：-回溯-判断"><a href="#思路1：-回溯-判断" class="headerlink" title="思路1： 回溯+判断"></a>思路1： 回溯+判断</h3><p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p>
-<h3 id="思路1：代码"><a href="#思路1：代码" class="headerlink" title="思路1：代码"></a>思路1：代码</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public List<List<String>> partition(String s) {
+]
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：-回溯-判断"><a href="#思路1：-回溯-判断" class="headerlink" title="思路1： 回溯+判断"></a>思路1： 回溯+判断</h3><p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p>
+<h3 id="思路1：代码"><a href="#思路1：代码" class="headerlink" title="思路1：代码"></a>思路1：代码</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public List<List<String>> partition(String s) &#123;
         List<List<String>> result = new LinkedList<>();
-        if (s.length() == 0) {
+        if (s.length() == 0) &#123;
             return result;
-        }
+        &#125;
         List<String> temp = new LinkedList<>();
         partitionHelper(result, s, 0, temp);
         return result;
-    }
-
-    private boolean canReverse(String s, int i, int j) {
-        if (i >= j) {
+    &#125;
+    
+    private boolean canReverse(String s, int i, int j) &#123;
+        if (i >= j) &#123;
             return true;
-        }
-        if (s.charAt(i++) == s.charAt(j--)) {
+        &#125;
+        if (s.charAt(i++) == s.charAt(j--)) &#123;
             return canReverse(s, i, j);
-        } else {
+        &#125; else &#123;
             return false;
-        }
-    }
-
-    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp) {
+        &#125;
+    &#125;
+    
+    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp) &#123;
         int size = s.length();
-        if (size <= startIndex) {
+        if (size <= startIndex) &#123;
             res.add(new LinkedList<String>(temp));
             return;
-        }
-        for(int i = startIndex; i < size; i++) {
-            if (canReverse(s, startIndex, i)) {
+        &#125;
+        for(int i = startIndex; i < size; i++) &#123;
+            if (canReverse(s, startIndex, i)) &#123;
                 temp.add(s.substring(startIndex, i + 1));
                 partitionHelper(res, s, i + 1, temp);
                 temp.remove(temp.size() - 1);
-            }
-        }
-    }
-}</code></pre>
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <h3 id="思路2：回溯-动态规划优化"><a href="#思路2：回溯-动态规划优化" class="headerlink" title="思路2：回溯+动态规划优化"></a>思路2：回溯+动态规划优化</h3><p>空间换时间，将判断是否是回文看成是一个动态规划，直接使用$n^2$算法求取，之后直接$1$调取</p>
-<h3 id="思路2-代码"><a href="#思路2-代码" class="headerlink" title="思路2: 代码"></a>思路2: 代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
-    public List<List<String>> partition(String s) {
+<h3 id="思路2-代码"><a href="#思路2-代码" class="headerlink" title="思路2: 代码"></a>思路2: 代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+    public List<List<String>> partition(String s) &#123;
         List<List<String>> res = new LinkedList<List<String>>();
-        if (s.length() == 0) {
+        if (s.length() == 0) &#123;
             return res;
-        }
+        &#125;
         int size = s.length();
         boolean[][] dps = new boolean[size][size];
-        for(int right = 0; right < size; right++) {
-            for(int left = 0; left <= right; left++) {
-                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dps[left + 1][right - 1])) {
+        for(int right = 0; right < size; right++) &#123;
+            for(int left = 0; left <= right; left++) &#123;
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dps[left + 1][right - 1])) &#123;
                     dps[left][right] = true;
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
 
         List<String> temp = new LinkedList<>();
         partitionHelper(res, s, 0, temp, dps);
         return res;
-    }
+    &#125;
 
-    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp, boolean[][] dps) {
+    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp, boolean[][] dps) &#123;
         int size = s.length();
-        if (startIndex >= size) {
+        if (startIndex >= size) &#123;
             res.add(new LinkedList<>(temp));
             return;
-        }
-        for(int i = startIndex; i < size; i++) {
-            if (dps[startIndex][i]) {
+        &#125;
+        for(int i = startIndex; i < size; i++) &#123;
+            if (dps[startIndex][i]) &#123;
                 temp.add(s.substring(startIndex, i + 1));
                 partitionHelper(res, s, i + 1, temp, dps);
                 temp.remove(temp.size() - 1);
-            }
-        }
-    }
-}</code></pre>
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>$n*2^n?$</p>
 <h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>$n*2^n?$</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>$2^n + n^2$</p>
@@ -1126,24 +1134,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

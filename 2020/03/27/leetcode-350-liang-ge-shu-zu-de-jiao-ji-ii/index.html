@@ -5,8 +5,12 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:350. 两个数组的交集 II, 小风雷">
-    <meta name="description" content="350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu">
+    <meta name="description" content="350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
+
+示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]
+
+示例 2:输入: nums1 = [4,9,5]">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,8 +31,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -417,62 +425,74 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="350-两个数组的交集-II"><a href="#350-两个数组的交集-II" class="headerlink" title="350. 两个数组的交集 II"></a><a href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/" target="_blank" rel="noopener">350. 两个数组的交集 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个数组，编写一个函数来计算它们的交集。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-输出: [4,9]</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
-我们可以不考虑输出结果的顺序。</code></pre><h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果给定的数组已经排好序呢？你将如何优化你的算法？
-如果 nums1 的大小比 nums2 小很多，哪种方法更优？
-如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-两个数组排序后使用两个指针遍历比较"><a href="#思路1-两个数组排序后使用两个指针遍历比较" class="headerlink" title="思路1: 两个数组排序后使用两个指针遍历比较"></a>思路1: 两个数组排序后使用两个指针遍历比较</h3><p>对两个数组分别排序，然后使用一个哨兵分别计数，若两位置相等则加入，否则按照排序递增</p>
+                <h1 id="350-两个数组的交集-II"><a href="#350-两个数组的交集-II" class="headerlink" title="350. 两个数组的交集 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/">350. 两个数组的交集 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个数组，编写一个函数来计算它们的交集。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+输出: [4,9]
+</code></pre>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
+我们可以不考虑输出结果的顺序。
+</code></pre>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果给定的数组已经排好序呢？你将如何优化你的算法？
+如果 nums1 的大小比 nums2 小很多，哪种方法更优？
+如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-两个数组排序后使用两个指针遍历比较"><a href="#思路1-两个数组排序后使用两个指针遍历比较" class="headerlink" title="思路1: 两个数组排序后使用两个指针遍历比较"></a>思路1: 两个数组排序后使用两个指针遍历比较</h3><p>对两个数组分别排序，然后使用一个哨兵分别计数，若两位置相等则加入，否则按照排序递增</p>
 <h3 id="思路2-使用Hash计数"><a href="#思路2-使用Hash计数" class="headerlink" title="思路2: 使用Hash计数"></a>思路2: 使用Hash计数</h3><p>对一个数组hash计数，然后使用另外一个等相等加入</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int[] intersect(int[] nums1, int[] nums2) {
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int[] intersect(int[] nums1, int[] nums2) &#123;
         List<Integer> result = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-
+        
         int aIndex = 0;
         int bIndex = 0;
-        while(aIndex < nums1.length && bIndex < nums2.length){
-            if (nums1[aIndex] == nums2[bIndex]){
+        while(aIndex < nums1.length && bIndex < nums2.length)&#123;
+            if (nums1[aIndex] == nums2[bIndex])&#123;
                 result.add(nums1[aIndex]);
                 aIndex ++;
                 bIndex ++;
-            } else if(nums1[aIndex] < nums2[bIndex]){
+            &#125; else if(nums1[aIndex] < nums2[bIndex])&#123;
                 aIndex ++;
-            } else {
+            &#125; else &#123;
                 bIndex ++;
-            }
-        }
+            &#125;
+        &#125;
         int[] intResult = new int[result.size()];
-        for(int i = 0; i < result.size(); i++){
+        for(int i = 0; i < result.size(); i++)&#123;
             intResult[i] = result.get(i);
-        }
+        &#125;
         return intResult;
-    }
-}</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int[] intersect(int[] nums1, int[] nums2) {
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int[] intersect(int[] nums1, int[] nums2) &#123;
         List<Integer> result = new ArrayList<>();
         Map<Integer, Integer> hashMap = new HashMap<>();
-        for(int num: nums1){
-            if (!hashMap.containsKey(num)){
+        for(int num: nums1)&#123;
+            if (!hashMap.containsKey(num))&#123;
                 hashMap.put(num, 0);
-            }
+            &#125;
             hashMap.put(num, hashMap.get(num) + 1);
-        }
-        for(int num: nums2){
-            if (hashMap.containsKey(num) && hashMap.get(num) > 0){
+        &#125;
+        for(int num: nums2)&#123;
+            if (hashMap.containsKey(num) && hashMap.get(num) > 0)&#123;
                 result.add(num);
                 hashMap.put(num, hashMap.get(num) - 1);
-            }
-        }
+            &#125;
+        &#125;
         int[] intResult = new int[result.size()];
-        for(int i = 0; i < result.size(); i++){
+        for(int i = 0; i < result.size(); i++)&#123;
             intResult[i] = result.get(i);
-        }
+        &#125;
         return intResult;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlog(n))$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1时间复杂度-1"><a href="#思路1时间复杂度-1" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
@@ -708,8 +728,8 @@
                         
                             Leetcode: 384.打乱数组题目描述打乱一个没有重复元素的数组。
 示例:// 以数字集合 1, 2 和 3 初始化数组。
-int[] nums = {1,2,3};
-Solution solution = new Solution(
+int[] nums = &#123;1,2,3&#125;;
+Solution solution = new
                         
                     </div>
                     <div class="publish-info">
@@ -1094,24 +1114,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

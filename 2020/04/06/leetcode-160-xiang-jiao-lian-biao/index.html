@@ -11,7 +11,9 @@
 
 
 
-在节点 c1 开始相交。示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5], l">
+在节点 c1 开始相交。
+
+示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5],">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -32,8 +34,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -424,53 +430,65 @@
 
 
 
-在节点 c1 开始相交。</code></pre><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+在节点 c1 开始相交。
+</code></pre>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
 输出：Reference of the node with value = 8
-输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</code></pre><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+</code></pre>
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
 输出：Reference of the node with value = 2
-输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</code></pre><h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+</code></pre>
+<p> </p>
+<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
 输出：null
 输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
-解释：这两个链表不相交，因此返回 null。</code></pre><h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><pre><code>如果两个链表没有交点，返回 null.
+解释：这两个链表不相交，因此返回 null。
+</code></pre>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><pre><code>如果两个链表没有交点，返回 null.
 在返回结果后，两个链表仍须保持原有的结构。
 可假定整个链表结构中没有循环。
-程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-       if ((headA == null && headB != null) || (headA != null && headB == null)){
+程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;
+       if ((headA == null && headB != null) || (headA != null && headB == null))&#123;
           return null;
-       }
+       &#125;
         int countA = 0, countB = 0;
         ListNode preA = headA, preB = headB;
-        while (preA != null){
+        while (preA != null)&#123;
             preA = preA.next;
             countA += 1;
-        }
-        while (preB != null){
+        &#125;
+        while (preB != null)&#123;
             preB = preB.next;
             countB += 1;
-        }
+        &#125;
         preA = headA;
         preB = headB;
-        while(countA > countB){
+        while(countA > countB)&#123;
             preA = preA.next;
             countA--;
-        }
-        while(countA < countB){
+        &#125;
+        while(countA < countB)&#123;
             preB = preB.next;
             countB--;
-        }
-
-        while(preA != null){
-            if (preA == preB){
+        &#125;
+        
+        while(preA != null)&#123;
+            if (preA == preB)&#123;
                 return preA;
-            }
+            &#125;
             preA = preA.next;
             preB = preB.next;
-        }
+        &#125;
         return null;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(1)$</p>
 
@@ -628,10 +646,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:206.反转链表题目描述反转一个单链表。示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+                            Leetcode:206.反转链表题目描述反转一个单链表。
+
+示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
 进阶:
-你可以迭代或
+你可以迭
                         
                     </div>
                     <div class="publish-info">
@@ -689,8 +709,12 @@
                     <div class="summary block-with-text">
                         
                             #Leetcode: 141.排序链表
-题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。示例 1:输入: 4-&gt;2-&gt;1-&gt;3
-输出: 1-&gt;2-&gt;3-&gt;4示例 2:输入
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+
+示例 1:输入: 4-&gt;2-&gt;1-&gt;3
+输出: 1-&gt;2-&gt;3-&gt;4
+
+示例 
                         
                     </div>
                     <div class="publish-info">
@@ -1071,24 +1095,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

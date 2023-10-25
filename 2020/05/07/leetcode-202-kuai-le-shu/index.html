@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,67 +418,73 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-202-快乐数"><a href="#Leetcode-202-快乐数" class="headerlink" title="Leetcode:202. 快乐数"></a><a href="https://leetcode-cn.com/problems/happy-number/" target="_blank" rel="noopener">Leetcode:202. 快乐数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个算法来判断一个数 n 是不是快乐数。
+                <h1 id="Leetcode-202-快乐数"><a href="#Leetcode-202-快乐数" class="headerlink" title="Leetcode:202. 快乐数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/happy-number/">Leetcode:202. 快乐数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个算法来判断一个数 n 是不是快乐数。
 
-「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。
+「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。
 
-如果 n 是快乐数就返回 True ；不是，则返回 False 。</code></pre><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>输入：19
+如果 n 是快乐数就返回 True ；不是，则返回 False 。
+</code></pre>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><pre><code>输入：19
 输出：true
 解释：
 12 + 92 = 82
 82 + 22 = 68
 62 + 82 = 100
-12 + 02 + 02 = 1</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-递推-哈希表记录"><a href="#思路1-递推-哈希表记录" class="headerlink" title="思路1 递推+哈希表记录"></a>思路1 递推+哈希表记录</h3><p>使用一个哈希表依次记录10进制各个位的平方和，最后判断最后输入的值是否为1</p>
+12 + 02 + 02 = 1
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-递推-哈希表记录"><a href="#思路1-递推-哈希表记录" class="headerlink" title="思路1 递推+哈希表记录"></a>思路1 递推+哈希表记录</h3><p>使用一个哈希表依次记录10进制各个位的平方和，最后判断最后输入的值是否为1</p>
 <h3 id="思路2-递推-快慢指针"><a href="#思路2-递推-快慢指针" class="headerlink" title="思路2 递推+快慢指针"></a>思路2 递推+快慢指针</h3><p>递推下一个数是一样的，可以通过快慢指针的方式判断是否是快乐数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean isHappy(int n) {
-        if (n <= 0){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public boolean isHappy(int n) &#123;
+        if (n <= 0)&#123;
             return false;
-        }
+        &#125;
         Set<Integer> intSet = new HashSet<Integer>();
-        while (n != 1 && !intSet.contains(n)){
+        while (n != 1 && !intSet.contains(n))&#123;
             intSet.add(n);
             n = getHappy(n);
-        }
+        &#125;
         return n == 1;
-    }
-
-    private int getHappy(int n){
+    &#125;
+    
+    private int getHappy(int n)&#123;
         int result = 0;
         int tempNum = 0;
-        while (n != 0){
+        while (n != 0)&#123;
             tempNum = n % 10;
             result += tempNum * tempNum;
             n /= 10;
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean isHappy(int n) {
-        if (n <= 0){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public boolean isHappy(int n) &#123;
+        if (n <= 0)&#123;
             return false;
-        }
+        &#125;
         int fast = getHappy(n);
         int slow = n;
-        while (fast != 1 && slow != fast){
+        while (fast != 1 && slow != fast)&#123;
             fast = getHappy(getHappy(fast));
             slow = getHappy(slow);
-        }
+        &#125;
         return fast == 1;
-    }
-
-    private int getHappy(int n){
+    &#125;
+    
+    private int getHappy(int n)&#123;
         int result = 0;
         int tempNum = 0;
-        while (n != 0){
+        while (n != 0)&#123;
             tempNum = n % 10;
             result += tempNum * tempNum;
             n /= 10;
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(logn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(logn)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(logn)$</p>
@@ -634,8 +644,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。示例 1:输入: a = 1, b = 2
-输出: 3示例 2:输入: a = -2, b
+                            [Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+
+示例 1:输入: a = 1, b = 2
+输出: 3
+
+示例 2:输入: a = -
                         
                     </div>
                     <div class="publish-info">
@@ -692,11 +706,18 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:326. 3的幂题目描述给定一个整数，写一个函数来判断它是否是 3 的幂次方。示例 1:输入: 27
-输出: true示例 2:输入: 0
-输出: false示例 3:输入: 9
-输出: true示例 4:输入: 45
-输
+                            Leetcode:326. 3的幂题目描述给定一个整数，写一个函数来判断它是否是 3 的幂次方。
+
+示例 1:输入: 27
+输出: true
+
+示例 2:输入: 0
+输出: false
+
+示例 3:输入: 9
+输出: true
+
+示例 4:
                         
                     </div>
                     <div class="publish-info">
@@ -1077,24 +1098,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

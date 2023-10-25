@@ -31,8 +31,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -425,54 +429,62 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="334-递增的三元子序列"><a href="#334-递增的三元子序列" class="headerlink" title="334. 递增的三元子序列"></a><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/" target="_blank" rel="noopener">334. 递增的三元子序列</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+                <h1 id="334-递增的三元子序列"><a href="#334-递增的三元子序列" class="headerlink" title="334. 递增的三元子序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/">334. 递增的三元子序列</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
 
 数学表达式如下:
 
 如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
 使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。
-说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
-输出: true</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
-输出: false</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] = max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
+说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3,4,5]
+输出: true
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [5,4,3,2,1]
+输出: false
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] &#x3D; max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
 <h3 id="思路2：加入两个哨兵元素"><a href="#思路2：加入两个哨兵元素" class="headerlink" title="思路2：加入两个哨兵元素"></a>思路2：加入两个哨兵元素</h3><p>使用两个哨兵元素记录值，即记录两个最小的数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean increasingTriplet(int[] nums) {
-        if (nums == null || nums.length < 3){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public boolean increasingTriplet(int[] nums) &#123;
+        if (nums == null || nums.length < 3)&#123;
             return false;
-        }
+        &#125;
         int[] dps = new int[nums.length];
-        for(int i = 1; i < nums.length; i++){
-            for(int j = 0; j < i; j++){
-                if (nums[i] > nums[j]){
+        for(int i = 1; i < nums.length; i++)&#123;
+            for(int j = 0; j < i; j++)&#123;
+                if (nums[i] > nums[j])&#123;
                     dps[i] = Math.max(dps[i], dps[j] + 1);
-                    if (dps[i] == 2){
+                    if (dps[i] == 2)&#123;
                         return true;
-                    }
-                }
-            }
-        }
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
         return false;
-    }
-}</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public boolean increasingTriplet(int[] nums) {
-        if (nums == null || nums.length < 3){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public boolean increasingTriplet(int[] nums) &#123;
+        if (nums == null || nums.length < 3)&#123;
             return false;
-        }
+        &#125;
         int max1 = Integer.MAX_VALUE;
         int max2 = Integer.MAX_VALUE;
-        for(int num: nums){
-            if (num <= max1){
+        for(int num: nums)&#123;
+            if (num <= max1)&#123;
                 max1 = num;
-            } else if (num <= max2){
+            &#125; else if (num <= max2)&#123;
                 max2 = num;
-            } else {
+            &#125; else &#123;
                 return true;
-            }
-        }
+            &#125;
+        &#125;
         return false;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
@@ -640,7 +652,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+                            Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
                         
                     </div>
                     <div class="publish-info">
@@ -697,8 +709,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
-输出: [2,2]示例 2:输入: nums1 = [4,9,5], nu
+                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
+
+示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+输出: [2,2]
+
+示例 2:输入: nums1 = [4,9,5]
                         
                     </div>
                     <div class="publish-info">
@@ -1083,24 +1099,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

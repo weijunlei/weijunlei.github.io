@@ -27,8 +27,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -437,10 +441,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="UNC多粒度支撑段落和支撑句"><a href="#UNC多粒度支撑段落和支撑句" class="headerlink" title="UNC多粒度支撑段落和支撑句"></a>UNC多粒度支撑段落和支撑句</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a href="https://arxiv.org/pdf/1909.08041.pdf" target="_blank" rel="noopener">Revealing the Importance of Semantic Retrieval<br>for Machine Reading at Scale</a></p>
+                <h1 id="UNC多粒度支撑段落和支撑句"><a href="#UNC多粒度支撑段落和支撑句" class="headerlink" title="UNC多粒度支撑段落和支撑句"></a>UNC多粒度支撑段落和支撑句</h1><h2 id="论文地址"><a href="#论文地址" class="headerlink" title="论文地址"></a>论文地址</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1909.08041.pdf">Revealing the Importance of Semantic Retrieval<br>for Machine Reading at Scale</a></p>
 <h2 id="一句话概括"><a href="#一句话概括" class="headerlink" title="一句话概括"></a>一句话概括</h2><p>通过term按照文本相关性搜索到可靠数量的段落，然后通过神经网络模型召回支撑段落，然后再在支撑段落里召回支撑句，并且文章做了大量的消融实验证明了支撑段落具有重大意义，支撑句需要有一些噪音效果才比较好。</p>
 <h2 id="论文精读"><a href="#论文精读" class="headerlink" title="论文精读"></a>论文精读</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><h2 id="开源可复现"><a href="#开源可复现" class="headerlink" title="开源可复现"></a>开源可复现</h2><p>开源</p>
-<h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p><a href="easonnie/semanticRetrievalMRS">easonnie/semanticRetrievalMRS</a></p>
+<h3 id="开源地址"><a href="#开源地址" class="headerlink" title="开源地址"></a>开源地址</h3><p><a href="easonnie/semanticRetrievalMRS">easonnie&#x2F;semanticRetrievalMRS</a></p>
 <h3 id="复现效果"><a href="#复现效果" class="headerlink" title="复现效果"></a>复现效果</h3><p>无</p>
 
             </div>
@@ -1065,24 +1069,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

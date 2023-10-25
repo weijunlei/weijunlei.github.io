@@ -5,9 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 887:鸡蛋掉落, 小风雷">
-    <meta name="description" content="Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+    <meta name="description" content="Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
-你知道存在楼层 F ，满足 0 &amp;lt;= F &amp;lt;">
+你知道存在楼层 F ，满足 0 &amp;lt;&amp;#x3D; F">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,111 +418,120 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-887-鸡蛋掉落"><a href="#Leetcode-887-鸡蛋掉落" class="headerlink" title="Leetcode 887:鸡蛋掉落"></a><a href="https://leetcode-cn.com/problems/super-egg-drop/" target="_blank" rel="noopener">Leetcode 887:鸡蛋掉落</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。</p>
+                <h1 id="Leetcode-887-鸡蛋掉落"><a href="#Leetcode-887-鸡蛋掉落" class="headerlink" title="Leetcode 887:鸡蛋掉落"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/super-egg-drop/">Leetcode 887:鸡蛋掉落</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。</p>
 <p>每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。</p>
-<p>你知道存在楼层 F ，满足 0 &lt;= F &lt;= N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。</p>
-<p>每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 &lt;= X &lt;= N）。</p>
+<p>你知道存在楼层 F ，满足 0 &lt;&#x3D; F &lt;&#x3D; N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。</p>
+<p>每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 &lt;&#x3D; X &lt;&#x3D; N）。</p>
 <p>你的目标是确切地知道 F 的值是多少。</p>
 <p>无论 F 的初始值如何，你确定 F 的值的最小移动次数是多少？</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/super-egg-drop" target="_blank" rel="noopener">https://leetcode-cn.com/problems/super-egg-drop</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/super-egg-drop">https://leetcode-cn.com/problems/super-egg-drop</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h4><pre><code>输入：K = 1, N = 2
 输出：2
 解释：
 鸡蛋从 1 楼掉落。如果它碎了，我们肯定知道 F = 0 。
 否则，鸡蛋从 2 楼掉落。如果它碎了，我们肯定知道 F = 1 。
 如果它没碎，那么我们肯定知道 F = 2 。
-因此，在最坏的情况下我们需要移动 2 次以确定 F 是多少。</code></pre><h4 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h4><pre><code>输入：K = 2, N = 6
+因此，在最坏的情况下我们需要移动 2 次以确定 F 是多少。
+</code></pre>
+<h4 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h4><pre><code>输入：K = 2, N = 6
 输出：3
 示例 3：
 
 输入：K = 3, N = 14
-输出：4</code></pre><h4 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h4><pre><code>1 &lt;= K &lt;= 100
-1 &lt;= N &lt;= 10000</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：基本二维DP-二分搜索"><a href="#思路1：基本二维DP-二分搜索" class="headerlink" title="思路1：基本二维DP + 二分搜索"></a>思路1：基本二维DP + 二分搜索</h3><p>直接二维DP计算最少的步骤，根据从x层掉落一个鸡蛋得到，则该情况下的状态转移方程为$DP[K][N] = max(DP[K][N-x], DP[K-1][x-1]) + 1$,从而可得到整体的状态转移方程$DP[K][N] = min(max(DP[K][N-x], DP[K-1][x-1])) + 1 x \isin [1, N]$,同时在dp过程中，前一个函数随x单调递减，后面单调递增，所以可以直接求是两个函数最接近的值作为候选求最小（可用两函数比相交（非整数，或者理解为值域相交，在相同定义域内））。所以该过程可用二分法求解。</p>
-<h3 id="思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）"><a href="#思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）" class="headerlink" title="思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）"></a>思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）</h3><p>可理解为有3元的方程，在一定程度上可根据两元求第3个未知变量，根据题设可以得到一个楼层数与鸡蛋数和步骤的关系，即在特定步骤和鸡蛋数下最多可以测的层数。所以可以得到递推式M为步骤数，K为鸡蛋数，所以状态转移方程为$DP[M][K] = DP[M-1][K-1] + DP[M-1][K] + 1$，该方法考虑的是每增加一步，鸡蛋数增加或减少一个，加1相当于在当前层进行操作。状态初始化是可利用任何一个鸡蛋可探明层数为M层，任何1步K个鸡蛋都只能探明1层，在这个过程中K已知，所以可得到一个可定范围</p>
-<h3 id="思路3：-逆向思维-推导函数-二分搜索"><a href="#思路3：-逆向思维-推导函数-二分搜索" class="headerlink" title="思路3： 逆向思维+推导函数 + 二分搜索"></a>思路3： 逆向思维+推导函数 + 二分搜索</h3><p>使用思路2进而推导出通项公式$f(k,n) = \frac{n(n-1)…(n-k)}{k!} + \frac{n(n-1)(n-2)}{3!} + \frac{n(n-1)}{2!} + n$,<a href="https://leetcode.com/problems/super-egg-drop/discuss/181702/Clear-C%2B%2B-codeRuntime-0-msO(1)-spacewith-explation.No-DPWhat-we-need-is-mathematical-thought!" target="_blank" rel="noopener">推导过程</a></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution {
-    public int superEggDrop(int K, int N) {
+输出：4
+</code></pre>
+<h4 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h4><pre><code>1 &lt;= K &lt;= 100
+1 &lt;= N &lt;= 10000
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：基本二维DP-二分搜索"><a href="#思路1：基本二维DP-二分搜索" class="headerlink" title="思路1：基本二维DP + 二分搜索"></a>思路1：基本二维DP + 二分搜索</h3><p>直接二维DP计算最少的步骤，根据从x层掉落一个鸡蛋得到，则该情况下的状态转移方程为$DP[K][N] &#x3D; max(DP[K][N-x], DP[K-1][x-1]) + 1$,从而可得到整体的状态转移方程$DP[K][N] &#x3D; min(max(DP[K][N-x], DP[K-1][x-1])) + 1 x \isin [1, N]$,同时在dp过程中，前一个函数随x单调递减，后面单调递增，所以可以直接求是两个函数最接近的值作为候选求最小（可用两函数比相交（非整数，或者理解为值域相交，在相同定义域内））。所以该过程可用二分法求解。</p>
+<h3 id="思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）"><a href="#思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）" class="headerlink" title="思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）"></a>思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）</h3><p>可理解为有3元的方程，在一定程度上可根据两元求第3个未知变量，根据题设可以得到一个楼层数与鸡蛋数和步骤的关系，即在特定步骤和鸡蛋数下最多可以测的层数。所以可以得到递推式M为步骤数，K为鸡蛋数，所以状态转移方程为$DP[M][K] &#x3D; DP[M-1][K-1] + DP[M-1][K] + 1$，该方法考虑的是每增加一步，鸡蛋数增加或减少一个，加1相当于在当前层进行操作。状态初始化是可利用任何一个鸡蛋可探明层数为M层，任何1步K个鸡蛋都只能探明1层，在这个过程中K已知，所以可得到一个可定范围</p>
+<h3 id="思路3：-逆向思维-推导函数-二分搜索"><a href="#思路3：-逆向思维-推导函数-二分搜索" class="headerlink" title="思路3： 逆向思维+推导函数 + 二分搜索"></a>思路3： 逆向思维+推导函数 + 二分搜索</h3><p>使用思路2进而推导出通项公式$f(k,n) &#x3D; \frac{n(n-1)…(n-k)}{k!} + \frac{n(n-1)(n-2)}{3!} + \frac{n(n-1)}{2!} + n$,<a target="_blank" rel="noopener" href="https://leetcode.com/problems/super-egg-drop/discuss/181702/Clear-C%2B%2B-codeRuntime-0-msO(1)-spacewith-explation.No-DPWhat-we-need-is-mathematical-thought!">推导过程</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+    public int superEggDrop(int K, int N) &#123;
         return eggDropHelper(K, N);
-    }
+    &#125;
 
     private static Map<String, Integer> eggDPs = new HashMap();
 
-    private String hasHelper(int K, int N) {
+    private String hasHelper(int K, int N) &#123;
         return Integer.toString(K) + "," + Integer.toString(N);
-    }
+    &#125;
 
-    private int eggDropHelper(int K, int N) {
-        if (!eggDPs.containsKey(hasHelper(K, N))) {
+    private int eggDropHelper(int K, int N) &#123;
+        if (!eggDPs.containsKey(hasHelper(K, N))) &#123;
             int result = 0;
-            if (K == 1 || N == 0 || N == 1) {
+            if (K == 1 || N == 0 || N == 1) &#123;
                 result = N;
-            } else {
+            &#125; else &#123;
                 int low = 1;
                 int high = N;
-                while (low + 1 < high) {
+                while (low + 1 < high) &#123;
                     int mid = (low + high) / 2;
                     int r1 = eggDropHelper(K, N - mid);
                     int r2 = eggDropHelper(K - 1, mid - 1);
 
-                    if (r1 > r2) {
+                    if (r1 > r2) &#123;
                         low = mid;
-                    } else if (r1 < r2) {
+                    &#125; else if (r1 < r2) &#123;
                         high = mid;
-                    } else {
+                    &#125; else &#123;
                         low = high = mid;
-                    }
-                }
+                    &#125;
+                &#125;
                 result = 1 + Math.min(Math.max(eggDropHelper(K, N - low), eggDropHelper(K - 1, low - 1)),
                         Math.max(eggDropHelper(K, N-high), eggDropHelper(K - 1, high - 1)));
-            }
+            &#125;
             eggDPs.put(hasHelper(K, N), result);
-        }
+        &#125;
         return eggDPs.get(hasHelper(K, N));
-    }
-}</code></pre>
-<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution2 {
-    public int superEggDrop(int K, int N) {
+    &#125;
+&#125;
+</code></pre>
+<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution2 &#123;
+    public int superEggDrop(int K, int N) &#123;
         int ans = 0;
         int[] dps = new int[K + 1];
-        for (int i = 0; i < K + 1; i ++) {
+        for (int i = 0; i < K + 1; i ++) &#123;
             dps[i] = 0;
-        }
-        while (dps[K] < N) {
-            for(int i = K; i > 0; i--) {
+        &#125;
+        while (dps[K] < N) &#123;
+            for(int i = K; i > 0; i--) &#123;
                 dps[i] = 1 + dps[i - 1] + dps[i];
-            }
+            &#125;
             ans ++;
-        }
+        &#125;
         return ans;
-    }
-}</code></pre>
-<h3 id="思路3代码"><a href="#思路3代码" class="headerlink" title="思路3代码"></a>思路3代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution3 {
-    public int superEggDrop(int K, int N) {
+    &#125;
+&#125;
+</code></pre>
+<h3 id="思路3代码"><a href="#思路3代码" class="headerlink" title="思路3代码"></a>思路3代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution3 &#123;
+    public int superEggDrop(int K, int N) &#123;
         int low = 1;
         int high = N;
-        while (low < high) {
+        while (low < high) &#123;
             int mid = (low + high) / 2;
-            if (eggHelper(mid, K, N) < N) {
+            if (eggHelper(mid, K, N) < N) &#123;
                 low = mid + 1;
-            } else {
+            &#125; else &#123;
                 high = mid;
-            }
-        }
+            &#125;
+        &#125;
         return low;
-    }
+    &#125;
 
-    private int eggHelper(int mid, int K, int N) {
+    private int eggHelper(int mid, int K, int N) &#123;
         int result = 0;
         int r = 1;
-        for (int i = 1; i <= K; i++) {
+        for (int i = 1; i <= K; i++) &#123;
             r *= mid - i + 1;
             r /= i;
             result += r;
             if (result > N) break;
-        }
+        &#125;
         return result;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>kNlog(N)</p>
 <h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>N * N</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>Klog(N)</p>
@@ -739,11 +752,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+                            多数元素题目描述给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n&#x2F;2 ⌋ 的元素。
 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
 示例示例1：
     输入: [3,2,3]
-    输出
+ 
                         
                     </div>
                     <div class="publish-info">
@@ -1128,24 +1141,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

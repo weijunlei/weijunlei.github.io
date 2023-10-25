@@ -5,7 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:127. 单词接龙, 小风雷">
-    <meta name="description" content="Leetcode: 127. 单词接龙题目描述给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
+    <meta name="description" content="Leetcode: 127. 单词接龙题目描述给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
 
 每次转换只能改变一个字母。
 转换过">
@@ -29,8 +29,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -415,155 +419,165 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-127-单词接龙"><a href="#Leetcode-127-单词接龙" class="headerlink" title="Leetcode: 127. 单词接龙"></a><a href="https://leetcode-cn.com/problems/word-ladder/" target="_blank" rel="noopener">Leetcode: 127. 单词接龙</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
+                <h1 id="Leetcode-127-单词接龙"><a href="#Leetcode-127-单词接龙" class="headerlink" title="Leetcode: 127. 单词接龙"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/">Leetcode: 127. 单词接龙</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
 
 每次转换只能改变一个字母。
-转换过程中的中间单词必须是字典中的单词。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果不存在这样的转换序列，返回 0。
+转换过程中的中间单词必须是字典中的单词。
+</code></pre>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>如果不存在这样的转换序列，返回 0。
 所有单词具有相同的长度。
 所有单词只由小写字母组成。
 字典中不存在重复的单词。
-你可以假设 beginWord 和 endWord 是非空的，且二者不相同。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
+你可以假设 beginWord 和 endWord 是非空的，且二者不相同。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
 beginWord = &quot;hit&quot;,
 endWord = &quot;cog&quot;,
 wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]
 
 输出: 5
 解释: 一个最短转换序列是 &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;,
-    返回它的长度 5。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:
+    返回它的长度 5。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:
 beginWord = &quot;hit&quot;
 endWord = &quot;cog&quot;
 wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]
 
-输出: 0
+输出: 0
 
-解释: endWord &quot;cog&quot; 不在字典中，所以无法进行转换。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p>
+解释: endWord &quot;cog&quot; 不在字典中，所以无法进行转换。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p>
 <h3 id="思路2-双向"><a href="#思路2-双向" class="headerlink" title="思路2 双向"></a>思路2 双向</h3><p>同时从开始词和末尾词进行BFS,减少无用边，更快找到路径，结果为路径加和即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) &#123;
+        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0)&#123;
             return 0;
-        }
+        &#125;
         Map<String, List<String>> wordDict = new HashMap<>();
         Map<String, Boolean> hasVisit = new HashMap();
         Queue<Map<String, Integer>> queue = new LinkedList<>();
         hasVisit.put(beginWord, true);
-        queue.offer(new HashMap<>(){{put(beginWord, 1);}});
-        for(String word: wordList){
+        queue.offer(new HashMap<>()&#123;&#123;put(beginWord, 1);&#125;&#125;);
+        for(String word: wordList)&#123;
             int l = word.length();
-            if (!word.equals(beginWord)){
+            if (!word.equals(beginWord))&#123;
                 hasVisit.put(word, false);
-            }
+            &#125;
 
-            for(int i = 0; i < l; i++){
+            for(int i = 0; i < l; i++)&#123;
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (!wordDict.containsKey(tempStr)){
+                if (!wordDict.containsKey(tempStr))&#123;
                     wordDict.put(tempStr, new ArrayList<String>());
-                }
+                &#125;
                 List<String> tempList = wordDict.get(tempStr);
                 tempList.add(word);
                 wordDict.put(tempStr, tempList);
-            }
-        }
-        while(!queue.isEmpty()){
+            &#125;
+        &#125;
+        while(!queue.isEmpty())&#123;
             Map<String, Integer> node = queue.remove();
             String word = node.keySet().toArray()[0].toString();
             int getLevel = node.get(word);
-            if (word.equals(endWord)){
+            if (word.equals(endWord))&#123;
                 return getLevel;
-            }
+            &#125;
             int l = word.length();
-            for(int i = 0; i < l; i++){
+            for(int i = 0; i < l; i++)&#123;
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0){
+                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0)&#123;
                     continue;
-                }
-                for(String getWord: wordDict.get(tempStr)){
-                    if (getWord.equals(endWord)){
+                &#125;
+                for(String getWord: wordDict.get(tempStr))&#123;
+                    if (getWord.equals(endWord))&#123;
                         return getLevel + 1;
-                    }
-                    if (!hasVisit.get(getWord)){
-                        queue.offer(new HashMap<>(){{put(getWord, getLevel + 1);}});
+                    &#125;
+                    if (!hasVisit.get(getWord))&#123;
+                        queue.offer(new HashMap<>()&#123;&#123;put(getWord, getLevel + 1);&#125;&#125;);
                         hasVisit.put(getWord, true);
-                    }
-                }
-            }
-        }
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
         return 0;
 
-    }
-}</code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
+    &#125;
+&#125;
+</code></pre>
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) &#123;
+        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0)&#123;
             return 0;
-        }
+        &#125;
         Map<String, List<String>> wordDict = new HashMap<>();
         Map<String, Integer> beginVisit = new HashMap<>();
         Map<String, Integer> endVisit = new HashMap<>();
         Queue<String> beginQueue = new LinkedList<>();
         Queue<String> endQueue = new LinkedList<>();
-
+        
         beginVisit.put(beginWord, 1);
         endVisit.put(endWord, 1);
         beginQueue.offer(beginWord);
         endQueue.offer(endWord);
         boolean hasEndWord = false;
-
-        for(String word: wordList){
+        
+        for(String word: wordList)&#123;
             int l = word.length();
-            if (word.equals(endWord)){
+            if (word.equals(endWord))&#123;
                 hasEndWord = true;
-            }
-            for(int i = 0; i < l; i++){
+            &#125;
+            for(int i = 0; i < l; i++)&#123;
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (!wordDict.containsKey(tempStr)){
+                if (!wordDict.containsKey(tempStr))&#123;
                     wordDict.put(tempStr, new ArrayList<String>());
-                }
+                &#125;
                 List<String> tempList = wordDict.get(tempStr);
                 tempList.add(word);
                 wordDict.put(tempStr, tempList);
-            }
-        }
+            &#125;
+        &#125;
         System.out.println(hasEndWord);
-        if (!hasEndWord){
+        if (!hasEndWord)&#123;
             return 0;
-        }
-
-        while(!beginQueue.isEmpty() && !endQueue.isEmpty()){
+        &#125;
+        
+        while(!beginQueue.isEmpty() && !endQueue.isEmpty())&#123;
             int getSame = updateQueue(wordDict, beginQueue, beginVisit, endVisit);
-            if (getSame != -1){
+            if (getSame != -1)&#123;
                 return getSame;
-            }
+            &#125;
             getSame = updateQueue(wordDict, endQueue, endVisit, beginVisit);
-            if (getSame != -1){
+            if (getSame != -1)&#123;
                 return getSame;
-            }
-        }
+            &#125;
+        &#125;
         return 0;
-    }
-
-    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1){
+    &#125;
+    
+    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1)&#123;
         String getStr = queue.remove();
         int l = getStr.length();
         int getLever = visit.get(getStr);
-        for(int i = 0; i < l; i++){
+        for(int i = 0; i < l; i++)&#123;
             String tempStr = getStr.substring(0, i) + "*" + getStr.substring(i + 1, l);
-            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0){
+            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0)&#123;
                 continue;
-            }
-            for(String getWord: wordDict.get(tempStr)){
-                if (!visit.containsKey(getWord)){
-                    if (visit1.containsKey(getWord)){
+            &#125;
+            for(String getWord: wordDict.get(tempStr))&#123;
+                if (!visit.containsKey(getWord))&#123;
+                    if (visit1.containsKey(getWord))&#123;
                         return getLever + visit1.get(getWord);
-                    }
+                    &#125;
                     queue.offer(getWord);
                     visit.put(getWord, getLever + 1);
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return -1;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>
 <h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p>
@@ -723,9 +737,9 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [Leetcode: 207.课程表]题目描述你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
+                            [Leetcode: 207.课程表]题目描述你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
 
-在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配
+在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配
                         
                     </div>
                     <div class="publish-info">
@@ -786,7 +800,7 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:200. 岛屿数量题目描述给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
+                            Leetcode:200. 岛屿数量题目描述给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
 岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成
                         
@@ -1169,24 +1183,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

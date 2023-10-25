@@ -5,8 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:395. 至少有K个重复字符的最长子串, 小风雷">
-    <meta name="description" content="Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。示例 1:输入:
-s = &amp;quot;aaabb&amp;quot">
+    <meta name="description" content="Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。
+
+示例 1:输入:
+s = &amp;quot;aaabb&amp;qu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,8 +29,12 @@ s = &amp;quot;aaabb&amp;quot">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -413,57 +419,64 @@ s = &amp;quot;aaabb&amp;quot">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-395-至少有K个重复字符的最长子串"><a href="#Leetcode-395-至少有K个重复字符的最长子串" class="headerlink" title="Leetcode:395. 至少有K个重复字符的最长子串"></a><a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/" target="_blank" rel="noopener">Leetcode:395. 至少有K个重复字符的最长子串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
+                <h1 id="Leetcode-395-至少有K个重复字符的最长子串"><a href="#Leetcode-395-至少有K个重复字符的最长子串" class="headerlink" title="Leetcode:395. 至少有K个重复字符的最长子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">Leetcode:395. 至少有K个重复字符的最长子串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
 s = &quot;aaabb&quot;, k = 3
 输出:
 3
-最长子串为 &quot;aaa&quot; ，其中 &#39;a&#39; 重复了 3 次。</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:
+最长子串为 &quot;aaa&quot; ，其中 &#39;a&#39; 重复了 3 次。
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入:
 s = &quot;ababbc&quot;, k = 2
 
 输出:
 5
 
-最长子串为 &quot;ababb&quot; ，其中 &#39;a&#39; 重复了 2 次， &#39;b&#39; 重复了 3 次。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>计算字符串中每个字符出现次数，然后是用双指针去除前后不满足的字符。中间字符串遍历，如有少于k次地则切割分治分别计算，并取最大值</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
-    public int longestSubstring(String s, int k) {
-        if (s == null || s.length() == 0 || k > s.length()){
+最长子串为 &quot;ababb&quot; ，其中 &#39;a&#39; 重复了 2 次， &#39;b&#39; 重复了 3 次。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>计算字符串中每个字符出现次数，然后是用双指针去除前后不满足的字符。中间字符串遍历，如有少于k次地则切割分治分别计算，并取最大值</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+    public int longestSubstring(String s, int k) &#123;
+        if (s == null || s.length() == 0 || k > s.length())&#123;
             return 0;
-        }
-        if (k < 2){
+        &#125;
+        if (k < 2)&#123;
             return s.length();
-        }
-
+        &#125;
+        
         return subStringHelper(s, 0, s.length() - 1, k);
-    }
-
-
-    private int subStringHelper(String s, int start, int end, int k){
-        if (end - start + 1 < k){
+    &#125;
+    
+    
+    private int subStringHelper(String s, int start, int end, int k)&#123;
+        if (end - start + 1 < k)&#123;
             return 0;
-        }
-
+        &#125;
+        
         int[] chNum = new int[26];
-        for(int i = start; i <= end; i++){
+        for(int i = start; i <= end; i++)&#123;
             chNum[s.charAt(i) - 'a'] += 1;
-        }
-        while(end - start + 1 >= k && chNum[s.charAt(start) - 'a'] < k){
+        &#125;
+        while(end - start + 1 >= k && chNum[s.charAt(start) - 'a'] < k)&#123;
             start++;
-        }
-        while(end - start + 1 >= k && chNum[s.charAt(end) - 'a'] < k){
+        &#125;
+        while(end - start + 1 >= k && chNum[s.charAt(end) - 'a'] < k)&#123;
             end--;
-        }
-
-        if (end - start + 1 < k){
+        &#125;
+        
+        if (end - start + 1 < k)&#123;
             return 0;
-        }
-        for(int i = start; i <= end; i++){
-            if (chNum[s.charAt(i) - 'a'] < k){
+        &#125;
+        for(int i = start; i <= end; i++)&#123;
+            if (chNum[s.charAt(i) - 'a'] < k)&#123;
                 return Math.max(subStringHelper(s, start, i - 1, k), subStringHelper(s, i + 1, end, k));
-            }
-        }
+            &#125;
+        &#125;
         return end - start + 1;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
 <h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
 
@@ -623,8 +636,9 @@ s = &quot;ababbc&quot;, k = 2
                         
                             Leetcode:124. 二叉树中的最大路径和题目描述给定一个非空二叉树，返回其最大路径和。
 
-本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。示例 1:输入: [1,2,3]
+本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
 
+示例 1:输入: [1,2,3
                         
                     </div>
                     <div class="publish-info">
@@ -685,7 +699,7 @@ s = &quot;ababbc&quot;, k = 2
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:315. 计算右侧小于当前元素的个数题目描述给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数
+                            Leetcode:315. 计算右侧小于当前元素的个数题目描述给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数
                         
                     </div>
                     <div class="publish-info">
@@ -1074,24 +1088,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

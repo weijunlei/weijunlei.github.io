@@ -7,8 +7,9 @@
     <meta name="keywords" content="Leetcode:124. 二叉树中的最大路径和, 小风雷">
     <meta name="description" content="Leetcode:124. 二叉树中的最大路径和题目描述给定一个非空二叉树，返回其最大路径和。
 
-本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。示例 1:输入: [1,2,3]
-">
+本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
+
+示例 1:输入: [1,2,3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -29,8 +30,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -419,45 +424,52 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-124-二叉树中的最大路径和"><a href="#Leetcode-124-二叉树中的最大路径和" class="headerlink" title="Leetcode:124. 二叉树中的最大路径和"></a><a href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/" target="_blank" rel="noopener">Leetcode:124. 二叉树中的最大路径和</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空二叉树，返回其最大路径和。
+                <h1 id="Leetcode-124-二叉树中的最大路径和"><a href="#Leetcode-124-二叉树中的最大路径和" class="headerlink" title="Leetcode:124. 二叉树中的最大路径和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/">Leetcode:124. 二叉树中的最大路径和</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空二叉树，返回其最大路径和。
 
-本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。</code></pre><h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3]
+本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
+</code></pre>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [1,2,3]
 
     1
     / \
     2   3
 
-输出: 6</code></pre><h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [-10,9,20,null,null,15,7]
+输出: 6
+</code></pre>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [-10,9,20,null,null,15,7]
 
-   -10
-   / \
-  9  20
-    /  \
-   15   7
+   -10
+   / \
+  9  20
+    /  \
+   15   7
 
-输出: 42</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>后序遍历递归实现，最大路径只能为node+left son + right son或node + left son + node的父节点或node + right son + 父节点，所以在具体实现中后序遍历二叉数，并分别计算比较这三个值即可，递归得到以left son为最高节点的最大路径和right son为最高节点的路径和</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution {
+输出: 42
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>后序遍历递归实现，最大路径只能为node+left son + right son或node + left son + node的父节点或node + right son + 父节点，所以在具体实现中后序遍历二叉数，并分别计算比较这三个值即可，递归得到以left son为最高节点的最大路径和right son为最高节点的路径和</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
     private int result = Integer.MIN_VALUE;
-
-    public int maxPathSum(TreeNode root) {
+    
+    public int maxPathSum(TreeNode root) &#123;
         maxPathCount(root);
         return result;
-    }
-
-    private int maxPathCount(TreeNode node){
-        if (node == null){
+    &#125;
+    
+    private int maxPathCount(TreeNode node)&#123;
+        if (node == null)&#123;
             return 0;
-        }
-
+        &#125;
+        
         int leftSum = Math.max(maxPathCount(node.left), 0);
         int rightSum = Math.max(maxPathCount(node.right), 0);
-
+        
         int newSum = node.val + leftSum + rightSum;
         result = Math.max(result, newSum);
-
+        
         return node.val + Math.max(leftSum, rightSum);
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(logn)$</p>
 
@@ -621,9 +633,11 @@
                         
                             Leetcode:128. 最长连续序列题目描述给定一个未排序的整数数组，找出最长连续序列的长度。
 
-要求算法的时间复杂度为 O(n)。示例:输入: [100, 4, 200, 1, 3, 2]
+要求算法的时间复杂度为 O(n)。
+
+示例:输入: [100, 4, 200, 1, 3, 2]
 输出: 4
-解释: 最长连续序列是 [1, 
+解释: 最长连续序列是 [1
                         
                     </div>
                     <div class="publish-info">
@@ -684,8 +698,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。示例 1:输入:
-s = &quot;aaabb&quot
+                            Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。
+
+示例 1:输入:
+s = &quot;aaabb&qu
                         
                     </div>
                     <div class="publish-info">
@@ -1066,24 +1082,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

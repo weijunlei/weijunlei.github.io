@@ -26,8 +26,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -416,32 +420,34 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Multilingual-NMT-with-a-language-independent-attention-bridge"><a href="#Multilingual-NMT-with-a-language-independent-attention-bridge" class="headerlink" title="Multilingual NMT with a language-independent attention bridge"></a><a href="https://www.aclweb.org/anthology/W19-4305.pdf" target="_blank" rel="noopener">Multilingual NMT with a language-independent attention bridge</a></h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inner-attention语言特定的编码和解码器连接进行训练。注意力桥利用每种语言的语义进行翻译，并发展成一种语言无关的意义表示，可以有效地用于迁移学习。作者为有效开发多语言神经网络机器翻译提供了一种新的框架。作者在多平行数据上进行了系统性的测试。该模型在双语模型和零样本的翻译上提升较大，展现了该模型的抽象和迁移能力。</p>
+                <h1 id="Multilingual-NMT-with-a-language-independent-attention-bridge"><a href="#Multilingual-NMT-with-a-language-independent-attention-bridge" class="headerlink" title="Multilingual NMT with a language-independent attention bridge"></a><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4305.pdf">Multilingual NMT with a language-independent attention bridge</a></h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inner-attention语言特定的编码和解码器连接进行训练。注意力桥利用每种语言的语义进行翻译，并发展成一种语言无关的意义表示，可以有效地用于迁移学习。作者为有效开发多语言神经网络机器翻译提供了一种新的框架。作者在多平行数据上进行了系统性的测试。该模型在双语模型和零样本的翻译上提升较大，展现了该模型的抽象和迁移能力。</p>
 <h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
 <li>提出了一种多语言翻译系统，有效解决学习语言无关的句子表征任务</li>
 <li>验证了模型能够通过共享表征实现有效的迁移学习和零样本翻译。</li>
-<li>证明了经过多语言训练的词嵌入可以改善大多数下流和展示了从组合翻译任务上获取抽象学习的句子探测任务<h2 id="模型实现"><a href="#模型实现" class="headerlink" title="模型实现"></a>模型实现</h2><h3 id="整体上"><a href="#整体上" class="headerlink" title="整体上"></a>整体上</h3></li>
+<li>证明了经过多语言训练的词嵌入可以改善大多数下流和展示了从组合翻译任务上获取抽象学习的句子探测任务</li>
 </ul>
-<ol>
+<h2 id="模型实现"><a href="#模型实现" class="headerlink" title="模型实现"></a>模型实现</h2><h3 id="整体上"><a href="#整体上" class="headerlink" title="整体上"></a>整体上</h3><ol>
 <li>使用了标准的encoder-decoder加上attention机制</li>
-<li>加上了self-attention层共享所有的语言对完成语言无关层<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3></li>
+<li>加上了self-attention层共享所有的语言对完成语言无关层</li>
 </ol>
-<ul>
-<li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M\in R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<br>  A &amp;= softmax(W_2ReLU(W_1H^T)) \\<br>  M &amp;= AH<br>\end{aligned}$$</li>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ul>
+<li>编码器用用BiLSTM得到$n*d_h$句子向量表示，然后使用多层注意力将该表示转换为固定大小的向量$M\in R^{d_h * k}$,k为attention head数量。<br>$$\begin{aligned}<br>  A &amp;&#x3D; softmax(W_2ReLU(W_1H^T)) \\<br>  M &amp;&#x3D; AH<br>\end{aligned}$$</li>
 <li>解码器使用通用的带注意力的解码器，该解码器初始向量通过M的平均池化的到。解码器用的是单向的LSTM</li>
-<li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<br>$$L = -log(p(Y|X)) + ||AA^T - I||_F^2$$<h2 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h2></li>
+<li>增加惩罚项避免学习到重复的信息。作者使用的是Frobenius正则化解决<br>$$L &#x3D; -log(p(Y|X)) + ||AA^T - I||_F^2$$</li>
 </ul>
-<ol>
+<h2 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h2><ol>
 <li>在双语翻译结果上有所下降，作者解释是因为将有10个self-attention组成的固定的句子向量没有包含多语言信息<br><img src="https://i.loli.net/2020/04/14/KwBSyCF28i7LOq3.png" alt="AB_BLEU_score.png"></li>
 <li>在多对一和一对多的实验中，但是多对一就有一定的效果提升，然后在训练过程中加上了单语数据，具体是将语言A的句子直接复制形成句子对，和平行预料一起进行训练。</li>
 <li>在多对多模型上，在双语模型基础上有了巨大提升，加上单语预料后也有增益。同时在零样本学习上也强于之前的多对一模型。</li>
-<li>训练得到向量在下流任务上结果:在相同预料库下相对于Glove-BoW有所提升，但是可能相对通用的预训练模型微调的效果可能有点不够看，但是为零样本、少样本的跨语言学习提供一种解决方案<br><img src="https://i.loli.net/2020/04/14/NZdJSiUn45mWw7Y.png" alt="AB_DT.png"><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></li>
+<li>训练得到向量在下流任务上结果:在相同预料库下相对于Glove-BoW有所提升，但是可能相对通用的预训练模型微调的效果可能有点不够看，但是为零样本、少样本的跨语言学习提供一种解决方案<br><img src="https://i.loli.net/2020/04/14/NZdJSiUn45mWw7Y.png" alt="AB_DT.png"></li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>对传统的encoder-decoder进行了三项改造:使用了特定语言的encoder-decoder、语言无关的共享attention bridge以及惩罚项。</li>
 <li>使用Attention Bridge合理地将多语言表征融合。该融合是否可以直接用于预训练任务？</li>
-<li>Multi-Head学习到重复内容是否可以使用其他方法进行一种增加“惩罚项”,因为该方法中的Frobenius其实效果提升较小或者对有些任务有负作用<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2></li>
+<li>Multi-Head学习到重复内容是否可以使用其他方法进行一种增加“惩罚项”,因为该方法中的Frobenius其实效果提升较小或者对有些任务有负作用</li>
 </ol>
-<ul>
-<li><a href="https://www.aclweb.org/anthology/W19-4305.pdf" target="_blank" rel="noopener">Multilingual NMT with a language-independent attention bridge</a></li>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4305.pdf">Multilingual NMT with a language-independent attention bridge</a></li>
 </ul>
 
             </div>
@@ -602,9 +608,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:179. 最大数题目描述给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。示例 1:输入: [10,2]
-输出: 210示例 2:输入: [3,30,34,5,9]
-输出: 9534330说明:输出结果可能非常大
+                            Leetcode:179. 最大数题目描述给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+
+示例 1:输入: [10,2]
+输出: 210
+
+示例 2:输入: [3,30,34,5,9]
+输出: 9534330
+
+说明:输出结
                         
                     </div>
                     <div class="publish-info">
@@ -1046,24 +1058,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>

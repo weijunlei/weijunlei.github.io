@@ -28,8 +28,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-<link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -414,9 +418,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/" target="_blank" rel="noopener">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+                <h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
 
-请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。</code></pre><h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树：
+请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
+</code></pre>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树：
 
  1
 / \
@@ -424,71 +430,78 @@
     / \
     4   5
 
-序列化为 &quot;[1,2,3,null,null,4,5]&quot;</code></pre><h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。</code></pre><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p>
-<h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Codec {
+序列化为 &quot;[1,2,3,null,null,4,5]&quot;
+</code></pre>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
+</code></pre>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。
+</code></pre>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p>
+<h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Codec &#123;
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public String serialize(TreeNode root) &#123;
         Queue<TreeNode> queue = new LinkedList<>();
         StringBuilder sb = new StringBuilder();
         queue.add(root);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty())&#123;
             TreeNode pre = queue.poll();
-            if (pre == null){
+            if (pre == null)&#123;
                 sb.append("n");
                 sb.append(",");
                 continue;
-            }else{
+            &#125;else&#123;
                 sb.append(String.valueOf(pre.val));
                 sb.append(",");
-            }
+            &#125;
             queue.offer(pre.left);
             queue.offer(pre.right);
-        }
+        &#125;
         int neededLength = sb.length() - 1;
         // strip speed
-        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n'){
+        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n')&#123;
             neededLength -= 2;
-        }
+        &#125;
         sb.setLength(neededLength);
         return sb.toString();
-    }
+    &#125;
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        if (data.equals("n")){
+    public TreeNode deserialize(String data) &#123;
+        if (data.equals("n"))&#123;
             return null;
-        }
+        &#125;
         String[] vals = data.split(",");
         TreeNode root = new TreeNode(Integer.valueOf(vals[0]));
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        for(int i = 1; i < vals.length; i += 2){
-            if (queue.isEmpty()){
+        for(int i = 1; i < vals.length; i += 2)&#123;
+            if (queue.isEmpty())&#123;
                 break;
-            }
+            &#125;
             TreeNode pre = queue.poll();
-            if (vals[i].equals("n")){
+            if (vals[i].equals("n"))&#123;
                 pre.left = null;
-            }else{
+            &#125;else&#123;
                 TreeNode left = new TreeNode(Integer.valueOf(vals[i]));
                 pre.left = left;
                 queue.offer(left);
-            }
-            if (i + 1 >= vals.length){
+            &#125;
+            if (i + 1 >= vals.length)&#123;
                 break;
-            }
-            if (vals[i + 1].equals("n")){
+            &#125;
+            if (vals[i + 1].equals("n"))&#123;
                 pre.right = null;
-            }else{
+            &#125;else&#123;
                 TreeNode right = new TreeNode(Integer.valueOf(vals[i + 1]));
                 pre.right = right;
                 queue.offer(right);
-            }
-        }
+            &#125;
+        &#125;
         return root;
-    }
-}</code></pre>
+    &#125;
+&#125;
+</code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
@@ -1090,24 +1103,7 @@ $(function () {
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>
