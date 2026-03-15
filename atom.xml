@@ -6,7 +6,7 @@
   <link href="https://weijunlei.github.io/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2026-03-15T09:15:21.910Z</updated>
+  <updated>2026-03-15T09:18:29.171Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -17,15 +17,29 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>订单号生成方案</title>
     <link href="https://weijunlei.github.io/2026/03/15/ding-dan-hao-sheng-cheng-fang-an/"/>
     <id>https://weijunlei.github.io/2026/03/15/ding-dan-hao-sheng-cheng-fang-an/</id>
-    <published>2026-03-15T08:53:33.162Z</published>
-    <updated>2026-03-15T09:15:21.910Z</updated>
+    <published>2026-03-15T08:50:00.000Z</published>
+    <updated>2026-03-15T09:18:29.171Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;订单号生成方案&quot;&gt;&lt;a href=&quot;#订单号生成方案&quot; class=&quot;headerlink&quot;</summary>
+        
+      
     
     
     
+    <category term="技术" scheme="https://weijunlei.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
+    
+    <category term="架构" scheme="https://weijunlei.github.io/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="分布式" scheme="https://weijunlei.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
   </entry>
   
