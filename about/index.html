@@ -1211,19 +1211,51 @@
                             <i class="fa fa-address-book"></i>&nbsp;&nbsp;个人简历
                         </div>
                         <div id="articleContent" data-aos="fade-up">
-                            <h1 id="我的简历"><a href="#我的简历" class="headerlink" title="我的简历"></a>我的简历</h1><h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><ul>
-<li>硕士 计算机技术<br>南京大学<br>2019&#x2F;09 - 现在</li>
-<li>本科 软件工程（数字动漫）<br>2015&#x2F;09-2019&#x2F;06<br>综合排名 4&#x2F;69</li>
+                            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><blockquote>
+<p>如果爱，请深爱</p>
+</blockquote>
+<p>Software Engineer || NLPer</p>
+<h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><ul>
+<li><strong>南京大学</strong> | 计算机技术（保研） | 硕士 | 2019.09 - 2022.06</li>
+<li><strong>电子科技大学</strong> | 软件工程 | 本科 | 2015.09 - 2019.06</li>
 </ul>
-<h2 id="项目实践经历"><a href="#项目实践经历" class="headerlink" title="项目实践经历"></a>项目实践经历</h2><ul>
-<li>数据挖掘实习生(百度)<br>事件图谱的相关研发，包括对事件归一、事件脉络的集成上线等工作</li>
-<li>后端研发 （SAP）<br>进行一个CRM的ABSP的并行化任务开发，包括数据处理和数据接口提供等工作</li>
-<li>数据挖掘实习生(电子科技大学嵌入式实验室)<br>完成一个电信网络告警工程研发任务。包括使用LSTM实现告警根源预测等工作</li>
+<h2 id="工作与实习经历"><a href="#工作与实习经历" class="headerlink" title="工作与实习经历"></a>工作与实习经历</h2><h3 id="Shopee-高级后台开发工程师-2022-07-至今"><a href="#Shopee-高级后台开发工程师-2022-07-至今" class="headerlink" title="Shopee | 高级后台开发工程师 | 2022.07 - 至今"></a>Shopee | 高级后台开发工程师 | 2022.07 - 至今</h3><p><strong>订单核心交易研发</strong>：覆盖购物车加购、聚合购物车展示、订单下单、支付、退款等订单全链路流程。</p>
+<ul>
+<li><p><strong>Food Order AI DoD机器人接入</strong>：基于外卖高峰期与休息时间接近+订单业务复杂等问题，基于SMART平台+日志平台+监控平台MCP+Prompt规则，实现常规活动&#x2F;预期内报错和系统错误快速识别，从原有的十分钟级到分钟级响应。</p>
+</li>
+<li><p><strong>订单异构数据同步优化</strong>：并发消费CDC。基于Shopee CDC单Partition及Go Sarama单Kafka Partition仅分配一个协程消费特点，引入多协程并发消费模型+等待队列保证Kafka顺序&#x2F;延时提交+Channel提升系统吞吐量，系统瓶颈由写ES转为解析Kafka消息，理论性能提升200倍。</p>
+</li>
+<li><p><strong>订单表无停机分库迁移</strong>：解决DDL操作时间过长（单库1T+数据）+RDS迁移需要，完成单库千表→10库百表拆分。基于存量数据同步+分阶段双写+异步数据和同步读数据分离的方式实现非停机迁移订单表，最终满足RDS容量限制（单库≤500G），DDL执行时间从14个小时减少到1小时以内，P99降低10%。</p>
+</li>
 </ul>
-<h2 id="奖项"><a href="#奖项" class="headerlink" title="奖项"></a>奖项</h2><ul>
-<li>人民二等奖学金<br>2015~2017 两次</li>
-<li>国家励志奖学金<br>2017~2018</li>
-<li>电子科技大学优秀毕业生</li>
+<h3 id="华为-算法实习生-2020-10-2021-07"><a href="#华为-算法实习生-2020-10-2021-07" class="headerlink" title="华为 | 算法实习生 | 2020.10 - 2021.07"></a>华为 | 算法实习生 | 2020.10 - 2021.07</h3><p>时间序列算法集成，将WaveNet&#x2F;MQRNN等算法集成至时间序列算法检测库，用于告警日志数据异常检测及云化告警业务发现。</p>
+<h3 id="百度-算法实习生-2018-11-2019-05"><a href="#百度-算法实习生-2018-11-2019-05" class="headerlink" title="百度 | 算法实习生 | 2018.11 - 2019.05"></a>百度 | 算法实习生 | 2018.11 - 2019.05</h3><p>事件图谱的事件归一算法研究及上线。包含从数据分析、数据收集、模型调研、模型训练、模型上线整个流程。算法上主要通过BERT进行预训练事件脉络的pipeline集成，包含集成事件判别、事件名生成、事件归一。业务上线至时空阿Top 4卡片。鹰眼系统开发，提供热点事件粗召回功能。</p>
+<h3 id="SAP-后端开发实习生-2017-12-2018-06"><a href="#SAP-后端开发实习生-2017-12-2018-06" class="headerlink" title="SAP | 后端开发实习生 | 2017.12 - 2018.06"></a>SAP | 后端开发实习生 | 2017.12 - 2018.06</h3><p>某汽车主机厂CRM的后端开发工作，主要使用C4C针对到店、试驾等任务进行数据处理和接口定义工作。</p>
+<h2 id="比赛经历"><a href="#比赛经历" class="headerlink" title="比赛经历"></a>比赛经历</h2><ul>
+<li><p><strong>2020华为Digix AI全球校园AI算法精英大赛</strong> | 第6名&#x2F;300+&#x2F;1000+</p>
+<ul>
+<li>广告CTR预测任务，给定7天的用户、广告、广告主数据，预测将来（8-10）天的曝光广告的点击率</li>
+<li>特征工程包括曝光特征、交叉特征、Target Encoding、Embedding特征等，使用LightGBM和NN模型，获得奖金1.2w</li>
+</ul>
+</li>
+<li><p><strong>莱斯杯：全国第二届&quot;军事阅读理解&quot;挑战赛</strong> | 第4名&#x2F;65&#x2F;653</p>
+<ul>
+<li>军事阅读理解任务，包含单答案问题、多答案问题、推理问题</li>
+<li>模型层使用百度ERNIE 1.0 + 3层Query-Context CoAttention对答案进行预测</li>
+</ul>
+</li>
+</ul>
+<h2 id="论文成果"><a href="#论文成果" class="headerlink" title="论文成果"></a>论文成果</h2><ul>
+<li><strong>ICASSP 2023（CCF-B）</strong></li>
+<li><strong>From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</strong></li>
+<li>多步阅读理解SOTA</li>
+</ul>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
+<li><strong>后端</strong>：Golang, MySQL, Kafka</li>
+<li><strong>算法</strong>：阅读理解、MCP、Prompt、特征工程、LightGBM</li>
+</ul>
+<h2 id="英语水平"><a href="#英语水平" class="headerlink" title="英语水平"></a>英语水平</h2><ul>
+<li>四六级通过</li>
 </ul>
 
                         </div>
