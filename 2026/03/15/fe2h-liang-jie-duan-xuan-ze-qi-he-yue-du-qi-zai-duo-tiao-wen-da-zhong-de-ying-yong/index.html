@@ -424,18 +424,18 @@
 <h3 id="1-1-跳-的含义"><a href="#1-1-跳-的含义" class="headerlink" title="1.1 &quot;跳&quot;的含义"></a>1.1 &quot;跳&quot;的含义</h3><p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p>
 <h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>中文示例：</strong></p>
 <pre class="mermaid">flowchart TD
-    subgraph 第一跳
-    Q1[问题: 谁执导了流浪地球]
-    D1[文档A: 流浪地球由郭帆导演]
+    subgraph Hop1
+    Q1[Q: Who directed The Wandering Earth]
+    D1[Doc A: The Wandering Earth directed by Guo Fan]
     end
     
-    subgraph 第二跳
-    Q2[根据线索问: 郭帆出生在哪年]
-    D2[文档B: 郭帆出生于1980年]
+    subgraph Hop2
+    Q2[Q: When was Guo Fan born]
+    D2[Doc B: Guo Fan was born in 1980]
     end
     
-    subgraph 最终答案
-    Answer[答案: 郭帆，1980年]
+    subgraph Answer
+    Answer[Answer: Guo Fan, 1980]
     end
     
     Q1 --> D1
