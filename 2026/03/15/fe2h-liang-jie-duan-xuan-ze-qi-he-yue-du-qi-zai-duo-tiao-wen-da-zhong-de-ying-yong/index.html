@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -531,16 +531,16 @@
 </ul>
 <h4 id="312-fe2h-的解决方案渐进式筛选"><a class="markdownIt-Anchor" href="#312-fe2h-的解决方案渐进式筛选"></a> 3.1.2 FE2H 的解决方案：渐进式筛选</h4>
 <pre class="mermaid">flowchart TD
-    subgraph 传统方法
-    T1[问题 + 10个文档] --> T2[一次性选择相关文档]
-    T2 --> T3[直接进行多跳推理]
+    subgraph Traditional
+    T1[Q + 10 docs] --> T2[Select all at once]
+    T2 --> T3[Multi-hop reasoning]
     end
     
-    subgraph FE2H方法
-    F1[问题 + 10个文档] --> F2[第一阶段：选择最相关文档]
-    F2 --> F3[结合问题+文档1]
-    F3 --> F4[第二阶段：筛选第二跳文档]
-    F4 --> F5[基于精选文档进行推理]
+    subgraph FE2H
+    F1[Q + 10 docs] --> F2[Stage 1: Select relevant doc]
+    F2 --> F3[Combine Q + doc1]
+    F3 --> F4[Stage 2: Select 2nd hop]
+    F4 --> F5[Reason on filtered docs]
     end
     
     style F2 fill:#bfb,color:#333
@@ -583,29 +583,29 @@
 <h4 id="321-核心灵感"><a class="markdownIt-Anchor" href="#321-核心灵感"></a> 3.2.1 核心灵感</h4>
 <p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p>
 <pre class="mermaid">flowchart LR
-    subgraph 人类学习方式
-    H1[学说话] --> H2[学认字] --> H3[学阅读] --> H4[学写作]
+    subgraph Human Learning
+    H1[Learn to speak] --> H2[Learn to read] --> H3[Learn comprehension] --> H4[Learn to write]
     end
     
-    subgraph FE2H训练方式
-    E1[单跳问答] --> E2[简单推理] --> E3[多跳问答]
+    subgraph FE2H Training
+    E1[Single-hop QA] --> E2[Simple reasoning] --> E3[Multi-hop QA]
     end
     
     style E1 fill:#bbf,color:#333
     style E3 fill:#f9f,color:#333</pre>
 <h4 id="322-渐进式训练策略"><a class="markdownIt-Anchor" href="#322-渐进式训练策略"></a> 3.2.2 渐进式训练策略</h4>
 <pre class="mermaid">flowchart TD
-    subgraph 阶段1：单跳预训练
-    P1[在SQuAD/Natural Questions上训练]
-    P1 --> P2[学习基础阅读理解能力]
-    P2 --> P3[理解问题意图]
-    P3 --> P4[定位答案边界]
+    subgraph Stage 1: Single-hop Pre-training
+    P1[Train on SQuAD]
+    P1 --> P2[Learn basic reading comprehension]
+    P2 --> P3[Understand question intent]
+    P3 --> P4[Locate answer boundaries]
     end
     
-    subgraph 阶段2：多跳迁移
-    P4 --> M1[迁移到HotpotQA]
-    M1 --> M2[两阶段文档筛选]
-    M2 --> M3[多跳推理]
+    subgraph Stage 2: Multi-hop Transfer
+    P4 --> M1[Transfer to HotpotQA]
+    M1 --> M2[Two-stage document selection]
+    M2 --> M3[Multi-hop reasoning]
     end
     
     style P1 fill:#bbf,color:#333
@@ -659,16 +659,16 @@
 </table>
 <h4 id="332-框架对比"><a class="markdownIt-Anchor" href="#332-框架对比"></a> 3.3.2 框架对比</h4>
 <pre class="mermaid">flowchart TD
-    subgraph 主流方法（基于图）
-    G1[构建知识图谱] --> G2[实体链接]
-    G2 --> G3[图神经网络推理]
-    G3 --> G4[多跳信息聚合]
+    subgraph Traditional (Graph-based)
+    G1[Build knowledge graph] --> G2[Entity linking]
+    G2 --> G3[GNN reasoning]
+    G3 --> G4[Multi-hop aggregation]
     end
     
-    subgraph FE2H（筛选+阅读）
-    F1[文档筛选] --> F2[单跳预训练]
-    F2 --> F3[多跳微调]
-    F3 --> F4[答案生成]
+    subgraph FE2H (Selection + Reader)
+    F1[Document selection] --> F2[Single-hop pretrain]
+    F2 --> F3[Multi-hop fine-tune]
+    F3 --> F4[Answer generation]
     end
     
     style G1 fill:#fbb,color:#333
@@ -710,19 +710,19 @@
 <h2 id="4-fe2h框架详解"><a class="markdownIt-Anchor" href="#4-fe2h框架详解"></a> 4. FE2H框架详解</h2>
 <h3 id="41-整体架构"><a class="markdownIt-Anchor" href="#41-整体架构"></a> 4.1 整体架构</h3>
 <pre class="mermaid">flowchart TD
-    Q[问题] --> DS1[第一阶段文档选择器]
+    Q[Question] --> DS1[Stage 1 Doc Selector]
     
-    subgraph 文档筛选阶段
-    DS1 -->|选择最相关文档| D1[相关文档1]
-    DS1 -->|结合问题+文档1| DS2[第二阶段文档选择器]
-    DS2 -->|筛选第二跳文档| D2[相关文档2]
+    subgraph Document Selection Stage
+    DS1 -->|Select relevant doc| D1[Relevant Doc 1]
+    DS1 -->|Combine Q + Doc1| DS2[Stage 2 Doc Selector]
+    DS2 -->|Select 2nd hop doc| D2[Relevant Doc 2]
     end
     
-    subgraph 问答阶段
-    D1 --> Reader[两阶段阅读器]
+    subgraph QA Stage
+    D1 --> Reader[Two-stage Reader]
     D2 --> Reader
-    Reader -->|单跳模式| Output1[答案+支持事实]
-    Reader -->|多跳模式| Output2[最终答案]
+    Reader -->|Single-hop mode| Output1[Answer + Support]
+    Reader -->|Multi-hop mode| Output2[Final Answer]
     end
     
     style DS1 fill:#f9f,color:#333
@@ -755,8 +755,8 @@
 <h3 id="51-chain-of-thought-cot-简介"><a class="markdownIt-Anchor" href="#51-chain-of-thought-cot-简介"></a> 5.1 Chain-of-Thought (CoT) 简介</h3>
 <p>Chain-of-Thought（思维链）是近年来大语言模型（如GPT-4、PaLM）的重要推理范式。其核心思想是：</p>
 <pre class="mermaid">flowchart LR
-    Q1[问题] --> CoT1[逐步推理<br/>Step 1: ...<br/>Step 2: ...<br/>Step 3: ...]
-    CoT1 --> A1[最终答案]
+    Q1[Question] --> CoT1[Step-by-step reasoning<br/>Step 1: ...<br/>Step 2: ...<br/>Step 3: ...]
+    CoT1 --> A1[Final Answer]
     
     style Q1 fill:#f9f,color:#333
     style CoT1 fill:#ff9,color:#333
@@ -826,13 +826,13 @@
 </ol>
 <h3 id="54-未来结合方向"><a class="markdownIt-Anchor" href="#54-未来结合方向"></a> 5.4 未来结合方向</h3>
 <pre class="mermaid">flowchart TD
-    Q[问题] --> Selector[文档选择器]
+    Q[Question] --> Selector[Doc Selector]
     
-    Selector -->|筛选相关文档| Context[精简上下文]
-    Context --> CoT[思维链推理]
-    CoT -->|中间步骤验证| Selector
+    Selector -->|Filter relevant docs| Context[Filtered Context]
+    Context --> CoT[Chain-of-Thought]
+    CoT -->|Verify intermediate steps| Selector
     
-    CoT --> Answer[最终答案]
+    CoT --> Answer[Final Answer]
     
     style Q fill:#f9f,color:#333
     style Selector fill:#bbf,color:#333
