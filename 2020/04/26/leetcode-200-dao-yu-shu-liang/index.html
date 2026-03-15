@@ -439,7 +439,7 @@
 输出: 3
 解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS"><a href="#思路1-DFS" class="headerlink" title="思路1 DFS"></a>思路1 DFS</h3><p>在先判断是否是岛屿之后使用DFS对为’1’的岛屿进行深度优先遍历，将状态改为’0’</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS"><a href="#思路1-DFS" class="headerlink" title="思路1 DFS"></a>思路1 DFS</h3><p>在先判断是否是岛屿之后使用DFS对为&#39;1&#39;的岛屿进行深度优先遍历，将状态改为&#39;0&#39;</p>
 <h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><p>并查集和BFS</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     private int[][] paths = &#123;&#123;1, 0&#125;, &#123;0, 1&#125;, &#123;-1, 0&#125;, &#123;0, -1&#125;&#125;;

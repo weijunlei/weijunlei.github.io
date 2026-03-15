@@ -1134,7 +1134,7 @@ func (s *SnowflakeWithReject) NextID() (int64, error) &#123;
     return s.generateID(timestamp)
 &#125;
 </code></pre>
-<h3 id="5-3-序列号偏移法"><a href="#5-3-序列号偏移法" class="headerlink" title="5.3 序列号偏移法"></a>5.3 序列号偏移法</h3><p>利用序列号bit位的多位数，允许在一定范围内”绕回”。</p>
+<h3 id="5-3-序列号偏移法"><a href="#5-3-序列号偏移法" class="headerlink" title="5.3 序列号偏移法"></a>5.3 序列号偏移法</h3><p>利用序列号bit位的多位数，允许在一定范围内&quot;绕回&quot;。</p>
 <pre class=" language-language-go"><code class="language-language-go">package snowflake
 
 import (
@@ -1340,7 +1340,7 @@ console.log(orderIdStr);  // 输出: "1742054400000005678"（正确）
 <li><strong>风险</strong>：如果知道某一天的起始order_id和生成速率，可以大致估算单量</li>
 <li><strong>解决方案</strong>：<ul>
 <li>在order_id中掺杂随机位</li>
-<li>使用美团Leaf的” Leaf-snowflake”方案，对ID进行混淆</li>
+<li>使用美团Leaf的&quot; Leaf-snowflake&quot;方案，对ID进行混淆</li>
 <li>或者直接使用完全随机的UUID作为对外展示的订单号，内部映射到雪花ID</li>
 </ul>
 </li>
