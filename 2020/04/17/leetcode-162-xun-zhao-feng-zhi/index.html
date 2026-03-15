@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -441,38 +441,38 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-遍历"><a href="#思路1-遍历" class="headerlink" title="思路1 遍历"></a>思路1 遍历</h3><p>直接遍历，遍历元素是否大于下一个元素，若大于则返回（从数组列表开始）</p>
 <h3 id="思路2-二分法"><a href="#思路2-二分法" class="headerlink" title="思路2: 二分法"></a>思路2: 二分法</h3><p>可用二分法找峰值，若找的元素大于右侧元素，则需要峰值的元素在mid元素左侧，若小于右侧则为mid右侧</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int findPeakElement(int[] nums) &#123;
-        if (nums == null)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int findPeakElement(int[] nums) {
+        if (nums == null){
             return -1;
-        &#125;
-        for(int i = 0; i < nums.length - 1; i++)&#123;
-            if (nums[i] > nums[i + 1])&#123;
+        }
+        for(int i = 0; i < nums.length - 1; i++){
+            if (nums[i] > nums[i + 1]){
                 return i;
-            &#125;
-        &#125;
+            }
+        }
         return nums.length - 1;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int findPeakElement(int[] nums) &#123;
-        if (nums == null)&#123;
+<h3 id="代码二"><a href="#代码二" class="headerlink" title="代码二"></a>代码二</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int findPeakElement(int[] nums) {
+        if (nums == null){
             return -1;
-        &#125;
+        }
         int left = 0;
         int right = nums.length - 1;
-        while (left < right)&#123;
+        while (left < right){
             int mid = (left + right) / 2;
-            if (nums[mid] > nums[mid + 1])&#123;
+            if (nums[mid] > nums[mid + 1]){
                 right = mid;
-            &#125;else&#123;
+            }else{
                 left = mid + 1;
-            &#125;
-        &#125;
+            }
+        }
         return left;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
@@ -724,12 +724,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
-                    </a>
-                    
                     <a href="/tags/%E6%8E%92%E5%BA%8F/">
                         <span class="chip bg-color">排序</span>
+                    </a>
+                    
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>

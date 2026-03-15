@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -452,42 +452,42 @@
 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;
-       if ((headA == null && headB != null) || (headA != null && headB == null))&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+       if ((headA == null && headB != null) || (headA != null && headB == null)){
           return null;
-       &#125;
+       }
         int countA = 0, countB = 0;
         ListNode preA = headA, preB = headB;
-        while (preA != null)&#123;
+        while (preA != null){
             preA = preA.next;
             countA += 1;
-        &#125;
-        while (preB != null)&#123;
+        }
+        while (preB != null){
             preB = preB.next;
             countB += 1;
-        &#125;
+        }
         preA = headA;
         preB = headB;
-        while(countA > countB)&#123;
+        while(countA > countB){
             preA = preA.next;
             countA--;
-        &#125;
-        while(countA < countB)&#123;
+        }
+        while(countA < countB){
             preB = preB.next;
             countB--;
-        &#125;
+        }
         
-        while(preA != null)&#123;
-            if (preA == preB)&#123;
+        while(preA != null){
+            if (preA == preB){
                 return preA;
-            &#125;
+            }
             preA = preA.next;
             preB = preB.next;
-        &#125;
+        }
         return null;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(1)$</p>

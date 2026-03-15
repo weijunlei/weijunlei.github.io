@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -449,30 +449,30 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：优先级队列"><a href="#思路1：优先级队列" class="headerlink" title="思路1：优先级队列"></a>思路1：优先级队列</h3><p>使用优先级队列存储一个k的最大堆，大于k时每次去除前面的第k个元素</p>
 <h3 id="思路2：动态规划"><a href="#思路2：动态规划" class="headerlink" title="思路2：动态规划"></a>思路2：动态规划</h3><p>将原数组设置为k个一个单元，然后分别求从左至当前位置的最大值（不超过k单元内）和从右至左，这样可以直接求两个边界最大值即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int[] maxSlidingWindow(int[] nums, int k) &#123;
-        if (nums == null || nums.length == 0)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0){
             return nums;
-        &#125;
+        }
         
         PriorityQueue<Integer> pq = new  PriorityQueue<Integer>(Collections.reverseOrder());
         int[] result = new int[nums.length - k + 1];
         
-        for(int i = 0; i < nums.length; i++)&#123;
+        for(int i = 0; i < nums.length; i++){
             if (i >= k) pq.remove(nums[i - k]);
             pq.offer(nums[i]);
             if (i + 1 >= k) result[i + 1 - k] = pq.peek();
-        &#125;
+        }
         
         return result;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int[] maxSlidingWindow(int[] nums, int k) &#123;
-        if (nums == null || nums.length == 0)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (nums == null || nums.length == 0){
             return nums;
-        &#125;
+        }
         
         int n = nums.length;
         int[] leftDPs = new int[n];
@@ -481,26 +481,26 @@
         rightDPs[n - 1] = nums[n - 1];
         int[] result = new int[n - k + 1];
         
-        for(int i = 1; i < n; i++)&#123;
-            if (i % k != 0)&#123;
+        for(int i = 1; i < n; i++){
+            if (i % k != 0){
                 leftDPs[i] = Math.max(nums[i], leftDPs[i - 1]);
-            &#125; else &#123;
+            } else {
                 leftDPs[i] = nums[i];
-            &#125;
+            }
             
             int rightIndex = n - i - 1;
-            if (rightIndex % k != 0)&#123;
+            if (rightIndex % k != 0){
                 rightDPs[rightIndex] = Math.max(nums[rightIndex], rightDPs[rightIndex + 1]);
-            &#125;else &#123;
+            }else {
                 rightDPs[rightIndex] = nums[rightIndex];
-            &#125;
-        &#125;
-        for(int i = 0; i < n - k + 1; i++)&#123;
+            }
+        }
+        for(int i = 0; i < n - k + 1; i++){
             result[i] = Math.max(rightDPs[i], leftDPs[i + k - 1]);
-        &#125;
+        }
         return result;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>

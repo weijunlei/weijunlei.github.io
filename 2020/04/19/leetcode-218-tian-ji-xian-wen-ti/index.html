@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -436,134 +436,134 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用分治法，类似与插入排序思路。重点在于看到单个建筑物的应该如何存储。如[1, 5, 9]存为[1, 9],[5, 0],即分好左右节点.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/tian-ji-xian-wen-ti-by-leetcode/">参考</a></p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用最大优先级队列保存最高点，然后根据左右节点以类似入栈出栈形式得到结果。关键在于存储左右节点</p>
 <h3 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h3><p>可以使用TreeMap使得时间复杂度为$O(nlogn)$<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--45/">思路</a></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public List<List<Integer>> getSkyline(int[][] buildings) &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public List<List<Integer>> getSkyline(int[][] buildings) {
         List<List<Integer>> result = new ArrayList<>();
         int n = buildings.length;
         
-        if (n == 0)&#123;return result;&#125;
-        if (n == 1)&#123;
-            result.add(new ArrayList<Integer>() &#123;&#123;add(buildings[0][0]); add(buildings[0][2]);&#125;&#125;);
-            result.add(new ArrayList<Integer>() &#123;&#123;add(buildings[0][1]); add(0);&#125;&#125;);
+        if (n == 0){return result;}
+        if (n == 1){
+            result.add(new ArrayList<Integer>() {{add(buildings[0][0]); add(buildings[0][2]);}});
+            result.add(new ArrayList<Integer>() {{add(buildings[0][1]); add(0);}});
             return result;
-        &#125;
+        }
         
         List<List<Integer>> left, right;
         left = getSkyline(Arrays.copyOfRange(buildings,0, n / 2));
         right = getSkyline(Arrays.copyOfRange(buildings, n/2, n));
         
         return mergeResult(left, right);
-    &#125;
+    }
     
-    private List<List<Integer>> mergeResult(List<List<Integer>> left, List<List<Integer>> right)&#123;
+    private List<List<Integer>> mergeResult(List<List<Integer>> left, List<List<Integer>> right){
         int ls = 0, rs = 0;
         int le = left.size(), re = right.size();
         int leftY = 0, rightY = 0, curY = 0;
         int x, maxY;
         List<List<Integer>> result = new ArrayList<>();
         
-        while (ls < le && rs < re)&#123;
+        while (ls < le && rs < re){
             List<Integer> leftP = left.get(ls);
             List<Integer> rightP = right.get(rs);
             
-            if (leftP.get(0) < rightP.get(0))&#123;
+            if (leftP.get(0) < rightP.get(0)){
                 x = leftP.get(0);
                 ls ++;
                 leftY = leftP.get(1);
-            &#125;else&#123;
+            }else{
                 x = rightP.get(0);
                 rs ++;
                 rightY = rightP.get(1);
-            &#125;
+            }
             maxY = Math.max(leftY, rightY);
-            if (curY != maxY)&#123;
+            if (curY != maxY){
                 updateResult(result, x, maxY);
                 curY = maxY;
-            &#125;
-        &#125;
+            }
+        }
         
         addRest(result, left, ls, le, curY);
         addRest(result, right, rs, re, curY);
         return result;  
-    &#125;
+    }
     
-    private void updateResult(List<List<Integer>> result, int x, int y)&#123;
-        if (result.isEmpty() || result.get(result.size() - 1).get(0) != x)&#123;
-            result.add(new ArrayList<Integer>()&#123;&#123;add(x); add(y);&#125;&#125;);
-        &#125;else&#123;
+    private void updateResult(List<List<Integer>> result, int x, int y){
+        if (result.isEmpty() || result.get(result.size() - 1).get(0) != x){
+            result.add(new ArrayList<Integer>(){{add(x); add(y);}});
+        }else{
             result.get(result.size() - 1).set(1, y);
-        &#125;
-    &#125;
+        }
+    }
     
-    private void addRest(List<List<Integer>> result, List<List<Integer>> left, int s, int e, int curY)&#123;
-        while (s < e)&#123;
+    private void addRest(List<List<Integer>> result, List<List<Integer>> left, int s, int e, int curY){
+        while (s < e){
             List<Integer> point = left.get(s);
             int x = point.get(0);
             int y = point.get(1);
             s ++;
             
-            if (y != curY)&#123;
+            if (y != curY){
                 updateResult(result, x, y);
                 curY = y;
-            &#125;
-        &#125;
-    &#125;
+            }
+        }
+    }
     
-&#125;
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public List<List<Integer>> getSkyline(int[][] buildings) &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public List<List<Integer>> getSkyline(int[][] buildings) {
         List<List<Integer>> result = new ArrayList<>();
-        if (buildings.length == 0)&#123;
+        if (buildings.length == 0){
             return result;
-        &#125;
+        }
         List<List<Integer>> marks = new ArrayList<>();
-        for(int[] nums: buildings)&#123;
-            marks.add(new ArrayList<Integer>()&#123;&#123;add(nums[0]);add(-nums[2]);&#125;&#125;);
-            marks.add(new ArrayList<Integer>()&#123;&#123;add(nums[1]); add(nums[2]);&#125;&#125;);
-        &#125;
+        for(int[] nums: buildings){
+            marks.add(new ArrayList<Integer>(){{add(nums[0]);add(-nums[2]);}});
+            marks.add(new ArrayList<Integer>(){{add(nums[1]); add(nums[2]);}});
+        }
         
-        Collections.sort(marks, new Comparator<List<Integer>>()&#123;
+        Collections.sort(marks, new Comparator<List<Integer>>(){
             @Override
-            public int compare(List<Integer> o1, List<Integer> o2)&#123;
+            public int compare(List<Integer> o1, List<Integer> o2){
                 int x1 = o1.get(0);
                 int x2 = o2.get(0);
                 int y1 = o1.get(1);
                 int y2 = o2.get(1);
-                if (x1 != x2)&#123;
+                if (x1 != x2){
                     return x1 - x2;
-                &#125;else&#123;
+                }else{
                     return y1 - y2;
-                &#125;
-            &#125;
-        &#125;);
+                }
+            }
+        });
         
-        Queue<Integer> queue = new PriorityQueue<Integer>(new Comparator<Integer>()&#123;
+        Queue<Integer> queue = new PriorityQueue<Integer>(new Comparator<Integer>(){
             @Override
-            public int compare(Integer o1, Integer o2)&#123;
+            public int compare(Integer o1, Integer o2){
                 return o2 - o1;
-            &#125;
-        &#125;);
+            }
+        });
         queue.offer(0);
         int preY = 0;
-        for(List<Integer> nums: marks)&#123;
+        for(List<Integer> nums: marks){
             int x = nums.get(0);
             int y = nums.get(1);
             
-            if (y < 0)&#123;
+            if (y < 0){
                 queue.offer(-y);
-            &#125;else&#123;
+            }else{
                 queue.remove(y);
-            &#125;
+            }
             int curMax = queue.peek();
-            if (preY != curMax)&#123;
-                result.add(new ArrayList<Integer>()&#123;&#123;add(x); add(curMax);&#125;&#125;);
+            if (preY != curMax){
+                result.add(new ArrayList<Integer>(){{add(x); add(curMax);}});
                 preY = curMax;
-            &#125;
-        &#125;
+            }
+        }
         return result;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>

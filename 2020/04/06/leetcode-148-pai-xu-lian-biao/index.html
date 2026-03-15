@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -435,77 +435,77 @@
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用归并排序，实现平均复杂度$O(n)$,因为链表可以直接引用空间，所以可以不用额外的$O(nlogn)$空间，需要注意获取中间节点的快指针位置初始设置</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-language-Java"><code class="language-language-Java">/**
  * Definition for singly-linked list.
- * public class ListNode &#123;
+ * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) &#123; val = x; &#125;
- * &#125;
+ *     ListNode(int x) { val = x; }
+ * }
  */
-class Solution &#123;
-    public ListNode sortList(ListNode head) &#123;
-        if (head == null || head.next == null)&#123;
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null){
             return head;
-        &#125;
+        }
         
         quickSort(head, null);
         
         return head;
-    &#125;
+    }
     
-    private void quickSort(ListNode head, ListNode end)&#123;
-        if (head != end)&#123;
+    private void quickSort(ListNode head, ListNode end){
+        if (head != end){
             ListNode midNode = getPartition(head, end);
             quickSort(head, midNode);
             quickSort(midNode.next, end);
-        &#125;
-    &#125;
+        }
+    }
     
-    private ListNode getPartition(ListNode head, ListNode end)&#123;
+    private ListNode getPartition(ListNode head, ListNode end){
         ListNode getNode = head;
         int getNum = head.val;
         ListNode pre = head.next;
         
-        while(pre != null)&#123;
-            if (pre == end)&#123;
+        while(pre != null){
+            if (pre == end){
                 break;
-            &#125;
-            if (pre.val < getNum)&#123;
+            }
+            if (pre.val < getNum){
                 getNode = getNode.next;
                 int tempNum = pre.val;
                 pre.val = getNode.val;
                 getNode.val = tempNum;
-            &#125;
+            }
             pre = pre.next;
-        &#125;
+        }
         
         int tempNum = getNode.val;
         getNode.val = head.val;
         head.val = tempNum;
         
         return getNode;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">/**
  * Definition for singly-linked list.
- * public class ListNode &#123;
+ * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) &#123; val = x; &#125;
- * &#125;
+ *     ListNode(int x) { val = x; }
+ * }
  */
-class Solution &#123;
-    public ListNode sortList(ListNode head) &#123;
-        if (head == null || head.next == null)&#123;
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null){
             return head;
-        &#125;
+        }
         
         ListNode pre = head.next;
         ListNode middle = head;
-        while (pre != null && pre.next != null)&#123;
+        while (pre != null && pre.next != null){
             pre = pre.next.next;
             middle = middle.next;
-        &#125;
+        }
         
         pre = middle.next;
         middle.next = null;
@@ -514,24 +514,24 @@ class Solution &#123;
         
         ListNode result = new ListNode(0);
         ListNode temp = result;
-        while (left != null && right != null)&#123;
-            if (left.val < right.val)&#123;
+        while (left != null && right != null){
+            if (left.val < right.val){
                 temp.next = left;
                 left = left.next;
-            &#125;else&#123;
+            }else{
                 temp.next = right;
                 right = right.next;
-            &#125;
+            }
             temp = temp.next;
-        &#125;
+        }
         temp.next = right;
-        if (left != null)&#123;
+        if (left != null){
             temp.next = left;
-        &#125;
+        }
         
         return result.next;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>

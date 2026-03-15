@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -442,79 +442,79 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用BFS思想，将无前置课程的课程作为初始节点进行BFS遍历，在遍历过程中通过减少子节点依赖前置课程数的方式遍历（当该课程无前置课程时），判断最终的课程数目是否和需要修的课程数相等</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用DFS思想，判断各个课程出发的图是否有环，可以使用一个数组记录课程遍历状态，如1表示在当前课程中已经被遍历过，0表示未被遍历，-1表示在其他课程开始的节点中遍历过</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public boolean canFinish(int numCourses, int[][] prerequisites) &#123;
-        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0){
             return true;
-        &#125;
+        }
         int[] dps = new int[numCourses];
         List<List<Integer>> numOutput = new ArrayList();
-        for(int i = 0; i < numCourses; i++)&#123;
+        for(int i = 0; i < numCourses; i++){
             numOutput.add(new ArrayList<Integer>());
-        &#125;
-        for(int[] pre: prerequisites)&#123;
+        }
+        for(int[] pre: prerequisites){
             numOutput.get(pre[0]).add(pre[1]);
             dps[pre[1]] += 1;
-        &#125;
+        }
         Queue<Integer> queue = new LinkedList<>();
-        for(int i = 0; i < numCourses; i++)&#123;
-            if (dps[i] == 0)&#123;
+        for(int i = 0; i < numCourses; i++){
+            if (dps[i] == 0){
                 queue.offer(i);
-            &#125;
-        &#125;
+            }
+        }
         int amount = 0;
-        while (!queue.isEmpty())&#123;
+        while (!queue.isEmpty()){
             int getNum = queue.remove();
             amount += 1;
-            for(int num: numOutput.get(getNum))&#123;
+            for(int num: numOutput.get(getNum)){
                 dps[num] -= 1;
-                if (dps[num] == 0)&#123;
+                if (dps[num] == 0){
                     queue.offer(num);
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return amount == numCourses;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public boolean canFinish(int numCourses, int[][] prerequisites) &#123;
-        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0){
             return true;
-        &#125;
+        }
         int[] hasVisit = new int[numCourses];
         List<List<Integer>> numOutput = new ArrayList();
-        for(int i = 0; i < numCourses; i++)&#123;
+        for(int i = 0; i < numCourses; i++){
             numOutput.add(new ArrayList<Integer>());
-        &#125;
-        for(int[] pre: prerequisites)&#123;
+        }
+        for(int[] pre: prerequisites){
             numOutput.get(pre[1]).add(pre[0]);
-        &#125;
-        for(int i = 0; i < numCourses; i++)&#123;
-            if (hasLoop(numOutput, hasVisit, i))&#123;
+        }
+        for(int i = 0; i < numCourses; i++){
+            if (hasLoop(numOutput, hasVisit, i)){
                 return false;
-            &#125;
-        &#125;
+            }
+        }
         return true;
-    &#125;
+    }
     
-    private boolean hasLoop(List<List<Integer>> numOutput, int[] hasVisit, int index)&#123;
-        if (hasVisit[index] == 1)&#123;
+    private boolean hasLoop(List<List<Integer>> numOutput, int[] hasVisit, int index){
+        if (hasVisit[index] == 1){
             return true;
-        &#125;
-        if (hasVisit[index] == -1)&#123;
+        }
+        if (hasVisit[index] == -1){
             return false;
-        &#125;
+        }
         hasVisit[index] = 1;
-        for(int getIndex: numOutput.get(index))&#123;
-            if (hasLoop(numOutput, hasVisit, getIndex))&#123;
+        for(int getIndex: numOutput.get(index)){
+            if (hasLoop(numOutput, hasVisit, getIndex)){
                 return true;
-            &#125;
-        &#125;
+            }
+        }
         hasVisit[index] = -1;
         return false;
-    &#125; 
-&#125;
+    } 
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>

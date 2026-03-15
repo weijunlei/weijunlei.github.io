@@ -34,7 +34,7 @@ top() -- 获取栈顶元素">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -437,51 +437,51 @@ minStack.top();      --&gt; 返回 0.
 minStack.getMin();   --&gt; 返回 -2.
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class MinStack &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class MinStack {
 
     /** initialize your data structure here. */
     private Stack<Integer> stack;
     private Stack<Integer> stackHelper;
     
-    public MinStack() &#123;
+    public MinStack() {
         stack = new Stack<>();
         stackHelper = new Stack<>();
-    &#125;
+    }
     
-    public void push(int x) &#123;
+    public void push(int x) {
         stack.add(x);
-        if (stackHelper.isEmpty() || x < stackHelper.peek())&#123;
+        if (stackHelper.isEmpty() || x < stackHelper.peek()){
             stackHelper.add(x);
-        &#125;else &#123;
+        }else {
             stackHelper.add(stackHelper.peek());
-        &#125;
-    &#125;
+        }
+    }
     
-    public void pop() &#123;
-        if (!stack.isEmpty())&#123;
+    public void pop() {
+        if (!stack.isEmpty()){
             stack.pop();
             stackHelper.pop();
-        &#125; else &#123;
+        } else {
             throw new RuntimeException("Stack is empty!");
-        &#125;
-    &#125;
+        }
+    }
     
-    public int top() &#123;
-        if (!stack.isEmpty())&#123;
+    public int top() {
+        if (!stack.isEmpty()){
             return stack.peek();
-        &#125; else &#123;
+        } else {
             throw new RuntimeException("Stack is empty!");
-        &#125;
-    &#125;
+        }
+    }
     
-    public int getMin() &#123;
-        if (!stackHelper.isEmpty())&#123;
+    public int getMin() {
+        if (!stackHelper.isEmpty()){
             return stackHelper.peek();
-        &#125; else &#123;
+        } else {
             throw new RuntimeException("Stack is empty!");
-        &#125;
-    &#125;
-&#125;
+        }
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>

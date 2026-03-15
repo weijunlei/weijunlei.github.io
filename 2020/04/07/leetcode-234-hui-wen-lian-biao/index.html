@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -436,58 +436,58 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-转化为数组再判断"><a href="#思路1-转化为数组再判断" class="headerlink" title="思路1:转化为数组再判断"></a>思路1:转化为数组再判断</h3><p>将链表使用一个列表存储，然后再判断数组是否是回文</p>
 <h3 id="思路2-修改原链表，将后半部分链表反向"><a href="#思路2-修改原链表，将后半部分链表反向" class="headerlink" title="思路2: 修改原链表，将后半部分链表反向"></a>思路2: 修改原链表，将后半部分链表反向</h3><p>使用快慢指针得到链表中间位置，然后对后半部分链表进行反转然后比较判断是否是回文链表</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public boolean isPalindrome(ListNode head) &#123;
-        if (head == null || head.next == null)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null){
             return true;
-        &#125;
+        }
         ArrayList<Integer> getNums = new ArrayList<>();
         ListNode pre = head;
-        while(pre != null)&#123;
+        while(pre != null){
             getNums.add(pre.val);
             pre = pre.next;
-        &#125;
+        }
         int arraySize = getNums.size();
-        for(int i = 0; i < arraySize / 2; i++)&#123;
-            if (!getNums.get(i).equals(getNums.get(arraySize - i - 1)))&#123;
+        for(int i = 0; i < arraySize / 2; i++){
+            if (!getNums.get(i).equals(getNums.get(arraySize - i - 1))){
                 return false;
-            &#125;
-        &#125;
+            }
+        }
         return true;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public boolean isPalindrome(ListNode head) &#123;
-        if (head == null || head.next == null)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null){
             return true;
-        &#125;
+        }
         ListNode fast = head, slow = head;
-        while (fast != null && fast.next != null)&#123;
+        while (fast != null && fast.next != null){
             fast = fast.next.next;
             slow = slow.next;
-        &#125;
+        }
         ListNode pre = null;
         ListNode forward = slow.next;
-        while(slow != null)&#123;
+        while(slow != null){
             slow.next = pre;
             pre = slow;
             slow = forward;
-            if (forward != null)&#123;
+            if (forward != null){
                 forward = forward.next;
-            &#125;
-        &#125;
+            }
+        }
         forward = head;
-        while(pre != null)&#123;
-            if (forward.val != pre.val)&#123;
+        while(pre != null){
+            if (forward.val != pre.val){
                 return false;
-            &#125;
+            }
             pre = pre.next;
             forward = forward.next;
-        &#125;
+        }
         return true;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>

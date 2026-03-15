@@ -32,7 +32,7 @@ candidates 中的每个数字在每个组合中只">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -438,37 +438,37 @@ candidates 中的每个数字在每个组合中只能使用一次。
 ]
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS-剪枝"><a href="#思路1-DFS-剪枝" class="headerlink" title="思路1: DFS+剪枝"></a>思路1: DFS+剪枝</h3><p>与lc39类似，但是每个数只能出现一次，所以节点数量为当前位置+1到最后位置，同时，要避免同一层相同元素，避免出现重复结果（因为会选到），所以可以通过剪枝去除</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
     List<List<Integer>> results;
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) &#123;
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         results = new ArrayList<>();
-        if (candidates == null || candidates.length == 0)&#123;
+        if (candidates == null || candidates.length == 0){
             return results;
-        &#125;
+        }
         Arrays.sort(candidates);
         List<Integer> result = new ArrayList<Integer>();
         dfs(candidates, target, 0, result);
         return results;
-    &#125;
+    }
 
-    private void dfs(int[] candidates, int target, int idx, List<Integer> result)&#123;
-        if (target == 0)&#123;
+    private void dfs(int[] candidates, int target, int idx, List<Integer> result){
+        if (target == 0){
             this.results.add(new ArrayList<>(result));
-        &#125;
+        }
         
-        for(int i = idx; i < candidates.length; i++)&#123;
-            if (target < 0)&#123;
+        for(int i = idx; i < candidates.length; i++){
+            if (target < 0){
                 break;
-            &#125;
-            if (i > idx && candidates[i] == candidates[i - 1])&#123;
+            }
+            if (i > idx && candidates[i] == candidates[i - 1]){
                 continue;
-            &#125;
+            }
             result.add(candidates[i]);
             dfs(candidates, target - candidates[i], i + 1, result);
             result.remove(result.size() - 1);
-        &#125;
-    &#125;
-&#125;
+        }
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n!)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n!)$</p>

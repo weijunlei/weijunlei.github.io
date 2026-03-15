@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -436,7 +436,7 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">/**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
- * public interface NestedInteger &#123;
+ * public interface NestedInteger {
  *
  *     // @return true if this NestedInteger holds a single integer, rather than a nested list.
  *     public boolean isInteger();
@@ -448,38 +448,38 @@
  *     // @return the nested list that this NestedInteger holds, if it holds a nested list
  *     // Return null if this NestedInteger holds a single integer
  *     public List<NestedInteger> getList();
- * &#125;
+ * }
  */
-public class NestedIterator implements Iterator<Integer> &#123;
+public class NestedIterator implements Iterator<Integer> {
     
     Queue<Integer> queue;
-    public NestedIterator(List<NestedInteger> nestedList) &#123;
+    public NestedIterator(List<NestedInteger> nestedList) {
         queue = new LinkedList<Integer>();
-        for(NestedInteger node: nestedList)&#123;
+        for(NestedInteger node: nestedList){
             DFS(node);
-        &#125;
-    &#125;
+        }
+    }
 
     @Override
-    public Integer next() &#123;
+    public Integer next() {
         return queue.poll();
-    &#125;
+    }
 
     @Override
-    public boolean hasNext() &#123;
+    public boolean hasNext() {
         return !queue.isEmpty();
-    &#125;
+    }
     
-    private void DFS(NestedInteger node)&#123;
-        if (node.isInteger())&#123;
+    private void DFS(NestedInteger node){
+        if (node.isInteger()){
             queue.offer(node.getInteger());
-        &#125; else &#123;
-            for(NestedInteger sonNode: node.getList())&#123;
+        } else {
+            for(NestedInteger sonNode: node.getList()){
                 DFS(sonNode);
-            &#125;
-        &#125;
-    &#125;
-&#125;
+            }
+        }
+    }
+}
 
 /**
  * Your NestedIterator object will be instantiated and called as such:

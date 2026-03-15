@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -442,56 +442,56 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-两个数组排序后使用两个指针遍历比较"><a href="#思路1-两个数组排序后使用两个指针遍历比较" class="headerlink" title="思路1: 两个数组排序后使用两个指针遍历比较"></a>思路1: 两个数组排序后使用两个指针遍历比较</h3><p>对两个数组分别排序，然后使用一个哨兵分别计数，若两位置相等则加入，否则按照排序递增</p>
 <h3 id="思路2-使用Hash计数"><a href="#思路2-使用Hash计数" class="headerlink" title="思路2: 使用Hash计数"></a>思路2: 使用Hash计数</h3><p>对一个数组hash计数，然后使用另外一个等相等加入</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int[] intersect(int[] nums1, int[] nums2) &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
         List<Integer> result = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         
         int aIndex = 0;
         int bIndex = 0;
-        while(aIndex < nums1.length && bIndex < nums2.length)&#123;
-            if (nums1[aIndex] == nums2[bIndex])&#123;
+        while(aIndex < nums1.length && bIndex < nums2.length){
+            if (nums1[aIndex] == nums2[bIndex]){
                 result.add(nums1[aIndex]);
                 aIndex ++;
                 bIndex ++;
-            &#125; else if(nums1[aIndex] < nums2[bIndex])&#123;
+            } else if(nums1[aIndex] < nums2[bIndex]){
                 aIndex ++;
-            &#125; else &#123;
+            } else {
                 bIndex ++;
-            &#125;
-        &#125;
+            }
+        }
         int[] intResult = new int[result.size()];
-        for(int i = 0; i < result.size(); i++)&#123;
+        for(int i = 0; i < result.size(); i++){
             intResult[i] = result.get(i);
-        &#125;
+        }
         return intResult;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int[] intersect(int[] nums1, int[] nums2) &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
         List<Integer> result = new ArrayList<>();
         Map<Integer, Integer> hashMap = new HashMap<>();
-        for(int num: nums1)&#123;
-            if (!hashMap.containsKey(num))&#123;
+        for(int num: nums1){
+            if (!hashMap.containsKey(num)){
                 hashMap.put(num, 0);
-            &#125;
+            }
             hashMap.put(num, hashMap.get(num) + 1);
-        &#125;
-        for(int num: nums2)&#123;
-            if (hashMap.containsKey(num) && hashMap.get(num) > 0)&#123;
+        }
+        for(int num: nums2){
+            if (hashMap.containsKey(num) && hashMap.get(num) > 0){
                 result.add(num);
                 hashMap.put(num, hashMap.get(num) - 1);
-            &#125;
-        &#125;
+            }
+        }
         int[] intResult = new int[result.size()];
-        for(int i = 0; i < result.size(); i++)&#123;
+        for(int i = 0; i < result.size(); i++){
             intResult[i] = result.get(i);
-        &#125;
+        }
         return intResult;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlog(n))$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
@@ -728,7 +728,7 @@
                         
                             Leetcode: 384.打乱数组题目描述打乱一个没有重复元素的数组。
 示例:// 以数字集合 1, 2 和 3 初始化数组。
-int[] nums = &#123;1,2,3&#125;;
+int[] nums = {1,2,3};
 Solution solution = new
                         
                     </div>

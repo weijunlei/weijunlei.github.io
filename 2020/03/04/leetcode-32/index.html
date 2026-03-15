@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -437,38 +437,38 @@
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h4><h4 id="DP-Stack"><a href="#DP-Stack" class="headerlink" title="DP + Stack"></a>DP + Stack</h4><ul>
 <li>Java</li>
 </ul>
-<pre class=" language-language-java"><code class="language-language-java">public class Solution &#123;
-    public int longestValidParentheses(String s) &#123;
-        if (s == null || s.length() == 0) &#123;
+<pre class=" language-language-java"><code class="language-language-java">public class Solution {
+    public int longestValidParentheses(String s) {
+        if (s == null || s.length() == 0) {
             return 0;
-        &#125;
+        }
         int[] dps = new int[s.length()];
         int matchIndex = 0;
         int curLength = 0;
         int result = 0;
         Stack<Integer> stack = new Stack<>();
-        for(int i = 0; i < s.length(); i++) &#123;
+        for(int i = 0; i < s.length(); i++) {
             char newChar = s.charAt(i);
-            if (newChar == '(') &#123;
+            if (newChar == '(') {
                 stack.push(i);
-            &#125;
-            else&#123;
-                if (!stack.isEmpty()) &#123;
+            }
+            else{
+                if (!stack.isEmpty()) {
                     matchIndex = stack.pop();
                     curLength = i - matchIndex + 1;
-                    if (matchIndex - 1 > 0) &#123;
+                    if (matchIndex - 1 > 0) {
                         curLength += dps[matchIndex - 1];
-                    &#125;
+                    }
                     dps[i] = curLength;
-                    if (curLength > result) &#123;
+                    if (curLength > result) {
                         result = curLength;
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
+                    }
+                }
+            }
+        }
         return result;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <ul>
 <li>Python</li>
@@ -498,31 +498,31 @@
 <h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><ul>
 <li>Java</li>
 </ul>
-<pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 &#123;
-    public int longestValidParentheses(String s) &#123;
-        if (s == null || s.length() < 2) &#123;
+<pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 {
+    public int longestValidParentheses(String s) {
+        if (s == null || s.length() < 2) {
             return 0;
-        &#125;
+        }
         Stack<Integer> stack = new Stack<>();
         stack.push(-1);
         int result = 0;
         int tmp = 0;
-        for (int i = 0; i < s.length(); i ++) &#123;
-            if (s.charAt(i) == '(') &#123;
+        for (int i = 0; i < s.length(); i ++) {
+            if (s.charAt(i) == '(') {
                 stack.push(i);
-            &#125; else &#123;
+            } else {
                 stack.pop();
-                if (stack.isEmpty()) &#123;
+                if (stack.isEmpty()) {
                     stack.push(i);
-                &#125; else &#123;
+                } else {
                     tmp = i - stack.peek();
                     result = result > tmp ? result : tmp;
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return result;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="实验效果分析"><a href="#实验效果分析" class="headerlink" title="实验效果分析"></a>实验效果分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><h4 id="Stack-DP"><a href="#Stack-DP" class="headerlink" title="Stack + DP"></a>Stack + DP</h4><p>$n$</p>
 <h4 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h4><p>$n$</p>

@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -372,12 +372,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
-                            </a>
-                        
                             <a href="/tags/%E6%8E%92%E5%BA%8F/">
                                 <span class="chip bg-color">排序</span>
+                            </a>
+                        
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                     </div>
@@ -436,117 +436,117 @@
 </code></pre>
 <h3 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h3><pre><code>将两个数组换位虚地址
 </code></pre>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public void wiggleSort(int[] nums) &#123;
-        if (nums == null || nums.length == 0)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public void wiggleSort(int[] nums) {
+        if (nums == null || nums.length == 0){
             return;
-        &#125;
+        }
         Arrays.sort(nums);
         int mid = (nums.length + 1) / 2;
         reverse(nums, 0, mid - 1);
         reverse(nums, mid, nums.length - 1);
         int[] smallNums = new int[mid];
         int[] bigNums = new int[nums.length - mid];
-        for(int i = 0; i < nums.length; i++)&#123;
-            if (i <= mid - 1)&#123;
+        for(int i = 0; i < nums.length; i++){
+            if (i <= mid - 1){
                 smallNums[i] = nums[i];
-            &#125;else&#123;
+            }else{
                 bigNums[i - mid] = nums[i];
-            &#125;
-        &#125;
-        for(int i = 0; i < nums.length; i++)&#123;
-            if (i % 2 == 0)&#123;
+            }
+        }
+        for(int i = 0; i < nums.length; i++){
+            if (i % 2 == 0){
                 nums[i] = smallNums[i / 2];
-            &#125;else&#123;
+            }else{
                 nums[i] = bigNums[i / 2];
-            &#125;
-        &#125;
-    &#125;
+            }
+        }
+    }
     
-    private void reverse(int[] nums,int start,int end)&#123;
-        while (start < end)&#123;
+    private void reverse(int[] nums,int start,int end){
+        while (start < end){
             int temp = nums[start];
             nums[start++] = nums[end];
             nums[end--] = temp;
-        &#125;
-    &#125;
+        }
+    }
     
-&#125;
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public void wiggleSort(int[] nums) &#123;
-        if (nums == null || nums.length == 0 || nums.length == 1)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public void wiggleSort(int[] nums) {
+        if (nums == null || nums.length == 0 || nums.length == 1){
             return;
-        &#125;
+        }
         int mid = (nums.length + 1) / 2;
-        if (nums.length > 1)&#123;
+        if (nums.length > 1){
             quickSelect(nums, 0, nums.length - 1, mid, false);
-        &#125;
+        }
         int midNum = nums[mid];
         int midIndex = 0, k = nums.length - 1, iterIndex =0;
-        while (midIndex < k)&#123;
-            if (nums[midIndex] > midNum)&#123;
+        while (midIndex < k){
+            if (nums[midIndex] > midNum){
                 swap(nums, midIndex, k);
                 k --;
-            &#125;else if(nums[midIndex] < midNum)&#123;
+            }else if(nums[midIndex] < midNum){
                 swap(nums, midIndex, iterIndex);
                 midIndex++;
                 iterIndex++;
-            &#125;else&#123;
+            }else{
                 midIndex++;
-            &#125;
-        &#125;
+            }
+        }
         int[] smallNums = new int[mid];
         int[] bigNums = new int[nums.length - mid];
-        for(int i = 0; i < nums.length; i++)&#123;
-            if (i < mid)&#123;
+        for(int i = 0; i < nums.length; i++){
+            if (i < mid){
                 smallNums[i] = nums[mid - 1 - i];
-            &#125;else&#123;
+            }else{
                 bigNums[i - mid] = nums[nums.length - 1 - (i - mid)];
-            &#125;
-        &#125;
-        for(int i = 0; i < nums.length; i++)&#123;
-            if (i % 2 == 0)&#123;
+            }
+        }
+        for(int i = 0; i < nums.length; i++){
+            if (i % 2 == 0){
                 nums[i] =  smallNums[i / 2];
-            &#125;else&#123;
+            }else{
                 nums[i] = bigNums[i / 2];
-            &#125;
-        &#125;
-    &#125;
+            }
+        }
+    }
     
-    private void quickSelect(int[] nums,int start,int end,int k, boolean reverse)&#123;
+    private void quickSelect(int[] nums,int start,int end,int k, boolean reverse){
         int getIndex = getPartition(nums, start, end, reverse);
-        while (getIndex != k)&#123;
-            if (getIndex > k)&#123;
+        while (getIndex != k){
+            if (getIndex > k){
                 getIndex = getPartition(nums, start, getIndex - 1, reverse);
-            &#125;
-            if (getIndex < k)&#123;
+            }
+            if (getIndex < k){
                 getIndex = getPartition(nums, getIndex + 1, end, reverse);
-            &#125;
-        &#125;
-    &#125;
+            }
+        }
+    }
     
-    private int getPartition(int[] nums, int start, int end, boolean reverse)&#123;
+    private int getPartition(int[] nums, int start, int end, boolean reverse){
         int getNum = nums[start];
         int getIndex = start;
         swap(nums, start, end);
-        for(int i = start; i < end; i++)&#123;
-            if ((!reverse && nums[i] < getNum) || (reverse && nums[i] > getNum))&#123;
+        for(int i = start; i < end; i++){
+            if ((!reverse && nums[i] < getNum) || (reverse && nums[i] > getNum)){
                 swap(nums, getIndex++, i);
-            &#125;
-        &#125;
+            }
+        }
         swap(nums, getIndex, end);
         return getIndex;
-    &#125;
+    }
     
     
-    private void swap(int[] nums, int i, int j)&#123;
+    private void swap(int[] nums, int i, int j){
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
-    &#125;
+    }
     
-&#125;
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogn)$考虑平均情况</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
@@ -624,12 +624,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%8E%92%E5%BA%8F/">
                                     <span class="chip bg-color">排序</span>
+                                </a>
+                            
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                         </div>
@@ -807,12 +807,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
-                    </a>
-                    
                     <a href="/tags/%E6%8E%92%E5%BA%8F/">
                         <span class="chip bg-color">排序</span>
+                    </a>
+                    
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>

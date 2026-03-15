@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -450,39 +450,39 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>以依赖前置课程数为零的课程开始BFS,按照这个顺序修完所有课程并记录，同时记录所有的课程</p>
 <h3 id="思路2-DFS"><a href="#思路2-DFS" class="headerlink" title="思路2 DFS"></a>思路2 DFS</h3><p>类似与课程表LC207&#x2F;&#x2F;TODO</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int[] findOrder(int numCourses, int[][] prerequisites) &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] result = new int[numCourses];
         int[] depNum = new int[numCourses];
         List<List<Integer>> afters = new ArrayList<>();
-        for(int i = 0; i < numCourses; i++)&#123;
+        for(int i = 0; i < numCourses; i++){
             afters.add(new ArrayList<Integer>());
-        &#125;
-        for(int[] pres: prerequisites)&#123;
+        }
+        for(int[] pres: prerequisites){
             afters.get(pres[1]).add(pres[0]);
             depNum[pres[0]] += 1;
-        &#125;
+        }
         Queue<Integer> queue = new LinkedList<>();
-        for(int i = 0; i < numCourses; i++)&#123;
-            if (depNum[i] == 0)&#123;
+        for(int i = 0; i < numCourses; i++){
+            if (depNum[i] == 0){
                 queue.offer(i);
-            &#125;
-        &#125;
+            }
+        }
         // System.out.printf("%d\n", queue.size());
         int getIndex = 0;
-        while(!queue.isEmpty())&#123;
+        while(!queue.isEmpty()){
             int getNum = queue.remove();
             result[getIndex++] = getNum;
-            for(int after: afters.get(getNum))&#123;
+            for(int after: afters.get(getNum)){
                 depNum[after] -= 1;
-                if (depNum[after] == 0)&#123;
+                if (depNum[after] == 0){
                     queue.offer(after);
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return  getIndex == numCourses ? result: new int[0];
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(V+E)$，所有的课程数目和依赖关系</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(V+E)$</p>

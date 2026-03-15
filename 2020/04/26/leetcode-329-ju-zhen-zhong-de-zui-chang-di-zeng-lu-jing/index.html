@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -450,37 +450,37 @@
 解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    private int[][] paths = &#123;&#123;0, 1&#125;, &#123;1, 0&#125;, &#123;0, -1&#125;, &#123;-1, 0&#125;&#125;;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    private int[][] paths = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     private int[][] dps;
-    public int longestIncreasingPath(int[][] matrix) &#123;
-        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0)&#123;
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
             return 0;
-        &#125;
+        }
         dps = new int[matrix.length][matrix[0].length];
         int result = 0;
-        for(int i = 0; i < matrix.length; i++)&#123;
-            for(int j = 0; j < matrix[0].length; j++)&#123;
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
                 result = Math.max(dfs(matrix, i, j), result);
-            &#125;
-        &#125;
+            }
+        }
         return result;
-    &#125;
+    }
     
-    private int dfs(int[][] matrix, int i, int j)&#123;
-        if(dps[i][j] != 0)&#123;
+    private int dfs(int[][] matrix, int i, int j){
+        if(dps[i][j] != 0){
             return dps[i][j];
-        &#125;
-        for(int[] path: paths)&#123;
+        }
+        for(int[] path: paths){
             int x = i + path[0];
             int y = j + path[1];
-            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y])&#123;
+            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y]){
                 dps[i][j] = Math.max(dps[i][j], dfs(matrix, x, y));
-            &#125;
-        &#125;
+            }
+        }
         return ++dps[i][j];
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$每个单元格仅被计算一次</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$</p>

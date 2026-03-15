@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -450,66 +450,66 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS"><a href="#思路1-BFS" class="headerlink" title="思路1 BFS"></a>思路1 BFS</h3><p>可将单词接龙看作更改一个单词的无向图，但是需要记录访问的词，所有词都可分解为将一个字符改成*的通用匹配模式，然后使用该通用模型进行匹配，然后使用BFS对图进行广度优先遍历，在广度优先遍历时需要注意要保存层次信息帮助记录路径长</p>
 <h3 id="思路2-双向"><a href="#思路2-双向" class="headerlink" title="思路2 双向"></a>思路2 双向</h3><p>同时从开始词和末尾词进行BFS,减少无用边，更快找到路径，结果为路径加和即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) &#123;
-        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
             return 0;
-        &#125;
+        }
         Map<String, List<String>> wordDict = new HashMap<>();
         Map<String, Boolean> hasVisit = new HashMap();
         Queue<Map<String, Integer>> queue = new LinkedList<>();
         hasVisit.put(beginWord, true);
-        queue.offer(new HashMap<>()&#123;&#123;put(beginWord, 1);&#125;&#125;);
-        for(String word: wordList)&#123;
+        queue.offer(new HashMap<>(){{put(beginWord, 1);}});
+        for(String word: wordList){
             int l = word.length();
-            if (!word.equals(beginWord))&#123;
+            if (!word.equals(beginWord)){
                 hasVisit.put(word, false);
-            &#125;
+            }
 
-            for(int i = 0; i < l; i++)&#123;
+            for(int i = 0; i < l; i++){
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (!wordDict.containsKey(tempStr))&#123;
+                if (!wordDict.containsKey(tempStr)){
                     wordDict.put(tempStr, new ArrayList<String>());
-                &#125;
+                }
                 List<String> tempList = wordDict.get(tempStr);
                 tempList.add(word);
                 wordDict.put(tempStr, tempList);
-            &#125;
-        &#125;
-        while(!queue.isEmpty())&#123;
+            }
+        }
+        while(!queue.isEmpty()){
             Map<String, Integer> node = queue.remove();
             String word = node.keySet().toArray()[0].toString();
             int getLevel = node.get(word);
-            if (word.equals(endWord))&#123;
+            if (word.equals(endWord)){
                 return getLevel;
-            &#125;
+            }
             int l = word.length();
-            for(int i = 0; i < l; i++)&#123;
+            for(int i = 0; i < l; i++){
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0)&#123;
+                if (wordDict.get(tempStr) == null || wordDict.get(tempStr).size() == 0){
                     continue;
-                &#125;
-                for(String getWord: wordDict.get(tempStr))&#123;
-                    if (getWord.equals(endWord))&#123;
+                }
+                for(String getWord: wordDict.get(tempStr)){
+                    if (getWord.equals(endWord)){
                         return getLevel + 1;
-                    &#125;
-                    if (!hasVisit.get(getWord))&#123;
-                        queue.offer(new HashMap<>()&#123;&#123;put(getWord, getLevel + 1);&#125;&#125;);
+                    }
+                    if (!hasVisit.get(getWord)){
+                        queue.offer(new HashMap<>(){{put(getWord, getLevel + 1);}});
                         hasVisit.put(getWord, true);
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
+                    }
+                }
+            }
+        }
         return 0;
 
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) &#123;
-        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (beginWord == null || beginWord.length() == 0 || endWord == null || endWord.length() == 0 || wordList == null || wordList.size() == 0){
             return 0;
-        &#125;
+        }
         Map<String, List<String>> wordDict = new HashMap<>();
         Map<String, Integer> beginVisit = new HashMap<>();
         Map<String, Integer> endVisit = new HashMap<>();
@@ -522,61 +522,61 @@ wordList = [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quo
         endQueue.offer(endWord);
         boolean hasEndWord = false;
         
-        for(String word: wordList)&#123;
+        for(String word: wordList){
             int l = word.length();
-            if (word.equals(endWord))&#123;
+            if (word.equals(endWord)){
                 hasEndWord = true;
-            &#125;
-            for(int i = 0; i < l; i++)&#123;
+            }
+            for(int i = 0; i < l; i++){
                 String tempStr = word.substring(0, i) + "*" + word.substring(i + 1, l);
-                if (!wordDict.containsKey(tempStr))&#123;
+                if (!wordDict.containsKey(tempStr)){
                     wordDict.put(tempStr, new ArrayList<String>());
-                &#125;
+                }
                 List<String> tempList = wordDict.get(tempStr);
                 tempList.add(word);
                 wordDict.put(tempStr, tempList);
-            &#125;
-        &#125;
+            }
+        }
         System.out.println(hasEndWord);
-        if (!hasEndWord)&#123;
+        if (!hasEndWord){
             return 0;
-        &#125;
+        }
         
-        while(!beginQueue.isEmpty() && !endQueue.isEmpty())&#123;
+        while(!beginQueue.isEmpty() && !endQueue.isEmpty()){
             int getSame = updateQueue(wordDict, beginQueue, beginVisit, endVisit);
-            if (getSame != -1)&#123;
+            if (getSame != -1){
                 return getSame;
-            &#125;
+            }
             getSame = updateQueue(wordDict, endQueue, endVisit, beginVisit);
-            if (getSame != -1)&#123;
+            if (getSame != -1){
                 return getSame;
-            &#125;
-        &#125;
+            }
+        }
         return 0;
-    &#125;
+    }
     
-    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1)&#123;
+    private int updateQueue(Map<String, List<String>> wordDict, Queue<String> queue, Map<String, Integer> visit, Map<String, Integer> visit1){
         String getStr = queue.remove();
         int l = getStr.length();
         int getLever = visit.get(getStr);
-        for(int i = 0; i < l; i++)&#123;
+        for(int i = 0; i < l; i++){
             String tempStr = getStr.substring(0, i) + "*" + getStr.substring(i + 1, l);
-            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0)&#123;
+            if (!wordDict.containsKey(tempStr) || wordDict.get(tempStr).size() == 0){
                 continue;
-            &#125;
-            for(String getWord: wordDict.get(tempStr))&#123;
-                if (!visit.containsKey(getWord))&#123;
-                    if (visit1.containsKey(getWord))&#123;
+            }
+            for(String getWord: wordDict.get(tempStr)){
+                if (!visit.containsKey(getWord)){
+                    if (visit1.containsKey(getWord)){
                         return getLever + visit1.get(getWord);
-                    &#125;
+                    }
                     queue.offer(getWord);
                     visit.put(getWord, getLever + 1);
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return -1;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(m*n)$遍历完m个字符长度的n个词</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(m*n)$存储可变换状态</p>

@@ -35,7 +35,7 @@ s = &amp;quot;">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -437,24 +437,24 @@ s = &quot;loveleetcode&quot;,
 注意事项：您可以假定该字符串只包含小写字母。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路：数组-字典"><a href="#思路：数组-字典" class="headerlink" title="思路：数组 字典"></a>思路：数组 字典</h3><p>直接使用数组对字母计数二次遍历</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public int firstUniqChar(String s) &#123;
-        if (s == null || s.length() == 0)&#123;
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int firstUniqChar(String s) {
+        if (s == null || s.length() == 0){
             return -1;
-        &#125;
+        }
         int[] chDict = new int[26];
 
-        for(int i = 0; i < s.length(); i++)&#123;
+        for(int i = 0; i < s.length(); i++){
             chDict[s.charAt(i) - 'a'] += 1;
-        &#125;
-        for(int i = 0; i < s.length(); i++)&#123;
-            if(chDict[s.charAt(i) - 'a'] == 1)&#123;
+        }
+        for(int i = 0; i < s.length(); i++){
+            if(chDict[s.charAt(i) - 'a'] == 1){
                 return i;
-            &#125;
-        &#125;
+            }
+        }
         return -1;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 
             </div>

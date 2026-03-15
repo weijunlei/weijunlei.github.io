@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -442,79 +442,79 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯-DFS"><a href="#思路1-回溯-DFS" class="headerlink" title="思路1: 回溯+DFS"></a>思路1: 回溯+DFS</h3><p>直接使用回溯+DFS判断每个单词是否存在，需要注意一个单词不能使用两次以上一个字符。</p>
 <h3 id="思路2-前缀树-回溯减枝"><a href="#思路2-前缀树-回溯减枝" class="headerlink" title="思路2: 前缀树+回溯减枝"></a>思路2: 前缀树+回溯减枝</h3><p>对所有的单词建立节点，然后回溯board中每个可能的单词，裁剪掉不能满足前缀树的路径</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
-    public List<String> findWords(char[][] board, String[] words) &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution {
+    public List<String> findWords(char[][] board, String[] words) {
         List<String> result = new LinkedList<>();
-        if (words.length == 0 || board.length == 0 || board[0].length == 0)&#123;
+        if (words.length == 0 || board.length == 0 || board[0].length == 0){
             return result;
-        &#125;
-        for(String word: words)&#123;
-            if(hasWord(word, board)) &#123;
+        }
+        for(String word: words){
+            if(hasWord(word, board)) {
                 result.add(word);
-            &#125;
-        &#125;
+            }
+        }
         return result;
-    &#125;
+    }
 
-    private boolean hasWord(String s, char[][] board)&#123;
+    private boolean hasWord(String s, char[][] board){
         boolean canFind = false;
-        for(int i = 0; i < board.length; i++)&#123;
-            for(int j = 0; j < board[0].length; j++)&#123;
-                if (s.charAt(0) == board[i][j] && wordDFS(s, board, 0, i, j)) &#123;
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+                if (s.charAt(0) == board[i][j] && wordDFS(s, board, 0, i, j)) {
                     canFind = true;
                     break;
-                &#125;
-            &#125;
-            if (canFind)&#123;
+                }
+            }
+            if (canFind){
                 break;
-            &#125;
-        &#125;
+            }
+        }
         return canFind;
-    &#125;
+    }
 
-    private boolean wordDFS(String s, char[][] board, int startIndex, int i, int j)&#123;
-        if (startIndex == s.length() - 1)&#123;
+    private boolean wordDFS(String s, char[][] board, int startIndex, int i, int j){
+        if (startIndex == s.length() - 1){
             return true;
-        &#125;
+        }
         boolean canFind = false;
         char temp = s.charAt(startIndex);
         char getCh = s.charAt(startIndex + 1);
         board[i][j] = '$';
-        if(canGetCh(getCh, board, i + 1, j))&#123;
+        if(canGetCh(getCh, board, i + 1, j)){
             canFind = canFind || wordDFS(s, board, startIndex+1, i+1, j);
-            if (canFind)&#123;
+            if (canFind){
                 board[i][j] = temp;
-            &#125;
-        &#125;
-        if (!canFind && canGetCh(getCh, board, i -1, j))&#123;
+            }
+        }
+        if (!canFind && canGetCh(getCh, board, i -1, j)){
             canFind = canFind || wordDFS(s, board, startIndex+1, i-1, j);
-            if (canFind)&#123;
+            if (canFind){
                 board[i][j] = temp;
-            &#125;
-        &#125;
-        if (!canFind && canGetCh(getCh, board, i, j+1))&#123;
+            }
+        }
+        if (!canFind && canGetCh(getCh, board, i, j+1)){
             canFind = canFind || wordDFS(s, board, startIndex+1, i, j+1);
-            if (canFind)&#123;
+            if (canFind){
                 board[i][j] = temp;
-            &#125;
-        &#125;
-        if (!canFind && canGetCh(getCh, board, i, j-1))&#123;
+            }
+        }
+        if (!canFind && canGetCh(getCh, board, i, j-1)){
             canFind = canFind || wordDFS(s, board, startIndex+1, i, j-1);
-            if (canFind)&#123;
+            if (canFind){
                 board[i][j] = temp;
-            &#125;
-        &#125;
+            }
+        }
         board[i][j] = temp;
         return canFind;
-    &#125;
+    }
 
-    private boolean canGetCh(char getCh, char[][] board, int i, int j)&#123;
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length)&#123;
+    private boolean canGetCh(char getCh, char[][] board, int i, int j){
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length){
             return false;
-        &#125;
+        }
         return board[i][j] == getCh;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1-时间复杂度"><a href="#思路1-时间复杂度" class="headerlink" title="思路1:时间复杂度"></a>思路1:时间复杂度</h3><p>只超过14%</p>
 <h3 id="思路2-空间复杂度"><a href="#思路2-空间复杂度" class="headerlink" title="思路2:空间复杂度"></a>思路2:空间复杂度</h3><p>&#x2F;&#x2F;TODO</p>

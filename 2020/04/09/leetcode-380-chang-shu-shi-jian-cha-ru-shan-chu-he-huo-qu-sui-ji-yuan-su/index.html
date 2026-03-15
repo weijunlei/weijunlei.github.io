@@ -33,7 +33,7 @@ remove(val)：元">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -373,12 +373,12 @@ remove(val)：元">
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
-                            </a>
-                        
                             <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">
                                 <span class="chip bg-color">哈希表</span>
+                            </a>
+                        
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                             <a href="/tags/Collection/">
@@ -454,34 +454,34 @@ randomSet.insert(2);
 randomSet.getRandom();
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>首先满足插入和删除为O(1)的容器会想到哈希表，然后需要返回集合中的随机数，需要一个增长列表。同时需要满足插入和删除为O(1)可以直接将需要删除的数置于末尾，然后删除，插入不变。在插入和删除过程中需要同时更新哈希表和增长列表。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class RandomizedSet &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class RandomizedSet {
 
     /** Initialize your data structure here. */
     private HashMap<Integer, Integer> numMap;
     private List<Integer> nums;
     private Random random;
     
-    public RandomizedSet() &#123;
+    public RandomizedSet() {
         numMap = new HashMap<>();
         nums = new ArrayList<>();
         random = new Random();
-    &#125;
+    }
     
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
-    public boolean insert(int val) &#123;
-        if (numMap.containsKey(val))&#123;
+    public boolean insert(int val) {
+        if (numMap.containsKey(val)){
             return false;
-        &#125;
+        }
         numMap.put(val, nums.size());
         nums.add(val);
         return true;
-    &#125;
+    }
     
     /** Removes a value from the set. Returns true if the set contained the specified element. */
-    public boolean remove(int val) &#123;
-        if (!numMap.containsKey(val))&#123;
+    public boolean remove(int val) {
+        if (!numMap.containsKey(val)){
             return false;
-        &#125;
+        }
         int getIndex = numMap.get(val);
         int getNum = nums.get(nums.size() - 1);
         numMap.put(getNum, getIndex);
@@ -489,13 +489,13 @@ randomSet.getRandom();
         nums.remove(nums.size() - 1);
         numMap.remove(val);
         return true;
-    &#125;
+    }
     
     /** Get a random element from the set. */
-    public int getRandom() &#123;
+    public int getRandom() {
         return nums.get(random.nextInt(nums.size()));
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
@@ -566,12 +566,12 @@ randomSet.getRandom();
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">
                                     <span class="chip bg-color">哈希表</span>
+                                </a>
+                            
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                                 <a href="/tags/Collection/">
@@ -746,12 +746,12 @@ randomSet.getRandom();
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
-                    </a>
-                    
                     <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">
                         <span class="chip bg-color">哈希表</span>
+                    </a>
+                    
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>

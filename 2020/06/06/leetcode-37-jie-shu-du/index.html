@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -444,77 +444,77 @@
 给定数独永远是 9x9 形式的。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
     char[][] board;
     int[][] rowCount = new int[9][9];
     int[][] columnCount = new int[9][9];
     int[][] matrixCount = new int[9][9];
     boolean canSolve = false;
 
-    private boolean canSet(int row, int column, int num)&#123;
+    private boolean canSet(int row, int column, int num){
         int matrixIndex = (row / 3) * 3 + column / 3;
         return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;
-    &#125;
+    }
 
-    private void setNum(int row, int column, int num)&#123;
+    private void setNum(int row, int column, int num){
         int matrixIndex = (row / 3) * 3 + column / 3;
         rowCount[row][num - 1] += 1;
         columnCount[column][num - 1] += 1;
         matrixCount[matrixIndex][num - 1] += 1;
         board[row][column] = (char)('0' + num);
-    &#125;
+    }
 
-    private void removeNum(int row, int column, int num)&#123;
+    private void removeNum(int row, int column, int num){
         int matrixIndex = (row / 3) * 3 + column / 3;
         rowCount[row][num - 1] -= 1;
         columnCount[column][num - 1] -= 1;
         matrixCount[matrixIndex][num - 1] -= 1;
         board[row][column] = '.';
-    &#125;
+    }
 
-    private void setNext(int row, int column)&#123;
-        if (row == 8 && column == 8)&#123;
+    private void setNext(int row, int column){
+        if (row == 8 && column == 8){
             this.canSolve = true;
-        &#125;
-        if (column != 8)&#123;
+        }
+        if (column != 8){
             backTrack(row, column + 1);
-        &#125;else&#123;
+        }else{
             backTrack(row + 1, 0);
-        &#125;
-    &#125;
+        }
+    }
 
-    private void backTrack(int row, int column)&#123;
-        if (row > 8 || column > 8)&#123;
+    private void backTrack(int row, int column){
+        if (row > 8 || column > 8){
             return;
-        &#125;
-        if (this.board[row][column] == '.')&#123;
-            for(int i = 1; i < 10; i++)&#123;
-                if (canSet(row, column, i))&#123;
+        }
+        if (this.board[row][column] == '.'){
+            for(int i = 1; i < 10; i++){
+                if (canSet(row, column, i)){
                     setNum(row, column, i);
                     setNext(row, column);
-                    if (!this.canSolve)&#123;
+                    if (!this.canSolve){
                         removeNum(row, column, i);
-                    &#125;
-                &#125;
-            &#125;
-        &#125;else&#123;
+                    }
+                }
+            }
+        }else{
             setNext(row, column);
-        &#125;
-    &#125;
+        }
+    }
 
-    public void solveSudoku(char[][] board) &#123;
+    public void solveSudoku(char[][] board) {
         this.board = board;
-        for(int i = 0; i < 9; i++)&#123;
-            for(int j=0; j < 9; j++)&#123;
-                if (this.board[i][j] != '.')&#123;
+        for(int i = 0; i < 9; i++){
+            for(int j=0; j < 9; j++){
+                if (this.board[i][j] != '.'){
                     int num = (int)(this.board[i][j] - '0');
                     setNum(i, j, num);
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         backTrack(0, 0);
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$(n!)^9$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n^2$</p>

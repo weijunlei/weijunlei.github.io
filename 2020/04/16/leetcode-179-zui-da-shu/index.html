@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -378,12 +378,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/Medium/">
-                                <span class="chip bg-color">Medium</span>
-                            </a>
-                        
                             <a href="/tags/%E6%8E%92%E5%BA%8F/">
                                 <span class="chip bg-color">排序</span>
+                            </a>
+                        
+                            <a href="/tags/Medium/">
+                                <span class="chip bg-color">Medium</span>
                             </a>
                         
                     </div>
@@ -436,124 +436,124 @@
 </code></pre>
 <h2 id="思路1：转化为排序-快排"><a href="#思路1：转化为排序-快排" class="headerlink" title="思路1：转化为排序+快排"></a>思路1：转化为排序+快排</h2><p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p>
 <h2 id="思路2-转化为排序-Java排序"><a href="#思路2-转化为排序-Java排序" class="headerlink" title="思路2: 转化为排序+Java排序"></a>思路2: 转化为排序+Java排序</h2><p>转化为排序然后使用Java内置排序</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public String largestNumber(int[] nums) &#123;
-        if (nums == null || nums.length == 0)&#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public String largestNumber(int[] nums) {
+        if (nums == null || nums.length == 0){
             return "";
-        &#125;
+        }
         StringBuilder result = new StringBuilder();
         String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++)&#123;
+        for(int i = 0; i < nums.length; i++){
             strNums[i] = String.valueOf(nums[i]);
-        &#125;
+        }
         quickSort(strNums, 0, strNums.length - 1);
-        if (strNums[0].equals("0"))&#123;
+        if (strNums[0].equals("0")){
             return "0";
-        &#125;
-        for(int i = 0; i < strNums.length; i++)&#123;
+        }
+        for(int i = 0; i < strNums.length; i++){
             result.append(strNums[i]);
-        &#125;
+        }
         return result.toString();
-    &#125;
+    }
     
-    private void quickSort(String[] nums, int start, int end)&#123;
-        if (start < end)&#123;
+    private void quickSort(String[] nums, int start, int end){
+        if (start < end){
             int getIndex = getPartition(nums, start, end);
             quickSort(nums, start, getIndex);
             quickSort(nums, getIndex + 1, end);
-        &#125;
-    &#125;
+        }
+    }
     
-    private int getPartition(String[] nums, int start, int end)&#123;
+    private int getPartition(String[] nums, int start, int end){
         String getNum = nums[start];
         nums[start] = nums[end];
         nums[end] = getNum;
         int getIndex = start;
-        for(int i = start; i < end; i++)&#123;
-            if (compare(nums[i], getNum))&#123;
+        for(int i = start; i < end; i++){
+            if (compare(nums[i], getNum)){
                 String temp = nums[getIndex];
                 nums[getIndex] = nums[i];
                 nums[i] = temp;
                 getIndex ++;
-            &#125;
-        &#125;
+            }
+        }
         nums[end] = nums[getIndex];
         nums[getIndex] = getNum;
         return getIndex;
-    &#125;
+    }
     
-    private boolean compare(String a, String b)&#123;
+    private boolean compare(String a, String b){
         int aCount = a.length();
         int bCount = b.length();
         int maxCount = aCount > bCount ? aCount : bCount;
         char chA = '0';
         char chB = '0';
-        for(int i = 0; i < aCount + bCount; i++)&#123;
-            if (i < aCount)&#123;
+        for(int i = 0; i < aCount + bCount; i++){
+            if (i < aCount){
                 chA = a.charAt(i);
-            &#125;else&#123;
+            }else{
                 chA = b.charAt(i - aCount);
-            &#125;
-            if(i < bCount)&#123;
+            }
+            if(i < bCount){
                 chB = b.charAt(i);
-            &#125;else&#123;
+            }else{
                 chB = a.charAt(i - bCount);
-            &#125;
-            if (chA > chB)&#123;
+            }
+            if (chA > chB){
                 return true;
-            &#125;else if(chA < chB)&#123;
+            }else if(chA < chB){
                 return false;
-            &#125;
-        &#125;
+            }
+        }
         return false;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
-    public String largestNumber(int[] nums) &#123;
-        if (nums == null || nums.length == 0)&#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public String largestNumber(int[] nums) {
+        if (nums == null || nums.length == 0){
             return "";
-        &#125;
+        }
         StringBuilder result = new StringBuilder();
         String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++)&#123;
+        for(int i = 0; i < nums.length; i++){
             strNums[i] = String.valueOf(nums[i]);
-        &#125;
-        Arrays.sort(strNums, new Comparator<String>()&#123;
+        }
+        Arrays.sort(strNums, new Comparator<String>(){
             @Override
-            public int compare(String a, String b)&#123;
+            public int compare(String a, String b){
                 int aCount = a.length();
                 int bCount = b.length();
                 int maxCount = aCount > bCount ? aCount : bCount;
                 char chA = '0';
                 char chB = '0';
-                for(int i = 0; i < aCount + bCount; i++)&#123;
-                    if (i < aCount)&#123;
+                for(int i = 0; i < aCount + bCount; i++){
+                    if (i < aCount){
                         chA = a.charAt(i);
-                    &#125;else&#123;
+                    }else{
                         chA = b.charAt(i - aCount);
-                    &#125;
-                    if(i < bCount)&#123;
+                    }
+                    if(i < bCount){
                         chB = b.charAt(i);
-                    &#125;else&#123;
+                    }else{
                         chB = a.charAt(i - bCount);
-                    &#125;
-                    if (chA != chB)&#123;
+                    }
+                    if (chA != chB){
                         return chB - chA;
-                    &#125;
-                &#125;
+                    }
+                }
                 return 0;
-            &#125;
-        &#125;);
-        if (strNums[0].equals("0"))&#123;
+            }
+        });
+        if (strNums[0].equals("0")){
             return "0";
-        &#125;
-        for(int i = 0; i < strNums.length; i++)&#123;
+        }
+        for(int i = 0; i < strNums.length; i++){
             result.append(strNums[i]);
-        &#125;
+        }
         return result.toString();
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
 <h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
@@ -626,12 +626,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/Medium/">
-                                    <span class="chip bg-color">Medium</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%8E%92%E5%BA%8F/">
                                     <span class="chip bg-color">排序</span>
+                                </a>
+                            
+                                <a href="/tags/Medium/">
+                                    <span class="chip bg-color">Medium</span>
                                 </a>
                             
                         </div>
@@ -742,12 +742,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Medium/">
-                        <span class="chip bg-color">Medium</span>
-                    </a>
-                    
                     <a href="/tags/%E6%8E%92%E5%BA%8F/">
                         <span class="chip bg-color">排序</span>
+                    </a>
+                    
+                    <a href="/tags/Medium/">
+                        <span class="chip bg-color">Medium</span>
                     </a>
                     
                 </div>

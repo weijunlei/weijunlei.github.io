@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -450,114 +450,114 @@
 <h3 id="思路2：记忆化可切分后缀"><a href="#思路2：记忆化可切分后缀" class="headerlink" title="思路2：记忆化可切分后缀"></a>思路2：记忆化可切分后缀</h3><p>记录一个回溯记忆数组，若该后缀可切分则综合到最后可切分，这样可以大幅减少调用函数次数</p>
 <h3 id="思路3-BFS实现"><a href="#思路3-BFS实现" class="headerlink" title="思路3: BFS实现"></a>思路3: BFS实现</h3><p>使用广度优先遍历实现，相当于将可到达相同的前缀节点合并，不进行相同的后续操作，减少函数调用次数。</p>
 <h3 id="思路4-DP实现"><a href="#思路4-DP实现" class="headerlink" title="思路4: DP实现"></a>思路4: DP实现</h3><p>第j个位置可根据可形成前缀的位置进行计算，若其前缀为i,则若s.sub(i, j)在字典中则第j个位置为可拼接，最后一个位置即为最后是否可切分结果。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
-    public boolean wordBreak(String s, List<String> wordDict) &#123;
-        if (s == null || s.length() == 0) &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (s == null || s.length() == 0) {
             return true;
-        &#125; else if (wordDict.size() == 0) &#123;
+        } else if (wordDict.size() == 0) {
             return false;
-        &#125;
+        }
         HashSet<String> hashSet = new HashSet<>(wordDict);
         return wordBreakHelper(s, 0, hashSet);
 
-    &#125;
+    }
 
-    private boolean wordBreakHelper(String s, int startIndex, HashSet<String> hashSet) &#123;
-        if (startIndex >= s.length()) &#123;
+    private boolean wordBreakHelper(String s, int startIndex, HashSet<String> hashSet) {
+        if (startIndex >= s.length()) {
             return true;
-        &#125;
+        }
         boolean hasMatch = false;
-        for(var neededStr: hashSet) &#123;
+        for(var neededStr: hashSet) {
 //            System.out.println(s.substring(startIndex, startIndex + neededStr.length()));
-            if (startIndex + neededStr.length() <= s.length() && s.substring(startIndex, startIndex + neededStr.length()).equalsIgnoreCase(neededStr)) &#123;
+            if (startIndex + neededStr.length() <= s.length() && s.substring(startIndex, startIndex + neededStr.length()).equalsIgnoreCase(neededStr)) {
                 hasMatch = hasMatch || wordBreakHelper(s, startIndex + neededStr.length(), hashSet);
-                if (hasMatch) &#123;
+                if (hasMatch) {
                     break;
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return hasMatch;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 &#123;
-    public boolean wordBreak(String s, List<String> wordDict) &#123;
-        if (s == null || s.length() == 0) &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (s == null || s.length() == 0) {
             return true;
-        &#125; else if (wordDict.size() == 0) &#123;
+        } else if (wordDict.size() == 0) {
             return false;
-        &#125;
+        }
         HashSet<String> hashSet = new HashSet<>(wordDict);
         return wordBreakHelper(s, 0, hashSet, new Boolean[s.length()]);
-    &#125;
+    }
 
-    private boolean wordBreakHelper(String neededStr, int startIndex, HashSet<String> hashSet, Boolean[] hasMatch) &#123;
-        if (startIndex == neededStr.length()) &#123;
+    private boolean wordBreakHelper(String neededStr, int startIndex, HashSet<String> hashSet, Boolean[] hasMatch) {
+        if (startIndex == neededStr.length()) {
             return true;
-        &#125;
-        if (hasMatch[startIndex] != null) &#123;
+        }
+        if (hasMatch[startIndex] != null) {
             return hasMatch[startIndex];
-        &#125;
-        for(int i=startIndex + 1; i <= neededStr.length(); i++) &#123;
-            if (hashSet.contains(neededStr.substring(startIndex, i)) && wordBreakHelper(neededStr, i, hashSet, hasMatch)) &#123;
+        }
+        for(int i=startIndex + 1; i <= neededStr.length(); i++) {
+            if (hashSet.contains(neededStr.substring(startIndex, i)) && wordBreakHelper(neededStr, i, hashSet, hasMatch)) {
                 return hasMatch[startIndex] = true;
-            &#125;
-        &#125;
+            }
+        }
         return hasMatch[startIndex] = false;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码3：BFS-（队列实现）"><a href="#代码3：BFS-（队列实现）" class="headerlink" title="代码3：BFS （队列实现）"></a>代码3：BFS （队列实现）</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution3 &#123;
-    public boolean wordBreak(String s, List<String> wordDict) &#123;
-        if (s == null || s.length() == 0) &#123;
+<h3 id="代码3：BFS-（队列实现）"><a href="#代码3：BFS-（队列实现）" class="headerlink" title="代码3：BFS （队列实现）"></a>代码3：BFS （队列实现）</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution3 {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (s == null || s.length() == 0) {
             return true;
-        &#125; else if(wordDict.size() == 0) &#123;
+        } else if(wordDict.size() == 0) {
             return false;
-        &#125;
+        }
         Set<String> hashSet = new HashSet<>(wordDict);
         Queue<Integer> queue = new LinkedList<>();
         boolean[] hasSeen = new boolean[s.length()];
         queue.add(0);
-        while (!queue.isEmpty()) &#123;
+        while (!queue.isEmpty()) {
             int startIndex = queue.remove();
-            if (!hasSeen[startIndex]) &#123;
-                for(int endIndex = startIndex + 1; endIndex <= s.length(); endIndex++) &#123;
-                    if (hashSet.contains(s.substring(startIndex, endIndex))) &#123;
+            if (!hasSeen[startIndex]) {
+                for(int endIndex = startIndex + 1; endIndex <= s.length(); endIndex++) {
+                    if (hashSet.contains(s.substring(startIndex, endIndex))) {
                         queue.add(endIndex);
-                        if (endIndex == s.length()) &#123;
+                        if (endIndex == s.length()) {
                             return true;
-                        &#125;
-                    &#125;
-                &#125;
+                        }
+                    }
+                }
                 hasSeen[startIndex] = true;
-            &#125;
-        &#125;
+            }
+        }
         return false;
-    &#125;
-&#125;
+    }
+}
 </code></pre>
-<h3 id="代码4-DP实现"><a href="#代码4-DP实现" class="headerlink" title="代码4: DP实现"></a>代码4: DP实现</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution4 &#123;
-    public boolean wordBreak(String s, List<String> wordDict) &#123;
-        if (s == null || s.length() == 0) &#123;
+<h3 id="代码4-DP实现"><a href="#代码4-DP实现" class="headerlink" title="代码4: DP实现"></a>代码4: DP实现</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution4 {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if (s == null || s.length() == 0) {
             return true;
-        &#125; else if(wordDict.size() == 0) &#123;
+        } else if(wordDict.size() == 0) {
             return false;
-        &#125;
+        }
         Set<String> hashSet = new HashSet<>(wordDict);
         boolean[] dps = new boolean[s.length() + 1];
         dps[0] = true;
 
-        for(int end = 1; end < s.length() + 1; end++) &#123;
-            for(int start=0; start < end; start++) &#123;
-                if (dps[start] && hashSet.contains(s.substring(start, end))) &#123;
+        for(int end = 1; end < s.length() + 1; end++) {
+            for(int start=0; start < end; start++) {
+                if (dps[start] && hashSet.contains(s.substring(start, end))) {
                     dps[end] = true;
                     break;
-                &#125;
-            &#125;
-        &#125;
+                }
+            }
+        }
         return dps[s.length()];
-    &#125;
-&#125;
+    }
+}
 </code></pre>
 <h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1：时间复杂度"><a href="#思路1：时间复杂度" class="headerlink" title="思路1：时间复杂度"></a>思路1：时间复杂度</h3><p>$n^n$</p>
 <h3 id="思路1-空间复杂度"><a href="#思路1-空间复杂度" class="headerlink" title="思路1: 空间复杂度"></a>思路1: 空间复杂度</h3><p>$n$</p>
