@@ -6,7 +6,7 @@
   <link href="https://weijunlei.github.io/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2026-03-15T09:28:56.691Z</updated>
+  <updated>2026-03-15T09:49:25.138Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FE2H 创新点详解：从易到难的两阶段问答框架</title>
+    <link href="https://weijunlei.github.io/2026/03/15/fe2h-chuang-xin-dian-xiang-jie/"/>
+    <id>https://weijunlei.github.io/2026/03/15/fe2h-chuang-xin-dian-xiang-jie/</id>
+    <published>2026-03-15T09:48:00.000Z</published>
+    <updated>2026-03-15T09:49:25.138Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;FE2H-创新点详解：从易到难的两阶段问答框架&quot;&gt;&lt;a href=&quot;#FE2H-创新点详解：从易到难的两阶段问答框架&quot; class=&quot;headerlink&quot; title=&quot;FE2H 创新点详解：从易到难的两阶段问答框架&quot;&gt;&lt;/a&gt;FE2H</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://weijunlei.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="NLP" scheme="https://weijunlei.github.io/tags/NLP/"/>
+    
+    <category term="论文阅读" scheme="https://weijunlei.github.io/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+    <category term="问答系统" scheme="https://weijunlei.github.io/tags/%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="多跳阅读理解" scheme="https://weijunlei.github.io/tags/%E5%A4%9A%E8%B7%B3%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
+    
+    <category term="创新点解析" scheme="https://weijunlei.github.io/tags/%E5%88%9B%E6%96%B0%E7%82%B9%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>订单号生成方案</title>
@@ -28,7 +61,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;订单号生成方案&quot;&gt;&lt;a href=&quot;#订单号生成方案&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;订单号生成方案&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#订单号生成方案&quot;&gt;&lt;/a&gt;</summary>
         
       
     
@@ -55,7 +88,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;雪球特别版：段永平投资问答录（商业逻辑篇）&quot;&gt;&lt;a href=&quot;#雪球特别版：段永平投资问答录（商业逻辑篇）&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;雪球特别版段永平投资问答录商业逻辑篇&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#雪球特别版段永平投资问答录商业逻辑篇&quot;&gt;&lt;/a&gt; 雪球特别版：段永平投资问答录（商业逻辑篇）&lt;/h1&gt;
+&lt;h2 id=&quot;书籍地址&quot;&gt;&lt;a</summary>
         
       
     
@@ -80,7 +114,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-42-接雨水&quot;&gt;&lt;a href=&quot;#Leetcode-42-接雨水&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:42. 接雨水&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode42-接雨水&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode42-接雨水&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -109,7 +143,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-40-组合总和-II&quot;&gt;&lt;a href=&quot;#Leetcode-40-组合总和-II&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 40. 组合总和 II&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-40-组合总和-ii&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-40-组合总和-ii&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -140,7 +174,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-Leetcode-39-组合总和&quot;&gt;&lt;a href=&quot;#Leetcode-Leetcode-39-组合总和&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode](Leetcode: 39.</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcodeleetcode-39-组合总和&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcodeleetcode-39-组合总和&quot;&gt;&lt;/a&gt; [Leetcode](Leetcode: 39.</summary>
         
       
     
@@ -171,7 +205,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-37-解数独&quot;&gt;&lt;a href=&quot;#Leetcode-37-解数独&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 37.解数独&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-37解数独&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-37解数独&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -200,7 +234,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-146-LRU缓存机制&quot;&gt;&lt;a href=&quot;#Leetcode-146-LRU缓存机制&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:146. LRU缓存机制&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode146-lru缓存机制&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode146-lru缓存机制&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -229,7 +263,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-134-加油站&quot;&gt;&lt;a href=&quot;#Leetcode-134-加油站&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode: 134. 加油站]&quot;&gt;&lt;/a&gt;[Leetcode: 134. 加油站]&lt;/h1&gt;&lt;h2</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-134-加油站&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-134-加油站&quot;&gt;&lt;/a&gt; [Leetcode: 134. 加油站]&lt;/h1&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a</summary>
         
       
     
@@ -256,7 +291,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-371-两整数之和&quot;&gt;&lt;a href=&quot;#Leetcode-371-两整数之和&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode: 371. 两整数之和]&quot;&gt;&lt;/a&gt;[Leetcode: 371.</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-371-两整数之和&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-371-两整数之和&quot;&gt;&lt;/a&gt; [Leetcode: 371. 两整数之和]&lt;/h1&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a</summary>
         
       
     
@@ -285,7 +321,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-202-快乐数&quot;&gt;&lt;a href=&quot;#Leetcode-202-快乐数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:202. 快乐数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode202-快乐数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode202-快乐数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -314,7 +350,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-326-3的幂&quot;&gt;&lt;a href=&quot;#Leetcode-326-3的幂&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:326. 3的幂&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode326-3的幂&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode326-3的幂&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -343,7 +379,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-268-缺失数字&quot;&gt;&lt;a href=&quot;#Leetcode-268-缺失数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:268. 缺失数字&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode268-缺失数字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode268-缺失数字&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -372,7 +408,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-190-颠倒二进制位&quot;&gt;&lt;a href=&quot;#Leetcode-190-颠倒二进制位&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:190. 颠倒二进制位&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode190-颠倒二进制位&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode190-颠倒二进制位&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -401,7 +437,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-204-计数质数&quot;&gt;&lt;a href=&quot;#Leetcode-204-计数质数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:204. 计数质数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode204-计数质数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode204-计数质数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -430,7 +466,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-166-分数到小数&quot;&gt;&lt;a href=&quot;#Leetcode-166-分数到小数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:166. 分数到小数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode166-分数到小数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode166-分数到小数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -459,7 +495,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-172-阶乘后的零&quot;&gt;&lt;a href=&quot;#Leetcode-172-阶乘后的零&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:172. 阶乘后的零&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode172-阶乘后的零&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode172-阶乘后的零&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -488,7 +524,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-149-直线上最多的点数&quot;&gt;&lt;a href=&quot;#Leetcode-149-直线上最多的点数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 149. 直线上最多的点数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-149-直线上最多的点数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-149-直线上最多的点数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -517,7 +553,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-191-位1的个数&quot;&gt;&lt;a href=&quot;#Leetcode-191-位1的个数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:191. 位1的个数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode191-位1的个数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode191-位1的个数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -546,7 +582,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-136-只出现一次的数字&quot;&gt;&lt;a href=&quot;#Leetcode-136-只出现一次的数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:136. 只出现一次的数字&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode136-只出现一次的数字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode136-只出现一次的数字&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -562,37 +598,6 @@
     <category term="异或" scheme="https://weijunlei.github.io/tags/%E5%BC%82%E6%88%96/"/>
     
     <category term="位运算" scheme="https://weijunlei.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:210. 课程表 II</title>
-    <link href="https://weijunlei.github.io/2020/04/30/leetcode-210-ke-cheng-biao-ii/"/>
-    <id>https://weijunlei.github.io/2020/04/30/leetcode-210-ke-cheng-biao-ii/</id>
-    <published>2020-04-30T14:58:16.000Z</published>
-    <updated>2020-04-30T15:08:15.086Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Leetcode-210-课程表-II&quot;&gt;&lt;a href=&quot;#Leetcode-210-课程表-II&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:210. 课程表 II&quot;&gt;&lt;/a&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-    <category term="Medium" scheme="https://weijunlei.github.io/tags/Medium/"/>
-    
-    <category term="BFS" scheme="https://weijunlei.github.io/tags/BFS/"/>
-    
-    <category term="DFS" scheme="https://weijunlei.github.io/tags/DFS/"/>
     
   </entry>
   
