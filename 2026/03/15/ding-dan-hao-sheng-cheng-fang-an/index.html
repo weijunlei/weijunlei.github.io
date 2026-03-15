@@ -339,7 +339,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.7k
+                    3.6k
                 </div>
                 
 
@@ -360,15 +360,15 @@
                 <h1 id="订单号生成方案"><a href="#订单号生成方案" class="headerlink" title="订单号生成方案"></a>订单号生成方案</h1><p>在分布式系统中，如何生成全局唯一且有序的订单号是一个核心问题。本文将详细介绍雪花算法（Snowflake）及其在实际业务中的应用。</p>
 <h2 id="1-雪花算法介绍"><a href="#1-雪花算法介绍" class="headerlink" title="1. 雪花算法介绍"></a>1. 雪花算法介绍</h2><p>雪花算法（Snowflake）是 Twitter 开源的分布式 ID 生成算法，其核心思想是将一个 64 位的整数划分为多个bit位，每个bit位代表不同的含义，从而保证在分布式环境下生成唯一 ID。</p>
 <h3 id="1-1-雪花算法bit位分配"><a href="#1-1-雪花算法bit位分配" class="headerlink" title="1.1 雪花算法bit位分配"></a>1.1 雪花算法bit位分配</h3><pre class="mermaid">graph TD
-    A[64位雪花ID] --> B[第1位]
-    A --> C[第2-42位]
-    A --> D[第43-52位]
-    A --> E[第53-64位]
+    A[64-bit Snowflake ID] --> B[Bit 1]
+    A --> C[Bits 2-42]
+    A --> D[Bits 43-52]
+    A --> E[Bits 53-64]
     
-    B1[符号位<br/>固定为0]
-    C1[时间戳<br/>41位<br/>支持69年]
-    D1[机器ID<br/>10位<br/>支持1024台]
-    E1[序列号<br/>12位<br/>每毫秒4096个]
+    B1[Sign bit<br/>Fixed at 0]
+    C1[Timestamp<br/>41 bits<br/>69 years]
+    D1[Worker ID<br/>10 bits<br/>1024 workers]
+    E1[Sequence<br/>12 bits<br/>4096 per ms]
     
     B --> B1
     C --> C1
@@ -566,10 +566,10 @@ func GenerateOrderId(snowflakeId int64, buyerId int64) string {
     A[buyerId=3] --> D[3 % 9973 = 3]
     A[buyerId=9974] --> E[9974 % 9973 = 1]
     
-    B --> F[订单号末尾: ...0001]
-    C --> G[订单号末尾: ...0002]
-    D --> H[订单号末尾: ...0003]
-    E --> I[订单号末尾: ...0001]
+    B --> F[Order ends: ...0001]
+    C --> G[Order ends: ...0002]
+    D --> H[Order ends: ...0003]
+    E --> I[Order ends: ...0001]
     
     style F fill:#90EE90
     style G fill:#90EE90
@@ -611,20 +611,20 @@ SHARDING_KEY = buyer_id % 10000
 <hr>
 <h2 id="3-订单号的妙用"><a href="#3-订单号的妙用" class="headerlink" title="3. 订单号的妙用"></a>3. 订单号的妙用</h2><h3 id="3-1-索引优化"><a href="#3-1-索引优化" class="headerlink" title="3.1 索引优化"></a>3.1 索引优化</h3><p>在大型系统中，订单表通常数据量巨大。合理的订单号设计可以显著提升查询性能。</p>
 <h4 id="3-1-1-核心订单-vs-退款等附属场景"><a href="#3-1-1-核心订单-vs-退款等附属场景" class="headerlink" title="3.1.1 核心订单 vs 退款等附属场景"></a>3.1.1 核心订单 vs 退款等附属场景</h4><pre class="mermaid">flowchart TD
-    A[订单中心] --> B[核心订单表 orders]
-    A --> C[退款表 refunds]
-    A --> D[日志表 order_logs]
+    A[Order Center] --> B[Order Table]
+    A --> C[Refund Table]
+    A --> D[Log Table]
     
-    B --> E[主键索引: order_id]
-    B --> F[索引: buyer_id]
-    B --> G[索引: store_id]
+    B --> E[Primary Key: order_id]
+    B --> F[Index: buyer_id]
+    B --> G[Index: store_id]
     
-    C --> H[传统方案: create_time索引]
-    C --> I[优化方案: order_id索引]
+    C --> H[Traditional: create_time index]
+    C --> I[Optimized: order_id index]
     
-    I --> J[优势1: 索引空间更小<br/>order_id为8字节，datetime为4字节]
-    I --> K[优势2: 覆盖索引查询<br/>可直接从order_id反推时间]
-    I --> L[优势3: 范围查询更快<br/>order_id自带排序属性]
+    I --> J[Advantage 1: Smaller index<br/>order_id 8 bytes, datetime 4]
+    I --> K[Advantage 2: Covering index<br/>Derive time from order_id]
+    I --> L[Advantage 3: Faster range query<br/>order_id is naturally sorted]
     
     style I fill:#90EE90
     style J fill:#E0FFFF
@@ -678,26 +678,26 @@ func GetDayRange(year int, month int, day int) (start int64, end int64) {
 </code></pre>
 <h3 id="3-2-系统切换与迁移"><a href="#3-2-系统切换与迁移" class="headerlink" title="3.2 系统切换与迁移"></a>3.2 系统切换与迁移</h3><p>在系统升级或迁移过程中，订单号可以作为灰度切换的标识，实现平滑过渡。</p>
 <h4 id="3-2-1-基于order-id的平滑迁移方案"><a href="#3-2-1-基于order-id的平滑迁移方案" class="headerlink" title="3.2.1 基于order_id的平滑迁移方案"></a>3.2.1 基于order_id的平滑迁移方案</h4><pre class="mermaid">flowchart TD
-    A[订单系统迁移] --> B[定义迁移时间点T]
-    A --> C[新系统最小order_id: MIN_NEW]
-    A --> D[旧系统最大order_id: MAX_OLD]
+    A[System Migration] --> B[Define Time T]
+    A --> C[Min order_id: MIN_NEW]
+    A --> D[Max order_id: MAX_OLD]
     
     B --> E{order_id < MIN_NEW?}
     
-    E -->|Yes| F[新逻辑处理]
-    E -->|No| G[旧逻辑处理]
+    E -->|Yes| F[New Logic]
+    E -->|No| G[Old Logic]
     
-    F --> H[走新系统流程]
-    G --> I[走老系统流程]
+    F --> H[Use New System]
+    G --> G[Use Old System]
     
-    J[消费者A: 退款] --> K{order_id范围判断}
-    J[消费者B: 通知] --> L{order_id范围判断}
+    J[Consumer A: Refund] --> K{order_id range}
+    J[Consumer B: Notify] --> L{order_id range}
     
-    K --> M[阈值: 1742000000000000000]
+    K --> M[Threshold: 1742000000000000000]
     L --> M
     
-    M --> N[≤阈值: 新逻辑]
-    M --> O[>阈值: 旧逻辑]
+    M --> N[<= Threshold: New]
+    M --> O[> Threshold: Old]
     
     style M fill:#FFE4B5
     style N fill:#90EE90
@@ -768,12 +768,12 @@ func handleRefundOld(event OrderRefundEvent) {
 </ol>
 <h4 id="4-1-1-方案一：号段模式（Leaf-Segment）"><a href="#4-1-1-方案一：号段模式（Leaf-Segment）" class="headerlink" title="4.1.1 方案一：号段模式（Leaf Segment）"></a>4.1.1 方案一：号段模式（Leaf Segment）</h4><p><strong>原理：</strong> 每次从数据库获取一段号码，内存中逐个分配，耗尽后再去数据库获取新号段。</p>
 <pre class="mermaid">flowchart LR
-    A[数据库] -->|1. 获取号段[1-1000]| B[Leaf服务]
-    B -->|2. 分配号码| C[商家]
-    C -->|3. 请求取餐号| B
-    B -->|返回: 5| C
-    C -->|4. 号码用尽| B
-    B -->|5. 异步获取新号段[1001-2000]| A</pre>
+    A[Database] -->|1. Get segment[1-1000]| B[Leaf Service]
+    B -->|2. Allocate| C[Store]
+    C -->|3. Request number| B
+    B -->|Return: 5| C
+    C -->|4. Exhausted| B
+    B -->|5. Async fetch new[1001-2000]| A</pre>
 
 <p><strong>数据库表设计：</strong></p>
 <pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE `meal_number_segment` (
@@ -796,19 +796,19 @@ func handleRefundOld(event OrderRefundEvent) {
 </ul>
 <p><strong>断号示例：</strong></p>
 <pre class="mermaid">sequenceDiagram
-    participant S as 服务启动
-    participant DB as 数据库
+    participant S as Service Start
+    participant DB as Database
     
-    Note over S: 服务启动，加载号段1-1000
-    S->>S: 分配: 1, 2, 3, ... 11
+    Note over S: Load segment 1-1000
+    S->>S: Allocate: 1, 2, 3, ... 11
     
-    Note over S: 服务异常重启！
+    Note over S: Service restarts!
     
-    S->>DB: 获取新号段
-    DB->>S: 返回号段1001-2000
+    S->>DB: Get new segment
+    DB->>S: Return segment 1001-2000
     
-    Note over S: 分配: 1001, 1002, ... 1014
-    Note over S: 出现断号: 12-1000</pre>
+    Note over S: Allocate: 1001, 1002, ... 1014
+    Note over S: Gap: 12-1000</pre>
 
 <h4 id="4-1-2-方案二：Redis实现"><a href="#4-1-2-方案二：Redis实现" class="headerlink" title="4.1.2 方案二：Redis实现"></a>4.1.2 方案二：Redis实现</h4><p><strong>原理：</strong> 使用Redis的原子操作实现高性能、高可用的取餐号生成。</p>
 <p><strong>Redis Key设计：</strong></p>
@@ -1130,15 +1130,15 @@ func (s *SnowflakeWithSequence) NextID() (int64, error) {
 </code></pre>
 <h3 id="5-4-雪花算法改进版：百度UidGenerator"><a href="#5-4-雪花算法改进版：百度UidGenerator" class="headerlink" title="5.4 雪花算法改进版：百度UidGenerator"></a>5.4 雪花算法改进版：百度UidGenerator</h3><p>百度开源的UidGenerator使用<strong>TCP协议</strong>的原子计数器来避免时钟回拨问题。</p>
 <pre class="mermaid">flowchart TD
-    A[UidGenerator] --> B[雪花算法]
-    A --> C[TCP/CAS保证序列号]
+    A[UidGenerator] --> B[Snowflake]
+    A --> C[TCP/CAS for sequence]
     
-    B --> D[41位时间戳]
-    B --> E[22位序列号]
-    B --> F[1位标志位]
+    B --> D[41-bit timestamp]
+    B --> E[22-bit sequence]
+    B --> F[1-bit flag]
     
-    C --> G[同一毫秒内<br/>序列号不重复]
-    C --> H[即使时间回拨<br/>序列号仍递增]</pre>
+    C --> G[No duplicate<br/>in same ms]
+    C --> H[Sequential even<br/>with clock back]</pre>
 
 <h3 id="5-5-解决方案对比"><a href="#5-5-解决方案对比" class="headerlink" title="5.5 解决方案对比"></a>5.5 解决方案对比</h3><table>
 <thead>
@@ -1725,7 +1725,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">44.6k</span>&nbsp;字
+                    class="white-color">44.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
