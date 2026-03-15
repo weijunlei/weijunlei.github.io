@@ -440,7 +440,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-动态规划"><a href="#思路1-动态规划" class="headerlink" title="思路1 动态规划"></a>思路1 动态规划</h3><p>维持每个数字对应的上升子序列长度，然后根据状态转移方程$dp[i] &#x3D; max(dp[j] + 1)　j\in(nums[j] &lt; nums[i] &amp;&amp; j &lt; i&gt;&gt;)$</p>
 <h3 id="思路2-贪心-二分搜索"><a href="#思路2-贪心-二分搜索" class="headerlink" title="思路2 贪心+二分搜索"></a>思路2 贪心+二分搜索</h3><p>使用一个数组保存从小到大的数字，在相同的上升子序列长度只保留一个值(最小值)，然后每个数字进来二分查找找到合适的位置。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int lengthOfLIS(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;
@@ -461,7 +461,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int lengthOfLIS(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;

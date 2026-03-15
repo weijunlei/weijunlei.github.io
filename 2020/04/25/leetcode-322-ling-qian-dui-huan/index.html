@@ -430,7 +430,7 @@
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以认为每种硬币的数量是无限的。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>从0开始计算到amount的每个位置的需要硬币的数量，然后按照$dp[i] &#x3D; min(dp[i - coin] + 1)　coin \in coins$更新状态</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int coinChange(int[] coins, int amount) &#123;
         if (coins == null || coins.length == 0)&#123;
             return -1;

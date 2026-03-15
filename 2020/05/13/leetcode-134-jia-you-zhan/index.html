@@ -455,7 +455,7 @@ cost = [3,4,3]
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="[思路]"></a>[思路]</h2><h3 id="思路1-暴力判断每个位置是否可以作为起点"><a href="#思路1-暴力判断每个位置是否可以作为起点" class="headerlink" title="思路1 暴力判断每个位置是否可以作为起点"></a>思路1 暴力判断每个位置是否可以作为起点</h3><p>直接判断每个位置是否可以作为起点</p>
 <h3 id="思路2-利用当前油量和总油量记录状态"><a href="#思路2-利用当前油量和总油量记录状态" class="headerlink" title="思路2 利用当前油量和总油量记录状态"></a>思路2 利用当前油量和总油量记录状态</h3><p>使用cur_gas和gas_sum记录当前油量和总油量，当当前油量小于零时则该位置不可作为起点，且之前节点也不行，依次类推，详情见代码</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int canCompleteCircuit(int[] gas, int[] cost) &#123;
         if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length)&#123;
             return -1;
@@ -488,7 +488,7 @@ cost = [3,4,3]
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int canCompleteCircuit(int[] gas, int[] cost) &#123;
         if (gas == null || gas.length == 0 || cost == null || cost.length == 0 || gas.length != cost.length)&#123;
             return -1;

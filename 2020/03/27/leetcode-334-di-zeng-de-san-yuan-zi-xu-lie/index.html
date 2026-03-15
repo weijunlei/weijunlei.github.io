@@ -445,7 +445,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP"><a href="#思路1：DP" class="headerlink" title="思路1：DP"></a>思路1：DP</h3><p>使用状态方程记录数组每个位置的最大递增序列大小，状态转移方程为$dps[i] &#x3D; max(dps[i], dps[j] + 1 if nums[j] &lt; nums[i]) j \isin [0, i)</p>
 <h3 id="思路2：加入两个哨兵元素"><a href="#思路2：加入两个哨兵元素" class="headerlink" title="思路2：加入两个哨兵元素"></a>思路2：加入两个哨兵元素</h3><p>使用两个哨兵元素记录值，即记录两个最小的数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public boolean increasingTriplet(int[] nums) &#123;
         if (nums == null || nums.length < 3)&#123;
             return false;
@@ -465,7 +465,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public boolean increasingTriplet(int[] nums) &#123;
         if (nums == null || nums.length < 3)&#123;
             return false;

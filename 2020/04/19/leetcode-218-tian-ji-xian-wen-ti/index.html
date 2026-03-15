@@ -436,7 +436,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用分治法，类似与插入排序思路。重点在于看到单个建筑物的应该如何存储。如[1, 5, 9]存为[1, 9],[5, 0],即分好左右节点.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/tian-ji-xian-wen-ti-by-leetcode/">参考</a></p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用最大优先级队列保存最高点，然后根据左右节点以类似入栈出栈形式得到结果。关键在于存储左右节点</p>
 <h3 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h3><p>可以使用TreeMap使得时间复杂度为$O(nlogn)$<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--45/">思路</a></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public List<List<Integer>> getSkyline(int[][] buildings) &#123;
         List<List<Integer>> result = new ArrayList<>();
         int n = buildings.length;
@@ -511,7 +511,7 @@
     
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public List<List<Integer>> getSkyline(int[][] buildings) &#123;
         List<List<Integer>> result = new ArrayList<>();
         if (buildings.length == 0)&#123;

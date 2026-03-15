@@ -446,7 +446,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：基本二维DP-二分搜索"><a href="#思路1：基本二维DP-二分搜索" class="headerlink" title="思路1：基本二维DP + 二分搜索"></a>思路1：基本二维DP + 二分搜索</h3><p>直接二维DP计算最少的步骤，根据从x层掉落一个鸡蛋得到，则该情况下的状态转移方程为$DP[K][N] &#x3D; max(DP[K][N-x], DP[K-1][x-1]) + 1$,从而可得到整体的状态转移方程$DP[K][N] &#x3D; min(max(DP[K][N-x], DP[K-1][x-1])) + 1 x \isin [1, N]$,同时在dp过程中，前一个函数随x单调递减，后面单调递增，所以可以直接求是两个函数最接近的值作为候选求最小（可用两函数比相交（非整数，或者理解为值域相交，在相同定义域内））。所以该过程可用二分法求解。</p>
 <h3 id="思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）"><a href="#思路2：二维DP-逆向思维（根据步骤数和鸡蛋数求楼数）" class="headerlink" title="思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）"></a>思路2：二维DP + 逆向思维（根据步骤数和鸡蛋数求楼数）</h3><p>可理解为有3元的方程，在一定程度上可根据两元求第3个未知变量，根据题设可以得到一个楼层数与鸡蛋数和步骤的关系，即在特定步骤和鸡蛋数下最多可以测的层数。所以可以得到递推式M为步骤数，K为鸡蛋数，所以状态转移方程为$DP[M][K] &#x3D; DP[M-1][K-1] + DP[M-1][K] + 1$，该方法考虑的是每增加一步，鸡蛋数增加或减少一个，加1相当于在当前层进行操作。状态初始化是可利用任何一个鸡蛋可探明层数为M层，任何1步K个鸡蛋都只能探明1层，在这个过程中K已知，所以可得到一个可定范围</p>
 <h3 id="思路3：-逆向思维-推导函数-二分搜索"><a href="#思路3：-逆向思维-推导函数-二分搜索" class="headerlink" title="思路3： 逆向思维+推导函数 + 二分搜索"></a>思路3： 逆向思维+推导函数 + 二分搜索</h3><p>使用思路2进而推导出通项公式$f(k,n) &#x3D; \frac{n(n-1)…(n-k)}{k!} + \frac{n(n-1)(n-2)}{3!} + \frac{n(n-1)}{2!} + n$,<a target="_blank" rel="noopener" href="https://leetcode.com/problems/super-egg-drop/discuss/181702/Clear-C%2B%2B-codeRuntime-0-msO(1)-spacewith-explation.No-DPWhat-we-need-is-mathematical-thought!">推导过程</a></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
     public int superEggDrop(int K, int N) &#123;
         return eggDropHelper(K, N);
     &#125;
@@ -487,7 +487,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution2 &#123;
+<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 &#123;
     public int superEggDrop(int K, int N) &#123;
         int ans = 0;
         int[] dps = new int[K + 1];
@@ -504,7 +504,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="思路3代码"><a href="#思路3代码" class="headerlink" title="思路3代码"></a>思路3代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution3 &#123;
+<h3 id="思路3代码"><a href="#思路3代码" class="headerlink" title="思路3代码"></a>思路3代码</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution3 &#123;
     public int superEggDrop(int K, int N) &#123;
         int low = 1;
         int high = N;

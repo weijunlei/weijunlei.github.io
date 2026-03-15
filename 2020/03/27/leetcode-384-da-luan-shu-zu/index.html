@@ -439,7 +439,7 @@ solution.shuffle();
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：复制数组-移除"><a href="#思路1：复制数组-移除" class="headerlink" title="思路1：复制数组+移除"></a>思路1：复制数组+移除</h3><p>复制一个新数组，然后随机置入数组，将置入数组的数移除</p>
 <h3 id="思路2：Fisher–Yates-shuffle"><a href="#思路2：Fisher–Yates-shuffle" class="headerlink" title="思路2：Fisher–Yates shuffle"></a>思路2：Fisher–Yates shuffle</h3><p>遍历数组，随机化得到一个从当前位置到最后位置的数进行交换，该方法产生n!种可能，但是如果采用随机产生两个随机数则是错的，其产生的可能性为$n^n$,简单证明为n!可能不能被$n^n$整除</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-复制数组-移除"><a href="#代码1-复制数组-移除" class="headerlink" title="代码1: 复制数组+移除"></a>代码1: 复制数组+移除</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-复制数组-移除"><a href="#代码1-复制数组-移除" class="headerlink" title="代码1: 复制数组+移除"></a>代码1: 复制数组+移除</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     private int[] nums;
     private int[] origins;
     
@@ -472,7 +472,7 @@ solution.shuffle();
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     private int[] nums;
     private int[] origins;
     

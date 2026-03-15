@@ -430,7 +430,7 @@
 </code></pre>
 <h2 id="思路1-迭代"><a href="#思路1-迭代" class="headerlink" title="思路1:迭代"></a>思路1:迭代</h2><p>使用三个指针分别指向之前，现在和将来的位置，然后遍历逆转即可</p>
 <h2 id="思路2-递归"><a href="#思路2-递归" class="headerlink" title="思路2:递归"></a>思路2:递归</h2><p>需要考虑从尾指针开始，然后开始递归，即考虑从后开始。然后利用当前指针的下一个位置进行递归，然后逆转。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public ListNode reverseList(ListNode head) &#123;
         if (head == null || head.next == null)&#123;
             return head;
@@ -451,7 +451,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution2 &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution2 &#123;
     public ListNode reverseList(ListNode head) &#123;
         if (head == null || head.next == null)&#123;
             return head;

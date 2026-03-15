@@ -436,7 +436,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-排序-遍历"><a href="#思路1-排序-遍历" class="headerlink" title="思路1 排序+遍历"></a>思路1 排序+遍历</h3><p>在对数组进行排序后，依次遍历计算最长的连续序列，注意相等情况</p>
 <h3 id="思路2-hash表-初始值才遍历"><a href="#思路2-hash表-初始值才遍历" class="headerlink" title="思路2 hash表+初始值才遍历"></a>思路2 hash表+初始值才遍历</h3><p>使用一个hash表记录数组中存在的数字，每次都只计算当前数字在且该数字减一不在(避免重复遍历)，然后依次叠加计算最长连续序列</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int longestConsecutive(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;
@@ -460,7 +460,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int longestConsecutive(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;

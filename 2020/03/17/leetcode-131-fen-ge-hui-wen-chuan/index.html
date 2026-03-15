@@ -437,7 +437,7 @@
 ]
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：-回溯-判断"><a href="#思路1：-回溯-判断" class="headerlink" title="思路1： 回溯+判断"></a>思路1： 回溯+判断</h3><p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p>
-<h3 id="思路1：代码"><a href="#思路1：代码" class="headerlink" title="思路1：代码"></a>思路1：代码</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="思路1：代码"><a href="#思路1：代码" class="headerlink" title="思路1：代码"></a>思路1：代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public List<List<String>> partition(String s) &#123;
         List<List<String>> result = new LinkedList<>();
         if (s.length() == 0) &#123;
@@ -476,7 +476,7 @@
 &#125;
 </code></pre>
 <h3 id="思路2：回溯-动态规划优化"><a href="#思路2：回溯-动态规划优化" class="headerlink" title="思路2：回溯+动态规划优化"></a>思路2：回溯+动态规划优化</h3><p>空间换时间，将判断是否是回文看成是一个动态规划，直接使用$n^2$算法求取，之后直接$1$调取</p>
-<h3 id="思路2-代码"><a href="#思路2-代码" class="headerlink" title="思路2: 代码"></a>思路2: 代码</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+<h3 id="思路2-代码"><a href="#思路2-代码" class="headerlink" title="思路2: 代码"></a>思路2: 代码</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
     public List<List<String>> partition(String s) &#123;
         List<List<String>> res = new LinkedList<List<String>>();
         if (s.length() == 0) &#123;

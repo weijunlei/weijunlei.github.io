@@ -433,7 +433,7 @@
 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>可以维护两个DP,表示最大值和最小值（因为数据中包含正负),转移方程为$maxDP[i+1] &#x3D; max(nums[i+1], maxDP[i+1]*nums[i+1], minDP[i+1]*nums[i+1])$以及$minDP[i+1] &#x3D; min(nums[i+1], maxDP[i+1]*nums[i+1], minDP[i+1]*nums[i+1])$,由于只涉及DP的两个状态值，所以去除掉所有状态的存储，只存储上一状态即可。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int maxProduct(int[] nums) &#123;
         int result = nums[0];
         int maxNum = 1;

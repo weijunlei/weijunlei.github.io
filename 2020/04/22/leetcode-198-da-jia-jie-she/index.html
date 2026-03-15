@@ -434,7 +434,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP保存所有状态"><a href="#思路1-DP保存所有状态" class="headerlink" title="思路1 DP保存所有状态"></a>思路1 DP保存所有状态</h3><p>DP保存所有状态，然后根据$dps[i] &#x3D; max(dps[i], nums[i] + dps[j])　j\in[0, i-2]$进行状态更新</p>
 <h3 id="思路2-DP只保存前三个状态"><a href="#思路2-DP只保存前三个状态" class="headerlink" title="思路2 DP只保存前三个状态"></a>思路2 DP只保存前三个状态</h3><p>DP保存前三个状态，然后根据$dps[i] &#x3D; max(nums[i] + dps[i - 2], nums[i] + dps[i - 3])$进行状态更新</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int rob(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;
@@ -458,7 +458,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int rob(int[] nums) &#123;
         if (nums == null || nums.length == 0)&#123;
             return 0;

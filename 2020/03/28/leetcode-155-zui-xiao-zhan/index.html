@@ -437,7 +437,7 @@ minStack.top();      --&gt; 返回 0.
 minStack.getMin();   --&gt; 返回 -2.
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class MinStack &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class MinStack &#123;
 
     /** initialize your data structure here. */
     private Stack<Integer> stack;

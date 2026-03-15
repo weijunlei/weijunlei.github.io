@@ -438,7 +438,7 @@ candidates 中的每个数字在每个组合中只能使用一次。
 ]
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS-剪枝"><a href="#思路1-DFS-剪枝" class="headerlink" title="思路1: DFS+剪枝"></a>思路1: DFS+剪枝</h3><p>与lc39类似，但是每个数只能出现一次，所以节点数量为当前位置+1到最后位置，同时，要避免同一层相同元素，避免出现重复结果（因为会选到），所以可以通过剪枝去除</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     List<List<Integer>> results;
     public List<List<Integer>> combinationSum2(int[] candidates, int target) &#123;
         results = new ArrayList<>();

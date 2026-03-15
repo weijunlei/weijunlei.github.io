@@ -452,7 +452,7 @@
 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;
        if ((headA == null && headB != null) || (headA != null && headB == null))&#123;
           return null;

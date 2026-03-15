@@ -442,7 +442,7 @@ words = [&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;] and 
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-回溯-DFS"><a href="#思路1-回溯-DFS" class="headerlink" title="思路1: 回溯+DFS"></a>思路1: 回溯+DFS</h3><p>直接使用回溯+DFS判断每个单词是否存在，需要注意一个单词不能使用两次以上一个字符。</p>
 <h3 id="思路2-前缀树-回溯减枝"><a href="#思路2-前缀树-回溯减枝" class="headerlink" title="思路2: 前缀树+回溯减枝"></a>思路2: 前缀树+回溯减枝</h3><p>对所有的单词建立节点，然后回溯board中每个可能的单词，裁剪掉不能满足前缀树的路径</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-Java"><code class="language-Java">public class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-回溯-DFS"><a href="#代码1-回溯-DFS" class="headerlink" title="代码1: 回溯+DFS"></a>代码1: 回溯+DFS</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution &#123;
     public List<String> findWords(char[][] board, String[] words) &#123;
         List<String> result = new LinkedList<>();
         if (words.length == 0 || board.length == 0 || board[0].length == 0)&#123;

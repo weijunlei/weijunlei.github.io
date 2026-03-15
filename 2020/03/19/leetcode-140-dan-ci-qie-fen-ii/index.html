@@ -452,7 +452,7 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP-回溯"><a href="#思路1：DP-回溯" class="headerlink" title="思路1：DP+回溯"></a>思路1：DP+回溯</h3><p>即利用中等难度的dp单词切分获取到可能的子序列，根据是否可以整体切分以及切分标记回溯这些字序列获取最终的结果</p>
 <h3 id="思路2-记忆回溯"><a href="#思路2-记忆回溯" class="headerlink" title="思路2: 记忆回溯"></a>思路2: 记忆回溯</h3><p>将每个位置i记为以他为起点，到最后结果的可能切分，最后递归求解。将每个位置记为(i, list<str>),减少无用的后缀计算，以空间换时间</p>
 <h3 id="思路3：DP-直接记录"><a href="#思路3：DP-直接记录" class="headerlink" title="思路3：DP+直接记录"></a>思路3：DP+直接记录</h3><p>将每个位置直接记录可能的前缀串，最后得到记录的全单词切分前缀串。但是在leetcode上会出现内存分配过大而超时的现象，故意需要增加判断是否可以完全完成单词切分</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-DP-回溯"><a href="#代码1-DP-回溯" class="headerlink" title="代码1: DP+回溯"></a>代码1: DP+回溯</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-DP-回溯"><a href="#代码1-DP-回溯" class="headerlink" title="代码1: DP+回溯"></a>代码1: DP+回溯</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public List<String> wordBreak(String s, List<String> wordDict) &#123;
         List<String> result = new LinkedList<>();
         if (s == null || s.length() == 0 || wordDict.size() == 0)&#123;
@@ -499,7 +499,7 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2-记忆回溯"><a href="#代码2-记忆回溯" class="headerlink" title="代码2: 记忆回溯"></a>代码2: 记忆回溯</h3><pre class=" language-Java"><code class="language-Java">public class Solution2 &#123;
+<h3 id="代码2-记忆回溯"><a href="#代码2-记忆回溯" class="headerlink" title="代码2: 记忆回溯"></a>代码2: 记忆回溯</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 &#123;
     Map<Integer, List<String>> hashMap = new HashMap<>();
     public List<String> wordBreak(String s, List<String> wordDict)&#123;
         List<String> result = new LinkedList<>();
@@ -535,7 +535,7 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码3-DP-直接记录"><a href="#代码3-DP-直接记录" class="headerlink" title="代码3: DP+直接记录"></a>代码3: DP+直接记录</h3><pre class=" language-Java"><code class="language-Java">public class Solution3 &#123;
+<h3 id="代码3-DP-直接记录"><a href="#代码3-DP-直接记录" class="headerlink" title="代码3: DP+直接记录"></a>代码3: DP+直接记录</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution3 &#123;
     public List<String> wordBreak(String s, List<String> wordDict) &#123;
         if (s == null || s.length() == 0 || wordDict.size() == 0 || !canWordBreak(s, wordDict))&#123;
             return new LinkedList<String>();

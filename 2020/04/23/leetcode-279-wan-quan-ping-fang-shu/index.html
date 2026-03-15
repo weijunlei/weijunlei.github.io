@@ -446,7 +446,7 @@
 <h3 id="思路2-贪心法"><a href="#思路2-贪心法" class="headerlink" title="思路2 贪心法"></a>思路2 贪心法</h3><p>使用一个canSqure函数依次计算是否可以由count个可开方数字加和得到，在这个过程依旧要保存可开方数，用于计算递归计算count - 1个组合而成</p>
 <h3 id="思路3-贪心-BFS"><a href="#思路3-贪心-BFS" class="headerlink" title="思路3 贪心+BFS"></a>思路3 贪心+BFS</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/solution/wan-quan-ping-fang-shu-by-leetcode/">贪心+BFS</a>基本思路是思路2的n元树BFS</p>
 <h3 id="思路4-数学公式"><a href="#思路4-数学公式" class="headerlink" title="思路4 数学公式"></a>思路4 数学公式</h3><p>每个自然数都可以表示为四个整数平方和，且$n!&#x3D; 4^k(8m + 7) &lt;&#x3D;&#x3D;&gt; n &#x3D; a^2 + b^2 + c^2$,所以只需要判断能否表示为三个可开方数之和，如果不能则为4，然后判断是否可以由两个开方数组合而成以及一个可开方数</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int numSquares(int n) &#123;
         if (n == 0 || n == 1)&#123;
             return 1;
@@ -470,7 +470,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     private Set<Integer> squareSet;
     
     public int numSquares(int n) &#123;
@@ -506,7 +506,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码4"><a href="#代码4" class="headerlink" title="代码4"></a>代码4</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码4"><a href="#代码4" class="headerlink" title="代码4"></a>代码4</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int numSquares(int n) &#123;
         while (n % 4 == 0)&#123;
             n /= 4;

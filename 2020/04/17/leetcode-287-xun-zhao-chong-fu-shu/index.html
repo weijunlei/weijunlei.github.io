@@ -437,7 +437,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用二分法统计小于mid数量，因为数字在1~n（n+1数组）,若大于mid数量则在左侧，反之右侧</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>快慢指针的思路,因为范围有限以及有重复元素，所以可以看作是链表有环求交点位置</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int findDuplicate(int[] nums) &#123;
         int left = 1;
         int right = nums.length - 1;
@@ -460,7 +460,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public int findDuplicate(int[] nums) &#123;
         int slow = nums[0];
         int fast = nums[0];

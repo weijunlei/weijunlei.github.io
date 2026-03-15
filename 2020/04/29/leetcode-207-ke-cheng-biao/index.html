@@ -442,7 +442,7 @@
 </code></pre>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用BFS思想，将无前置课程的课程作为初始节点进行BFS遍历，在遍历过程中通过减少子节点依赖前置课程数的方式遍历（当该课程无前置课程时），判断最终的课程数目是否和需要修的课程数相等</p>
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用DFS思想，判断各个课程出发的图是否有环，可以使用一个数组记录课程遍历状态，如1表示在当前课程中已经被遍历过，0表示未被遍历，-1表示在其他课程开始的节点中遍历过</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public boolean canFinish(int numCourses, int[][] prerequisites) &#123;
         if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0)&#123;
             return true;
@@ -477,7 +477,7 @@
     &#125;
 &#125;
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-Java"><code class="language-Java">class Solution &#123;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution &#123;
     public boolean canFinish(int numCourses, int[][] prerequisites) &#123;
         if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0)&#123;
             return true;
