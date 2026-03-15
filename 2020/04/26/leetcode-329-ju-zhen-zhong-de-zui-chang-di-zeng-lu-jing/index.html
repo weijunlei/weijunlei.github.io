@@ -5,16 +5,14 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:329. 矩阵中的最长递增路径, 小风雷">
-    <meta name="description" content=" Leetcode
- 题目描述
-给定一个整数矩阵，找出最长递增路径的长度。
+    <meta name="description" content="Leetcode题目描述给定一个整数矩阵，找出最长递增路径的长度。
 
 对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。
 
- 示例 1:
-输入: nums = 
+示例 1:输入: nums = 
 [
-[9,">
+[9,9,4],
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -429,14 +427,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode"><a class="markdownIt-Anchor" href="#leetcode"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">Leetcode</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定一个整数矩阵，找出最长递增路径的长度。
+                <h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">Leetcode</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数矩阵，找出最长递增路径的长度。
 
 对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: nums = 
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = 
 [
 [9,9,4],
 [6,6,8],
@@ -445,8 +440,7 @@
 输出: 4 
 解释: 最长递增路径为 [1, 2, 6, 9]。
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: nums = 
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = 
 [
 [3,4,5],
 [3,2,6],
@@ -455,48 +449,41 @@
 输出: 4 
 解释: 最长递增路径是 [3, 4, 5, 6]。注意不允许在对角线方向上移动。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[][] paths = &lt;!--swig￼<span class="hljs-number">0</span>--&gt;;
-    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[][] dps;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestIncreasingPath</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix)</span> {
-        <span class="hljs-keyword">if</span> (matrix == <span class="hljs-literal">null</span> || matrix.length == <span class="hljs-number">0</span> || matrix[<span class="hljs-number">0</span>] == <span class="hljs-literal">null</span> || matrix[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对每个位置进行深度优先遍历（可看作是四叉树），使用一个与matrix形状相同的数组保存以及经过DFS的节点，然后通过比较与上下左右四个状态比较更新状态</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    private int[][] paths = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private int[][] dps;
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
+            return 0;
         }
-        dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[matrix.length][matrix[<span class="hljs-number">0</span>].length];
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; matrix.length; i++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; matrix[<span class="hljs-number">0</span>].length; j++){
+        dps = new int[matrix.length][matrix[0].length];
+        int result = 0;
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
                 result = Math.max(dfs(matrix, i, j), result);
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] matrix, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>{
-        <span class="hljs-keyword">if</span>(dps[i][j] != <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> dps[i][j];
+    private int dfs(int[][] matrix, int i, int j){
+        if(dps[i][j] != 0){
+            return dps[i][j];
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] path: paths){
-            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> i + path[<span class="hljs-number">0</span>];
-            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> j + path[<span class="hljs-number">1</span>];
-            <span class="hljs-keyword">if</span>(x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; matrix.length &amp;&amp; y &gt;=<span class="hljs-number">0</span> &amp;&amp; y &lt; matrix[<span class="hljs-number">0</span>].length &amp;&amp; matrix[i][j] &lt; matrix[x][y]){
+        for(int[] path: paths){
+            int x = i + path[0];
+            int y = j + path[1];
+            if(x >= 0 && x < matrix.length && y >=0 && y < matrix[0].length && matrix[i][j] < matrix[x][y]){
                 dps[i][j] = Math.max(dps[i][j], dfs(matrix, x, y));
             }
         }
-        <span class="hljs-keyword">return</span> ++dps[i][j];
+        return ++dps[i][j];
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(mn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>每个单元格仅被计算一次</p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(mn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$每个单元格仅被计算一次</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$</p>
 
             </div>
             <hr/>
@@ -656,13 +643,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:200. 岛屿数量
- 题目描述
-给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
+                            Leetcode:200. 岛屿数量题目描述给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
-岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
-
-此外，你可以假设该
+岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成
                         
                     </div>
                     <div class="publish-info">
@@ -688,12 +671,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/DFS/">
-                        <span class="chip bg-color">DFS</span>
-                    </a>
-                    
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/DFS/">
+                        <span class="chip bg-color">DFS</span>
                     </a>
                     
                 </div>
@@ -719,12 +702,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 322.零钱兑换
- 题目描述
-给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+                            Leetcode: 322.零钱兑换题目描述给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
 
- 示例 1:
-输入:
+示例 1:输入: coins
                         
                     </div>
                     <div class="publish-info">
@@ -750,12 +730,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">动态规划</span>
-                    </a>
-                    
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                        <span class="chip bg-color">动态规划</span>
                     </a>
                     
                 </div>

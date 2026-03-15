@@ -5,8 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="FE2H 创新点详解：从易到难的两阶段问答框架, 小风雷">
-    <meta name="description" content=" FE2H 创新点详解：从易到难的两阶段问答框架
-在多跳问答领域，如何高效地从海量文档中筛选出相关信息并进行推理，一直是核心难题。本文将深入解析论文 From Easy to Hard (FE2H) 的核心创新点，看看它是如何在不依赖复杂图">
+    <meta name="description" content="FE2H 创新点详解：从易到难的两阶段问答框架在多跳问答领域，如何高效地从海量文档中筛选出相关信息并进行推理，一直是核心难题。本文将深入解析论文 From Easy to Hard (FE2H) 的核心创新点，看看它是如何在不依赖复杂图结构">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -425,12 +424,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="fe2h-创新点详解从易到难的两阶段问答框架"><a class="markdownIt-Anchor" href="#fe2h-创新点详解从易到难的两阶段问答框架"></a> FE2H 创新点详解：从易到难的两阶段问答框架</h1>
-<p>在多跳问答领域，如何高效地从海量文档中筛选出相关信息并进行推理，一直是核心难题。本文将深入解析论文 <strong>From Easy to Hard (FE2H)</strong> 的核心创新点，看看它是如何在不依赖复杂图结构的情况下，实现 HotpotQA 排行榜第一的。</p>
-<hr />
-<h2 id="1-创新点一两阶段文档筛选器"><a class="markdownIt-Anchor" href="#1-创新点一两阶段文档筛选器"></a> 1. 创新点一：两阶段文档筛选器</h2>
-<h3 id="11-传统方法的痛点"><a class="markdownIt-Anchor" href="#11-传统方法的痛点"></a> 1.1 传统方法的痛点</h3>
-<p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p>
+                <h1 id="FE2H-创新点详解：从易到难的两阶段问答框架"><a href="#FE2H-创新点详解：从易到难的两阶段问答框架" class="headerlink" title="FE2H 创新点详解：从易到难的两阶段问答框架"></a>FE2H 创新点详解：从易到难的两阶段问答框架</h1><p>在多跳问答领域，如何高效地从海量文档中筛选出相关信息并进行推理，一直是核心难题。本文将深入解析论文 <strong>From Easy to Hard (FE2H)</strong> 的核心创新点，看看它是如何在不依赖复杂图结构的情况下，实现 HotpotQA 排行榜第一的。</p>
+<hr>
+<h2 id="1-创新点一：两阶段文档筛选器"><a href="#1-创新点一：两阶段文档筛选器" class="headerlink" title="1. 创新点一：两阶段文档筛选器"></a>1. 创新点一：两阶段文档筛选器</h2><h3 id="1-1-传统方法的痛点"><a href="#1-1-传统方法的痛点" class="headerlink" title="1.1 传统方法的痛点"></a>1.1 传统方法的痛点</h3><p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p>
 <ol>
 <li><strong>直接全局推理</strong>：将所有文档一起输入模型</li>
 <li><strong>一次性选择</strong>：一次性选出所有相关文档</li>
@@ -441,8 +437,7 @@
 <li>推理复杂度呈指数级增长</li>
 <li>错误在多跳推理过程中累积</li>
 </ul>
-<h3 id="12-fe2h-的解决方案渐进式筛选"><a class="markdownIt-Anchor" href="#12-fe2h-的解决方案渐进式筛选"></a> 1.2 FE2H 的解决方案：渐进式筛选</h3>
-<pre class="mermaid">flowchart TD
+<h3 id="1-2-FE2H-的解决方案：渐进式筛选"><a href="#1-2-FE2H-的解决方案：渐进式筛选" class="headerlink" title="1.2 FE2H 的解决方案：渐进式筛选"></a>1.2 FE2H 的解决方案：渐进式筛选</h3><pre class="mermaid">flowchart TD
     subgraph 传统方法
     T1[问题 + 10个文档] --> T2[一次性选择相关文档]
     T2 --> T3[直接进行多跳推理]
@@ -457,18 +452,13 @@
     
     style F2 fill:#bfb,color:#333
     style F4 fill:#bfb,color:#333</pre>
+
 <p><strong>核心思想</strong>：借鉴人类的迭代阅读习惯，先找到&quot;入口文档&quot;，再基于它找到后续相关文档。</p>
-<h3 id="13-两阶段筛选的数学表示"><a class="markdownIt-Anchor" href="#13-两阶段筛选的数学表示"></a> 1.3 两阶段筛选的数学表示</h3>
-<p><strong>第一阶段</strong>：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub><mo>=</mo><mtext>top-</mtext><mi>k</mi><mo stretchy="false">(</mo><msub><mtext>Selector</mtext><mn>1</mn></msub><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi>a</mi><mi>l</mi><mi>l</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_1 = \text{top-}k(\text{Selector}_1(Q, D_{all}))
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">top-</span></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord"><span class="mord text"><span class="mord">Selector</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
-<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">Q</span></span></span></span> 是问题，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mrow><mi>a</mi><mi>l</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">D_{all}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是所有候选文档，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">D_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 是第一阶段筛选出的文档。</p>
-<p><strong>第二阶段</strong>：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>D</mi><mn>2</mn></msub><mo>=</mo><mtext>top-</mtext><mi>k</mi><mo stretchy="false">(</mo><msub><mtext>Selector</mtext><mn>2</mn></msub><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><msub><mi>D</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_2 = \text{top-}k(\text{Selector}_2(Q, D_1))
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">top-</span></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord"><span class="mord text"><span class="mord">Selector</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span></p>
+<h3 id="1-3-两阶段筛选的数学表示"><a href="#1-3-两阶段筛选的数学表示" class="headerlink" title="1.3 两阶段筛选的数学表示"></a>1.3 两阶段筛选的数学表示</h3><p><strong>第一阶段</strong>：<br>$$<br>D_1 &#x3D; \text{top-}k(\text{Selector}<em>1(Q, D</em>{all}))<br>$$</p>
+<p>其中 $Q$ 是问题，$D_{all}$ 是所有候选文档，$D_1$ 是第一阶段筛选出的文档。</p>
+<p><strong>第二阶段</strong>：<br>$$<br>D_2 &#x3D; \text{top-}k(\text{Selector}_2(Q, D_1))<br>$$</p>
 <p>将问题与第一阶段选中的文档结合，进一步筛选出与推理链相关的第二跳文档。</p>
-<h3 id="14-为什么这样更有效"><a class="markdownIt-Anchor" href="#14-为什么这样更有效"></a> 1.4 为什么这样更有效？</h3>
-<table>
+<h3 id="1-4-为什么这样更有效？"><a href="#1-4-为什么这样更有效？" class="headerlink" title="1.4 为什么这样更有效？"></a>1.4 为什么这样更有效？</h3><table>
 <thead>
 <tr>
 <th>特性</th>
@@ -476,8 +466,7 @@
 <th>FE2H两阶段</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>信息利用</td>
 <td>全局搜索</td>
 <td>聚焦式检索</td>
@@ -497,12 +486,9 @@
 <td>多跳同时推理</td>
 <td>分步验证</td>
 </tr>
-</tbody>
-</table>
-<hr />
-<h2 id="2-创新点二从易到难的渐进式学习"><a class="markdownIt-Anchor" href="#2-创新点二从易到难的渐进式学习"></a> 2. 创新点二：从易到难的渐进式学习</h2>
-<h3 id="21-核心灵感"><a class="markdownIt-Anchor" href="#21-核心灵感"></a> 2.1 核心灵感</h3>
-<p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p>
+</tbody></table>
+<hr>
+<h2 id="2-创新点二：从易到难的渐进式学习"><a href="#2-创新点二：从易到难的渐进式学习" class="headerlink" title="2. 创新点二：从易到难的渐进式学习"></a>2. 创新点二：从易到难的渐进式学习</h2><h3 id="2-1-核心灵感"><a href="#2-1-核心灵感" class="headerlink" title="2.1 核心灵感"></a>2.1 核心灵感</h3><p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p>
 <pre class="mermaid">flowchart LR
     subgraph 人类学习方式
     H1[学说话] --> H2[学认字] --> H3[学阅读] --> H4[学写作]
@@ -514,8 +500,8 @@
     
     style E1 fill:#bbf,color:#333
     style E3 fill:#f9f,color:#333</pre>
-<h3 id="22-渐进式训练策略"><a class="markdownIt-Anchor" href="#22-渐进式训练策略"></a> 2.2 渐进式训练策略</h3>
-<pre class="mermaid">flowchart TD
+
+<h3 id="2-2-渐进式训练策略"><a href="#2-2-渐进式训练策略" class="headerlink" title="2.2 渐进式训练策略"></a>2.2 渐进式训练策略</h3><pre class="mermaid">flowchart TD
     subgraph 阶段1：单跳预训练
     P1[在SQuAD/Natural Questions上训练]
     P1 --> P2[学习基础阅读理解能力]
@@ -531,12 +517,11 @@
     
     style P1 fill:#bbf,color:#333
     style M1 fill:#f9f,color:#333</pre>
-<h3 id="23-为什么单跳数据很重要"><a class="markdownIt-Anchor" href="#23-为什么单跳数据很重要"></a> 2.3 为什么单跳数据很重要？</h3>
-<ol>
+
+<h3 id="2-3-为什么单跳数据很重要？"><a href="#2-3-为什么单跳数据很重要？" class="headerlink" title="2.3 为什么单跳数据很重要？"></a>2.3 为什么单跳数据很重要？</h3><ol>
 <li><strong>数据规模大</strong>：单跳问答数据集（如SQuAD）规模远大于多跳数据集</li>
 <li><strong>噪声少</strong>：单跳文档通常直接包含答案，干扰较少</li>
-<li><strong>学习基础能力</strong>：
-<ul>
+<li><strong>学习基础能力</strong>：<ul>
 <li>问题理解</li>
 <li>实体识别</li>
 <li>答案定位</li>
@@ -544,18 +529,11 @@
 </ul>
 </li>
 </ol>
-<h3 id="24-渐进式学习的数学解释"><a class="markdownIt-Anchor" href="#24-渐进式学习的数学解释"></a> 2.4 渐进式学习的数学解释</h3>
-<p><strong>预训练阶段</strong>（单跳）：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>θ</mi><mo>∗</mo></msup><mo>=</mo><mi>arg</mi><mo>⁡</mo><munder><mo><mi>min</mi><mo>⁡</mo></mo><mi>θ</mi></munder><msub><mi mathvariant="script">L</mi><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mi>g</mi><mi>l</mi><mi>e</mi><mo>−</mo><mi>h</mi><mi>o</mi><mi>p</mi></mrow></msub><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><mi>D</mi><mo separator="true">,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta^* = \arg\min_\theta \mathcal{L}_{single-hop}(Q, D, A)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.5021079999999998em;vertical-align:-0.7521079999999999em;"></span><span class="mop">ar<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.347892em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7521079999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathcal">L</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">e</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">A</span><span class="mclose">)</span></span></span></span></span></p>
-<p><strong>微调阶段</strong>（多跳）：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>θ</mi><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></msup><mo>=</mo><mi>arg</mi><mo>⁡</mo><munder><mo><mi>min</mi><mo>⁡</mo></mo><mi>θ</mi></munder><msub><mi mathvariant="script">L</mi><mrow><mi>m</mi><mi>u</mi><mi>l</mi><mi>t</mi><mi>i</mi><mo>−</mo><mi>h</mi><mi>o</mi><mi>p</mi></mrow></msub><mo stretchy="false">(</mo><mi>Q</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi>s</mi><mi>e</mi><mi>l</mi><mi>e</mi><mi>c</mi><mi>t</mi><mi>e</mi><mi>d</mi></mrow></msub><mo separator="true">,</mo><mi>A</mi><mo separator="true">,</mo><mi>S</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta^{&#x27;} = \arg\min_\theta \mathcal{L}_{multi-hop}(Q, D_{selected}, A, S)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.99248em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.99248em;"><span style="top:-2.99248em;margin-right:0.05em;"><span class="pstrut" style="height:2.57948em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8278285714285715em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.5021079999999998em;vertical-align:-0.7521079999999999em;"></span><span class="mop">ar<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.347892em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">θ</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7521079999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathcal">L</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">i</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">h</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">A</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">)</span></span></span></span></span></p>
-<p>其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span> 是答案，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span> 是支持事实。</p>
-<hr />
-<h2 id="3-创新点三简洁有效的框架设计"><a class="markdownIt-Anchor" href="#3-创新点三简洁有效的框架设计"></a> 3. 创新点三：简洁有效的框架设计</h2>
-<h3 id="31-拒绝复杂拥抱简单"><a class="markdownIt-Anchor" href="#31-拒绝复杂拥抱简单"></a> 3.1 拒绝复杂，拥抱简单</h3>
-<table>
+<h3 id="2-4-渐进式学习的数学解释"><a href="#2-4-渐进式学习的数学解释" class="headerlink" title="2.4 渐进式学习的数学解释"></a>2.4 渐进式学习的数学解释</h3><p><strong>预训练阶段</strong>（单跳）：<br>$$<br>\theta^* &#x3D; \arg\min_\theta \mathcal{L}_{single-hop}(Q, D, A)<br>$$</p>
+<p><strong>微调阶段</strong>（多跳）：<br>$$<br>\theta^{&#39;} &#x3D; \arg\min_\theta \mathcal{L}<em>{multi-hop}(Q, D</em>{selected}, A, S)<br>$$</p>
+<p>其中 $A$ 是答案，$S$ 是支持事实。</p>
+<hr>
+<h2 id="3-创新点三：简洁有效的框架设计"><a href="#3-创新点三：简洁有效的框架设计" class="headerlink" title="3. 创新点三：简洁有效的框架设计"></a>3. 创新点三：简洁有效的框架设计</h2><h3 id="3-1-拒绝复杂，拥抱简单"><a href="#3-1-拒绝复杂，拥抱简单" class="headerlink" title="3.1 拒绝复杂，拥抱简单"></a>3.1 拒绝复杂，拥抱简单</h3><table>
 <thead>
 <tr>
 <th>特性</th>
@@ -563,8 +541,7 @@
 <th>FE2H</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>图结构</td>
 <td>需要构建实体关系图</td>
 <td>无需图结构</td>
@@ -584,10 +561,8 @@
 <td>O(n²) 甚至更高</td>
 <td>O(n)</td>
 </tr>
-</tbody>
-</table>
-<h3 id="32-框架对比"><a class="markdownIt-Anchor" href="#32-框架对比"></a> 3.2 框架对比</h3>
-<pre class="mermaid">flowchart TD
+</tbody></table>
+<h3 id="3-2-框架对比"><a href="#3-2-框架对比" class="headerlink" title="3.2 框架对比"></a>3.2 框架对比</h3><pre class="mermaid">flowchart TD
     subgraph 主流方法（基于图）
     G1[构建知识图谱] --> G2[实体链接]
     G2 --> G3[图神经网络推理]
@@ -602,8 +577,8 @@
     
     style G1 fill:#fbb,color:#333
     style F1 fill:#bfb,color:#333</pre>
-<h3 id="33-消融实验结果"><a class="markdownIt-Anchor" href="#33-消融实验结果"></a> 3.3 消融实验结果</h3>
-<p>论文中的消融实验证明了各组件的有效性：</p>
+
+<h3 id="3-3-消融实验结果"><a href="#3-3-消融实验结果" class="headerlink" title="3.3 消融实验结果"></a>3.3 消融实验结果</h3><p>论文中的消融实验证明了各组件的有效性：</p>
 <table>
 <thead>
 <tr>
@@ -612,8 +587,7 @@
 <th>提升</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>基础模型</td>
 <td>74.2</td>
 <td>-</td>
@@ -633,10 +607,8 @@
 <td><strong>76.5</strong></td>
 <td>+0.4</td>
 </tr>
-</tbody>
-</table>
-<h3 id="34-简洁的代价与收获"><a class="markdownIt-Anchor" href="#34-简洁的代价与收获"></a> 3.4 简洁的代价与收获</h3>
-<p><strong>失去的</strong>：</p>
+</tbody></table>
+<h3 id="3-4-简洁的代价与收获"><a href="#3-4-简洁的代价与收获" class="headerlink" title="3.4 简洁的代价与收获"></a>3.4 简洁的代价与收获</h3><p><strong>失去的</strong>：</p>
 <ul>
 <li>复杂的图结构表示能力</li>
 <li>显式的推理链可视化</li>
@@ -648,9 +620,8 @@
 <li>更好的泛化能力</li>
 <li>更容易部署</li>
 </ul>
-<hr />
-<h2 id="4-创新点总结"><a class="markdownIt-Anchor" href="#4-创新点总结"></a> 4. 创新点总结</h2>
-<pre class="mermaid">flowchart TD
+<hr>
+<h2 id="4-创新点总结"><a href="#4-创新点总结" class="headerlink" title="4. 创新点总结"></a>4. 创新点总结</h2><pre class="mermaid">flowchart TD
     center[FE2H 核心创新]
     
     center --> I1[两阶段文档筛选]
@@ -670,19 +641,17 @@
     style I1 fill:#bbf,color:#333
     style I2 fill:#bbf,color:#333
     style I3 fill:#bbf,color:#333</pre>
-<hr />
-<h2 id="5-与大模型思维链的对比"><a class="markdownIt-Anchor" href="#5-与大模型思维链的对比"></a> 5. 与大模型思维链的对比</h2>
-<h3 id="51-思维链chain-of-thought"><a class="markdownIt-Anchor" href="#51-思维链chain-of-thought"></a> 5.1 思维链（Chain-of-Thought）</h3>
-<p>大型语言模型（如GPT-4）通过思维链提示，让模型逐步展示推理过程：</p>
-<pre class="highlight"><code class="">问题：小明有5个苹果，小红给了他3个，小明吃了2个，还剩多少个？
+
+<hr>
+<h2 id="5-与大模型思维链的对比"><a href="#5-与大模型思维链的对比" class="headerlink" title="5. 与大模型思维链的对比"></a>5. 与大模型思维链的对比</h2><h3 id="5-1-思维链（Chain-of-Thought）"><a href="#5-1-思维链（Chain-of-Thought）" class="headerlink" title="5.1 思维链（Chain-of-Thought）"></a>5.1 思维链（Chain-of-Thought）</h3><p>大型语言模型（如GPT-4）通过思维链提示，让模型逐步展示推理过程：</p>
+<pre><code>问题：小明有5个苹果，小红给了他3个，小明吃了2个，还剩多少个？
 思维链：
 1. 小明最初有5个苹果
 2. 小红给了他3个，所以有 5+3=8 个
 3. 小明吃了2个，所以有 8-2=6 个
 答案：6个
 </code></pre>
-<h3 id="52-fe2h-vs-思维链"><a class="markdownIt-Anchor" href="#52-fe2h-vs-思维链"></a> 5.2 FE2H vs 思维链</h3>
-<table>
+<h3 id="5-2-FE2H-vs-思维链"><a href="#5-2-FE2H-vs-思维链" class="headerlink" title="5.2 FE2H vs 思维链"></a>5.2 FE2H vs 思维链</h3><table>
 <thead>
 <tr>
 <th>维度</th>
@@ -690,8 +659,7 @@
 <th>思维链</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>信息筛选</strong></td>
 <td>显式文档筛选</td>
 <td>隐式上下文利用</td>
@@ -716,27 +684,22 @@
 <td>低（有文档约束）</td>
 <td>高（可能编造）</td>
 </tr>
-</tbody>
-</table>
-<h3 id="53-融合可能性"><a class="markdownIt-Anchor" href="#53-融合可能性"></a> 5.3 融合可能性</h3>
-<p>未来可以探索：</p>
+</tbody></table>
+<h3 id="5-3-融合可能性"><a href="#5-3-融合可能性" class="headerlink" title="5.3 融合可能性"></a>5.3 融合可能性</h3><p>未来可以探索：</p>
 <ol>
 <li><strong>用思维链解释筛选</strong>：让模型解释为什么选择这些文档</li>
 <li><strong>用筛选约束思维链</strong>：只让模型在筛选出的文档范围内推理</li>
 <li><strong>迭代式验证</strong>：推理 → 验证 → 再筛选 → 再推理</li>
 </ol>
-<hr />
-<h2 id="6-结论"><a class="markdownIt-Anchor" href="#6-结论"></a> 6. 结论</h2>
-<p>FE2H 的三大创新点：</p>
+<hr>
+<h2 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h2><p>FE2H 的三大创新点：</p>
 <ol>
 <li><strong>两阶段文档筛选</strong>：模拟人类阅读习惯，渐进式定位关键信息</li>
-<li><strong>从易到难学习</strong>：借鉴人类学习方式，充分利用单跳数据<br />
-3.简洁框架设计**：拒绝过度复杂，用简单方法解决实际问题</li>
+<li><strong>从易到难学习</strong>：借鉴人类学习方式，充分利用单跳数据<br>3.简洁框架设计**：拒绝过度复杂，用简单方法解决实际问题</li>
 </ol>
 <p>这三个创新点相互配合，共同实现了在 HotpotQA 排行榜上的最优表现，同时也为多跳问答领域提供了一种新的思路。</p>
-<hr />
-<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
-<ol>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></li>
 <li><a target="_blank" rel="noopener" href="https://hotpotqa.github.io/">HotpotQA Leaderboard</a></li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li>

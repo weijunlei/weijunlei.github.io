@@ -5,11 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:207. 课程表, 小风雷">
-    <meta name="description" content=" [Leetcode: 207.课程表]
- 题目描述
-你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
+    <meta name="description" content="[Leetcode: 207.课程表]题目描述你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
 
-在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用">
+在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -374,16 +372,16 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/DFS/">
-                                <span class="chip bg-color">DFS</span>
-                            </a>
-                        
                             <a href="/tags/Medium/">
                                 <span class="chip bg-color">Medium</span>
                             </a>
                         
                             <a href="/tags/BFS/">
                                 <span class="chip bg-color">BFS</span>
+                            </a>
+                        
+                            <a href="/tags/DFS/">
+                                <span class="chip bg-color">DFS</span>
                             </a>
                         
                     </div>
@@ -424,120 +422,104 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode-207课程表"><a class="markdownIt-Anchor" href="#leetcode-207课程表"></a> [Leetcode: 207.课程表]</h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
+                <h1 id="Leetcode-207-课程表"><a href="#Leetcode-207-课程表" class="headerlink" title="[Leetcode: 207.课程表]"></a>[Leetcode: 207.课程表]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
 
 在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们：[0,1]
 
 给定课程总量以及它们的先决条件，请你判断是否可能完成所有课程的学习？
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: 2, [[1,0]] 
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 2, [[1,0]] 
 输出: true
 解释: 总共有 2 门课程。学习课程 1 之前，你需要完成课程 0。所以这是可能的。
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: 2, [[1,0],[0,1]]
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 2, [[1,0],[0,1]]
 输出: false
 解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成​课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。
 </code></pre>
-<h3 id="提示"><a class="markdownIt-Anchor" href="#提示"></a> 提示：</h3>
-<pre><code>输入的先决条件是由 边缘列表 表示的图形，而不是 邻接矩阵 。详情请参见图的表示法。
+<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><pre><code>输入的先决条件是由 边缘列表 表示的图形，而不是 邻接矩阵 。详情请参见图的表示法。
 你可以假定输入的先决条件中没有重复的边。
 1 &lt;= numCourses &lt;= 10^5
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>使用BFS思想，将无前置课程的课程作为初始节点进行BFS遍历，在遍历过程中通过减少子节点依赖前置课程数的方式遍历（当该课程无前置课程时），判断最终的课程数目是否和需要修的课程数相等</p>
-<h3 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h3>
-<p>使用DFS思想，判断各个课程出发的图是否有环，可以使用一个数组记录课程遍历状态，如1表示在当前课程中已经被遍历过，0表示未被遍历，-1表示在其他课程开始的节点中遍历过</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canFinish</span><span class="hljs-params">(<span class="hljs-type">int</span> numCourses, <span class="hljs-type">int</span>[][] prerequisites)</span> {
-        <span class="hljs-keyword">if</span> (numCourses == <span class="hljs-number">0</span> || prerequisites == <span class="hljs-literal">null</span> || prerequisites.length == <span class="hljs-number">0</span> || prerequisites[<span class="hljs-number">0</span>] == <span class="hljs-literal">null</span> || prerequisites[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用BFS思想，将无前置课程的课程作为初始节点进行BFS遍历，在遍历过程中通过减少子节点依赖前置课程数的方式遍历（当该课程无前置课程时），判断最终的课程数目是否和需要修的课程数相等</p>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用DFS思想，判断各个课程出发的图是否有环，可以使用一个数组记录课程遍历状态，如1表示在当前课程中已经被遍历过，0表示未被遍历，-1表示在其他课程开始的节点中遍历过</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0){
+            return true;
         }
-        <span class="hljs-type">int</span>[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[numCourses];
-        List&lt;List&lt;Integer&gt;&gt; numOutput = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; numCourses; i++){
-            numOutput.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;());
+        int[] dps = new int[numCourses];
+        List<List<Integer>> numOutput = new ArrayList();
+        for(int i = 0; i < numCourses; i++){
+            numOutput.add(new ArrayList<Integer>());
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] pre: prerequisites){
-            numOutput.get(pre[<span class="hljs-number">0</span>]).add(pre[<span class="hljs-number">1</span>]);
-            dps[pre[<span class="hljs-number">1</span>]] += <span class="hljs-number">1</span>;
+        for(int[] pre: prerequisites){
+            numOutput.get(pre[0]).add(pre[1]);
+            dps[pre[1]] += 1;
         }
-        Queue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; numCourses; i++){
-            <span class="hljs-keyword">if</span> (dps[i] == <span class="hljs-number">0</span>){
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i = 0; i < numCourses; i++){
+            if (dps[i] == 0){
                 queue.offer(i);
             }
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">amount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (!queue.isEmpty()){
-            <span class="hljs-type">int</span> <span class="hljs-variable">getNum</span> <span class="hljs-operator">=</span> queue.remove();
-            amount += <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: numOutput.get(getNum)){
-                dps[num] -= <span class="hljs-number">1</span>;
-                <span class="hljs-keyword">if</span> (dps[num] == <span class="hljs-number">0</span>){
+        int amount = 0;
+        while (!queue.isEmpty()){
+            int getNum = queue.remove();
+            amount += 1;
+            for(int num: numOutput.get(getNum)){
+                dps[num] -= 1;
+                if (dps[num] == 0){
                     queue.offer(num);
                 }
             }
         }
-        <span class="hljs-keyword">return</span> amount == numCourses;
+        return amount == numCourses;
     }
 }
 </code></pre>
-<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canFinish</span><span class="hljs-params">(<span class="hljs-type">int</span> numCourses, <span class="hljs-type">int</span>[][] prerequisites)</span> {
-        <span class="hljs-keyword">if</span> (numCourses == <span class="hljs-number">0</span> || prerequisites == <span class="hljs-literal">null</span> || prerequisites.length == <span class="hljs-number">0</span> || prerequisites[<span class="hljs-number">0</span>] == <span class="hljs-literal">null</span> || prerequisites[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if (numCourses == 0 || prerequisites == null || prerequisites.length == 0 || prerequisites[0] == null || prerequisites[0].length == 0){
+            return true;
         }
-        <span class="hljs-type">int</span>[] hasVisit = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[numCourses];
-        List&lt;List&lt;Integer&gt;&gt; numOutput = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; numCourses; i++){
-            numOutput.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;());
+        int[] hasVisit = new int[numCourses];
+        List<List<Integer>> numOutput = new ArrayList();
+        for(int i = 0; i < numCourses; i++){
+            numOutput.add(new ArrayList<Integer>());
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] pre: prerequisites){
-            numOutput.get(pre[<span class="hljs-number">1</span>]).add(pre[<span class="hljs-number">0</span>]);
+        for(int[] pre: prerequisites){
+            numOutput.get(pre[1]).add(pre[0]);
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; numCourses; i++){
-            <span class="hljs-keyword">if</span> (hasLoop(numOutput, hasVisit, i)){
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        for(int i = 0; i < numCourses; i++){
+            if (hasLoop(numOutput, hasVisit, i)){
+                return false;
             }
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        return true;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasLoop</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; numOutput, <span class="hljs-type">int</span>[] hasVisit, <span class="hljs-type">int</span> index)</span>{
-        <span class="hljs-keyword">if</span> (hasVisit[index] == <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    private boolean hasLoop(List<List<Integer>> numOutput, int[] hasVisit, int index){
+        if (hasVisit[index] == 1){
+            return true;
         }
-        <span class="hljs-keyword">if</span> (hasVisit[index] == -<span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        if (hasVisit[index] == -1){
+            return false;
         }
-        hasVisit[index] = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> getIndex: numOutput.get(index)){
-            <span class="hljs-keyword">if</span> (hasLoop(numOutput, hasVisit, getIndex)){
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        hasVisit[index] = 1;
+        for(int getIndex: numOutput.get(index)){
+            if (hasLoop(numOutput, hasVisit, getIndex)){
+                return true;
             }
         }
-        hasVisit[index] = -<span class="hljs-number">1</span>;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        hasVisit[index] = -1;
+        return false;
     } 
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>V</mi><mo>+</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(V+E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>所有节点和边数目</p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>V</mi><mo>+</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(V+E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>所有节点和边数目</p>
-<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>V</mi><mo>+</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(V+E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>所有节点和边数目</p>
-<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>V</mi><mo>+</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(V+E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>所有节点和边数目</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(V+E)$所有节点和边数目</p>
 
             </div>
             <hr/>
@@ -605,16 +587,16 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/DFS/">
-                                    <span class="chip bg-color">DFS</span>
-                                </a>
-                            
                                 <a href="/tags/Medium/">
                                     <span class="chip bg-color">Medium</span>
                                 </a>
                             
                                 <a href="/tags/BFS/">
                                     <span class="chip bg-color">BFS</span>
+                                </a>
+                            
+                                <a href="/tags/DFS/">
+                                    <span class="chip bg-color">DFS</span>
                                 </a>
                             
                         </div>
@@ -697,12 +679,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:210. 课程表 II
- 题目描述
-现在你总共有 n 门课需要选，记为 0 到 n-1。
+                            Leetcode:210. 课程表 II题目描述现在你总共有 n 门课需要选，记为 0 到 n-1。
 
 在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们: [0,1]
 
+给定课
                         
                     </div>
                     <div class="publish-info">
@@ -728,16 +709,16 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/DFS/">
-                        <span class="chip bg-color">DFS</span>
-                    </a>
-                    
                     <a href="/tags/Medium/">
                         <span class="chip bg-color">Medium</span>
                     </a>
                     
                     <a href="/tags/BFS/">
                         <span class="chip bg-color">BFS</span>
+                    </a>
+                    
+                    <a href="/tags/DFS/">
+                        <span class="chip bg-color">DFS</span>
                     </a>
                     
                 </div>
@@ -763,11 +744,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 127. 单词接龙
- 题目描述
-给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
+                            Leetcode: 127. 单词接龙题目描述给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
 
 每次转换只能改变一个字母。
+转换过
                         
                     </div>
                     <div class="publish-info">

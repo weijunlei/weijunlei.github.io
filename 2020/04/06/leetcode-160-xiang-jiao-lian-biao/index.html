@@ -5,9 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:160. 相交链表, 小风雷">
-    <meta name="description" content=" [Leetcode:160.相交链表]
- 题目描述
-编写一个程序，找到两个单链表相交的起始节点。
+    <meta name="description" content="[Leetcode:160.相交链表]题目描述编写一个程序，找到两个单链表相交的起始节点。
 
 如下面的两个链表：
 
@@ -15,8 +13,7 @@
 
 在节点 c1 开始相交。
 
- 示例 1：
-输入：intersectVal = 8, listA = [4,1,8">
+示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5],">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -427,9 +424,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode160相交链表"><a class="markdownIt-Anchor" href="#leetcode160相交链表"></a> [Leetcode:160.相交链表]</h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>编写一个程序，找到两个单链表相交的起始节点。
+                <h1 id="Leetcode-160-相交链表"><a href="#Leetcode-160-相交链表" class="headerlink" title="[Leetcode:160.相交链表]"></a>[Leetcode:160.相交链表]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，找到两个单链表相交的起始节点。
 
 如下面的两个链表：
 
@@ -437,76 +432,65 @@
 
 在节点 c1 开始相交。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1：</h3>
-<pre><code>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
 输出：Reference of the node with value = 8
 输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2：</h3>
-<pre><code>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
 输出：Reference of the node with value = 2
 输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
 </code></pre>
-<p></p>
-<h3 id="示例-3"><a class="markdownIt-Anchor" href="#示例-3"></a> 示例 3：</h3>
-<pre><code>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+<p> </p>
+<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
 输出：null
 输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
 解释：这两个链表不相交，因此返回 null。
 </code></pre>
-<h3 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意：</h3>
-<pre><code>如果两个链表没有交点，返回 null.
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><pre><code>如果两个链表没有交点，返回 null.
 在返回结果后，两个链表仍须保持原有的结构。
 可假定整个链表结构中没有循环。
 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">getIntersectionNode</span><span class="hljs-params">(ListNode headA, ListNode headB)</span> {
-       <span class="hljs-keyword">if</span> ((headA == <span class="hljs-literal">null</span> &amp;&amp; headB != <span class="hljs-literal">null</span>) || (headA != <span class="hljs-literal">null</span> &amp;&amp; headB == <span class="hljs-literal">null</span>)){
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>对链表的节点数量计数后分别遍历，然后长的链表先遍历完注定不相交的前段，然后开始同时遍历知道相同</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+       if ((headA == null && headB != null) || (headA != null && headB == null)){
+          return null;
        }
-        <span class="hljs-type">int</span> <span class="hljs-variable">countA</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, countB = <span class="hljs-number">0</span>;
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">preA</span> <span class="hljs-operator">=</span> headA, preB = headB;
-        <span class="hljs-keyword">while</span> (preA != <span class="hljs-literal">null</span>){
+        int countA = 0, countB = 0;
+        ListNode preA = headA, preB = headB;
+        while (preA != null){
             preA = preA.next;
-            countA += <span class="hljs-number">1</span>;
+            countA += 1;
         }
-        <span class="hljs-keyword">while</span> (preB != <span class="hljs-literal">null</span>){
+        while (preB != null){
             preB = preB.next;
-            countB += <span class="hljs-number">1</span>;
+            countB += 1;
         }
         preA = headA;
         preB = headB;
-        <span class="hljs-keyword">while</span>(countA &gt; countB){
+        while(countA > countB){
             preA = preA.next;
             countA--;
         }
-        <span class="hljs-keyword">while</span>(countA &lt; countB){
+        while(countA < countB){
             preB = preB.next;
             countB--;
         }
         
-        <span class="hljs-keyword">while</span>(preA != <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">if</span> (preA == preB){
-                <span class="hljs-keyword">return</span> preA;
+        while(preA != null){
+            if (preA == preB){
+                return preA;
             }
             preA = preA.next;
             preB = preB.next;
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+        return null;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="代码1时间复杂度"><a class="markdownIt-Anchor" href="#代码1时间复杂度"></a> 代码1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="代码1空间复杂度"><a class="markdownIt-Anchor" href="#代码1空间复杂度"></a> 代码1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="代码1时间复杂度"><a href="#代码1时间复杂度" class="headerlink" title="代码1时间复杂度"></a>代码1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="代码1空间复杂度"><a href="#代码1空间复杂度" class="headerlink" title="代码1空间复杂度"></a>代码1空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -662,14 +646,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:206.反转链表
- 题目描述
-反转一个单链表。
+                            Leetcode:206.反转链表题目描述反转一个单链表。
 
- 示例:
-输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+示例:输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
-进阶
+进阶:
+你可以迭
                         
                     </div>
                     <div class="publish-info">
@@ -727,13 +709,12 @@
                     <div class="summary block-with-text">
                         
                             #Leetcode: 141.排序链表
- 题目描述
-在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
 
- 示例 1:
-输入: 4-&gt;2-&gt;1-&gt;3
+示例 1:输入: 4-&gt;2-&gt;1-&gt;3
 输出: 1-&gt;2-&gt;3-&gt;4
 
+示例 
                         
                     </div>
                     <div class="publish-info">

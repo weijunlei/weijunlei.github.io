@@ -5,13 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:200. 岛屿数量, 小风雷">
-    <meta name="description" content=" Leetcode:200. 岛屿数量
- 题目描述
-给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
+    <meta name="description" content="Leetcode:200. 岛屿数量题目描述给你一个由 &amp;#39;1&amp;#39;（陆地）和 &amp;#39;0&amp;#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
-岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
-
-此外，你可以假设该">
+岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -376,12 +372,12 @@
                                 <span class="chip bg-color">Leetcode</span>
                             </a>
                         
-                            <a href="/tags/DFS/">
-                                <span class="chip bg-color">DFS</span>
-                            </a>
-                        
                             <a href="/tags/Medium/">
                                 <span class="chip bg-color">Medium</span>
+                            </a>
+                        
+                            <a href="/tags/DFS/">
+                                <span class="chip bg-color">DFS</span>
                             </a>
                         
                     </div>
@@ -422,16 +418,13 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode200-岛屿数量"><a class="markdownIt-Anchor" href="#leetcode200-岛屿数量"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">Leetcode:200. 岛屿数量</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
+                <h1 id="Leetcode-200-岛屿数量"><a href="#Leetcode-200-岛屿数量" class="headerlink" title="Leetcode:200. 岛屿数量"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">Leetcode:200. 岛屿数量</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个由 &#39;1&#39;（陆地）和 &#39;0&#39;（水）组成的的二维网格，请你计算网格中岛屿的数量。
 
 岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
 
 此外，你可以假设该网格的四条边均被水包围。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入:
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入:
 11110
 11010
 11000
@@ -439,52 +432,47 @@
 输出: 1
 示例 2:
 </code></pre>
-<h3 id="输入"><a class="markdownIt-Anchor" href="#输入"></a> 输入:</h3>
-<pre><code>11000
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入:"></a>输入:</h3><pre><code>11000
 11000
 00100
 00011
 输出: 3
 解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-dfs"><a class="markdownIt-Anchor" href="#思路1-dfs"></a> 思路1 DFS</h3>
-<p>在先判断是否是岛屿之后使用DFS对为’1’的岛屿进行深度优先遍历，将状态改为’0’</p>
-<h3 id="todo"><a class="markdownIt-Anchor" href="#todo"></a> TODO</h3>
-<p>并查集和BFS</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[][] paths = &lt;!--swig￼<span class="hljs-number">0</span>--&gt;;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numIslands</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] grid)</span> {
-        <span class="hljs-keyword">if</span> (grid == <span class="hljs-literal">null</span> || grid.length == <span class="hljs-number">0</span> || grid[<span class="hljs-number">0</span>] == <span class="hljs-literal">null</span> || grid[<span class="hljs-number">0</span>].length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DFS"><a href="#思路1-DFS" class="headerlink" title="思路1 DFS"></a>思路1 DFS</h3><p>在先判断是否是岛屿之后使用DFS对为&#39;1&#39;的岛屿进行深度优先遍历，将状态改为&#39;0&#39;</p>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><p>并查集和BFS</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    private int[][] paths = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0){
+            return 0;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;
-        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; i++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++){
-                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>){
-                    result += <span class="hljs-number">1</span>;
+        int m = grid.length;
+        int n = grid[0].length;
+        int result = 0;
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if (grid[i][j] == '1'){
+                    result += 1;
                 }
                 dfs(grid, i, j);
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">dfs</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] grid, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>{
-        <span class="hljs-keyword">if</span>(grid[i][j] == <span class="hljs-string">&#x27;0&#x27;</span>){
-            <span class="hljs-keyword">return</span>;
+    private void dfs(char[][] grid, int i, int j){
+        if(grid[i][j] == '0'){
+            return;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;
-        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;
-        grid[i][j] = <span class="hljs-string">&#x27;0&#x27;</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] path: paths){
-            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> i + path[<span class="hljs-number">0</span>];
-            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> j + path[<span class="hljs-number">1</span>];
-            <span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt; m &amp;&amp; y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; n){
-                <span class="hljs-keyword">if</span> (grid[x][y] == <span class="hljs-string">&#x27;1&#x27;</span>){
+        int m = grid.length;
+        int n = grid[0].length;
+        grid[i][j] = '0';
+        for(int[] path: paths){
+            int x = i + path[0];
+            int y = j + path[1];
+            if (x >= 0 && x < m && y >= 0 && y < n){
+                if (grid[x][y] == '1'){
                     dfs(grid, x, y);
                 }
             }
@@ -492,11 +480,8 @@
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(mn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(mn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,栈空间m*n</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(mn)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(mn)$,栈空间m*n</p>
 
             </div>
             <hr/>
@@ -564,12 +549,12 @@
                                     <span class="chip bg-color">Leetcode</span>
                                 </a>
                             
-                                <a href="/tags/DFS/">
-                                    <span class="chip bg-color">DFS</span>
-                                </a>
-                            
                                 <a href="/tags/Medium/">
                                     <span class="chip bg-color">Medium</span>
+                                </a>
+                            
+                                <a href="/tags/DFS/">
+                                    <span class="chip bg-color">DFS</span>
                                 </a>
                             
                         </div>
@@ -652,11 +637,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 127. 单词接龙
- 题目描述
-给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
+                            Leetcode: 127. 单词接龙题目描述给定两个单词（beginWord 和 endWord）和一个字典，找到从 beginWord 到 endWord 的最短转换序列的长度。转换需遵循如下规则：
 
 每次转换只能改变一个字母。
+转换过
                         
                     </div>
                     <div class="publish-info">
@@ -713,16 +697,14 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode
- 题目描述
-给定一个整数矩阵，找出最长递增路径的长度。
+                            Leetcode题目描述给定一个整数矩阵，找出最长递增路径的长度。
 
 对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）。
 
- 示例 1:
-输入: nums = 
+示例 1:输入: nums = 
 [
-[9,
+[9,9,4],
+
                         
                     </div>
                     <div class="publish-info">
