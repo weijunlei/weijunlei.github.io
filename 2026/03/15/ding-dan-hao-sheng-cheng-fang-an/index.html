@@ -5,8 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="订单号生成方案, 小风雷">
-    <meta name="description" content="订单号生成方案在分布式系统中，如何生成全局唯一且有序的订单号是一个核心问题。本文将详细介绍雪花算法（Snowflake）及其在实际业务中的应用。
-1. 雪花算法介绍雪花算法（Snowflake）是 Twitter 开源的分布式 ID 生成算">
+    <meta name="description" content=" 订单号生成方案
+在分布式系统中，如何生成全局唯一且有序的订单号是一个核心问题。本文将详细介绍雪花算法（Snowflake）及其在实际业务中的应用。
+ 1. 雪花算法介绍
+雪花算法（Snowflake）是 Twitter 开源的分布式 ID">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -413,9 +415,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="订单号生成方案"><a href="#订单号生成方案" class="headerlink" title="订单号生成方案"></a>订单号生成方案</h1><p>在分布式系统中，如何生成全局唯一且有序的订单号是一个核心问题。本文将详细介绍雪花算法（Snowflake）及其在实际业务中的应用。</p>
-<h2 id="1-雪花算法介绍"><a href="#1-雪花算法介绍" class="headerlink" title="1. 雪花算法介绍"></a>1. 雪花算法介绍</h2><p>雪花算法（Snowflake）是 Twitter 开源的分布式 ID 生成算法，其核心思想是将一个 64 位的整数划分为多个bit位，每个bit位代表不同的含义，从而保证在分布式环境下生成唯一 ID。</p>
-<h3 id="1-1-雪花算法bit位分配"><a href="#1-1-雪花算法bit位分配" class="headerlink" title="1.1 雪花算法bit位分配"></a>1.1 雪花算法bit位分配</h3><pre class="mermaid">graph TD
+                <h1 id="订单号生成方案"><a class="markdownIt-Anchor" href="#订单号生成方案"></a> 订单号生成方案</h1>
+<p>在分布式系统中，如何生成全局唯一且有序的订单号是一个核心问题。本文将详细介绍雪花算法（Snowflake）及其在实际业务中的应用。</p>
+<h2 id="1-雪花算法介绍"><a class="markdownIt-Anchor" href="#1-雪花算法介绍"></a> 1. 雪花算法介绍</h2>
+<p>雪花算法（Snowflake）是 Twitter 开源的分布式 ID 生成算法，其核心思想是将一个 64 位的整数划分为多个bit位，每个bit位代表不同的含义，从而保证在分布式环境下生成唯一 ID。</p>
+<h3 id="11-雪花算法bit位分配"><a class="markdownIt-Anchor" href="#11-雪花算法bit位分配"></a> 1.1 雪花算法bit位分配</h3>
+<pre class="mermaid">graph TD
     A[64位雪花ID] --> B[第1位]
     A --> C[第2-42位]
     A --> D[第43-52位]
@@ -430,7 +435,6 @@
     C --> C1
     D --> D1
     E --> E1</pre>
-
 <p><strong>具体结构如下：</strong></p>
 <table>
 <thead>
@@ -441,7 +445,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>第1位</td>
 <td>符号位</td>
 <td>1</td>
@@ -465,110 +470,113 @@
 <td>12</td>
 <td>每毫秒内的自增序列，最大4096</td>
 </tr>
-</tbody></table>
-<h3 id="1-2-雪花算法代码实现"><a href="#1-2-雪花算法代码实现" class="headerlink" title="1.2 雪花算法代码实现"></a>1.2 雪花算法代码实现</h3><pre class=" language-language-go"><code class="language-language-go">package snowflake
+</tbody>
+</table>
+<h3 id="12-雪花算法代码实现"><a class="markdownIt-Anchor" href="#12-雪花算法代码实现"></a> 1.2 雪花算法代码实现</h3>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> snowflake
 
-import (
-    "errors"
-    "sync"
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;errors&quot;</span>
+    <span class="hljs-string">&quot;sync&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 )
 
-const (
-    // 序列号bit位数
-    sequenceBits = 12
-    // 机器IDbit位数
-    workerIDBits = 10
-    // 时间戳bit位数
-    timestampBits = 41
+<span class="hljs-keyword">const</span> (
+    <span class="hljs-comment">// 序列号bit位数</span>
+    sequenceBits = <span class="hljs-number">12</span>
+    <span class="hljs-comment">// 机器IDbit位数</span>
+    workerIDBits = <span class="hljs-number">10</span>
+    <span class="hljs-comment">// 时间戳bit位数</span>
+    timestampBits = <span class="hljs-number">41</span>
 
-    // 序列号最大值
-    sequenceMask = (1 << sequenceBits) - 1
-    // 机器ID最大值
-    workerIDMask = (1 << workerIDBits) - 1
+    <span class="hljs-comment">// 序列号最大值</span>
+    sequenceMask = (<span class="hljs-number">1</span> &lt;&lt; sequenceBits) - <span class="hljs-number">1</span>
+    <span class="hljs-comment">// 机器ID最大值</span>
+    workerIDMask = (<span class="hljs-number">1</span> &lt;&lt; workerIDBits) - <span class="hljs-number">1</span>
 
-    // 机器ID左移位数
+    <span class="hljs-comment">// 机器ID左移位数</span>
     workerIDShift = sequenceBits
-    // 时间戳左移位数
+    <span class="hljs-comment">// 时间戳左移位数</span>
     timestampShift = sequenceBits + workerIDBits
 )
 
-var (
-    // 起始时间戳 2020-01-01 00:00:00
-    epoch = int64(1577836800000)
+<span class="hljs-keyword">var</span> (
+    <span class="hljs-comment">// 起始时间戳 2020-01-01 00:00:00</span>
+    epoch = <span class="hljs-type">int64</span>(<span class="hljs-number">1577836800000</span>)
 )
 
-type Snowflake struct {
-    workerID     int64
-    datacenterID int64
-    sequence     int64
-    lastTimestamp int64
+<span class="hljs-keyword">type</span> Snowflake <span class="hljs-keyword">struct</span> {
+    workerID     <span class="hljs-type">int64</span>
+    datacenterID <span class="hljs-type">int64</span>
+    sequence     <span class="hljs-type">int64</span>
+    lastTimestamp <span class="hljs-type">int64</span>
     mu           sync.Mutex
 }
 
-func NewSnowflake(workerID, datacenterID int64) (*Snowflake, error) {
-    if workerID < 0 || workerID > workerIDMask {
-        return nil, errors.New("worker ID out of range")
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewSnowflake</span><span class="hljs-params">(workerID, datacenterID <span class="hljs-type">int64</span>)</span></span> (*Snowflake, <span class="hljs-type">error</span>) {
+    <span class="hljs-keyword">if</span> workerID &lt; <span class="hljs-number">0</span> || workerID &gt; workerIDMask {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">&quot;worker ID out of range&quot;</span>)
     }
-    if datacenterID < 0 || datacenterID > workerIDMask {
-        return nil, errors.New("datacenter ID out of range")
+    <span class="hljs-keyword">if</span> datacenterID &lt; <span class="hljs-number">0</span> || datacenterID &gt; workerIDMask {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">&quot;datacenter ID out of range&quot;</span>)
     }
 
-    return &Snowflake{
+    <span class="hljs-keyword">return</span> &amp;Snowflake{
         workerID:     workerID,
         datacenterID: datacenterID,
-        sequence:     0,
-        lastTimestamp: -1,
-    }, nil
+        sequence:     <span class="hljs-number">0</span>,
+        lastTimestamp: <span class="hljs-number">-1</span>,
+    }, <span class="hljs-literal">nil</span>
 }
 
-func (s *Snowflake) NextID() (int64, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Snowflake)</span></span> NextID() (<span class="hljs-type">int64</span>, <span class="hljs-type">error</span>) {
     s.mu.Lock()
-    defer s.mu.Unlock()
+    <span class="hljs-keyword">defer</span> s.mu.Unlock()
 
     timestamp := currentTimeMillis()
 
-    // 时钟回拨检测
-    if timestamp < s.lastTimestamp {
-        return 0, errors.New("clock moved backwards")
+    <span class="hljs-comment">// 时钟回拨检测</span>
+    <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;clock moved backwards&quot;</span>)
     }
 
-    // 同一毫秒内，序列号自增
-    if timestamp == s.lastTimestamp {
-        s.sequence = (s.sequence + 1) & sequenceMask
-        if s.sequence == 0 {
-            // 序列号用完，等待下一毫秒
+    <span class="hljs-comment">// 同一毫秒内，序列号自增</span>
+    <span class="hljs-keyword">if</span> timestamp == s.lastTimestamp {
+        s.sequence = (s.sequence + <span class="hljs-number">1</span>) &amp; sequenceMask
+        <span class="hljs-keyword">if</span> s.sequence == <span class="hljs-number">0</span> {
+            <span class="hljs-comment">// 序列号用完，等待下一毫秒</span>
             timestamp = s.waitNextMillis(timestamp)
         }
-    } else {
-        s.sequence = 0
+    } <span class="hljs-keyword">else</span> {
+        s.sequence = <span class="hljs-number">0</span>
     }
 
     s.lastTimestamp = timestamp
 
-    // 组装ID
-    id := ((timestamp - epoch) << timestampShift) |
-        (s.datacenterID << workerIDShift) |
-        (s.workerID << workerIDShift) |
+    <span class="hljs-comment">// 组装ID</span>
+    id := ((timestamp - epoch) &lt;&lt; timestampShift) |
+        (s.datacenterID &lt;&lt; workerIDShift) |
+        (s.workerID &lt;&lt; workerIDShift) |
         s.sequence
 
-    return id, nil
+    <span class="hljs-keyword">return</span> id, <span class="hljs-literal">nil</span>
 }
 
-func currentTimeMillis() int64 {
-    return time.Now().UnixMilli()
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">currentTimeMillis</span><span class="hljs-params">()</span></span> <span class="hljs-type">int64</span> {
+    <span class="hljs-keyword">return</span> time.Now().UnixMilli()
 }
 
-func (s *Snowflake) waitNextMillis(lastTimestamp int64) int64 {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Snowflake)</span></span> waitNextMillis(lastTimestamp <span class="hljs-type">int64</span>) <span class="hljs-type">int64</span> {
     timestamp := currentTimeMillis()
-    for timestamp <= lastTimestamp {
+    <span class="hljs-keyword">for</span> timestamp &lt;= lastTimestamp {
         time.Sleep(time.Millisecond)
         timestamp = currentTimeMillis()
     }
-    return timestamp
+    <span class="hljs-keyword">return</span> timestamp
 }
 </code></pre>
-<h3 id="1-3-雪花算法优缺点"><a href="#1-3-雪花算法优缺点" class="headerlink" title="1.3 雪花算法优缺点"></a>1.3 雪花算法优缺点</h3><p><strong>优点：</strong></p>
+<h3 id="13-雪花算法优缺点"><a class="markdownIt-Anchor" href="#13-雪花算法优缺点"></a> 1.3 雪花算法优缺点</h3>
+<p><strong>优点：</strong></p>
 <ul>
 <li><strong>高性能</strong>：本地生成，不依赖数据库，单机每秒可生成约409.6万个ID</li>
 <li><strong>趋势递增</strong>：毫秒数在高位，序列号在低位，整体趋势递增</li>
@@ -579,41 +587,47 @@ func (s *Snowflake) waitNextMillis(lastTimestamp int64) int64 {
 <li><strong>强依赖时钟</strong>：如果机器时钟回拨，可能导致ID重复</li>
 <li><strong>无法严格递增</strong>：只能保证趋势递增，不能保证严格单调递增</li>
 </ul>
-<hr>
-<h2 id="2-雪花算法在实际生产环境中的应用"><a href="#2-雪花算法在实际生产环境中的应用" class="headerlink" title="2. 雪花算法在实际生产环境中的应用"></a>2. 雪花算法在实际生产环境中的应用</h2><p>在实际业务中，特别是外卖等高频交易场景，我们需要保证同一用户的订单能够聚合在一起，便于查询和分析。</p>
-<h3 id="2-1-基于用户ID的订单分片策略"><a href="#2-1-基于用户ID的订单分片策略" class="headerlink" title="2.1 基于用户ID的订单分片策略"></a>2.1 基于用户ID的订单分片策略</h3><p>为了实现同一用户的订单聚合，我们采用对用户ID取模的方式：</p>
-<pre class=" language-language-go"><code class="language-language-go">package order
+<hr />
+<h2 id="2-雪花算法在实际生产环境中的应用"><a class="markdownIt-Anchor" href="#2-雪花算法在实际生产环境中的应用"></a> 2. 雪花算法在实际生产环境中的应用</h2>
+<p>在实际业务中，特别是外卖等高频交易场景，我们需要保证同一用户的订单能够聚合在一起，便于查询和分析。</p>
+<h3 id="21-基于用户id的订单分片策略"><a class="markdownIt-Anchor" href="#21-基于用户id的订单分片策略"></a> 2.1 基于用户ID的订单分片策略</h3>
+<p>为了实现同一用户的订单聚合，我们采用对用户ID取模的方式：</p>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> order
 
-const (
-    // 分表数量，通常设置为10000
-    ShardingCount = 10000
+<span class="hljs-keyword">const</span> (
+    <span class="hljs-comment">// 分表数量，通常设置为10000</span>
+    ShardingCount = <span class="hljs-number">10000</span>
 
-    // 质数取模，使数据分布更均匀
-    PrimeModulus = 9973
+    <span class="hljs-comment">// 质数取模，使数据分布更均匀</span>
+    PrimeModulus = <span class="hljs-number">9973</span>
 )
 
-// GenerateOrderId 生成订单号
-// snowflakeId: 雪花算法生成的ID
-// buyerId: 买家ID
-// 返回: 实际使用的订单号
-func GenerateOrderId(snowflakeId int64, buyerId int64) string {
-    // 对buyerId取模，得到4位数字
-    buyerMod := int(buyerId % PrimeModulus)
+<span class="hljs-comment">// GenerateOrderId 生成订单号</span>
+<span class="hljs-comment">// snowflakeId: 雪花算法生成的ID</span>
+<span class="hljs-comment">// buyerId: 买家ID</span>
+<span class="hljs-comment">// 返回: 实际使用的订单号</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GenerateOrderId</span><span class="hljs-params">(snowflakeId <span class="hljs-type">int64</span>, buyerId <span class="hljs-type">int64</span>)</span></span> <span class="hljs-type">string</span> {
+    <span class="hljs-comment">// 对buyerId取模，得到4位数字</span>
+    buyerMod := <span class="hljs-type">int</span>(buyerId % PrimeModulus)
 
-    // 将雪花ID左移4位，腾出空间存放buyerId取模结果
-    // 保证同一用户的订单在一起（最后4位相同）
-    orderId := (snowflakeId << 4) | int64(buyerMod)
+    <span class="hljs-comment">// 将雪花ID左移4位，腾出空间存放buyerId取模结果</span>
+    <span class="hljs-comment">// 保证同一用户的订单在一起（最后4位相同）</span>
+    orderId := (snowflakeId &lt;&lt; <span class="hljs-number">4</span>) | <span class="hljs-type">int64</span>(buyerMod)
 
-    return strconv.FormatInt(orderId, 10)
+    <span class="hljs-keyword">return</span> strconv.FormatInt(orderId, <span class="hljs-number">10</span>)
 }
 </code></pre>
-<h3 id="2-2-为何使用质数取模？"><a href="#2-2-为何使用质数取模？" class="headerlink" title="2.2 为何使用质数取模？"></a>2.2 为何使用质数取模？</h3><p><strong>使用质数取模的主要原因：</strong></p>
+<h3 id="22-为何使用质数取模"><a class="markdownIt-Anchor" href="#22-为何使用质数取模"></a> 2.2 为何使用质数取模？</h3>
+<p><strong>使用质数取模的主要原因：</strong></p>
 <ol>
-<li><p><strong>数据分布更均匀</strong>：质数取模可以使得取模结果在0到质数-1的范围内均匀分布，避免出现热点数据问题</p>
+<li>
+<p><strong>数据分布更均匀</strong>：质数取模可以使得取模结果在0到质数-1的范围内均匀分布，避免出现热点数据问题</p>
 </li>
-<li><p><strong>减少哈希冲突</strong>：质数与大多数数字的最大公约数为1，使得取模结果更加分散</p>
+<li>
+<p><strong>减少哈希冲突</strong>：质数与大多数数字的最大公约数为1，使得取模结果更加分散</p>
 </li>
-<li><p><strong>打散连续ID</strong>：即使buyerId是连续的，使用质数取模后，最后4位也会均匀分布</p>
+<li>
+<p><strong>打散连续ID</strong>：即使buyerId是连续的，使用质数取模后，最后4位也会均匀分布</p>
 </li>
 </ol>
 <pre class="mermaid">graph LR
@@ -631,42 +645,45 @@ func GenerateOrderId(snowflakeId int64, buyerId int64) string {
     style G fill:#90EE90
     style H fill:#90EE90
     style I fill:#90EE90</pre>
-
-<h3 id="2-3-从MySQL查询优化角度解释"><a href="#2-3-从MySQL查询优化角度解释" class="headerlink" title="2.3 从MySQL查询优化角度解释"></a>2.3 从MySQL查询优化角度解释</h3><p><strong>订单号设计的核心优势：</strong></p>
+<h3 id="23-从mysql查询优化角度解释"><a class="markdownIt-Anchor" href="#23-从mysql查询优化角度解释"></a> 2.3 从MySQL查询优化角度解释</h3>
+<p><strong>订单号设计的核心优势：</strong></p>
 <ol>
 <li><strong>聚集索引优化</strong></li>
 </ol>
 <p>在MySQL InnoDB引擎中，表数据按照主键（订单号）的顺序物理存储。当同一用户的订单号末尾包含相同的取模值时，这些订单在物理存储上也是相邻的：</p>
-<pre class=" language-language-sql"><code class="language-language-sql">-- 假设 buyer_id=12345 的用户取模结果为 5678
--- 其所有订单号末尾都是 5678
-SELECT * FROM orders 
-WHERE order_id LIKE '%5678' 
-ORDER BY order_id DESC 
-LIMIT 10;
+<pre class="highlight"><code class="sql"><span class="hljs-comment">-- 假设 buyer_id=12345 的用户取模结果为 5678</span>
+<span class="hljs-comment">-- 其所有订单号末尾都是 5678</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> orders 
+<span class="hljs-keyword">WHERE</span> order_id <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;%5678&#x27;</span> 
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> order_id <span class="hljs-keyword">DESC</span> 
+LIMIT <span class="hljs-number">10</span>;
 
--- 由于order_id是主键（聚集索引），查询效率极高
--- 无需额外排序，物理存储即有序
+<span class="hljs-comment">-- 由于order_id是主键（聚集索引），查询效率极高</span>
+<span class="hljs-comment">-- 无需额外排序，物理存储即有序</span>
 </code></pre>
 <ol start="2">
 <li><strong>覆盖索引减少回表</strong></li>
 </ol>
 <p>由于order_id包含时间信息和用户标识，可以直接通过order_id反推时间范围，减少索引使用：</p>
-<pre class=" language-language-sql"><code class="language-language-sql">-- 通过订单号可以直接确定时间范围
--- 减少对create_time索引的依赖
-SELECT * FROM orders 
-WHERE order_id BETWEEN '17420544000000000001' AND '17421407999999999999';
+<pre class="highlight"><code class="sql"><span class="hljs-comment">-- 通过订单号可以直接确定时间范围</span>
+<span class="hljs-comment">-- 减少对create_time索引的依赖</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> orders 
+<span class="hljs-keyword">WHERE</span> order_id <span class="hljs-keyword">BETWEEN</span> <span class="hljs-string">&#x27;17420544000000000001&#x27;</span> <span class="hljs-keyword">AND</span> <span class="hljs-string">&#x27;17421407999999999999&#x27;</span>;
 </code></pre>
 <ol start="3">
 <li><strong>分表查询优化</strong></li>
 </ol>
-<pre class=" language-language-sql"><code class="language-language-sql">-- 订单分表10000张
--- 同一用户的订单必定在同一分表
--- 无需跨表查询
-SHARDING_KEY = buyer_id % 10000
+<pre class="highlight"><code class="sql"><span class="hljs-comment">-- 订单分表10000张</span>
+<span class="hljs-comment">-- 同一用户的订单必定在同一分表</span>
+<span class="hljs-comment">-- 无需跨表查询</span>
+SHARDING_KEY <span class="hljs-operator">=</span> buyer_id <span class="hljs-operator">%</span> <span class="hljs-number">10000</span>
 </code></pre>
-<hr>
-<h2 id="3-订单号的妙用"><a href="#3-订单号的妙用" class="headerlink" title="3. 订单号的妙用"></a>3. 订单号的妙用</h2><h3 id="3-1-索引优化"><a href="#3-1-索引优化" class="headerlink" title="3.1 索引优化"></a>3.1 索引优化</h3><p>在大型系统中，订单表通常数据量巨大。合理的订单号设计可以显著提升查询性能。</p>
-<h4 id="3-1-1-核心订单-vs-退款等附属场景"><a href="#3-1-1-核心订单-vs-退款等附属场景" class="headerlink" title="3.1.1 核心订单 vs 退款等附属场景"></a>3.1.1 核心订单 vs 退款等附属场景</h4><pre class="mermaid">flowchart TD
+<hr />
+<h2 id="3-订单号的妙用"><a class="markdownIt-Anchor" href="#3-订单号的妙用"></a> 3. 订单号的妙用</h2>
+<h3 id="31-索引优化"><a class="markdownIt-Anchor" href="#31-索引优化"></a> 3.1 索引优化</h3>
+<p>在大型系统中，订单表通常数据量巨大。合理的订单号设计可以显著提升查询性能。</p>
+<h4 id="311-核心订单-vs-退款等附属场景"><a class="markdownIt-Anchor" href="#311-核心订单-vs-退款等附属场景"></a> 3.1.1 核心订单 vs 退款等附属场景</h4>
+<pre class="mermaid">flowchart TD
     A[订单中心] --> B[核心订单表 orders]
     A --> C[退款表 refunds]
     A --> D[日志表 order_logs]
@@ -686,54 +703,56 @@ SHARDING_KEY = buyer_id % 10000
     style J fill:#E0FFFF
     style K fill:#E0FFFF
     style L fill:#E0FFFF</pre>
-
 <p><strong>优化示例：</strong></p>
-<pre class=" language-language-sql"><code class="language-language-sql">-- 传统方案：使用create_time索引
-SELECT * FROM refunds 
-WHERE create_time >= '2026-01-01' AND create_time < '2026-01-02'
-ORDER BY create_time;
+<pre class="highlight"><code class="sql"><span class="hljs-comment">-- 传统方案：使用create_time索引</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> refunds 
+<span class="hljs-keyword">WHERE</span> create_time <span class="hljs-operator">&gt;=</span> <span class="hljs-string">&#x27;2026-01-01&#x27;</span> <span class="hljs-keyword">AND</span> create_time <span class="hljs-operator">&lt;</span> <span class="hljs-string">&#x27;2026-01-02&#x27;</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> create_time;
 
--- 优化方案：使用order_id索引
--- 由于order_id包含时间信息，可以直接筛选
--- 假设2026-01-01的订单号范围是 [X, Y)
-SELECT * FROM refunds 
-WHERE order_id >= X AND order_id < Y
-ORDER BY order_id;
+<span class="hljs-comment">-- 优化方案：使用order_id索引</span>
+<span class="hljs-comment">-- 由于order_id包含时间信息，可以直接筛选</span>
+<span class="hljs-comment">-- 假设2026-01-01的订单号范围是 [X, Y)</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> refunds 
+<span class="hljs-keyword">WHERE</span> order_id <span class="hljs-operator">&gt;=</span> X <span class="hljs-keyword">AND</span> order_id <span class="hljs-operator">&lt;</span> Y
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> order_id;
 </code></pre>
-<h4 id="3-1-2-order-id范围反推时间"><a href="#3-1-2-order-id范围反推时间" class="headerlink" title="3.1.2 order_id范围反推时间"></a>3.1.2 order_id范围反推时间</h4><p>由于雪花算法的高位是时间戳，我们可以通过简单的计算反推时间范围：</p>
-<pre class=" language-language-go"><code class="language-language-go">package order
+<h4 id="312-order_id范围反推时间"><a class="markdownIt-Anchor" href="#312-order_id范围反推时间"></a> 3.1.2 order_id范围反推时间</h4>
+<p>由于雪花算法的高位是时间戳，我们可以通过简单的计算反推时间范围：</p>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> order
 
-import (
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;time&quot;</span>
 )
 
-const (
-    // 起始时间戳 2020-01-01
-    epoch = int64(1577836800000)
+<span class="hljs-keyword">const</span> (
+    <span class="hljs-comment">// 起始时间戳 2020-01-01</span>
+    epoch = <span class="hljs-type">int64</span>(<span class="hljs-number">1577836800000</span>)
 )
 
-// ExtractTimestamp 从订单号中提取时间戳
-func ExtractTimestamp(orderID int64) int64 {
-    // 去掉末尾4位buyerId取模值和12位序列号
-    return orderID >> (12 + 4)
+<span class="hljs-comment">// ExtractTimestamp 从订单号中提取时间戳</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ExtractTimestamp</span><span class="hljs-params">(orderID <span class="hljs-type">int64</span>)</span></span> <span class="hljs-type">int64</span> {
+    <span class="hljs-comment">// 去掉末尾4位buyerId取模值和12位序列号</span>
+    <span class="hljs-keyword">return</span> orderID &gt;&gt; (<span class="hljs-number">12</span> + <span class="hljs-number">4</span>)
 }
 
-// GetDayRange 获取某一天订单号的范围
-func GetDayRange(year int, month int, day int) (start int64, end int64) {
-    date := time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.UTC)
+<span class="hljs-comment">// GetDayRange 获取某一天订单号的范围</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GetDayRange</span><span class="hljs-params">(year <span class="hljs-type">int</span>, month <span class="hljs-type">int</span>, day <span class="hljs-type">int</span>)</span></span> (start <span class="hljs-type">int64</span>, end <span class="hljs-type">int64</span>) {
+    date := time.Date(year, time.Month(month), day, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, time.UTC)
     startTimestamp := date.UnixMilli()
-    endTimestamp := startTimestamp + 86400000 // 24小时
+    endTimestamp := startTimestamp + <span class="hljs-number">86400000</span> <span class="hljs-comment">// 24小时</span>
 
-    // 转换为订单号（简化版）
-    base := (startTimestamp - epoch) << 16
+    <span class="hljs-comment">// 转换为订单号（简化版）</span>
+    base := (startTimestamp - epoch) &lt;&lt; <span class="hljs-number">16</span>
     start = base
-    end = (endTimestamp - epoch) << 16
+    end = (endTimestamp - epoch) &lt;&lt; <span class="hljs-number">16</span>
 
-    return
+    <span class="hljs-keyword">return</span>
 }
 </code></pre>
-<h3 id="3-2-系统切换与迁移"><a href="#3-2-系统切换与迁移" class="headerlink" title="3.2 系统切换与迁移"></a>3.2 系统切换与迁移</h3><p>在系统升级或迁移过程中，订单号可以作为灰度切换的标识，实现平滑过渡。</p>
-<h4 id="3-2-1-基于order-id的平滑迁移方案"><a href="#3-2-1-基于order-id的平滑迁移方案" class="headerlink" title="3.2.1 基于order_id的平滑迁移方案"></a>3.2.1 基于order_id的平滑迁移方案</h4><pre class="mermaid">flowchart TD
+<h3 id="32-系统切换与迁移"><a class="markdownIt-Anchor" href="#32-系统切换与迁移"></a> 3.2 系统切换与迁移</h3>
+<p>在系统升级或迁移过程中，订单号可以作为灰度切换的标识，实现平滑过渡。</p>
+<h4 id="321-基于order_id的平滑迁移方案"><a class="markdownIt-Anchor" href="#321-基于order_id的平滑迁移方案"></a> 3.2.1 基于order_id的平滑迁移方案</h4>
+<pre class="mermaid">flowchart TD
     A[订单系统迁移] --> B[定义迁移时间点T]
     A --> C[新系统最小order_id: MIN_NEW]
     A --> D[旧系统最大order_id: MAX_OLD]
@@ -758,71 +777,74 @@ func GetDayRange(year int, month int, day int) (start int64, end int64) {
     style M fill:#FFE4B5
     style N fill:#90EE90
     style O fill:#FFB6C1</pre>
-
 <p><strong>实现示例：</strong></p>
-<pre class=" language-language-go"><code class="language-language-go">package migrator
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> migrator
 
-// 迁移阈值，由业务方提前计算并配置
-const MigrationThreshold = int64(1742000000000000000)
+<span class="hljs-comment">// 迁移阈值，由业务方提前计算并配置</span>
+<span class="hljs-keyword">const</span> MigrationThreshold = <span class="hljs-type">int64</span>(<span class="hljs-number">1742000000000000000</span>)
 
-type LogicType string
+<span class="hljs-keyword">type</span> LogicType <span class="hljs-type">string</span>
 
-const (
-    LogicTypeNew LogicType = "NEW" // 新逻辑
-    LogicTypeOld LogicType = "OLD" // 老逻辑
+<span class="hljs-keyword">const</span> (
+    LogicTypeNew LogicType = <span class="hljs-string">&quot;NEW&quot;</span> <span class="hljs-comment">// 新逻辑</span>
+    LogicTypeOld LogicType = <span class="hljs-string">&quot;OLD&quot;</span> <span class="hljs-comment">// 老逻辑</span>
 )
 
-// GetLogicType 判断使用新逻辑还是老逻辑
-func GetLogicType(orderID int64) LogicType {
-    if orderID < MigrationThreshold {
-        return LogicTypeNew
+<span class="hljs-comment">// GetLogicType 判断使用新逻辑还是老逻辑</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GetLogicType</span><span class="hljs-params">(orderID <span class="hljs-type">int64</span>)</span></span> LogicType {
+    <span class="hljs-keyword">if</span> orderID &lt; MigrationThreshold {
+        <span class="hljs-keyword">return</span> LogicTypeNew
     }
-    return LogicTypeOld
+    <span class="hljs-keyword">return</span> LogicTypeOld
 }
 
-// OrderRefundEvent 退款事件
-type OrderRefundEvent struct {
-    OrderID   int64  `json:"order_id"`
-    RefundID  string `json:"refund_id"`
-    BuyerID   int64  `json:"buyer_id"`
+<span class="hljs-comment">// OrderRefundEvent 退款事件</span>
+<span class="hljs-keyword">type</span> OrderRefundEvent <span class="hljs-keyword">struct</span> {
+    OrderID   <span class="hljs-type">int64</span>  <span class="hljs-string">`json:&quot;order_id&quot;`</span>
+    RefundID  <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;refund_id&quot;`</span>
+    BuyerID   <span class="hljs-type">int64</span>  <span class="hljs-string">`json:&quot;buyer_id&quot;`</span>
 }
 
-// HandleRefund 退款消费者
-func HandleRefund(event OrderRefundEvent) {
+<span class="hljs-comment">// HandleRefund 退款消费者</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">HandleRefund</span><span class="hljs-params">(event OrderRefundEvent)</span></span> {
     logicType := GetLogicType(event.OrderID)
 
-    switch logicType {
-    case LogicTypeNew:
-        // 新退款流程
+    <span class="hljs-keyword">switch</span> logicType {
+    <span class="hljs-keyword">case</span> LogicTypeNew:
+        <span class="hljs-comment">// 新退款流程</span>
         handleRefundNew(event)
-    case LogicTypeOld:
-        // 老退款流程
+    <span class="hljs-keyword">case</span> LogicTypeOld:
+        <span class="hljs-comment">// 老退款流程</span>
         handleRefundOld(event)
     }
 }
 
-func handleRefundNew(event OrderRefundEvent) {
-    // TODO: 实现新退款流程
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleRefundNew</span><span class="hljs-params">(event OrderRefundEvent)</span></span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 实现新退款流程</span>
 }
 
-func handleRefundOld(event OrderRefundEvent) {
-    // TODO: 实现老退款流程
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleRefundOld</span><span class="hljs-params">(event OrderRefundEvent)</span></span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 实现老退款流程</span>
 }
 </code></pre>
-<h4 id="3-2-2-迁移优势"><a href="#3-2-2-迁移优势" class="headerlink" title="3.2.2 迁移优势"></a>3.2.2 迁移优势</h4><ol>
+<h4 id="322-迁移优势"><a class="markdownIt-Anchor" href="#322-迁移优势"></a> 3.2.2 迁移优势</h4>
+<ol>
 <li><strong>无状态切换</strong>：无需重启服务，通过配置阈值实现动态切换</li>
 <li><strong>可回滚</strong>：如果新逻辑出现问题，只需调整阈值即可回滚</li>
 <li><strong>精确控制</strong>：可以精确到每个订单号维度进行切换</li>
 <li><strong>可观测</strong>：通过监控不同逻辑处理的订单数量，评估迁移效果</li>
 </ol>
-<hr>
-<h2 id="4-其他场景的有序订单号生成"><a href="#4-其他场景的有序订单号生成" class="headerlink" title="4. 其他场景的有序订单号生成"></a>4. 其他场景的有序订单号生成</h2><h3 id="4-1-取餐号生成方案"><a href="#4-1-取餐号生成方案" class="headerlink" title="4.1 取餐号生成方案"></a>4.1 取餐号生成方案</h3><p>在外卖业务中，取餐号需要满足以下特点：</p>
+<hr />
+<h2 id="4-其他场景的有序订单号生成"><a class="markdownIt-Anchor" href="#4-其他场景的有序订单号生成"></a> 4. 其他场景的有序订单号生成</h2>
+<h3 id="41-取餐号生成方案"><a class="markdownIt-Anchor" href="#41-取餐号生成方案"></a> 4.1 取餐号生成方案</h3>
+<p>在外卖业务中，取餐号需要满足以下特点：</p>
 <ol>
 <li><strong>单一店铺有序</strong>：每个店铺的取餐号独立递增</li>
 <li><strong>短号易于区分</strong>：通常为3位数，方便用户识别</li>
 <li><strong>循环复用</strong>：号段循环，从999回到1</li>
 </ol>
-<h4 id="4-1-1-方案一：号段模式（Leaf-Segment）"><a href="#4-1-1-方案一：号段模式（Leaf-Segment）" class="headerlink" title="4.1.1 方案一：号段模式（Leaf Segment）"></a>4.1.1 方案一：号段模式（Leaf Segment）</h4><p><strong>原理：</strong> 每次从数据库获取一段号码，内存中逐个分配，耗尽后再去数据库获取新号段。</p>
+<h4 id="411-方案一号段模式leaf-segment"><a class="markdownIt-Anchor" href="#411-方案一号段模式leaf-segment"></a> 4.1.1 方案一：号段模式（Leaf Segment）</h4>
+<p><strong>原理：</strong> 每次从数据库获取一段号码，内存中逐个分配，耗尽后再去数据库获取新号段。</p>
 <pre class="mermaid">flowchart LR
     A[数据库] -->|1. 获取号段[1-1000]| B[Leaf服务]
     B -->|2. 分配号码| C[商家]
@@ -830,15 +852,14 @@ func handleRefundOld(event OrderRefundEvent) {
     B -->|返回: 5| C
     C -->|4. 号码用尽| B
     B -->|5. 异步获取新号段[1001-2000]| A</pre>
-
 <p><strong>数据库表设计：</strong></p>
-<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE `meal_number_segment` (
-    `biz_tag` VARCHAR(128) NOT NULL COMMENT '业务标识，如store_id',
-    `max_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '当前最大号',
-    `step` INT(11) NOT NULL DEFAULT '1000' COMMENT '步长',
-    `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`biz_tag`)
-) ENGINE=InnoDB;
+<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> `meal_number_segment` (
+    `biz_tag` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">128</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;业务标识，如store_id&#x27;</span>,
+    `max_id` <span class="hljs-type">BIGINT</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;1&#x27;</span> COMMENT <span class="hljs-string">&#x27;当前最大号&#x27;</span>,
+    `step` <span class="hljs-type">INT</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;1000&#x27;</span> COMMENT <span class="hljs-string">&#x27;步长&#x27;</span>,
+    `update_time` <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,
+    <span class="hljs-keyword">PRIMARY KEY</span> (`biz_tag`)
+) ENGINE<span class="hljs-operator">=</span>InnoDB;
 </code></pre>
 <p><strong>优点：</strong></p>
 <ul>
@@ -865,138 +886,138 @@ func handleRefundOld(event OrderRefundEvent) {
     
     Note over S: 分配: 1001, 1002, ... 1014
     Note over S: 出现断号: 12-1000</pre>
-
-<h4 id="4-1-2-方案二：Redis实现"><a href="#4-1-2-方案二：Redis实现" class="headerlink" title="4.1.2 方案二：Redis实现"></a>4.1.2 方案二：Redis实现</h4><p><strong>原理：</strong> 使用Redis的原子操作实现高性能、高可用的取餐号生成。</p>
+<h4 id="412-方案二redis实现"><a class="markdownIt-Anchor" href="#412-方案二redis实现"></a> 4.1.2 方案二：Redis实现</h4>
+<p><strong>原理：</strong> 使用Redis的原子操作实现高性能、高可用的取餐号生成。</p>
 <p><strong>Redis Key设计：</strong></p>
-<pre><code>meal:number:store:【store_id】
+<pre class="highlight"><code class="">meal:number:store:【store_id】
 </code></pre>
 <p><strong>实现代码：</strong></p>
-<pre class=" language-language-go"><code class="language-language-go">package meal
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> meal
 
-import (
-    "context"
-    "fmt"
-    "strconv"
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;strconv&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 
-    "github.com/redis/go-redis/v9"
+    <span class="hljs-string">&quot;github.com/redis/go-redis/v9&quot;</span>
 )
 
-const (
-    MaxNumber = 999
-    MinNumber = 1
+<span class="hljs-keyword">const</span> (
+    MaxNumber = <span class="hljs-number">999</span>
+    MinNumber = <span class="hljs-number">1</span>
 )
 
-type NumberGenerator struct {
+<span class="hljs-keyword">type</span> NumberGenerator <span class="hljs-keyword">struct</span> {
     redis *redis.Client
 }
 
-func NewNumberGenerator(redisClient *redis.Client) *NumberGenerator {
-    return &NumberGenerator{redis: redisClient}
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewNumberGenerator</span><span class="hljs-params">(redisClient *redis.Client)</span></span> *NumberGenerator {
+    <span class="hljs-keyword">return</span> &amp;NumberGenerator{redis: redisClient}
 }
 
-// Generate 生成取餐号
-func (g *NumberGenerator) Generate(ctx context.Context, storeID string) (string, error) {
-    // 使用字符串拼接代替 Sprintf，避免大括号被转义
-    key := "meal:number:store:" + storeID
+<span class="hljs-comment">// Generate 生成取餐号</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(g *NumberGenerator)</span></span> Generate(ctx context.Context, storeID <span class="hljs-type">string</span>) (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) {
+    <span class="hljs-comment">// 使用字符串拼接代替 Sprintf，避免大括号被转义</span>
+    key := <span class="hljs-string">&quot;meal:number:store:&quot;</span> + storeID
 
-    // 使用Redis WATCH/MULTI/EXEC事务保证原子性
-    for retries := 0; retries < 3; retries++ {
-        err := g.redis.Watch(ctx, func(tx *redis.Tx) error {
-            // 获取当前值
+    <span class="hljs-comment">// 使用Redis WATCH/MULTI/EXEC事务保证原子性</span>
+    <span class="hljs-keyword">for</span> retries := <span class="hljs-number">0</span>; retries &lt; <span class="hljs-number">3</span>; retries++ {
+        err := g.redis.Watch(ctx, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(tx *redis.Tx)</span></span> <span class="hljs-type">error</span> {
+            <span class="hljs-comment">// 获取当前值</span>
             current, err := tx.Get(ctx, key).Result()
-            if err != nil && err != redis.Nil {
-                return err
+            <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &amp;&amp; err != redis.Nil {
+                <span class="hljs-keyword">return</span> err
             }
 
-            var currentNum int
-            if current == "" {
-                currentNum = 0
-            } else {
+            <span class="hljs-keyword">var</span> currentNum <span class="hljs-type">int</span>
+            <span class="hljs-keyword">if</span> current == <span class="hljs-string">&quot;&quot;</span> {
+                currentNum = <span class="hljs-number">0</span>
+            } <span class="hljs-keyword">else</span> {
                 currentNum, err = strconv.Atoi(current)
-                if err != nil {
-                    return err
+                <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+                    <span class="hljs-keyword">return</span> err
                 }
             }
 
-            // 计算下一个号码
-            nextNum := currentNum + 1
-            if nextNum > MaxNumber {
+            <span class="hljs-comment">// 计算下一个号码</span>
+            nextNum := currentNum + <span class="hljs-number">1</span>
+            <span class="hljs-keyword">if</span> nextNum &gt; MaxNumber {
                 nextNum = MinNumber
             }
 
-            // 开启事务
-            _, err = tx.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-                pipe.Set(ctx, key, strconv.Itoa(nextNum), 0)
-                return nil
+            <span class="hljs-comment">// 开启事务</span>
+            _, err = tx.TxPipelined(ctx, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(pipe redis.Pipeliner)</span></span> <span class="hljs-type">error</span> {
+                pipe.Set(ctx, key, strconv.Itoa(nextNum), <span class="hljs-number">0</span>)
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
             })
 
-            return err
+            <span class="hljs-keyword">return</span> err
         }, key)
 
-        if err == nil {
-            // 成功获取，生成最终取餐号
+        <span class="hljs-keyword">if</span> err == <span class="hljs-literal">nil</span> {
+            <span class="hljs-comment">// 成功获取，生成最终取餐号</span>
             current, _ := g.redis.Get(ctx, key).Result()
             num, _ := strconv.Atoi(current)
-            if num == 0 {
-                num = 1
+            <span class="hljs-keyword">if</span> num == <span class="hljs-number">0</span> {
+                num = <span class="hljs-number">1</span>
             }
-            return fmt.Sprintf("%03d", num), nil
+            <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">&quot;%03d&quot;</span>, num), <span class="hljs-literal">nil</span>
         }
 
-        if err == redis.TxFailedErr {
-            // 事务冲突，重试
-            time.Sleep(time.Millisecond * 10)
-            continue
+        <span class="hljs-keyword">if</span> err == redis.TxFailedErr {
+            <span class="hljs-comment">// 事务冲突，重试</span>
+            time.Sleep(time.Millisecond * <span class="hljs-number">10</span>)
+            <span class="hljs-keyword">continue</span>
         }
-        return "", err
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, err
     }
 
-    return "", fmt.Errorf("max retries exceeded")
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, fmt.Errorf(<span class="hljs-string">&quot;max retries exceeded&quot;</span>)
 }
 
-// Init 初始化号段（可选，用于首次设置）
-func (g *NumberGenerator) Init(ctx context.Context, storeID string) error {
-    // 使用字符串拼接代替 Sprintf，避免大括号被转义
-    key := "meal:number:store:" + storeID
-    return g.redis.SetNX(ctx, key, "0", 0).Err()
+<span class="hljs-comment">// Init 初始化号段（可选，用于首次设置）</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(g *NumberGenerator)</span></span> Init(ctx context.Context, storeID <span class="hljs-type">string</span>) <span class="hljs-type">error</span> {
+    <span class="hljs-comment">// 使用字符串拼接代替 Sprintf，避免大括号被转义</span>
+    key := <span class="hljs-string">&quot;meal:number:store:&quot;</span> + storeID
+    <span class="hljs-keyword">return</span> g.redis.SetNX(ctx, key, <span class="hljs-string">&quot;0&quot;</span>, <span class="hljs-number">0</span>).Err()
 }
 </code></pre>
 <p><strong>优化版本（使用Lua脚本）：</strong></p>
-<pre class=" language-language-lua"><code class="language-language-lua">-- Lua脚本：保证原子性的取餐号生成
-local key = KEYS[1]
-local max = tonumber(ARGV[1])
-local min = tonumber(ARGV[2])
+<pre class="highlight"><code class="lua"><span class="hljs-comment">-- Lua脚本：保证原子性的取餐号生成</span>
+<span class="hljs-keyword">local</span> key = KEYS[<span class="hljs-number">1</span>]
+<span class="hljs-keyword">local</span> <span class="hljs-built_in">max</span> = <span class="hljs-built_in">tonumber</span>(ARGV[<span class="hljs-number">1</span>])
+<span class="hljs-keyword">local</span> <span class="hljs-built_in">min</span> = <span class="hljs-built_in">tonumber</span>(ARGV[<span class="hljs-number">2</span>])
 
-local current = tonumber(redis.call('GET', key) or '0')
-local next = current >= max and min or (current + 1)
+<span class="hljs-keyword">local</span> current = <span class="hljs-built_in">tonumber</span>(redis.call(<span class="hljs-string">&#x27;GET&#x27;</span>, key) <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;0&#x27;</span>)
+<span class="hljs-keyword">local</span> <span class="hljs-built_in">next</span> = current &gt;= <span class="hljs-built_in">max</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">min</span> <span class="hljs-keyword">or</span> (current + <span class="hljs-number">1</span>)
 
-redis.call('SET', key, tostring(next))
-return next
+redis.call(<span class="hljs-string">&#x27;SET&#x27;</span>, key, <span class="hljs-built_in">tostring</span>(<span class="hljs-built_in">next</span>))
+<span class="hljs-keyword">return</span> <span class="hljs-built_in">next</span>
 </code></pre>
-<pre class=" language-language-go"><code class="language-language-go">// 使用Lua脚本的版本
-var luaScript = redis.NewScript(`
-local current = tonumber(redis.call('GET', KEYS[1]) or '0')
-local next = current >= 999 and 1 or (current + 1)
-redis.call('SET', KEYS[1], tostring(next))
+<pre class="highlight"><code class="go"><span class="hljs-comment">// 使用Lua脚本的版本</span>
+<span class="hljs-keyword">var</span> luaScript = redis.NewScript(<span class="hljs-string">`
+local current = tonumber(redis.call(&#x27;GET&#x27;, KEYS[1]) or &#x27;0&#x27;)
+local next = current &gt;= 999 and 1 or (current + 1)
+redis.call(&#x27;SET&#x27;, KEYS[1], tostring(next))
 return next
-`)
+`</span>)
 
-func (g *NumberGenerator) GenerateWithLua(ctx context.Context, storeID string) (string, error) {
-    // 使用字符串拼接代替 Sprintf，避免大括号被转义
-    key := "meal:number:store:" + storeID
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(g *NumberGenerator)</span></span> GenerateWithLua(ctx context.Context, storeID <span class="hljs-type">string</span>) (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) {
+    <span class="hljs-comment">// 使用字符串拼接代替 Sprintf，避免大括号被转义</span>
+    key := <span class="hljs-string">&quot;meal:number:store:&quot;</span> + storeID
 
-    result, err := g.redis.Eval(ctx, luaScript, []string{key}).Result()
-    if err != nil {
-        return "", err
+    result, err := g.redis.Eval(ctx, luaScript, []<span class="hljs-type">string</span>{key}).Result()
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, err
     }
 
-    num, ok := result.(int64)
-    if !ok {
-        return "", fmt.Errorf("invalid result type")
+    num, ok := result.(<span class="hljs-type">int64</span>)
+    <span class="hljs-keyword">if</span> !ok {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, fmt.Errorf(<span class="hljs-string">&quot;invalid result type&quot;</span>)
     }
 
-    return fmt.Sprintf("%03d", num), nil
+    <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">&quot;%03d&quot;</span>, num), <span class="hljs-literal">nil</span>
 }
 </code></pre>
 <p><strong>Redis方案 vs 号段方案对比：</strong></p>
@@ -1008,7 +1029,8 @@ func (g *NumberGenerator) GenerateWithLua(ctx context.Context, storeID string) (
 <th>号段方案</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>断号问题</td>
 <td>无</td>
 <td>有（重启时）</td>
@@ -1033,158 +1055,164 @@ func (g *NumberGenerator) GenerateWithLua(ctx context.Context, storeID string) (
 <td>依赖Redis持久化</td>
 <td>MySQL保证</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="5-时间回拨问题及解决方案"><a href="#5-时间回拨问题及解决方案" class="headerlink" title="5. 时间回拨问题及解决方案"></a>5. 时间回拨问题及解决方案</h2><p>雪花算法强依赖机器时钟，如果发生时钟回拨，可能导致ID重复。下面介绍几种解决方案：</p>
-<h3 id="5-1-等待法"><a href="#5-1-等待法" class="headerlink" title="5.1 等待法"></a>5.1 等待法</h3><p>当检测到时钟回拨时，等待时间追上后再继续生成ID。</p>
-<pre class=" language-language-go"><code class="language-language-go">package snowflake
+</tbody>
+</table>
+<hr />
+<h2 id="5-时间回拨问题及解决方案"><a class="markdownIt-Anchor" href="#5-时间回拨问题及解决方案"></a> 5. 时间回拨问题及解决方案</h2>
+<p>雪花算法强依赖机器时钟，如果发生时钟回拨，可能导致ID重复。下面介绍几种解决方案：</p>
+<h3 id="51-等待法"><a class="markdownIt-Anchor" href="#51-等待法"></a> 5.1 等待法</h3>
+<p>当检测到时钟回拨时，等待时间追上后再继续生成ID。</p>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> snowflake
 
-import (
-    "errors"
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;errors&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 )
 
-type SnowflakeWithWait struct {
+<span class="hljs-keyword">type</span> SnowflakeWithWait <span class="hljs-keyword">struct</span> {
     *Snowflake
 }
 
-func NewSnowflakeWithWait(workerID, datacenterID int64) (*SnowflakeWithWait, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewSnowflakeWithWait</span><span class="hljs-params">(workerID, datacenterID <span class="hljs-type">int64</span>)</span></span> (*SnowflakeWithWait, <span class="hljs-type">error</span>) {
     sf, err := NewSnowflake(workerID, datacenterID)
-    if err != nil {
-        return nil, err
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err
     }
-    return &SnowflakeWithWait{Snowflake: sf}, nil
+    <span class="hljs-keyword">return</span> &amp;SnowflakeWithWait{Snowflake: sf}, <span class="hljs-literal">nil</span>
 }
 
-func (s *SnowflakeWithWait) NextID() (int64, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *SnowflakeWithWait)</span></span> NextID() (<span class="hljs-type">int64</span>, <span class="hljs-type">error</span>) {
     s.mu.Lock()
-    defer s.mu.Unlock()
+    <span class="hljs-keyword">defer</span> s.mu.Unlock()
 
     timestamp := currentTimeMillis()
 
-    if timestamp < s.lastTimestamp {
-        // 等待时间追上
+    <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
+        <span class="hljs-comment">// 等待时间追上</span>
         offset := s.lastTimestamp - timestamp
-        //fmt.Printf("Clock back: waiting %dms\n", offset)
+        <span class="hljs-comment">//fmt.Printf(&quot;Clock back: waiting %dms\n&quot;, offset)</span>
 
         time.Sleep(time.Duration(offset) * time.Millisecond)
 
         timestamp = currentTimeMillis()
-        if timestamp < s.lastTimestamp {
-            return 0, errors.New("clock moved backwards")
+        <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;clock moved backwards&quot;</span>)
         }
     }
 
-    return s.generateID(timestamp)
+    <span class="hljs-keyword">return</span> s.generateID(timestamp)
 }
 
-func (s *SnowflakeWithWait) generateID(timestamp int64) (int64, error) {
-    if timestamp == s.lastTimestamp {
-        s.sequence = (s.sequence + 1) & sequenceMask
-        if s.sequence == 0 {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *SnowflakeWithWait)</span></span> generateID(timestamp <span class="hljs-type">int64</span>) (<span class="hljs-type">int64</span>, <span class="hljs-type">error</span>) {
+    <span class="hljs-keyword">if</span> timestamp == s.lastTimestamp {
+        s.sequence = (s.sequence + <span class="hljs-number">1</span>) &amp; sequenceMask
+        <span class="hljs-keyword">if</span> s.sequence == <span class="hljs-number">0</span> {
             timestamp = s.waitNextMillis(timestamp)
         }
-    } else {
-        s.sequence = 0
+    } <span class="hljs-keyword">else</span> {
+        s.sequence = <span class="hljs-number">0</span>
     }
 
     s.lastTimestamp = timestamp
 
-    id := ((timestamp - epoch) << timestampShift) |
-        (s.datacenterID << workerIDShift) |
-        (s.workerID << workerIDShift) |
+    id := ((timestamp - epoch) &lt;&lt; timestampShift) |
+        (s.datacenterID &lt;&lt; workerIDShift) |
+        (s.workerID &lt;&lt; workerIDShift) |
         s.sequence
 
-    return id, nil
+    <span class="hljs-keyword">return</span> id, <span class="hljs-literal">nil</span>
 }
 </code></pre>
-<h3 id="5-2-拒绝法"><a href="#5-2-拒绝法" class="headerlink" title="5.2 拒绝法"></a>5.2 拒绝法</h3><p>直接拒绝服务，返回错误码，等待人工处理。</p>
-<pre class=" language-language-go"><code class="language-language-go">package snowflake
+<h3 id="52-拒绝法"><a class="markdownIt-Anchor" href="#52-拒绝法"></a> 5.2 拒绝法</h3>
+<p>直接拒绝服务，返回错误码，等待人工处理。</p>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> snowflake
 
-import (
-    "errors"
-    "fmt"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;errors&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 )
 
-type SnowflakeWithReject struct {
+<span class="hljs-keyword">type</span> SnowflakeWithReject <span class="hljs-keyword">struct</span> {
     *Snowflake
 }
 
-func NewSnowflakeWithReject(workerID, datacenterID int64) (*SnowflakeWithReject, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewSnowflakeWithReject</span><span class="hljs-params">(workerID, datacenterID <span class="hljs-type">int64</span>)</span></span> (*SnowflakeWithReject, <span class="hljs-type">error</span>) {
     sf, err := NewSnowflake(workerID, datacenterID)
-    if err != nil {
-        return nil, err
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err
     }
-    return &SnowflakeWithReject{Snowflake: sf}, nil
+    <span class="hljs-keyword">return</span> &amp;SnowflakeWithReject{Snowflake: sf}, <span class="hljs-literal">nil</span>
 }
 
-func (s *SnowflakeWithReject) NextID() (int64, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *SnowflakeWithReject)</span></span> NextID() (<span class="hljs-type">int64</span>, <span class="hljs-type">error</span>) {
     s.mu.Lock()
-    defer s.mu.Unlock()
+    <span class="hljs-keyword">defer</span> s.mu.Unlock()
 
     timestamp := currentTimeMillis()
 
-    if timestamp < s.lastTimestamp {
-        return 0, fmt.Errorf(
-            "clock moved backwards, refusing to generate id for %d milliseconds",
+    <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, fmt.Errorf(
+            <span class="hljs-string">&quot;clock moved backwards, refusing to generate id for %d milliseconds&quot;</span>,
             s.lastTimestamp-timestamp,
         )
     }
 
-    return s.generateID(timestamp)
+    <span class="hljs-keyword">return</span> s.generateID(timestamp)
 }
 </code></pre>
-<h3 id="5-3-序列号偏移法"><a href="#5-3-序列号偏移法" class="headerlink" title="5.3 序列号偏移法"></a>5.3 序列号偏移法</h3><p>利用序列号bit位的多位数，允许在一定范围内&quot;绕回&quot;。</p>
-<pre class=" language-language-go"><code class="language-language-go">package snowflake
+<h3 id="53-序列号偏移法"><a class="markdownIt-Anchor" href="#53-序列号偏移法"></a> 5.3 序列号偏移法</h3>
+<p>利用序列号bit位的多位数，允许在一定范围内&quot;绕回&quot;。</p>
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> snowflake
 
-import (
-    "errors"
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;errors&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 )
 
-const (
-    timeoutThreshold = int64(5) // 5ms
+<span class="hljs-keyword">const</span> (
+    timeoutThreshold = <span class="hljs-type">int64</span>(<span class="hljs-number">5</span>) <span class="hljs-comment">// 5ms</span>
 )
 
-type SnowflakeWithSequence struct {
+<span class="hljs-keyword">type</span> SnowflakeWithSequence <span class="hljs-keyword">struct</span> {
     *Snowflake
 }
 
-func NewSnowflakeWithSequence(workerID, datacenterID int64) (*SnowflakeWithSequence, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewSnowflakeWithSequence</span><span class="hljs-params">(workerID, datacenterID <span class="hljs-type">int64</span>)</span></span> (*SnowflakeWithSequence, <span class="hljs-type">error</span>) {
     sf, err := NewSnowflake(workerID, datacenterID)
-    if err != nil {
-        return nil, err
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err
     }
-    return &SnowflakeWithSequence{Snowflake: sf}, nil
+    <span class="hljs-keyword">return</span> &amp;SnowflakeWithSequence{Snowflake: sf}, <span class="hljs-literal">nil</span>
 }
 
-func (s *SnowflakeWithSequence) NextID() (int64, error) {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *SnowflakeWithSequence)</span></span> NextID() (<span class="hljs-type">int64</span>, <span class="hljs-type">error</span>) {
     s.mu.Lock()
-    defer s.mu.Unlock()
+    <span class="hljs-keyword">defer</span> s.mu.Unlock()
 
     timestamp := currentTimeMillis()
 
-    if timestamp < s.lastTimestamp {
+    <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
         offset := s.lastTimestamp - timestamp
 
-        if offset <= timeoutThreshold {
-            // 小幅度回拨，等待2倍时间
-            time.Sleep(time.Duration(offset*2) * time.Millisecond)
+        <span class="hljs-keyword">if</span> offset &lt;= timeoutThreshold {
+            <span class="hljs-comment">// 小幅度回拨，等待2倍时间</span>
+            time.Sleep(time.Duration(offset*<span class="hljs-number">2</span>) * time.Millisecond)
 
             timestamp = currentTimeMillis()
-            if timestamp < s.lastTimestamp {
-                return 0, errors.New("clock still backwards")
+            <span class="hljs-keyword">if</span> timestamp &lt; s.lastTimestamp {
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;clock still backwards&quot;</span>)
             }
-        } else {
-            // 大幅度回拨，抛异常
-            return 0, errors.New("large clock backwards")
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// 大幅度回拨，抛异常</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>, errors.New(<span class="hljs-string">&quot;large clock backwards&quot;</span>)
         }
     }
 
-    return s.generateID(timestamp)
+    <span class="hljs-keyword">return</span> s.generateID(timestamp)
 }
 </code></pre>
-<h3 id="5-4-雪花算法改进版：百度UidGenerator"><a href="#5-4-雪花算法改进版：百度UidGenerator" class="headerlink" title="5.4 雪花算法改进版：百度UidGenerator"></a>5.4 雪花算法改进版：百度UidGenerator</h3><p>百度开源的UidGenerator使用<strong>TCP协议</strong>的原子计数器来避免时钟回拨问题。</p>
+<h3 id="54-雪花算法改进版百度uidgenerator"><a class="markdownIt-Anchor" href="#54-雪花算法改进版百度uidgenerator"></a> 5.4 雪花算法改进版：百度UidGenerator</h3>
+<p>百度开源的UidGenerator使用<strong>TCP协议</strong>的原子计数器来避免时钟回拨问题。</p>
 <pre class="mermaid">flowchart TD
     A[UidGenerator] --> B[雪花算法]
     A --> C[TCP/CAS保证序列号]
@@ -1195,8 +1223,8 @@ func (s *SnowflakeWithSequence) NextID() (int64, error) {
     
     C --> G[同一毫秒内<br/>序列号不重复]
     C --> H[即使时间回拨<br/>序列号仍递增]</pre>
-
-<h3 id="5-5-解决方案对比"><a href="#5-5-解决方案对比" class="headerlink" title="5.5 解决方案对比"></a>5.5 解决方案对比</h3><table>
+<h3 id="55-解决方案对比"><a class="markdownIt-Anchor" href="#55-解决方案对比"></a> 5.5 解决方案对比</h3>
+<table>
 <thead>
 <tr>
 <th>方案</th>
@@ -1205,7 +1233,8 @@ func (s *SnowflakeWithSequence) NextID() (int64, error) {
 <th>适用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>等待法</td>
 <td>保证ID不重复</td>
 <td>服务短暂不可用</td>
@@ -1229,124 +1258,133 @@ func (s *SnowflakeWithSequence) NextID() (int64, error) {
 <td>依赖额外组件</td>
 <td>大型分布式系统</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="6-其他问题（FAQ）"><a href="#6-其他问题（FAQ）" class="headerlink" title="6. 其他问题（FAQ）"></a>6. 其他问题（FAQ）</h2><h3 id="Q1-为什么要对用户ID取模而不是直接使用用户ID？"><a href="#Q1-为什么要对用户ID取模而不是直接使用用户ID？" class="headerlink" title="Q1: 为什么要对用户ID取模而不是直接使用用户ID？"></a>Q1: 为什么要对用户ID取模而不是直接使用用户ID？</h3><p><strong>A：</strong> 取模的主要目的是：</p>
+</tbody>
+</table>
+<hr />
+<h2 id="6-其他问题faq"><a class="markdownIt-Anchor" href="#6-其他问题faq"></a> 6. 其他问题（FAQ）</h2>
+<h3 id="q1-为什么要对用户id取模而不是直接使用用户id"><a class="markdownIt-Anchor" href="#q1-为什么要对用户id取模而不是直接使用用户id"></a> Q1: 为什么要对用户ID取模而不是直接使用用户ID？</h3>
+<p><strong>A：</strong> 取模的主要目的是：</p>
 <ol>
 <li><strong>控制取模结果长度</strong>：用户ID可能是十几位数字，直接拼接会导致订单号过长</li>
 <li><strong>数据分布均匀</strong>：连续的user_id取模后分布更随机，避免热点</li>
 <li><strong>固定长度</strong>：取模后固定4位（对9973取模），便于计算和存储</li>
 </ol>
-<h3 id="Q2-为什么要用质数取模？"><a href="#Q2-为什么要用质数取模？" class="headerlink" title="Q2: 为什么要用质数取模？"></a>Q2: 为什么要用质数取模？</h3><p><strong>A：</strong> 使用质数（如9973）取模的原因：</p>
+<h3 id="q2-为什么要用质数取模"><a class="markdownIt-Anchor" href="#q2-为什么要用质数取模"></a> Q2: 为什么要用质数取模？</h3>
+<p><strong>A：</strong> 使用质数（如9973）取模的原因：</p>
 <ol>
 <li><strong>均匀分布</strong>：质数与任意整数的最大公约数通常为1，使得取模结果在[0, 质数-1]范围内分布均匀</li>
 <li><strong>减少冲突</strong>：相比合数，质数能更好地打散连续ID的聚集性</li>
 <li><strong>哈希表优化</strong>：这是计算机科学中经典的哈希取模优化技巧</li>
 </ol>
-<pre class=" language-language-go"><code class="language-language-go">package main
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> main
 
-import "fmt"
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
 
-func main() {
-    userIDs := []int{1, 2, 3, 4, 5, 100, 200, 300, 1000, 2000}
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    userIDs := []<span class="hljs-type">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">2000</span>}
 
-    fmt.Println("=== 使用合数10000取模 ===")
-    for _, id := range userIDs {
-        fmt.Printf("%d ", id%10000)
+    fmt.Println(<span class="hljs-string">&quot;=== 使用合数10000取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> userIDs {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">10000</span>)
     }
-    // 结果：1 2 3 4 5 100 200 300 1000 2000
+    <span class="hljs-comment">// 结果：1 2 3 4 5 100 200 300 1000 2000</span>
 
-    fmt.Println("\n=== 使用质数9973取模 ===")
-    for _, id := range userIDs {
-        fmt.Printf("%d ", id%9973)
+    fmt.Println(<span class="hljs-string">&quot;\n=== 使用质数9973取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> userIDs {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">9973</span>)
     }
-    // 结果：1 2 3 4 5 100 200 300 1000 2000
+    <span class="hljs-comment">// 结果：1 2 3 4 5 100 200 300 1000 2000</span>
 
-    // 但对于连续范围的user_id
-    continuousIDs := []int{100, 101, 102, 103, 104, 105}
-    fmt.Println("\n=== 连续ID用10000取模 ===")
-    for _, id := range continuousIDs {
-        fmt.Printf("%d ", id%10000)
+    <span class="hljs-comment">// 但对于连续范围的user_id</span>
+    continuousIDs := []<span class="hljs-type">int</span>{<span class="hljs-number">100</span>, <span class="hljs-number">101</span>, <span class="hljs-number">102</span>, <span class="hljs-number">103</span>, <span class="hljs-number">104</span>, <span class="hljs-number">105</span>}
+    fmt.Println(<span class="hljs-string">&quot;\n=== 连续ID用10000取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> continuousIDs {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">10000</span>)
     }
-    // 结果：100 101 102 103 104 105 （仍然连续）
+    <span class="hljs-comment">// 结果：100 101 102 103 104 105 （仍然连续）</span>
 
-    fmt.Println("\n=== 连续ID用9973取模 ===")
-    for _, id := range continuousIDs {
-        fmt.Printf("%d ", id%9973)
+    fmt.Println(<span class="hljs-string">&quot;\n=== 连续ID用9973取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> continuousIDs {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">9973</span>)
     }
-    // 结果：100 101 102 103 104 105 （仍然连续，因为范围小于质数）
+    <span class="hljs-comment">// 结果：100 101 102 103 104 105 （仍然连续，因为范围小于质数）</span>
 
-    // 但对于大范围连续ID
-    largeRange := []int{1, 2, 3, 4, 5, 9973, 9974, 9975, 9999, 10000}
-    fmt.Println("\n=== 大范围连续ID用10000取模 ===")
-    for _, id := range largeRange {
-        fmt.Printf("%d ", id%10000)
+    <span class="hljs-comment">// 但对于大范围连续ID</span>
+    largeRange := []<span class="hljs-type">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9973</span>, <span class="hljs-number">9974</span>, <span class="hljs-number">9975</span>, <span class="hljs-number">9999</span>, <span class="hljs-number">10000</span>}
+    fmt.Println(<span class="hljs-string">&quot;\n=== 大范围连续ID用10000取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> largeRange {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">10000</span>)
     }
-    // 结果：1 2 3 4 5 9973 9974 9975 9999 0
+    <span class="hljs-comment">// 结果：1 2 3 4 5 9973 9974 9975 9999 0</span>
 
-    fmt.Println("\n=== 大范围连续ID用9973取模 ===")
-    for _, id := range largeRange {
-        fmt.Printf("%d ", id%9973)
+    fmt.Println(<span class="hljs-string">&quot;\n=== 大范围连续ID用9973取模 ===&quot;</span>)
+    <span class="hljs-keyword">for</span> _, id := <span class="hljs-keyword">range</span> largeRange {
+        fmt.Printf(<span class="hljs-string">&quot;%d &quot;</span>, id%<span class="hljs-number">9973</span>)
     }
-    // 结果：1 2 3 4 5 0 1 2 26 27（分布更均匀）
+    <span class="hljs-comment">// 结果：1 2 3 4 5 0 1 2 26 27（分布更均匀）</span>
 }
 </code></pre>
-<h3 id="Q3-如果超过41位时间戳范围怎么办？"><a href="#Q3-如果超过41位时间戳范围怎么办？" class="headerlink" title="Q3: 如果超过41位时间戳范围怎么办？"></a>Q3: 如果超过41位时间戳范围怎么办？</h3><p><strong>A：</strong> 41位时间戳可以表示约69年（从指定起始时间开始）。解决方案：</p>
+<h3 id="q3-如果超过41位时间戳范围怎么办"><a class="markdownIt-Anchor" href="#q3-如果超过41位时间戳范围怎么办"></a> Q3: 如果超过41位时间戳范围怎么办？</h3>
+<p><strong>A：</strong> 41位时间戳可以表示约69年（从指定起始时间开始）。解决方案：</p>
 <ol>
 <li><strong>设置合理的起始时间</strong>：例如设置为2020-01-01，可以用到2089年</li>
 <li><strong>迁移方案</strong>：提前规划，当接近时间戳上限时进行系统迁移</li>
 <li><strong>扩展时间戳位</strong>：在业务允许的情况下，可以压缩其他bit位（如减少机器ID位数）来延长使用时间</li>
 </ol>
-<pre class=" language-language-go"><code class="language-language-go">package main
+<pre class="highlight"><code class="go"><span class="hljs-keyword">package</span> main
 
-import (
-    "fmt"
-    "time"
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 )
 
-func main() {
-    // 雪花算法41位时间戳的起始时间通常是2020-01-01或1970-01-01
-    // 假设起始时间为2020-01-01 00:00:00 UTC
-    epochStart := int64(1577836800000) // 2020-01-01 00:00:00 UTC
-    maxTimestamp := int64(1<<41) - 1   // 2199023255551
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-comment">// 雪花算法41位时间戳的起始时间通常是2020-01-01或1970-01-01</span>
+    <span class="hljs-comment">// 假设起始时间为2020-01-01 00:00:00 UTC</span>
+    epochStart := <span class="hljs-type">int64</span>(<span class="hljs-number">1577836800000</span>) <span class="hljs-comment">// 2020-01-01 00:00:00 UTC</span>
+    maxTimestamp := <span class="hljs-type">int64</span>(<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">41</span>) - <span class="hljs-number">1</span>   <span class="hljs-comment">// 2199023255551</span>
 
     maxTime := epochStart + maxTimestamp
-    fmt.Printf("最大可表示时间: %v\n", time.UnixMilli(maxTime))
-    // 输出：2089-09-07 15:47:35
+    fmt.Printf(<span class="hljs-string">&quot;最大可表示时间: %v\n&quot;</span>, time.UnixMilli(maxTime))
+    <span class="hljs-comment">// 输出：2089-09-07 15:47:35</span>
 
-    // 计算剩余年限
-    yearsRemaining := (maxTime - time.Now().UnixMilli()) / (365 * 24 * 3600 * 1000)
-    fmt.Printf("剩余可用年限: %d 年\n", yearsRemaining)
+    <span class="hljs-comment">// 计算剩余年限</span>
+    yearsRemaining := (maxTime - time.Now().UnixMilli()) / (<span class="hljs-number">365</span> * <span class="hljs-number">24</span> * <span class="hljs-number">3600</span> * <span class="hljs-number">1000</span>)
+    fmt.Printf(<span class="hljs-string">&quot;剩余可用年限: %d 年\n&quot;</span>, yearsRemaining)
 }
 </code></pre>
-<h3 id="Q4-为什么要把订单号转成String传给前端？"><a href="#Q4-为什么要把订单号转成String传给前端？" class="headerlink" title="Q4: 为什么要把订单号转成String传给前端？"></a>Q4: 为什么要把订单号转成String传给前端？</h3><p><strong>A：</strong> 主要原因：</p>
+<h3 id="q4-为什么要把订单号转成string传给前端"><a class="markdownIt-Anchor" href="#q4-为什么要把订单号转成string传给前端"></a> Q4: 为什么要把订单号转成String传给前端？</h3>
+<p><strong>A：</strong> 主要原因：</p>
 <ol>
-<li><strong>JavaScript整数精度问题</strong>：JavaScript的Number类型使用IEEE 754双精度浮点数，最大安全整数为2^53-1（约9×10^15），而64位雪花ID可能超过这个范围</li>
+<li><strong>JavaScript整数精度问题</strong>：JavaScript的Number类型使用IEEE 754双精度浮点数，最大安全整数为2<sup>53-1（约9×10</sup>15），而64位雪花ID可能超过这个范围</li>
 <li><strong>避免精度丢失</strong>：超过9×10^15的整数在JavaScript中会被截断</li>
 </ol>
-<pre class=" language-language-javascript"><code class="language-language-javascript">// JavaScript精度问题示例
-const orderId = 1742054400000005678;
-console.log(orderId);  // 输出: 1742054400000006000（精度丢失！）
+<pre class="highlight"><code class="javascript"><span class="hljs-comment">// JavaScript精度问题示例</span>
+<span class="hljs-keyword">const</span> orderId = <span class="hljs-number">1742054400000005678</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(orderId);  <span class="hljs-comment">// 输出: 1742054400000006000（精度丢失！）</span>
 
-// 解决方案：使用String
-const orderIdStr = "1742054400000005678";
-console.log(orderIdStr);  // 输出: "1742054400000005678"（正确）
+<span class="hljs-comment">// 解决方案：使用String</span>
+<span class="hljs-keyword">const</span> orderIdStr = <span class="hljs-string">&quot;1742054400000005678&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(orderIdStr);  <span class="hljs-comment">// 输出: &quot;1742054400000005678&quot;（正确）</span>
 </code></pre>
 <ol start="3">
 <li><strong>统一格式</strong>：String类型更灵活，可以在其中添加特殊字符、格式化显示等</li>
 </ol>
-<h3 id="Q5-雪花算法生成的ID是否安全？会被竞对猜到单量吗？"><a href="#Q5-雪花算法生成的ID是否安全？会被竞对猜到单量吗？" class="headerlink" title="Q5: 雪花算法生成的ID是否安全？会被竞对猜到单量吗？"></a>Q5: 雪花算法生成的ID是否安全？会被竞对猜到单量吗？</h3><p><strong>A：</strong> 这是个好问题。雪花算法生成的ID是趋势递增的，确实可能被推断：</p>
+<h3 id="q5-雪花算法生成的id是否安全会被竞对猜到单量吗"><a class="markdownIt-Anchor" href="#q5-雪花算法生成的id是否安全会被竞对猜到单量吗"></a> Q5: 雪花算法生成的ID是否安全？会被竞对猜到单量吗？</h3>
+<p><strong>A：</strong> 这是个好问题。雪花算法生成的ID是趋势递增的，确实可能被推断：</p>
 <ol>
 <li><strong>风险</strong>：如果知道某一天的起始order_id和生成速率，可以大致估算单量</li>
-<li><strong>解决方案</strong>：<ul>
+<li><strong>解决方案</strong>：
+<ul>
 <li>在order_id中掺杂随机位</li>
 <li>使用美团Leaf的&quot; Leaf-snowflake&quot;方案，对ID进行混淆</li>
 <li>或者直接使用完全随机的UUID作为对外展示的订单号，内部映射到雪花ID</li>
 </ul>
 </li>
 </ol>
-<hr>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<hr />
+<h2 id="参考文档"><a class="markdownIt-Anchor" href="#参考文档"></a> 参考文档</h2>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/04/21/mt-leaf.html">Leaf——美团点评分布式ID生成系统</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/twitter/snowflake">Twitter Snowflake</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.ietf.org/rfc/rfc4122.txt">UUID规范 (RFC 4122)</a></li>
@@ -1567,8 +1605,11 @@ console.log(orderIdStr);  // 输出: "1742054400000005678"（正确）
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            雪球特别版：段永平投资问答录（商业逻辑篇）书籍地址雪球特别版——段永平投资问答录(投资逻辑篇)
-一句话概括记录了OPPO&amp;vivo&amp;步步高创始人段永平在雪球上和网友的投资问答，体现了段永平本人的开公司、投资的理念。本书从伟大
+                             雪球特别版：段永平投资问答录（商业逻辑篇）
+ 书籍地址
+雪球特别版——段永平投资问答录(投资逻辑篇)
+ 一句话概括
+记录了OPPO&amp;vivo&amp;步步高创始人段永平在雪球上和网友的投资问答，体现了段永平本人的开公司、投资的理念
                         
                     </div>
                     <div class="publish-info">

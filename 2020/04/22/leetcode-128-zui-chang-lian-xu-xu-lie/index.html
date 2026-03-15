@@ -5,13 +5,16 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:128. 最长连续序列, 小风雷">
-    <meta name="description" content="Leetcode:128. 最长连续序列题目描述给定一个未排序的整数数组，找出最长连续序列的长度。
+    <meta name="description" content=" Leetcode:128. 最长连续序列
+ 题目描述
+给定一个未排序的整数数组，找出最长连续序列的长度。
 
 要求算法的时间复杂度为 O(n)。
 
-示例:输入: [100, 4, 200, 1, 3, 2]
+ 示例:
+输入: [100, 4, 200, 1, 3, 2]
 输出: 4
-解释: 最长连续序列是 [1">
+解释: 最长连续">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -426,73 +429,87 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-128-最长连续序列"><a href="#Leetcode-128-最长连续序列" class="headerlink" title="Leetcode:128. 最长连续序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">Leetcode:128. 最长连续序列</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个未排序的整数数组，找出最长连续序列的长度。
+                <h1 id="leetcode128-最长连续序列"><a class="markdownIt-Anchor" href="#leetcode128-最长连续序列"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">Leetcode:128. 最长连续序列</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个未排序的整数数组，找出最长连续序列的长度。
 
 要求算法的时间复杂度为 O(n)。
 </code></pre>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [100, 4, 200, 1, 3, 2]
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
+<pre><code>输入: [100, 4, 200, 1, 3, 2]
 输出: 4
 解释: 最长连续序列是 [1, 2, 3, 4]。它的长度为 4。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-排序-遍历"><a href="#思路1-排序-遍历" class="headerlink" title="思路1 排序+遍历"></a>思路1 排序+遍历</h3><p>在对数组进行排序后，依次遍历计算最长的连续序列，注意相等情况</p>
-<h3 id="思路2-hash表-初始值才遍历"><a href="#思路2-hash表-初始值才遍历" class="headerlink" title="思路2 hash表+初始值才遍历"></a>思路2 hash表+初始值才遍历</h3><p>使用一个hash表记录数组中存在的数字，每次都只计算当前数字在且该数字减一不在(避免重复遍历)，然后依次叠加计算最长连续序列</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public int longestConsecutive(int[] nums) {
-        if (nums == null || nums.length == 0){
-            return 0;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-排序遍历"><a class="markdownIt-Anchor" href="#思路1-排序遍历"></a> 思路1 排序+遍历</h3>
+<p>在对数组进行排序后，依次遍历计算最长的连续序列，注意相等情况</p>
+<h3 id="思路2-hash表初始值才遍历"><a class="markdownIt-Anchor" href="#思路2-hash表初始值才遍历"></a> 思路2 hash表+初始值才遍历</h3>
+<p>使用一个hash表记录数组中存在的数字，每次都只计算当前数字在且该数字减一不在(避免重复遍历)，然后依次叠加计算最长连续序列</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestConsecutive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
         
         Arrays.sort(nums);
-        int result = 1;
-        int temp = 1;
-        for(int i = 1; i < nums.length; i++){
-            if (nums[i] - nums[i - 1] == 1){
-                temp += 1;
-                if (temp > result){
+        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; nums.length; i++){
+            <span class="hljs-keyword">if</span> (nums[i] - nums[i - <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>){
+                temp += <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">if</span> (temp &gt; result){
                     result = temp;
                 }
-            }else if(nums[i] != nums[i - 1]){
-                temp = 1; 
+            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[i] != nums[i - <span class="hljs-number">1</span>]){
+                temp = <span class="hljs-number">1</span>; 
             }
         }
         
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
 }
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public int longestConsecutive(int[] nums) {
-        if (nums == null || nums.length == 0){
-            return 0;
+<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestConsecutive</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
         }
-        int result = 1;
-        int temp = 1;
+        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
         
-        HashSet<Integer> numSet = new HashSet<>();
-        for(int num: nums){
+        HashSet&lt;Integer&gt; numSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums){
             numSet.add(num);
         }
         
-        for(int num: nums){
-            if (!numSet.contains(num - 1)){
-                temp = 1;
-                while (numSet.contains(num + 1)){
-                    temp += 1;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums){
+            <span class="hljs-keyword">if</span> (!numSet.contains(num - <span class="hljs-number">1</span>)){
+                temp = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">while</span> (numSet.contains(num + <span class="hljs-number">1</span>)){
+                    temp += <span class="hljs-number">1</span>;
                     num ++;
                 }
-                if (temp > result){
+                <span class="hljs-keyword">if</span> (temp &gt; result){
                     result = temp;
                 }
             }
         }
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlog(n))$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$若看作排序需要n的空间</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>若看作排序需要n的空间</p>
+<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -652,9 +669,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:198. 打家劫舍题目描述你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+                             Leetcode:198. 打家劫舍
+ 题目描述
+你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
-给定一个
+
                         
                     </div>
                     <div class="publish-info">
@@ -680,12 +699,12 @@
                         <span class="chip bg-color">Leetcode</span>
                     </a>
                     
-                    <a href="/tags/Easy/">
-                        <span class="chip bg-color">Easy</span>
-                    </a>
-                    
                     <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
                         <span class="chip bg-color">动态规划</span>
+                    </a>
+                    
+                    <a href="/tags/Easy/">
+                        <span class="chip bg-color">Easy</span>
                     </a>
                     
                 </div>
@@ -711,11 +730,14 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:124. 二叉树中的最大路径和题目描述给定一个非空二叉树，返回其最大路径和。
+                             Leetcode:124. 二叉树中的最大路径和
+ 题目描述
+给定一个非空二叉树，返回其最大路径和。
 
 本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
 
-示例 1:输入: [1,2,3
+ 示例 1:
+输入: 
                         
                     </div>
                     <div class="publish-info">

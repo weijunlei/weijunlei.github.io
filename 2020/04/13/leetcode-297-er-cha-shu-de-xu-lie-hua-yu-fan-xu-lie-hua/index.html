@@ -5,9 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:297. 二叉树的序列化与反序列化, 小风雷">
-    <meta name="description" content="Leetcode:297. 二叉树的序列化与反序列化题目描述序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
-
-请">
+    <meta name="description" content=" Leetcode:297. 二叉树的序列化与反序列化
+ 题目描述
+序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -418,11 +418,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-297-二叉树的序列化与反序列化"><a href="#Leetcode-297-二叉树的序列化与反序列化" class="headerlink" title="Leetcode:297. 二叉树的序列化与反序列化"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/">Leetcode:297. 二叉树的序列化与反序列化</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+                <h1 id="leetcode297-二叉树的序列化与反序列化"><a class="markdownIt-Anchor" href="#leetcode297-二叉树的序列化与反序列化"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/">Leetcode:297. 二叉树的序列化与反序列化</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
 
 请设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且将这个字符串反序列化为原始的树结构。
 </code></pre>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>你可以将以下二叉树：
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
+<pre><code>你可以将以下二叉树：
 
  1
 / \
@@ -432,78 +435,88 @@
 
 序列化为 &quot;[1,2,3,null,null,4,5]&quot;
 </code></pre>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示:"></a>提示:</h3><pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
+<h3 id="提示"><a class="markdownIt-Anchor" href="#提示"></a> 提示:</h3>
+<pre><code>这与 LeetCode 目前使用的方式一致，详情请参阅 LeetCode 序列化二叉树的格式。你并非必须采取这种方式，你也可以采用其他的方法解决这个问题。
 </code></pre>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
+<pre><code>不要使用类的成员 / 全局 / 静态变量来存储状态，你的序列化和反序列化算法应该是无状态的。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-BFS-迭代"><a href="#思路1-BFS-迭代" class="headerlink" title="思路1: BFS + 迭代"></a>思路1: BFS + 迭代</h3><p>使用队列进行BFS，记录每个节点进行迭代</p>
-<h3 id="思路2-BFS-递归（TODO-）"><a href="#思路2-BFS-递归（TODO-）" class="headerlink" title="思路2: BFS + 递归（TODO:）"></a>思路2: BFS + 递归（TODO:）</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Codec {
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-bfs-迭代"><a class="markdownIt-Anchor" href="#思路1-bfs-迭代"></a> 思路1: BFS + 迭代</h3>
+<p>使用队列进行BFS，记录每个节点进行迭代</p>
+<h3 id="思路2-bfs-递归todo"><a class="markdownIt-Anchor" href="#思路2-bfs-递归todo"></a> 思路2: BFS + 递归（TODO:）</h3>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Codec</span> {
 
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        StringBuilder sb = new StringBuilder();
+    <span class="hljs-comment">// Encodes a tree to a single string.</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">serialize</span><span class="hljs-params">(TreeNode root)</span> {
+        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
         queue.add(root);
-        while (!queue.isEmpty()){
-            TreeNode pre = queue.poll();
-            if (pre == null){
-                sb.append("n");
-                sb.append(",");
-                continue;
-            }else{
+        <span class="hljs-keyword">while</span> (!queue.isEmpty()){
+            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> queue.poll();
+            <span class="hljs-keyword">if</span> (pre == <span class="hljs-literal">null</span>){
+                sb.append(<span class="hljs-string">&quot;n&quot;</span>);
+                sb.append(<span class="hljs-string">&quot;,&quot;</span>);
+                <span class="hljs-keyword">continue</span>;
+            }<span class="hljs-keyword">else</span>{
                 sb.append(String.valueOf(pre.val));
-                sb.append(",");
+                sb.append(<span class="hljs-string">&quot;,&quot;</span>);
             }
             queue.offer(pre.left);
             queue.offer(pre.right);
         }
-        int neededLength = sb.length() - 1;
-        // strip speed
-        while(neededLength > 2 && sb.charAt(neededLength - 1) == 'n'){
-            neededLength -= 2;
+        <span class="hljs-type">int</span> <span class="hljs-variable">neededLength</span> <span class="hljs-operator">=</span> sb.length() - <span class="hljs-number">1</span>;
+        <span class="hljs-comment">// strip speed</span>
+        <span class="hljs-keyword">while</span>(neededLength &gt; <span class="hljs-number">2</span> &amp;&amp; sb.charAt(neededLength - <span class="hljs-number">1</span>) == <span class="hljs-string">&#x27;n&#x27;</span>){
+            neededLength -= <span class="hljs-number">2</span>;
         }
         sb.setLength(neededLength);
-        return sb.toString();
+        <span class="hljs-keyword">return</span> sb.toString();
     }
 
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        if (data.equals("n")){
-            return null;
+    <span class="hljs-comment">// Decodes your encoded data to tree.</span>
+    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">deserialize</span><span class="hljs-params">(String data)</span> {
+        <span class="hljs-keyword">if</span> (data.equals(<span class="hljs-string">&quot;n&quot;</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
         }
-        String[] vals = data.split(",");
-        TreeNode root = new TreeNode(Integer.valueOf(vals[0]));
-        Queue<TreeNode> queue = new LinkedList<>();
+        String[] vals = data.split(<span class="hljs-string">&quot;,&quot;</span>);
+        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(Integer.valueOf(vals[<span class="hljs-number">0</span>]));
+        Queue&lt;TreeNode&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
         queue.offer(root);
-        for(int i = 1; i < vals.length; i += 2){
-            if (queue.isEmpty()){
-                break;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; vals.length; i += <span class="hljs-number">2</span>){
+            <span class="hljs-keyword">if</span> (queue.isEmpty()){
+                <span class="hljs-keyword">break</span>;
             }
-            TreeNode pre = queue.poll();
-            if (vals[i].equals("n")){
-                pre.left = null;
-            }else{
-                TreeNode left = new TreeNode(Integer.valueOf(vals[i]));
+            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> queue.poll();
+            <span class="hljs-keyword">if</span> (vals[i].equals(<span class="hljs-string">&quot;n&quot;</span>)){
+                pre.left = <span class="hljs-literal">null</span>;
+            }<span class="hljs-keyword">else</span>{
+                <span class="hljs-type">TreeNode</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(Integer.valueOf(vals[i]));
                 pre.left = left;
                 queue.offer(left);
             }
-            if (i + 1 >= vals.length){
-                break;
+            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &gt;= vals.length){
+                <span class="hljs-keyword">break</span>;
             }
-            if (vals[i + 1].equals("n")){
-                pre.right = null;
-            }else{
-                TreeNode right = new TreeNode(Integer.valueOf(vals[i + 1]));
+            <span class="hljs-keyword">if</span> (vals[i + <span class="hljs-number">1</span>].equals(<span class="hljs-string">&quot;n&quot;</span>)){
+                pre.right = <span class="hljs-literal">null</span>;
+            }<span class="hljs-keyword">else</span>{
+                <span class="hljs-type">TreeNode</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(Integer.valueOf(vals[i + <span class="hljs-number">1</span>]));
                 pre.right = right;
                 queue.offer(right);
             }
         }
-        return root;
+        <span class="hljs-keyword">return</span> root;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -659,7 +672,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks1. 摘要Unicoder是一个对于不同语言通用的语言编码器。该
+                             Unicoder: A Universal Language Encoder by Pre-training with Multiple Cross-lingual Tasks
+ 1. 摘要
+Unicoder是一个对于不同语言通用的语言编
                         
                     </div>
                     <div class="publish-info">
@@ -720,9 +735,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 236. 二叉树的最近公共祖先题目描述给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+                             Leetcode: 236. 二叉树的最近公共祖先
+ 题目描述
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是
                         
                     </div>
                     <div class="publish-info">

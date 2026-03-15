@@ -5,15 +5,17 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:149. 直线上最多的点数, 小风雷">
-    <meta name="description" content="Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+    <meta name="description" content=" Leetcode: 149. 直线上最多的点数
+ 题目描述
+给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
 
-示例 1:输入: [[1,1],[2,2],[3,3]]
+ 示例 1:
+输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
 |
-|        o
-| ">
+|      ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -424,9 +426,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-149-直线上最多的点数"><a href="#Leetcode-149-直线上最多的点数" class="headerlink" title="Leetcode: 149. 直线上最多的点数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-points-on-a-line/">Leetcode: 149. 直线上最多的点数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+                <h1 id="leetcode-149-直线上最多的点数"><a class="markdownIt-Anchor" href="#leetcode-149-直线上最多的点数"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-points-on-a-line/">Leetcode: 149. 直线上最多的点数</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],[2,2],[3,3]]
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
@@ -437,7 +442,8 @@
 +-------------&gt;
 0  1  2  3  4
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
 输出: 4
 解释:
 ^
@@ -449,69 +455,76 @@
 +-------------------&gt;
 0  1  2  3  4  5  6
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-点斜法记录直线-hashMap"><a href="#思路1-点斜法记录直线-hashMap" class="headerlink" title="思路1: 点斜法记录直线+hashMap"></a>思路1: 点斜法记录直线+hashMap</h3><p>使用点斜法记录i与i+1开始的斜率值，保存最大值，并记录重复值，最后比较结果</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public int maxPoints(int[][] points) {
-        if (points.length < 3){
-            return points.length;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-点斜法记录直线hashmap"><a class="markdownIt-Anchor" href="#思路1-点斜法记录直线hashmap"></a> 思路1: 点斜法记录直线+hashMap</h3>
+<p>使用点斜法记录i与i+1开始的斜率值，保存最大值，并记录重复值，最后比较结果</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxPoints</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] points)</span> {
+        <span class="hljs-keyword">if</span> (points.length &lt; <span class="hljs-number">3</span>){
+            <span class="hljs-keyword">return</span> points.length;
         }
-        int duplicatedNum = 0;
-        int num = points.length;
-        int result = 0;
-        for(int i = 0;i < num - 1; i++){
-            if (points[i][0] != points[i + 1][0] || points[i][1] != points[i+1][1]){
-                break;
+        <span class="hljs-type">int</span> <span class="hljs-variable">duplicatedNum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> points.length;
+        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;i &lt; num - <span class="hljs-number">1</span>; i++){
+            <span class="hljs-keyword">if</span> (points[i][<span class="hljs-number">0</span>] != points[i + <span class="hljs-number">1</span>][<span class="hljs-number">0</span>] || points[i][<span class="hljs-number">1</span>] != points[i+<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]){
+                <span class="hljs-keyword">break</span>;
             }
-            duplicatedNum += 1;
+            duplicatedNum += <span class="hljs-number">1</span>;
         }
-        if (duplicatedNum - 1 == num){
-            return num;
+        <span class="hljs-keyword">if</span> (duplicatedNum - <span class="hljs-number">1</span> == num){
+            <span class="hljs-keyword">return</span> num;
         }
         
-        for(int i = 0; i < num - 1; i++){
-            duplicatedNum = 0;
-            Map<String, Integer> tempMap = new HashMap<>();
-            int tempMax = 0;
-            for(int j = i + 1; j < num; j++){
-                int x = points[i][0] - points[j][0];
-                int y = points[i][1] - points[j][1];
-                int tempGcb = gcb(x, y);
-                if (x == 0 && y == 0){
-                    duplicatedNum += 1;
-                    continue;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; num - <span class="hljs-number">1</span>; i++){
+            duplicatedNum = <span class="hljs-number">0</span>;
+            Map&lt;String, Integer&gt; tempMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+            <span class="hljs-type">int</span> <span class="hljs-variable">tempMax</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; num; j++){
+                <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> points[i][<span class="hljs-number">0</span>] - points[j][<span class="hljs-number">0</span>];
+                <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> points[i][<span class="hljs-number">1</span>] - points[j][<span class="hljs-number">1</span>];
+                <span class="hljs-type">int</span> <span class="hljs-variable">tempGcb</span> <span class="hljs-operator">=</span> gcb(x, y);
+                <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span> &amp;&amp; y == <span class="hljs-number">0</span>){
+                    duplicatedNum += <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">continue</span>;
                 }
                 x = x / tempGcb;
                 y = y / tempGcb;
-                String tempKey = x + "#" + y;
-                if (!tempMap.containsKey(tempKey)){
-                    tempMap.put(tempKey, 0);
+                <span class="hljs-type">String</span> <span class="hljs-variable">tempKey</span> <span class="hljs-operator">=</span> x + <span class="hljs-string">&quot;#&quot;</span> + y;
+                <span class="hljs-keyword">if</span> (!tempMap.containsKey(tempKey)){
+                    tempMap.put(tempKey, <span class="hljs-number">0</span>);
                 }
-                tempMap.put(tempKey, tempMap.get(tempKey) + 1);
-                if (tempMap.get(tempKey) > tempMax){
+                tempMap.put(tempKey, tempMap.get(tempKey) + <span class="hljs-number">1</span>);
+                <span class="hljs-keyword">if</span> (tempMap.get(tempKey) &gt; tempMax){
                     tempMax = tempMap.get(tempKey);
                 }
                 
             }
-            if (tempMax + duplicatedNum + 1 > result){
-                result = tempMax + duplicatedNum + 1;
+            <span class="hljs-keyword">if</span> (tempMax + duplicatedNum + <span class="hljs-number">1</span> &gt; result){
+                result = tempMax + duplicatedNum + <span class="hljs-number">1</span>;
             }
         }
-        return result;
+        <span class="hljs-keyword">return</span> result;
         
     }
     
-    private int gcb(int a, int b){
-        while(b != 0){
-            int temp = a % b;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">gcb</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>{
+        <span class="hljs-keyword">while</span>(b != <span class="hljs-number">0</span>){
+            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> a % b;
             a = b;
             b = temp;
         }
-        return a;
+        <span class="hljs-keyword">return</span> a;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n^2)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -667,15 +680,19 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。
+                             Leetcode:172. 阶乘后的零
+ 题目描述
+给定一个整数 n，返回 n! 结果尾数中零的数量。
 
-示例 1:输入: 3
+ 示例 1:
+输入: 3
 输出: 0
 解释: 3! = 6, 尾数中没有零。
 
-示例 2:输入: 5
+ 示例 2:
+输入: 5
 输出: 1
-解释: 5! = 120, 尾
+解释: 5! 
                         
                     </div>
                     <div class="publish-info">
@@ -732,9 +749,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:191. 位1的个数题目描述编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
-示例 1：输入：00000000000000000000000000001011
-输出：
+                             Leetcode:191. 位1的个数
+ 题目描述
+编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+ 示例 1：
+输入：000000000000000000000000000010
                         
                     </div>
                     <div class="publish-info">
