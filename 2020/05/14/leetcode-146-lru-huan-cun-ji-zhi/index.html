@@ -5,10 +5,8 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:146. LRU缓存机制, 小风雷">
-    <meta name="description" content=" Leetcode:146. LRU缓存机制
- 题目描述
-运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
-获取数据 get(key) - 如果密">
+    <meta name="description" content="Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+获取数据 get(key) - 如果密钥 (k">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +31,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -67,28 +65,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -105,17 +81,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
     </a>
     
   </li>
@@ -158,28 +123,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -196,17 +139,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
 		</a>
           
         </li>
@@ -409,7 +341,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    608
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
 				
                 
@@ -419,118 +361,100 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode146-lru缓存机制"><a class="markdownIt-Anchor" href="#leetcode146-lru缓存机制"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">Leetcode:146. LRU缓存机制</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p>
-<p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br />
-写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
-<p></p>
+                <h1 id="Leetcode-146-LRU缓存机制"><a href="#Leetcode-146-LRU缓存机制" class="headerlink" title="Leetcode:146. LRU缓存机制"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">Leetcode:146. LRU缓存机制</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p>
+<p>获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥&#x2F;数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
+<p> </p>
 <p>进阶:</p>
 <p>你是否可以在 O(1) 时间复杂度内完成这两种操作？</p>
-<p></p>
+<p> </p>
 <p>示例:</p>
-<p>LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );</p>
-<p>cache.put(1, 1);<br />
-cache.put(2, 2);<br />
-cache.get(1);       // 返回  1<br />
-cache.put(3, 3);    // 该操作会使得密钥 2 作废<br />
-cache.get(2);       // 返回 -1 (未找到)<br />
-cache.put(4, 4);    // 该操作会使得密钥 1 作废<br />
-cache.get(1);       // 返回 -1 (未找到)<br />
-cache.get(3);       // 返回  3<br />
-cache.get(4);       // 返回  4</p>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-hashmap-双向链表"><a class="markdownIt-Anchor" href="#思路1-hashmap-双向链表"></a> 思路1 HashMap + 双向链表</h3>
-<p>因为要满足存取都是O(1)复杂度，且有容量限制（所以重点在于如何删除以及置于最前），所以可以使用一个HashMap和双向链表实现</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">import</span> java.util.Hashtable;
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">LRUCache</span> {
+<p>LRUCache cache &#x3D; new LRUCache( 2 &#x2F;* 缓存容量 *&#x2F; );</p>
+<p>cache.put(1, 1);<br>cache.put(2, 2);<br>cache.get(1);       &#x2F;&#x2F; 返回  1<br>cache.put(3, 3);    &#x2F;&#x2F; 该操作会使得密钥 2 作废<br>cache.get(2);       &#x2F;&#x2F; 返回 -1 (未找到)<br>cache.put(4, 4);    &#x2F;&#x2F; 该操作会使得密钥 1 作废<br>cache.get(1);       &#x2F;&#x2F; 返回 -1 (未找到)<br>cache.get(3);       &#x2F;&#x2F; 返回  3<br>cache.get(4);       &#x2F;&#x2F; 返回  4</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-HashMap-双向链表"><a href="#思路1-HashMap-双向链表" class="headerlink" title="思路1 HashMap + 双向链表"></a>思路1 HashMap + 双向链表</h3><p>因为要满足存取都是O(1)复杂度，且有容量限制（所以重点在于如何删除以及置于最前），所以可以使用一个HashMap和双向链表实现</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">import java.util.Hashtable;
+class LRUCache {
 
-    <span class="hljs-keyword">class</span> <span class="hljs-title class_">DNode</span>{
-        <span class="hljs-type">int</span> key;
-        <span class="hljs-type">int</span> value;
+    class DNode{
+        int key;
+        int value;
         DNode pre;
         DNode next;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addNode</span><span class="hljs-params">(DNode node)</span>{
+    private void addNode(DNode node){
         node.pre = head;
         node.next = head.next;
         head.next.pre = node;
         head.next = node;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">removeNode</span><span class="hljs-params">(DNode node)</span>{
-        <span class="hljs-type">DNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> node.pre;
-        <span class="hljs-type">DNode</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> node.next;
+    private void removeNode(DNode node){
+        DNode pre = node.pre;
+        DNode next = node.next;
         
         pre.next = next;
         next.pre = pre;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">toHead</span><span class="hljs-params">(DNode node)</span>{
+    private void toHead(DNode node){
         removeNode(node);
         addNode(node);
     }
     
-    <span class="hljs-keyword">private</span> DNode <span class="hljs-title function_">removeTail</span><span class="hljs-params">()</span>{
-        <span class="hljs-type">DNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> tail.pre;
+    private DNode removeTail(){
+        DNode pre = tail.pre;
         removeNode(pre);
-        <span class="hljs-keyword">return</span> pre;
+        return pre;
     }
     
-    <span class="hljs-keyword">private</span> DNode head, tail;
-    <span class="hljs-keyword">private</span> HashMap&lt;Integer, DNode&gt; cache =
-          <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, DNode&gt;();
-    <span class="hljs-type">int</span> maxSize;
-    <span class="hljs-type">int</span> size;
+    private DNode head, tail;
+    private HashMap<Integer, DNode> cache =
+          new HashMap<Integer, DNode>();
+    int maxSize;
+    int size;
     
-    <span class="hljs-keyword">public</span> <span class="hljs-title function_">LRUCache</span><span class="hljs-params">(<span class="hljs-type">int</span> capacity)</span> {
-        <span class="hljs-built_in">this</span>.maxSize = capacity;
-        <span class="hljs-built_in">this</span>.size = <span class="hljs-number">0</span>;
-        <span class="hljs-built_in">this</span>.head = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DNode</span>();
-        <span class="hljs-built_in">this</span>.tail = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DNode</span>();
-        <span class="hljs-built_in">this</span>.head.next = tail;
-        <span class="hljs-built_in">this</span>.tail.pre = head;
+    public LRUCache(int capacity) {
+        this.maxSize = capacity;
+        this.size = 0;
+        this.head = new DNode();
+        this.tail = new DNode();
+        this.head.next = tail;
+        this.tail.pre = head;
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span> {
-        <span class="hljs-type">DNode</span> <span class="hljs-variable">node</span> <span class="hljs-operator">=</span> cache.get(key);
-        <span class="hljs-keyword">if</span> (node == <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
-        }<span class="hljs-keyword">else</span>{
+    public int get(int key) {
+        DNode node = cache.get(key);
+        if (node == null){
+            return -1;
+        }else{
             toHead(node);
-            <span class="hljs-keyword">return</span> node.value;
+            return node.value;
         }
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(<span class="hljs-type">int</span> key, <span class="hljs-type">int</span> value)</span> {
-        <span class="hljs-type">DNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> cache.get(key);
-        <span class="hljs-keyword">if</span> (pre == <span class="hljs-literal">null</span>){
-            pre = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DNode</span>();
+    public void put(int key, int value) {
+        DNode pre = cache.get(key);
+        if (pre == null){
+            pre = new DNode();
             pre.key = key;
             pre.value = value;
-            <span class="hljs-built_in">this</span>.size += <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.size &gt; <span class="hljs-built_in">this</span>.maxSize){
-                <span class="hljs-type">DNode</span> <span class="hljs-variable">removeNode</span> <span class="hljs-operator">=</span> removeTail();
+            this.size += 1;
+            if (this.size > this.maxSize){
+                DNode removeNode = removeTail();
                 cache.remove(removeNode.key);
-                <span class="hljs-built_in">this</span>.size = <span class="hljs-built_in">this</span>.maxSize;
+                this.size = this.maxSize;
             }
             addNode(pre);
             cache.put(key, pre);
-        }<span class="hljs-keyword">else</span>{
+        }else{
             pre.value = value;
             toHead(pre);
         }
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -686,15 +610,13 @@ cache.get(4);       // 返回  4</p>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 37.解数独
- 题目描述
-编写一个程序，通过已填充的空格来解决数独问题。
+                            Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
 
 一个数独的解法需遵循如下规则：
 
 数字 1-9 在每一行只能出现一次。
 数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分
+数字 1-9 在每一个以粗实线分隔的 3
                         
                     </div>
                     <div class="publish-info">
@@ -751,11 +673,9 @@ cache.get(4);       // 返回  4</p>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             [Leetcode: 134. 加油站]
- 题目描述
-在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+                            [Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其
                         
                     </div>
                     <div class="publish-info">
@@ -971,6 +891,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             &copy; 2019 WeijunLei. All Rights Reserved.
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">44.6k</span>&nbsp;字
+                
             <span id="sitetime"></span>
 
             
@@ -983,7 +906,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:qingfengwuyu233@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 

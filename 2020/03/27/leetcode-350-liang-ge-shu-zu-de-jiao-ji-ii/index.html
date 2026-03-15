@@ -5,16 +5,12 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:350. 两个数组的交集 II, 小风雷">
-    <meta name="description" content=" 350. 两个数组的交集 II
- 题目描述
-给定两个数组，编写一个函数来计算它们的交集。
+    <meta name="description" content="350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
 
- 示例 1:
-输入: nums1 = [1,2,2,1], nums2 = [2,2]
+示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
 输出: [2,2]
 
- 示例 2:
-输入: nums1 =">
+示例 2:输入: nums1 = [4,9,5]">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -39,7 +35,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -73,28 +69,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -111,17 +85,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
     </a>
     
   </li>
@@ -164,28 +127,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -202,17 +143,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
 		</a>
           
         </li>
@@ -419,7 +349,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    521
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
 				
                 
@@ -429,95 +369,78 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="350-两个数组的交集-ii"><a class="markdownIt-Anchor" href="#350-两个数组的交集-ii"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/">350. 两个数组的交集 II</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定两个数组，编写一个函数来计算它们的交集。
+                <h1 id="350-两个数组的交集-II"><a href="#350-两个数组的交集-II" class="headerlink" title="350. 两个数组的交集 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/">350. 两个数组的交集 II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定两个数组，编写一个函数来计算它们的交集。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: nums1 = [1,2,2,1], nums2 = [2,2]
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums1 = [1,2,2,1], nums2 = [2,2]
 输出: [2,2]
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 输出: [4,9]
 </code></pre>
-<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明：</h3>
-<pre><code>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
 我们可以不考虑输出结果的顺序。
 </code></pre>
-<h3 id="进阶"><a class="markdownIt-Anchor" href="#进阶"></a> 进阶:</h3>
-<pre><code>如果给定的数组已经排好序呢？你将如何优化你的算法？
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶:"></a>进阶:</h3><pre><code>如果给定的数组已经排好序呢？你将如何优化你的算法？
 如果 nums1 的大小比 nums2 小很多，哪种方法更优？
 如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-两个数组排序后使用两个指针遍历比较"><a class="markdownIt-Anchor" href="#思路1-两个数组排序后使用两个指针遍历比较"></a> 思路1: 两个数组排序后使用两个指针遍历比较</h3>
-<p>对两个数组分别排序，然后使用一个哨兵分别计数，若两位置相等则加入，否则按照排序递增</p>
-<h3 id="思路2-使用hash计数"><a class="markdownIt-Anchor" href="#思路2-使用hash计数"></a> 思路2: 使用Hash计数</h3>
-<p>对一个数组hash计数，然后使用另外一个等相等加入</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] intersect(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2) {
-        List&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-两个数组排序后使用两个指针遍历比较"><a href="#思路1-两个数组排序后使用两个指针遍历比较" class="headerlink" title="思路1: 两个数组排序后使用两个指针遍历比较"></a>思路1: 两个数组排序后使用两个指针遍历比较</h3><p>对两个数组分别排序，然后使用一个哨兵分别计数，若两位置相等则加入，否则按照排序递增</p>
+<h3 id="思路2-使用Hash计数"><a href="#思路2-使用Hash计数" class="headerlink" title="思路2: 使用Hash计数"></a>思路2: 使用Hash计数</h3><p>对一个数组hash计数，然后使用另外一个等相等加入</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> result = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         
-        <span class="hljs-type">int</span> <span class="hljs-variable">aIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">bIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span>(aIndex &lt; nums1.length &amp;&amp; bIndex &lt; nums2.length){
-            <span class="hljs-keyword">if</span> (nums1[aIndex] == nums2[bIndex]){
+        int aIndex = 0;
+        int bIndex = 0;
+        while(aIndex < nums1.length && bIndex < nums2.length){
+            if (nums1[aIndex] == nums2[bIndex]){
                 result.add(nums1[aIndex]);
                 aIndex ++;
                 bIndex ++;
-            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums1[aIndex] &lt; nums2[bIndex]){
+            } else if(nums1[aIndex] < nums2[bIndex]){
                 aIndex ++;
-            } <span class="hljs-keyword">else</span> {
+            } else {
                 bIndex ++;
             }
         }
-        <span class="hljs-type">int</span>[] intResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[result.size()];
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; result.size(); i++){
+        int[] intResult = new int[result.size()];
+        for(int i = 0; i < result.size(); i++){
             intResult[i] = result.get(i);
         }
-        <span class="hljs-keyword">return</span> intResult;
+        return intResult;
     }
 }
 </code></pre>
-<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] intersect(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2) {
-        List&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-        Map&lt;Integer, Integer&gt; hashMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums1){
-            <span class="hljs-keyword">if</span> (!hashMap.containsKey(num)){
-                hashMap.put(num, <span class="hljs-number">0</span>);
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> result = new ArrayList<>();
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        for(int num: nums1){
+            if (!hashMap.containsKey(num)){
+                hashMap.put(num, 0);
             }
-            hashMap.put(num, hashMap.get(num) + <span class="hljs-number">1</span>);
+            hashMap.put(num, hashMap.get(num) + 1);
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums2){
-            <span class="hljs-keyword">if</span> (hashMap.containsKey(num) &amp;&amp; hashMap.get(num) &gt; <span class="hljs-number">0</span>){
+        for(int num: nums2){
+            if (hashMap.containsKey(num) && hashMap.get(num) > 0){
                 result.add(num);
-                hashMap.put(num, hashMap.get(num) - <span class="hljs-number">1</span>);
+                hashMap.put(num, hashMap.get(num) - 1);
             }
         }
-        <span class="hljs-type">int</span>[] intResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[result.size()];
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; result.size(); i++){
+        int[] intResult = new int[result.size()];
+        for(int i = 0; i < result.size(); i++){
             intResult[i] = result.get(i);
         }
-        <span class="hljs-keyword">return</span> intResult;
+        return intResult;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1时间复杂度-2"><a class="markdownIt-Anchor" href="#思路1时间复杂度-2"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度-2"><a class="markdownIt-Anchor" href="#思路1空间复杂度-2"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlog(n))$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路1时间复杂度-1"><a href="#思路1时间复杂度-1" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路1空间复杂度-1"><a href="#思路1空间复杂度-1" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -677,14 +600,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             334. 递增的三元子序列
- 题目描述
-给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+                            334. 递增的三元子序列题目描述给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
 
 数学表达式如下:
 
 如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，
-使得 
+使得 arr[
                         
                     </div>
                     <div class="publish-info">
@@ -749,13 +670,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 384.打乱数组
- 题目描述
-打乱一个没有重复元素的数组。
- 示例:
-// 以数字集合 1, 2 和 3 初始化数组。
+                            Leetcode: 384.打乱数组题目描述打乱一个没有重复元素的数组。
+示例:// 以数字集合 1, 2 和 3 初始化数组。
 int[] nums = {1,2,3};
-Solution solution
+Solution solution = new
                         
                     </div>
                     <div class="publish-info">
@@ -979,6 +897,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             &copy; 2019 WeijunLei. All Rights Reserved.
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">44.6k</span>&nbsp;字
+                
             <span id="sitetime"></span>
 
             
@@ -991,7 +912,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:qingfengwuyu233@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 

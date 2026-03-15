@@ -5,19 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:172. 阶乘后的零, 小风雷">
-    <meta name="description" content=" Leetcode:172. 阶乘后的零
- 题目描述
-给定一个整数 n，返回 n! 结果尾数中零的数量。
+    <meta name="description" content="Leetcode:172. 阶乘后的零题目描述给定一个整数 n，返回 n! 结果尾数中零的数量。
 
- 示例 1:
-输入: 3
+示例 1:输入: 3
 输出: 0
 解释: 3! = 6, 尾数中没有零。
 
- 示例 2:
-输入: 5
+示例 2:输入: 5
 输出: 1
-解释: 5! ">
+解释: 5! = 120, 尾">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -42,7 +38,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -76,28 +72,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -114,17 +88,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
     </a>
     
   </li>
@@ -167,28 +130,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -205,17 +146,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
 		</a>
           
         </li>
@@ -418,7 +348,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    194
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 				
                 
@@ -428,45 +368,34 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode172-阶乘后的零"><a class="markdownIt-Anchor" href="#leetcode172-阶乘后的零"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">Leetcode:172. 阶乘后的零</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定一个整数 n，返回 n! 结果尾数中零的数量。
+                <h1 id="Leetcode-172-阶乘后的零"><a href="#Leetcode-172-阶乘后的零" class="headerlink" title="Leetcode:172. 阶乘后的零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">Leetcode:172. 阶乘后的零</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数 n，返回 n! 结果尾数中零的数量。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: 3
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 3
 输出: 0
 解释: 3! = 6, 尾数中没有零。
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: 5
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 5
 输出: 1
 解释: 5! = 120, 尾数中有 1 个零.
 说明: 你算法的时间复杂度应为 O(log n) 。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1利用基本数学规则"><a class="markdownIt-Anchor" href="#思路1利用基本数学规则"></a> 思路1：利用基本数学规则</h3>
-<p>每含一个5为约数的数可以提供一个0，含25为约数可以提供两个0，以此类推</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trailingZeroes</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
-        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：利用基本数学规则"><a href="#思路1：利用基本数学规则" class="headerlink" title="思路1：利用基本数学规则"></a>思路1：利用基本数学规则</h3><p>每含一个5为约数的数可以提供一个0，含25为约数可以提供两个0，以此类推</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int trailingZeroes(int n) {
+        if (n < 0){
+            return -1;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (n / <span class="hljs-number">5</span> != <span class="hljs-number">0</span>){
-            result += n / <span class="hljs-number">5</span>;
-            n = n / <span class="hljs-number">5</span>;
+        int result = 0;
+        while (n / 5 != 0){
+            result += n / 5;
+            n = n / 5;
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(log(n))$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -622,13 +551,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:166. 分数到小数
- 题目描述
-给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
+                            Leetcode:166. 分数到小数题目描述给定两个整数，分别表示分数的分子 numerator 和分母 denominator，以字符串形式返回小数。
 如果小数部分为循环小数，则将循环的部分括在括号内。
 
- 示例 1:
-输入: 
+示例 1:输入: numera
                         
                     </div>
                     <div class="publish-info">
@@ -685,17 +611,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 149. 直线上最多的点数
- 题目描述
-给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
+                            Leetcode: 149. 直线上最多的点数题目描述给定一个二维平面，平面上有 n 个点，求最多有多少个点在同一条直线上。
 
- 示例 1:
-输入: [[1,1],[2,2],[3,3]]
+示例 1:输入: [[1,1],[2,2],[3,3]]
 输出: 3
 解释:
 ^
 |
-|      
+|        o
+| 
                         
                     </div>
                     <div class="publish-info">
@@ -915,6 +839,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             &copy; 2019 WeijunLei. All Rights Reserved.
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">44.6k</span>&nbsp;字
+                
             <span id="sitetime"></span>
 
             
@@ -927,7 +854,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:qingfengwuyu233@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 

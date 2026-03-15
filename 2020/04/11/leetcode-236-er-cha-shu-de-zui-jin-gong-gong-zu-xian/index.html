@@ -5,11 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:236. 二叉树的最近公共祖先, 小风雷">
-    <meta name="description" content=" Leetcode: 236. 二叉树的最近公共祖先
- 题目描述
-给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+    <meta name="description" content="Leetcode: 236. 二叉树的最近公共祖先题目描述给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
-百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是">
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -34,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -68,28 +66,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -106,17 +82,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
     </a>
     
   </li>
@@ -159,28 +124,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -197,17 +140,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
 		</a>
           
         </li>
@@ -410,7 +342,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    483
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
                 
 				
                 
@@ -420,65 +362,53 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode-236-二叉树的最近公共祖先"><a class="markdownIt-Anchor" href="#leetcode-236-二叉树的最近公共祖先"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">Leetcode: 236. 二叉树的最近公共祖先</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+                <h1 id="Leetcode-236-二叉树的最近公共祖先"><a href="#Leetcode-236-二叉树的最近公共祖先" class="headerlink" title="Leetcode: 236. 二叉树的最近公共祖先"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">Leetcode: 236. 二叉树的最近公共祖先</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
 
 百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”
 
 例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
 输出: 3
 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
 输出: 5
 解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。
 </code></pre>
-<p></p>
-<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
-<pre><code>所有节点的值都是唯一的。
+<p> </p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>所有节点的值都是唯一的。
 p、q 为不同节点且均存在于给定的二叉树中。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-后序遍历递归"><a class="markdownIt-Anchor" href="#思路1-后序遍历递归"></a> 思路1: 后序遍历+递归</h3>
-<p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br />
-// TODO:其他思路</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> TreeNode <span class="hljs-title function_">lowestCommonAncestor</span><span class="hljs-params">(TreeNode root, TreeNode p, TreeNode q)</span> {
-        <span class="hljs-type">TreeNode</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeNode</span>(<span class="hljs-number">0</span>);
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-后序遍历-递归"><a href="#思路1-后序遍历-递归" class="headerlink" title="思路1: 后序遍历+递归"></a>思路1: 后序遍历+递归</h3><p>使用三个计数器分别计数，通过后序遍历的方式计算每个节点的左子树，右子树以及本身是否包含p,q，如果有两个则表明该节点为最近公共祖先<br>&#x2F;&#x2F; TODO:其他思路</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode result = new TreeNode(0);
         commonHelper(root, p, q, result);
-        <span class="hljs-keyword">return</span> result.left;
+        return result.left;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">commonHelper</span><span class="hljs-params">(TreeNode root, TreeNode p, TreeNode q, TreeNode result)</span>{
-        <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    private boolean commonHelper(TreeNode root, TreeNode p, TreeNode q, TreeNode result){
+        if (root == null){
+            return false;
         }
         
-        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> commonHelper(root.left, p, q, result) ? <span class="hljs-number">1</span>: <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> commonHelper(root.right, p, q, result) ? <span class="hljs-number">1</span>: <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">if</span> (root == p || root == q){
-            mid = <span class="hljs-number">1</span>;
+        int left = commonHelper(root.left, p, q, result) ? 1: 0;
+        int right = commonHelper(root.right, p, q, result) ? 1: 0;
+        int mid = 0;
+        if (root == p || root == q){
+            mid = 1;
         }
-        <span class="hljs-keyword">if</span> (mid + left + right &gt;= <span class="hljs-number">2</span>){
+        if (mid + left + right >= 2){
             System.out.println(root.val);
             result.left = root;
         }
-        <span class="hljs-keyword">return</span> (mid + left + right) &gt; <span class="hljs-number">0</span>;
+        return (mid + left + right) > 0;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -634,9 +564,9 @@ p、q 为不同节点且均存在于给定的二叉树中。
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:297. 二叉树的序列化与反序列化
- 题目描述
-序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据
+                            Leetcode:297. 二叉树的序列化与反序列化题目描述序列化是将一个数据结构或者对象转换为连续的比特位的操作，进而可以将转换后的数据存储在一个文件或者内存中，同时也可以通过网络传输到另一个计算机环境，采取相反方式重构得到原数据。
+
+请
                         
                     </div>
                     <div class="publish-info">
@@ -693,14 +623,11 @@ p、q 为不同节点且均存在于给定的二叉树中。
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 230. 二叉搜索树中第K小的元素
- 题目描述
-一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
+                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
 
- 说明：
-你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
+说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
 
- 
+示例 1:输入
                         
                     </div>
                     <div class="publish-info">
@@ -920,6 +847,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             &copy; 2019 WeijunLei. All Rights Reserved.
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">44.6k</span>&nbsp;字
+                
             <span id="sitetime"></span>
 
             
@@ -932,7 +862,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:qingfengwuyu233@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 

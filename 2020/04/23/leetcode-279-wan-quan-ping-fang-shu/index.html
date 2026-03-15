@@ -5,13 +5,11 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:279. 完全平方数, 小风雷">
-    <meta name="description" content=" Leetcode:279. 完全平方数
- 题目描述
-给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。
+    <meta name="description" content="Leetcode:279. 完全平方数题目描述给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。
 
- 示例 1:
-输入: n = 12
-输出: ">
+示例 1:输入: n = 12
+输出: 3 
+解释:">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -36,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -70,28 +68,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -108,17 +84,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
     </a>
     
   </li>
@@ -161,28 +126,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -199,17 +142,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
 		</a>
           
         </li>
@@ -424,7 +356,17 @@
                 
 
                 
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    353
+                </div>
+                
 
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
                 
 				
                 
@@ -434,154 +376,111 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode279-完全平方数"><a class="markdownIt-Anchor" href="#leetcode279-完全平方数"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">Leetcode:279. 完全平方数</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。
+                <h1 id="Leetcode-279-完全平方数"><a href="#Leetcode-279-完全平方数" class="headerlink" title="Leetcode:279. 完全平方数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">Leetcode:279. 完全平方数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定正整数 n，找到若干个完全平方数（比如 1, 4, 9, 16, ...）使得它们的和等于 n。你需要让组成和的完全平方数的个数最少。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: n = 12
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: n = 12
 输出: 3 
 解释: 12 = 4 + 4 + 4.
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: n = 13
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: n = 13
 输出: 2
 解释: 13 = 4 + 9.
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-dp可开方数保存"><a class="markdownIt-Anchor" href="#思路1-dp可开方数保存"></a> 思路1 DP+可开方数保存</h3>
-<p>保存可开方数，然后使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo>−</mo><mi>s</mi><mi>q</mi><mi>r</mi><mi>t</mi><mi>N</mi><mi>u</mi><mi>m</mi><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo><mo stretchy="false">]</mo><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mtext>　</mtext><mi>j</mi><mo>∈</mo><mtext>开方列表大小</mtext></mrow><annotation encoding="application/x-tex">dp[i] = min(dp[i - sqrtNum[j]] + 1)　j \in 开方列表大小</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">i</span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">p</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord cjk_fallback">　</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord cjk_fallback">开</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">列</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">大</span><span class="mord cjk_fallback">小</span></span></span></span></p>
-<h3 id="思路2-贪心法"><a class="markdownIt-Anchor" href="#思路2-贪心法"></a> 思路2 贪心法</h3>
-<p>使用一个canSqure函数依次计算是否可以由count个可开方数字加和得到，在这个过程依旧要保存可开方数，用于计算递归计算count - 1个组合而成</p>
-<h3 id="思路3-贪心bfs"><a class="markdownIt-Anchor" href="#思路3-贪心bfs"></a> 思路3 贪心+BFS</h3>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/solution/wan-quan-ping-fang-shu-by-leetcode/">贪心+BFS</a>基本思路是思路2的n元树BFS</p>
-<h3 id="思路4-数学公式"><a class="markdownIt-Anchor" href="#思路4-数学公式"></a> 思路4 数学公式</h3>
-<p>每个自然数都可以表示为四个整数平方和，且<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false">!</mo><mo>=</mo><msup><mn>4</mn><mi>k</mi></msup><mo stretchy="false">(</mo><mn>8</mn><mi>m</mi><mo>+</mo><mn>7</mn><mo stretchy="false">)</mo><mo>&lt;</mo><mo>=</mo><mo>=</mo><mo>&gt;</mo><mi>n</mi><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup><mo>+</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n!= 4^k(8m + 7) &lt;==&gt; n = a^2 + b^2 + c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.099108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">8</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">7</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathnormal">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>,所以只需要判断能否表示为三个可开方数之和，如果不能则为4，然后判断是否可以由两个开方数组合而成以及一个可开方数</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSquares</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
-        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP-可开方数保存"><a href="#思路1-DP-可开方数保存" class="headerlink" title="思路1 DP+可开方数保存"></a>思路1 DP+可开方数保存</h3><p>保存可开方数，然后使用$dp[i] &#x3D; min(dp[i - sqrtNum[j]] + 1)　j \in 开方列表大小$</p>
+<h3 id="思路2-贪心法"><a href="#思路2-贪心法" class="headerlink" title="思路2 贪心法"></a>思路2 贪心法</h3><p>使用一个canSqure函数依次计算是否可以由count个可开方数字加和得到，在这个过程依旧要保存可开方数，用于计算递归计算count - 1个组合而成</p>
+<h3 id="思路3-贪心-BFS"><a href="#思路3-贪心-BFS" class="headerlink" title="思路3 贪心+BFS"></a>思路3 贪心+BFS</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/solution/wan-quan-ping-fang-shu-by-leetcode/">贪心+BFS</a>基本思路是思路2的n元树BFS</p>
+<h3 id="思路4-数学公式"><a href="#思路4-数学公式" class="headerlink" title="思路4 数学公式"></a>思路4 数学公式</h3><p>每个自然数都可以表示为四个整数平方和，且$n!&#x3D; 4^k(8m + 7) &lt;&#x3D;&#x3D;&gt; n &#x3D; a^2 + b^2 + c^2$,所以只需要判断能否表示为三个可开方数之和，如果不能则为4，然后判断是否可以由两个开方数组合而成以及一个可开方数</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int numSquares(int n) {
+        if (n == 0 || n == 1){
+            return 1;
         }
-        <span class="hljs-type">int</span>[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n + <span class="hljs-number">1</span>];
-        ArrayList&lt;Integer&gt; sqrtNums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n + <span class="hljs-number">1</span>; i++){
-            <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">1</span> &amp;&amp; i * i &lt;= n){
+        int[] dps = new int[n + 1];
+        ArrayList<Integer> sqrtNums = new ArrayList<>();
+        for(int i = 0; i < n + 1; i++){
+            if (i >= 1 && i * i <= n){
                 sqrtNums.add(i * i);
             }
             dps[i] = i;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">sqrtSize</span> <span class="hljs-operator">=</span> sqrtNums.size();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; i &lt;= n; i++){
-            <span class="hljs-type">int</span> <span class="hljs-variable">tempNum</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; sqrtSize &amp;&amp; i - sqrtNums.get(j) &gt;= <span class="hljs-number">0</span>; j++){
-                dps[i] = Math.min(dps[i], dps[i - sqrtNums.get(j)] + <span class="hljs-number">1</span>);
+        int sqrtSize = sqrtNums.size();
+        for(int i = 2; i <= n; i++){
+            int tempNum = 1;
+            for(int j = 0; j < sqrtSize && i - sqrtNums.get(j) >= 0; j++){
+                dps[i] = Math.min(dps[i], dps[i - sqrtNums.get(j)] + 1);
             }
         }
-        <span class="hljs-keyword">return</span> dps[n];
+        return dps[n];
     }
 }
 </code></pre>
-<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">private</span> Set&lt;Integer&gt; squareSet;
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    private Set<Integer> squareSet;
     
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSquares</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
-        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    public int numSquares(int n) {
+        if (n == 0 || n == 1){
+            return 1;
         }
-        squareSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i * i &lt;= n; i++){
+        squareSet = new HashSet<>();
+        for(int i = 0; i * i <= n; i++){
             squareSet.add(i * i);
         }
         
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= n; i++){
-            <span class="hljs-keyword">if</span> (canSquare(n, i)){
-                <span class="hljs-keyword">return</span> i;
+        for(int i = 1; i <= n; i++){
+            if (canSquare(n, i)){
+                return i;
             }
         }
-        <span class="hljs-keyword">return</span> n;
+        return n;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canSquare</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> count)</span>{
-        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    private boolean canSquare(int n, int count){
+        if (n < 0){
+            return false;
         }
-        <span class="hljs-keyword">if</span> (count == <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> squareSet.contains(n);
+        if (count == 1){
+            return squareSet.contains(n);
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: squareSet){
-            <span class="hljs-keyword">if</span> (canSquare(n - num, count - <span class="hljs-number">1</span>)){
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        for(int num: squareSet){
+            if (canSquare(n - num, count - 1)){
+                return true;
             }
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        return false;
     }
 }
 </code></pre>
-<h3 id="代码4"><a class="markdownIt-Anchor" href="#代码4"></a> 代码4</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numSquares</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> {
-        <span class="hljs-keyword">while</span> (n % <span class="hljs-number">4</span> == <span class="hljs-number">0</span>){
-            n /= <span class="hljs-number">4</span>;
+<h3 id="代码4"><a href="#代码4" class="headerlink" title="代码4"></a>代码4</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int numSquares(int n) {
+        while (n % 4 == 0){
+            n /= 4;
         }
-        <span class="hljs-keyword">if</span> (n % <span class="hljs-number">8</span> == <span class="hljs-number">7</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+        if (n % 8 == 7){
+            return 4;
         }
-        <span class="hljs-keyword">if</span> (isSquare(n)){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        if (isSquare(n)){
+            return 1;
         }
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i * i &lt;= n; i++){
-            <span class="hljs-keyword">if</span> (isSquare(n - i * i)){
-                <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+        for(int i = 1; i * i <= n; i++){
+            if (isSquare(n - i * i)){
+                return 2;
             }
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+        return 3;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSquare</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">getSqrt</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)Math.sqrt(n);
-        <span class="hljs-keyword">return</span> getSqrt * getSqrt == n;
+    private boolean isSquare(int n){
+        int getSqrt = (int)Math.sqrt(n);
+        return getSqrt * getSqrt == n;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p>$ O(n\sqrt{n}) $</p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mfrac><mi>h</mi><mn>2</mn></mfrac></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^{\frac{h}{2}})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.22902em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.97902em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8800285714285714em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">h</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,h为递归次数，h可看作是n元树，n为可开方数量，然后最多层数为4根据后续证明</p>
-<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msqrt><mi>n</mi></msqrt><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\sqrt{n})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.05028em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
-c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
-c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
-c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
-s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
-c69,-144,104.5,-217.7,106.5,-221
-l0 -0
-c5.3,-9.3,12,-14,20,-14
-H400000v40H845.2724
-s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
-c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
-M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路3同思路2"><a class="markdownIt-Anchor" href="#思路3同思路2"></a> 思路3同思路2</h3>
-<h3 id="思路4时间复杂度"><a class="markdownIt-Anchor" href="#思路4时间复杂度"></a> 思路4时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msqrt><mi>n</mi></msqrt><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(\sqrt{n})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.05028em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
-c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
-c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
-c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
-s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
-c69,-144,104.5,-217.7,106.5,-221
-l0 -0
-c5.3,-9.3,12,-14,20,-14
-H400000v40H845.2724
-s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
-c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
-M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路4空间复杂度"><a class="markdownIt-Anchor" href="#思路4空间复杂度"></a> 思路4空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$ O(n\sqrt{n}) $</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n^{\frac{h}{2}})$,h为递归次数，h可看作是n元树，n为可开方数量，然后最多层数为4根据后续证明</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(\sqrt{n})$</p>
+<h3 id="思路3同思路2"><a href="#思路3同思路2" class="headerlink" title="思路3同思路2"></a>思路3同思路2</h3><h3 id="思路4时间复杂度"><a href="#思路4时间复杂度" class="headerlink" title="思路4时间复杂度"></a>思路4时间复杂度</h3><p>$O(\sqrt{n})$</p>
+<h3 id="思路4空间复杂度"><a href="#思路4空间复杂度" class="headerlink" title="思路4空间复杂度"></a>思路4空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -749,14 +648,11 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:300.最长上升子序列
- 题目描述
-给定一个无序的整数数组，找到其中最长上升子序列的长度。
+                            Leetcode:300.最长上升子序列题目描述给定一个无序的整数数组，找到其中最长上升子序列的长度。
 
- 示例:
-输入: [10,9,2,5,3,7,101,18]
+示例:输入: [10,9,2,5,3,7,101,18]
 输出: 4 
-解释: 最长的上升子序列是 [2,3,7,101]
+解释: 最长的上升子序列是 [2,3,7,101]，它的长度是
                         
                     </div>
                     <div class="publish-info">
@@ -821,11 +717,9 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:198. 打家劫舍
- 题目描述
-你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+                            Leetcode:198. 打家劫舍题目描述你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
 
-
+给定一个
                         
                     </div>
                     <div class="publish-info">
@@ -1045,6 +939,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             &copy; 2019 WeijunLei. All Rights Reserved.
             <br>
             
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">44.6k</span>&nbsp;字
+                
             <span id="sitetime"></span>
 
             
@@ -1057,7 +954,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="mailto:qingfengwuyu233@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
