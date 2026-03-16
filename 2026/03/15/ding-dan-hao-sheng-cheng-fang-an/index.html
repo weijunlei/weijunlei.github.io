@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -767,7 +767,8 @@ func handleRefundOld(event OrderRefundEvent) {
 <li><strong>循环复用</strong>：号段循环，从999回到1</li>
 </ol>
 <h4 id="4-1-1-方案一：号段模式（Leaf-Segment）"><a href="#4-1-1-方案一：号段模式（Leaf-Segment）" class="headerlink" title="4.1.1 方案一：号段模式（Leaf Segment）"></a>4.1.1 方案一：号段模式（Leaf Segment）</h4><p><strong>原理：</strong> 每次从数据库获取一段号码，内存中逐个分配，耗尽后再去数据库获取新号段。</p>
-<pre class="mermaid">flowchart LR
+<pre class="mermaid">flowchart TD
+    direction LR
     A[Database] -->|1. Get segment[1-1000]| B[Leaf Service]
     B -->|2. Allocate| C[Store]
     C -->|3. Request number| B
