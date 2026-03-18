@@ -522,35 +522,22 @@
                     <i class="fas fa-file-alt"></i>
                 </a>
                 <div class="info-title">
-                    <a href="https://weijunlei.github.io/about/" target="_blank">电信告警预测</a>
+                    <a href="https://weijunlei.github.io/about/" target="_blank">Go Kafka并发消费优化</a>
                 </div>
-                <div class="info-desc">使用LSTM对电信网络告警进行处理</div>
-            </div>
-        </div>
-        
-        <div class="col s12 m6 l4" data-aos="fade-up">
-            <div class="info center-align">
-                <a href="https://github.com/blinkfox/typora-vue-theme" class="icon"
-                   style="background: linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)" target="_blank">
-                    <i class="fas fa-file-alt"></i>
-                </a>
-                <div class="info-title">
-                    <a href="https://github.com/blinkfox/typora-vue-theme" target="_blank">汽车主机厂CRM项目</a>
-                </div>
-                <div class="info-desc">数据处理与数据接口提供.</div>
+                <div class="info-desc">基于Go协程池+Lindorm消费模型，优化消息吞吐，支撑日均千万级告警数据实时处理</div>
             </div>
         </div>
         
         <div class="col s12 m6 l4" data-aos="fade-up">
             <div class="info center-align">
                 <a href="https://weijunlei.github.io/about/" class="icon"
-                   style="background: linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)" target="_blank">
-                    <i class="fas fa-database"></i>
+                   style="background: linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)" target="_blank">
+                    <i class="fas fa-file-alt"></i>
                 </a>
                 <div class="info-title">
-                    <a href="https://weijunlei.github.io/about/" target="_blank">事件发现与检测</a>
+                    <a href="https://weijunlei.github.io/about/" target="_blank">无停机DB分库</a>
                 </div>
-                <div class="info-desc">使用pipeline的方式实现事件发现与检测，包含使用事件归一（承担的主要任务）等技术手段实现。</div>
+                <div class="info-desc">基于存量数据同步+分阶段双写+异步数据分离实现非停机迁移</div>
             </div>
         </div>
         
@@ -589,9 +576,9 @@
 <li><p><strong>订单表无停机分库迁移</strong>：解决DDL操作时间过长（单库1T+数据）+RDS迁移需要，完成单库千表→10库百表拆分。基于存量数据同步+分阶段双写+异步数据和同步读数据分离的方式实现非停机迁移订单表，最终满足RDS容量限制（单库≤500G），DDL执行时间从14个小时减少到1小时以内，P99降低10%。</p>
 </li>
 </ul>
-<h3 id="华为-算法实习生-2020-10-2021-07"><a href="#华为-算法实习生-2020-10-2021-07" class="headerlink" title="华为 | 算法实习生 | 2020.10 - 2021.07"></a>华为 | 算法实习生 | 2020.10 - 2021.07</h3><p><strong>Go Kafka并发消费优化</strong>：将WaveNet&#x2F;MQRNN等时间序列算法集成至算法检测库，用于告警日志异常检测及云化告警业务发现。基于Go协程池+Lindorm消费模型，优化消息吞吐，支撑日均千万级告警数据实时处理。</p>
+<h3 id="华为-算法实习生-2020-10-2021-07"><a href="#华为-算法实习生-2020-10-2021-07" class="headerlink" title="华为 | 算法实习生 | 2020.10 - 2021.07"></a>华为 | 算法实习生 | 2020.10 - 2021.07</h3><p>时间序列算法集成，将WaveNet&#x2F;MQRNN等算法集成至时间序列算法检测库，用于告警日志数据异常检测及云化告警业务发现。</p>
 <h3 id="百度-算法实习生-2018-11-2019-05"><a href="#百度-算法实习生-2018-11-2019-05" class="headerlink" title="百度 | 算法实习生 | 2018.11 - 2019.05"></a>百度 | 算法实习生 | 2018.11 - 2019.05</h3><p>事件图谱的事件归一算法研究及上线。包含从数据分析、数据收集、模型调研、模型训练、模型上线整个流程。算法上主要通过BERT进行预训练事件脉络的pipeline集成，包含集成事件判别、事件名生成、事件归一。业务上线至时空阿Top 4卡片。鹰眼系统开发，提供热点事件粗召回功能。</p>
-<h3 id="SAP-后端开发实习生-2017-12-2018-06"><a href="#SAP-后端开发实习生-2017-12-2018-06" class="headerlink" title="SAP | 后端开发实习生 | 2017.12 - 2018.06"></a>SAP | 后端开发实习生 | 2017.12 - 2018.06</h3><p><strong>无停机DB分库</strong>：某汽车主机厂CRM后端开发，基于C4C针对到店、试驾等任务进行数据处理和接口定义。通过存量数据同步+双写方案实现业务库无停机分库迁移，单库拆分为多库，DDL执行时间缩短90%</p>
+<h3 id="SAP-后端开发实习生-2017-12-2018-06"><a href="#SAP-后端开发实习生-2017-12-2018-06" class="headerlink" title="SAP | 后端开发实习生 | 2017.12 - 2018.06"></a>SAP | 后端开发实习生 | 2017.12 - 2018.06</h3><p>某汽车主机厂CRM的后端开发工作，主要使用C4C针对到店、试驾等任务进行数据处理和接口定义工作。</p>
 <h2 id="比赛经历"><a href="#比赛经历" class="headerlink" title="比赛经历"></a>比赛经历</h2><ul>
 <li><p><strong>2020华为Digix AI全球校园AI算法精英大赛</strong> | 第6名&#x2F;300+&#x2F;1000+</p>
 <ul>
