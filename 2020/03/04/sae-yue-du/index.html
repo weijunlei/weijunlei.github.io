@@ -1,0 +1,1000 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="SAE：Rank+(预训练+GNN联合训练), 小风雷">
+    <meta name="description" content="
+  1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>SAE：Rank+(预训练+GNN联合训练) | 小风雷</title>
+    <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小风雷</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小风雷</div>
+        <div class="logo-desc">
+            
+              There are roads regardless of the height of mountains and ferries regardless of the depth of river
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = 'xiao957';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
+        if (pwd && pwd.length > 0) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/gstzxhwjyfkNO2c.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        SAE：Rank+(预训练+GNN联合训练)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/NLP/">
+                                <span class="chip bg-color">NLP</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+                                <span class="chip bg-color">论文阅读</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
+                                <span class="chip bg-color">阅读理解</span>
+                            </a>
+                        
+                            <a href="/tags/HotpotQA/">
+                                <span class="chip bg-color">HotpotQA</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/NLP/" class="post-category">
+                                NLP
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-04
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    1 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="2b76aef1a815c82976c14d985ad509b9bc4dfa5beaa486db50c97d04dd5dd987">1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195d108bdc6f624c6df2728114e822c7fe351fd9860c0db17653ff8f889190f004cdc2d295a969ffa5e85856dc253014aa3a3b7cd8a38ad9e17ee988c3f050825f213cba14198ae87255c10765719a12f73f3ea49d3d688160d904810342dbf142ddfa8781dcbb06e53646fe869e5dedb132ce9b33f4c800bae4d9521a5f4aef888d7f6944a2c5615e785110a353bb608e404ca1092928c606a2004317e9a08c3bf571c055d6412b3c9720cf63befcbf20ad56e9fc715811f876b7e9a3043409f5526fa57c3b97dfe05bc02cf8ba517ed522f87db223ae121f2c25731c0bc93dc0f9095c2ac598dc1f27477eabea67b7a00d782be27ae2b5a68c5c8efbbb292706ee983782dbf149ec66d5a333368ebbc971ee4ae2fc9ccd83c71176f5a50be8764a27daa1b4dba4121594c2043667cb819218f07c707f29ae31d6ac662f1f5e8dae7f454fc7d3cd2aa6ec0c6dd6c4a36e498a9dc3dc3492cbbf00afa28d994a9bd2decf828708e0b9f96db343c8b197ebd0ea67b580f346cdc3210eb51288d8e54424b23545210610d705f6cfbf06d523cc9e5d04e9349d67737340d68b6b561480a4ad665d03367295022b23f31da77778063c1383882ad8e16b91fd0d03893755a115ef1c730948e7b0dc4e66750913707b8cc2a075db19dd0845fcf9fc62ca58e29ad078aa925bf745e0a475491ae61845e8b7180a79235b084492a6d249b9cba15f4d57513d374b3d4296548441ff221e51b20f666e1a239a7f1bf7c0a21868a0bf524da0d74a9ac26961231ad0c039f8551603e926af7d69a6fe522eb3edeb2da86398e6d991fa5e04c6a528e2625fd7c0fee6422e05a41393863c2238ced0e9723e5b212b8435c1fdc0bfe8a420d101278d11054ece14065ff2ce0396474156a6a18ad5138396ed1f6468fdf3d1f964333aa8d3f5081e18584803050824bd4941faaf3101d6f2f7e453a4e85882c2be35d3a8a88a78bd42fe378d58bdac5e298aca5ee36fdfedb37b7cf0564b76db392e328c66660329563125b14d4c5c883f73904bb62ed940180ee06b17187e475f83d81dc279ededce0bad1d6515ca58356d08f2baf59f2e8f77eab8b611a73fcdb8695848ba4dddfcd10767759b4db0ab64fa9a0a06e1a080d8f296c9a39b887656141f90f01f7b2cf43ddd518e4e774e6af353a2a1929ad52f3b8153c3572705ec9c7e70ab4515d658f0ea978b6a9a735efebde637eda5221a49af696c16147e684e1f5f7a7461b676f0bbc08d40a52f93f9c708a98dbaa81dbac910bff9f3b339bbf7f948ec18e972eddb8e5c95a88e61906c40bf948eda5a0785282e92df4c6a2a0252630a836ff6e8bdc2856a2af0e246d364cee2c9abf3f953c594f019ea88af1ecaf9a1ce02c15af35e48811c0a2793acf646f95e46140073ffc8d6db44eea5322662e91adaa2268d248136eb2dab151d4fc83d1ee6756769ac934a4f176d78d4257c6015dec083bb1b1a032e0217bc596131ed207a571c4f96bcdd7dd80917199c8e98a40f5ce0d9c3280e4b7cabfc006abce3a92c64e1ea5c041dc61229577b4d1b4c87c1166f983b5e53be5c0302920a4a1ead89356faa1e2ebd95a8e71d87e10aa3751f6e6d26254f6e2f2930ef04dbe8b08b46d62708e51d0f6e3e8e2f80bd50aaff88fb6ff9e814305ef34bf5c4e26bd620d1c807e48b94354e5d93161f11e267d9bf73ae92bde4146bf700db17761b2777a63d7537cb31010a18e2c7dba01b3e96f71be5cc3f15e5c4c8ff66e321a5883d89a359993a818f7eb5624ac33648eb4f5486b29203f24697dc2921ecd218787a2a48faccf6f062f989ed2f0f6b16c9c70f6a53d7296cac082dac9238a378aa150444253fc79efbb83bc8c5092826717cc68e6785566a830e69ddda403652f97edc4e9360430d6afb56212bd3dee3d85348957db5a7dd6e8231b1153e06fd8ff5ce5f3e89ddaac76ce169f5eae395b755a12e00287e3385e355a938eb19022ef2c6f95792cb87e77c70ccebc203ba1a1a470c9c91d46ebc3a901c6930cf0a2b2c6d1f4dd55fabbd307bfe0edbda10494bfdac1c3ce93335e1066302273fc3eaf318007637faf245082a39da9e8f8b8d81f20199f9f16e9019d80161c040ecbfab129e018c1a8cc2df565e369858a82763ab4b6435840f635046a32206fbf60dfcf657f772285f72109770698e7a467a8a1db3c902f330698632cd5b1315fac13bfce6d85b0f36e1e97648e125709c0474e244d054b1c7f276b29b2ed5315d0b888102ee9cb914882b05f49a560f11b6f1ca24384b5c29aead7c18651c2bf0ecc5e9a7c4be6b2249b86bda9cd09d653e6f74776f7e2156bf5ae36ae6b219dc8d26308b753295669d4c140f4c1de8b79ce249b5976e352260015176d7e318e429588123c5687cef694615fca1f837abf3b9aeb41a2e3cfaf4afcf7153adc0219f01b354cae13f9451b32801c7cb815f2a8e85b5a4c4d19ef5f42d34f654d3468c9be7f030c595edfc2d869e25503eff7960a9a4134acdb450f0cd45e3fbea78bb4e16094e54ac9fc8c4c64715d4d36410116c82fb90e93ae0b054ef5a04ad2da97529c6d45540bafcdd373416ebe4115ff2fd735d9a4343adb85a30de47357b896e5974f4582593cac8f7ddb976060e108f1ff7ea217c7aa000c07e684b5601218acc16e875829438c357027ae154f826456d44bf492d09e3e68e831c2d128a3c3c3a529df67fb49547f9404f8edaca7b36343a7bb97265923267b8f70a8c5a114336b4611d851db92c972381af6b67c27454f3749b48480a134de2adfa725dec119f4ac89a0631f0a7cbd66b8def4b187cc2eaade4b8d18b96015350db7a96aa4826b551b23c48f9282865689978c21e31172d3f2201c605629995d662328b2047f1acd348ea2030c6e1ab82388993917cc8a699f96d233bf6c5caf2833862373b16322f89415fd842dd22de5081b69344dcbe9e344f60b70879be68092f0fd72b8640ba86de9fa89f81d320de68f14103f21b90b42b73e31cdc0124dd7c11e1067a0853cc728b8b355943e0b4403b526062644ed278a5c228190ce1ab601da5f2bc39da551d9bb4e4520b26f313c40c9ebf5d2791afbf080b3318bdcb2a2c0d78b802762f852f62664609db25c82d9d8d78c23fe424edd8bd617ce5daf593cec2b84661a2709c9d5271e1a39a11054803bd59290d84636c6ad6cb979898fb68bc8010bc7d5a11b25481bbddef18d60b8dea1ca13e0ed20aedb98f9e2817a2cf2cd9069334ac97135b2f8e571a5bdba7a02add9723877e3e145f8d1e389aa14307cb05f0821ee23aefa9f42a096cccaa8b0120b3c2fba67d2adddf204f166ead3192f2ad14adbce4e1c938b5b2b803a80d4fb75fb674001ee4a087268641bb6e9fdf934befd241aa02b2b5276a657895c347a4ec8c05673d3ab78d3408fb90038c67f75436f14210760c551a926b8b8b514dde2159f672fcd3a8c7046ecb88443fa96617d8eb3ee48b4330d895e243967282134ff8973f708cd81391df692d9c83adceb66243292ee4d6d34de19361f24e1edf9f750e69e5fd9b28f10ba6f9c822c7c50fbcc19fb433ff9197907bcbf7c93c6bb147ce3c805b4b67d02a09c8dc51cef7fa2ca025b1cf2f6da62e590fd4955b23ed0e5fa4fa41688862259bf63c61f2405180db420e2549c65f20b892844918e10766928becae70f833ea15a370163168ddc2b7fd4bae5d0dea8f3644a856fbad13c2a119c5689242523b880bf5804be60c4ef8692ae0196daddfbf43b37da34995ed89199eb26b6cd7ecc3863a6c4bf0a451bdd845b97e3643485b2c2b6119397567d1dd639d85cef4f7bc2ca333a3e850f72ec4c2c2e89eb95bce2f67af8b57486915b06ca1e4c3869b34426aab77e3b7a963f7a55161a2281a00c2896195ace056dc863deeeaca2be1329de40d38e65729eab088953d534df374d57f073ccd12ea021a3aaf2e75bde2b1d235b89fa058b561a959639626cd691d0aaba7d7e8146cafa914b5946c577e6821272cb7380165e364dabbb468d7d0c7ef9d151f7d53c047f2980cea1a363f007ba04939256f63f917e02a40fa894467458ea1d62b13f3cac0ecbe9e554eb05fad6e7b40224c032fddcbaf5eb0e010eff91713c30fec603a89d71d0901f7b2012e077fc4e34b2c39387484ae82462cb05cb9ee31e4d1b90ae0bcbbe45823c661f8fb3239b50c7e31a6efb04bf8cba8651c32ee63d523acb97bbef0c20c24ed6a311c7165d306f4b905f212558965564a65ec50effe9116845ea882e112dbdd5913b1e57e640201be6c055383b6734d9b96d9ac04b421c243930db00e3712978b5b37755af45b3cb5528a678654cdaff815ac83ce039948158317b94c59b65c21c745530bab8ca2eb9189307c8e98f8a02a481ac93bfbb2aa203c184cef80dbebbbb6b7c7f24c773990843d14c8f86088377ccc269e0293514a939cc350b3fc1249532485256d6d81ae24890fa5bb1d7c7fd9a07495721a2415914051ff2dd3075034edbc1cd832cd637af0a4828e07170edc3bf57a6330e5c545681754b19f6e0ebf00b62a533c7f9fca012135fcf2c396453e9770b67fe1f21be3dd9ae01e465479d531d12fb7ac214b585dba2790cbb3e64081d03cfb7580664766c61e50ce44773d4ab33fa6ca43307d90ba8bfb5b7b51027cce25a921200e5a7cce33d5efba3023d86138c92ae96b9cd49433fdc5d30e6acbee13d242f4962735694723932bb62ed83079678237676f50027d221958d87c57ef21f8fc850689849e752073904f6e8590fca4bcf6c15d00f271f9245440ea05e26341793a74ca9f4e05807110696ec12916243201e40588612b5b81356a89655a387692dafe31d83f95961936283762c5a7ec98ecc9273030c5b864e3003d4bdb47d9d41d1ab2cc57c4b5c9bbed56fa098ee3f30c0504eb5c6da9211a62325cfdd5608ad28bb752a1220471a2e8f6d6668f6973479fee4e0a4a5e52b6a974e4e372f9b9fde6b42b32f0ccc2e69141d72955fd301b9284f85c81a48600864d0653318e43dea04f0983d7140b676b07137bd4a42b236acfda5a05e230037d2955798666ff51c4cc06625979a829821c7b46b629843273001cefd6f0d3f8c6cf8bb80c65410abb18e984bc216d6c686fe3c336af70ebcb5a63cd8e4f04d9f3a3509d5ba558ea984317b57616614b1a6e6ffe45b87476028ad9b6b96164950a9fe92110d2b8657a5d2a43da146ea540ae2cf1b3e031dd5382d8ef8b87ee0f31ab15438c700e59507793d17b0ee871617de6bc482781015ac7408eb70c013d7dfacf6e562446cab855cf68f912b89f8828a786b26289ab16d657863107799f7bc8be8bf34088e15bb2789e137696d0c01ad5331b5f7154f5beeda161678b2d80f5b51104e778aa46c1c1e97cfbad3042a9ca12b6ba7f250ffd9e1b75e846fcb8b03c6181289feba2b2ceade60d24ccc246531657f61cd0e924009ef9e181d90b53fbd2b5179b43dfe0c4730f93d73f86054a010936cebf39d2fe6f9d389078265d01f34fb773092a0aa1df77d658126ca3f2cfd3a4a0ca9fc56b2ad4748ae6c720d058c363b7008e1c284bd86efbc0618642129c673fe28d2f7926351b9973df07fc9b82a0215379131b189f5d6d6cfb842dc3ea7759875576d952ae2995b6257ad98865f4d513cd5fee71fa1b6e9a6d68fcbc9be922733ff93394fac235a7888c482cc4f333a05c0633a60d29f070b599f98117ee5544dd688354d12240e15c33061927501b763405b975c78182d4da036dbc595a651a8719c385f7c65b08dc8174ba3d6d9c9505c468792a212b3bb917b733bd50daeebb2e11fa200f20cba5034e2c0d74c11c3825ddfe9e9055f7c4a4acb296c5ab074f385458af37224ae3ebfaaca1391818ee8f189da703d058c10eb92dc73217298d4da6d854c987eaa80161f7f0950a100ae82cd178c08b5345e4f7bd684d6193a10396d737093efa725457b2fb5c9d9b11f666fb217657a74802f4e549f12106416496318aee43ca3fa90802fffb3c8ea887e9f1d3a6cef400c2b098b81257f3621ace3475d65c9c9acef641adc9c29ec516dab940a60c2e29d2f9bfc854df46396336aeeac88a10556e6c94c9329165363ce194b8cbf356e9a5da48079c91fc5a6e5c7b0dfb48833fe3a9802474a72fab5927e25b31056d1275fe452e315e3ace0a94670a3af946791eee2eb4ee8f4725e038e0bad64b225631ad5758122e846d74313edebe704a5f046f703108aa62b12b639933e900bb190cc5f0fee40dc38c18d2444585b85a40eedca4ffd9d8dedd427848e7172c34a28bfb24aa751f323b43809a7d5e4b2661c4ac5b0c7152a87977da0bdd9402e33f621aa36a19c2fef095c56791d73a</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://weijunlei.github.io" rel="external nofollow noreferrer">小风雷</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://weijunlei.github.io/2020/03/04/sae-yue-du/">https://weijunlei.github.io/2020/03/04/sae-yue-du/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://weijunlei.github.io" target="_blank">小风雷</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/NLP/">
+                                    <span class="chip bg-color">NLP</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+                                    <span class="chip bg-color">论文阅读</span>
+                                </a>
+                            
+                                <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
+                                    <span class="chip bg-color">阅读理解</span>
+                                </a>
+                            
+                                <a href="/tags/HotpotQA/">
+                                    <span class="chip bg-color">HotpotQA</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '7878399d8bff0d88848b',
+        clientSecret: '96eaba695092f18c65833528c2ef63ad74696f00',
+        repo: 'weijunlei.github.io',
+        owner: 'weijunlei',
+        admin: "weijunlei",
+        id: '2020-03-04T01-08-04',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/03/04/leetcode-32/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="LeetCode 32:最长有效括号">
+                        
+                        <span class="card-title">LeetCode 32:最长有效括号</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            最长有效括号题目描述给定一个只包含 &#39;(&#39; 和 &#39;)&#39; 的字符串，找出最长的包含有效括号的子串的长度。
+示例1:输入: &quot;(()&quot;
+输出: 2
+解释: 最长有效括号子串为 &quot;()
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Leetcode/" class="post-category">
+                                    Leetcode
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Leetcode/">
+                        <span class="chip bg-color">Leetcode</span>
+                    </a>
+                    
+                    <a href="/tags/Hard/">
+                        <span class="chip bg-color">Hard</span>
+                    </a>
+                    
+                    <a href="/tags/DP/">
+                        <span class="chip bg-color">DP</span>
+                    </a>
+                    
+                    <a href="/tags/Stack/">
+                        <span class="chip bg-color">Stack</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/09/hotpotqa-fen-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="HotpotQA分析">
+                        
+                        <span class="card-title">HotpotQA分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            HotpotQA分析数据说明HOTPOTQA: A Dataset for Diverse, ExplainableMulti-hop Question Answering
+简单数据分析数据样例
+答案长度分布
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/NLP/" class="post-category">
+                                    NLP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
+                        <span class="chip bg-color">阅读理解</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/">
+                        <span class="chip bg-color">数据集</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小风雷<br />'
+            + '文章作者: 小风雷<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; 2019 WeijunLei. All Rights Reserved.
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">47.1k</span>&nbsp;字
+                
+            <span id="sitetime"></span>
+
+            
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/weijunlei" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2019, 12, 12, 00, 00, 00); 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="/js/matery.js"></script>
+    
+    <!-- Mermaid 支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: { useMaxWidth: true, htmlLabels: true }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>

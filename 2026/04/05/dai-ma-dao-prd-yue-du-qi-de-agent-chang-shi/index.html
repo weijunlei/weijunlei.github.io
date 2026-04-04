@@ -1,0 +1,1136 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="代码-&gt;PRD阅读器的agent尝试, 小风雷">
+    <meta name="description" content="代码-&amp;gt;PRD阅读器的agent尝试这篇文章基于 code-as-prd-agent 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、可追">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>代码-&gt;PRD阅读器的agent尝试 | 小风雷</title>
+    <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小风雷</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小风雷</div>
+        <div class="logo-desc">
+            
+              There are roads regardless of the height of mountains and ferries regardless of the depth of river
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
+        if (pwd && pwd.length > 0) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        代码-&gt;PRD阅读器的agent尝试
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Agent/">
+                                <span class="chip bg-color">Agent</span>
+                            </a>
+                        
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                <span class="chip bg-color">工程实践</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/">
+                                <span class="chip bg-color">后端架构</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-04-05
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="代码-PRD阅读器的agent尝试"><a href="#代码-PRD阅读器的agent尝试" class="headerlink" title="代码-&gt;PRD阅读器的agent尝试"></a>代码-&gt;PRD阅读器的agent尝试</h1><p>这篇文章基于 <code>code-as-prd-agent</code> 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、可追问、可复用的“PRD级解释”。</p>
+<p>它不是在替代研发或产品，而是在减少重复沟通成本，让“我先问 agent，再找人确认边界”成为新的协作默认流程。</p>
+<hr>
+<h2 id="0-参考地址与实现效果"><a href="#0-参考地址与实现效果" class="headerlink" title="0. 参考地址与实现效果"></a>0. 参考地址与实现效果</h2><h3 id="0-1-项目参考地址"><a href="#0-1-项目参考地址" class="headerlink" title="0.1 项目参考地址"></a>0.1 项目参考地址</h3><ul>
+<li>GitHub 仓库：<a target="_blank" rel="noopener" href="https://github.com/weijunlei/code-as-prd-agent">https://github.com/weijunlei/code-as-prd-agent</a></li>
+<li>README（含使用说明与界面示意）：<a target="_blank" rel="noopener" href="https://github.com/weijunlei/code-as-prd-agent/blob/main/README.md">https://github.com/weijunlei/code-as-prd-agent/blob/main/README.md</a></li>
+</ul>
+<h3 id="0-2-实现效果（README-中的示意）"><a href="#0-2-实现效果（README-中的示意）" class="headerlink" title="0.2 实现效果（README 中的示意）"></a>0.2 实现效果（README 中的示意）</h3><p>该项目 README 里给出了三类典型效果图，对应完整链路：</p>
+<ol>
+<li><strong>仓库初始化任务页</strong>：调用 <code>POST /code-as-prd-agent/repo/init</code> 后，轮询任务状态，看到 <code>running</code> 过程与结果 JSON；</li>
+<li><strong>首次问答页</strong>：在已挂载工作区上提问，可看到思考过程、工具调用与最终 Markdown 回答；</li>
+<li><strong>续聊问答页</strong>：同一工作区继续追问（文件级细节），服务端基于 <code>chat_id</code> 拼接历史对话继续分析。</li>
+</ol>
+<p>可直接在 README 对应“实现效果（界面截图）”章节查看。</p>
+<hr>
+<h2 id="1-先回答：什么是-Agent？"><a href="#1-先回答：什么是-Agent？" class="headerlink" title="1. 先回答：什么是 Agent？"></a>1. 先回答：什么是 Agent？</h2><h3 id="1-1-一个工程化定义"><a href="#1-1-一个工程化定义" class="headerlink" title="1.1 一个工程化定义"></a>1.1 一个工程化定义</h3><p>在工程语境里，<strong>Agent &#x3D; 普通应用 + 大模型 + 工具调用 + 执行循环</strong>。</p>
+<p>拆成四层看更清晰：</p>
+<ol>
+<li><strong>普通应用层</strong>：有 API、任务队列、鉴权、日志、状态管理（本项目就是 FastAPI 服务）。</li>
+<li><strong>模型推理层</strong>：理解意图、拆问题、决定下一步（由 Claude 模型承担）。</li>
+<li><strong>工具层</strong>：给模型“手和眼”，比如列目录、读文件、调用检索、访问 API。</li>
+<li><strong>循环控制层</strong>：模型-工具-模型多轮往复，直到得到可交付答案。</li>
+</ol>
+<p>所以 Agent 不是魔法，不是“一个超大 prompt”。它本质是把传统软件系统的能力边界，和大模型的语义推理能力，做了一个闭环耦合。</p>
+<h3 id="1-2-从数字化到智能化（我的观点-主流观点融合）"><a href="#1-2-从数字化到智能化（我的观点-主流观点融合）" class="headerlink" title="1.2 从数字化到智能化（我的观点 + 主流观点融合）"></a>1.2 从数字化到智能化（我的观点 + 主流观点融合）</h3><p>我认可一个很直观的演进逻辑：</p>
+<ul>
+<li><strong>数字化阶段</strong>：核心价值是“信息留痕、信息透明、信息传播”，把线下流程搬到线上系统。</li>
+<li><strong>智能化阶段</strong>：核心价值是“让系统开始帮人干活”，不仅展示信息，还能主动理解、检索、归纳、执行部分流程。</li>
+</ul>
+<p>主流行业里常见提法是：</p>
+<ul>
+<li>Copilot：辅助人完成任务；</li>
+<li>Agent：在边界内可半自主执行任务；</li>
+<li>Human-in-the-loop：关键决策仍由人兜底。</li>
+</ul>
+<p>这和“帮助人民干活”的说法并不冲突。更准确地说：<strong>Agent 负责高频、标准化、可验证的脑力劳动；人负责价值判断、取舍和责任承担。</strong></p>
+<hr>
+<h2 id="2-传统-RPC-HTTP-与-Stream-交互：差异与巧妙点"><a href="#2-传统-RPC-HTTP-与-Stream-交互：差异与巧妙点" class="headerlink" title="2. 传统 RPC&#x2F;HTTP 与 Stream 交互：差异与巧妙点"></a>2. 传统 RPC&#x2F;HTTP 与 Stream 交互：差异与巧妙点</h2><h3 id="2-1-电商-外卖后端常见调用范式"><a href="#2-1-电商-外卖后端常见调用范式" class="headerlink" title="2.1 电商&#x2F;外卖后端常见调用范式"></a>2.1 电商&#x2F;外卖后端常见调用范式</h3><p>在电商、外卖后端里，我们最熟悉的是：</p>
+<ul>
+<li><strong>同步 RPC&#x2F;HTTP</strong>：请求一次，返回一个完整结果（库存查询、价格计算、地址校验）。</li>
+<li><strong>异步任务 + 轮询</strong>：先返回 task_id，再查状态（导出报表、批量派单、离线对账）。</li>
+</ul>
+<p>这套范式非常成熟，适合“输入结构化、处理过程确定、结果格式固定”的场景。</p>
+<h3 id="2-2-Agent-场景为什么偏向-Stream"><a href="#2-2-Agent-场景为什么偏向-Stream" class="headerlink" title="2.2 Agent 场景为什么偏向 Stream"></a>2.2 Agent 场景为什么偏向 Stream</h3><p>Agent 问答的过程天然不确定：</p>
+<ul>
+<li>模型可能先思考，再列目录，再读多个文件，再整合结论；</li>
+<li>单次耗时和 token 消耗不稳定；</li>
+<li>用户往往不只关心“最后答案”，还关心“你是怎么得出这个答案的”。</li>
+</ul>
+<p>因此 <code>code-as-prd-agent</code> 同时支持了两类接口：</p>
+<ul>
+<li><strong>非流式</strong>：一次性 JSON，适合程序调用；</li>
+<li><strong>SSE 流式</strong>：持续输出 <code>delta</code> &#x2F; <code>done</code>，把思考和工具调用片段实时推送给前端。</li>
+</ul>
+<h3 id="2-3-这个-Stream-设计巧妙在哪里"><a href="#2-3-这个-Stream-设计巧妙在哪里" class="headerlink" title="2.3 这个 Stream 设计巧妙在哪里"></a>2.3 这个 Stream 设计巧妙在哪里</h3><p>我认为这个项目有三个设计点非常实用：</p>
+<ol>
+<li><strong>保留传统任务模型</strong>：仍有 <code>task_id</code>、状态机、队列并发控制，便于运维和观测。</li>
+<li><strong>把模型内部过程事件化</strong>：<code>thinking/tool_use/tool_result/text</code> 统一映射为前端可消费事件。</li>
+<li><strong>双轨并存</strong>：既能走“传统后端可集成”的 JSON，也能走“人机交互友好”的流式。</li>
+</ol>
+<p>这其实是把“互联网后端稳定性范式”和“大模型交互范式”做了融合，而不是替换。</p>
+<hr>
+<h2 id="3-这个项目的实现方法（整体方案）"><a href="#3-这个项目的实现方法（整体方案）" class="headerlink" title="3. 这个项目的实现方法（整体方案）"></a>3. 这个项目的实现方法（整体方案）</h2><h3 id="3-1-一句话架构"><a href="#3-1-一句话架构" class="headerlink" title="3.1 一句话架构"></a>3.1 一句话架构</h3><p><strong>FastAPI 负责调度，RepositoryManager 准备代码工作区，ClaudeCodeBridge 通过官方 Python SDK 拉起 Claude Code，在指定 cwd 内读代码并输出流式结果。</strong></p>
+<h3 id="3-2-核心流程"><a href="#3-2-核心流程" class="headerlink" title="3.2 核心流程"></a>3.2 核心流程</h3><ol>
+<li>调用 <code>/repo/init</code>：把仓库 clone&#x2F;pull 到 <code>WORKSPACE_BASE_DIR/workspace_id</code> 下；</li>
+<li>调用 <code>/ask</code> 或 <code>/chat</code>：携带 <code>workspace_id + question</code>；</li>
+<li>服务端构造 prompt（含规则：必须基于事实、只读、不改文件）；</li>
+<li>SDK 以该 workspace 作为 <code>cwd</code> 发起 query；</li>
+<li>模型在工具调用中完成“列目录-&gt;读文件-&gt;归纳回答”；</li>
+<li>返回 JSON 或 SSE 流；多轮会话可落盘 JSON（<code>chat_id</code> 模式）。</li>
+</ol>
+<h3 id="3-3-关键工程点"><a href="#3-3-关键工程点" class="headerlink" title="3.3 关键工程点"></a>3.3 关键工程点</h3><ul>
+<li><strong>工作区隔离</strong>：按 <code>workspace_id</code> 管理代码上下文，避免串仓。</li>
+<li><strong>多轮持久化</strong>：把历史落到 <code>.code-as-prd-agent/chat_sessions</code>，下一轮拼进 prompt。</li>
+<li><strong>并发与队列</strong>：避免多个重任务互相挤压。</li>
+<li><strong>只读约束</strong>：通过 disallowed tools 控制“问答不落盘修改”。</li>
+</ul>
+<hr>
+<h2 id="4-为什么“只要-git-clone-全部交给模型”就能-work？"><a href="#4-为什么“只要-git-clone-全部交给模型”就能-work？" class="headerlink" title="4. 为什么“只要 git clone + 全部交给模型”就能 work？"></a>4. 为什么“只要 git clone + 全部交给模型”就能 work？</h2><p>很多人第一反应是：这不就是“把目录丢给 LLM”吗，真的靠谱吗？</p>
+<p>我的结论是：<strong>在“问题边界清晰 + 工具可用 + 约束明确”的条件下，它确实能稳定 work。</strong></p>
+<h3 id="4-1-本质不是“全塞上下文”，而是“按需检索式阅读”"><a href="#4-1-本质不是“全塞上下文”，而是“按需检索式阅读”" class="headerlink" title="4.1 本质不是“全塞上下文”，而是“按需检索式阅读”"></a>4.1 本质不是“全塞上下文”，而是“按需检索式阅读”</h3><p>模型并不是一次性把全仓库吃进上下文。真实过程更像：</p>
+<ol>
+<li>先根据问题形成检索计划（可能涉及哪些模块）；</li>
+<li>用工具列目录定位候选文件；</li>
+<li>逐步读取关键文件；</li>
+<li>在多段证据间建立关联；</li>
+<li>输出带路径依据的解释。</li>
+</ol>
+<p>这和人类资深工程师“看陌生项目”的策略非常接近：先扫结构，再看入口，再查链路。</p>
+<h3 id="4-2-项目代码里是怎么让它“更稳”的"><a href="#4-2-项目代码里是怎么让它“更稳”的" class="headerlink" title="4.2 项目代码里是怎么让它“更稳”的"></a>4.2 项目代码里是怎么让它“更稳”的</h3><p><code>code-as-prd-agent</code> 做了几件关键事情来提升成功率：</p>
+<ul>
+<li><strong>强制 cwd 正确</strong>：要求模型在 workspace 根目录按相对路径找代码，避免幻觉路径；</li>
+<li><strong>明确行为规则</strong>：必须基于事实、中文回答、只回答问题、不改文件；</li>
+<li><strong>历史拼接模式</strong>：使用 <code>chat_id</code> 时，每轮独立会话但拼接完整历史，规避 CLI session 并发问题；</li>
+<li><strong>会话锁与重试</strong>：针对 “session already in use” 做互斥和退避，降低续聊失败概率。</li>
+</ul>
+<h3 id="4-3-什么时候不-work"><a href="#4-3-什么时候不-work" class="headerlink" title="4.3 什么时候不 work"></a>4.3 什么时候不 work</h3><p>也要诚实面对边界：</p>
+<ul>
+<li>仓库超大且索引成本高时，响应会慢；</li>
+<li>问题描述过于抽象，模型检索范围会漂；</li>
+<li>跨仓依赖复杂但未完整挂载时，结论会不全；</li>
+<li>需要组织级业务背景的判断，不可能仅靠代码得出。</li>
+</ul>
+<p>所以工程上正确姿势是：<strong>把 Agent 当“高质量一线分析员”，不是“最终拍板人”。</strong></p>
+<hr>
+<h2 id="5-Claude-Code-SDK-在这里扮演什么角色？"><a href="#5-Claude-Code-SDK-在这里扮演什么角色？" class="headerlink" title="5. Claude Code SDK 在这里扮演什么角色？"></a>5. Claude Code SDK 在这里扮演什么角色？</h2><h3 id="5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”"><a href="#5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”" class="headerlink" title="5.1 它不是“直接 HTTP 调 Anthropic Messages API”"></a>5.1 它不是“直接 HTTP 调 Anthropic Messages API”</h3><p>这个项目通过 <code>claude-agent-sdk</code> 调用 Claude Code 能力，核心调用形态是 <code>query(prompt, options)</code>。<br><code>options</code> 里会带：</p>
+<ul>
+<li><code>cwd</code></li>
+<li><code>maxTurns</code></li>
+<li><code>allowedTools</code> &#x2F; <code>disallowedTools</code></li>
+<li><code>sessionId</code> &#x2F; <code>resume</code> &#x2F; <code>continueConversation</code></li>
+<li><code>mcpServers</code>（可选）</li>
+</ul>
+<p>也就是说，它不是简单“传 prompt 等答案”，而是“启动一个带工具执行能力的模型回路”。</p>
+<h3 id="5-2-为什么能做出流式可观测"><a href="#5-2-为什么能做出流式可观测" class="headerlink" title="5.2 为什么能做出流式可观测"></a>5.2 为什么能做出流式可观测</h3><p>SDK 会持续返回消息事件，常见类型有：</p>
+<ul>
+<li><code>system</code></li>
+<li><code>assistant</code>（含 <code>thinking</code>、<code>tool_use</code>、<code>tool_result</code>、<code>text</code> 块）</li>
+<li><code>result</code></li>
+</ul>
+<p>服务端再把这些 wire 消息转换成 SSE 事件推给前端，因此你可以看到一个“正在思考和查代码”的过程，而不是黑盒等待。</p>
+<h3 id="5-3-续聊策略为什么分两种"><a href="#5-3-续聊策略为什么分两种" class="headerlink" title="5.3 续聊策略为什么分两种"></a>5.3 续聊策略为什么分两种</h3><p>这个项目里我认为很务实的一点是：它并不执着于单一路径。</p>
+<ol>
+<li><strong>CLI session 续聊</strong>：沿用模型原生会话，但有并发占用风险。</li>
+<li><strong>JSON 历史续聊（推荐）</strong>：每轮新会话 + 历史拼 prompt，工程可控性更高。</li>
+</ol>
+<p>这背后是个典型的工程取舍：<br><strong>理论连续性</strong>（原生 session） vs <strong>运行稳定性</strong>（服务端可控历史）。</p>
+<hr>
+<h2 id="6-和“传统代码搜索-文档系统”相比，价值在哪"><a href="#6-和“传统代码搜索-文档系统”相比，价值在哪" class="headerlink" title="6. 和“传统代码搜索&#x2F;文档系统”相比，价值在哪"></a>6. 和“传统代码搜索&#x2F;文档系统”相比，价值在哪</h2><p>如果只有搜索，你拿到的是“片段”；<br>如果只有文档，你拿到的是“可能过时的解释”；<br>如果只有人肉答疑，你拿到的是“口头记忆”。</p>
+<p>而代码-&gt;PRD阅读器 Agent 的价值是三者组合：</p>
+<ul>
+<li>以代码为事实来源；</li>
+<li>以自然语言组织解释；</li>
+<li>以流式交互支持追问与澄清。</li>
+</ul>
+<p>它把“查证事实”和“生成可读说明”放到同一链路中，显著缩短了产品、研发、测试之间的认知对齐时间。</p>
+<hr>
+<h2 id="7-落地建议（给团队）"><a href="#7-落地建议（给团队）" class="headerlink" title="7. 落地建议（给团队）"></a>7. 落地建议（给团队）</h2><ol>
+<li><strong>先从只读问答开始</strong>，别一开始就自动改代码。</li>
+<li><strong>问题模板化</strong>：沉淀“是否已实现&#x2F;入口在哪&#x2F;边界条件&#x2F;异常链路”这类固定问法。</li>
+<li><strong>会话持久化</strong>：重要讨论的 <code>chat_id</code> 结果可二次沉淀为 PRD 附件或技术说明。</li>
+<li><strong>明确责任边界</strong>：Agent 给的是证据化建议，最终决策必须人来签字。</li>
+</ol>
+<hr>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>“代码-&gt;PRD阅读器”这类 Agent 项目之所以有现实价值，不在于它做了多复杂的算法，而在于它把一个高频痛点工程化了：</p>
+<ul>
+<li>用代码事实替代记忆沟通；</li>
+<li>用流式交互替代黑盒等待；</li>
+<li>用可复用会话替代一次性口头解释。</li>
+</ul>
+<p>从数字化到智能化的关键一步，正是让系统开始承担“理解 + 检索 + 归纳”的劳动。<br>这个项目已经把这条路走通了一个非常实用的版本。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://weijunlei.github.io" rel="external nofollow noreferrer">小风雷</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://weijunlei.github.io/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/">https://weijunlei.github.io/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://weijunlei.github.io" target="_blank">小风雷</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Agent/">
+                                    <span class="chip bg-color">Agent</span>
+                                </a>
+                            
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                    <span class="chip bg-color">工程实践</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/">
+                                    <span class="chip bg-color">后端架构</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '7878399d8bff0d88848b',
+        clientSecret: '96eaba695092f18c65833528c2ef63ad74696f00',
+        repo: 'weijunlei.github.io',
+        owner: 'weijunlei',
+        admin: "weijunlei",
+        id: '2026-04-05T10-30-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="代码->PRD阅读器的agent尝试">
+                        
+                        <span class="card-title">代码->PRD阅读器的agent尝试</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从 code-as-prd-agent 项目出发，系统拆解 Agent 本质、流式交互价值，以及“克隆代码+交给大模型”为什么能成立。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-04-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Agent/">
+                        <span class="chip bg-color">Agent</span>
+                    </a>
+                    
+                    <a href="/tags/LLM/">
+                        <span class="chip bg-color">LLM</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">后端架构</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用">
+                        
+                        <span class="card-title">From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            深入解析FE2H论文：从多跳阅读理解介绍到核心创新点，再到与思维链的对比
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+                        <span class="chip bg-color">论文阅读</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">问答系统</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%A4%9A%E8%B7%B3%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/">
+                        <span class="chip bg-color">多跳阅读理解</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小风雷<br />'
+            + '文章作者: 小风雷<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; 2019 WeijunLei. All Rights Reserved.
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">47.1k</span>&nbsp;字
+                
+            <span id="sitetime"></span>
+
+            
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/weijunlei" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2019, 12, 12, 00, 00, 00); 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="/js/matery.js"></script>
+    
+    <!-- Mermaid 支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: { useMaxWidth: true, htmlLabels: true }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>
