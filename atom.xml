@@ -6,7 +6,7 @@
   <link href="https://weijunlei.github.io/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2026-03-15T10:52:08.593Z</updated>
+  <updated>2026-04-04T16:15:20.378Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>代码-&gt;PRD阅读器的agent尝试</title>
+    <link href="https://weijunlei.github.io/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/"/>
+    <id>https://weijunlei.github.io/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/</id>
+    <published>2026-04-05T02:30:00.000Z</published>
+    <updated>2026-04-04T16:15:20.378Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;代码-PRD阅读器的agent尝试&quot;&gt;&lt;a href=&quot;#代码-PRD阅读器的agent尝试&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://weijunlei.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Agent" scheme="https://weijunlei.github.io/tags/Agent/"/>
+    
+    <category term="LLM" scheme="https://weijunlei.github.io/tags/LLM/"/>
+    
+    <category term="工程实践" scheme="https://weijunlei.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+    <category term="后端架构" scheme="https://weijunlei.github.io/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</title>
@@ -560,37 +591,6 @@
     <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
     
     <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-    <category term="位运算" scheme="https://weijunlei.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:136. 只出现一次的数字</title>
-    <link href="https://weijunlei.github.io/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/"/>
-    <id>https://weijunlei.github.io/2020/04/30/leetcode-136-zhi-chu-xian-yi-ci-de-shu-zi/</id>
-    <published>2020-04-30T15:29:04.000Z</published>
-    <updated>2020-04-30T15:32:10.412Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Leetcode-136-只出现一次的数字&quot;&gt;&lt;a href=&quot;#Leetcode-136-只出现一次的数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:136. 只出现一次的数字&quot;&gt;&lt;/a&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-    <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
-    
-    <category term="异或" scheme="https://weijunlei.github.io/tags/%E5%BC%82%E6%88%96/"/>
     
     <category term="位运算" scheme="https://weijunlei.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
