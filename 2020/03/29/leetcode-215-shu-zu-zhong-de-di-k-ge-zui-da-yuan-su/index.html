@@ -5,12 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:215. 数组中的第K个最大元素, 小风雷">
-    <meta name="description" content=" 215. 数组中的第K个最大元素
- 题目描述
-在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+    <meta name="description" content="215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
 
- 示例 1:
-输入: [3,2,1,5,6,4] 和 k = 2">
+示例 1:输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -347,7 +345,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    360
+                    346
                 </div>
                 
 
@@ -365,78 +363,67 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="215-数组中的第k个最大元素"><a class="markdownIt-Anchor" href="#215-数组中的第k个最大元素"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215. 数组中的第K个最大元素</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+                <h1 id="215-数组中的第K个最大元素"><a href="#215-数组中的第K个最大元素" class="headerlink" title="215. 数组中的第K个最大元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">215. 数组中的第K个最大元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: [3,2,1,5,6,4] 和 k = 2
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [3,2,1,5,6,4] 和 k = 2
 输出: 5
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
 输出: 4
 </code></pre>
-<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
-<pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>采用快排的获取主元排序索引，更新到符合K大的位置</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findKthLargest</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> {
-        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length &lt; k){
-            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用快排的获取主元排序索引，更新到符合K大的位置</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length < k){
+            return -1;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;
+        int result = -1;
+        int start = 0;
+        int end = nums.length - 1;
         result = getIndex(nums, start, end);
-        <span class="hljs-keyword">while</span> (result != k - <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">if</span> (result &gt; k - <span class="hljs-number">1</span>){
+        while (result != k - 1){
+            if (result > k - 1){
                 end = result;
-                result = getIndex(nums, start, end - <span class="hljs-number">1</span>);
-            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(result &lt; k - <span class="hljs-number">1</span>){
+                result = getIndex(nums, start, end - 1);
+            } else if(result < k - 1){
                 start = result;
-                result = getIndex(nums, start + <span class="hljs-number">1</span>, end);
+                result = getIndex(nums, start + 1, end);
             }
         }
-        <span class="hljs-keyword">if</span> (result == k - <span class="hljs-number">1</span>){
-            <span class="hljs-keyword">return</span> nums[k - <span class="hljs-number">1</span>];
-        }<span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        if (result == k - 1){
+            return nums[k - 1];
+        }else {
+            return -1;
         }
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getIndex</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> s, <span class="hljs-type">int</span> e)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">getNum</span> <span class="hljs-operator">=</span> nums[s];
-        <span class="hljs-type">int</span> <span class="hljs-variable">getIndex</span> <span class="hljs-operator">=</span> s;
+    private int getIndex(int[] nums, int s, int e){
+        int getNum = nums[s];
+        int getIndex = s;
         swap(nums, s, e);
         
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> s; i &lt; e; i++){
-            <span class="hljs-keyword">if</span> (nums[i] &gt; getNum){
+        for(int i = s; i < e; i++){
+            if (nums[i] > getNum){
                 swap(nums, getIndex, i);
                 getIndex ++;
             }
         }
         swap(nums, getIndex, e);
-        <span class="hljs-keyword">return</span> getIndex;
+        return getIndex;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> nums[i];
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
     }
 }
 </code></pre>
-<p>// TODO:其他思路</p>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
-<p>平均<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,最坏<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
-<h3 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<p>&#x2F;&#x2F; TODO:其他思路</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>平均$O(n)$,最坏$(n^2)$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -592,15 +579,14 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:295. 数据流的中位数
- 题目描述
-中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
+                            Leetcode:295. 数据流的中位数题目描述中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 例如，
 
 [2,3,4] 的中位数是 3
 
 [2,3] 的中位数是 (2 + 3) / 2 = 2.5
 
+设计一
                         
                     </div>
                     <div class="publish-info">
@@ -657,13 +643,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:155. 最小栈
- 题目描述
-设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+                            Leetcode:155. 最小栈题目描述设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
 push(x) -- 将元素 x 推入栈中。
 pop() -- 删除栈顶的元素。
-top() -- 获取
+top() -- 获取栈顶元素
                         
                     </div>
                     <div class="publish-info">
@@ -884,7 +868,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">53.8k</span>&nbsp;字
+                    class="white-color">47.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

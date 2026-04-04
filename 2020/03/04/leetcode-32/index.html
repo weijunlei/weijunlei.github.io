@@ -5,15 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="LeetCode 32:最长有效括号, 小风雷">
-    <meta name="description" content=" 最长有效括号
- 题目描述
-给定一个只包含 ‘(’ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。
- 示例1:
-输入: &amp;quot;(()&amp;quot;
+    <meta name="description" content="最长有效括号题目描述给定一个只包含 &amp;#39;(&amp;#39; 和 &amp;#39;)&amp;#39; 的字符串，找出最长的包含有效括号的子串的长度。
+示例1:输入: &amp;quot;(()&amp;quot;
 输出: 2
-解释: 最长有效括号子串为 &amp;quot;()&amp;quot;
-
- 示">
+解释: 最长有效括号子串为 &amp;quot;()">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -354,7 +349,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    592
+                    576
                 </div>
                 
 
@@ -372,129 +367,111 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="最长有效括号"><a class="markdownIt-Anchor" href="#最长有效括号"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">最长有效括号</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<p>给定一个只包含 ‘(’ 和 ‘)’ 的字符串，找出最长的包含有效括号的子串的长度。</p>
-<h3 id="示例1"><a class="markdownIt-Anchor" href="#示例1"></a> 示例1:</h3>
-<pre><code>输入: &quot;(()&quot;
+                <h1 id="最长有效括号"><a href="#最长有效括号" class="headerlink" title="最长有效括号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">最长有效括号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个只包含 &#39;(&#39; 和 &#39;)&#39; 的字符串，找出最长的包含有效括号的子串的长度。</p>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1:"></a>示例1:</h3><pre><code>输入: &quot;(()&quot;
 输出: 2
 解释: 最长有效括号子串为 &quot;()&quot;
 </code></pre>
-<h3 id="示例2"><a class="markdownIt-Anchor" href="#示例2"></a> 示例2:</h3>
-<pre><code>输入: &quot;)()())&quot;
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2:"></a>示例2:</h3><pre><code>输入: &quot;)()())&quot;
 输出: 4
 解释: 最长有效括号子串为 &quot;()()&quot;
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1-dp-stack"><a class="markdownIt-Anchor" href="#思路1-dp-stack"></a> 思路1 DP + Stack</h3>
-<p>存在括号匹配可用栈进行存储，寻找满足括号对的存在，但是在本题中光有匹配的数目是不够的，需要从整体上计算匹配上的括号数目，且存在括号包含和括号不包含两种情况，如果非包含关系的话可以使用DP思想将匹配好的为止进行存储</p>
-<h3 id="思路2-stack"><a class="markdownIt-Anchor" href="#思路2-stack"></a> 思路2 Stack</h3>
-<p>其实与思路1类似可以直接只是用栈作为容器完成程序，主要在于满足匹配的最长子串的&quot;)“开始索引，然后使用最后匹配的”)“进行位置计算，“(”和中间”)“全部pop,注意的关键点在于初始化栈是将-1引入为第一个元素，充当于”)&quot;</p>
-<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
-<h4 id="源文件"><a class="markdownIt-Anchor" href="#源文件"></a> 源文件</h4>
-<h4 id="dp-stack"><a class="markdownIt-Anchor" href="#dp-stack"></a> DP + Stack</h4>
-<ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-DP-Stack"><a href="#思路1-DP-Stack" class="headerlink" title="思路1 DP + Stack"></a>思路1 DP + Stack</h3><p>存在括号匹配可用栈进行存储，寻找满足括号对的存在，但是在本题中光有匹配的数目是不够的，需要从整体上计算匹配上的括号数目，且存在括号包含和括号不包含两种情况，如果非包含关系的话可以使用DP思想将匹配好的为止进行存储</p>
+<h3 id="思路2-Stack"><a href="#思路2-Stack" class="headerlink" title="思路2 Stack"></a>思路2 Stack</h3><p>其实与思路1类似可以直接只是用栈作为容器完成程序，主要在于满足匹配的最长子串的&quot;)&quot;开始索引，然后使用最后匹配的&quot;)&quot;进行位置计算，“(”和中间&quot;)&quot;全部pop,注意的关键点在于初始化栈是将-1引入为第一个元素，充当于&quot;)&quot;</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h4><h4 id="DP-Stack"><a href="#DP-Stack" class="headerlink" title="DP + Stack"></a>DP + Stack</h4><ul>
 <li>Java</li>
 </ul>
-<pre class="highlight"><code class="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestValidParentheses</span><span class="hljs-params">(String s)</span> {
-        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<pre class=" language-language-java"><code class="language-language-java">public class Solution {
+    public int longestValidParentheses(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
         }
-        <span class="hljs-type">int</span>[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[s.length()];
-        <span class="hljs-type">int</span> <span class="hljs-variable">matchIndex</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">curLength</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) {
-            <span class="hljs-type">char</span> <span class="hljs-variable">newChar</span> <span class="hljs-operator">=</span> s.charAt(i);
-            <span class="hljs-keyword">if</span> (newChar == <span class="hljs-string">&#x27;(&#x27;</span>) {
+        int[] dps = new int[s.length()];
+        int matchIndex = 0;
+        int curLength = 0;
+        int result = 0;
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i < s.length(); i++) {
+            char newChar = s.charAt(i);
+            if (newChar == '(') {
                 stack.push(i);
             }
-            <span class="hljs-keyword">else</span>{
-                <span class="hljs-keyword">if</span> (!stack.isEmpty()) {
+            else{
+                if (!stack.isEmpty()) {
                     matchIndex = stack.pop();
-                    curLength = i - matchIndex + <span class="hljs-number">1</span>;
-                    <span class="hljs-keyword">if</span> (matchIndex - <span class="hljs-number">1</span> &gt; <span class="hljs-number">0</span>) {
-                        curLength += dps[matchIndex - <span class="hljs-number">1</span>];
+                    curLength = i - matchIndex + 1;
+                    if (matchIndex - 1 > 0) {
+                        curLength += dps[matchIndex - 1];
                     }
                     dps[i] = curLength;
-                    <span class="hljs-keyword">if</span> (curLength &gt; result) {
+                    if (curLength > result) {
                         result = curLength;
                     }
                 }
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
 <ul>
 <li>Python</li>
 </ul>
-<pre class="highlight"><code class="Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">longestValidParentheses</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:
-        dp = [<span class="hljs-number">0</span>, ] * <span class="hljs-built_in">len</span>(s)
-        result = <span class="hljs-number">0</span>
+<pre class=" language-language-Python"><code class="language-language-Python">class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        dp = [0, ] * len(s)
+        result = 0
         cache = []
-        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(s)):
+        for i in range(0, len(s)):
             cur_char = s[i]
-            <span class="hljs-keyword">if</span> cur_char == <span class="hljs-string">&#x27;(&#x27;</span>:
+            if cur_char == '(':
                 cache.append(i)
-            <span class="hljs-keyword">else</span>:
-                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(cache) == <span class="hljs-number">0</span>:
-                    <span class="hljs-keyword">continue</span>
-                <span class="hljs-keyword">else</span>:
+            else:
+                if len(cache) == 0:
+                    continue
+                else:
                     match_index = cache.pop()
-                    cur_len = i - match_index + <span class="hljs-number">1</span>
-                    <span class="hljs-keyword">if</span> match_index - <span class="hljs-number">1</span> &gt; <span class="hljs-number">0</span>:
-                        cur_len += dp[match_index - <span class="hljs-number">1</span>]
+                    cur_len = i - match_index + 1
+                    if match_index - 1 > 0:
+                        cur_len += dp[match_index - 1]
                     dp[i] = cur_len
-                    <span class="hljs-keyword">if</span> cur_len &gt; result:
+                    if cur_len > result:
                         result = cur_len
-        <span class="hljs-keyword">return</span> result
+        return result
 </code></pre>
-<h4 id="stack"><a class="markdownIt-Anchor" href="#stack"></a> Stack</h4>
-<ul>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><ul>
 <li>Java</li>
 </ul>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution2</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">longestValidParentheses</span><span class="hljs-params">(String s)</span> {
-        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() &lt; <span class="hljs-number">2</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 {
+    public int longestValidParentheses(String s) {
+        if (s == null || s.length() < 2) {
+            return 0;
         }
-        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
-        stack.push(-<span class="hljs-number">1</span>);
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i ++) {
-            <span class="hljs-keyword">if</span> (s.charAt(i) == <span class="hljs-string">&#x27;(&#x27;</span>) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int result = 0;
+        int tmp = 0;
+        for (int i = 0; i < s.length(); i ++) {
+            if (s.charAt(i) == '(') {
                 stack.push(i);
-            } <span class="hljs-keyword">else</span> {
+            } else {
                 stack.pop();
-                <span class="hljs-keyword">if</span> (stack.isEmpty()) {
+                if (stack.isEmpty()) {
                     stack.push(i);
-                } <span class="hljs-keyword">else</span> {
+                } else {
                     tmp = i - stack.peek();
-                    result = result &gt; tmp ? result : tmp;
+                    result = result > tmp ? result : tmp;
                 }
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h2 id="实验效果分析"><a class="markdownIt-Anchor" href="#实验效果分析"></a> 实验效果分析</h2>
-<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
-<h4 id="stack-dp"><a class="markdownIt-Anchor" href="#stack-dp"></a> Stack + DP</h4>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></p>
-<h4 id="stack-2"><a class="markdownIt-Anchor" href="#stack-2"></a> Stack</h4>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></p>
-<h3 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h3>
-<h4 id="stack-dp-2"><a class="markdownIt-Anchor" href="#stack-dp-2"></a> Stack + DP</h4>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathnormal">n</span></span></span></span></p>
-<h4 id="stack-3"><a class="markdownIt-Anchor" href="#stack-3"></a> Stack</h4>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></p>
+<h2 id="实验效果分析"><a href="#实验效果分析" class="headerlink" title="实验效果分析"></a>实验效果分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><h4 id="Stack-DP"><a href="#Stack-DP" class="headerlink" title="Stack + DP"></a>Stack + DP</h4><p>$n$</p>
+<h4 id="Stack-1"><a href="#Stack-1" class="headerlink" title="Stack"></a>Stack</h4><p>$n$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><h4 id="Stack-DP-1"><a href="#Stack-DP-1" class="headerlink" title="Stack + DP"></a>Stack + DP</h4><p>$2n$</p>
+<h4 id="Stack-2"><a href="#Stack-2" class="headerlink" title="Stack"></a>Stack</h4><p>$n$</p>
 
             </div>
             <hr/>
@@ -654,15 +631,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             搜索二维矩阵II
- 题目描述
-编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
+                            搜索二维矩阵II题目描述编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
 
 每行的元素从左到右升序排列。
 每列的元素从上到下升序排列。
 
- 示例
-现有矩阵 matrix 如
+示例现有矩阵 matrix 如下：
+   
                         
                     </div>
                     <div class="publish-info">
@@ -724,7 +699,7 @@
                     <div class="summary block-with-text">
                         
                             
-  1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569ad92b5c77d59e639df070ae82f44bfcb3f8cc35f2baaeeaf4ffe103
+  1390a92507fcdb52d6ceac5012267f370dbd3bbe32520d597c6da66b9e4569adc194b899baf987ea3f3b1506d6149ce5c3fe16aea289c3f1c4195
                         
                     </div>
                     <div class="publish-info">
@@ -949,7 +924,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">53.8k</span>&nbsp;字
+                    class="white-color">47.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

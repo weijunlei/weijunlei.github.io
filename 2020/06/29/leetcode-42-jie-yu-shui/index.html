@@ -5,10 +5,8 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:42. 接雨水, 小风雷">
-    <meta name="description" content=" Leetcode:42. 接雨水
- 题目描述
-给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
-上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下">
+    <meta name="description" content="Leetcode:42. 接雨水题目描述给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -345,7 +343,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    691
+                    648
                 </div>
                 
 
@@ -363,117 +361,99 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode42-接雨水"><a class="markdownIt-Anchor" href="#leetcode42-接雨水"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">Leetcode:42. 接雨水</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
+                <h1 id="Leetcode-42-接雨水"><a href="#Leetcode-42-接雨水" class="headerlink" title="Leetcode:42. 接雨水"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">Leetcode:42. 接雨水</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 感谢 Marcos 贡献此图。
 </code></pre>
-<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
-<pre><code>输入: [0,1,0,2,1,0,1,3,2,1,2,1]
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [0,1,0,2,1,0,1,3,2,1,2,1]
 输出: 6
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1暴力解决"><a class="markdownIt-Anchor" href="#思路1暴力解决"></a> 思路1:暴力解决</h3>
-<p>对每个位置找最大左右边界的最小值</p>
-<h3 id="思路2dp"><a class="markdownIt-Anchor" href="#思路2dp"></a> 思路2:DP</h3>
-<p>记录每个位置的最大左边界和右边界，然后利用dp[i] = max(dp[i], dp[i - 1])进行状态更新，使用记录的左右边界的最小值减去当前高度获取结果</p>
-<h3 id="思路3-双指针法"><a class="markdownIt-Anchor" href="#思路3-双指针法"></a> 思路3: 双指针法</h3>
-<p>实际上两个状态转移都只用到了一个原状态，故可以只记录左右最大值即可，在这个过程中，若左边最大值小于右边最小值，这取左边最大值减去当前值即获得当且可接雨水量</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="思路1代码"><a class="markdownIt-Anchor" href="#思路1代码"></a> 思路1代码</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
-        <span class="hljs-keyword">if</span> (height == <span class="hljs-literal">null</span> || height.length &lt; <span class="hljs-number">3</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力解决"><a href="#思路1-暴力解决" class="headerlink" title="思路1:暴力解决"></a>思路1:暴力解决</h3><p>对每个位置找最大左右边界的最小值</p>
+<h3 id="思路2-DP"><a href="#思路2-DP" class="headerlink" title="思路2:DP"></a>思路2:DP</h3><p>记录每个位置的最大左边界和右边界，然后利用dp[i] &#x3D; max(dp[i], dp[i - 1])进行状态更新，使用记录的左右边界的最小值减去当前高度获取结果</p>
+<h3 id="思路3-双指针法"><a href="#思路3-双指针法" class="headerlink" title="思路3: 双指针法"></a>思路3: 双指针法</h3><p>实际上两个状态转移都只用到了一个原状态，故可以只记录左右最大值即可，在这个过程中，若左边最大值小于右边最小值，这取左边最大值减去当前值即获得当且可接雨水量</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length < 3){
+            return 0;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">height_size</span> <span class="hljs-operator">=</span> height.length;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; height_size - <span class="hljs-number">1</span>; i++){
-            <span class="hljs-type">int</span> <span class="hljs-variable">left_height</span> <span class="hljs-operator">=</span> height[i];
-            <span class="hljs-type">int</span> <span class="hljs-variable">right_heigh</span> <span class="hljs-operator">=</span> height[i];
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; height_size; j++){
-                <span class="hljs-keyword">if</span>(j &lt; i &amp;&amp; height[j] &gt; left_height){
+        int result = 0;
+        int height_size = height.length;
+        for(int i = 1; i < height_size - 1; i++){
+            int left_height = height[i];
+            int right_heigh = height[i];
+            for(int j = 0; j < height_size; j++){
+                if(j < i && height[j] > left_height){
                     left_height = height[j];
                 }
-                <span class="hljs-keyword">if</span> (j &gt; i &amp;&amp; height[j] &gt; right_heigh){
+                if (j > i && height[j] > right_heigh){
                     right_heigh = height[j];
                 }
             }
             result += Math.min(left_height, right_heigh) - height[i];
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h3 id="思路2代码"><a class="markdownIt-Anchor" href="#思路2代码"></a> 思路2代码</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
-        <span class="hljs-keyword">if</span> (height == <span class="hljs-literal">null</span> || height.length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h3 id="思路2代码"><a href="#思路2代码" class="headerlink" title="思路2代码"></a>思路2代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length == 0){
+            return 0;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">height_size</span> <span class="hljs-operator">=</span> height.length;
-        <span class="hljs-type">int</span>[] leftMaxs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[height_size];
-        <span class="hljs-type">int</span>[] rightMaxs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[height_size];
-        leftMaxs[<span class="hljs-number">0</span>] = height[<span class="hljs-number">0</span>];
-        rightMaxs[height_size - <span class="hljs-number">1</span>] = height[height_size - <span class="hljs-number">1</span>];
+        int height_size = height.length;
+        int[] leftMaxs = new int[height_size];
+        int[] rightMaxs = new int[height_size];
+        leftMaxs[0] = height[0];
+        rightMaxs[height_size - 1] = height[height_size - 1];
 
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; height_size; i++){
-            leftMaxs[i] = Math.max(height[i], leftMaxs[i - <span class="hljs-number">1</span>]);
-            rightMaxs[height_size - i - <span class="hljs-number">1</span>] = Math.max(height[height_size - i - <span class="hljs-number">1</span>], rightMaxs[height_size - i]);
+        for(int i = 1; i < height_size; i++){
+            leftMaxs[i] = Math.max(height[i], leftMaxs[i - 1]);
+            rightMaxs[height_size - i - 1] = Math.max(height[height_size - i - 1], rightMaxs[height_size - i]);
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; height_size - <span class="hljs-number">1</span>; i++){
+        int result = 0;
+        for(int i = 1; i < height_size - 1; i++){
             result += Math.min(leftMaxs[i], rightMaxs[i]) - height[i];
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h3 id="思路三代码"><a class="markdownIt-Anchor" href="#思路三代码"></a> 思路三代码</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> {
-        <span class="hljs-keyword">if</span> (height == <span class="hljs-literal">null</span> || height.length &lt; <span class="hljs-number">3</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h3 id="思路三代码"><a href="#思路三代码" class="headerlink" title="思路三代码"></a>思路三代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int trap(int[] height) {
+        if (height == null || height.length < 3){
+            return 0;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> height.length - <span class="hljs-number">1</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">maxRight</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">maxLeft</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (left &lt; right){
-            <span class="hljs-keyword">if</span> (height[left] &lt; height[right]){
-                <span class="hljs-keyword">if</span>(maxLeft &lt; height[left]){
+        int result = 0;
+        int left = 0;
+        int right = height.length - 1;
+        int maxRight = 0;
+        int maxLeft = 0;
+        while (left < right){
+            if (height[left] < height[right]){
+                if(maxLeft < height[left]){
                     maxLeft = height[left];
-                }<span class="hljs-keyword">else</span>{
+                }else{
                     result += maxLeft - height[left];
                 }
                 left++;
-            }<span class="hljs-keyword">else</span>{
-                <span class="hljs-keyword">if</span>(maxRight &lt; height[right]){
+            }else{
+                if(maxRight < height[right]){
                     maxRight = height[right];
-                }<span class="hljs-keyword">else</span>{
+                }else{
                     result += maxRight - height[right];
                 }
                 right --;
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路3时间复杂度"><a class="markdownIt-Anchor" href="#思路3时间复杂度"></a> 思路3时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路3空间复杂度"><a class="markdownIt-Anchor" href="#思路3空间复杂度"></a> 思路3空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路3时间复杂度"><a href="#思路3时间复杂度" class="headerlink" title="思路3时间复杂度"></a>思路3时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路3空间复杂度"><a href="#思路3空间复杂度" class="headerlink" title="思路3空间复杂度"></a>思路3空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -629,11 +609,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             雪球特别版：段永平投资问答录（商业逻辑篇）
- 书籍地址
-雪球特别版——段永平投资问答录(投资逻辑篇)
- 一句话概括
-记录了OPPO&amp;vivo&amp;步步高创始人段永平在雪球上和网友的投资问答，体现了段永平本人的开公司、投资的理念
+                            雪球特别版：段永平投资问答录（商业逻辑篇）书籍地址雪球特别版——段永平投资问答录(投资逻辑篇)
+一句话概括记录了OPPO&amp;vivo&amp;步步高创始人段永平在雪球上和网友的投资问答，体现了段永平本人的开公司、投资的理念。本书从伟大
                         
                     </div>
                     <div class="publish-info">
@@ -682,11 +659,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 40. 组合总和 II
- 题目描述
-给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+                            Leetcode: 40. 组合总和 II题目描述给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-candidates 中的每个数字在每个
+candidates 中的每个数字在每个组合中只
                         
                     </div>
                     <div class="publish-info">
@@ -911,7 +886,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">53.8k</span>&nbsp;字
+                    class="white-color">47.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

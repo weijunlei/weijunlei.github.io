@@ -4,9 +4,8 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="代码-&gt;PRD阅读器的agent尝试, 小风雷">
-    <meta name="description" content=" 代码-&amp;gt;PRD阅读器的agent尝试
-这篇文章基于 code-as-prd-agent 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、">
+    <meta name="keywords" content="代码-&gt;PRD阅读器的Agent小试牛刀, 小风雷">
+    <meta name="description" content="代码-&amp;gt;PRD阅读器的Agent小试牛刀这篇文章基于 code-as-prd-agent 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>代码-&gt;PRD阅读器的agent尝试 | 小风雷</title>
+    <title>代码-&gt;PRD阅读器的Agent小试牛刀 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -177,13 +176,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/plzgBj7O.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        代码-&gt;PRD阅读器的agent尝试
+                        代码-&gt;PRD阅读器的Agent小试牛刀
                     </div>
                 </div>
             </div>
@@ -347,14 +346,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    11 分
                 </div>
                 
 				
@@ -365,28 +364,38 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="代码-prd阅读器的agent尝试"><a class="markdownIt-Anchor" href="#代码-prd阅读器的agent尝试"></a> 代码-&gt;PRD阅读器的agent尝试</h1>
-<p>这篇文章基于 <code>code-as-prd-agent</code> 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、可追问、可复用的“PRD级解释”。</p>
+                <h1 id="代码-PRD阅读器的Agent小试牛刀"><a href="#代码-PRD阅读器的Agent小试牛刀" class="headerlink" title="代码-&gt;PRD阅读器的Agent小试牛刀"></a>代码-&gt;PRD阅读器的Agent小试牛刀</h1><p>这篇文章基于 <code>code-as-prd-agent</code> 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、可追问、可复用的“PRD级解释”。</p>
 <p>它不是在替代研发或产品，而是在减少重复沟通成本，让“我先问 agent，再找人确认边界”成为新的协作默认流程。</p>
-<hr />
-<h2 id="0-参考地址与实现效果"><a class="markdownIt-Anchor" href="#0-参考地址与实现效果"></a> 0. 参考地址与实现效果</h2>
-<h3 id="01-项目参考地址"><a class="markdownIt-Anchor" href="#01-项目参考地址"></a> 0.1 项目参考地址</h3>
-<ul>
+<hr>
+<h2 id="0-参考地址与实现效果"><a href="#0-参考地址与实现效果" class="headerlink" title="0. 参考地址与实现效果"></a>0. 参考地址与实现效果</h2><h3 id="0-1-项目参考地址"><a href="#0-1-项目参考地址" class="headerlink" title="0.1 项目参考地址"></a>0.1 项目参考地址</h3><ul>
 <li>GitHub 仓库：<a target="_blank" rel="noopener" href="https://github.com/weijunlei/code-as-prd-agent">https://github.com/weijunlei/code-as-prd-agent</a></li>
 <li>README（含使用说明与界面示意）：<a target="_blank" rel="noopener" href="https://github.com/weijunlei/code-as-prd-agent/blob/main/README.md">https://github.com/weijunlei/code-as-prd-agent/blob/main/README.md</a></li>
 </ul>
-<h3 id="02-实现效果readme-中的示意"><a class="markdownIt-Anchor" href="#02-实现效果readme-中的示意"></a> 0.2 实现效果（README 中的示意）</h3>
-<p>该项目 README 里给出了三类典型效果图，对应完整链路：</p>
+<h3 id="0-2-实现效果（README-中的示意）"><a href="#0-2-实现效果（README-中的示意）" class="headerlink" title="0.2 实现效果（README 中的示意）"></a>0.2 实现效果（README 中的示意）</h3><p>该项目 README 里给出了三类典型效果图，对应完整链路：</p>
 <ol>
 <li><strong>仓库初始化任务页</strong>：调用 <code>POST /code-as-prd-agent/repo/init</code> 后，轮询任务状态，看到 <code>running</code> 过程与结果 JSON；</li>
 <li><strong>首次问答页</strong>：在已挂载工作区上提问，可看到思考过程、工具调用与最终 Markdown 回答；</li>
 <li><strong>续聊问答页</strong>：同一工作区继续追问（文件级细节），服务端基于 <code>chat_id</code> 拼接历史对话继续分析。</li>
 </ol>
 <p>可直接在 README 对应“实现效果（界面截图）”章节查看。</p>
-<hr />
-<h2 id="1-先回答什么是-agent"><a class="markdownIt-Anchor" href="#1-先回答什么是-agent"></a> 1. 先回答：什么是 Agent？</h2>
-<h3 id="11-一个工程化定义"><a class="markdownIt-Anchor" href="#11-一个工程化定义"></a> 1.1 一个工程化定义</h3>
-<p>在工程语境里，<strong>Agent = 普通应用 + 大模型 + 工具调用 + 执行循环</strong>。</p>
+<p>按典型用户路径，三张效果图建议这样看：</p>
+<p><strong>1）仓库初始化任务页（先准备上下文）</strong></p>
+<p><img src="https://s3.bmp.ovh/2026/04/05/HNVBslq1.png" alt="repository-init-task-running.png"></p>
+<blockquote>
+<p>图1：仓库初始化任务页。通过 <code>repo/init</code> 创建任务并轮询状态，确认工作区代码已准备完成。</p>
+</blockquote>
+<p><strong>2）首次问答页（开始基于代码问答）</strong></p>
+<p><img src="https://s3.bmp.ovh/2026/04/05/Wp3ZkukO.png" alt="chat-subagent-implementation.png"></p>
+<blockquote>
+<p>图2：首次问答页。展示模型思考、工具调用过程与最终回答内容。</p>
+</blockquote>
+<p><strong>3）续聊问答页（追问文件级细节）</strong></p>
+<p><img src="https://s3.bmp.ovh/2026/04/05/QI7GYgjl.png" alt="chat-mailbox-architecture-analysis.png"></p>
+<blockquote>
+<p>图3：续聊问答页。基于同一 <code>chat_id</code> 的历史上下文继续追问，实现文件级深入分析。</p>
+</blockquote>
+<hr>
+<h2 id="1-先回答：什么是-Agent？"><a href="#1-先回答：什么是-Agent？" class="headerlink" title="1. 先回答：什么是 Agent？"></a>1. 先回答：什么是 Agent？</h2><h3 id="1-1-一个工程化定义"><a href="#1-1-一个工程化定义" class="headerlink" title="1.1 一个工程化定义"></a>1.1 一个工程化定义</h3><p>在工程语境里，<strong>Agent &#x3D; 普通应用 + 大模型 + 工具调用 + 执行循环</strong>。</p>
 <p>拆成四层看更清晰：</p>
 <ol>
 <li><strong>普通应用层</strong>：有 API、任务队列、鉴权、日志、状态管理（本项目就是 FastAPI 服务）。</li>
@@ -395,8 +404,7 @@
 <li><strong>循环控制层</strong>：模型-工具-模型多轮往复，直到得到可交付答案。</li>
 </ol>
 <p>所以 Agent 不是魔法，不是“一个超大 prompt”。它本质是把传统软件系统的能力边界，和大模型的语义推理能力，做了一个闭环耦合。</p>
-<h3 id="12-从数字化到智能化我的观点-主流观点融合"><a class="markdownIt-Anchor" href="#12-从数字化到智能化我的观点-主流观点融合"></a> 1.2 从数字化到智能化（我的观点 + 主流观点融合）</h3>
-<p>我认可一个很直观的演进逻辑：</p>
+<h3 id="1-2-从数字化到智能化（我的观点-主流观点融合）"><a href="#1-2-从数字化到智能化（我的观点-主流观点融合）" class="headerlink" title="1.2 从数字化到智能化（我的观点 + 主流观点融合）"></a>1.2 从数字化到智能化（我的观点 + 主流观点融合）</h3><p>我认可一个很直观的演进逻辑：</p>
 <ul>
 <li><strong>数字化阶段</strong>：核心价值是“信息留痕、信息透明、信息传播”，把线下流程搬到线上系统。</li>
 <li><strong>智能化阶段</strong>：核心价值是“让系统开始帮人干活”，不仅展示信息，还能主动理解、检索、归纳、执行部分流程。</li>
@@ -408,17 +416,14 @@
 <li>Human-in-the-loop：关键决策仍由人兜底。</li>
 </ul>
 <p>这和“帮助人民干活”的说法并不冲突。更准确地说：<strong>Agent 负责高频、标准化、可验证的脑力劳动；人负责价值判断、取舍和责任承担。</strong></p>
-<hr />
-<h2 id="2-传统-rpchttp-与-stream-交互差异与巧妙点"><a class="markdownIt-Anchor" href="#2-传统-rpchttp-与-stream-交互差异与巧妙点"></a> 2. 传统 RPC/HTTP 与 Stream 交互：差异与巧妙点</h2>
-<h3 id="21-电商外卖后端常见调用范式"><a class="markdownIt-Anchor" href="#21-电商外卖后端常见调用范式"></a> 2.1 电商/外卖后端常见调用范式</h3>
-<p>在电商、外卖后端里，我们最熟悉的是：</p>
+<hr>
+<h2 id="2-传统-RPC-HTTP-与-Stream-交互：差异与巧妙点"><a href="#2-传统-RPC-HTTP-与-Stream-交互：差异与巧妙点" class="headerlink" title="2. 传统 RPC&#x2F;HTTP 与 Stream 交互：差异与巧妙点"></a>2. 传统 RPC&#x2F;HTTP 与 Stream 交互：差异与巧妙点</h2><h3 id="2-1-电商-外卖后端常见调用范式"><a href="#2-1-电商-外卖后端常见调用范式" class="headerlink" title="2.1 电商&#x2F;外卖后端常见调用范式"></a>2.1 电商&#x2F;外卖后端常见调用范式</h3><p>在电商、外卖后端里，我们最熟悉的是：</p>
 <ul>
-<li><strong>同步 RPC/HTTP</strong>：请求一次，返回一个完整结果（库存查询、价格计算、地址校验）。</li>
+<li><strong>同步 RPC&#x2F;HTTP</strong>：请求一次，返回一个完整结果（库存查询、价格计算、地址校验）。</li>
 <li><strong>异步任务 + 轮询</strong>：先返回 task_id，再查状态（导出报表、批量派单、离线对账）。</li>
 </ul>
 <p>这套范式非常成熟，适合“输入结构化、处理过程确定、结果格式固定”的场景。</p>
-<h3 id="22-agent-场景为什么偏向-stream"><a class="markdownIt-Anchor" href="#22-agent-场景为什么偏向-stream"></a> 2.2 Agent 场景为什么偏向 Stream</h3>
-<p>Agent 问答的过程天然不确定：</p>
+<h3 id="2-2-Agent-场景为什么偏向-Stream"><a href="#2-2-Agent-场景为什么偏向-Stream" class="headerlink" title="2.2 Agent 场景为什么偏向 Stream"></a>2.2 Agent 场景为什么偏向 Stream</h3><p>Agent 问答的过程天然不确定：</p>
 <ul>
 <li>模型可能先思考，再列目录，再读多个文件，再整合结论；</li>
 <li>单次耗时和 token 消耗不稳定；</li>
@@ -427,42 +432,95 @@
 <p>因此 <code>code-as-prd-agent</code> 同时支持了两类接口：</p>
 <ul>
 <li><strong>非流式</strong>：一次性 JSON，适合程序调用；</li>
-<li><strong>SSE 流式</strong>：持续输出 <code>delta</code> / <code>done</code>，把思考和工具调用片段实时推送给前端。</li>
+<li><strong>SSE 流式</strong>：持续输出 <code>delta</code> &#x2F; <code>done</code>，把思考和工具调用片段实时推送给前端。</li>
 </ul>
-<h3 id="23-这个-stream-设计巧妙在哪里"><a class="markdownIt-Anchor" href="#23-这个-stream-设计巧妙在哪里"></a> 2.3 这个 Stream 设计巧妙在哪里</h3>
-<p>我认为这个项目有三个设计点非常实用：</p>
+<h3 id="2-3-这个-Stream-设计巧妙在哪里"><a href="#2-3-这个-Stream-设计巧妙在哪里" class="headerlink" title="2.3 这个 Stream 设计巧妙在哪里"></a>2.3 这个 Stream 设计巧妙在哪里</h3><p>我认为这个项目有三个设计点非常实用：</p>
 <ol>
 <li><strong>保留传统任务模型</strong>：仍有 <code>task_id</code>、状态机、队列并发控制，便于运维和观测。</li>
 <li><strong>把模型内部过程事件化</strong>：<code>thinking/tool_use/tool_result/text</code> 统一映射为前端可消费事件。</li>
 <li><strong>双轨并存</strong>：既能走“传统后端可集成”的 JSON，也能走“人机交互友好”的流式。</li>
 </ol>
 <p>这其实是把“互联网后端稳定性范式”和“大模型交互范式”做了融合，而不是替换。</p>
-<hr />
-<h2 id="3-这个项目的实现方法整体方案"><a class="markdownIt-Anchor" href="#3-这个项目的实现方法整体方案"></a> 3. 这个项目的实现方法（整体方案）</h2>
-<h3 id="31-一句话架构"><a class="markdownIt-Anchor" href="#31-一句话架构"></a> 3.1 一句话架构</h3>
-<p><strong>FastAPI 负责调度，RepositoryManager 准备代码工作区，ClaudeCodeBridge 通过官方 Python SDK 拉起 Claude Code，在指定 cwd 内读代码并输出流式结果。</strong></p>
-<h3 id="32-核心流程"><a class="markdownIt-Anchor" href="#32-核心流程"></a> 3.2 核心流程</h3>
-<ol>
-<li>调用 <code>/repo/init</code>：把仓库 clone/pull 到 <code>WORKSPACE_BASE_DIR/workspace_id</code> 下；</li>
+<hr>
+<h2 id="3-这个项目的实现方法（整体方案）"><a href="#3-这个项目的实现方法（整体方案）" class="headerlink" title="3. 这个项目的实现方法（整体方案）"></a>3. 这个项目的实现方法（整体方案）</h2><h3 id="3-1-一句话架构"><a href="#3-1-一句话架构" class="headerlink" title="3.1 一句话架构"></a>3.1 一句话架构</h3><p><strong>FastAPI 负责调度，RepositoryManager 准备代码工作区，ClaudeCodeBridge 通过官方 Python SDK 拉起 Claude Code，在指定 cwd 内读代码并输出流式结果。</strong></p>
+<h3 id="3-1-1-README-中的架构图（Mermaid）"><a href="#3-1-1-README-中的架构图（Mermaid）" class="headerlink" title="3.1.1 README 中的架构图（Mermaid）"></a>3.1.1 README 中的架构图（Mermaid）</h3><pre class="mermaid">flowchart TB
+  subgraph Client[客户端]
+    WEB[静态页 web 5173]
+    API_CLIENT[其他 HTTP 调用方]
+  end
+
+  subgraph Server[code-as-prd-agent FastAPI]
+    FAST[FastAPI 8080]
+    REPO[RepositoryManager repo init]
+    ASK[/ask 问答]
+    CHAT[/chat TD 追问 可选]
+    STORE[conversation_store chat_sessions json]
+    TASK[TaskQueue and TaskManager]
+    BRIDGE[ClaudeCodeBridge claude-agent-sdk]
+  end
+
+  subgraph Runtime[本机运行时]
+    CLI[Claude Code CLI 由 SDK 拉起]
+    WS[WORKSPACE_BASE_DIR workspace_id 代码仓库]
+  end
+
+  subgraph Cloud[模型侧 可配置]
+    LLM[Anthropic API 或兼容网关]
+  end
+
+  WEB --> FAST
+  API_CLIENT --> FAST
+  FAST --> ASK
+  FAST --> CHAT
+  FAST --> REPO
+  ASK --> STORE
+  ASK --> TASK
+  ASK --> BRIDGE
+  CHAT --> TASK
+  CHAT --> BRIDGE
+  REPO --> TASK
+  BRIDGE --> CLI
+  CLI --> WS
+  CLI --> LLM</pre>
+<blockquote>
+<p>图4：系统组件关系图。客户端请求进入 FastAPI，由任务与桥接层调度 Claude Code CLI，在工作区内完成代码检索与问答。</p>
+</blockquote>
+<h3 id="3-1-2-README-中的流式问答时序图（Mermaid）"><a href="#3-1-2-README-中的流式问答时序图（Mermaid）" class="headerlink" title="3.1.2 README 中的流式问答时序图（Mermaid）"></a>3.1.2 README 中的流式问答时序图（Mermaid）</h3><pre class="mermaid">sequenceDiagram
+  participant U as 用户浏览器
+  participant S as FastAPI
+  participant Q as 任务队列 / 并发池
+  participant C as Claude Code CLI
+  participant W as Workspace 代码树
+
+  U->>S: POST /code-as-prd-agent/ask (stream, workspace_id, question, chat_id?)
+  S->>S: 若有 chat_id 则读写会话 JSON 并拼接历史 prompt
+  S->>Q: acquire 并发槽位
+  S->>C: SDK query(prompt, cwd=workspace, chat_id 模式不传 CLI session_id)
+  C->>W: 读取 / 检索仓库内文件
+  C-->>S: SSE 行（delta / done）
+  S-->>U: text/event-stream
+  S->>Q: release</pre>
+<blockquote>
+<p>图5：流式问答时序图。请求进入后分配并发槽位，模型边检索边输出 SSE，结束后释放资源。</p>
+</blockquote>
+<h3 id="3-2-核心流程"><a href="#3-2-核心流程" class="headerlink" title="3.2 核心流程"></a>3.2 核心流程</h3><ol>
+<li>调用 <code>/repo/init</code>：把仓库 clone&#x2F;pull 到 <code>WORKSPACE_BASE_DIR/workspace_id</code> 下；</li>
 <li>调用 <code>/ask</code> 或 <code>/chat</code>：携带 <code>workspace_id + question</code>；</li>
 <li>服务端构造 prompt（含规则：必须基于事实、只读、不改文件）；</li>
 <li>SDK 以该 workspace 作为 <code>cwd</code> 发起 query；</li>
 <li>模型在工具调用中完成“列目录-&gt;读文件-&gt;归纳回答”；</li>
 <li>返回 JSON 或 SSE 流；多轮会话可落盘 JSON（<code>chat_id</code> 模式）。</li>
 </ol>
-<h3 id="33-关键工程点"><a class="markdownIt-Anchor" href="#33-关键工程点"></a> 3.3 关键工程点</h3>
-<ul>
+<h3 id="3-3-关键工程点"><a href="#3-3-关键工程点" class="headerlink" title="3.3 关键工程点"></a>3.3 关键工程点</h3><ul>
 <li><strong>工作区隔离</strong>：按 <code>workspace_id</code> 管理代码上下文，避免串仓。</li>
 <li><strong>多轮持久化</strong>：把历史落到 <code>.code-as-prd-agent/chat_sessions</code>，下一轮拼进 prompt。</li>
 <li><strong>并发与队列</strong>：避免多个重任务互相挤压。</li>
 <li><strong>只读约束</strong>：通过 disallowed tools 控制“问答不落盘修改”。</li>
 </ul>
-<hr />
-<h2 id="4-为什么只要-git-clone-全部交给模型就能-work"><a class="markdownIt-Anchor" href="#4-为什么只要-git-clone-全部交给模型就能-work"></a> 4. 为什么“只要 git clone + 全部交给模型”就能 work？</h2>
-<p>很多人第一反应是：这不就是“把目录丢给 LLM”吗，真的靠谱吗？</p>
+<hr>
+<h2 id="4-为什么“只要-git-clone-全部交给模型”就能-work？"><a href="#4-为什么“只要-git-clone-全部交给模型”就能-work？" class="headerlink" title="4. 为什么“只要 git clone + 全部交给模型”就能 work？"></a>4. 为什么“只要 git clone + 全部交给模型”就能 work？</h2><p>很多人第一反应是：这不就是“把目录丢给 LLM”吗，真的靠谱吗？</p>
 <p>我的结论是：<strong>在“问题边界清晰 + 工具可用 + 约束明确”的条件下，它确实能稳定 work。</strong></p>
-<h3 id="41-本质不是全塞上下文而是按需检索式阅读"><a class="markdownIt-Anchor" href="#41-本质不是全塞上下文而是按需检索式阅读"></a> 4.1 本质不是“全塞上下文”，而是“按需检索式阅读”</h3>
-<p>模型并不是一次性把全仓库吃进上下文。真实过程更像：</p>
+<h3 id="4-1-本质不是“全塞上下文”，而是“按需检索式阅读”"><a href="#4-1-本质不是“全塞上下文”，而是“按需检索式阅读”" class="headerlink" title="4.1 本质不是“全塞上下文”，而是“按需检索式阅读”"></a>4.1 本质不是“全塞上下文”，而是“按需检索式阅读”</h3><p>模型并不是一次性把全仓库吃进上下文。真实过程更像：</p>
 <ol>
 <li>先根据问题形成检索计划（可能涉及哪些模块）；</li>
 <li>用工具列目录定位候选文件；</li>
@@ -471,16 +529,14 @@
 <li>输出带路径依据的解释。</li>
 </ol>
 <p>这和人类资深工程师“看陌生项目”的策略非常接近：先扫结构，再看入口，再查链路。</p>
-<h3 id="42-项目代码里是怎么让它更稳的"><a class="markdownIt-Anchor" href="#42-项目代码里是怎么让它更稳的"></a> 4.2 项目代码里是怎么让它“更稳”的</h3>
-<p><code>code-as-prd-agent</code> 做了几件关键事情来提升成功率：</p>
+<h3 id="4-2-项目代码里是怎么让它“更稳”的"><a href="#4-2-项目代码里是怎么让它“更稳”的" class="headerlink" title="4.2 项目代码里是怎么让它“更稳”的"></a>4.2 项目代码里是怎么让它“更稳”的</h3><p><code>code-as-prd-agent</code> 做了几件关键事情来提升成功率：</p>
 <ul>
 <li><strong>强制 cwd 正确</strong>：要求模型在 workspace 根目录按相对路径找代码，避免幻觉路径；</li>
 <li><strong>明确行为规则</strong>：必须基于事实、中文回答、只回答问题、不改文件；</li>
 <li><strong>历史拼接模式</strong>：使用 <code>chat_id</code> 时，每轮独立会话但拼接完整历史，规避 CLI session 并发问题；</li>
 <li><strong>会话锁与重试</strong>：针对 “session already in use” 做互斥和退避，降低续聊失败概率。</li>
 </ul>
-<h3 id="43-什么时候不-work"><a class="markdownIt-Anchor" href="#43-什么时候不-work"></a> 4.3 什么时候不 work</h3>
-<p>也要诚实面对边界：</p>
+<h3 id="4-3-什么时候不-work"><a href="#4-3-什么时候不-work" class="headerlink" title="4.3 什么时候不 work"></a>4.3 什么时候不 work</h3><p>也要诚实面对边界：</p>
 <ul>
 <li>仓库超大且索引成本高时，响应会慢；</li>
 <li>问题描述过于抽象，模型检索范围会漂；</li>
@@ -488,40 +544,31 @@
 <li>需要组织级业务背景的判断，不可能仅靠代码得出。</li>
 </ul>
 <p>所以工程上正确姿势是：<strong>把 Agent 当“高质量一线分析员”，不是“最终拍板人”。</strong></p>
-<hr />
-<h2 id="5-claude-code-sdk-在这里扮演什么角色"><a class="markdownIt-Anchor" href="#5-claude-code-sdk-在这里扮演什么角色"></a> 5. Claude Code SDK 在这里扮演什么角色？</h2>
-<h3 id="51-它不是直接-http-调-anthropic-messages-api"><a class="markdownIt-Anchor" href="#51-它不是直接-http-调-anthropic-messages-api"></a> 5.1 它不是“直接 HTTP 调 Anthropic Messages API”</h3>
-<p>这个项目通过 <code>claude-agent-sdk</code> 调用 Claude Code 能力，核心调用形态是 <code>query(prompt, options)</code>。<br />
-<code>options</code> 里会带：</p>
+<hr>
+<h2 id="5-Claude-Code-SDK-在这里扮演什么角色？"><a href="#5-Claude-Code-SDK-在这里扮演什么角色？" class="headerlink" title="5. Claude Code SDK 在这里扮演什么角色？"></a>5. Claude Code SDK 在这里扮演什么角色？</h2><h3 id="5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”"><a href="#5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”" class="headerlink" title="5.1 它不是“直接 HTTP 调 Anthropic Messages API”"></a>5.1 它不是“直接 HTTP 调 Anthropic Messages API”</h3><p>这个项目通过 <code>claude-agent-sdk</code> 调用 Claude Code 能力，核心调用形态是 <code>query(prompt, options)</code>。<br><code>options</code> 里会带：</p>
 <ul>
 <li><code>cwd</code></li>
 <li><code>maxTurns</code></li>
-<li><code>allowedTools</code> / <code>disallowedTools</code></li>
-<li><code>sessionId</code> / <code>resume</code> / <code>continueConversation</code></li>
+<li><code>allowedTools</code> &#x2F; <code>disallowedTools</code></li>
+<li><code>sessionId</code> &#x2F; <code>resume</code> &#x2F; <code>continueConversation</code></li>
 <li><code>mcpServers</code>（可选）</li>
 </ul>
 <p>也就是说，它不是简单“传 prompt 等答案”，而是“启动一个带工具执行能力的模型回路”。</p>
-<h3 id="52-为什么能做出流式可观测"><a class="markdownIt-Anchor" href="#52-为什么能做出流式可观测"></a> 5.2 为什么能做出流式可观测</h3>
-<p>SDK 会持续返回消息事件，常见类型有：</p>
+<h3 id="5-2-为什么能做出流式可观测"><a href="#5-2-为什么能做出流式可观测" class="headerlink" title="5.2 为什么能做出流式可观测"></a>5.2 为什么能做出流式可观测</h3><p>SDK 会持续返回消息事件，常见类型有：</p>
 <ul>
 <li><code>system</code></li>
 <li><code>assistant</code>（含 <code>thinking</code>、<code>tool_use</code>、<code>tool_result</code>、<code>text</code> 块）</li>
 <li><code>result</code></li>
 </ul>
 <p>服务端再把这些 wire 消息转换成 SSE 事件推给前端，因此你可以看到一个“正在思考和查代码”的过程，而不是黑盒等待。</p>
-<h3 id="53-续聊策略为什么分两种"><a class="markdownIt-Anchor" href="#53-续聊策略为什么分两种"></a> 5.3 续聊策略为什么分两种</h3>
-<p>这个项目里我认为很务实的一点是：它并不执着于单一路径。</p>
+<h3 id="5-3-续聊策略为什么分两种"><a href="#5-3-续聊策略为什么分两种" class="headerlink" title="5.3 续聊策略为什么分两种"></a>5.3 续聊策略为什么分两种</h3><p>这个项目里我认为很务实的一点是：它并不执着于单一路径。</p>
 <ol>
 <li><strong>CLI session 续聊</strong>：沿用模型原生会话，但有并发占用风险。</li>
 <li><strong>JSON 历史续聊（推荐）</strong>：每轮新会话 + 历史拼 prompt，工程可控性更高。</li>
 </ol>
-<p>这背后是个典型的工程取舍：<br />
-<strong>理论连续性</strong>（原生 session） vs <strong>运行稳定性</strong>（服务端可控历史）。</p>
-<hr />
-<h2 id="6-和传统代码搜索文档系统相比价值在哪"><a class="markdownIt-Anchor" href="#6-和传统代码搜索文档系统相比价值在哪"></a> 6. 和“传统代码搜索/文档系统”相比，价值在哪</h2>
-<p>如果只有搜索，你拿到的是“片段”；<br />
-如果只有文档，你拿到的是“可能过时的解释”；<br />
-如果只有人肉答疑，你拿到的是“口头记忆”。</p>
+<p>这背后是个典型的工程取舍：<br><strong>理论连续性</strong>（原生 session） vs <strong>运行稳定性</strong>（服务端可控历史）。</p>
+<hr>
+<h2 id="6-和“传统代码搜索-文档系统”相比，价值在哪"><a href="#6-和“传统代码搜索-文档系统”相比，价值在哪" class="headerlink" title="6. 和“传统代码搜索&#x2F;文档系统”相比，价值在哪"></a>6. 和“传统代码搜索&#x2F;文档系统”相比，价值在哪</h2><p>如果只有搜索，你拿到的是“片段”；<br>如果只有文档，你拿到的是“可能过时的解释”；<br>如果只有人肉答疑，你拿到的是“口头记忆”。</p>
 <p>而代码-&gt;PRD阅读器 Agent 的价值是三者组合：</p>
 <ul>
 <li>以代码为事实来源；</li>
@@ -529,24 +576,21 @@
 <li>以流式交互支持追问与澄清。</li>
 </ul>
 <p>它把“查证事实”和“生成可读说明”放到同一链路中，显著缩短了产品、研发、测试之间的认知对齐时间。</p>
-<hr />
-<h2 id="7-落地建议给团队"><a class="markdownIt-Anchor" href="#7-落地建议给团队"></a> 7. 落地建议（给团队）</h2>
-<ol>
+<hr>
+<h2 id="7-落地建议（给团队）"><a href="#7-落地建议（给团队）" class="headerlink" title="7. 落地建议（给团队）"></a>7. 落地建议（给团队）</h2><ol>
 <li><strong>先从只读问答开始</strong>，别一开始就自动改代码。</li>
-<li><strong>问题模板化</strong>：沉淀“是否已实现/入口在哪/边界条件/异常链路”这类固定问法。</li>
+<li><strong>问题模板化</strong>：沉淀“是否已实现&#x2F;入口在哪&#x2F;边界条件&#x2F;异常链路”这类固定问法。</li>
 <li><strong>会话持久化</strong>：重要讨论的 <code>chat_id</code> 结果可二次沉淀为 PRD 附件或技术说明。</li>
 <li><strong>明确责任边界</strong>：Agent 给的是证据化建议，最终决策必须人来签字。</li>
 </ol>
-<hr />
-<h2 id="8-总结"><a class="markdownIt-Anchor" href="#8-总结"></a> 8. 总结</h2>
-<p>“代码-&gt;PRD阅读器”这类 Agent 项目之所以有现实价值，不在于它做了多复杂的算法，而在于它把一个高频痛点工程化了：</p>
+<hr>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>“代码-&gt;PRD阅读器”这类 Agent 项目之所以有现实价值，不在于它做了多复杂的算法，而在于它把一个高频痛点工程化了：</p>
 <ul>
 <li>用代码事实替代记忆沟通；</li>
 <li>用流式交互替代黑盒等待；</li>
 <li>用可复用会话替代一次性口头解释。</li>
 </ul>
-<p>从数字化到智能化的关键一步，正是让系统开始承担“理解 + 检索 + 归纳”的劳动。<br />
-这个项目已经把这条路走通了一个非常实用的版本。</p>
+<p>从数字化到智能化的关键一步，正是让系统开始承担“理解 + 检索 + 归纳”的劳动。<br>这个项目已经把这条路走通了一个非常实用的版本。</p>
 
             </div>
             <hr/>
@@ -699,9 +743,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://s3.bmp.ovh/2026/03/16/plzgBj7O.jpg" class="responsive-img" alt="代码->PRD阅读器的agent尝试">
+                        <img src="https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg" class="responsive-img" alt="代码->PRD阅读器的Agent小试牛刀">
                         
-                        <span class="card-title">代码->PRD阅读器的agent尝试</span>
+                        <span class="card-title">代码->PRD阅读器的Agent小试牛刀</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -987,7 +1031,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">53.8k</span>&nbsp;字
+                    class="white-color">47.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

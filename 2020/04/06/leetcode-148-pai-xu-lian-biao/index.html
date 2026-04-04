@@ -6,13 +6,12 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:148. 排序链表, 小风雷">
     <meta name="description" content="#Leetcode: 141.排序链表
- 题目描述
-在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+题目描述在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
 
- 示例 1:
-输入: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3
+示例 1:输入: 4-&amp;gt;2-&amp;gt;1-&amp;gt;3
 输出: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4
-">
+
+示例 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -349,7 +348,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    528
+                    494
                 </div>
                 
 
@@ -368,134 +367,120 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>#<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sort-list/">Leetcode: 141.排序链表</a></p>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: 4-&gt;2-&gt;1-&gt;3
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 4-&gt;2-&gt;1-&gt;3
 输出: 1-&gt;2-&gt;3-&gt;4
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: -1-&gt;5-&gt;3-&gt;4-&gt;0
 输出: -1-&gt;0-&gt;3-&gt;4-&gt;5
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>使用快排实现，值修改</p>
-<h3 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h3>
-<p>使用归并排序，实现平均复杂度<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,因为链表可以直接引用空间，所以可以不用额外的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>空间，需要注意获取中间节点的快指针位置初始设置</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="思路1代码"><a class="markdownIt-Anchor" href="#思路1代码"></a> 思路1代码</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-comment">/**
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用快排实现，值修改</p>
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用归并排序，实现平均复杂度$O(n)$,因为链表可以直接引用空间，所以可以不用额外的$O(nlogn)$空间，需要注意获取中间节点的快指针位置初始设置</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-language-Java"><code class="language-language-Java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
  *     ListNode next;
  *     ListNode(int x) { val = x; }
  * }
- */</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">sortList</span><span class="hljs-params">(ListNode head)</span> {
-        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">return</span> head;
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
         }
         
-        quickSort(head, <span class="hljs-literal">null</span>);
+        quickSort(head, null);
         
-        <span class="hljs-keyword">return</span> head;
+        return head;
     }
     
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quickSort</span><span class="hljs-params">(ListNode head, ListNode end)</span>{
-        <span class="hljs-keyword">if</span> (head != end){
-            <span class="hljs-type">ListNode</span> <span class="hljs-variable">midNode</span> <span class="hljs-operator">=</span> getPartition(head, end);
+    private void quickSort(ListNode head, ListNode end){
+        if (head != end){
+            ListNode midNode = getPartition(head, end);
             quickSort(head, midNode);
             quickSort(midNode.next, end);
         }
     }
     
-    <span class="hljs-keyword">private</span> ListNode <span class="hljs-title function_">getPartition</span><span class="hljs-params">(ListNode head, ListNode end)</span>{
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">getNode</span> <span class="hljs-operator">=</span> head;
-        <span class="hljs-type">int</span> <span class="hljs-variable">getNum</span> <span class="hljs-operator">=</span> head.val;
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> head.next;
+    private ListNode getPartition(ListNode head, ListNode end){
+        ListNode getNode = head;
+        int getNum = head.val;
+        ListNode pre = head.next;
         
-        <span class="hljs-keyword">while</span>(pre != <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">if</span> (pre == end){
-                <span class="hljs-keyword">break</span>;
+        while(pre != null){
+            if (pre == end){
+                break;
             }
-            <span class="hljs-keyword">if</span> (pre.val &lt; getNum){
+            if (pre.val < getNum){
                 getNode = getNode.next;
-                <span class="hljs-type">int</span> <span class="hljs-variable">tempNum</span> <span class="hljs-operator">=</span> pre.val;
+                int tempNum = pre.val;
                 pre.val = getNode.val;
                 getNode.val = tempNum;
             }
             pre = pre.next;
         }
         
-        <span class="hljs-type">int</span> <span class="hljs-variable">tempNum</span> <span class="hljs-operator">=</span> getNode.val;
+        int tempNum = getNode.val;
         getNode.val = head.val;
         head.val = tempNum;
         
-        <span class="hljs-keyword">return</span> getNode;
+        return getNode;
     }
 }
 </code></pre>
-<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-comment">/**
+<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
  *     ListNode next;
  *     ListNode(int x) { val = x; }
  * }
- */</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">sortList</span><span class="hljs-params">(ListNode head)</span> {
-        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">return</span> head;
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
         }
         
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">pre</span> <span class="hljs-operator">=</span> head.next;
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">middle</span> <span class="hljs-operator">=</span> head;
-        <span class="hljs-keyword">while</span> (pre != <span class="hljs-literal">null</span> &amp;&amp; pre.next != <span class="hljs-literal">null</span>){
+        ListNode pre = head.next;
+        ListNode middle = head;
+        while (pre != null && pre.next != null){
             pre = pre.next.next;
             middle = middle.next;
         }
         
         pre = middle.next;
-        middle.next = <span class="hljs-literal">null</span>;
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> sortList(head);
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> sortList(pre);
+        middle.next = null;
+        ListNode left = sortList(head);
+        ListNode right = sortList(pre);
         
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-number">0</span>);
-        <span class="hljs-type">ListNode</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> result;
-        <span class="hljs-keyword">while</span> (left != <span class="hljs-literal">null</span> &amp;&amp; right != <span class="hljs-literal">null</span>){
-            <span class="hljs-keyword">if</span> (left.val &lt; right.val){
+        ListNode result = new ListNode(0);
+        ListNode temp = result;
+        while (left != null && right != null){
+            if (left.val < right.val){
                 temp.next = left;
                 left = left.next;
-            }<span class="hljs-keyword">else</span>{
+            }else{
                 temp.next = right;
                 right = right.next;
             }
             temp = temp.next;
         }
         temp.next = right;
-        <span class="hljs-keyword">if</span> (left != <span class="hljs-literal">null</span>){
+        if (left != null){
             temp.next = left;
         }
         
-        <span class="hljs-keyword">return</span> result.next;
+        return result.next;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p>最坏<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，平均<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlogn)$</p>
+<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -651,9 +636,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             [Leetcode:160.相交链表]
- 题目描述
-编写一个程序，找到两个单链表相交的起始节点。
+                            [Leetcode:160.相交链表]题目描述编写一个程序，找到两个单链表相交的起始节点。
 
 如下面的两个链表：
 
@@ -661,8 +644,7 @@
 
 在节点 c1 开始相交。
 
- 示例 1：
-输入：intersectVal = 8, listA = [4,1,8
+示例 1：输入：intersectVal = 8, listA = [4,1,8,4,5],
                         
                     </div>
                     <div class="publish-info">
@@ -719,12 +701,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:141. 环形链表
- 题目描述
-给定一个链表，判断链表中是否有环。
+                            Leetcode:141. 环形链表题目描述给定一个链表，判断链表中是否有环。
 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
 
- 示
+示例 1：输
                         
                     </div>
                     <div class="publish-info">
@@ -945,7 +925,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">53.8k</span>&nbsp;字
+                    class="white-color">47.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
