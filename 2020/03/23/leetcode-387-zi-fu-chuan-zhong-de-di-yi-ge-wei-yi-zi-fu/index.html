@@ -5,12 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:387. 字符串中的第一个唯一字符, 小风雷">
-    <meta name="description" content="Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+    <meta name="description" content=" Leetcode:387. 字符串中的第一个唯一字符
+ 题目描述
+给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
 
-案例:s = &amp;quot;leetcode&amp;quot;
+ 案例:
+s = &amp;quot;leetcode&amp;quot;
 返回 0.
 
-s = &amp;quot;">
+s = ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -35,8 +38,8 @@ s = &amp;quot;">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -181,7 +184,7 @@ s = &amp;quot;">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -351,7 +354,7 @@ s = &amp;quot;">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    180
+                    186
                 </div>
                 
 
@@ -369,9 +372,12 @@ s = &amp;quot;">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-387-字符串中的第一个唯一字符"><a href="#Leetcode-387-字符串中的第一个唯一字符" class="headerlink" title="Leetcode:387. 字符串中的第一个唯一字符"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/">Leetcode:387. 字符串中的第一个唯一字符</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+                <h1 id="leetcode387-字符串中的第一个唯一字符"><a class="markdownIt-Anchor" href="#leetcode387-字符串中的第一个唯一字符"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/">Leetcode:387. 字符串中的第一个唯一字符</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
 </code></pre>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例:"></a>案例:</h3><pre><code>s = &quot;leetcode&quot;
+<h3 id="案例"><a class="markdownIt-Anchor" href="#案例"></a> 案例:</h3>
+<pre><code>s = &quot;leetcode&quot;
 返回 0.
 
 s = &quot;loveleetcode&quot;,
@@ -380,23 +386,26 @@ s = &quot;loveleetcode&quot;,
 
 注意事项：您可以假定该字符串只包含小写字母。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路：数组-字典"><a href="#思路：数组-字典" class="headerlink" title="思路：数组 字典"></a>思路：数组 字典</h3><p>直接使用数组对字母计数二次遍历</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public int firstUniqChar(String s) {
-        if (s == null || s.length() == 0){
-            return -1;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路数组-字典"><a class="markdownIt-Anchor" href="#思路数组-字典"></a> 思路：数组 字典</h3>
+<p>直接使用数组对字母计数二次遍历</p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">firstUniqChar</span><span class="hljs-params">(String s)</span> {
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
         }
-        int[] chDict = new int[26];
+        <span class="hljs-type">int</span>[] chDict = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];
 
-        for(int i = 0; i < s.length(); i++){
-            chDict[s.charAt(i) - 'a'] += 1;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++){
+            chDict[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>] += <span class="hljs-number">1</span>;
         }
-        for(int i = 0; i < s.length(); i++){
-            if(chDict[s.charAt(i) - 'a'] == 1){
-                return i;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++){
+            <span class="hljs-keyword">if</span>(chDict[s.charAt(i) - <span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-number">1</span>){
+                <span class="hljs-keyword">return</span> i;
             }
         }
-        return -1;
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
     }
 }
 </code></pre>
@@ -551,7 +560,7 @@ s = &quot;loveleetcode&quot;,
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="Leetcode:344. 反转字符串">
+                        <img src="https://s3.bmp.ovh/2026/03/16/fv3eLHwV.jpg" class="responsive-img" alt="Leetcode:344. 反转字符串">
                         
                         <span class="card-title">Leetcode:344. 反转字符串</span>
                     </div>
@@ -559,9 +568,11 @@ s = &quot;loveleetcode&quot;,
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:344. 反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+                             Leetcode:344. 反转字符串
+ 题目描述
+编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
 
-不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这
                         
                     </div>
                     <div class="publish-info">
@@ -614,7 +625,7 @@ s = &quot;loveleetcode&quot;,
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="Leetcode:242. 有效的字母异位词">
+                        <img src="https://s3.bmp.ovh/2026/03/16/LQJlAo0M.jpg" class="responsive-img" alt="Leetcode:242. 有效的字母异位词">
                         
                         <span class="card-title">Leetcode:242. 有效的字母异位词</span>
                     </div>
@@ -622,9 +633,12 @@ s = &quot;loveleetcode&quot;,
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:242. 有效的字母异位词题目描述给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+                             Leetcode:242. 有效的字母异位词
+ 题目描述
+给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
 
-示例 1:输入: s = &quot;anagram&quot;, t = &quot;nagaram&
+ 示例 1:
+输入: s = &quot;anagram&quot;, t = &quot;na
                         
                     </div>
                     <div class="publish-info">
@@ -845,7 +859,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

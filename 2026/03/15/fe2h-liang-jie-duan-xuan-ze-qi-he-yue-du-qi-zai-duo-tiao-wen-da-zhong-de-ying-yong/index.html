@@ -5,10 +5,12 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用, 小风雷">
-    <meta name="description" content="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用
+    <meta name="description" content=" From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用
+
 发表信息：本文发表于 ICASSP 2023（CCF-B 类会议）
 
-1. 什么是多跳阅读理解？多跳阅读理解（Multi-hop Question Answeri">
+ 1. 什么是多跳阅读理解？
+多跳阅读理解（Multi-hop Question Ans">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,8 +35,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -179,7 +181,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/sa8PsCyf.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -367,12 +369,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用"><a href="#From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用" class="headerlink" title="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用"></a>From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</h1><blockquote>
+                <h1 id="from-easy-to-hard-两阶段选择器与阅读器在多跳问答中的应用"><a class="markdownIt-Anchor" href="#from-easy-to-hard-两阶段选择器与阅读器在多跳问答中的应用"></a> From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</h1>
+<blockquote>
 <p><strong>发表信息</strong>：本文发表于 <strong>ICASSP 2023</strong>（CCF-B 类会议）</p>
 </blockquote>
-<h2 id="1-什么是多跳阅读理解？"><a href="#1-什么是多跳阅读理解？" class="headerlink" title="1. 什么是多跳阅读理解？"></a>1. 什么是多跳阅读理解？</h2><p>多跳阅读理解（Multi-hop Question Answering）是自然语言处理领域中的一个极具挑战性的任务。与单跳问答不同，多跳问答需要模型在<strong>多个文档</strong>中进行推理，找到关联信息后才能给出正确答案。</p>
-<h3 id="1-1-跳-的含义"><a href="#1-1-跳-的含义" class="headerlink" title="1.1 &quot;跳&quot;的含义"></a>1.1 &quot;跳&quot;的含义</h3><p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p>
-<h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>中文示例：</strong></p>
+<h2 id="1-什么是多跳阅读理解"><a class="markdownIt-Anchor" href="#1-什么是多跳阅读理解"></a> 1. 什么是多跳阅读理解？</h2>
+<p>多跳阅读理解（Multi-hop Question Answering）是自然语言处理领域中的一个极具挑战性的任务。与单跳问答不同，多跳问答需要模型在<strong>多个文档</strong>中进行推理，找到关联信息后才能给出正确答案。</p>
+<h3 id="11-跳的含义"><a class="markdownIt-Anchor" href="#11-跳的含义"></a> 1.1 &quot;跳&quot;的含义</h3>
+<p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p>
+<h3 id="12-多跳问题示例"><a class="markdownIt-Anchor" href="#12-多跳问题示例"></a> 1.2 多跳问题示例</h3>
+<p><strong>中文示例：</strong></p>
 <pre class="mermaid">flowchart TD
     subgraph Hop1
     Q1[Q: Who directed The Wandering Earth]
@@ -398,7 +404,6 @@
     style Q2 fill:#ff9,color:#333
     style D2 fill:#bbf,color:#333
     style Answer fill:#bfb,color:#333</pre>
-
 <p><strong>问题解析：</strong></p>
 <table>
 <thead>
@@ -408,7 +413,8 @@
 <th>涉及的文档</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>第一跳</td>
 <td>找出《流浪地球》的导演</td>
 <td>文档A</td>
@@ -423,17 +429,19 @@
 <td>整合两跳信息给出完整答案</td>
 <td>合并结果</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>多跳体现在哪里？</strong></p>
 <ol>
 <li><strong>无法直接回答</strong>：看第一个文档只能知道导演是谁，但问题问的是出生年份</li>
 <li><strong>需要链式推理</strong>：第一跳的结果（导演名）是第二跳的输入</li>
 <li><strong>两步信息整合</strong>：必须把两个文档的信息合在一起才能完整回答问题</li>
 </ol>
-<hr>
-<h2 id="2-论文摘要"><a href="#2-论文摘要" class="headerlink" title="2. 论文摘要"></a>2. 论文摘要</h2><p><strong>Title</strong>: From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</p>
+<hr />
+<h2 id="2-论文摘要"><a class="markdownIt-Anchor" href="#2-论文摘要"></a> 2. 论文摘要</h2>
+<p><strong>Title</strong>: From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</p>
 <p><strong>作者</strong>: Weijun Lei et al. (南京大学)</p>
-<p><strong>Abstract</strong>: </p>
+<p><strong>Abstract</strong>:</p>
 <p>多跳问答是一个具有挑战性的任务，需要QA系统在多个文档上进行复杂推理并提供支持性事实和准确答案。现有方法倾向于使用基于图的推理和问题分解来获取推理链，但这不可避免地引入了额外的复杂性和累积误差。</p>
 <p>为了解决上述问题，我们提出了一个简单而有效的新框架——<strong>From Easy to Hard (FE2H)</strong>，该框架通过移除干扰信息来获得更好的多跳QA任务上下文表示。</p>
 <p>FE2H的核心理念：</p>
@@ -450,8 +458,11 @@
 <p><strong>论文链接</strong>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">arXiv:2205.11729</a></p>
 <p><strong>代码链接</strong>: <a target="_blank" rel="noopener" href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></p>
 <p><strong>HotpotQA排行榜</strong>: <a target="_blank" rel="noopener" href="https://hotpotqa.github.io/">https://hotpotqa.github.io/</a></p>
-<hr>
-<h2 id="3-核心创新点"><a href="#3-核心创新点" class="headerlink" title="3. 核心创新点"></a>3. 核心创新点</h2><h3 id="3-1-创新点一：两阶段文档筛选器"><a href="#3-1-创新点一：两阶段文档筛选器" class="headerlink" title="3.1 创新点一：两阶段文档筛选器"></a>3.1 创新点一：两阶段文档筛选器</h3><h4 id="3-1-1-传统方法的痛点"><a href="#3-1-1-传统方法的痛点" class="headerlink" title="3.1.1 传统方法的痛点"></a>3.1.1 传统方法的痛点</h4><p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p>
+<hr />
+<h2 id="3-核心创新点"><a class="markdownIt-Anchor" href="#3-核心创新点"></a> 3. 核心创新点</h2>
+<h3 id="31-创新点一两阶段文档筛选器"><a class="markdownIt-Anchor" href="#31-创新点一两阶段文档筛选器"></a> 3.1 创新点一：两阶段文档筛选器</h3>
+<h4 id="311-传统方法的痛点"><a class="markdownIt-Anchor" href="#311-传统方法的痛点"></a> 3.1.1 传统方法的痛点</h4>
+<p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p>
 <ol>
 <li><strong>直接全局推理</strong>：将所有文档一起输入模型</li>
 <li><strong>一次性选择</strong>：一次性选出所有相关文档</li>
@@ -462,7 +473,8 @@
 <li>推理复杂度呈指数级增长</li>
 <li>错误在多跳推理过程中累积</li>
 </ul>
-<h4 id="3-1-2-FE2H-的解决方案：渐进式筛选"><a href="#3-1-2-FE2H-的解决方案：渐进式筛选" class="headerlink" title="3.1.2 FE2H 的解决方案：渐进式筛选"></a>3.1.2 FE2H 的解决方案：渐进式筛选</h4><pre class="mermaid">flowchart TD
+<h4 id="312-fe2h-的解决方案渐进式筛选"><a class="markdownIt-Anchor" href="#312-fe2h-的解决方案渐进式筛选"></a> 3.1.2 FE2H 的解决方案：渐进式筛选</h4>
+<pre class="mermaid">flowchart TD
     subgraph Traditional
     T1[Q + 10 docs] --> T2[Select all at once]
     T2 --> T3[Multi-hop reasoning]
@@ -477,9 +489,9 @@
     
     style F2 fill:#bfb,color:#333
     style F4 fill:#bfb,color:#333</pre>
-
 <p><strong>核心思想</strong>：借鉴人类的迭代阅读习惯，先找到&quot;入口文档&quot;，再基于它找到后续相关文档。</p>
-<h4 id="3-1-3-为什么这样更有效？"><a href="#3-1-3-为什么这样更有效？" class="headerlink" title="3.1.3 为什么这样更有效？"></a>3.1.3 为什么这样更有效？</h4><table>
+<h4 id="313-为什么这样更有效"><a class="markdownIt-Anchor" href="#313-为什么这样更有效"></a> 3.1.3 为什么这样更有效？</h4>
+<table>
 <thead>
 <tr>
 <th>特性</th>
@@ -487,7 +499,8 @@
 <th>FE2H两阶段</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>信息利用</td>
 <td>全局搜索</td>
 <td>聚焦式检索</td>
@@ -507,9 +520,12 @@
 <td>多跳同时推理</td>
 <td>分步验证</td>
 </tr>
-</tbody></table>
-<hr>
-<h3 id="3-2-创新点二：从易到难的渐进式学习"><a href="#3-2-创新点二：从易到难的渐进式学习" class="headerlink" title="3.2 创新点二：从易到难的渐进式学习"></a>3.2 创新点二：从易到难的渐进式学习</h3><h4 id="3-2-1-核心灵感"><a href="#3-2-1-核心灵感" class="headerlink" title="3.2.1 核心灵感"></a>3.2.1 核心灵感</h4><p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p>
+</tbody>
+</table>
+<hr />
+<h3 id="32-创新点二从易到难的渐进式学习"><a class="markdownIt-Anchor" href="#32-创新点二从易到难的渐进式学习"></a> 3.2 创新点二：从易到难的渐进式学习</h3>
+<h4 id="321-核心灵感"><a class="markdownIt-Anchor" href="#321-核心灵感"></a> 3.2.1 核心灵感</h4>
+<p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p>
 <pre class="mermaid">flowchart LR
     subgraph Human Learning
     H1[Learn to speak] --> H2[Learn to read] --> H3[Learn comprehension] --> H4[Learn to write]
@@ -521,8 +537,8 @@
     
     style E1 fill:#bbf,color:#333
     style E3 fill:#f9f,color:#333</pre>
-
-<h4 id="3-2-2-渐进式训练策略"><a href="#3-2-2-渐进式训练策略" class="headerlink" title="3.2.2 渐进式训练策略"></a>3.2.2 渐进式训练策略</h4><pre class="mermaid">flowchart TD
+<h4 id="322-渐进式训练策略"><a class="markdownIt-Anchor" href="#322-渐进式训练策略"></a> 3.2.2 渐进式训练策略</h4>
+<pre class="mermaid">flowchart TD
     subgraph Stage 1: Single-hop Pre-training
     P1[Train on SQuAD]
     P1 --> P2[Learn basic reading comprehension]
@@ -538,11 +554,12 @@
     
     style P1 fill:#bbf,color:#333
     style M1 fill:#f9f,color:#333</pre>
-
-<h4 id="3-2-3-为什么单跳数据很重要？"><a href="#3-2-3-为什么单跳数据很重要？" class="headerlink" title="3.2.3 为什么单跳数据很重要？"></a>3.2.3 为什么单跳数据很重要？</h4><ol>
+<h4 id="323-为什么单跳数据很重要"><a class="markdownIt-Anchor" href="#323-为什么单跳数据很重要"></a> 3.2.3 为什么单跳数据很重要？</h4>
+<ol>
 <li><strong>数据规模大</strong>：单跳问答数据集（如SQuAD）规模远大于多跳数据集</li>
 <li><strong>噪声少</strong>：单跳文档通常直接包含答案，干扰较少</li>
-<li><strong>学习基础能力</strong>：<ul>
+<li><strong>学习基础能力</strong>：
+<ul>
 <li>问题理解</li>
 <li>实体识别</li>
 <li>答案定位</li>
@@ -550,8 +567,10 @@
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="3-3-创新点三：简洁有效的框架设计"><a href="#3-3-创新点三：简洁有效的框架设计" class="headerlink" title="3.3 创新点三：简洁有效的框架设计"></a>3.3 创新点三：简洁有效的框架设计</h3><h4 id="3-3-1-拒绝复杂，拥抱简单"><a href="#3-3-1-拒绝复杂，拥抱简单" class="headerlink" title="3.3.1 拒绝复杂，拥抱简单"></a>3.3.1 拒绝复杂，拥抱简单</h4><table>
+<hr />
+<h3 id="33-创新点三简洁有效的框架设计"><a class="markdownIt-Anchor" href="#33-创新点三简洁有效的框架设计"></a> 3.3 创新点三：简洁有效的框架设计</h3>
+<h4 id="331-拒绝复杂拥抱简单"><a class="markdownIt-Anchor" href="#331-拒绝复杂拥抱简单"></a> 3.3.1 拒绝复杂，拥抱简单</h4>
+<table>
 <thead>
 <tr>
 <th>特性</th>
@@ -559,7 +578,8 @@
 <th>FE2H</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>图结构</td>
 <td>需要构建实体关系图</td>
 <td>无需图结构</td>
@@ -579,8 +599,10 @@
 <td>O(n²) 甚至更高</td>
 <td>O(n)</td>
 </tr>
-</tbody></table>
-<h4 id="3-3-2-框架对比"><a href="#3-3-2-框架对比" class="headerlink" title="3.3.2 框架对比"></a>3.3.2 框架对比</h4><pre class="mermaid">flowchart TD
+</tbody>
+</table>
+<h4 id="332-框架对比"><a class="markdownIt-Anchor" href="#332-框架对比"></a> 3.3.2 框架对比</h4>
+<pre class="mermaid">flowchart TD
     subgraph Traditional (Graph-based)
     G1[Build knowledge graph] --> G2[Entity linking]
     G2 --> G3[GNN reasoning]
@@ -595,8 +617,8 @@
     
     style G1 fill:#fbb,color:#333
     style F1 fill:#bfb,color:#333</pre>
-
-<h4 id="3-3-3-消融实验结果"><a href="#3-3-3-消融实验结果" class="headerlink" title="3.3.3 消融实验结果"></a>3.3.3 消融实验结果</h4><p>论文中的消融实验证明了各组件的有效性：</p>
+<h4 id="333-消融实验结果"><a class="markdownIt-Anchor" href="#333-消融实验结果"></a> 3.3.3 消融实验结果</h4>
+<p>论文中的消融实验证明了各组件的有效性：</p>
 <table>
 <thead>
 <tr>
@@ -605,7 +627,8 @@
 <th>提升</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>基础模型</td>
 <td>74.2</td>
 <td>-</td>
@@ -625,9 +648,12 @@
 <td><strong>76.5</strong></td>
 <td>+0.4</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="4-FE2H框架详解"><a href="#4-FE2H框架详解" class="headerlink" title="4. FE2H框架详解"></a>4. FE2H框架详解</h2><h3 id="4-1-整体架构"><a href="#4-1-整体架构" class="headerlink" title="4.1 整体架构"></a>4.1 整体架构</h3><pre class="mermaid">flowchart TD
+</tbody>
+</table>
+<hr />
+<h2 id="4-fe2h框架详解"><a class="markdownIt-Anchor" href="#4-fe2h框架详解"></a> 4. FE2H框架详解</h2>
+<h3 id="41-整体架构"><a class="markdownIt-Anchor" href="#41-整体架构"></a> 4.1 整体架构</h3>
+<pre class="mermaid">flowchart TD
     Q[Question] --> DS1[Stage 1 Doc Selector]
     
     subgraph Document Selection Stage
@@ -646,8 +672,8 @@
     style DS1 fill:#f9f,color:#333
     style DS2 fill:#f9f,color:#333
     style Reader fill:#ff9,color:#333</pre>
-
-<h3 id="4-2-两阶段文档选择器"><a href="#4-2-两阶段文档选择器" class="headerlink" title="4.2 两阶段文档选择器"></a>4.2 两阶段文档选择器</h3><p><strong>第一阶段</strong>：</p>
+<h3 id="42-两阶段文档选择器"><a class="markdownIt-Anchor" href="#42-两阶段文档选择器"></a> 4.2 两阶段文档选择器</h3>
+<p><strong>第一阶段</strong>：</p>
 <ul>
 <li>输入：问题 + 所有候选文档</li>
 <li>输出：选择最相关的文档（top-k）</li>
@@ -657,7 +683,8 @@
 <li>输入：问题 + 第一阶段选中的文档</li>
 <li>输出：进一步筛选出与推理链相关的其他文档</li>
 </ul>
-<h3 id="4-3-两阶段阅读器"><a href="#4-3-两阶段阅读器" class="headerlink" title="4.3 两阶段阅读器"></a>4.3 两阶段阅读器</h3><p><strong>第一阶段（单跳模式）</strong>：</p>
+<h3 id="43-两阶段阅读器"><a class="markdownIt-Anchor" href="#43-两阶段阅读器"></a> 4.3 两阶段阅读器</h3>
+<p><strong>第一阶段（单跳模式）</strong>：</p>
 <ul>
 <li>在单跳问答数据集（如SQuAD）上进行预训练</li>
 <li>学习基础的问答能力</li>
@@ -667,8 +694,10 @@
 <li>迁移到多跳问答任务</li>
 <li>利用第一阶段学到的知识进行更复杂的推理</li>
 </ul>
-<hr>
-<h2 id="5-与大模型Chain-of-Thought的联系与区别"><a href="#5-与大模型Chain-of-Thought的联系与区别" class="headerlink" title="5. 与大模型Chain-of-Thought的联系与区别"></a>5. 与大模型Chain-of-Thought的联系与区别</h2><h3 id="5-1-Chain-of-Thought-CoT-简介"><a href="#5-1-Chain-of-Thought-CoT-简介" class="headerlink" title="5.1 Chain-of-Thought (CoT) 简介"></a>5.1 Chain-of-Thought (CoT) 简介</h3><p>Chain-of-Thought（思维链）是近年来大语言模型（如GPT-4、PaLM）的重要推理范式。其核心思想是：</p>
+<hr />
+<h2 id="5-与大模型chain-of-thought的联系与区别"><a class="markdownIt-Anchor" href="#5-与大模型chain-of-thought的联系与区别"></a> 5. 与大模型Chain-of-Thought的联系与区别</h2>
+<h3 id="51-chain-of-thought-cot-简介"><a class="markdownIt-Anchor" href="#51-chain-of-thought-cot-简介"></a> 5.1 Chain-of-Thought (CoT) 简介</h3>
+<p>Chain-of-Thought（思维链）是近年来大语言模型（如GPT-4、PaLM）的重要推理范式。其核心思想是：</p>
 <pre class="mermaid">flowchart LR
     Q1[Question] --> CoT1[Step-by-step reasoning<br/>Step 1: ...<br/>Step 2: ...<br/>Step 3: ...]
     CoT1 --> A1[Final Answer]
@@ -676,14 +705,14 @@
     style Q1 fill:#f9f,color:#333
     style CoT1 fill:#ff9,color:#333
     style A1 fill:#bfb,color:#333</pre>
-
 <p>CoT的优势：</p>
 <ul>
 <li>显式展示推理过程</li>
 <li>提高模型的可解释性</li>
 <li>在数学、逻辑推理任务上效果显著</li>
 </ul>
-<h3 id="5-2-FE2H-vs-Chain-of-Thought"><a href="#5-2-FE2H-vs-Chain-of-Thought" class="headerlink" title="5.2 FE2H vs Chain-of-Thought"></a>5.2 FE2H vs Chain-of-Thought</h3><table>
+<h3 id="52-fe2h-vs-chain-of-thought"><a class="markdownIt-Anchor" href="#52-fe2h-vs-chain-of-thought"></a> 5.2 FE2H vs Chain-of-Thought</h3>
+<table>
 <thead>
 <tr>
 <th>特性</th>
@@ -691,7 +720,8 @@
 <th>Chain-of-Thought</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>推理方式</strong></td>
 <td>显式的文档筛选+阅读</td>
 <td>隐式的思维链</td>
@@ -716,24 +746,30 @@
 <td>结构化文档检索</td>
 <td>开放域推理</td>
 </tr>
-</tbody></table>
-<h3 id="5-3-两者的联系"><a href="#5-3-两者的联系" class="headerlink" title="5.3 两者的联系"></a>5.3 两者的联系</h3><ol>
-<li><p><strong>渐进式推理</strong>：两者都采用&quot;逐步推理&quot;的思想</p>
+</tbody>
+</table>
+<h3 id="53-两者的联系"><a class="markdownIt-Anchor" href="#53-两者的联系"></a> 5.3 两者的联系</h3>
+<ol>
+<li>
+<p><strong>渐进式推理</strong>：两者都采用&quot;逐步推理&quot;的思想</p>
 <ul>
 <li>FE2H：从简单文档到复杂文档，从单跳到多跳</li>
 <li>CoT：从简单推理步骤到复杂推理步骤</li>
 </ul>
 </li>
-<li><p><strong>中间结果</strong>：都依赖中间结果来增强最终答案</p>
+<li>
+<p><strong>中间结果</strong>：都依赖中间结果来增强最终答案</p>
 <ul>
 <li>FE2H：筛选出的相关文档</li>
 <li>CoT：推理过程中的中间结论</li>
 </ul>
 </li>
-<li><p><strong>减少幻觉</strong>：通过结构化信息减少模型编造答案的风险</p>
+<li>
+<p><strong>减少幻觉</strong>：通过结构化信息减少模型编造答案的风险</p>
 </li>
 </ol>
-<h3 id="5-4-未来结合方向"><a href="#5-4-未来结合方向" class="headerlink" title="5.4 未来结合方向"></a>5.4 未来结合方向</h3><pre class="mermaid">flowchart TD
+<h3 id="54-未来结合方向"><a class="markdownIt-Anchor" href="#54-未来结合方向"></a> 5.4 未来结合方向</h3>
+<pre class="mermaid">flowchart TD
     Q[Question] --> Selector[Doc Selector]
     
     Selector -->|Filter relevant docs| Context[Filtered Context]
@@ -746,15 +782,15 @@
     style Selector fill:#bbf,color:#333
     style CoT fill:#ff9,color:#333
     style Answer fill:#bfb,color:#333</pre>
-
 <p><strong>可能的结合方向</strong>：</p>
 <ul>
 <li>用CoT来解释为什么选择某些文档</li>
 <li>用文档筛选结果来约束CoT的推理空间</li>
 <li>迭代式：筛选 → 推理 → 验证 → 再筛选</li>
 </ul>
-<hr>
-<h2 id="6-实验结果"><a href="#6-实验结果" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h2><p>在HotpotQA数据集（distractor设置）上的表现：</p>
+<hr />
+<h2 id="6-实验结果"><a class="markdownIt-Anchor" href="#6-实验结果"></a> 6. 实验结果</h2>
+<p>在HotpotQA数据集（distractor设置）上的表现：</p>
 <table>
 <thead>
 <tr>
@@ -767,7 +803,8 @@
 <th>Joint F1</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>FE2H (ALBERT)</td>
 <td><strong>71.89</strong></td>
 <td><strong>84.44</strong></td>
@@ -794,18 +831,21 @@
 <td>48.15</td>
 <td>75.72</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>FE2H在排行榜上取得了<strong>Joint F1 76.54</strong>的成绩，位列第一。</p>
-<hr>
-<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>FE2H的核心贡献：</p>
+<hr />
+<h2 id="7-总结"><a class="markdownIt-Anchor" href="#7-总结"></a> 7. 总结</h2>
+<p>FE2H的核心贡献：</p>
 <ol>
 <li><strong>两阶段文档筛选</strong>：通过渐进式筛选有效减少干扰信息，提高信息利用率</li>
 <li><strong>从易到难的学习范式</strong>：先在简单任务上学习，再迁移到复杂任务</li>
 <li><strong>简洁有效</strong>：不依赖复杂的图结构或问题分解，方法简单但效果显著</li>
 </ol>
 <p>这种方法为多跳问答提供了一种新的思路，同时也为大型语言模型的推理能力增强提供了参考。</p>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<hr />
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></li>
 <li><a target="_blank" rel="noopener" href="https://hotpotqa.github.io/">HotpotQA数据集</a></li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li>
@@ -962,7 +1002,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg" class="responsive-img" alt="代码->PRD阅读器的agent尝试">
+                        <img src="https://s3.bmp.ovh/2026/03/16/plzgBj7O.jpg" class="responsive-img" alt="代码->PRD阅读器的agent尝试">
                         
                         <span class="card-title">代码->PRD阅读器的agent尝试</span>
                     </div>
@@ -1023,7 +1063,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/h23ozwxuGPLkCRs.jpg" class="responsive-img" alt="订单号生成方案">
+                        <img src="https://s3.bmp.ovh/2026/03/16/LQJlAo0M.jpg" class="responsive-img" alt="订单号生成方案">
                         
                         <span class="card-title">订单号生成方案</span>
                     </div>
@@ -1248,7 +1288,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

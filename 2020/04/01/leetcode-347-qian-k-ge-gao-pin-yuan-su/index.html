@@ -5,12 +5,16 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:347. 前 K 个高频元素, 小风雷">
-    <meta name="description" content="Leetcode:347. 前 K 个高频元素题目描述给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+    <meta name="description" content=" Leetcode:347. 前 K 个高频元素
+ 题目描述
+给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
 
-示例 1:输入: nums = [1,1,1,2,2,3], k = 2
+ 示例 1:
+输入: nums = [1,1,1,2,2,3], k = 2
 输出: [1,2]
 
-示例 2:输入: nums ">
+ 示例 2:
+输">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -35,8 +39,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -181,7 +185,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/TF2bM7pR.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -351,7 +355,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    424
+                    493
                 </div>
                 
 
@@ -369,85 +373,101 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-347-前-K-个高频元素"><a href="#Leetcode-347-前-K-个高频元素" class="headerlink" title="Leetcode:347. 前 K 个高频元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">Leetcode:347. 前 K 个高频元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
+                <h1 id="leetcode347-前-k-个高频元素"><a class="markdownIt-Anchor" href="#leetcode347-前-k-个高频元素"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">Leetcode:347. 前 K 个高频元素</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个非空的整数数组，返回其中出现频率前 k 高的元素。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: nums = [1,1,1,2,2,3], k = 2
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: nums = [1,1,1,2,2,3], k = 2
 输出: [1,2]
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: nums = [1], k = 1
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: nums = [1], k = 1
 输出: [1]
 </code></pre>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明：</h3>
+<pre><code>你可以假设给定的 k 总是合理的，且 1 ≤ k ≤ 数组中不相同的元素的个数。
 你的算法的时间复杂度必须优于 O(n log n) , n 是数组的大小
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>维护一个大小为K的最小堆，根据数字出现次数排序</p>
-<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>使用桶排序，维护一个出现次数的二维数组</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public List<Integer> topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int num: nums){
-            if (!map.containsKey(num)){
-                map.put(num, 1);
-            } else{
-                map.put(num, map.get(num) + 1);
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
+<p>维护一个大小为K的最小堆，根据数字出现次数排序</p>
+<h3 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h3>
+<p>使用桶排序，维护一个出现次数的二维数组</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">topKFrequent</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> {
+        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, Integer&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums){
+            <span class="hljs-keyword">if</span> (!map.containsKey(num)){
+                map.put(num, <span class="hljs-number">1</span>);
+            } <span class="hljs-keyword">else</span>{
+                map.put(num, map.get(num) + <span class="hljs-number">1</span>);
             }
         }
 
-        PriorityQueue<Integer> pq =
-                new PriorityQueue<Integer>((n1, n2) -> map.get(n1) - map.get(n2));
-        for(int num: map.keySet()){
+        PriorityQueue&lt;Integer&gt; pq =
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;Integer&gt;((n1, n2) -&gt; map.get(n1) - map.get(n2));
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: map.keySet()){
             pq.add(num);
-            if (pq.size() > k){
+            <span class="hljs-keyword">if</span> (pq.size() &gt; k){
                 pq.poll();
             }
         }
 
-        List<Integer> maxQueue = new ArrayList<>();
-        while (pq.size() != 0){
+        List&lt;Integer&gt; maxQueue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        <span class="hljs-keyword">while</span> (pq.size() != <span class="hljs-number">0</span>){
             maxQueue.add(pq.poll());
         }
         Collections.reverse(maxQueue);
-        return maxQueue;
+        <span class="hljs-keyword">return</span> maxQueue;
     }
 }
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public List<Integer> topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        for(int num: nums){
-            if (!map.containsKey(num)){
-                map.put(num, 1);
-            } else{
-                map.put(num, map.get(num) + 1);
+<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">topKFrequent</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k)</span> {
+        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, Integer&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: nums){
+            <span class="hljs-keyword">if</span> (!map.containsKey(num)){
+                map.put(num, <span class="hljs-number">1</span>);
+            } <span class="hljs-keyword">else</span>{
+                map.put(num, map.get(num) + <span class="hljs-number">1</span>);
             }
         }
         
-        List<Integer>[] sizeCount = new List[nums.length];
+        List&lt;Integer&gt;[] sizeCount = <span class="hljs-keyword">new</span> <span class="hljs-title class_">List</span>[nums.length];
         
-        for(int num: map.keySet()){
-            int getCount = map.get(num) - 1;
-            if (sizeCount[getCount] == null){
-                sizeCount[getCount] = new ArrayList<Integer>();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: map.keySet()){
+            <span class="hljs-type">int</span> <span class="hljs-variable">getCount</span> <span class="hljs-operator">=</span> map.get(num) - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span> (sizeCount[getCount] == <span class="hljs-literal">null</span>){
+                sizeCount[getCount] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();
             }
             sizeCount[getCount].add(num);
         }
         
-        List<Integer> maxQueue = new ArrayList<>();
-        for(int i = nums.length - 1; i >= 0 && maxQueue.size() < k; i--){
-            if (sizeCount[i] == null){
-                continue;
-            }else {
+        List&lt;Integer&gt; maxQueue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span> &amp;&amp; maxQueue.size() &lt; k; i--){
+            <span class="hljs-keyword">if</span> (sizeCount[i] == <span class="hljs-literal">null</span>){
+                <span class="hljs-keyword">continue</span>;
+            }<span class="hljs-keyword">else</span> {
                 maxQueue.addAll(sizeCount[i]);
             }
         }
-        return maxQueue;
+        <span class="hljs-keyword">return</span> maxQueue;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(nlogk)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路1时间复杂度-1"><a href="#思路1时间复杂度-1" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>k</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogk)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1时间复杂度-2"><a class="markdownIt-Anchor" href="#思路1时间复杂度-2"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -599,7 +619,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:239. 滑动窗口最大值">
+                        <img src="https://s3.bmp.ovh/2026/03/16/ceq8YVny.jpg" class="responsive-img" alt="Leetcode:239. 滑动窗口最大值">
                         
                         <span class="card-title">Leetcode:239. 滑动窗口最大值</span>
                     </div>
@@ -607,11 +627,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 239. 滑动窗口最大值题目描述给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+                             Leetcode: 239. 滑动窗口最大值
+ 题目描述
+给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
 
-返回滑动窗口中的最大值。
-
- 
+返回滑动窗口中的最大值
                         
                     </div>
                     <div class="publish-info">
@@ -660,7 +680,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/GblweqZuYAh9Nrx.jpg" class="responsive-img" alt="Leetcode:378. 有序矩阵中第K小的元素">
+                        <img src="https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg" class="responsive-img" alt="Leetcode:378. 有序矩阵中第K小的元素">
                         
                         <span class="card-title">Leetcode:378. 有序矩阵中第K小的元素</span>
                     </div>
@@ -668,11 +688,14 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:378. 有序矩阵中第K小的元素题目描述给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
+                             Leetcode:378. 有序矩阵中第K小的元素
+ 题目描述
+给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第k小的元素。
 请注意，它是排序后的第k小元素，而不是第k个元素。
 
-示例:matrix = [
-[ 1,  5
+ 示例:
+matrix = [
+[
                         
                     </div>
                     <div class="publish-info">
@@ -893,7 +916,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

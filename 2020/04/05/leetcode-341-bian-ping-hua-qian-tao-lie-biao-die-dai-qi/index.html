@@ -5,11 +5,12 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:341. 扁平化嵌套列表迭代器, 小风雷">
-    <meta name="description" content="Leetcode:341. 扁平化嵌套列表迭代器题目描述给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+    <meta name="description" content=" Leetcode:341. 扁平化嵌套列表迭代器
+ 题目描述
+给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
 列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
-
-示例 ">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -34,8 +35,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -180,7 +181,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/ceq8YVny.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -346,7 +347,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    419
+                    442
                 </div>
                 
 
@@ -364,75 +365,84 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-341-扁平化嵌套列表迭代器"><a href="#Leetcode-341-扁平化嵌套列表迭代器" class="headerlink" title="Leetcode:341. 扁平化嵌套列表迭代器"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/flatten-nested-list-iterator/">Leetcode:341. 扁平化嵌套列表迭代器</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
+                <h1 id="leetcode341-扁平化嵌套列表迭代器"><a class="markdownIt-Anchor" href="#leetcode341-扁平化嵌套列表迭代器"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/flatten-nested-list-iterator/">Leetcode:341. 扁平化嵌套列表迭代器</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给你一个嵌套的整型列表。请你设计一个迭代器，使其能够遍历这个整型列表中的所有整数。
 
 列表中的每一项或者为一个整数，或者是另一个列表。其中列表的元素也可能是整数或是其他列表。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [[1,1],2,[1,1]]
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: [[1,1],2,[1,1]]
 输出: [1,1,2,1,1]
 解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,1,2,1,1]。
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [1,[4,[6]]]
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: [1,[4,[6]]]
 输出: [1,4,6]
 解释: 通过重复调用 next 直到 hasNext 返回 false，next 返回的元素的顺序应该是: [1,4,6]。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用深度优先遍历获取递归的数字</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">/**
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>使用深度优先遍历获取递归的数字</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<pre class="highlight"><code class="Java"><span class="hljs-comment">/**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
  * public interface NestedInteger {
  *
- *     // @return true if this NestedInteger holds a single integer, rather than a nested list.
+ *     // <span class="hljs-doctag">@return</span> true if this NestedInteger holds a single integer, rather than a nested list.
  *     public boolean isInteger();
  *
- *     // @return the single integer that this NestedInteger holds, if it holds a single integer
+ *     // <span class="hljs-doctag">@return</span> the single integer that this NestedInteger holds, if it holds a single integer
  *     // Return null if this NestedInteger holds a nested list
  *     public Integer getInteger();
  *
- *     // @return the nested list that this NestedInteger holds, if it holds a nested list
+ *     // <span class="hljs-doctag">@return</span> the nested list that this NestedInteger holds, if it holds a nested list
  *     // Return null if this NestedInteger holds a single integer
- *     public List<NestedInteger> getList();
+ *     public List&lt;NestedInteger&gt; getList();
  * }
- */
-public class NestedIterator implements Iterator<Integer> {
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NestedIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;Integer&gt; {
     
-    Queue<Integer> queue;
-    public NestedIterator(List<NestedInteger> nestedList) {
-        queue = new LinkedList<Integer>();
-        for(NestedInteger node: nestedList){
+    Queue&lt;Integer&gt; queue;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">NestedIterator</span><span class="hljs-params">(List&lt;NestedInteger&gt; nestedList)</span> {
+        queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;Integer&gt;();
+        <span class="hljs-keyword">for</span>(NestedInteger node: nestedList){
             DFS(node);
         }
     }
 
-    @Override
-    public Integer next() {
-        return queue.poll();
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">next</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> queue.poll();
     }
 
-    @Override
-    public boolean hasNext() {
-        return !queue.isEmpty();
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span> {
+        <span class="hljs-keyword">return</span> !queue.isEmpty();
     }
     
-    private void DFS(NestedInteger node){
-        if (node.isInteger()){
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">DFS</span><span class="hljs-params">(NestedInteger node)</span>{
+        <span class="hljs-keyword">if</span> (node.isInteger()){
             queue.offer(node.getInteger());
-        } else {
-            for(NestedInteger sonNode: node.getList()){
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">for</span>(NestedInteger sonNode: node.getList()){
                 DFS(sonNode);
             }
         }
     }
 }
 
-/**
+<span class="hljs-comment">/**
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i = new NestedIterator(nestedList);
  * while (i.hasNext()) v[f()] = i.next();
- */
+ */</span>
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$,n为元素个数</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,n为元素个数</p>
+<h3 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -580,7 +590,7 @@ public class NestedIterator implements Iterator<Integer> {
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:150. 逆波兰表达式求值">
+                        <img src="https://s3.bmp.ovh/2026/03/16/LQJlAo0M.jpg" class="responsive-img" alt="Leetcode:150. 逆波兰表达式求值">
                         
                         <span class="card-title">Leetcode:150. 逆波兰表达式求值</span>
                     </div>
@@ -588,12 +598,15 @@ public class NestedIterator implements Iterator<Integer> {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:150. 逆波兰表达式求值题目描述根据逆波兰表示法，求表达式的值。
+                             Leetcode:150. 逆波兰表达式求值
+ 题目描述
+根据逆波兰表示法，求表达式的值。
 
 有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。
 
-说明：整数除法只保留整数部分。
-给定逆波兰表达式总是有
+ 说明：
+整数除法只保留整数部分。
+给定逆波兰
                         
                     </div>
                     <div class="publish-info">
@@ -642,7 +655,7 @@ public class NestedIterator implements Iterator<Integer> {
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:227. 基本计算器 II">
+                        <img src="https://s3.bmp.ovh/2026/03/16/plzgBj7O.jpg" class="responsive-img" alt="Leetcode:227. 基本计算器 II">
                         
                         <span class="card-title">Leetcode:227. 基本计算器 II</span>
                     </div>
@@ -650,11 +663,14 @@ public class NestedIterator implements Iterator<Integer> {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 227. 基本计算器 II题目描述实现一个基本的计算器来计算一个简单的字符串表达式的值。
+                             Leetcode 227. 基本计算器 II
+ 题目描述
+实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
 字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格  。 整数除法仅保留整数部分。
 
-示例 1:输入: &quot;
+ 示例 1:
+输入: 
                         
                     </div>
                     <div class="publish-info">
@@ -875,7 +891,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

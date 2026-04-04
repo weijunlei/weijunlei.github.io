@@ -5,8 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:328. 奇偶链表, 小风雷">
-    <meta name="description" content="Leetcode:328. 奇偶链表题目描述给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
-请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)">
+    <meta name="description" content=" Leetcode:328. 奇偶链表
+ 题目描述
+给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+请尝试使用原地算法完成。你的算法的空间复杂度应为 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,8 +33,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -177,7 +179,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/6jfUEeuWw4rc3z5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -343,7 +345,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    354
+                    365
                 </div>
                 
 
@@ -361,29 +363,38 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-328-奇偶链表"><a href="#Leetcode-328-奇偶链表" class="headerlink" title="Leetcode:328. 奇偶链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/odd-even-linked-list">Leetcode:328. 奇偶链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+                <h1 id="leetcode328-奇偶链表"><a class="markdownIt-Anchor" href="#leetcode328-奇偶链表"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/odd-even-linked-list">Leetcode:328. 奇偶链表</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
 请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)，时间复杂度应为 O(nodes)，nodes 为节点总数。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 输出: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL 
 输出: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 </code></pre>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>应当保持奇数节点和偶数节点的相对顺序。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
+<pre><code>应当保持奇数节点和偶数节点的相对顺序。
 链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接使用四个指针分别之前奇数节点起点、遍历；偶数节点、遍历；然后交替更换即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public ListNode oddEvenList(ListNode head) {
-        if (head == null || head.next == null){
-            return head;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
+<p>直接使用四个指针分别之前奇数节点起点、遍历；偶数节点、遍历；然后交替更换即可</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> ListNode <span class="hljs-title function_">oddEvenList</span><span class="hljs-params">(ListNode head)</span> {
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">null</span> || head.next == <span class="hljs-literal">null</span>){
+            <span class="hljs-keyword">return</span> head;
         }
-        ListNode even = head.next;
-        ListNode evenPre = even;
-        ListNode oddEnd = head;
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">even</span> <span class="hljs-operator">=</span> head.next;
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">evenPre</span> <span class="hljs-operator">=</span> even;
+        <span class="hljs-type">ListNode</span> <span class="hljs-variable">oddEnd</span> <span class="hljs-operator">=</span> head;
 
-        while(evenPre != null && evenPre.next != null){
+        <span class="hljs-keyword">while</span>(evenPre != <span class="hljs-literal">null</span> &amp;&amp; evenPre.next != <span class="hljs-literal">null</span>){
             oddEnd.next = evenPre.next;
             oddEnd = oddEnd.next;
             evenPre.next = oddEnd.next;
@@ -391,12 +402,15 @@
         }
 
         oddEnd.next = even;
-        return head;
+        <span class="hljs-keyword">return</span> head;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(1)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -544,7 +558,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/xe92D3No58CP1TR.jpg" class="responsive-img" alt="Leetcode:171. Excel表列序号">
+                        <img src="https://s3.bmp.ovh/2026/03/16/PVPo3zt7.jpg" class="responsive-img" alt="Leetcode:171. Excel表列序号">
                         
                         <span class="card-title">Leetcode:171. Excel表列序号</span>
                     </div>
@@ -552,15 +566,17 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。
+                             Leetcode: 171. Excel表列序号
+ 题目描述
+给定一个Excel表格中的列名称，返回其相应的列序号。
 
-例如，A -&gt; 1
+ 例如，
+A -&gt; 1
 B -&gt; 2
 C -&gt; 3
 ...
 Z -&gt; 26
-AA -&gt; 27
-AB 
+AA -&gt; 
                         
                     </div>
                     <div class="publish-info">
@@ -609,7 +625,7 @@ AB
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/sMj1WAcOIw7J4N3.jpg" class="responsive-img" alt="Leetcode:237. 删除链表中的节点">
+                        <img src="https://s3.bmp.ovh/2026/03/16/sa8PsCyf.jpg" class="responsive-img" alt="Leetcode:237. 删除链表中的节点">
                         
                         <span class="card-title">Leetcode:237. 删除链表中的节点</span>
                     </div>
@@ -617,11 +633,13 @@ AB
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 237. 删除链表中的节点题目描述请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
+                             Leetcode: 237. 删除链表中的节点
+ 题目描述
+请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。
 
 现有一个链表 -- head = [4,5,1,9]，它可以表示为:
 
-示例 1:输入: h
+ 示例 1:
                         
                     </div>
                     <div class="publish-info">
@@ -842,7 +860,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

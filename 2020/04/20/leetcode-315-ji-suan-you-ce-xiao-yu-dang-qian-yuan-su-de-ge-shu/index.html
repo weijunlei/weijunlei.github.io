@@ -5,7 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:315. 计算右侧小于当前元素的个数, 小风雷">
-    <meta name="description" content="Leetcode:315. 计算右侧小于当前元素的个数题目描述给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数">
+    <meta name="description" content=" Leetcode:315. 计算右侧小于当前元素的个数
+ 题目描述
+给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,8 +32,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -176,7 +178,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/G3EAJMz69ilbnpy.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/W7aB4q3k.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -350,14 +352,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    367
+                    541
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 				
@@ -368,9 +370,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-315-计算右侧小于当前元素的个数"><a href="#Leetcode-315-计算右侧小于当前元素的个数" class="headerlink" title="Leetcode:315. 计算右侧小于当前元素的个数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/">Leetcode:315. 计算右侧小于当前元素的个数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。
+                <h1 id="leetcode315-计算右侧小于当前元素的个数"><a class="markdownIt-Anchor" href="#leetcode315-计算右侧小于当前元素的个数"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/">Leetcode:315. 计算右侧小于当前元素的个数</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。
 </code></pre>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>输入: [5,2,6,1]
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
+<pre><code>输入: [5,2,6,1]
 输出: [2,1,1,0] 
 解释:
 5 的右侧有 2 个更小的元素 (2 和 1).
@@ -378,90 +383,101 @@
 6 的右侧有 1 个更小的元素 (1).
 1 的右侧有 0 个更小的元素.
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-暴力遍历比较"><a href="#思路1-暴力遍历比较" class="headerlink" title="思路1 暴力遍历比较"></a>思路1 暴力遍历比较</h3><p>直接对每个位置的数和之后的数比较</p>
-<h3 id="思路2-归并排序-索引数组"><a href="#思路2-归并排序-索引数组" class="headerlink" title="思路2 归并排序+索引数组"></a>思路2 归并排序+索引数组</h3><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public List<Integer> countSmaller(int[] nums) {
-        ArrayList<Integer> result = new ArrayList<>();
-        for(int i = 0; i < nums.length; i++){
-            int count = 0;
-            for(int j = i + 1; j < nums.length; j++){
-                if (nums[i] > nums[j]){
-                    count += 1;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-暴力遍历比较"><a class="markdownIt-Anchor" href="#思路1-暴力遍历比较"></a> 思路1 暴力遍历比较</h3>
+<p>直接对每个位置的数和之后的数比较</p>
+<h3 id="思路2-归并排序索引数组"><a class="markdownIt-Anchor" href="#思路2-归并排序索引数组"></a> 思路2 归并排序+索引数组</h3>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">countSmaller</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        ArrayList&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++){
+            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i + <span class="hljs-number">1</span>; j &lt; nums.length; j++){
+                <span class="hljs-keyword">if</span> (nums[i] &gt; nums[j]){
+                    count += <span class="hljs-number">1</span>;
                 }
             }
             result.add(count);
         }
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
 }
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    private int[] indexs;
-    private int[] counters;
-    private int[] temp;
+<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] indexs;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] counters;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] temp;
     
-    public List<Integer> countSmaller(int[] nums) {
-        ArrayList<Integer> result = new ArrayList<>();
-        indexs = new int[nums.length];
-        counters = new int[nums.length];
-        temp = new int[nums.length];
-        for(int i = 0; i < nums.length; i++){
+    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">countSmaller</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        ArrayList&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        indexs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
+        counters = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
+        temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++){
             indexs[i] = i;
-            counters[i] = 0;
+            counters[i] = <span class="hljs-number">0</span>;
         }
-        mergeSort(nums, 0, nums.length - 1);
-        for(int i = 0; i < counters.length; i++){
+        mergeSort(nums, <span class="hljs-number">0</span>, nums.length - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; counters.length; i++){
             result.add(counters[i]);
         }
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
     
     
-    private void mergeSort(int[] nums, int left, int right){
-        if (left < right){
-            int mid = (left + right) / 2;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">mergeSort</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span>{
+        <span class="hljs-keyword">if</span> (left &lt; right){
+            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (left + right) / <span class="hljs-number">2</span>;
             mergeSort(nums, left, mid);
-            mergeSort(nums, mid + 1, right);
+            mergeSort(nums, mid + <span class="hljs-number">1</span>, right);
             mergeHelper(nums, left, mid, right);
         }
     }
     
-    private void mergeHelper(int[] nums, int left, int mid , int right){
-        int tempIndex = left;
-        int leftIndex = left;
-        int rightIndex = mid + 1;
-        while (leftIndex <= mid && rightIndex <= right){
-            if (nums[indexs[leftIndex]] <= nums[indexs[rightIndex]]){
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">mergeHelper</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> left, <span class="hljs-type">int</span> mid , <span class="hljs-type">int</span> right)</span>{
+        <span class="hljs-type">int</span> <span class="hljs-variable">tempIndex</span> <span class="hljs-operator">=</span> left;
+        <span class="hljs-type">int</span> <span class="hljs-variable">leftIndex</span> <span class="hljs-operator">=</span> left;
+        <span class="hljs-type">int</span> <span class="hljs-variable">rightIndex</span> <span class="hljs-operator">=</span> mid + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">while</span> (leftIndex &lt;= mid &amp;&amp; rightIndex &lt;= right){
+            <span class="hljs-keyword">if</span> (nums[indexs[leftIndex]] &lt;= nums[indexs[rightIndex]]){
                 temp[tempIndex] = indexs[leftIndex];
-                counters[indexs[leftIndex]] += rightIndex - mid - 1;
+                counters[indexs[leftIndex]] += rightIndex - mid - <span class="hljs-number">1</span>;
                 leftIndex++;
-            }else{
+            }<span class="hljs-keyword">else</span>{
                 temp[tempIndex] = indexs[rightIndex];
                 rightIndex++;
             }
             tempIndex++;
         }
-        while(leftIndex <= mid){
+        <span class="hljs-keyword">while</span>(leftIndex &lt;= mid){
             temp[tempIndex] = indexs[leftIndex];
-            counters[indexs[leftIndex]] += rightIndex - mid - 1;
+            counters[indexs[leftIndex]] += rightIndex - mid - <span class="hljs-number">1</span>;
             leftIndex++;
             tempIndex++;
         }
-        while(rightIndex <= right){
+        <span class="hljs-keyword">while</span>(rightIndex &lt;= right){
             temp[tempIndex] = indexs[rightIndex];
             rightIndex++;
             tempIndex++;
         }
-        for(int i = left; i <= right; i++){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> left; i &lt;= right; i++){
             indexs[i] = temp[i];
         }
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(nlog(n))$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -617,7 +633,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/y2VQbBTcRzmoeSJ.jpg" class="responsive-img" alt="Leetcode:395. 至少有K个重复字符的最长子串">
+                        <img src="https://s3.bmp.ovh/2026/03/16/plzgBj7O.jpg" class="responsive-img" alt="Leetcode:395. 至少有K个重复字符的最长子串">
                         
                         <span class="card-title">Leetcode:395. 至少有K个重复字符的最长子串</span>
                     </div>
@@ -625,10 +641,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:395. 至少有K个重复字符的最长子串题目描述找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。
+                             Leetcode:395. 至少有K个重复字符的最长子串
+ 题目描述
+找到给定字符串（由小写字符组成）中的最长子串 T ， 要求 T 中的每一字符出现次数都不少于 k 。输出 T 的长度。
 
-示例 1:输入:
-s = &quot;aaabb&qu
+ 示例 1:
+输入:
+s = &quot;aa
                         
                     </div>
                     <div class="publish-info">
@@ -677,7 +696,7 @@ s = &quot;aaabb&qu
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/Y9KoJ6yMIwldctp.jpg" class="responsive-img" alt="Leetcode:218. 天际线问题">
+                        <img src="https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg" class="responsive-img" alt="Leetcode:218. 天际线问题">
                         
                         <span class="card-title">Leetcode:218. 天际线问题</span>
                     </div>
@@ -685,9 +704,9 @@ s = &quot;aaabb&qu
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode: 218. 天际线问题题目描述城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。现在，假设您获得了城市风光照片（图A）上显示的所有建筑物的位置和高度，请编写一个程序以输出由这些建筑物形成的天际线（图B）。
-
-
+                             Leetcode: 218. 天际线问题
+ 题目描述
+城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。现在，假设您获得了城市风光照片（图A）上显示的所有建筑物的位置和高度，请编写一个程序以输出由这些建筑物形成的天际线（图B
                         
                     </div>
                     <div class="publish-info">
@@ -908,7 +927,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.1k</span>&nbsp;字
+                    class="white-color">53.8k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
