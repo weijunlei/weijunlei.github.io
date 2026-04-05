@@ -346,14 +346,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    2.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    10 分
                 </div>
                 
 				
@@ -444,28 +444,28 @@
 <hr>
 <h2 id="3-这个项目的实现方法（整体方案）"><a href="#3-这个项目的实现方法（整体方案）" class="headerlink" title="3. 这个项目的实现方法（整体方案）"></a>3. 这个项目的实现方法（整体方案）</h2><h3 id="3-1-一句话架构"><a href="#3-1-一句话架构" class="headerlink" title="3.1 一句话架构"></a>3.1 一句话架构</h3><p><strong>FastAPI 负责调度，RepositoryManager 准备代码工作区，ClaudeCodeBridge 通过官方 Python SDK 拉起 Claude Code，在指定 cwd 内读代码并输出流式结果。</strong></p>
 <h3 id="3-1-1-README-中的架构图（Mermaid）"><a href="#3-1-1-README-中的架构图（Mermaid）" class="headerlink" title="3.1.1 README 中的架构图（Mermaid）"></a>3.1.1 README 中的架构图（Mermaid）</h3><pre class="mermaid">flowchart TB
-  subgraph Client[客户端]
-    WEB[静态页 web 5173]
-    API_CLIENT[其他 HTTP 调用方]
+  subgraph Client
+    WEB[Web UI]
+    API_CLIENT[API Client]
   end
 
-  subgraph Server[code-as-prd-agent FastAPI]
-    FAST[FastAPI 8080]
-    REPO[RepositoryManager repo init]
-    ASK[/ask 问答]
-    CHAT[/chat TD 追问 可选]
-    STORE[conversation_store chat_sessions json]
-    TASK[TaskQueue and TaskManager]
-    BRIDGE[ClaudeCodeBridge claude-agent-sdk]
+  subgraph Server
+    FAST[FastAPI]
+    REPO[RepositoryManager]
+    ASK[Ask API]
+    CHAT[Chat API]
+    STORE[ConversationStore]
+    TASK[TaskQueue]
+    BRIDGE[ClaudeBridge]
   end
 
-  subgraph Runtime[本机运行时]
-    CLI[Claude Code CLI 由 SDK 拉起]
-    WS[WORKSPACE_BASE_DIR workspace_id 代码仓库]
+  subgraph Runtime
+    CLI[Claude Code CLI]
+    WS[Workspace]
   end
 
-  subgraph Cloud[模型侧 可配置]
-    LLM[Anthropic API 或兼容网关]
+  subgraph Cloud
+    LLM[Model API]
   end
 
   WEB --> FAST
@@ -486,20 +486,20 @@
 <p>图4：系统组件关系图。客户端请求进入 FastAPI，由任务与桥接层调度 Claude Code CLI，在工作区内完成代码检索与问答。</p>
 </blockquote>
 <h3 id="3-1-2-README-中的流式问答时序图（Mermaid）"><a href="#3-1-2-README-中的流式问答时序图（Mermaid）" class="headerlink" title="3.1.2 README 中的流式问答时序图（Mermaid）"></a>3.1.2 README 中的流式问答时序图（Mermaid）</h3><pre class="mermaid">sequenceDiagram
-  participant U as 用户浏览器
+  participant U as User
   participant S as FastAPI
-  participant Q as 任务队列 / 并发池
+  participant Q as TaskQueue
   participant C as Claude Code CLI
-  participant W as Workspace 代码树
+  participant W as Workspace
 
-  U->>S: POST /code-as-prd-agent/ask (stream, workspace_id, question, chat_id?)
-  S->>S: 若有 chat_id 则读写会话 JSON 并拼接历史 prompt
-  S->>Q: acquire 并发槽位
-  S->>C: SDK query(prompt, cwd=workspace, chat_id 模式不传 CLI session_id)
-  C->>W: 读取 / 检索仓库内文件
-  C-->>S: SSE 行（delta / done）
+  U->>S: POST ask
+  S->>S: build prompt with history
+  S->>Q: acquire slot
+  S->>C: run query
+  C->>W: read code files
+  C-->>S: stream deltas
   S-->>U: text/event-stream
-  S->>Q: release</pre>
+  S->>Q: release slot</pre>
 <blockquote>
 <p>图5：流式问答时序图。请求进入后分配并发槽位，模型边检索边输出 SSE，结束后释放资源。</p>
 </blockquote>
@@ -1031,7 +1031,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.4k</span>&nbsp;字
+                    class="white-color">47.3k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
