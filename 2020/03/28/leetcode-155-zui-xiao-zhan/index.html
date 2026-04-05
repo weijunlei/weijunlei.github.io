@@ -5,13 +5,11 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:155. 最小栈, 小风雷">
-    <meta name="description" content=" Leetcode:155. 最小栈
- 题目描述
-设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+    <meta name="description" content="Leetcode:155. 最小栈题目描述设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
 push(x) -- 将元素 x 推入栈中。
 pop() -- 删除栈顶的元素。
-top() -- 获取">
+top() -- 获取栈顶元素">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -348,7 +346,7 @@ top() -- 获取">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    349
+                    323
                 </div>
                 
 
@@ -366,17 +364,14 @@ top() -- 获取">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode155-最小栈"><a class="markdownIt-Anchor" href="#leetcode155-最小栈"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-stack/">Leetcode:155. 最小栈</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+                <h1 id="Leetcode-155-最小栈"><a href="#Leetcode-155-最小栈" class="headerlink" title="Leetcode:155. 最小栈"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-stack/">Leetcode:155. 最小栈</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
 push(x) -- 将元素 x 推入栈中。
 pop() -- 删除栈顶的元素。
 top() -- 获取栈顶元素。
 getMin() -- 检索栈中的最小元素。
 </code></pre>
-<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
-<pre><code>MinStack minStack = new MinStack();
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>MinStack minStack = new MinStack();
 minStack.push(-2);
 minStack.push(0);
 minStack.push(-3);
@@ -385,62 +380,55 @@ minStack.pop();
 minStack.top();      --&gt; 返回 0.
 minStack.getMin();   --&gt; 返回 -2.
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MinStack</span> {
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>主要还是栈，只是在栈的基础上获取栈中最小值，所以可以直接构建一个辅助栈，每次入栈时都记录当前位置下栈的最小数，出栈时只需要一起出即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class MinStack {
 
-    <span class="hljs-comment">/** initialize your data structure here. */</span>
-    <span class="hljs-keyword">private</span> Stack&lt;Integer&gt; stack;
-    <span class="hljs-keyword">private</span> Stack&lt;Integer&gt; stackHelper;
+    /** initialize your data structure here. */
+    private Stack<Integer> stack;
+    private Stack<Integer> stackHelper;
     
-    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MinStack</span><span class="hljs-params">()</span> {
-        stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
-        stackHelper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();
+    public MinStack() {
+        stack = new Stack<>();
+        stackHelper = new Stack<>();
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> {
+    public void push(int x) {
         stack.add(x);
-        <span class="hljs-keyword">if</span> (stackHelper.isEmpty() || x &lt; stackHelper.peek()){
+        if (stackHelper.isEmpty() || x < stackHelper.peek()){
             stackHelper.add(x);
-        }<span class="hljs-keyword">else</span> {
+        }else {
             stackHelper.add(stackHelper.peek());
         }
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">if</span> (!stack.isEmpty()){
+    public void pop() {
+        if (!stack.isEmpty()){
             stack.pop();
             stackHelper.pop();
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Stack is empty!&quot;</span>);
+        } else {
+            throw new RuntimeException("Stack is empty!");
         }
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">top</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">if</span> (!stack.isEmpty()){
-            <span class="hljs-keyword">return</span> stack.peek();
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Stack is empty!&quot;</span>);
+    public int top() {
+        if (!stack.isEmpty()){
+            return stack.peek();
+        } else {
+            throw new RuntimeException("Stack is empty!");
         }
     }
     
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMin</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">if</span> (!stackHelper.isEmpty()){
-            <span class="hljs-keyword">return</span> stackHelper.peek();
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Stack is empty!&quot;</span>);
+    public int getMin() {
+        if (!stackHelper.isEmpty()){
+            return stackHelper.peek();
+        } else {
+            throw new RuntimeException("Stack is empty!");
         }
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -596,12 +584,10 @@ minStack.getMin();   --&gt; 返回 -2.
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             215. 数组中的第K个最大元素
- 题目描述
-在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+                            215. 数组中的第K个最大元素题目描述在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
 
- 示例 1:
-输入: [3,2,1,5,6,4] 和 k = 2
+示例 1:输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5
                         
                     </div>
                     <div class="publish-info">
@@ -658,9 +644,7 @@ minStack.getMin();   --&gt; 返回 -2.
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 238. 除自身以外数组的乘积
- 题目描述
-给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素
+                            Leetcode: 238. 除自身以外数组的乘积题目描述给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
                         
                     </div>
                     <div class="publish-info">
@@ -877,11 +861,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

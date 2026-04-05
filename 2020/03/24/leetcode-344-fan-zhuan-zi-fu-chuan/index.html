@@ -5,11 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:344. 反转字符串, 小风雷">
-    <meta name="description" content=" Leetcode:344. 反转字符串
- 题目描述
-编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+    <meta name="description" content="Leetcode:344. 反转字符串题目描述编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
 
-不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这">
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -350,7 +348,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    279
+                    270
                 </div>
                 
 
@@ -368,45 +366,36 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode344-反转字符串"><a class="markdownIt-Anchor" href="#leetcode344-反转字符串"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/explore/interview/card/top-interview-quesitons/275/string/1144/">Leetcode:344. 反转字符串</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
+                <h1 id="Leetcode-344-反转字符串"><a href="#Leetcode-344-反转字符串" class="headerlink" title="Leetcode:344. 反转字符串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/explore/interview/card/top-interview-quesitons/275/string/1144/">Leetcode:344. 反转字符串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
 
 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
 
 你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1：</h3>
-<pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]
 输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2：</h3>
-<pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]
 输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<p>直接使用前后指针swap</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reverseString</span><span class="hljs-params">(<span class="hljs-type">char</span>[] s)</span> {
-        <span class="hljs-keyword">if</span>(s == <span class="hljs-literal">null</span> || s.length == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>直接使用前后指针swap</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public void reverseString(char[] s) {
+        if(s == null || s.length == 0){
+            return;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> s.length - <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">while</span> (left &lt; right){
-            <span class="hljs-type">char</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> s[left];
+        int left = 0;
+        int right = s.length - 1;
+        while (left < right){
+            char temp = s[left];
             s[left++] = s[right];
             s[right--] = temp;
         }
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$</p>
+<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -566,16 +555,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             乘积最大子数组
- 题目描述
-给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。
+                            乘积最大子数组题目描述给你一个整数数组 nums ，请你找出数组中乘积最大的连续子数组（该子数组中至少包含一个数字）。
 
- 示例 1:
-输入: [2,3,-2,4]
+示例 1:输入: [2,3,-2,4]
 输出: 6
 解释: 子数组 [2,3] 有最大乘积 6。
 
- 示例
+示例 2:输入: 
                         
                     </div>
                     <div class="publish-info">
@@ -632,15 +618,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:387. 字符串中的第一个唯一字符
- 题目描述
-给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+                            Leetcode:387. 字符串中的第一个唯一字符题目描述给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
 
- 案例:
-s = &quot;leetcode&quot;
+案例:s = &quot;leetcode&quot;
 返回 0.
 
-s = 
+s = &quot;
                         
                     </div>
                     <div class="publish-info">
@@ -861,11 +844,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

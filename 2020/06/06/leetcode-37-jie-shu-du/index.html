@@ -5,15 +5,13 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:37. 解数独, 小风雷">
-    <meta name="description" content=" Leetcode: 37.解数独
- 题目描述
-编写一个程序，通过已填充的空格来解决数独问题。
+    <meta name="description" content="Leetcode: 37.解数独题目描述编写一个程序，通过已填充的空格来解决数独问题。
 
 一个数独的解法需遵循如下规则：
 
 数字 1-9 在每一行只能出现一次。
 数字 1-9 在每一列只能出现一次。
-数字 1-9 在每一个以粗实线分">
+数字 1-9 在每一个以粗实线分隔的 3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -350,7 +348,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    520
+                    498
                 </div>
                 
 
@@ -368,16 +366,14 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode-37解数独"><a class="markdownIt-Anchor" href="#leetcode-37解数独"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">Leetcode: 37.解数独</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>编写一个程序，通过已填充的空格来解决数独问题。
+                <h1 id="Leetcode-37-解数独"><a href="#Leetcode-37-解数独" class="headerlink" title="Leetcode: 37.解数独"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">Leetcode: 37.解数独</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>编写一个程序，通过已填充的空格来解决数独问题。
 
 一个数独的解法需遵循如下规则：
 
 数字 1-9 在每一行只能出现一次。
 数字 1-9 在每一列只能出现一次。
 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
-空白格用 '.' 表示。
+空白格用 &#39;.&#39; 表示。
 
 
 
@@ -387,93 +383,85 @@
 
 答案被标成红色。
 </code></pre>
-<h3 id="note"><a class="markdownIt-Anchor" href="#note"></a> Note:</h3>
-<pre><code>给定的数独序列只包含数字 1-9 和字符 '.' 。
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><pre><code>给定的数独序列只包含数字 1-9 和字符 &#39;.&#39; 。
 你可以假设给定的数独只有唯一解。
 给定数独永远是 9x9 形式的。
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-type">char</span>[][] board;
-    <span class="hljs-type">int</span>[][] rowCount = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">9</span>][<span class="hljs-number">9</span>];
-    <span class="hljs-type">int</span>[][] columnCount = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">9</span>][<span class="hljs-number">9</span>];
-    <span class="hljs-type">int</span>[][] matrixCount = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">9</span>][<span class="hljs-number">9</span>];
-    <span class="hljs-type">boolean</span> <span class="hljs-variable">canSolve</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>使用回溯法，利用受行、列、3*3矩阵约束，进行回溯</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    char[][] board;
+    int[][] rowCount = new int[9][9];
+    int[][] columnCount = new int[9][9];
+    int[][] matrixCount = new int[9][9];
+    boolean canSolve = false;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canSet</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> column, <span class="hljs-type">int</span> num)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">matrixIndex</span> <span class="hljs-operator">=</span> (row / <span class="hljs-number">3</span>) * <span class="hljs-number">3</span> + column / <span class="hljs-number">3</span>;
-        <span class="hljs-keyword">return</span> rowCount[row][num - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span> &amp;&amp; columnCount[column][num - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span> &amp;&amp; matrixCount[matrixIndex][num - <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>;
+    private boolean canSet(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        return rowCount[row][num - 1] == 0 && columnCount[column][num - 1] == 0 && matrixCount[matrixIndex][num - 1] == 0;
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNum</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> column, <span class="hljs-type">int</span> num)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">matrixIndex</span> <span class="hljs-operator">=</span> (row / <span class="hljs-number">3</span>) * <span class="hljs-number">3</span> + column / <span class="hljs-number">3</span>;
-        rowCount[row][num - <span class="hljs-number">1</span>] += <span class="hljs-number">1</span>;
-        columnCount[column][num - <span class="hljs-number">1</span>] += <span class="hljs-number">1</span>;
-        matrixCount[matrixIndex][num - <span class="hljs-number">1</span>] += <span class="hljs-number">1</span>;
-        board[row][column] = (<span class="hljs-type">char</span>)(<span class="hljs-string">&#x27;0&#x27;</span> + num);
+    private void setNum(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        rowCount[row][num - 1] += 1;
+        columnCount[column][num - 1] += 1;
+        matrixCount[matrixIndex][num - 1] += 1;
+        board[row][column] = (char)('0' + num);
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">removeNum</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> column, <span class="hljs-type">int</span> num)</span>{
-        <span class="hljs-type">int</span> <span class="hljs-variable">matrixIndex</span> <span class="hljs-operator">=</span> (row / <span class="hljs-number">3</span>) * <span class="hljs-number">3</span> + column / <span class="hljs-number">3</span>;
-        rowCount[row][num - <span class="hljs-number">1</span>] -= <span class="hljs-number">1</span>;
-        columnCount[column][num - <span class="hljs-number">1</span>] -= <span class="hljs-number">1</span>;
-        matrixCount[matrixIndex][num - <span class="hljs-number">1</span>] -= <span class="hljs-number">1</span>;
-        board[row][column] = <span class="hljs-string">&#x27;.&#x27;</span>;
+    private void removeNum(int row, int column, int num){
+        int matrixIndex = (row / 3) * 3 + column / 3;
+        rowCount[row][num - 1] -= 1;
+        columnCount[column][num - 1] -= 1;
+        matrixCount[matrixIndex][num - 1] -= 1;
+        board[row][column] = '.';
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNext</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> column)</span>{
-        <span class="hljs-keyword">if</span> (row == <span class="hljs-number">8</span> &amp;&amp; column == <span class="hljs-number">8</span>){
-            <span class="hljs-built_in">this</span>.canSolve = <span class="hljs-literal">true</span>;
+    private void setNext(int row, int column){
+        if (row == 8 && column == 8){
+            this.canSolve = true;
         }
-        <span class="hljs-keyword">if</span> (column != <span class="hljs-number">8</span>){
-            backTrack(row, column + <span class="hljs-number">1</span>);
-        }<span class="hljs-keyword">else</span>{
-            backTrack(row + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+        if (column != 8){
+            backTrack(row, column + 1);
+        }else{
+            backTrack(row + 1, 0);
         }
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backTrack</span><span class="hljs-params">(<span class="hljs-type">int</span> row, <span class="hljs-type">int</span> column)</span>{
-        <span class="hljs-keyword">if</span> (row &gt; <span class="hljs-number">8</span> || column &gt; <span class="hljs-number">8</span>){
-            <span class="hljs-keyword">return</span>;
+    private void backTrack(int row, int column){
+        if (row > 8 || column > 8){
+            return;
         }
-        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.board[row][column] == <span class="hljs-string">&#x27;.&#x27;</span>){
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++){
-                <span class="hljs-keyword">if</span> (canSet(row, column, i)){
+        if (this.board[row][column] == '.'){
+            for(int i = 1; i < 10; i++){
+                if (canSet(row, column, i)){
                     setNum(row, column, i);
                     setNext(row, column);
-                    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.canSolve){
+                    if (!this.canSolve){
                         removeNum(row, column, i);
                     }
                 }
             }
-        }<span class="hljs-keyword">else</span>{
+        }else{
             setNext(row, column);
         }
     }
 
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">solveSudoku</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] board)</span> {
-        <span class="hljs-built_in">this</span>.board = board;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; i++){
-            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j &lt; <span class="hljs-number">9</span>; j++){
-                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.board[i][j] != <span class="hljs-string">&#x27;.&#x27;</span>){
-                    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>)(<span class="hljs-built_in">this</span>.board[i][j] - <span class="hljs-string">&#x27;0&#x27;</span>);
+    public void solveSudoku(char[][] board) {
+        this.board = board;
+        for(int i = 0; i < 9; i++){
+            for(int j=0; j < 9; j++){
+                if (this.board[i][j] != '.'){
+                    int num = (int)(this.board[i][j] - '0');
                     setNum(i, j, num);
                 }
             }
         }
-        backTrack(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+        backTrack(0, 0);
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">!</mo><msup><mo stretchy="false">)</mo><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">(n!)^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">!</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$(n!)^9$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n^2$</p>
 
             </div>
             <hr/>
@@ -629,11 +617,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             [Leetcode](Leetcode: 39. 组合总和)
- 题目描述
-给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+                            [Leetcode](Leetcode: 39. 组合总和)题目描述给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
 
-candi
+candidate
                         
                     </div>
                     <div class="publish-info">
@@ -694,10 +680,8 @@ candi
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:146. LRU缓存机制
- 题目描述
-运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
-获取数据 get(key) - 如果密
+                            Leetcode:146. LRU缓存机制题目描述运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+获取数据 get(key) - 如果密钥 (k
                         
                     </div>
                     <div class="publish-info">
@@ -914,11 +898,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

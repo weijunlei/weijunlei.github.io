@@ -5,17 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:171. Excel表列序号, 小风雷">
-    <meta name="description" content=" Leetcode: 171. Excel表列序号
- 题目描述
-给定一个Excel表格中的列名称，返回其相应的列序号。
+    <meta name="description" content="Leetcode: 171. Excel表列序号题目描述给定一个Excel表格中的列名称，返回其相应的列序号。
 
- 例如，
-A -&amp;gt; 1
+例如，A -&amp;gt; 1
 B -&amp;gt; 2
 C -&amp;gt; 3
 ...
 Z -&amp;gt; 26
-AA -&amp;gt; ">
+AA -&amp;gt; 27
+AB ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -352,7 +350,7 @@ AA -&amp;gt; ">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    191
+                    177
                 </div>
                 
 
@@ -370,12 +368,9 @@ AA -&amp;gt; ">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode-171-excel表列序号"><a class="markdownIt-Anchor" href="#leetcode-171-excel表列序号"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/excel-sheet-column-number/">Leetcode: 171. Excel表列序号</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>给定一个Excel表格中的列名称，返回其相应的列序号。
+                <h1 id="Leetcode-171-Excel表列序号"><a href="#Leetcode-171-Excel表列序号" class="headerlink" title="Leetcode: 171. Excel表列序号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/excel-sheet-column-number/">Leetcode: 171. Excel表列序号</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个Excel表格中的列名称，返回其相应的列序号。
 </code></pre>
-<h3 id="例如"><a class="markdownIt-Anchor" href="#例如"></a> 例如，</h3>
-<pre><code>A -&gt; 1
+<h3 id="例如，"><a href="#例如，" class="headerlink" title="例如，"></a>例如，</h3><pre><code>A -&gt; 1
 B -&gt; 2
 C -&gt; 3
 ...
@@ -384,41 +379,31 @@ AA -&gt; 27
 AB -&gt; 28 
 ...
 </code></pre>
-<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
-<pre><code>输入: &quot;A&quot;
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: &quot;A&quot;
 输出: 1
 </code></pre>
-<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
-<pre><code>输入: &quot;AB&quot;
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: &quot;AB&quot;
 输出: 28
 </code></pre>
-<h3 id="示例-3"><a class="markdownIt-Anchor" href="#示例-3"></a> 示例 3:</h3>
-<pre><code>输入: &quot;ZY&quot;
+<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h3><pre><code>输入: &quot;ZY&quot;
 输出: 701
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>直接使用26进制思路遍历字符串即可</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">titleToNumber</span><span class="hljs-params">(String s)</span> {
-        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>){
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>直接使用26进制思路遍历字符串即可</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
+    public int titleToNumber(String s) {
+        if (s == null || s.length() == 0){
+            return 0;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++){
-            result = result * <span class="hljs-number">26</span> + s.charAt(i) - <span class="hljs-string">&#x27;A&#x27;</span> + <span class="hljs-number">1</span>;
+        int result = 0;
+        for(int i = 0; i < s.length(); i++){
+            result = result * 26 + s.charAt(i) - 'A' + 1;
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
 
             </div>
             <hr/>
@@ -574,9 +559,8 @@ AB -&gt; 28
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:454. 四数相加II
-给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
-为了使问题简单化，所有的
+                            Leetcode:454. 四数相加II给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
+为了使问题简单化，所有的 A
                         
                     </div>
                     <div class="publish-info">
@@ -633,10 +617,8 @@ AB -&gt; 28
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:328. 奇偶链表
- 题目描述
-给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
-请尝试使用原地算法完成。你的算法的空间复杂度应为 
+                            Leetcode:328. 奇偶链表题目描述给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+请尝试使用原地算法完成。你的算法的空间复杂度应为 O(1)
                         
                     </div>
                     <div class="publish-info">
@@ -853,11 +835,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

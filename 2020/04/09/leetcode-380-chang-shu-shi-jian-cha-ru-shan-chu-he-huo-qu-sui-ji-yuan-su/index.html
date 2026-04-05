@@ -5,12 +5,10 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:380. 常数时间插入、删除和获取随机元素, 小风雷">
-    <meta name="description" content=" Leetcode: 380. 常数时间插入、删除和获取随机元素
- 题目描述
-设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。
+    <meta name="description" content="Leetcode: 380. 常数时间插入、删除和获取随机元素题目描述设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。
 
 insert(val)：当元素 val 不存在时，向集合中插入该项。
-remove(va">
+remove(val)：元">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -351,7 +349,7 @@ remove(va">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    558
+                    537
                 </div>
                 
 
@@ -369,16 +367,13 @@ remove(va">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="leetcode-380-常数时间插入-删除和获取随机元素"><a class="markdownIt-Anchor" href="#leetcode-380-常数时间插入-删除和获取随机元素"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-delete-getrandom-o1/">Leetcode: 380. 常数时间插入、删除和获取随机元素</a></h1>
-<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
-<pre><code>设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。
+                <h1 id="Leetcode-380-常数时间插入、删除和获取随机元素"><a href="#Leetcode-380-常数时间插入、删除和获取随机元素" class="headerlink" title="Leetcode: 380. 常数时间插入、删除和获取随机元素"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-delete-getrandom-o1/">Leetcode: 380. 常数时间插入、删除和获取随机元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>设计一个支持在平均 时间复杂度 O(1) 下，执行以下操作的数据结构。
 
 insert(val)：当元素 val 不存在时，向集合中插入该项。
 remove(val)：元素 val 存在时，从集合中移除该项。
 getRandom：随机返回现有集合中的一项。每个元素应该有相同的概率被返回。
 </code></pre>
-<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例 :</h3>
-<pre><code>// 初始化一个空的集合。
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例 :"></a>示例 :</h3><pre><code>// 初始化一个空的集合。
 RandomizedSet randomSet = new RandomizedSet();
 
 // 向集合中插入 1 。返回 true 表示 1 被成功地插入。
@@ -402,59 +397,52 @@ randomSet.insert(2);
 // 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。
 randomSet.getRandom();
 </code></pre>
-<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
-<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
-<p>首先满足插入和删除为O(1)的容器会想到哈希表，然后需要返回集合中的随机数，需要一个增长列表。同时需要满足插入和删除为O(1)可以直接将需要删除的数置于末尾，然后删除，插入不变。在插入和删除过程中需要同时更新哈希表和增长列表。</p>
-<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
-<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
-<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomizedSet</span> {
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>首先满足插入和删除为O(1)的容器会想到哈希表，然后需要返回集合中的随机数，需要一个增长列表。同时需要满足插入和删除为O(1)可以直接将需要删除的数置于末尾，然后删除，插入不变。在插入和删除过程中需要同时更新哈希表和增长列表。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class RandomizedSet {
 
-    <span class="hljs-comment">/** Initialize your data structure here. */</span>
-    <span class="hljs-keyword">private</span> HashMap&lt;Integer, Integer&gt; numMap;
-    <span class="hljs-keyword">private</span> List&lt;Integer&gt; nums;
-    <span class="hljs-keyword">private</span> Random random;
+    /** Initialize your data structure here. */
+    private HashMap<Integer, Integer> numMap;
+    private List<Integer> nums;
+    private Random random;
     
-    <span class="hljs-keyword">public</span> <span class="hljs-title function_">RandomizedSet</span><span class="hljs-params">()</span> {
-        numMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-        nums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-        random = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+    public RandomizedSet() {
+        numMap = new HashMap<>();
+        nums = new ArrayList<>();
+        random = new Random();
     }
     
-    <span class="hljs-comment">/** Inserts a value to the set. Returns true if the set did not already contain the specified element. */</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> {
-        <span class="hljs-keyword">if</span> (numMap.containsKey(val)){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+    public boolean insert(int val) {
+        if (numMap.containsKey(val)){
+            return false;
         }
         numMap.put(val, nums.size());
         nums.add(val);
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        return true;
     }
     
-    <span class="hljs-comment">/** Removes a value from the set. Returns true if the set contained the specified element. */</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> val)</span> {
-        <span class="hljs-keyword">if</span> (!numMap.containsKey(val)){
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    /** Removes a value from the set. Returns true if the set contained the specified element. */
+    public boolean remove(int val) {
+        if (!numMap.containsKey(val)){
+            return false;
         }
-        <span class="hljs-type">int</span> <span class="hljs-variable">getIndex</span> <span class="hljs-operator">=</span> numMap.get(val);
-        <span class="hljs-type">int</span> <span class="hljs-variable">getNum</span> <span class="hljs-operator">=</span> nums.get(nums.size() - <span class="hljs-number">1</span>);
+        int getIndex = numMap.get(val);
+        int getNum = nums.get(nums.size() - 1);
         numMap.put(getNum, getIndex);
         nums.set(getIndex, getNum);
-        nums.remove(nums.size() - <span class="hljs-number">1</span>);
+        nums.remove(nums.size() - 1);
         numMap.remove(val);
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        return true;
     }
     
-    <span class="hljs-comment">/** Get a random element from the set. */</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRandom</span><span class="hljs-params">()</span> {
-        <span class="hljs-keyword">return</span> nums.get(random.nextInt(nums.size()));
+    /** Get a random element from the set. */
+    public int getRandom() {
+        return nums.get(random.nextInt(nums.size()));
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
-<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
-<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(1)$</p>
+<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
 
             </div>
             <hr/>
@@ -614,14 +602,11 @@ randomSet.getRandom();
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode: 230. 二叉搜索树中第K小的元素
- 题目描述
-一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
+                            Leetcode: 230. 二叉搜索树中第K小的元素题目描述一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
 
- 说明：
-你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
+说明：你可以假设 k 总是有效的，1 ≤ k ≤ 二叉搜索树元素个数。
 
- 
+示例 1:输入
                         
                     </div>
                     <div class="publish-info">
@@ -678,9 +663,8 @@ randomSet.getRandom();
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             Leetcode:454. 四数相加II
-给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
-为了使问题简单化，所有的
+                            Leetcode:454. 四数相加II给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
+为了使问题简单化，所有的 A
                         
                     </div>
                     <div class="publish-info">
@@ -897,11 +881,11 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

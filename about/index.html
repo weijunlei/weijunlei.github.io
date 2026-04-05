@@ -218,7 +218,7 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">92</a></span>
+    <span class="count"><a href="/">93</a></span>
     <span class="name">文章</span>
 </div>
 
@@ -232,7 +232,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">88</a></span>
+    <span class="count"><a href="/tags">91</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -248,7 +248,7 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">92</a></span>
+    <span class="count"><a href="/">93</a></span>
     <span class="name">文章</span>
 </div>
 
@@ -262,7 +262,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">88</a></span>
+    <span class="count"><a href="/tags">91</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -398,7 +398,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,2,1],
+                data: [0,0,0,0,0,0,0,0,0,0,0,2,2],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -440,7 +440,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"NLP","value":8},{"name":"技术","value":3},{"name":"Leetcode","value":78},{"name":"实用技巧","value":1},{"name":"杂书","value":1}],
+                data: [{"name":"NLP","value":8},{"name":"技术","value":4},{"name":"Leetcode","value":78},{"name":"实用技巧","value":1},{"name":"杂书","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -585,74 +585,58 @@
                             <i class="fa fa-address-book"></i>&nbsp;&nbsp;个人简历
                         </div>
                         <div id="articleContent" data-aos="fade-up">
-                            <h1 id="关于我"><a class="markdownIt-Anchor" href="#关于我"></a> 关于我</h1>
-<blockquote>
+                            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><blockquote>
 <p>如果爱，请深爱</p>
 </blockquote>
 <p>后端开发工程师，搞过一段时间NLP</p>
-<h2 id="教育经历"><a class="markdownIt-Anchor" href="#教育经历"></a> 教育经历</h2>
-<ul>
+<h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><ul>
 <li><strong>南京大学</strong> | 计算机技术（保研） | 硕士 | 2019.09 - 2022.06</li>
 <li><strong>电子科技大学</strong> | 软件工程 | 本科 | 2015.09 - 2019.06</li>
 </ul>
-<h2 id="工作与实习经历"><a class="markdownIt-Anchor" href="#工作与实习经历"></a> 工作与实习经历</h2>
-<h3 id="shopee-高级后台开发工程师-202207-至今"><a class="markdownIt-Anchor" href="#shopee-高级后台开发工程师-202207-至今"></a> Shopee | 高级后台开发工程师 | 2022.07 - 至今</h3>
-<p><strong>订单核心交易研发</strong>：覆盖购物车加购、聚合购物车展示、订单下单、支付、退款等订单全链路流程。</p>
+<h2 id="工作与实习经历"><a href="#工作与实习经历" class="headerlink" title="工作与实习经历"></a>工作与实习经历</h2><h3 id="Shopee-高级后台开发工程师-2022-07-至今"><a href="#Shopee-高级后台开发工程师-2022-07-至今" class="headerlink" title="Shopee | 高级后台开发工程师 | 2022.07 - 至今"></a>Shopee | 高级后台开发工程师 | 2022.07 - 至今</h3><p><strong>订单核心交易研发</strong>：覆盖购物车加购、聚合购物车展示、订单下单、支付、退款等订单全链路流程。</p>
 <ul>
-<li>
-<p><strong>AI Agent 系统研发（dod_agent + Code-as-PRD）</strong>：基于 SMART/日志/监控 + MCP + Prompt，完成运营活动与异常识别、分流，问题响应效率从十分钟级提升到分钟级；串联 Agent、Python 工具服务与 MCP 侧协作。</p>
+<li><p><strong>AI Agent 系统研发（dod_agent + Code-as-PRD）</strong>：基于 SMART&#x2F;日志&#x2F;监控 + MCP + Prompt，完成运营活动与异常识别、分流，问题响应效率从十分钟级提升到分钟级；串联 Agent、Python 工具服务与 MCP 侧协作。</p>
 </li>
-<li>
-<p><strong>订单异构数据同步优化</strong>：并发消费CDC。基于Shopee CDC单Partition及Go Sarama单Kafka Partition仅分配一个协程消费特点，引入多协程并发消费模型+等待队列保证Kafka顺序/延时提交+Channel提升系统吞吐量，系统瓶颈由写ES转为解析Kafka消息，理论性能提升200倍。</p>
+<li><p><strong>订单异构数据同步优化</strong>：并发消费CDC。基于Shopee CDC单Partition及Go Sarama单Kafka Partition仅分配一个协程消费特点，引入多协程并发消费模型+等待队列保证Kafka顺序&#x2F;延时提交+Channel提升系统吞吐量，系统瓶颈由写ES转为解析Kafka消息，理论性能提升200倍。</p>
 </li>
-<li>
-<p><strong>订单表无停机分库迁移</strong>：解决DDL操作时间过长（单库1T+数据）+RDS迁移需要，完成单库千表→10库百表拆分。基于存量数据同步+分阶段双写+异步数据和同步读数据分离的方式实现非停机迁移订单表，最终满足RDS容量限制（单库≤500G），DDL执行时间从14个小时减少到1小时以内，P99降低10%。</p>
+<li><p><strong>订单表无停机分库迁移</strong>：解决DDL操作时间过长（单库1T+数据）+RDS迁移需要，完成单库千表→10库百表拆分。基于存量数据同步+分阶段双写+异步数据和同步读数据分离的方式实现非停机迁移订单表，最终满足RDS容量限制（单库≤500G），DDL执行时间从14个小时减少到1小时以内，P99降低10%。</p>
 </li>
 </ul>
 <p><strong>技术栈</strong>：Go、MySQL、Kafka、ElasticSearch、Eino、Milvus、MCP、Python</p>
-<h3 id="华为-算法实习生-202010-202107"><a class="markdownIt-Anchor" href="#华为-算法实习生-202010-202107"></a> 华为 | 算法实习生 | 2020.10 - 2021.07</h3>
-<p>时间序列算法集成，将WaveNet/MQRNN等算法集成至时间序列算法检测库，用于告警日志数据异常检测及云化告警业务发现。</p>
-<h3 id="百度-算法实习生-201811-201905"><a class="markdownIt-Anchor" href="#百度-算法实习生-201811-201905"></a> 百度 | 算法实习生 | 2018.11 - 2019.05</h3>
-<ul>
+<h3 id="华为-算法实习生-2020-10-2021-07"><a href="#华为-算法实习生-2020-10-2021-07" class="headerlink" title="华为 | 算法实习生 | 2020.10 - 2021.07"></a>华为 | 算法实习生 | 2020.10 - 2021.07</h3><p>时间序列算法集成，将WaveNet&#x2F;MQRNN等算法集成至时间序列算法检测库，用于告警日志数据异常检测及云化告警业务发现。</p>
+<h3 id="百度-算法实习生-2018-11-2019-05"><a href="#百度-算法实习生-2018-11-2019-05" class="headerlink" title="百度 | 算法实习生 | 2018.11 - 2019.05"></a>百度 | 算法实习生 | 2018.11 - 2019.05</h3><ul>
 <li>事件图谱的事件归一算法研究及上线。覆盖数据分析、数据收集、模型调研、模型训练、模型上线全流程。</li>
 <li>算法上基于 BERT 预训练完成事件脉络 pipeline 集成，包含事件判别、事件名生成、事件归一。</li>
 <li>业务上线至时空阿 Top 4 卡片，覆盖日均 100 万+ 事件数据。</li>
 <li>参与鹰眼系统开发，提供热点事件粗召回能力，召回准确率达到 80%+。</li>
 </ul>
 <p><strong>技术栈</strong>：Python、BERT、ElasticSearch、知识图谱、NLP</p>
-<h3 id="sap-后端开发实习生-201712-201806"><a class="markdownIt-Anchor" href="#sap-后端开发实习生-201712-201806"></a> SAP | 后端开发实习生 | 2017.12 - 2018.06</h3>
-<p>某汽车主机厂CRM的后端开发工作，主要使用C4C针对到店、试驾等任务进行数据处理和接口定义工作。</p>
-<h2 id="比赛经历"><a class="markdownIt-Anchor" href="#比赛经历"></a> 比赛经历</h2>
-<ul>
-<li>
-<p><strong>2020华为Digix AI全球校园AI算法精英大赛</strong> | 第6名/300+/1000+</p>
+<h3 id="SAP-后端开发实习生-2017-12-2018-06"><a href="#SAP-后端开发实习生-2017-12-2018-06" class="headerlink" title="SAP | 后端开发实习生 | 2017.12 - 2018.06"></a>SAP | 后端开发实习生 | 2017.12 - 2018.06</h3><p>某汽车主机厂CRM的后端开发工作，主要使用C4C针对到店、试驾等任务进行数据处理和接口定义工作。</p>
+<h2 id="比赛经历"><a href="#比赛经历" class="headerlink" title="比赛经历"></a>比赛经历</h2><ul>
+<li><p><strong>2020华为Digix AI全球校园AI算法精英大赛</strong> | 第6名&#x2F;300+&#x2F;1000+</p>
 <ul>
 <li>广告CTR预测任务，给定7天的用户、广告、广告主数据，预测将来（8-10）天的曝光广告的点击率</li>
 <li>特征工程包括曝光特征、交叉特征、Target Encoding、Embedding特征等，使用LightGBM和NN模型，获得奖金1.2w</li>
 </ul>
 </li>
-<li>
-<p><strong>莱斯杯：全国第二届&quot;军事阅读理解&quot;挑战赛</strong> | 第4名/65/653</p>
+<li><p><strong>莱斯杯：全国第二届&quot;军事阅读理解&quot;挑战赛</strong> | 第4名&#x2F;65&#x2F;653</p>
 <ul>
 <li>军事阅读理解任务，包含单答案问题、多答案问题、推理问题</li>
 <li>模型层使用百度ERNIE 1.0 + 3层Query-Context CoAttention对答案进行预测</li>
 </ul>
 </li>
 </ul>
-<h2 id="论文成果"><a class="markdownIt-Anchor" href="#论文成果"></a> 论文成果</h2>
-<ul>
+<h2 id="论文成果"><a href="#论文成果" class="headerlink" title="论文成果"></a>论文成果</h2><ul>
 <li><strong>ICASSP 2023（CCF-B）</strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></strong></li>
 <li>多步阅读理解SOTA</li>
 <li>论文链接：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">https://arxiv.org/abs/2205.11729</a></li>
 </ul>
-<h2 id="技术栈"><a class="markdownIt-Anchor" href="#技术栈"></a> 技术栈</h2>
-<ul>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
 <li><strong>后端</strong>：Golang, MySQL, Kafka</li>
 <li><strong>算法</strong>：阅读理解、MCP、Prompt、特征工程、LightGBM</li>
 </ul>
-<h2 id="英语水平"><a class="markdownIt-Anchor" href="#英语水平"></a> 英语水平</h2>
-<ul>
+<h2 id="英语水平"><a href="#英语水平" class="headerlink" title="英语水平"></a>英语水平</h2><ul>
 <li>四六级通过</li>
 </ul>
 
@@ -666,11 +650,11 @@
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 WeijunLei. All Rights Reserved.
+            &copy; 2026 WeijunLei. All Rights Reserved.
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">54.2k</span>&nbsp;字
+                    class="white-color">53.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
