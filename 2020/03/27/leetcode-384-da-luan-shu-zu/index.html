@@ -5,10 +5,13 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:384.打乱数组, 小风雷">
-    <meta name="description" content="Leetcode: 384.打乱数组题目描述打乱一个没有重复元素的数组。
-示例:// 以数字集合 1, 2 和 3 初始化数组。
+    <meta name="description" content=" Leetcode: 384.打乱数组
+ 题目描述
+打乱一个没有重复元素的数组。
+ 示例:
+// 以数字集合 1, 2 和 3 初始化数组。
 int[] nums = {1,2,3};
-Solution solution = new">
+Solution solution">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -349,7 +352,7 @@ Solution solution = new">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    517
+                    541
                 </div>
                 
 
@@ -367,8 +370,11 @@ Solution solution = new">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-384-打乱数组"><a href="#Leetcode-384-打乱数组" class="headerlink" title="Leetcode: 384.打乱数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shuffle-an-array/">Leetcode: 384.打乱数组</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>打乱一个没有重复元素的数组。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>// 以数字集合 1, 2 和 3 初始化数组。
+                <h1 id="leetcode-384打乱数组"><a class="markdownIt-Anchor" href="#leetcode-384打乱数组"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shuffle-an-array/">Leetcode: 384.打乱数组</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>打乱一个没有重复元素的数组。</p>
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
+<pre><code>// 以数字集合 1, 2 和 3 初始化数组。
 int[] nums = {1,2,3};
 Solution solution = new Solution(nums);
 
@@ -381,75 +387,86 @@ solution.reset();
 // 随机返回数组[1,2,3]打乱后的结果。
 solution.shuffle();
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：复制数组-移除"><a href="#思路1：复制数组-移除" class="headerlink" title="思路1：复制数组+移除"></a>思路1：复制数组+移除</h3><p>复制一个新数组，然后随机置入数组，将置入数组的数移除</p>
-<h3 id="思路2：Fisher–Yates-shuffle"><a href="#思路2：Fisher–Yates-shuffle" class="headerlink" title="思路2：Fisher–Yates shuffle"></a>思路2：Fisher–Yates shuffle</h3><p>遍历数组，随机化得到一个从当前位置到最后位置的数进行交换，该方法产生n!种可能，但是如果采用随机产生两个随机数则是错的，其产生的可能性为$n^n$,简单证明为n!可能不能被$n^n$整除</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-复制数组-移除"><a href="#代码1-复制数组-移除" class="headerlink" title="代码1: 复制数组+移除"></a>代码1: 复制数组+移除</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    private int[] nums;
-    private int[] origins;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1复制数组移除"><a class="markdownIt-Anchor" href="#思路1复制数组移除"></a> 思路1：复制数组+移除</h3>
+<p>复制一个新数组，然后随机置入数组，将置入数组的数移除</p>
+<h3 id="思路2fisheryates-shuffle"><a class="markdownIt-Anchor" href="#思路2fisheryates-shuffle"></a> 思路2：Fisher–Yates shuffle</h3>
+<p>遍历数组，随机化得到一个从当前位置到最后位置的数进行交换，该方法产生n!种可能，但是如果采用随机产生两个随机数则是错的，其产生的可能性为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">n^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>,简单证明为n!可能不能被<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">n^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>整除</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1-复制数组移除"><a class="markdownIt-Anchor" href="#代码1-复制数组移除"></a> 代码1: 复制数组+移除</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] nums;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] origins;
     
-    private Random rand = new Random();
+    <span class="hljs-keyword">private</span> <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     
-    public Solution(int[] nums) {
-        this.nums = nums;
-        origins = this.nums.clone();
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-built_in">this</span>.nums = nums;
+        origins = <span class="hljs-built_in">this</span>.nums.clone();
     }
     
-    /** Resets the array to its original configuration and return it. */
-    public int[] reset() {
-        this.nums = this.origins;
-        this.origins = this.origins.clone();
-        return this.nums;
+    <span class="hljs-comment">/** Resets the array to its original configuration and return it. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] reset() {
+        <span class="hljs-built_in">this</span>.nums = <span class="hljs-built_in">this</span>.origins;
+        <span class="hljs-built_in">this</span>.origins = <span class="hljs-built_in">this</span>.origins.clone();
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.nums;
     }
     
-    /** Returns a random shuffling of the array. */
-    public int[] shuffle() {
-        List<Integer> copyList = new ArrayList<>();
-        for(int num: this.nums){
+    <span class="hljs-comment">/** Returns a random shuffling of the array. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] shuffle() {
+        List&lt;Integer&gt; copyList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num: <span class="hljs-built_in">this</span>.nums){
             copyList.add(num);
         }
-        for(int i = 0; i < this.nums.length; i++){
-            int removeIndex = rand.nextInt(copyList.size());
-            this.nums[i] = copyList.get(removeIndex);
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.nums.length; i++){
+            <span class="hljs-type">int</span> <span class="hljs-variable">removeIndex</span> <span class="hljs-operator">=</span> rand.nextInt(copyList.size());
+            <span class="hljs-built_in">this</span>.nums[i] = copyList.get(removeIndex);
             copyList.remove(removeIndex);
         }
-        return this.nums;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.nums;
     }
 }
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    private int[] nums;
-    private int[] origins;
+<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] nums;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] origins;
     
-    private Random rand = new Random();
+    <span class="hljs-keyword">private</span> <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     
-    public Solution(int[] nums) {
-        this.nums = nums;
-        origins = this.nums.clone();
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-built_in">this</span>.nums = nums;
+        origins = <span class="hljs-built_in">this</span>.nums.clone();
     }
     
-    /** Resets the array to its original configuration and return it. */
-    public int[] reset() {
-        this.nums = this.origins;
-        this.origins = this.origins.clone();
-        return this.nums;
+    <span class="hljs-comment">/** Resets the array to its original configuration and return it. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] reset() {
+        <span class="hljs-built_in">this</span>.nums = <span class="hljs-built_in">this</span>.origins;
+        <span class="hljs-built_in">this</span>.origins = <span class="hljs-built_in">this</span>.origins.clone();
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.nums;
     }
     
-    /** Returns a random shuffling of the array. */
-    public int[] shuffle() {
-        for(int i = 0; i < this.nums.length; i++){
-            int swapIndex = rand.nextInt(this.nums.length - i) + i;
-            int temp = this.nums[i];
-            this.nums[i] = this.nums[swapIndex];
-            this.nums[swapIndex] = temp;
+    <span class="hljs-comment">/** Returns a random shuffling of the array. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] shuffle() {
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.nums.length; i++){
+            <span class="hljs-type">int</span> <span class="hljs-variable">swapIndex</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-built_in">this</span>.nums.length - i) + i;
+            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.nums[i];
+            <span class="hljs-built_in">this</span>.nums[i] = <span class="hljs-built_in">this</span>.nums[swapIndex];
+            <span class="hljs-built_in">this</span>.nums[swapIndex] = temp;
         }
-        return this.nums;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.nums;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(n^2)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$O(n)$没有了移除操作</p>
-<h3 id="思路1空间复杂度-1"><a href="#思路1空间复杂度-1" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>没有了移除操作</p>
+<h3 id="思路1空间复杂度-2"><a class="markdownIt-Anchor" href="#思路1空间复杂度-2"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -609,12 +626,16 @@ solution.shuffle();
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            350. 两个数组的交集 II题目描述给定两个数组，编写一个函数来计算它们的交集。
+                             350. 两个数组的交集 II
+ 题目描述
+给定两个数组，编写一个函数来计算它们的交集。
 
-示例 1:输入: nums1 = [1,2,2,1], nums2 = [2,2]
+ 示例 1:
+输入: nums1 = [1,2,2,1], nums2 = [2,2]
 输出: [2,2]
 
-示例 2:输入: nums1 = [4,9,5]
+ 示例 2:
+输入: nums1 =
                         
                     </div>
                     <div class="publish-info">
@@ -675,12 +696,16 @@ solution.shuffle();
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:283. 移动零题目描述给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+                             Leetcode:283. 移动零
+ 题目描述
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
 
-示例:输入: [0,1,0,3,12]
+ 示例:
+输入: [0,1,0,3,12]
 输出: [1,3,12,0,0]
 
-说明:必须在原数组上操作
+ 说明:
+必
                         
                     </div>
                     <div class="publish-info">
@@ -905,7 +930,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

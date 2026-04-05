@@ -5,15 +5,17 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:179. 最大数, 小风雷">
-    <meta name="description" content="Leetcode:179. 最大数题目描述给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+    <meta name="description" content=" Leetcode:179. 最大数
+ 题目描述
+给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
 
-示例 1:输入: [10,2]
+ 示例 1:
+输入: [10,2]
 输出: 210
 
-示例 2:输入: [3,30,34,5,9]
-输出: 9534330
-
-说明:输出结">
+ 示例 2:
+输入: [3,30,34,5,9]
+输出: 9534330">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -350,7 +352,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    655
+                    721
                 </div>
                 
 
@@ -368,54 +370,63 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-179-最大数"><a href="#Leetcode-179-最大数" class="headerlink" title="Leetcode:179. 最大数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number/">Leetcode:179. 最大数</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+                <h1 id="leetcode179-最大数"><a class="markdownIt-Anchor" href="#leetcode179-最大数"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-number/">Leetcode:179. 最大数</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: [10,2]
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: [10,2]
 输出: 210
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: [3,30,34,5,9]
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: [3,30,34,5,9]
 输出: 9534330
 </code></pre>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
+<pre><code>输出结果可能非常大，所以你需要返回一个字符串而不是整数。
 </code></pre>
-<h2 id="思路1：转化为排序-快排"><a href="#思路1：转化为排序-快排" class="headerlink" title="思路1：转化为排序+快排"></a>思路1：转化为排序+快排</h2><p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p>
-<h2 id="思路2-转化为排序-Java排序"><a href="#思路2-转化为排序-Java排序" class="headerlink" title="思路2: 转化为排序+Java排序"></a>思路2: 转化为排序+Java排序</h2><p>转化为排序然后使用Java内置排序</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public String largestNumber(int[] nums) {
-        if (nums == null || nums.length == 0){
-            return "";
+<h2 id="思路1转化为排序快排"><a class="markdownIt-Anchor" href="#思路1转化为排序快排"></a> 思路1：转化为排序+快排</h2>
+<p>将数组转化为字符串数组，然后从大到小排序，比较的是str(a)+str(b)与str(b)+str(a),若str(a)+str(b)大，则str(a) &gt; str(b)</p>
+<h2 id="思路2-转化为排序java排序"><a class="markdownIt-Anchor" href="#思路2-转化为排序java排序"></a> 思路2: 转化为排序+Java排序</h2>
+<p>转化为排序然后使用Java内置排序</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">largestNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
         }
-        StringBuilder result = new StringBuilder();
-        String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++){
+        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+        String[] strNums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[nums.length];
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++){
             strNums[i] = String.valueOf(nums[i]);
         }
-        quickSort(strNums, 0, strNums.length - 1);
-        if (strNums[0].equals("0")){
-            return "0";
+        quickSort(strNums, <span class="hljs-number">0</span>, strNums.length - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (strNums[<span class="hljs-number">0</span>].equals(<span class="hljs-string">&quot;0&quot;</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;0&quot;</span>;
         }
-        for(int i = 0; i < strNums.length; i++){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; strNums.length; i++){
             result.append(strNums[i]);
         }
-        return result.toString();
+        <span class="hljs-keyword">return</span> result.toString();
     }
     
-    private void quickSort(String[] nums, int start, int end){
-        if (start < end){
-            int getIndex = getPartition(nums, start, end);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quickSort</span><span class="hljs-params">(String[] nums, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span>{
+        <span class="hljs-keyword">if</span> (start &lt; end){
+            <span class="hljs-type">int</span> <span class="hljs-variable">getIndex</span> <span class="hljs-operator">=</span> getPartition(nums, start, end);
             quickSort(nums, start, getIndex);
-            quickSort(nums, getIndex + 1, end);
+            quickSort(nums, getIndex + <span class="hljs-number">1</span>, end);
         }
     }
     
-    private int getPartition(String[] nums, int start, int end){
-        String getNum = nums[start];
+    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getPartition</span><span class="hljs-params">(String[] nums, <span class="hljs-type">int</span> start, <span class="hljs-type">int</span> end)</span>{
+        <span class="hljs-type">String</span> <span class="hljs-variable">getNum</span> <span class="hljs-operator">=</span> nums[start];
         nums[start] = nums[end];
         nums[end] = getNum;
-        int getIndex = start;
-        for(int i = start; i < end; i++){
-            if (compare(nums[i], getNum)){
-                String temp = nums[getIndex];
+        <span class="hljs-type">int</span> <span class="hljs-variable">getIndex</span> <span class="hljs-operator">=</span> start;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start; i &lt; end; i++){
+            <span class="hljs-keyword">if</span> (compare(nums[i], getNum)){
+                <span class="hljs-type">String</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> nums[getIndex];
                 nums[getIndex] = nums[i];
                 nums[i] = temp;
                 getIndex ++;
@@ -423,86 +434,92 @@
         }
         nums[end] = nums[getIndex];
         nums[getIndex] = getNum;
-        return getIndex;
+        <span class="hljs-keyword">return</span> getIndex;
     }
     
-    private boolean compare(String a, String b){
-        int aCount = a.length();
-        int bCount = b.length();
-        int maxCount = aCount > bCount ? aCount : bCount;
-        char chA = '0';
-        char chB = '0';
-        for(int i = 0; i < aCount + bCount; i++){
-            if (i < aCount){
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(String a, String b)</span>{
+        <span class="hljs-type">int</span> <span class="hljs-variable">aCount</span> <span class="hljs-operator">=</span> a.length();
+        <span class="hljs-type">int</span> <span class="hljs-variable">bCount</span> <span class="hljs-operator">=</span> b.length();
+        <span class="hljs-type">int</span> <span class="hljs-variable">maxCount</span> <span class="hljs-operator">=</span> aCount &gt; bCount ? aCount : bCount;
+        <span class="hljs-type">char</span> <span class="hljs-variable">chA</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;0&#x27;</span>;
+        <span class="hljs-type">char</span> <span class="hljs-variable">chB</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;0&#x27;</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; aCount + bCount; i++){
+            <span class="hljs-keyword">if</span> (i &lt; aCount){
                 chA = a.charAt(i);
-            }else{
+            }<span class="hljs-keyword">else</span>{
                 chA = b.charAt(i - aCount);
             }
-            if(i < bCount){
+            <span class="hljs-keyword">if</span>(i &lt; bCount){
                 chB = b.charAt(i);
-            }else{
+            }<span class="hljs-keyword">else</span>{
                 chB = a.charAt(i - bCount);
             }
-            if (chA > chB){
-                return true;
-            }else if(chA < chB){
-                return false;
+            <span class="hljs-keyword">if</span> (chA &gt; chB){
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(chA &lt; chB){
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
             }
         }
-        return false;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
 }
 </code></pre>
-<h3 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public String largestNumber(int[] nums) {
-        if (nums == null || nums.length == 0){
-            return "";
+<h3 id="代码2"><a class="markdownIt-Anchor" href="#代码2"></a> 代码2</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">largestNumber</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> {
+        <span class="hljs-keyword">if</span> (nums == <span class="hljs-literal">null</span> || nums.length == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
         }
-        StringBuilder result = new StringBuilder();
-        String[] strNums = new String[nums.length];
-        for(int i = 0; i < nums.length; i++){
+        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+        String[] strNums = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[nums.length];
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++){
             strNums[i] = String.valueOf(nums[i]);
         }
-        Arrays.sort(strNums, new Comparator<String>(){
-            @Override
-            public int compare(String a, String b){
-                int aCount = a.length();
-                int bCount = b.length();
-                int maxCount = aCount > bCount ? aCount : bCount;
-                char chA = '0';
-                char chB = '0';
-                for(int i = 0; i < aCount + bCount; i++){
-                    if (i < aCount){
+        Arrays.sort(strNums, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;String&gt;(){
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(String a, String b)</span>{
+                <span class="hljs-type">int</span> <span class="hljs-variable">aCount</span> <span class="hljs-operator">=</span> a.length();
+                <span class="hljs-type">int</span> <span class="hljs-variable">bCount</span> <span class="hljs-operator">=</span> b.length();
+                <span class="hljs-type">int</span> <span class="hljs-variable">maxCount</span> <span class="hljs-operator">=</span> aCount &gt; bCount ? aCount : bCount;
+                <span class="hljs-type">char</span> <span class="hljs-variable">chA</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;0&#x27;</span>;
+                <span class="hljs-type">char</span> <span class="hljs-variable">chB</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;0&#x27;</span>;
+                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; aCount + bCount; i++){
+                    <span class="hljs-keyword">if</span> (i &lt; aCount){
                         chA = a.charAt(i);
-                    }else{
+                    }<span class="hljs-keyword">else</span>{
                         chA = b.charAt(i - aCount);
                     }
-                    if(i < bCount){
+                    <span class="hljs-keyword">if</span>(i &lt; bCount){
                         chB = b.charAt(i);
-                    }else{
+                    }<span class="hljs-keyword">else</span>{
                         chB = a.charAt(i - bCount);
                     }
-                    if (chA != chB){
-                        return chB - chA;
+                    <span class="hljs-keyword">if</span> (chA != chB){
+                        <span class="hljs-keyword">return</span> chB - chA;
                     }
                 }
-                return 0;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
             }
         });
-        if (strNums[0].equals("0")){
-            return "0";
+        <span class="hljs-keyword">if</span> (strNums[<span class="hljs-number">0</span>].equals(<span class="hljs-string">&quot;0&quot;</span>)){
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;0&quot;</span>;
         }
-        for(int i = 0; i < strNums.length; i++){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; strNums.length; i++){
             result.append(strNums[i]);
         }
-        return result.toString();
+        <span class="hljs-keyword">return</span> result.toString();
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(n)$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>最坏$O(n^2)$，平均$O(nlogn)$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$O(n)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p>最坏<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，平均<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
+<p>最坏<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，平均<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -658,9 +675,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:324. 摆动排序 II题目描述给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]... 的顺序。
+                             Leetcode:324. 摆动排序 II
+ 题目描述
+给定一个无序的数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]... 的顺序。
 
-示例 1:输入: nums = 
+ 示例 1:
+输入: n
                         
                     </div>
                     <div class="publish-info">
@@ -717,7 +737,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Multilingual NMT with a language-independent attention bridge摘要作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inner-a
+                             Multilingual NMT with a language-independent attention bridge
+ 摘要
+作者通过整合跨所有语言共享的中间注意力桥获取到为位机器翻译系统准备的句子表征架构。作者通过在编码端的inn
                         
                     </div>
                     <div class="publish-info">
@@ -942,7 +964,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

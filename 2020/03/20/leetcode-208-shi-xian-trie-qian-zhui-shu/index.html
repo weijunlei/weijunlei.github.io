@@ -5,11 +5,14 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 208:实现Trie(前缀树), 小风雷">
-    <meta name="description" content="Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+    <meta name="description" content=" Leetcode 208:实现Trie(前缀树)
+ 题目描述
+实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
-示例:Trie trie = new Trie();
+ 示例:
+Trie trie = new Trie();
 
-trie.ins">
+tr">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -350,7 +353,7 @@ trie.ins">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    365
+                    380
                 </div>
                 
 
@@ -368,9 +371,12 @@ trie.ins">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-208-实现Trie-前缀树"><a href="#Leetcode-208-实现Trie-前缀树" class="headerlink" title="Leetcode 208:实现Trie(前缀树)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">Leetcode 208:实现Trie(前缀树)</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+                <h1 id="leetcode-208实现trie前缀树"><a class="markdownIt-Anchor" href="#leetcode-208实现trie前缀树"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">Leetcode 208:实现Trie(前缀树)</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 </code></pre>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><pre><code>Trie trie = new Trie();
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例:</h3>
+<pre><code>Trie trie = new Trie();
 
 trie.insert(&quot;apple&quot;);
 trie.search(&quot;apple&quot;);   // 返回 true
@@ -379,59 +385,67 @@ trie.startsWith(&quot;app&quot;); // 返回 true
 trie.insert(&quot;app&quot;);   
 trie.search(&quot;app&quot;);     // 返回 true
 </code></pre>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><pre><code>你可以假设所有的输入都是由小写字母 a-z 构成的。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明:</h3>
+<pre><code>你可以假设所有的输入都是由小写字母 a-z 构成的。
 保证所有输入均为非空字符串。
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-前缀树基本实现"><a href="#思路1-前缀树基本实现" class="headerlink" title="思路1: 前缀树基本实现"></a>思路1: 前缀树基本实现</h3><p>主要是使用前缀树的基本概念，将前缀字母连接到下一个后缀节点,以及标记好结束节点</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1代码"><a href="#思路1代码" class="headerlink" title="思路1代码"></a>思路1代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Trie {
-    private final int alphaSize = 26;
-    private Trie[] children = new Trie[alphaSize];
-    private boolean isEnd = false;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-前缀树基本实现"><a class="markdownIt-Anchor" href="#思路1-前缀树基本实现"></a> 思路1: 前缀树基本实现</h3>
+<p>主要是使用前缀树的基本概念，将前缀字母连接到下一个后缀节点,以及标记好结束节点</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="思路1代码"><a class="markdownIt-Anchor" href="#思路1代码"></a> 思路1代码</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Trie</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">alphaSize</span> <span class="hljs-operator">=</span> <span class="hljs-number">26</span>;
+    <span class="hljs-keyword">private</span> Trie[] children = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>[alphaSize];
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isEnd</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
 
-    /** Initialize your data structure here. */
-    public Trie() {
+    <span class="hljs-comment">/** Initialize your data structure here. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Trie</span><span class="hljs-params">()</span> {
 
     }
 
-    /** Inserts a word into the trie. */
-    public void insert(String word) {
-        Trie temp = this;
-        for(var ch: word.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
-                temp.children[ch - 'a'] = new Trie();
+    <span class="hljs-comment">/** Inserts a word into the trie. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> ch: word.toCharArray()){
+            <span class="hljs-keyword">if</span> (temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-literal">null</span>){
+                temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Trie</span>();
             }
-            temp = temp.children[ch - 'a'];
+            temp = temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>];
         }
-        temp.isEnd=true;
+        temp.isEnd=<span class="hljs-literal">true</span>;
     }
 
-    /** Returns if the word is in the trie. */
-    public boolean search(String word) {
-        Trie temp = this;
-        for(var ch: word.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
-                return false;
+    <span class="hljs-comment">/** Returns if the word is in the trie. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">search</span><span class="hljs-params">(String word)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> ch: word.toCharArray()){
+            <span class="hljs-keyword">if</span> (temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-literal">null</span>){
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
             }
-            temp = temp.children[ch - 'a'];
+            temp = temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>];
         }
-        return temp.isEnd;
+        <span class="hljs-keyword">return</span> temp.isEnd;
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
-    public boolean startsWith(String prefix) {
-        Trie temp = this;
-        for(var ch: prefix.toCharArray()){
-            if (temp.children[ch - 'a'] == null){
-                return false;
+    <span class="hljs-comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">startsWith</span><span class="hljs-params">(String prefix)</span> {
+        <span class="hljs-type">Trie</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> ch: prefix.toCharArray()){
+            <span class="hljs-keyword">if</span> (temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>] == <span class="hljs-literal">null</span>){
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
             }
-            temp = temp.children[ch - 'a'];
+            temp = temp.children[ch - <span class="hljs-string">&#x27;a&#x27;</span>];
         }
-        return true;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$n$均可看作是链表的查找插入</p>
-<h3 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h3><p>$n$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span>均可看作是链表的查找插入</p>
+<h3 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -591,8 +605,10 @@ trie.search(&quot;app&quot;);     // 返回 true
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 212: 单词搜索II题目描述给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
-单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相
+                             Leetcode 212: 单词搜索II
+ 题目描述
+给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那
                         
                     </div>
                     <div class="publish-info">
@@ -653,9 +669,12 @@ trie.search(&quot;app&quot;);     // 返回 true
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+                             Leetcode 140: 单词切分II
+ 题目描述
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
 
-说明：分隔时可以重复使用字
+ 说明：
+分隔时可
                         
                     </div>
                     <div class="publish-info">
@@ -876,7 +895,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

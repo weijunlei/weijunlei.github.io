@@ -5,12 +5,16 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode:371. 两整数之和, 小风雷">
-    <meta name="description" content="[Leetcode: 371. 两整数之和]题目描述不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+    <meta name="description" content=" [Leetcode: 371. 两整数之和]
+ 题目描述
+不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
 
-示例 1:输入: a = 1, b = 2
+ 示例 1:
+输入: a = 1, b = 2
 输出: 3
 
-示例 2:输入: a = -">
+ 示例 2:
+输">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -347,7 +351,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    119
+                    156
                 </div>
                 
 
@@ -365,31 +369,42 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-371-两整数之和"><a href="#Leetcode-371-两整数之和" class="headerlink" title="[Leetcode: 371. 两整数之和]"></a>[Leetcode: 371. 两整数之和]</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+                <h1 id="leetcode-371-两整数之和"><a class="markdownIt-Anchor" href="#leetcode-371-两整数之和"></a> [Leetcode: 371. 两整数之和]</h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
 </code></pre>
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h3><pre><code>输入: a = 1, b = 2
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h3>
+<pre><code>输入: a = 1, b = 2
 输出: 3
 </code></pre>
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h3><pre><code>输入: a = -2, b = 3
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h3>
+<pre><code>输入: a = -2, b = 3
 输出: 1
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1-位操作"><a href="#思路1-位操作" class="headerlink" title="思路1 位操作"></a>思路1 位操作</h3><p>异或操作视作低位相加，与右移操作视作进位</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public int getSum(int a, int b) {
-        int addNum = 0;
-        int superNum = 0;
-        while (b != 0){
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-位操作"><a class="markdownIt-Anchor" href="#思路1-位操作"></a> 思路1 位操作</h3>
+<p>异或操作视作低位相加，与右移操作视作进位</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1"><a class="markdownIt-Anchor" href="#代码1"></a> 代码1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getSum</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">addNum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">superNum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (b != <span class="hljs-number">0</span>){
             addNum = a ^ b;
-            superNum = a & b << 1;
+            superNum = a &amp; b &lt;&lt; <span class="hljs-number">1</span>;
             a = addNum;
             b = superNum;
         }
-        return a;
+        <span class="hljs-keyword">return</span> a;
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>$O(logn)$</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$O(1)$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
 
             </div>
             <hr/>
@@ -545,9 +560,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            [Leetcode: 134. 加油站]题目描述在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+                             [Leetcode: 134. 加油站]
+ 题目描述
+在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 
-你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升
                         
                     </div>
                     <div class="publish-info">
@@ -600,9 +617,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode:202. 快乐数题目描述编写一个算法来判断一个数 n 是不是快乐数。
+                             Leetcode:202. 快乐数
+ 题目描述
+编写一个算法来判断一个数 n 是不是快乐数。
 
-「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 
+「快乐数」定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终
                         
                     </div>
                     <div class="publish-info">
@@ -823,7 +842,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

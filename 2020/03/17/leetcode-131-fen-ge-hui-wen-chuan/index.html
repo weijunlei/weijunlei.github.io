@@ -5,11 +5,15 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 131: 分割回文串, 小风雷">
-    <meta name="description" content="Leetcode 131: 分割回文串题目描述给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。
-示例输入: &amp;quot;aab&amp;quot;
+    <meta name="description" content=" Leetcode 131: 分割回文串
+ 题目描述
+给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。
+返回 s 所有可能的分割方案。
+ 示例
+输入: &amp;quot;aab&amp;quot;
 输出:
 [
-    [&amp;quot;aa&amp;quot;,">
+    [&amp;quot;aa">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -354,14 +358,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    204
+                    588
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 				
@@ -372,95 +376,111 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-131-分割回文串"><a href="#Leetcode-131-分割回文串" class="headerlink" title="Leetcode 131: 分割回文串"></a>Leetcode 131: 分割回文串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。<br>返回 s 所有可能的分割方案。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><pre><code>输入: &quot;aab&quot;
+                <h1 id="leetcode-131-分割回文串"><a class="markdownIt-Anchor" href="#leetcode-131-分割回文串"></a> Leetcode 131: 分割回文串</h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。<br />
+返回 s 所有可能的分割方案。</p>
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h3>
+<pre><code>输入: &quot;aab&quot;
 输出:
 [
     [&quot;aa&quot;,&quot;b&quot;],
     [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]
 ]
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：-回溯-判断"><a href="#思路1：-回溯-判断" class="headerlink" title="思路1： 回溯+判断"></a>思路1： 回溯+判断</h3><p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p>
-<h3 id="思路1：代码"><a href="#思路1：代码" class="headerlink" title="思路1：代码"></a>思路1：代码</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> result = new LinkedList<>();
-        if (s.length() == 0) {
-            return result;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1-回溯判断"><a class="markdownIt-Anchor" href="#思路1-回溯判断"></a> 思路1： 回溯+判断</h3>
+<p>即利用回溯思路不断增加是回文前缀字符串组的后续可能回文串</p>
+<h3 id="思路1代码"><a class="markdownIt-Anchor" href="#思路1代码"></a> 思路1：代码</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">partition</span><span class="hljs-params">(String s)</span> {
+        List&lt;List&lt;String&gt;&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        <span class="hljs-keyword">if</span> (s.length() == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">return</span> result;
         }
-        List<String> temp = new LinkedList<>();
-        partitionHelper(result, s, 0, temp);
-        return result;
+        List&lt;String&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        partitionHelper(result, s, <span class="hljs-number">0</span>, temp);
+        <span class="hljs-keyword">return</span> result;
     }
     
-    private boolean canReverse(String s, int i, int j) {
-        if (i >= j) {
-            return true;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canReverse</span><span class="hljs-params">(String s, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> {
+        <span class="hljs-keyword">if</span> (i &gt;= j) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
         }
-        if (s.charAt(i++) == s.charAt(j--)) {
-            return canReverse(s, i, j);
-        } else {
-            return false;
+        <span class="hljs-keyword">if</span> (s.charAt(i++) == s.charAt(j--)) {
+            <span class="hljs-keyword">return</span> canReverse(s, i, j);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
     
-    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp) {
-        int size = s.length();
-        if (size <= startIndex) {
-            res.add(new LinkedList<String>(temp));
-            return;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">partitionHelper</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; res, String s, <span class="hljs-type">int</span> startIndex, List&lt;String&gt; temp)</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> s.length();
+        <span class="hljs-keyword">if</span> (size &lt;= startIndex) {
+            res.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;String&gt;(temp));
+            <span class="hljs-keyword">return</span>;
         }
-        for(int i = startIndex; i < size; i++) {
-            if (canReverse(s, startIndex, i)) {
-                temp.add(s.substring(startIndex, i + 1));
-                partitionHelper(res, s, i + 1, temp);
-                temp.remove(temp.size() - 1);
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> startIndex; i &lt; size; i++) {
+            <span class="hljs-keyword">if</span> (canReverse(s, startIndex, i)) {
+                temp.add(s.substring(startIndex, i + <span class="hljs-number">1</span>));
+                partitionHelper(res, s, i + <span class="hljs-number">1</span>, temp);
+                temp.remove(temp.size() - <span class="hljs-number">1</span>);
             }
         }
     }
 }
 </code></pre>
-<h3 id="思路2：回溯-动态规划优化"><a href="#思路2：回溯-动态规划优化" class="headerlink" title="思路2：回溯+动态规划优化"></a>思路2：回溯+动态规划优化</h3><p>空间换时间，将判断是否是回文看成是一个动态规划，直接使用$n^2$算法求取，之后直接$1$调取</p>
-<h3 id="思路2-代码"><a href="#思路2-代码" class="headerlink" title="思路2: 代码"></a>思路2: 代码</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new LinkedList<List<String>>();
-        if (s.length() == 0) {
-            return res;
+<h3 id="思路2回溯动态规划优化"><a class="markdownIt-Anchor" href="#思路2回溯动态规划优化"></a> 思路2：回溯+动态规划优化</h3>
+<p>空间换时间，将判断是否是回文看成是一个动态规划，直接使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>算法求取，之后直接<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>调取</p>
+<h3 id="思路2-代码"><a class="markdownIt-Anchor" href="#思路2-代码"></a> 思路2: 代码</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">partition</span><span class="hljs-params">(String s)</span> {
+        List&lt;List&lt;String&gt;&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;List&lt;String&gt;&gt;();
+        <span class="hljs-keyword">if</span> (s.length() == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">return</span> res;
         }
-        int size = s.length();
-        boolean[][] dps = new boolean[size][size];
-        for(int right = 0; right < size; right++) {
-            for(int left = 0; left <= right; left++) {
-                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dps[left + 1][right - 1])) {
-                    dps[left][right] = true;
+        <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> s.length();
+        <span class="hljs-type">boolean</span>[][] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[size][size];
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; right &lt; size; right++) {
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; left &lt;= right; left++) {
+                <span class="hljs-keyword">if</span> (s.charAt(left) == s.charAt(right) &amp;&amp; (right - left &lt;= <span class="hljs-number">2</span> || dps[left + <span class="hljs-number">1</span>][right - <span class="hljs-number">1</span>])) {
+                    dps[left][right] = <span class="hljs-literal">true</span>;
                 }
             }
         }
 
-        List<String> temp = new LinkedList<>();
-        partitionHelper(res, s, 0, temp, dps);
-        return res;
+        List&lt;String&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        partitionHelper(res, s, <span class="hljs-number">0</span>, temp, dps);
+        <span class="hljs-keyword">return</span> res;
     }
 
-    private void partitionHelper(List<List<String>> res, String s, int startIndex, List<String> temp, boolean[][] dps) {
-        int size = s.length();
-        if (startIndex >= size) {
-            res.add(new LinkedList<>(temp));
-            return;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">partitionHelper</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; res, String s, <span class="hljs-type">int</span> startIndex, List&lt;String&gt; temp, <span class="hljs-type">boolean</span>[][] dps)</span> {
+        <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> s.length();
+        <span class="hljs-keyword">if</span> (startIndex &gt;= size) {
+            res.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;(temp));
+            <span class="hljs-keyword">return</span>;
         }
-        for(int i = startIndex; i < size; i++) {
-            if (dps[startIndex][i]) {
-                temp.add(s.substring(startIndex, i + 1));
-                partitionHelper(res, s, i + 1, temp, dps);
-                temp.remove(temp.size() - 1);
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> startIndex; i &lt; size; i++) {
+            <span class="hljs-keyword">if</span> (dps[startIndex][i]) {
+                temp.add(s.substring(startIndex, i + <span class="hljs-number">1</span>));
+                partitionHelper(res, s, i + <span class="hljs-number">1</span>, temp, dps);
+                temp.remove(temp.size() - <span class="hljs-number">1</span>);
             }
         }
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>$n*2^n?$</p>
-<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>$n*2^n?$</p>
-<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>$2^n + n^2$</p>
-<h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>$n * 2^n + n^2$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
+<h4 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>∗</mo><msup><mn>2</mn><mi>n</mi></msup><mo stretchy="false">?</mo></mrow><annotation encoding="application/x-tex">n*2^n?</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mclose">?</span></span></span></span></p>
+<h4 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>∗</mo><msup><mn>2</mn><mi>n</mi></msup><mo stretchy="false">?</mo></mrow><annotation encoding="application/x-tex">n*2^n?</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mclose">?</span></span></span></span></p>
+<h3 id="思路2"><a class="markdownIt-Anchor" href="#思路2"></a> 思路2</h3>
+<h4 id="时间复杂度-2"><a class="markdownIt-Anchor" href="#时间复杂度-2"></a> 时间复杂度</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2^n + n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<h4 id="空间复杂度-2"><a class="markdownIt-Anchor" href="#空间复杂度-2"></a> 空间复杂度</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>∗</mo><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n * 2^n + n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
 
             </div>
             <hr/>
@@ -624,9 +644,12 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 139: 单词切分题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
-说明：拆分时可以重复使用字典中的单词。
-你可以假设字典中没有重
+                             Leetcode 139: 单词切分
+ 题目描述
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
+ 说明：
+拆分时可以重复使用字典中的单词。
+你可以假设
                         
                     </div>
                     <div class="publish-info">
@@ -695,9 +718,13 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 25:验证回文串题目描述给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+                             Leetcode 25:验证回文串
+ 题目描述
+给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
 说明：本题中，我们将空字符串定义为有效的回文串。
-示例示例 1:输入: &quot;A man, a plan, a
+ 示例
+ 示例 1:
+输入: &quot;A man, a
                         
                     </div>
                     <div class="publish-info">
@@ -918,7 +945,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

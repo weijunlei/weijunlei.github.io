@@ -5,9 +5,12 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 140: 单词切分II, 小风雷">
-    <meta name="description" content="Leetcode 140: 单词切分II题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+    <meta name="description" content=" Leetcode 140: 单词切分II
+ 题目描述
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
 
-说明：分隔时可以重复使用字">
+ 说明：
+分隔时可">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -344,14 +347,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    732
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 				
@@ -362,12 +365,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-140-单词切分II"><a href="#Leetcode-140-单词切分II" class="headerlink" title="Leetcode 140: 单词切分II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break-ii/">Leetcode 140: 单词切分II</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><pre><code>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
+                <h1 id="leetcode-140-单词切分ii"><a class="markdownIt-Anchor" href="#leetcode-140-单词切分ii"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break-ii/">Leetcode 140: 单词切分II</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<pre><code>给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，在字符串中增加空格来构建一个句子，使得句子中所有的单词都在词典中。返回所有这些可能的句子。
 </code></pre>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><pre><code>分隔时可以重复使用字典中的单词。
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明：</h3>
+<pre><code>分隔时可以重复使用字典中的单词。
 你可以假设字典中没有重复的单词。
 </code></pre>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><pre><code>输入:
+<h3 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1：</h3>
+<pre><code>输入:
 s = &quot;catsanddog&quot;
 wordDict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;]
 输出:
@@ -376,7 +383,8 @@ wordDict = [&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;
 &quot;cat sand dog&quot;
 ]
 </code></pre>
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><pre><code>输入:
+<h3 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2：</h3>
+<pre><code>输入:
 s = &quot;pineapplepenapple&quot;
 wordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine&quot;, &quot;pineapple&quot;]
 输出:
@@ -387,150 +395,166 @@ wordDict = [&quot;apple&quot;, &quot;pen&quot;, &quot;applepen&quot;, &quot;pine
 ]
 解释: 注意你可以重复使用字典中的单词。
 </code></pre>
-<h3 id="示例-3："><a href="#示例-3：" class="headerlink" title="示例 3："></a>示例 3：</h3><pre><code>输入:
+<h3 id="示例-3"><a class="markdownIt-Anchor" href="#示例-3"></a> 示例 3：</h3>
+<pre><code>输入:
 s = &quot;catsandog&quot;
 wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;, &quot;cat&quot;]
 输出:
 []
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：DP-回溯"><a href="#思路1：DP-回溯" class="headerlink" title="思路1：DP+回溯"></a>思路1：DP+回溯</h3><p>即利用中等难度的dp单词切分获取到可能的子序列，根据是否可以整体切分以及切分标记回溯这些字序列获取最终的结果</p>
-<h3 id="思路2-记忆回溯"><a href="#思路2-记忆回溯" class="headerlink" title="思路2: 记忆回溯"></a>思路2: 记忆回溯</h3><p>将每个位置i记为以他为起点，到最后结果的可能切分，最后递归求解。将每个位置记为(i, list<str>),减少无用的后缀计算，以空间换时间</p>
-<h3 id="思路3：DP-直接记录"><a href="#思路3：DP-直接记录" class="headerlink" title="思路3：DP+直接记录"></a>思路3：DP+直接记录</h3><p>将每个位置直接记录可能的前缀串，最后得到记录的全单词切分前缀串。但是在leetcode上会出现内存分配过大而超时的现象，故意需要增加判断是否可以完全完成单词切分</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代码1-DP-回溯"><a href="#代码1-DP-回溯" class="headerlink" title="代码1: DP+回溯"></a>代码1: DP+回溯</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public List<String> wordBreak(String s, List<String> wordDict) {
-        List<String> result = new LinkedList<>();
-        if (s == null || s.length() == 0 || wordDict.size() == 0){
-            return result;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1dp回溯"><a class="markdownIt-Anchor" href="#思路1dp回溯"></a> 思路1：DP+回溯</h3>
+<p>即利用中等难度的dp单词切分获取到可能的子序列，根据是否可以整体切分以及切分标记回溯这些字序列获取最终的结果</p>
+<h3 id="思路2-记忆回溯"><a class="markdownIt-Anchor" href="#思路2-记忆回溯"></a> 思路2: 记忆回溯</h3>
+<p>将每个位置i记为以他为起点，到最后结果的可能切分，最后递归求解。将每个位置记为(i, list<str>),减少无用的后缀计算，以空间换时间</p>
+<h3 id="思路3dp直接记录"><a class="markdownIt-Anchor" href="#思路3dp直接记录"></a> 思路3：DP+直接记录</h3>
+<p>将每个位置直接记录可能的前缀串，最后得到记录的全单词切分前缀串。但是在leetcode上会出现内存分配过大而超时的现象，故意需要增加判断是否可以完全完成单词切分</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="代码1-dp回溯"><a class="markdownIt-Anchor" href="#代码1-dp回溯"></a> 代码1: DP+回溯</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">wordBreak</span><span class="hljs-params">(String s, List&lt;String&gt; wordDict)</span> {
+        List&lt;String&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span> || wordDict.size() == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> result;
         }
-        Set<String> hashSet = new HashSet<>(wordDict);
-        boolean[] dps = new boolean[s.length() + 1];
-        dps[0] = true;
-        for(int end=1; end < s.length() + 1; end++){
-            for(int start=0; start < end; start++) {
-                if(dps[start] && hashSet.contains(s.substring(start, end))) {
-                    dps[end] = true;
-                    break;
+        Set&lt;String&gt; hashSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;(wordDict);
+        <span class="hljs-type">boolean</span>[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[s.length() + <span class="hljs-number">1</span>];
+        dps[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> end=<span class="hljs-number">1</span>; end &lt; s.length() + <span class="hljs-number">1</span>; end++){
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> start=<span class="hljs-number">0</span>; start &lt; end; start++) {
+                <span class="hljs-keyword">if</span>(dps[start] &amp;&amp; hashSet.contains(s.substring(start, end))) {
+                    dps[end] = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
                 }
             }
         }
-        if (!dps[s.length()]) {
-            return result;
+        <span class="hljs-keyword">if</span> (!dps[s.length()]) {
+            <span class="hljs-keyword">return</span> result;
         }
 
-        List<String> temp = new LinkedList<>();
+        List&lt;String&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
         wordBreakHelper(s, hashSet, s.length(), dps, temp, result);
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
 
-    private void wordBreakHelper(String s, Set<String> hashSet, int endIndex, boolean[] dps, List<String> temp, List<String> result) {
-        if (endIndex == 0) {
-            StringBuilder sb = new StringBuilder();
-            for(int i = temp.size() - 1; i >= 0; i--){
-                if (i != temp.size() - 1) {
-                    sb.append(" ");
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">wordBreakHelper</span><span class="hljs-params">(String s, Set&lt;String&gt; hashSet, <span class="hljs-type">int</span> endIndex, <span class="hljs-type">boolean</span>[] dps, List&lt;String&gt; temp, List&lt;String&gt; result)</span> {
+        <span class="hljs-keyword">if</span> (endIndex == <span class="hljs-number">0</span>) {
+            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> temp.size() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+                <span class="hljs-keyword">if</span> (i != temp.size() - <span class="hljs-number">1</span>) {
+                    sb.append(<span class="hljs-string">&quot; &quot;</span>);
                 }
                 sb.append(temp.get(i));
             }
             result.add(sb.toString());
         }
-        for(int i=endIndex - 1; i >= 0; i--) {
-            if (dps[i] && hashSet.contains(s.substring(i, endIndex))){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=endIndex - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+            <span class="hljs-keyword">if</span> (dps[i] &amp;&amp; hashSet.contains(s.substring(i, endIndex))){
                 temp.add(s.substring(i, endIndex));
                 wordBreakHelper(s, hashSet, i, dps, temp, result);
-                temp.remove(temp.size() - 1);
+                temp.remove(temp.size() - <span class="hljs-number">1</span>);
             }
         }
     }
 }
 </code></pre>
-<h3 id="代码2-记忆回溯"><a href="#代码2-记忆回溯" class="headerlink" title="代码2: 记忆回溯"></a>代码2: 记忆回溯</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution2 {
-    Map<Integer, List<String>> hashMap = new HashMap<>();
-    public List<String> wordBreak(String s, List<String> wordDict){
-        List<String> result = new LinkedList<>();
-        if (s == null || s.length() == 0 || wordDict.size() == 0){
-            return result;
+<h3 id="代码2-记忆回溯"><a class="markdownIt-Anchor" href="#代码2-记忆回溯"></a> 代码2: 记忆回溯</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution2</span> {
+    Map&lt;Integer, List&lt;String&gt;&gt; hashMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">wordBreak</span><span class="hljs-params">(String s, List&lt;String&gt; wordDict)</span>{
+        List&lt;String&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span> || wordDict.size() == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">return</span> result;
         }
-        return wordBreakHelper(s, new HashSet<>(wordDict), 0);
+        <span class="hljs-keyword">return</span> wordBreakHelper(s, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;(wordDict), <span class="hljs-number">0</span>);
     }
 
-    private List<String> wordBreakHelper(String s, Set<String> hashSet, int startIndex) {
-        if (hashMap.containsKey(startIndex)) {
-            return hashMap.get(startIndex);
+    <span class="hljs-keyword">private</span> List&lt;String&gt; <span class="hljs-title function_">wordBreakHelper</span><span class="hljs-params">(String s, Set&lt;String&gt; hashSet, <span class="hljs-type">int</span> startIndex)</span> {
+        <span class="hljs-keyword">if</span> (hashMap.containsKey(startIndex)) {
+            <span class="hljs-keyword">return</span> hashMap.get(startIndex);
         }
-        List<String> temp = new LinkedList<>();
-        // 标记是否可以完全切分
-        if (startIndex == s.length()) {
-            temp.add("");
+        List&lt;String&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        <span class="hljs-comment">// 标记是否可以完全切分</span>
+        <span class="hljs-keyword">if</span> (startIndex == s.length()) {
+            temp.add(<span class="hljs-string">&quot;&quot;</span>);
         }
-        for(int end=startIndex+1; end <= s.length(); end++){
-            if(hashSet.contains(s.substring(startIndex, end))){
-                List<String> list = wordBreakHelper(s, hashSet, end);
-                for(var l: list){
-                    if (l.equals("")){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> end=startIndex+<span class="hljs-number">1</span>; end &lt;= s.length(); end++){
+            <span class="hljs-keyword">if</span>(hashSet.contains(s.substring(startIndex, end))){
+                List&lt;String&gt; list = wordBreakHelper(s, hashSet, end);
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> l: list){
+                    <span class="hljs-keyword">if</span> (l.equals(<span class="hljs-string">&quot;&quot;</span>)){
                         temp.add(s.substring(startIndex, end));
-                    } else{
-                        temp.add(s.substring(startIndex, end) + " " + l);
+                    } <span class="hljs-keyword">else</span>{
+                        temp.add(s.substring(startIndex, end) + <span class="hljs-string">&quot; &quot;</span> + l);
                     }
                 }
             }
         }
         hashMap.put(startIndex, temp);
-        return temp;
+        <span class="hljs-keyword">return</span> temp;
     }
 }
 </code></pre>
-<h3 id="代码3-DP-直接记录"><a href="#代码3-DP-直接记录" class="headerlink" title="代码3: DP+直接记录"></a>代码3: DP+直接记录</h3><pre class=" language-language-Java"><code class="language-language-Java">public class Solution3 {
-    public List<String> wordBreak(String s, List<String> wordDict) {
-        if (s == null || s.length() == 0 || wordDict.size() == 0 || !canWordBreak(s, wordDict)){
-            return new LinkedList<String>();
+<h3 id="代码3-dp直接记录"><a class="markdownIt-Anchor" href="#代码3-dp直接记录"></a> 代码3: DP+直接记录</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution3</span> {
+    <span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title function_">wordBreak</span><span class="hljs-params">(String s, List&lt;String&gt; wordDict)</span> {
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span> || wordDict.size() == <span class="hljs-number">0</span> || !canWordBreak(s, wordDict)){
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;String&gt;();
         }
-        Set<String> hashSet = new HashSet<>(wordDict);
-        List<String>[] dps = new LinkedList[s.length() + 1];
-        List<String> zero = new LinkedList<>();
-        zero.add("");
-        dps[0] = zero;
-        for(int end=1; end <= s.length(); end++){
-            List<String> temp = new LinkedList<>();
-            for(int start=0; start < end; start++){
-                if (dps[start].size() > 0 && hashSet.contains(s.substring(start, end))){
-                    for(var l: dps[start]){
-                        temp.add(l + (l.equals("") ? "" : " ") + s.substring(start, end));
+        Set&lt;String&gt; hashSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;(wordDict);
+        List&lt;String&gt;[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>[s.length() + <span class="hljs-number">1</span>];
+        List&lt;String&gt; zero = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+        zero.add(<span class="hljs-string">&quot;&quot;</span>);
+        dps[<span class="hljs-number">0</span>] = zero;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> end=<span class="hljs-number">1</span>; end &lt;= s.length(); end++){
+            List&lt;String&gt; temp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> start=<span class="hljs-number">0</span>; start &lt; end; start++){
+                <span class="hljs-keyword">if</span> (dps[start].size() &gt; <span class="hljs-number">0</span> &amp;&amp; hashSet.contains(s.substring(start, end))){
+                    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> l: dps[start]){
+                        temp.add(l + (l.equals(<span class="hljs-string">&quot;&quot;</span>) ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot; &quot;</span>) + s.substring(start, end));
                     }
                 }
             }
             dps[end] = temp;
         }
-        return dps[s.length()];
+        <span class="hljs-keyword">return</span> dps[s.length()];
     }
 
-    public boolean canWordBreak(String s, List<String> wordDict) {
-        if (s == null || s.length() == 0) {
-            return true;
-        } else if(wordDict.size() == 0) {
-            return false;
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">canWordBreak</span><span class="hljs-params">(String s, List&lt;String&gt; wordDict)</span> {
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(wordDict.size() == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
-        Set<String> hashSet = new HashSet<>(wordDict);
-        boolean[] dps = new boolean[s.length() + 1];
-        dps[0] = true;
+        Set&lt;String&gt; hashSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;(wordDict);
+        <span class="hljs-type">boolean</span>[] dps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">boolean</span>[s.length() + <span class="hljs-number">1</span>];
+        dps[<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;
 
-        for(int end = 1; end < s.length() + 1; end++) {
-            for(int start=0; start < end; start++) {
-                if (dps[start] && hashSet.contains(s.substring(start, end))) {
-                    dps[end] = true;
-                    break;
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; end &lt; s.length() + <span class="hljs-number">1</span>; end++) {
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> start=<span class="hljs-number">0</span>; start &lt; end; start++) {
+                <span class="hljs-keyword">if</span> (dps[start] &amp;&amp; hashSet.contains(s.substring(start, end))) {
+                    dps[end] = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
                 }
             }
         }
-        return dps[s.length()];
+        <span class="hljs-keyword">return</span> dps[s.length()];
     }
 }
 </code></pre>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="思路1时间复杂度"><a href="#思路1时间复杂度" class="headerlink" title="思路1时间复杂度"></a>思路1时间复杂度</h3><p>相当于减枝之后$n^n$？</p>
-<h3 id="思路1空间复杂度"><a href="#思路1空间复杂度" class="headerlink" title="思路1空间复杂度"></a>思路1空间复杂度</h3><p>$n$</p>
-<h3 id="思路2时间复杂度"><a href="#思路2时间复杂度" class="headerlink" title="思路2时间复杂度"></a>思路2时间复杂度</h3><p>$n^3$</p>
-<h3 id="思路2空间复杂度"><a href="#思路2空间复杂度" class="headerlink" title="思路2空间复杂度"></a>思路2空间复杂度</h3><p>$n^2$，相当于每次都清除</p>
-<h3 id="思路3时间复杂度"><a href="#思路3时间复杂度" class="headerlink" title="思路3时间复杂度"></a>思路3时间复杂度</h3><p>$n^3$</p>
-<h3 id="思路3空间复杂度"><a href="#思路3空间复杂度" class="headerlink" title="思路3空间复杂度"></a>思路3空间复杂度</h3><p>$n^3$</p>
+<h2 id="复杂度分析"><a class="markdownIt-Anchor" href="#复杂度分析"></a> 复杂度分析</h2>
+<h3 id="思路1时间复杂度"><a class="markdownIt-Anchor" href="#思路1时间复杂度"></a> 思路1时间复杂度</h3>
+<p>相当于减枝之后<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">n^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span>？</p>
+<h3 id="思路1空间复杂度"><a class="markdownIt-Anchor" href="#思路1空间复杂度"></a> 思路1空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></p>
+<h3 id="思路2时间复杂度"><a class="markdownIt-Anchor" href="#思路2时间复杂度"></a> 思路2时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="思路2空间复杂度"><a class="markdownIt-Anchor" href="#思路2空间复杂度"></a> 思路2空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>，相当于每次都清除</p>
+<h3 id="思路3时间复杂度"><a class="markdownIt-Anchor" href="#思路3时间复杂度"></a> 思路3时间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="思路3空间复杂度"><a class="markdownIt-Anchor" href="#思路3空间复杂度"></a> 思路3空间复杂度</h3>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">n^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></p>
 
             </div>
             <hr/>
@@ -686,11 +710,14 @@ wordDict = [&quot;cats&quot;, &quot;dog&quot;, &quot;sand&quot;, &quot;and&quot;
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 208:实现Trie(前缀树)题目描述实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+                             Leetcode 208:实现Trie(前缀树)
+ 题目描述
+实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
-示例:Trie trie = new Trie();
+ 示例:
+Trie trie = new Trie();
 
-trie.ins
+tr
                         
                     </div>
                     <div class="publish-info">
@@ -751,9 +778,12 @@ trie.ins
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 139: 单词切分题目描述给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
-说明：拆分时可以重复使用字典中的单词。
-你可以假设字典中没有重
+                             Leetcode 139: 单词切分
+ 题目描述
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
+ 说明：
+拆分时可以重复使用字典中的单词。
+你可以假设
                         
                     </div>
                     <div class="publish-info">
@@ -986,7 +1016,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

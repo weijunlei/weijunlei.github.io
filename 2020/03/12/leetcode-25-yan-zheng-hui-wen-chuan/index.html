@@ -5,9 +5,13 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="Leetcode 25:验证回文串, 小风雷">
-    <meta name="description" content="Leetcode 25:验证回文串题目描述给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+    <meta name="description" content=" Leetcode 25:验证回文串
+ 题目描述
+给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
 说明：本题中，我们将空字符串定义为有效的回文串。
-示例示例 1:输入: &amp;quot;A man, a plan, a">
+ 示例
+ 示例 1:
+输入: &amp;quot;A man, a">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -344,7 +348,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    245
+                    319
                 </div>
                 
 
@@ -362,58 +366,71 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Leetcode-25-验证回文串"><a href="#Leetcode-25-验证回文串" class="headerlink" title="Leetcode 25:验证回文串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome/">Leetcode 25:验证回文串</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
+                <h1 id="leetcode-25验证回文串"><a class="markdownIt-Anchor" href="#leetcode-25验证回文串"></a> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome/">Leetcode 25:验证回文串</a></h1>
+<h2 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h2>
+<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
 <p>说明：本题中，我们将空字符串定义为有效的回文串。</p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h4><pre><code>输入: &quot;A man, a plan, a canal: Panama&quot;
+<h3 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h3>
+<h4 id="示例-1"><a class="markdownIt-Anchor" href="#示例-1"></a> 示例 1:</h4>
+<pre><code>输入: &quot;A man, a plan, a canal: Panama&quot;
 输出: true
 </code></pre>
-<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h4><pre><code>输入: &quot;race a car&quot;
+<h4 id="示例-2"><a class="markdownIt-Anchor" href="#示例-2"></a> 示例 2:</h4>
+<pre><code>输入: &quot;race a car&quot;
 输出: false
 </code></pre>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="思路1：双指针"><a href="#思路1：双指针" class="headerlink" title="思路1：双指针"></a>思路1：双指针</h3><p>使用头尾指针进行匹配，如头尾指针指向的字符不同则判为错,注意边界处理即可</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><pre class=" language-language-Java"><code class="language-language-Java">class Solution {
-    public boolean isPalindrome(String s) {
-        if (s == null || s.length() == 0) {
-            return true;
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<h3 id="思路1双指针"><a class="markdownIt-Anchor" href="#思路1双指针"></a> 思路1：双指针</h3>
+<p>使用头尾指针进行匹配，如头尾指针指向的字符不同则判为错,注意边界处理即可</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<h3 id="思路1"><a class="markdownIt-Anchor" href="#思路1"></a> 思路1</h3>
+<pre class="highlight"><code class="Java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isPalindrome</span><span class="hljs-params">(String s)</span> {
+        <span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span> || s.length() == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
         }
         s = s.toLowerCase();
 
-        int low_index = 0;
-        int high_index= s.length() - 1;
-        boolean result = true;
-        while (true) {
-            while (high_index > low_index  && !isAlpha(s.charAt(low_index))) {
+        <span class="hljs-type">int</span> <span class="hljs-variable">low_index</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> high_index= s.length() - <span class="hljs-number">1</span>;
+        <span class="hljs-type">boolean</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+            <span class="hljs-keyword">while</span> (high_index &gt; low_index  &amp;&amp; !isAlpha(s.charAt(low_index))) {
                 low_index ++;
             }
-            while (high_index > low_index && !isAlpha(s.charAt(high_index))) {
+            <span class="hljs-keyword">while</span> (high_index &gt; low_index &amp;&amp; !isAlpha(s.charAt(high_index))) {
                 high_index --;
             }
-            if (high_index <= low_index) {
-                break;
+            <span class="hljs-keyword">if</span> (high_index &lt;= low_index) {
+                <span class="hljs-keyword">break</span>;
             }
-            else if (high_index > low_index && isAlpha(s.charAt(low_index)) && isAlpha(s.charAt(high_index)) && s.charAt(high_index) != s.charAt(low_index)) {
-                result = false;
-                break;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (high_index &gt; low_index &amp;&amp; isAlpha(s.charAt(low_index)) &amp;&amp; isAlpha(s.charAt(high_index)) &amp;&amp; s.charAt(high_index) != s.charAt(low_index)) {
+                result = <span class="hljs-literal">false</span>;
+                <span class="hljs-keyword">break</span>;
             }
-            else{
+            <span class="hljs-keyword">else</span>{
                 high_index --;
                 low_index++;
             }
         }
-        return result;
+        <span class="hljs-keyword">return</span> result;
     }
 
-    private boolean isAlpha(char ch) {
-        if ((ch >= '0' && ch <= '9') || (ch  >= 'a' && ch <= 'z')) {
-            return true;
-        } else{
-            return false;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isAlpha</span><span class="hljs-params">(<span class="hljs-type">char</span> ch)</span> {
+        <span class="hljs-keyword">if</span> ((ch &gt;= <span class="hljs-string">&#x27;0&#x27;</span> &amp;&amp; ch &lt;= <span class="hljs-string">&#x27;9&#x27;</span>) || (ch  &gt;= <span class="hljs-string">&#x27;a&#x27;</span> &amp;&amp; ch &lt;= <span class="hljs-string">&#x27;z&#x27;</span>)) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
         }
     }
 }
 </code></pre>
-<h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><h3 id="思路1-1"><a href="#思路1-1" class="headerlink" title="思路1"></a>思路1</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>n</p>
-<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>1</p>
+<h2 id="算法复杂度分析"><a class="markdownIt-Anchor" href="#算法复杂度分析"></a> 算法复杂度分析</h2>
+<h3 id="思路1-2"><a class="markdownIt-Anchor" href="#思路1-2"></a> 思路1</h3>
+<h4 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h4>
+<p>n</p>
+<h4 id="空间复杂度"><a class="markdownIt-Anchor" href="#空间复杂度"></a> 空间复杂度</h4>
+<p>1</p>
 
             </div>
             <hr/>
@@ -569,11 +586,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 131: 分割回文串题目描述给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。返回 s 所有可能的分割方案。
-示例输入: &quot;aab&quot;
+                             Leetcode 131: 分割回文串
+ 题目描述
+给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。
+返回 s 所有可能的分割方案。
+ 示例
+输入: &quot;aab&quot;
 输出:
 [
-    [&quot;aa&quot;,
+    [&quot;aa
                         
                     </div>
                     <div class="publish-info">
@@ -638,9 +659,11 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Leetcode 887:鸡蛋掉落题目描述你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+                             Leetcode 887:鸡蛋掉落
+ 题目描述
+你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
 每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
-你知道存在楼层 F ，满足 0 &lt;&#x3D; F
+你知道存在楼层 F ，满足 0 &lt;= F 
                         
                     </div>
                     <div class="publish-info">
@@ -861,7 +884,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">47.3k</span>&nbsp;字
+                    class="white-color">54.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
