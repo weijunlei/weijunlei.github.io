@@ -6,7 +6,7 @@
   <link href="https://weijunlei.github.io/atom.xml" rel="self"/>
   
   <link href="https://weijunlei.github.io/"/>
-  <updated>2026-04-05T16:39:20.730Z</updated>
+  <updated>2026-04-05T17:28:30.758Z</updated>
   <id>https://weijunlei.github.io/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现</title>
+    <link href="https://weijunlei.github.io/2026/04/06/claudecode-react-yu-plan-and-execute-ji-zhi/"/>
+    <id>https://weijunlei.github.io/2026/04/06/claudecode-react-yu-plan-and-execute-ji-zhi/</id>
+    <published>2026-04-06T08:20:00.000Z</published>
+    <updated>2026-04-05T17:28:30.758Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ClaudeCode-的执行机制：ReAct-与-Plan-and-Execute-在-TypeScript-源码中的实现&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://weijunlei.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="ClaudeCode" scheme="https://weijunlei.github.io/tags/ClaudeCode/"/>
+    
+    <category term="Agent" scheme="https://weijunlei.github.io/tags/Agent/"/>
+    
+    <category term="TypeScript" scheme="https://weijunlei.github.io/tags/TypeScript/"/>
+    
+    <category term="ReAct" scheme="https://weijunlei.github.io/tags/ReAct/"/>
+    
+    <category term="Plan-and-Execute" scheme="https://weijunlei.github.io/tags/Plan-and-Execute/"/>
+    
+    <category term="工程实践" scheme="https://weijunlei.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解</title>
@@ -43,9 +78,9 @@
     
     <category term="TypeScript" scheme="https://weijunlei.github.io/tags/TypeScript/"/>
     
-    <category term="Memory" scheme="https://weijunlei.github.io/tags/Memory/"/>
-    
     <category term="工程实践" scheme="https://weijunlei.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+    <category term="Memory" scheme="https://weijunlei.github.io/tags/Memory/"/>
     
   </entry>
   
@@ -568,35 +603,6 @@
     <category term="Easy" scheme="https://weijunlei.github.io/tags/Easy/"/>
     
     <category term="数运算" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:149. 直线上最多的点数</title>
-    <link href="https://weijunlei.github.io/2020/05/03/leetcode-149-zhi-xian-shang-zui-duo-de-dian-shu/"/>
-    <id>https://weijunlei.github.io/2020/05/03/leetcode-149-zhi-xian-shang-zui-duo-de-dian-shu/</id>
-    <published>2020-05-03T14:42:08.000Z</published>
-    <updated>2026-04-04T15:44:06.427Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Leetcode-149-直线上最多的点数&quot;&gt;&lt;a href=&quot;#Leetcode-149-直线上最多的点数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 149. 直线上最多的点数&quot;&gt;&lt;/a&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/categories/Leetcode/"/>
-    
-    
-    <category term="Leetcode" scheme="https://weijunlei.github.io/tags/Leetcode/"/>
-    
-    <category term="Hard" scheme="https://weijunlei.github.io/tags/Hard/"/>
-    
-    <category term="数据存储" scheme="https://weijunlei.github.io/tags/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
