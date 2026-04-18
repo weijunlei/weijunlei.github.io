@@ -346,14 +346,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    4.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    17 分
                 </div>
                 
 				
@@ -366,6 +366,7 @@
             <div id="articleContent">
                 <h1 id="代码-PRD阅读器的Agent小试牛刀"><a href="#代码-PRD阅读器的Agent小试牛刀" class="headerlink" title="代码-&gt;PRD阅读器的Agent小试牛刀"></a>代码-&gt;PRD阅读器的Agent小试牛刀</h1><p>这篇文章基于 <code>code-as-prd-agent</code> 项目，总结一条很实用的思路：把真实代码仓库挂到本地工作区，交给大模型在“可调用工具”的约束下去读代码、回答问题，从而把“代码事实”转化成可阅读、可追问、可复用的“PRD级解释”。</p>
 <p>它不是在替代研发或产品，而是在减少重复沟通成本，让“我先问 agent，再找人确认边界”成为新的协作默认流程。</p>
+<p>这里先交代一个我自己踩坑后的结论：我最开始并不是直接上 Claude Code SDK，而是先接了 MiniMax，再手工暴露 <code>bash</code> 和 <code>python</code> 工具，想自己拼一个“能读代码的 Agent”。这条路理论上可行，但在真实仓库问答里效果并不稳定。后来切到 Claude Code SDK 后，体验明显提升。原因不只是“模型更强”，更关键的是：Claude Code SDK 暴露出来的并不是一个普通模型 API，而是一套已经为代码任务打磨过的 agent runtime。</p>
 <hr>
 <h2 id="0-参考地址与实现效果"><a href="#0-参考地址与实现效果" class="headerlink" title="0. 参考地址与实现效果"></a>0. 参考地址与实现效果</h2><h3 id="0-1-项目参考地址"><a href="#0-1-项目参考地址" class="headerlink" title="0.1 项目参考地址"></a>0.1 项目参考地址</h3><ul>
 <li>GitHub 仓库：<a target="_blank" rel="noopener" href="https://github.com/weijunlei/code-as-prd-agent">https://github.com/weijunlei/code-as-prd-agent</a></li>
@@ -394,6 +395,60 @@
 <blockquote>
 <p>图3：续聊问答页。基于同一 <code>chat_id</code> 的历史上下文继续追问，实现文件级深入分析。</p>
 </blockquote>
+<h3 id="0-3-我一开始为什么没有直接用-Claude-Code-SDK"><a href="#0-3-我一开始为什么没有直接用-Claude-Code-SDK" class="headerlink" title="0.3 我一开始为什么没有直接用 Claude Code SDK"></a>0.3 我一开始为什么没有直接用 Claude Code SDK</h3><p>第一版其实走的是更“朴素”的路线：直接接 MiniMax，给模型两个主要工具：</p>
+<ul>
+<li><code>bash</code>：负责列目录、<code>rg</code> 搜索、看文件内容；</li>
+<li><code>python</code>：负责临时文本处理、结构化整理、代码片段提取。</li>
+</ul>
+<p>它并不是完全不能用，但一进入真实代码库问答，问题就暴露了：</p>
+<ol>
+<li><strong>工具是有了，但“先做什么、后做什么”几乎全靠 prompt 撑着。</strong></li>
+<li><strong>模型经常会大范围探索，读很多无关文件，回答看起来很长，但证据链不够聚焦。</strong></li>
+<li><strong>cwd 约束、只读权限、事件流、续聊、工具失败重试，这些工程胶水都得自己补。</strong></li>
+<li><strong>前端能看到的往往只是 token 流，而不是带语义的 <code>thinking/tool_use/tool_result</code> 过程。</strong></li>
+</ol>
+<p>我自己的感受是：<br><strong>“给模型工具”只解决了“它能不能动手”，并没有解决“它会不会像一个读代码很熟练的工程师那样动手”。</strong></p>
+<p>把这两条路放在一起看，差异会更直观：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>MiniMax + 自建 bash&#x2F;python 工具</th>
+<th>Claude Code SDK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能力边界</td>
+<td>理论上能列目录、搜代码、读文件</td>
+<td>同样能做这些事</td>
+</tr>
+<tr>
+<td>工具编排</td>
+<td>主要靠 prompt 和自己写循环</td>
+<td>runtime 已经内建多轮工具回路</td>
+</tr>
+<tr>
+<td>代码任务偏置</td>
+<td>需要自己慢慢调</td>
+<td>天然更偏“先定位、再读代码、再归纳”</td>
+</tr>
+<tr>
+<td>事件流</td>
+<td>多半只有文本&#x2F;token</td>
+<td>有 <code>thinking/tool_use/tool_result/result</code> 语义事件</td>
+</tr>
+<tr>
+<td>会话管理</td>
+<td>自己维护历史和续聊</td>
+<td>已有 <code>sessionId / resume / continueConversation</code></td>
+</tr>
+<tr>
+<td>工程工作量</td>
+<td>胶水层很多</td>
+<td>可以把精力更多放在产品约束上</td>
+</tr>
+</tbody></table>
+<p>所以本文后面想讲清楚的一个重点就是：<br><strong>为什么同样是“模型 + 工具”，直接接 Claude Code SDK 的效果通常会明显更好。</strong></p>
 <hr>
 <h2 id="1-先回答：什么是-Agent？"><a href="#1-先回答：什么是-Agent？" class="headerlink" title="1. 先回答：什么是 Agent？"></a>1. 先回答：什么是 Agent？</h2><h3 id="1-1-一个工程化定义"><a href="#1-1-一个工程化定义" class="headerlink" title="1.1 一个工程化定义"></a>1.1 一个工程化定义</h3><p>在工程语境里，<strong>Agent &#x3D; 普通应用 + 大模型 + 工具调用 + 执行循环</strong>。</p>
 <p>拆成四层看更清晰：</p>
@@ -545,7 +600,22 @@
 </ul>
 <p>所以工程上正确姿势是：<strong>把 Agent 当“高质量一线分析员”，不是“最终拍板人”。</strong></p>
 <hr>
-<h2 id="5-Claude-Code-SDK-在这里扮演什么角色？"><a href="#5-Claude-Code-SDK-在这里扮演什么角色？" class="headerlink" title="5. Claude Code SDK 在这里扮演什么角色？"></a>5. Claude Code SDK 在这里扮演什么角色？</h2><h3 id="5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”"><a href="#5-1-它不是“直接-HTTP-调-Anthropic-Messages-API”" class="headerlink" title="5.1 它不是“直接 HTTP 调 Anthropic Messages API”"></a>5.1 它不是“直接 HTTP 调 Anthropic Messages API”</h3><p>这个项目通过 <code>claude-agent-sdk</code> 调用 Claude Code 能力，核心调用形态是 <code>query(prompt, options)</code>。<br><code>options</code> 里会带：</p>
+<h2 id="5-为什么-Claude-Code-SDK-效果更好？"><a href="#5-为什么-Claude-Code-SDK-效果更好？" class="headerlink" title="5. 为什么 Claude Code SDK 效果更好？"></a>5. 为什么 Claude Code SDK 效果更好？</h2><h3 id="5-1-先说结论：提升不只是“换了一个模型”"><a href="#5-1-先说结论：提升不只是“换了一个模型”" class="headerlink" title="5.1 先说结论：提升不只是“换了一个模型”"></a>5.1 先说结论：提升不只是“换了一个模型”</h3><p>如果只从接口形态上看，<code>MiniMax + 自建 bash/python 工具</code> 和 <code>Claude Code SDK</code> 好像都在做同一件事：</p>
+<ol>
+<li>给模型一个问题；</li>
+<li>允许它调用工具；</li>
+<li>再把结果返回给前端。</li>
+</ol>
+<p>但实际效果差异很大。<br>核心原因是：前者更多是在<strong>自己搭一个 Agent</strong>，后者是在<strong>复用一个已经为代码任务验证过的 Agent runtime</strong>。</p>
+<p>换句话说，差异不只是 model endpoint，不只是“换成 Claude 所以更聪明”，而是下面几层一起换了：</p>
+<ul>
+<li>工具调用主循环；</li>
+<li>代码任务的默认行为偏置；</li>
+<li>会话和续聊机制；</li>
+<li>语义化事件流；</li>
+<li>权限约束与工程稳定性。</li>
+</ul>
+<h3 id="5-2-它不是“直接-HTTP-调-Anthropic-Messages-API”"><a href="#5-2-它不是“直接-HTTP-调-Anthropic-Messages-API”" class="headerlink" title="5.2 它不是“直接 HTTP 调 Anthropic Messages API”"></a>5.2 它不是“直接 HTTP 调 Anthropic Messages API”</h3><p>这个项目通过 <code>claude-agent-sdk</code> 调用 Claude Code 能力，核心调用形态是 <code>query(prompt, options)</code>。<br><code>options</code> 里会带：</p>
 <ul>
 <li><code>cwd</code></li>
 <li><code>maxTurns</code></li>
@@ -554,14 +624,55 @@
 <li><code>mcpServers</code>（可选）</li>
 </ul>
 <p>也就是说，它不是简单“传 prompt 等答案”，而是“启动一个带工具执行能力的模型回路”。</p>
-<h3 id="5-2-为什么能做出流式可观测"><a href="#5-2-为什么能做出流式可观测" class="headerlink" title="5.2 为什么能做出流式可观测"></a>5.2 为什么能做出流式可观测</h3><p>SDK 会持续返回消息事件，常见类型有：</p>
+<p>很多人容易低估这一点，觉得“我自己接一个兼容接口，再给模型加两个工具，不就差不多了吗”。<br>但工程上差得其实很远。因为真正难的不是“把工具函数注册出去”，而是让模型在真实代码任务里，稳定走出一条合理的执行链路。</p>
+<h3 id="5-3-为什么自建-bash-python-工具效果不如-Claude-Code-SDK"><a href="#5-3-为什么自建-bash-python-工具效果不如-Claude-Code-SDK" class="headerlink" title="5.3 为什么自建 bash&#x2F;python 工具效果不如 Claude Code SDK"></a>5.3 为什么自建 bash&#x2F;python 工具效果不如 Claude Code SDK</h3><p>我自己的第一版里，最直观的问题不是“模型完全不会用工具”，而是<strong>工具调用不够像一个熟练工程师的工作方式</strong>。</p>
+<p>典型表现有这些：</p>
+<ol>
+<li><p><strong>会用工具，但不会稳定地先定位入口再顺链路深挖。</strong><br>有时候它会先读很多无关文件，再回过头补关键入口，回答虽然长，但结构不紧。</p>
+</li>
+<li><p><strong>容易把 <code>python</code> 当成万能胶。</strong><br>一旦给了 <code>python</code>，模型很容易想“一把梭”处理大段文本，而不是老老实实先搜路径、看入口、逐步查证。</p>
+</li>
+<li><p><strong>Prompt 负担特别重。</strong><br>你得不断告诉它“先 <code>rg</code>、再看目录、再读关键文件、不要泛泛总结、一定给证据来源”。<br>本质上是在用 prompt 手工补 runtime。</p>
+</li>
+<li><p><strong>续聊和稳定性成本高。</strong><br>多轮历史怎么拼、工具失败怎么重试、会话如何隔离、cwd 如何保证正确，这些都要自己兜。</p>
+</li>
+</ol>
+<p>这并不意味着 MiniMax 这条路一定不行。<br>更准确地说，是<strong>我那版“MiniMax + 自建工具”的实现，还没有把一个成熟的 code agent runtime 真正搭起来。</strong></p>
+<h3 id="5-4-Claude-Code-SDK-实际上替你补了哪几层"><a href="#5-4-Claude-Code-SDK-实际上替你补了哪几层" class="headerlink" title="5.4 Claude Code SDK 实际上替你补了哪几层"></a>5.4 Claude Code SDK 实际上替你补了哪几层</h3><p>在这个任务里，Claude Code SDK 真正有价值的地方，是它把“代码问答 Agent”最难补齐的几层默认给你了。</p>
+<h4 id="5-4-1-它给的是成熟的工具回路，不只是工具列表"><a href="#5-4-1-它给的是成熟的工具回路，不只是工具列表" class="headerlink" title="5.4.1 它给的是成熟的工具回路，不只是工具列表"></a>5.4.1 它给的是成熟的工具回路，不只是工具列表</h4><p>Claude Code 的执行方式，本质上是一个非常稳定的：</p>
+<p><code>assistant -&gt; tool_use -&gt; tool_result -&gt; next turn</code></p>
+<p>这意味着：</p>
+<ul>
+<li>模型不是“有空再用工具”；</li>
+<li>而是在一个被 runtime 明确支持的多轮循环里持续规划、执行、再推理。</li>
+</ul>
+<p>这点听起来抽象，但工程上非常重要。<br>自建版本常见的问题是：工具可以调，但整个调用链没有被打磨成“默认工作流”；Claude Code SDK 则是从底层就假设“代码任务本来就应该多轮查证”。</p>
+<h4 id="5-4-2-它天然更像一个“会看代码”的执行器"><a href="#5-4-2-它天然更像一个“会看代码”的执行器" class="headerlink" title="5.4.2 它天然更像一个“会看代码”的执行器"></a>5.4.2 它天然更像一个“会看代码”的执行器</h4><p>对代码类问题来说，真正难的不是把文件内容读出来，而是形成一种靠谱的阅读策略：</p>
+<ol>
+<li>先判断应该去哪几个模块找；</li>
+<li>再定位入口；</li>
+<li>再顺调用链找关键事实；</li>
+<li>最后用自然语言组织解释。</li>
+</ol>
+<p>我自己体感里，Claude Code SDK 背后的这套 runtime 和默认提示，更接近一个已经习惯使用终端、搜索、读文件的工程师；<br>而自建版本更像是“我给模型发了两把扳手，再希望它自己学会怎么修机器”。</p>
+<h4 id="5-4-3-它把很多“隐性工程活”也一起带上了"><a href="#5-4-3-它把很多“隐性工程活”也一起带上了" class="headerlink" title="5.4.3 它把很多“隐性工程活”也一起带上了"></a>5.4.3 它把很多“隐性工程活”也一起带上了</h4><p>除了模型本身，Claude Code SDK 还顺手帮你补了不少容易被忽略的工程能力：</p>
+<ul>
+<li><code>cwd</code> 感知：把模型稳定锁在正确工作区；</li>
+<li><code>allowedTools / disallowedTools</code>：更容易做只读约束；</li>
+<li><code>maxTurns</code>：避免无限探索；</li>
+<li><code>sessionId / resume / continueConversation</code>：支持原生续聊；</li>
+<li>事件语义统一：便于前后端把 Agent 过程完整展示出来。</li>
+</ul>
+<p>这些能力单看都不复杂，但如果你全部自己实现，工程胶水会非常多，而且容易在边界条件上漏坑。</p>
+<h3 id="5-5-为什么它能做出“流式可观测”"><a href="#5-5-为什么它能做出“流式可观测”" class="headerlink" title="5.5 为什么它能做出“流式可观测”"></a>5.5 为什么它能做出“流式可观测”</h3><p>SDK 会持续返回消息事件，常见类型有：</p>
 <ul>
 <li><code>system</code></li>
 <li><code>assistant</code>（含 <code>thinking</code>、<code>tool_use</code>、<code>tool_result</code>、<code>text</code> 块）</li>
 <li><code>result</code></li>
 </ul>
 <p>服务端再把这些 wire 消息转换成 SSE 事件推给前端，因此你可以看到一个“正在思考和查代码”的过程，而不是黑盒等待。</p>
-<h3 id="5-3-续聊策略为什么分两种"><a href="#5-3-续聊策略为什么分两种" class="headerlink" title="5.3 续聊策略为什么分两种"></a>5.3 续聊策略为什么分两种</h3><p>这个项目里我认为很务实的一点是：它并不执着于单一路径。</p>
+<p>这也是我从自建版本切过来后非常明显的感受：<br><strong>前端不再只是“看到模型在吐字”，而是能看到 Agent 在真实执行。</strong></p>
+<h3 id="5-6-续聊策略为什么分两种"><a href="#5-6-续聊策略为什么分两种" class="headerlink" title="5.6 续聊策略为什么分两种"></a>5.6 续聊策略为什么分两种</h3><p>这个项目里我认为很务实的一点是：它并不执着于单一路径。</p>
 <ol>
 <li><strong>CLI session 续聊</strong>：沿用模型原生会话，但有并发占用风险。</li>
 <li><strong>JSON 历史续聊（推荐）</strong>：每轮新会话 + 历史拼 prompt，工程可控性更高。</li>
@@ -584,7 +695,9 @@
 <li><strong>明确责任边界</strong>：Agent 给的是证据化建议，最终决策必须人来签字。</li>
 </ol>
 <hr>
-<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>“代码-&gt;PRD阅读器”这类 Agent 项目之所以有现实价值，不在于它做了多复杂的算法，而在于它把一个高频痛点工程化了：</p>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>“代码-&gt;PRD阅读器”这类 Agent 项目之所以有现实价值，不在于它做了多复杂的算法，而在于它把一个高频痛点工程化了。</p>
+<p>而这件事能成立，一个很关键的原因并不是“换了一个模型名字”，而是选对了 runtime：<br><strong>从我自己的实践看，<code>MiniMax + 自建工具</code> 和 <code>Claude Code SDK</code> 的差异，核心不只是模型能力，而是后者已经把代码任务的工具回路、会话机制、事件流和行为约束打磨成了成体系的执行器。</strong></p>
+<p>落到结果上，它带来的价值是：</p>
 <ul>
 <li>用代码事实替代记忆沟通；</li>
 <li>用流式交互替代黑盒等待；</li>
@@ -1033,7 +1146,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">58.3k</span>&nbsp;字
+                    class="white-color">60.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
