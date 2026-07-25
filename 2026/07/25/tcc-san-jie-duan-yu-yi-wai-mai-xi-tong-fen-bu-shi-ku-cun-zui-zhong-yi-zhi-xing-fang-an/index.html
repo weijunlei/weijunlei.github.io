@@ -1,0 +1,1981 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="TCC三阶段语义：外卖系统分布式库存最终一致性方案, 小风雷">
+    <meta name="description" content="TCC三阶段语义：外卖系统分布式库存最终一致性方案某外卖系统的菜品域早期没有完整的库存能力。用户虽然能够成功创建订单，但商家实际备货时可能发现菜品已经售罄，最终只能取消订单。库存不足相关的取消率一度达到 0.8%。
+这个项目的目标不是简单增">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>TCC三阶段语义：外卖系统分布式库存最终一致性方案 | 小风雷</title>
+    <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小风雷</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小风雷</div>
+        <div class="logo-desc">
+            
+              There are roads regardless of the height of mountains and ferries regardless of the depth of river
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
+        if (pwd && pwd.length > 0) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        TCC三阶段语义：外卖系统分布式库存最终一致性方案
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">分布式系统</span>
+                            </a>
+                        
+                            <a href="/tags/TCC/">
+                                <span class="chip bg-color">TCC</span>
+                            </a>
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                            <a href="/tags/Kafka/">
+                                <span class="chip bg-color">Kafka</span>
+                            </a>
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-07-25
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    27 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="TCC三阶段语义：外卖系统分布式库存最终一致性方案"><a href="#TCC三阶段语义：外卖系统分布式库存最终一致性方案" class="headerlink" title="TCC三阶段语义：外卖系统分布式库存最终一致性方案"></a>TCC三阶段语义：外卖系统分布式库存最终一致性方案</h1><p>某外卖系统的菜品域早期没有完整的库存能力。用户虽然能够成功创建订单，但商家实际备货时可能发现菜品已经售罄，最终只能取消订单。库存不足相关的取消率一度达到 0.8%。</p>
+<p>这个项目的目标不是简单增加一个 <code>stock</code> 字段，而是从 0 到 1 建设一套能够支撑真实交易链路的库存系统：</p>
+<ul>
+<li>高并发预扣时不能超卖；</li>
+<li>系统超时、重启、消息重复后不能多扣或多返；</li>
+<li>即时单和预约单使用不同的库存确认时机；</li>
+<li>Redis 提供低延迟在线库存，MySQL 提供可恢复、可审计的操作记录；</li>
+<li>任意一个步骤失败后，事务都能通过重试、补偿和对账最终收敛。</li>
+</ul>
+<p>本文使用 TCC 的业务语义，并结合 Saga 补偿、WAL、Transactional Outbox 和状态机，完整拆解这套方案如何落地。</p>
+<blockquote>
+<p>文中的表名、Topic 名和部分字段经过抽象，重点是说明设计思想和故障恢复方式。</p>
+</blockquote>
+<h2 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h2><pre class="mermaid">flowchart LR
+    Client["订单服务<br/>Try / Confirm / Cancel"] --> API["Inventory API"]
+
+    subgraph Inventory["库存服务"]
+        API --> SM["Reservation 状态机"]
+        SM --> WAL["Operation WAL<br/>持久化待执行动作"]
+        WAL --> Executor["Operation Executor<br/>同步执行 + 异步重试"]
+        Scheduler["预约单时间轮<br/>超时扫描任务"] --> WAL
+        Reconciler["对账与修复任务"] --> WAL
+        OutboxPublisher["Outbox Publisher"] --> Kafka
+    end
+
+    SM --> MySQL[("MySQL<br/>Reservation / Ledger / WAL / Outbox")]
+    Executor --> Lua["Redis Lua<br/>原子检查与数量变更"]
+    Lua --> Redis[("Redis<br/>available / reserved / op result")]
+    Executor --> MySQL
+    MySQL --> OutboxPublisher
+
+    Kafka[("Kafka")] --> Consumer["订单事件消费者"]
+    Consumer --> SM
+    Kafka --> Downstream["订单 / 商家 / 监控等下游"]
+
+    Reconciler --> MySQL
+    Reconciler --> Redis</pre>
+
+<p>这套架构里有两个不同维度的事实源：</p>
+<ul>
+<li><strong>Redis 是在线可售数量的事实源</strong>：下单时是否还有库存，以 Redis Lua 的原子执行结果为准；</li>
+<li><strong>MySQL 是库存操作记录和状态流转的事实源</strong>：记录某张订单对某个菜品做过什么操作、执行到了哪一步，以及如何恢复和审计。</li>
+</ul>
+<p>这里需要特别强调：<strong>MySQL 和 Redis 之间不存在一个真正的跨存储原子事务</strong>。系统不是通过“同时写成功”保证一致，而是通过以下机制把任何中间状态变成可恢复状态：</p>
+<ol>
+<li>执行 Redis 前，先把操作意图持久化到 MySQL WAL；</li>
+<li>Redis 使用 Lua 保证单菜品数量检查和变更原子；</li>
+<li>Redis 保存 <code>op_id</code> 的执行结果，保证同一个动作重复调用不重复扣减；</li>
+<li>MySQL 状态机使用 CAS 控制合法状态转换；</li>
+<li>后台任务持续重试未完成的 WAL；</li>
+<li>Kafka 使用 Outbox 保证事件可重发；</li>
+<li>对账任务负责发现并修复长期差异。</li>
+</ol>
+<h2 id="2-业务语义：Try、Confirm、Cancel"><a href="#2-业务语义：Try、Confirm、Cancel" class="headerlink" title="2. 业务语义：Try、Confirm、Cancel"></a>2. 业务语义：Try、Confirm、Cancel</h2><p>一次库存事务以 <code>reservation_id</code> 标识，单个菜品操作使用以下业务唯一键：</p>
+<pre class=" language-language-text"><code class="language-language-text">order_id + dish_id + attempt_no
+</code></pre>
+<p>其中 <code>attempt_no</code> 用来区分同一订单的重新下单或重新预扣。已经 Cancel 的预扣不能被复活，如果业务需要再次尝试，必须创建新的 <code>attempt_no</code>。</p>
+<h3 id="2-1-Try：预扣库存"><a href="#2-1-Try：预扣库存" class="headerlink" title="2.1 Try：预扣库存"></a>2.1 Try：预扣库存</h3><p>Try 阶段要完成两件事：</p>
+<ol>
+<li>判断菜品当前是否有足够的可售库存；</li>
+<li>将库存从 <code>available</code> 转移到 <code>reserved</code>，为当前订单冻结资源。</li>
+</ol>
+<p>数量变化为：</p>
+<pre class=" language-language-text"><code class="language-language-text">available -= quantity
+reserved  += quantity
+</code></pre>
+<p>注意，这两个变化必须在同一段 Redis Lua 中完成。不能先 <code>GET available</code>，再由应用执行 <code>DECR</code>，否则并发请求可能同时读到相同余量并一起扣减，造成超卖。</p>
+<h3 id="2-2-Confirm：正式确认"><a href="#2-2-Confirm：正式确认" class="headerlink" title="2.2 Confirm：正式确认"></a>2.2 Confirm：正式确认</h3><p>Confirm 表示订单已经成功，预扣库存正式转为已售库存。</p>
+<pre class=" language-language-text"><code class="language-language-text">reserved -= quantity
+sold     += quantity
+</code></pre>
+<p>Confirm 不再减少 <code>available</code>，因为库存已经在 Try 阶段从可售池中移出。</p>
+<p>不同订单的 Confirm 时机不同：</p>
+<ul>
+<li><strong>即时单</strong>：消费订单域发布的 <code>OrderCreated</code> 或等价的“订单创建成功”事件后 Confirm；</li>
+<li><strong>预约单</strong>：Try 成功后等待 <code>processing_time</code>，由时间轮触发 Confirm。</li>
+</ul>
+<p>预约单不能过早 Confirm，否则库存会长时间占用并降低商家当前可售率；但也不能完全不预留，否则履约时间到达时可能无货。</p>
+<h3 id="2-3-Cancel：释放预扣"><a href="#2-3-Cancel：释放预扣" class="headerlink" title="2.3 Cancel：释放预扣"></a>2.3 Cancel：释放预扣</h3><p>订单创建失败、订单主动取消或预扣超时后执行 Cancel：</p>
+<pre class=" language-language-text"><code class="language-language-text">reserved  -= quantity
+available += quantity
+</code></pre>
+<p>系统会扫描超过 10 分钟仍处于 <code>RESERVED</code> 的记录，但扫描到记录后不能直接返还库存。它需要先确认订单没有成功，再通过状态机抢占 Cancel 权限。</p>
+<p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。订单侧需要把该订单置为失败，或者使用新的 <code>attempt_no</code> 重新发起库存事务。</p>
+<h2 id="3-状态机设计"><a href="#3-状态机设计" class="headerlink" title="3. 状态机设计"></a>3. 状态机设计</h2><pre class="mermaid">stateDiagram-v2
+    [*] --> PREPARING: 创建Try WAL
+    PREPARING --> RESERVED: Redis预扣成功
+    PREPARING --> REJECTED: 库存不足
+    PREPARING --> CANCELING: 请求放弃未完成Try
+
+    RESERVED --> CONFIRMING: Confirm CAS抢占成功
+    RESERVED --> CANCELING: Cancel CAS抢占成功
+
+    CONFIRMING --> CONFIRMED: Redis确认成功
+    CANCELING --> CANCELED: Redis释放成功
+
+    CONFIRMING --> CONFIRMING: 失败后重试
+    CANCELING --> CANCELING: 失败后重试
+
+    REJECTED --> [*]
+    CONFIRMED --> [*]
+    CANCELED --> [*]</pre>
+
+<p>核心规则如下：</p>
+<ul>
+<li><code>CONFIRMING</code> 和 <code>CANCELING</code> 只能有一个从 <code>RESERVED</code> 抢占成功；</li>
+<li><code>CONFIRMED</code>、<code>CANCELED</code>、<code>REJECTED</code> 都是终态；</li>
+<li>状态更新必须使用 <code>status + version</code> 做 CAS；</li>
+<li>执行到一半失败时保留中间态，由 WAL 重试继续推进；</li>
+<li>重复请求读取当前状态后返回历史结果，不重新执行完整流程。</li>
+</ul>
+<p>例如 Confirm 抢占状态可以使用：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">UPDATE inventory_reservation
+SET status = 30,
+    version = version + 1,
+    updated_at = NOW(3)
+WHERE reservation_id = ?
+  AND status = 20
+  AND version = ?;
+</code></pre>
+<p>如果影响行数为 0，需要重新读取记录：</p>
+<ul>
+<li>当前已经是 <code>CONFIRMED</code>：按幂等成功返回；</li>
+<li>当前是 <code>CONFIRMING</code>：说明已有任务执行，当前请求可以等待或返回处理中；</li>
+<li>当前是 <code>CANCELING/CANCELED</code>：Confirm 与既有终态冲突；</li>
+<li>版本变化但仍为 <code>RESERVED</code>：重新获取版本后再竞争。</li>
+</ul>
+<h2 id="4-MySQL-Schema"><a href="#4-MySQL-Schema" class="headerlink" title="4. MySQL Schema"></a>4. MySQL Schema</h2><p>MySQL 不承担下单链路的热点库存扣减，而是负责记录库存事务的生命周期。建议至少包含五类表。</p>
+<h3 id="4-1-菜品库存基线表"><a href="#4-1-菜品库存基线表" class="headerlink" title="4.1 菜品库存基线表"></a>4.1 菜品库存基线表</h3><pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE dish_stock_baseline (
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    merchant_id     BIGINT UNSIGNED NOT NULL,
+    dish_id         BIGINT UNSIGNED NOT NULL,
+    total_stock     BIGINT NOT NULL,
+    baseline_version BIGINT UNSIGNED NOT NULL DEFAULT 1,
+    stock_status    TINYINT NOT NULL DEFAULT 1 COMMENT '1=enabled, 2=disabled',
+    created_at      DATETIME(3) NOT NULL,
+    updated_at      DATETIME(3) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_merchant_dish (merchant_id, dish_id)
+) ENGINE=InnoDB;
+</code></pre>
+<p>该表保存商家设置的库存基线和版本，用于审计、对账与 Redis 重建。在线下单不直接锁这张表扣库存，否则热门菜品会形成 MySQL 热点行。</p>
+<h3 id="4-2-库存预扣状态表"><a href="#4-2-库存预扣状态表" class="headerlink" title="4.2 库存预扣状态表"></a>4.2 库存预扣状态表</h3><p>每个订单菜品一条记录：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_reservation (
+    id               BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    reservation_id   VARCHAR(64) NOT NULL,
+    order_id          BIGINT UNSIGNED NOT NULL,
+    merchant_id       BIGINT UNSIGNED NOT NULL,
+    dish_id           BIGINT UNSIGNED NOT NULL,
+    attempt_no        INT UNSIGNED NOT NULL DEFAULT 1,
+    quantity          INT UNSIGNED NOT NULL,
+    order_type        TINYINT NOT NULL COMMENT '1=instant, 2=scheduled',
+    processing_time   DATETIME(3) DEFAULT NULL,
+    expire_at         DATETIME(3) NOT NULL,
+    status            TINYINT NOT NULL COMMENT '10=preparing, 20=reserved, 30=confirming, 40=confirmed, 50=canceling, 60=canceled, 70=rejected',
+    version           INT UNSIGNED NOT NULL DEFAULT 1,
+    last_error_code   VARCHAR(64) DEFAULT NULL,
+    last_error_message VARCHAR(512) DEFAULT NULL,
+    created_at        DATETIME(3) NOT NULL,
+    updated_at        DATETIME(3) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_reservation_id (reservation_id),
+    UNIQUE KEY uk_order_dish_attempt (order_id, dish_id, attempt_no),
+    KEY idx_expire_scan (status, expire_at),
+    KEY idx_schedule_scan (status, processing_time),
+    KEY idx_order_id (order_id)
+) ENGINE=InnoDB;
+</code></pre>
+<p>这张表回答的是：“这张订单对这个菜品的库存事务现在进行到哪一步？”</p>
+<p>它不是库存数量表，也不应该使用它的记录数直接回答在线可售库存。</p>
+<h3 id="4-3-库存业务流水表"><a href="#4-3-库存业务流水表" class="headerlink" title="4.3 库存业务流水表"></a>4.3 库存业务流水表</h3><p>流水表只追加，不原地修改历史记录：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_ledger (
+    id               BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    ledger_id        VARCHAR(64) NOT NULL,
+    operation_id     VARCHAR(64) NOT NULL,
+    reservation_id   VARCHAR(64) NOT NULL,
+    order_id          BIGINT UNSIGNED NOT NULL,
+    merchant_id       BIGINT UNSIGNED NOT NULL,
+    dish_id           BIGINT UNSIGNED NOT NULL,
+    action            TINYINT NOT NULL COMMENT '1=init, 2=try, 3=confirm, 4=cancel, 5=adjust',
+    quantity          INT UNSIGNED NOT NULL,
+    available_delta   BIGINT NOT NULL DEFAULT 0,
+    reserved_delta    BIGINT NOT NULL DEFAULT 0,
+    sold_delta        BIGINT NOT NULL DEFAULT 0,
+    redis_version     BIGINT UNSIGNED DEFAULT NULL,
+    created_at        DATETIME(3) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_ledger_id (ledger_id),
+    UNIQUE KEY uk_reservation_action (reservation_id, action),
+    KEY idx_dish_created (merchant_id, dish_id, created_at),
+    KEY idx_operation_id (operation_id)
+) ENGINE=InnoDB;
+</code></pre>
+<p>三种核心流水的 delta 如下：</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th align="right">available_delta</th>
+<th align="right">reserved_delta</th>
+<th align="right">sold_delta</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Try</td>
+<td align="right"><code>-quantity</code></td>
+<td align="right"><code>+quantity</code></td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Confirm</td>
+<td align="right">0</td>
+<td align="right"><code>-quantity</code></td>
+<td align="right"><code>+quantity</code></td>
+</tr>
+<tr>
+<td>Cancel</td>
+<td align="right"><code>+quantity</code></td>
+<td align="right"><code>-quantity</code></td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+<p>流水用于审计和对账，也可以结合库存基线重建 Redis。唯一键 <code>reservation_id + action</code> 保证同一个阶段不会重复落账。</p>
+<h3 id="4-4-Operation-WAL-表"><a href="#4-4-Operation-WAL-表" class="headerlink" title="4.4 Operation WAL 表"></a>4.4 Operation WAL 表</h3><p>这里的 WAL 是应用层 Write-Ahead Log：<strong>先记录要做什么，再调用 Redis</strong>。</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_operation_wal (
+    id                BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    operation_id      VARCHAR(64) NOT NULL,
+    reservation_id    VARCHAR(64) NOT NULL,
+    action             TINYINT NOT NULL COMMENT '1=try, 2=confirm, 3=cancel',
+    status             TINYINT NOT NULL COMMENT '10=init, 20=executing, 30=succeeded, 40=retry, 50=dead',
+    request_payload    JSON NOT NULL,
+    result_payload     JSON DEFAULT NULL,
+    retry_count        INT UNSIGNED NOT NULL DEFAULT 0,
+    next_retry_at      DATETIME(3) NOT NULL,
+    lease_owner        VARCHAR(64) DEFAULT NULL,
+    lease_expire_at    DATETIME(3) DEFAULT NULL,
+    last_error         VARCHAR(1024) DEFAULT NULL,
+    created_at         DATETIME(3) NOT NULL,
+    updated_at         DATETIME(3) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_operation_id (operation_id),
+    UNIQUE KEY uk_reservation_action (reservation_id, action),
+    KEY idx_retry (status, next_retry_at),
+    KEY idx_lease (status, lease_expire_at)
+) ENGINE=InnoDB;
+</code></pre>
+<p>同步请求可以在提交 WAL 后立即执行，降低正常链路延迟；后台 Worker 则持续扫描 <code>INIT/RETRY</code> 记录，处理超时、进程退出或网络错误留下的任务。</p>
+<p>Worker 抢任务时可以使用 <code>SELECT ... FOR UPDATE SKIP LOCKED</code>，也可以通过带租约的条件更新获取执行权。即使多个 Worker 重复执行同一条 WAL，Redis <code>operation_id</code> 幂等键也会阻止重复扣减。</p>
+<h3 id="4-5-Transactional-Outbox-表"><a href="#4-5-Transactional-Outbox-表" class="headerlink" title="4.5 Transactional Outbox 表"></a>4.5 Transactional Outbox 表</h3><pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_outbox (
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    event_id        VARCHAR(64) NOT NULL,
+    aggregate_id    VARCHAR(64) NOT NULL COMMENT 'reservation_id or order_id',
+    event_type      VARCHAR(64) NOT NULL,
+    partition_key   VARCHAR(64) NOT NULL,
+    schema_version  INT UNSIGNED NOT NULL DEFAULT 1,
+    payload         JSON NOT NULL,
+    status          TINYINT NOT NULL DEFAULT 10 COMMENT '10=pending, 20=sending, 30=sent, 40=retry',
+    retry_count     INT UNSIGNED NOT NULL DEFAULT 0,
+    next_retry_at   DATETIME(3) NOT NULL,
+    created_at      DATETIME(3) NOT NULL,
+    sent_at         DATETIME(3) DEFAULT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_event_id (event_id),
+    KEY idx_publish (status, next_retry_at)
+) ENGINE=InnoDB;
+</code></pre>
+<p>Reservation 状态更新、Ledger 追加和 Outbox 事件写入必须放在同一个 MySQL 本地事务中。这样只要业务状态提交成功，对应事件就一定留在数据库里，可以由 Publisher 重试发送。</p>
+<h2 id="5-Redis-Schema"><a href="#5-Redis-Schema" class="headerlink" title="5. Redis Schema"></a>5. Redis Schema</h2><h3 id="5-1-库存数量-Hash"><a href="#5-1-库存数量-Hash" class="headerlink" title="5.1 库存数量 Hash"></a>5.1 库存数量 Hash</h3><pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id}:stock
+
+Fields:
+  total       100
+  available    72
+  reserved      8
+  sold          20
+  version      391
+  updated_at   1784982600123
+</code></pre>
+<p>Redis Cluster 中，Lua 涉及的所有 Key 必须在同一个 Slot。这里使用 <code>{merchant_id:dish_id}</code> 作为 hash tag：</p>
+<pre class=" language-language-text"><code class="language-language-text">inv:{10001:90001}:stock
+inv:{10001:90001}:reservation:rsv_01
+inv:{10001:90001}:op:op_try_abc
+inv:{10001:90001}:op:op_confirm_abc
+</code></pre>
+<h3 id="5-2-Reservation-Fence"><a href="#5-2-Reservation-Fence" class="headerlink" title="5.2 Reservation Fence"></a>5.2 Reservation Fence</h3><p>仅有每个动作自己的 <code>operation_id</code> 还不够。Try 和 Cancel 是两个不同的操作，如果 Cancel 先执行、Try 后到达，它们各自都可能认为自己是第一次执行。</p>
+<p>因此需要增加一条以 <code>reservation_id</code> 为维度的事务栅栏：</p>
+<pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id}:reservation:{reservation_id}
+
+Fields:
+  phase         RESERVED
+  quantity      2
+  try_op_id     op_try_abc
+  confirm_op_id ""
+  cancel_op_id  ""
+  version       392
+  updated_at    1784982600456
+</code></pre>
+<p><code>phase</code> 只允许单向转换：</p>
+<pre class=" language-language-text"><code class="language-language-text">NONE -> RESERVED -> CONFIRMED
+NONE -> CANCELED
+RESERVED -> CANCELED
+</code></pre>
+<p>其中 <code>NONE -&gt; CANCELED</code> 是一条空回滚栅栏：它不修改库存数量，但会阻止晚到的 Try 再次冻结库存。</p>
+<p>Try、Confirm、Cancel 的 Lua 都必须同时检查并更新这条 Fence：</p>
+<ul>
+<li>Try 发现 <code>phase=CANCELED/CONFIRMED</code>，直接拒绝执行；</li>
+<li>Confirm 只有在 <code>phase=RESERVED</code> 时才移动数量；</li>
+<li>Cancel 发现 <code>phase=NONE</code>，只写 <code>CANCELED</code> Fence，不增加 available；</li>
+<li>Cancel 发现 <code>phase=RESERVED</code>，才执行 <code>reserved -&gt; available</code>；</li>
+<li>任意终态被重复调用，都返回第一次执行结果。</li>
+</ul>
+<h3 id="5-3-Redis-操作幂等记录"><a href="#5-3-Redis-操作幂等记录" class="headerlink" title="5.3 Redis 操作幂等记录"></a>5.3 Redis 操作幂等记录</h3><pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id}:op:{operation_id}
+
+Fields:
+  action       TRY
+  result       SUCCEEDED
+  quantity     2
+  version      392
+  operated_at  1784982600456
+</code></pre>
+<p>该记录必须和库存数量在同一段 Lua 中写入。如果服务在 Redis 扣减成功后、更新 MySQL 前崩溃，重试相同 <code>operation_id</code> 时，Lua 会返回第一次结果，不再扣减第二次。</p>
+<p>幂等 Key 的 TTL 应覆盖：</p>
+<pre class=" language-language-text"><code class="language-language-text">订单最长生命周期 + 消息最大重试时间 + 对账修复窗口 + 安全余量
+</code></pre>
+<p>对于审计要求较高的交易，也可以不单独创建大量 Key，而是在同 Slot 的 Hash 中保存近期操作，终态归档后再清理。</p>
+<h3 id="5-4-Try-Lua-的核心逻辑"><a href="#5-4-Try-Lua-的核心逻辑" class="headerlink" title="5.4 Try Lua 的核心逻辑"></a>5.4 Try Lua 的核心逻辑</h3><p>下面是简化后的伪代码：</p>
+<pre class=" language-language-lua"><code class="language-language-lua">-- KEYS[1] = stock key
+-- KEYS[2] = operation idempotency key
+-- KEYS[3] = reservation fence key
+-- ARGV[1] = quantity
+-- ARGV[2] = now
+-- ARGV[3] = operation ttl
+
+local previous = redis.call("HGET", KEYS[2], "result")
+if previous then
+    local version = redis.call("HGET", KEYS[2], "version")
+    return {previous, version}
+end
+
+local phase = redis.call("HGET", KEYS[3], "phase")
+if phase == "CANCELED" or phase == "CONFIRMED" then
+    return {"FENCED", redis.call("HGET", KEYS[3], "version") or "0"}
+end
+if phase == "RESERVED" then
+    return {"SUCCEEDED", redis.call("HGET", KEYS[3], "version") or "0"}
+end
+
+local available = tonumber(redis.call("HGET", KEYS[1], "available") or "-1")
+local quantity = tonumber(ARGV[1])
+
+if available < quantity then
+    local version = redis.call("HGET", KEYS[1], "version") or "0"
+    redis.call("HSET", KEYS[2],
+        "action", "TRY",
+        "result", "INSUFFICIENT",
+        "quantity", quantity,
+        "version", version,
+        "operated_at", ARGV[2])
+    redis.call("PEXPIRE", KEYS[2], ARGV[3])
+    return {"INSUFFICIENT", version}
+end
+
+redis.call("HINCRBY", KEYS[1], "available", -quantity)
+redis.call("HINCRBY", KEYS[1], "reserved", quantity)
+local version = redis.call("HINCRBY", KEYS[1], "version", 1)
+redis.call("HSET", KEYS[1], "updated_at", ARGV[2])
+
+redis.call("HSET", KEYS[3],
+    "phase", "RESERVED",
+    "quantity", quantity,
+    "try_op_id", KEYS[2],
+    "version", version,
+    "updated_at", ARGV[2])
+
+redis.call("HSET", KEYS[2],
+    "action", "TRY",
+    "result", "SUCCEEDED",
+    "quantity", quantity,
+    "version", version,
+    "operated_at", ARGV[2])
+redis.call("PEXPIRE", KEYS[2], ARGV[3])
+
+return {"SUCCEEDED", version}
+</code></pre>
+<p>Confirm 和 Cancel 使用相同模式：</p>
+<ul>
+<li>先检查 <code>operation_id</code> 是否已经执行；</li>
+<li>再检查 Reservation Fence 是否允许当前阶段执行；</li>
+<li>校验 <code>reserved &gt;= quantity</code>；</li>
+<li>原子修改 Hash 中的数量；</li>
+<li>推进 Fence 的 <code>phase</code>；</li>
+<li>保存操作结果；</li>
+<li>返回新的库存版本。</li>
+</ul>
+<h2 id="6-Try-完整时序"><a href="#6-Try-完整时序" class="headerlink" title="6. Try 完整时序"></a>6. Try 完整时序</h2><pre class="mermaid">sequenceDiagram
+    participant O as Order Service
+    participant I as Inventory API
+    participant M as MySQL
+    participant R as Redis
+    participant W as WAL Worker
+    participant K as Kafka
+
+    O->>I: Try(order_id, dish_id, qty, attempt_no)
+    I->>M: TX: INSERT reservation(PREPARING)<br/>INSERT WAL(TRY, INIT)
+    M-->>I: commit
+
+    I->>R: EVALSHA TryLua(operation_id)
+    alt 库存充足
+        R-->>I: SUCCEEDED + stock_version
+        I->>M: TX: reservation=RESERVED<br/>WAL=SUCCEEDED<br/>INSERT ledger<br/>INSERT outbox
+        M-->>I: commit
+        I-->>O: reserved
+        M->>K: Outbox发布 InventoryReserved
+    else 库存不足
+        R-->>I: INSUFFICIENT
+        I->>M: TX: reservation=REJECTED<br/>WAL=SUCCEEDED<br/>INSERT outbox
+        I-->>O: insufficient stock
+    else Redis结果未知或进程退出
+        I--xO: timeout
+        W->>M: 扫描未完成WAL
+        W->>R: 使用相同operation_id重试
+        R-->>W: 返回首次执行结果或执行操作
+        W->>M: 补齐状态、流水与Outbox
+    end</pre>
+
+<h3 id="6-1-第一步：创建-Reservation-和-WAL"><a href="#6-1-第一步：创建-Reservation-和-WAL" class="headerlink" title="6.1 第一步：创建 Reservation 和 WAL"></a>6.1 第一步：创建 Reservation 和 WAL</h3><p>Try 请求到达后，先开启 MySQL 本地事务：</p>
+<ol>
+<li>根据 <code>order_id + dish_id + attempt_no</code> 查询或插入 Reservation；</li>
+<li>新记录状态为 <code>PREPARING</code>；</li>
+<li>插入 <code>TRY</code> 类型 WAL，状态为 <code>INIT</code>；</li>
+<li>提交事务。</li>
+</ol>
+<p>唯一键冲突代表请求重复。此时读取已有 Reservation：</p>
+<ul>
+<li><code>RESERVED</code>：返回预扣成功；</li>
+<li><code>REJECTED</code>：返回库存不足；</li>
+<li><code>PREPARING</code>：触发或等待 WAL 执行；</li>
+<li>已进入终态：返回历史结果，不创建第二次预扣。</li>
+</ul>
+<h3 id="6-2-第二步：执行-Redis-Lua"><a href="#6-2-第二步：执行-Redis-Lua" class="headerlink" title="6.2 第二步：执行 Redis Lua"></a>6.2 第二步：执行 Redis Lua</h3><p>API 在正常链路中直接执行 WAL，以减少用户等待时间。后台 Worker 和同步 API 使用完全相同的 Executor。</p>
+<p>Redis 返回三类结果：</p>
+<ul>
+<li><code>SUCCEEDED</code>：预扣成功；</li>
+<li><code>INSUFFICIENT</code>：库存不足；</li>
+<li><code>UNKNOWN</code>：超时、连接断开等导致客户端不知道 Redis 是否已执行。</li>
+</ul>
+<p>对于 <code>UNKNOWN</code>，不能假设失败后直接再扣一次，也不能直接返还库存。正确做法是使用相同 <code>operation_id</code> 重试，让 Lua 通过 Redis 操作记录返回第一次结果。</p>
+<h3 id="6-3-第三步：落状态、流水和-Outbox"><a href="#6-3-第三步：落状态、流水和-Outbox" class="headerlink" title="6.3 第三步：落状态、流水和 Outbox"></a>6.3 第三步：落状态、流水和 Outbox</h3><p>Redis 成功后，再开启一个 MySQL 本地事务：</p>
+<ol>
+<li><code>PREPARING -&gt; RESERVED</code>；</li>
+<li>WAL 标记为 <code>SUCCEEDED</code>；</li>
+<li>追加 Try Ledger；</li>
+<li>插入 <code>InventoryReserved</code> Outbox 事件。</li>
+</ol>
+<p>如果此时 MySQL 失败，Reservation 仍然是 <code>PREPARING</code>，WAL 也没有完成。后台 Worker 重试 Redis 时会命中操作幂等记录，然后补齐 MySQL。</p>
+<p>这就是 WAL 的价值：<strong>Redis 成功但 MySQL 未确认，不会变成一笔无人知道如何处理的悬挂库存。</strong></p>
+<h2 id="7-多菜品订单如何处理"><a href="#7-多菜品订单如何处理" class="headerlink" title="7. 多菜品订单如何处理"></a>7. 多菜品订单如何处理</h2><p>单个订单通常包含多个菜品，而 Redis Cluster 无法在不同 Slot 的 Key 上执行一段 Lua。这里有两种选择。</p>
+<h3 id="7-1-每个菜品独立预扣，订单级补偿"><a href="#7-1-每个菜品独立预扣，订单级补偿" class="headerlink" title="7.1 每个菜品独立预扣，订单级补偿"></a>7.1 每个菜品独立预扣，订单级补偿</h3><p>默认方案是每个菜品独立执行 Try：</p>
+<pre class="mermaid">flowchart TD
+    A["创建订单级库存事务"] --> B["并发预扣Dish A"]
+    A --> C["并发预扣Dish B"]
+    A --> D["并发预扣Dish C"]
+    B --> E{"是否全部成功"}
+    C --> E
+    D --> E
+    E -->|是| F["订单级Try成功"]
+    E -->|否| G["Cancel所有已成功菜品"]
+    G --> H["订单级Try失败"]</pre>
+
+<p>它不是跨菜品瞬时原子，而是 TCC 内部结合 Saga 补偿：</p>
+<ul>
+<li>所有菜品 Try 成功，订单级预扣成功；</li>
+<li>任意菜品库存不足，对已经成功的菜品执行 Cancel；</li>
+<li>Cancel 失败时保留 <code>CANCELING</code>，由 WAL 重试直到释放。</li>
+</ul>
+<h3 id="7-2-同商家菜品放入同一-Slot"><a href="#7-2-同商家菜品放入同一-Slot" class="headerlink" title="7.2 同商家菜品放入同一 Slot"></a>7.2 同商家菜品放入同一 Slot</h3><p>也可以使用 <code>{merchant_id}</code> 作为 hash tag，把同一商家的所有菜品放在同一 Redis Slot，然后用一段 Lua 原子预扣整单菜品。</p>
+<p>这种方案原子性更强，但一个热门商家的全部库存会集中到同一个 Redis Slot，容易形成热点。是否采用，需要结合商家流量分布、单订单菜品数和 Redis Cluster 容量评估。</p>
+<h2 id="8-Confirm-流程"><a href="#8-Confirm-流程" class="headerlink" title="8. Confirm 流程"></a>8. Confirm 流程</h2><h3 id="8-1-即时单"><a href="#8-1-即时单" class="headerlink" title="8.1 即时单"></a>8.1 即时单</h3><p>订单创建成功后，订单域发布事件：</p>
+<pre class=" language-language-json"><code class="language-language-json">{
+  "event_id": "evt_order_created_01",
+  "event_type": "OrderCreated",
+  "schema_version": 1,
+  "occurred_at": "2026-07-25T20:30:00.123+08:00",
+  "trace_id": "trace_abc",
+  "order_id": 90000001,
+  "order_type": "INSTANT",
+  "merchant_id": 10001,
+  "inventory_attempt_no": 1
+}
+</code></pre>
+<p>库存消费者收到消息后：</p>
+<ol>
+<li>根据 <code>order_id + attempt_no</code> 查询所有 Reservation；</li>
+<li>使用 CAS 把每条 <code>RESERVED</code> 抢占为 <code>CONFIRMING</code>；</li>
+<li>在同一 MySQL 事务中插入 Confirm WAL；</li>
+<li>Executor 执行 Confirm Lua；</li>
+<li>Redis 将 <code>reserved</code> 转为 <code>sold</code>；</li>
+<li>MySQL 更新为 <code>CONFIRMED</code>，追加 Ledger 和 Outbox。</li>
+</ol>
+<p>Kafka 可能重复投递，Confirm 消费必须幂等。重复消息最终会读取到 <code>CONFIRMED</code> 并直接返回成功。</p>
+<h3 id="8-2-预约单"><a href="#8-2-预约单" class="headerlink" title="8.2 预约单"></a>8.2 预约单</h3><p>预约单 Try 成功后，Reservation 保存 <code>processing_time</code>。时间轮在接近履约时间时触发 Confirm。</p>
+<p>时间轮只负责“准时触发”，不能成为唯一可靠来源。系统还需要一个补偿扫描任务：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">SELECT reservation_id
+FROM inventory_reservation
+WHERE order_type = 2
+  AND status = 20
+  AND processing_time <= NOW(3)
+ORDER BY processing_time
+LIMIT 500;
+</code></pre>
+<p>这样即使时间轮分片迁移、进程重启或触发消息丢失，扫描任务仍能补发 Confirm。</p>
+<h2 id="9-Cancel-流程"><a href="#9-Cancel-流程" class="headerlink" title="9. Cancel 流程"></a>9. Cancel 流程</h2><p>Cancel 有三类入口：</p>
+<ol>
+<li>订单域发布 <code>OrderCreateFailed</code> 或 <code>OrderCanceled</code>；</li>
+<li>Try 成功后超过 10 分钟仍未确认；</li>
+<li>多菜品 Try 部分失败，对已成功菜品执行补偿。</li>
+</ol>
+<p>Cancel 的关键不是“把数量加回去”，而是先获得合法的状态转换权：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">UPDATE inventory_reservation
+SET status = 50,
+    version = version + 1,
+    updated_at = NOW(3)
+WHERE reservation_id = ?
+  AND status = 20
+  AND version = ?;
+</code></pre>
+<p>只有 <code>RESERVED -&gt; CANCELING</code> 成功的任务才能创建 Cancel WAL。Confirm 同时到达时，也会竞争同一个 <code>RESERVED</code> 状态，因此只有一方可以成功。</p>
+<p>Cancel Lua 使用独立的 <code>operation_id</code>：</p>
+<pre class=" language-language-text"><code class="language-language-text">op_cancel_{reservation_id}
+</code></pre>
+<p>Lua 需要同时检查 Reservation Fence：</p>
+<ul>
+<li>Fence 为 <code>RESERVED</code>：执行 <code>reserved -= quantity</code>、<code>available += quantity</code>，再把 Fence 改为 <code>CANCELED</code>；</li>
+<li>Fence 不存在：说明 Try 尚未在 Redis 生效，只写入 <code>CANCELED</code> Fence，不修改任何库存数量；</li>
+<li>Fence 已经是 <code>CANCELED</code>：直接返回上一次结果；</li>
+<li>Fence 为 <code>CONFIRMED</code>：拒绝 Cancel，并上报终态冲突。</li>
+</ul>
+<p>第二种情况非常重要。Cancel 不能因为没有找到 Try 记录就直接增加 <code>available</code>，否则会产生空回滚，凭空增加库存。Cancel 写入的 <code>CANCELED</code> Fence 还会阻止正在路上或稍后重试的 Try，避免库存事务悬挂。</p>
+<h2 id="10-WAL-如何保证可重入"><a href="#10-WAL-如何保证可重入" class="headerlink" title="10. WAL 如何保证可重入"></a>10. WAL 如何保证可重入</h2><p>幂等和可重入不是同一个概念：</p>
+<ul>
+<li><strong>幂等</strong>：同一个动作执行多次，只产生一次业务效果；</li>
+<li><strong>可重入</strong>：动作执行到一半失败后，再次进入时能够从持久化状态继续。</li>
+</ul>
+<h3 id="10-1-WAL-Worker"><a href="#10-1-WAL-Worker" class="headerlink" title="10.1 WAL Worker"></a>10.1 WAL Worker</h3><p>Worker 周期扫描：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">SELECT *
+FROM inventory_operation_wal
+WHERE status IN (10, 40)
+  AND next_retry_at <= NOW(3)
+ORDER BY next_retry_at
+LIMIT 100
+FOR UPDATE SKIP LOCKED;
+</code></pre>
+<p>执行流程：</p>
+<ol>
+<li>获取任务租约，更新为 <code>EXECUTING</code>；</li>
+<li>读取 Reservation 当前状态；</li>
+<li>判断目标动作是否已经完成；</li>
+<li>使用原 <code>operation_id</code> 调用 Redis Lua；</li>
+<li>根据 Redis 返回补齐 MySQL 状态、Ledger 和 Outbox；</li>
+<li>成功后标记 WAL 为 <code>SUCCEEDED</code>；</li>
+<li>失败则指数退避，超过阈值进入 <code>DEAD</code> 并告警。</li>
+</ol>
+<h3 id="10-2-各故障窗口如何恢复"><a href="#10-2-各故障窗口如何恢复" class="headerlink" title="10.2 各故障窗口如何恢复"></a>10.2 各故障窗口如何恢复</h3><table>
+<thead>
+<tr>
+<th>故障窗口</th>
+<th>可观察状态</th>
+<th>恢复方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reservation 写入失败</td>
+<td>MySQL 无记录</td>
+<td>整个 Try 失败，订单重试</td>
+</tr>
+<tr>
+<td>WAL 已提交，Redis 未执行</td>
+<td><code>PREPARING + WAL INIT</code></td>
+<td>Worker 执行 Redis</td>
+</tr>
+<tr>
+<td>Redis 已成功，客户端超时</td>
+<td>Redis 有 op 记录，MySQL 未完成</td>
+<td>相同 <code>operation_id</code> 重试并读取首次结果</td>
+</tr>
+<tr>
+<td>Redis 成功，MySQL 状态提交失败</td>
+<td>Redis 数量已变，WAL 未完成</td>
+<td>Worker 命中 Redis op 记录并补齐 MySQL</td>
+</tr>
+<tr>
+<td>MySQL 状态成功，Kafka 未发送</td>
+<td>Outbox 为 <code>PENDING</code></td>
+<td>Publisher 重试发送</td>
+</tr>
+<tr>
+<td>Kafka 已发送，Outbox 未标记</td>
+<td>Kafka 可能重复</td>
+<td>使用相同 <code>event_id</code> 重发，消费者幂等</td>
+</tr>
+<tr>
+<td>Confirm&#x2F;Cancel 执行中进程退出</td>
+<td><code>CONFIRMING/CANCELING</code></td>
+<td>WAL 从中间态继续</td>
+</tr>
+</tbody></table>
+<p>所谓可重入，就是每次重试都先查看这些持久化状态，而不是从头盲目执行整段代码。</p>
+<h2 id="11-Kafka-Topic-与事件设计"><a href="#11-Kafka-Topic-与事件设计" class="headerlink" title="11. Kafka Topic 与事件设计"></a>11. Kafka Topic 与事件设计</h2><h3 id="11-1-入站事件"><a href="#11-1-入站事件" class="headerlink" title="11.1 入站事件"></a>11.1 入站事件</h3><p>库存服务主要消费订单域事件：</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Event</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>order.lifecycle.v1</code></td>
+<td><code>OrderCreated</code></td>
+<td>即时单触发 Confirm</td>
+</tr>
+<tr>
+<td><code>order.lifecycle.v1</code></td>
+<td><code>OrderCreateFailed</code></td>
+<td>创建失败触发 Cancel</td>
+</tr>
+<tr>
+<td><code>order.lifecycle.v1</code></td>
+<td><code>OrderCanceled</code></td>
+<td>订单取消触发 Cancel</td>
+</tr>
+<tr>
+<td><code>inventory.schedule.v1</code></td>
+<td><code>InventoryConfirmDue</code></td>
+<td>预约单到期触发 Confirm</td>
+</tr>
+</tbody></table>
+<p>同一订单的事件使用 <code>order_id</code> 作为 Kafka Partition Key，尽量保持订单内顺序。但消费端仍然必须校验状态和版本，不能把正确性完全建立在消息顺序上。</p>
+<h3 id="11-2-出站事件"><a href="#11-2-出站事件" class="headerlink" title="11.2 出站事件"></a>11.2 出站事件</h3><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Event</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>inventory.lifecycle.v1</code></td>
+<td><code>InventoryReserved</code></td>
+<td>Try 成功</td>
+</tr>
+<tr>
+<td><code>inventory.lifecycle.v1</code></td>
+<td><code>InventoryRejected</code></td>
+<td>库存不足</td>
+</tr>
+<tr>
+<td><code>inventory.lifecycle.v1</code></td>
+<td><code>InventoryConfirmed</code></td>
+<td>Confirm 完成</td>
+</tr>
+<tr>
+<td><code>inventory.lifecycle.v1</code></td>
+<td><code>InventoryCanceled</code></td>
+<td>Cancel 完成</td>
+</tr>
+<tr>
+<td><code>inventory.lifecycle.v1</code></td>
+<td><code>InventoryOperationDead</code></td>
+<td>自动恢复失败，需要介入</td>
+</tr>
+</tbody></table>
+<p>统一事件 Envelope：</p>
+<pre class=" language-language-json"><code class="language-language-json">{
+  "event_id": "evt_inventory_reserved_01",
+  "event_type": "InventoryReserved",
+  "schema_version": 1,
+  "occurred_at": "2026-07-25T20:30:00.456+08:00",
+  "producer": "inventory-service",
+  "trace_id": "trace_abc",
+  "partition_key": "90000001",
+  "data": {
+    "order_id": 90000001,
+    "merchant_id": 10001,
+    "attempt_no": 1,
+    "order_type": "INSTANT",
+    "processing_time": null,
+    "reservations": [
+      {
+        "reservation_id": "rsv_01",
+        "dish_id": 90001,
+        "quantity": 2,
+        "status": "RESERVED"
+      }
+    ],
+    "reason_code": null
+  }
+}
+</code></pre>
+<p>设计时注意：</p>
+<ul>
+<li><code>event_id</code> 全局唯一，用于消费幂等；</li>
+<li><code>schema_version</code> 支持事件演进；</li>
+<li><code>attempt_no</code> 防止旧事件操作新的预扣；</li>
+<li>不把 Redis 当前 <code>available</code> 当成事件事实传播，它是快速变化的在线状态；</li>
+<li>Consumer 可以维护 Inbox 表或消费幂等表，避免重复副作用；</li>
+<li>Kafka 采用 at-least-once 语义，系统设计目标是“允许重复，不能丢失”。</li>
+</ul>
+<h2 id="12-对账、修复与-Redis-重建"><a href="#12-对账、修复与-Redis-重建" class="headerlink" title="12. 对账、修复与 Redis 重建"></a>12. 对账、修复与 Redis 重建</h2><h3 id="12-1-对账公式"><a href="#12-1-对账公式" class="headerlink" title="12.1 对账公式"></a>12.1 对账公式</h3><p>对于一个菜品，在同一库存基线版本下：</p>
+<pre class=" language-language-text"><code class="language-language-text">expected_available =
+    baseline_total
+    + sum(adjust_delta)
+    - sum(valid_try_quantity)
+    + sum(canceled_quantity)
+</code></pre>
+<p>或者直接根据 Ledger delta 聚合：</p>
+<pre class=" language-language-text"><code class="language-language-text">expected_available = baseline_total + sum(available_delta)
+expected_reserved  = sum(reserved_delta)
+expected_sold      = sum(sold_delta)
+</code></pre>
+<p>对账任务按 <code>merchant_id + dish_id</code> 分片，比较 MySQL 期望值和 Redis 实际值。</p>
+<h3 id="12-2-在线修复"><a href="#12-2-在线修复" class="headerlink" title="12.2 在线修复"></a>12.2 在线修复</h3><p>不能在发现差异后直接 <code>SET available = expected</code>，因为修复期间可能还有在线 Try。</p>
+<p>安全修复方式是：</p>
+<ol>
+<li>读取 Redis 当前 <code>version</code>；</li>
+<li>根据 MySQL 计算期望数量；</li>
+<li>Lua 中再次检查 Redis <code>version</code> 是否未变化；</li>
+<li>版本一致才更新，否则重新计算；</li>
+<li>修复操作本身也生成 <code>operation_id</code> 和 Ledger；</li>
+<li>大批量差异限速处理，避免影响下单链路。</li>
+</ol>
+<h3 id="12-3-Redis-整体丢失"><a href="#12-3-Redis-整体丢失" class="headerlink" title="12.3 Redis 整体丢失"></a>12.3 Redis 整体丢失</h3><p>如果发生极端故障，需要从 MySQL 重建 Redis：</p>
+<ol>
+<li>暂停受影响库存分片的新 Try，库存安全优先；</li>
+<li>加载 <code>dish_stock_baseline</code>；</li>
+<li>聚合已提交 Ledger，恢复 available、reserved 和 sold；</li>
+<li>检查未完成 WAL，逐条恢复中间操作；</li>
+<li>完成全量对账；</li>
+<li>小流量恢复写入，再逐步放开。</li>
+</ol>
+<p>MySQL 之所以必须保留完整操作记录，就是为了在 Redis 数据损坏、主从回退或误操作后，系统仍然有可审计、可重建的依据。</p>
+<h2 id="13-超卖与少卖分别如何避免"><a href="#13-超卖与少卖分别如何避免" class="headerlink" title="13. 超卖与少卖分别如何避免"></a>13. 超卖与少卖分别如何避免</h2><h3 id="13-1-超卖"><a href="#13-1-超卖" class="headerlink" title="13.1 超卖"></a>13.1 超卖</h3><p>超卖通常来自并发检查和扣减不原子，或者重复消息造成重复扣减。</p>
+<p>本方案通过以下机制避免：</p>
+<ul>
+<li>Redis Lua 原子执行“检查 available + 转入 reserved”；</li>
+<li><code>operation_id</code> 保证重复 Try 只生效一次；</li>
+<li>Reservation 唯一键阻止同一订单重复创建预扣；</li>
+<li>Confirm 和 Cancel 使用 CAS 竞争终态；</li>
+<li>Redis 故障时失败关闭，不绕过库存继续下单。</li>
+</ul>
+<h3 id="13-2-少卖"><a href="#13-2-少卖" class="headerlink" title="13.2 少卖"></a>13.2 少卖</h3><p>少卖通常表现为库存被预扣后没有及时释放，Redis 数量长期低于真实可售数量。</p>
+<p>本方案通过以下机制避免：</p>
+<ul>
+<li>Reservation 保存 <code>expire_at</code>；</li>
+<li>10 分钟扫描未确认预扣；</li>
+<li>Cancel WAL 持续重试；</li>
+<li>多菜品 Try 部分失败后主动补偿；</li>
+<li>MySQL Ledger 与 Redis 定期对账；</li>
+<li>Redis op 记录解决“实际已执行但调用方误以为失败”的不确定窗口。</li>
+</ul>
+<h2 id="14-性能与容量设计"><a href="#14-性能与容量设计" class="headerlink" title="14. 性能与容量设计"></a>14. 性能与容量设计</h2><p>正常 Try 链路包含：</p>
+<ol>
+<li>一次 MySQL 本地事务：写 Reservation 和 WAL；</li>
+<li>一次 Redis Lua；</li>
+<li>一次 MySQL 本地事务：更新状态、写 Ledger 和 Outbox。</li>
+</ol>
+<p>它比单纯执行一次 <code>DECR</code> 更复杂，但换来了完整的故障恢复能力。通过连接池、批量 Outbox、WAL 分片和合理索引，平均事务耗时可以控制在 50ms 以内。</p>
+<p>系统最终支持 10 万级日库存操作，库存一致性达到 99.99%，库存不足相关取消率从 0.8% 降到 0.05%，下降约 94%。</p>
+<p>这里的 99.99% 必须给出统计口径。推荐同时关注：</p>
+<ul>
+<li>MySQL 期望库存与 Redis 实际库存一致的校验比例；</li>
+<li>超卖订单数；</li>
+<li>少卖差异数；</li>
+<li>P95&#x2F;P99 差异修复时长；</li>
+<li>WAL 积压量和最老任务年龄；</li>
+<li>Outbox 发送延迟；</li>
+<li>Try&#x2F;Confirm&#x2F;Cancel 成功率和 TP99。</li>
+</ul>
+<p>“零资损”不能只靠一句结果描述，需要由超卖监控、库存对账、异常补偿和长期业务指标共同证明。</p>
+<h2 id="15-标准-TCC-的正常流程"><a href="#15-标准-TCC-的正常流程" class="headerlink" title="15. 标准 TCC 的正常流程"></a>15. 标准 TCC 的正常流程</h2><p>标准 TCC 是一种由全局事务协调器驱动的两阶段分布式事务方案。虽然业务接口被命名为 Try、Confirm、Cancel，但从协调流程看，它仍然是“准备阶段 + 提交或回滚阶段”。</p>
+<p>参与角色通常包括：</p>
+<ul>
+<li><strong>事务发起方</strong>：开启一个全局事务；</li>
+<li><strong>事务协调器</strong>：保存全局事务和各分支事务状态；</li>
+<li><strong>事务参与者</strong>：订单、库存、优惠券、账户等资源服务；</li>
+<li><strong>业务资源</strong>：各参与者自己的数据库和冻结资源。</li>
+</ul>
+<pre class="mermaid">sequenceDiagram
+    participant B as Business
+    participant C as TCC Coordinator
+    participant O as Order Participant
+    participant I as Inventory Participant
+    participant P as Promotion Participant
+
+    B->>C: Begin global transaction(XID)
+    C->>O: Try(XID, branch_id)
+    O-->>C: Try success
+    C->>I: Try(XID, branch_id)
+    I-->>C: Try success
+    C->>P: Try(XID, branch_id)
+
+    alt 所有Try成功
+        P-->>C: Try success
+        C->>C: 持久化全局COMMIT决议
+        C->>O: Confirm
+        C->>I: Confirm
+        C->>P: Confirm
+        Note over C,P: Confirm失败会持续重试
+    else 任意Try失败或超时
+        P-->>C: Try failed
+        C->>C: 持久化全局ROLLBACK决议
+        C->>O: Cancel
+        C->>I: Cancel
+        C->>P: Cancel
+        Note over C,P: Cancel失败会持续重试
+    end</pre>
+
+<p>每个阶段的职责是：</p>
+<ol>
+<li><strong>Try</strong>：检查业务条件并预留资源，例如冻结库存、冻结余额，但不完成最终业务提交；</li>
+<li><strong>Confirm</strong>：全局 Try 全部成功后，协调器通知所有参与者正式提交冻结资源；</li>
+<li><strong>Cancel</strong>：任意参与者 Try 失败或全局事务超时后，协调器通知已经 Try 的参与者释放资源；</li>
+<li><strong>Coordinator Recovery</strong>：协调器持久化最终决议，进程重启后继续重试 Confirm 或 Cancel，直到所有分支收敛。</li>
+</ol>
+<p>标准 TCC 还要求参与者使用 <code>XID + branch_id</code> 建立分支事务记录，并处理重复调用、空回滚和悬挂问题。只实现三个同名接口，并不自动等于实现了 TCC。</p>
+<h2 id="16-为什么这里不使用标准-TCC"><a href="#16-为什么这里不使用标准-TCC" class="headerlink" title="16. 为什么这里不使用标准 TCC"></a>16. 为什么这里不使用标准 TCC</h2><p>这套库存方案使用了 Try、Confirm、Cancel 的业务语义，但没有直接引入标准 TCC 协调器，主要有以下原因。</p>
+<h3 id="16-1-事务生命周期不适合"><a href="#16-1-事务生命周期不适合" class="headerlink" title="16.1 事务生命周期不适合"></a>16.1 事务生命周期不适合</h3><p>标准 TCC 更适合生命周期较短、参与者边界明确的业务事务。例如一次下单同时冻结账户、优惠券和库存，所有 Try 在一个短时间窗口内完成，然后由协调器统一做出 Commit 或 Rollback 决议。</p>
+<p>预约单的库存可能在下单后很久才到 <code>processing_time</code> 正式确认。如果让全局 TCC 事务和分支上下文维持几个小时，会带来大量长事务状态、超时配置和协调器存储压力，也会让业务取消、改约等状态很难表达。</p>
+<h3 id="16-2-库存是独立领域事务"><a href="#16-2-库存是独立领域事务" class="headerlink" title="16.2 库存是独立领域事务"></a>16.2 库存是独立领域事务</h3><p>本文的核心一致性边界在库存服务内部：</p>
+<ul>
+<li>MySQL 保存库存操作生命周期；</li>
+<li>Redis 保存在线数量；</li>
+<li>Kafka 接收订单事实变化。</li>
+</ul>
+<p>订单创建是否成功已经由订单域自己提交，库存服务根据订单事件推进自己的状态。这里没有一个协调器同时控制订单数据库、Redis 和所有下游资源，也没有让多个参与者共同等待同一个全局决议。</p>
+<h3 id="16-3-需要事件驱动和长时间补偿"><a href="#16-3-需要事件驱动和长时间补偿" class="headerlink" title="16.3 需要事件驱动和长时间补偿"></a>16.3 需要事件驱动和长时间补偿</h3><p>即时单由 <code>OrderCreated</code> 触发 Confirm，预约单由时间轮触发 Confirm，超时和订单取消触发 Cancel。这些决策来自业务事件和状态，而不是一个全局 TCC Coordinator。</p>
+<p>WAL、Outbox、重试和对账更适合表达这种长生命周期、事件驱动的最终一致性流程。它允许订单主链路先完成本域事务，也不会因为库存后续通知或某个下游暂时异常而长期占用一个全局事务上下文。</p>
+<h3 id="16-4-降低协调器和框架耦合"><a href="#16-4-降低协调器和框架耦合" class="headerlink" title="16.4 降低协调器和框架耦合"></a>16.4 降低协调器和框架耦合</h3><p>引入标准 TCC 除了增加一个协调器，还要求所有参与者实现统一分支协议、全局事务传播、事务日志、恢复任务和防悬挂机制。对于只有库存内部双存储需要收敛的场景，这部分复杂度和收益不一定匹配。</p>
+<p>因此这里选择的是：</p>
+<pre class=" language-language-text"><code class="language-language-text">TCC业务语义
++ 库存领域状态机
++ Operation WAL
++ Redis幂等与Fence
++ Transactional Outbox
++ Kafka事件
++ 补偿与对账
+</code></pre>
+<p>它更接近一个<strong>借用 TCC 三阶段语义的状态机驱动 Saga</strong>，而不是标准 TCC 分布式事务。</p>
+<h2 id="17-为什么这套方案能够保证最终一致性"><a href="#17-为什么这套方案能够保证最终一致性" class="headerlink" title="17. 为什么这套方案能够保证最终一致性"></a>17. 为什么这套方案能够保证最终一致性</h2><p>最终一致性不表示“过一段时间大概会一致”，而是需要同时具备安全性和活性。</p>
+<h3 id="17-1-安全性：错误结果不能发生"><a href="#17-1-安全性：错误结果不能发生" class="headerlink" title="17.1 安全性：错误结果不能发生"></a>17.1 安全性：错误结果不能发生</h3><p>系统通过以下不变量保证不会多扣或多返：</p>
+<ol>
+<li>同一个 <code>reservation_id + action</code> 只有一条 MySQL 业务流水；</li>
+<li>同一个 <code>operation_id</code> 在 Redis 只产生一次数量变化；</li>
+<li>Try 只能执行 <code>available -&gt; reserved</code>；</li>
+<li>Confirm 和 Cancel 只能从 <code>RESERVED</code> 竞争，终态不能互相转换；</li>
+<li>Cancel 没有看到 Try 时只写 Fence，不能增加 available；</li>
+<li>Cancel 已经形成终态后，迟到 Try 会被 Fence 拒绝；</li>
+<li>MySQL 的状态更新、Ledger 和 Outbox 在同一个本地事务中提交。</li>
+</ol>
+<p>这些约束保证系统即使发生重复消息、请求超时和并发竞争，也不会进入一个业务上非法的数量状态。</p>
+<h3 id="17-2-活性：中间状态最终会继续推进"><a href="#17-2-活性：中间状态最终会继续推进" class="headerlink" title="17.2 活性：中间状态最终会继续推进"></a>17.2 活性：中间状态最终会继续推进</h3><p>系统通过以下机制保证未完成动作不会永久停留：</p>
+<ol>
+<li>每次调用 Redis 前先写 WAL，未完成操作一定可以被扫描出来；</li>
+<li>同步 API 失败后，后台 Worker 使用原 <code>operation_id</code> 重试；</li>
+<li><code>CONFIRMING/CANCELING</code> 都有明确的恢复入口；</li>
+<li>Outbox Publisher 持续重试未发送事件；</li>
+<li>时间轮丢失时，数据库扫描补触发预约单；</li>
+<li>超时 Reservation 会被 Cancel 扫描任务发现；</li>
+<li>对账任务发现 Redis 和 MySQL 长期差异并执行版本化修复；</li>
+<li>自动重试超过阈值后进入 Dead 状态并告警，由人工或修复任务继续处理。</li>
+</ol>
+<p>在满足“MySQL 和 Redis 最终恢复、重试任务持续运行、永久失败能够被人工处理”这些前提时，每条 Reservation 最终都会进入：</p>
+<pre class=" language-language-text"><code class="language-language-text">REJECTED / CONFIRMED / CANCELED
+</code></pre>
+<p>同时 Redis 数量会和 MySQL Ledger 推导出的期望值收敛。这才是本方案最终一致性的完整含义。</p>
+<h2 id="18-空回滚与悬挂问题"><a href="#18-空回滚与悬挂问题" class="headerlink" title="18. 空回滚与悬挂问题"></a>18. 空回滚与悬挂问题</h2><p>虽然它不是标准 TCC，但只要存在 Try 和 Cancel 的异步竞态，就仍然会遇到与 TCC 类似的空回滚和悬挂风险。</p>
+<h3 id="18-1-空回滚"><a href="#18-1-空回滚" class="headerlink" title="18.1 空回滚"></a>18.1 空回滚</h3><p>典型时序如下：</p>
+<ol>
+<li>Try 请求已经发出，但还没有执行到 Redis；</li>
+<li>订单侧超时，先发起 Cancel；</li>
+<li>Cancel 没有找到预扣记录；</li>
+<li>如果 Cancel 直接执行 <code>available += quantity</code>，库存会凭空增加。</li>
+</ol>
+<p>这就是空回滚。</p>
+<p>本方案的处理方式是：Cancel 发现 Redis Fence 不存在时，不修改数量，只创建：</p>
+<pre class=" language-language-text"><code class="language-language-text">reservation.phase = CANCELED
+</code></pre>
+<p>重复 Cancel 读取到相同终态后直接返回成功，所以空回滚既不会增加库存，也不会无限报错。</p>
+<h3 id="18-2-悬挂"><a href="#18-2-悬挂" class="headerlink" title="18.2 悬挂"></a>18.2 悬挂</h3><p>悬挂是空回滚之后的迟到 Try：</p>
+<ol>
+<li>Cancel 已经把事务判定为回滚；</li>
+<li>因为网络延迟，原 Try 此时才到达 Redis；</li>
+<li>如果 Try 继续冻结库存，就会出现全局已经取消、资源却被预扣的悬挂状态。</li>
+</ol>
+<p>Try Lua 在修改库存前必须读取 Reservation Fence。只要发现 <code>phase=CANCELED</code>，就返回 <code>FENCED</code>，不能再执行 <code>available -&gt; reserved</code>。</p>
+<p>因此：</p>
+<pre class=" language-language-text"><code class="language-language-text">Cancel before Try:
+    只写CANCELED Fence，不返还数量
+
+Late Try after Cancel:
+    看到CANCELED Fence，拒绝预扣
+</code></pre>
+<h3 id="18-3-重复调用和阶段乱序"><a href="#18-3-重复调用和阶段乱序" class="headerlink" title="18.3 重复调用和阶段乱序"></a>18.3 重复调用和阶段乱序</h3><p>Fence 之外还需要两层保护：</p>
+<ul>
+<li><code>operation_id</code> 解决同一阶段重复调用，例如 Try 重试三次只能预扣一次；</li>
+<li>MySQL <code>status + version</code> CAS 解决 Confirm 和 Cancel 并发竞争。</li>
+</ul>
+<p>Redis Fence 和 MySQL 状态机都采用单向状态转换。两边任何一方暂时落后，都可以通过 WAL 和对账补齐，但不能执行逆向状态扭转。</p>
+<h3 id="18-4-为什么有三个阶段仍不能称为标准-TCC"><a href="#18-4-为什么有三个阶段仍不能称为标准-TCC" class="headerlink" title="18.4 为什么有三个阶段仍不能称为标准 TCC"></a>18.4 为什么有三个阶段仍不能称为标准 TCC</h3><p>判断是否为标准 TCC，关键不在接口名字，而在事务协议：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>标准 TCC</th>
+<th>本文方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最终决议者</td>
+<td>全局事务协调器</td>
+<td>订单事件、状态机、时间轮和超时任务</td>
+</tr>
+<tr>
+<td>事务标识</td>
+<td>XID + branch_id</td>
+<td>reservation_id + operation_id + attempt_no</td>
+</tr>
+<tr>
+<td>参与者</td>
+<td>多个统一注册的分支事务</td>
+<td>库存领域内部 MySQL、Redis及事件处理</td>
+</tr>
+<tr>
+<td>Confirm 时机</td>
+<td>全部 Try 成功后立即由协调器触发</td>
+<td>即时单事件触发，预约单到 processing_time 触发</td>
+</tr>
+<tr>
+<td>Cancel 时机</td>
+<td>全局事务失败或超时</td>
+<td>订单失败、订单取消、预扣超时或局部补偿</td>
+</tr>
+<tr>
+<td>恢复中心</td>
+<td>Coordinator 持久化全局决议</td>
+<td>WAL Worker、Outbox、扫描任务和对账</td>
+</tr>
+<tr>
+<td>一致性模型</td>
+<td>协调器驱动的业务两阶段提交</td>
+<td>状态机驱动的事件最终一致性</td>
+</tr>
+</tbody></table>
+<p>所以更准确的描述是：</p>
+<blockquote>
+<p>该方案借用了 TCC 的预留、确认和释放语义，但没有采用全局事务协调器和标准分支事务协议；它本质上是一套基于状态机、WAL、幂等 Fence、Outbox 和补偿对账实现的最终一致性库存方案。</p>
+</blockquote>
+<h2 id="19-方案总结"><a href="#19-方案总结" class="headerlink" title="19. 方案总结"></a>19. 方案总结</h2><p>这套库存系统最核心的设计不是 TCC 三个英文单词，而是把分布式事务中的每一个不确定窗口都变成可观察、可重试的状态：</p>
+<ul>
+<li>Try 用 Redis Lua 保证高并发下不超卖；</li>
+<li>MySQL Reservation 和 Ledger 保存事务生命周期与审计记录；</li>
+<li>Operation WAL 解决 Redis 调用前后的故障恢复；</li>
+<li>状态机和 CAS 解决 Confirm、Cancel 并发竞争；</li>
+<li>Redis <code>operation_id</code> 解决重复执行和结果未知；</li>
+<li>Transactional Outbox 解决数据库状态与 Kafka 事件一致性；</li>
+<li>时间轮加扫描补偿解决预约单触发丢失；</li>
+<li>对账和重建机制兜住双存储的长期一致性。</li>
+</ul>
+<p>最终，Redis 负责在线性能，MySQL 负责记录、恢复和审计，状态机负责约束流程方向，幂等负责抵抗重复，可重入负责从局部失败中继续。它们组合在一起，才是一套真正能够在生产环境落地的最终一致性库存方案。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://xiaofenglei.cn" rel="external nofollow noreferrer">小风雷</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/">https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://xiaofenglei.cn" target="_blank">小风雷</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">分布式系统</span>
+                                </a>
+                            
+                                <a href="/tags/TCC/">
+                                    <span class="chip bg-color">TCC</span>
+                                </a>
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
+                                <a href="/tags/Kafka/">
+                                    <span class="chip bg-color">Kafka</span>
+                                </a>
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '7878399d8bff0d88848b',
+        clientSecret: '96eaba695092f18c65833528c2ef63ad74696f00',
+        repo: 'weijunlei.github.io',
+        owner: 'weijunlei',
+        admin: "weijunlei",
+        id: '2026-07-25T20-30-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg" class="responsive-img" alt="TCC三阶段语义：外卖系统分布式库存最终一致性方案">
+                        
+                        <span class="card-title">TCC三阶段语义：外卖系统分布式库存最终一致性方案</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从库存预扣、MySQL流水、Redis Lua、WAL、Outbox到Confirm与Cancel，完整拆解高并发库存系统的最终一致性设计。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">分布式系统</span>
+                    </a>
+                    
+                    <a href="/tags/TCC/">
+                        <span class="chip bg-color">TCC</span>
+                    </a>
+                    
+                    <a href="/tags/Redis/">
+                        <span class="chip bg-color">Redis</span>
+                    </a>
+                    
+                    <a href="/tags/Kafka/">
+                        <span class="chip bg-color">Kafka</span>
+                    </a>
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/04/06/claudecode-react-yu-plan-and-execute-ji-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg" class="responsive-img" alt="ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现">
+                        
+                        <span class="card-title">ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于 ClaudeCode TypeScript 源码，拆解它如何用 query 主循环实现 ReAct，如何通过 plan mode、plan file、approval flow 叠加出 Plan-and-Execute，以及这两套机制分别在什么条件下触发、判断依据是什么、如何持续传递给大模型。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-04-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ClaudeCode/">
+                        <span class="chip bg-color">ClaudeCode</span>
+                    </a>
+                    
+                    <a href="/tags/Agent/">
+                        <span class="chip bg-color">Agent</span>
+                    </a>
+                    
+                    <a href="/tags/TypeScript/">
+                        <span class="chip bg-color">TypeScript</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
+                    </a>
+                    
+                    <a href="/tags/ReAct/">
+                        <span class="chip bg-color">ReAct</span>
+                    </a>
+                    
+                    <a href="/tags/Plan-and-Execute/">
+                        <span class="chip bg-color">Plan-and-Execute</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小风雷<br />'
+            + '文章作者: 小风雷<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; 2026 WeijunLei. All Rights Reserved.
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">74k</span>&nbsp;字
+                
+            <span id="sitetime"></span>
+
+            
+            
+            
+            <br>
+            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+                赣ICP备2026004021号-1
+            </a>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/weijunlei" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2019, 12, 12, 00, 00, 00); 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="/js/matery.js"></script>
+    
+    <!-- Mermaid 支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: { useMaxWidth: true, htmlLabels: true }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>
