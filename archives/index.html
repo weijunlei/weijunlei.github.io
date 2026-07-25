@@ -1098,8 +1098,17 @@ $(function () {
             startOnLoad: true,
             theme: 'base',
             flowchart: { useMaxWidth: false, htmlLabels: true },
+            sequence: {
+                useMaxWidth: false,
+                actorMargin: 80,
+                width: 160,
+                height: 65,
+                messageMargin: 45
+            },
             themeVariables: {
-                fontSize: '16px',
+                fontSize: '18px',
+                actorFontSize: '18px',
+                noteFontSize: '18px',
                 background: '#fff7cc',
                 primaryColor: '#fff2a8',
                 primaryTextColor: '#172033',

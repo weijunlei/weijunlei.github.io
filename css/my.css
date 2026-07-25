@@ -8,6 +8,9 @@ pre.mermaid,
     background: #fff7cc !important;
     border: 1px solid #dfc45a;
     border-radius: 6px;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 pre.mermaid svg,
@@ -17,6 +20,13 @@ pre.mermaid svg,
     height: auto;
     margin: 0 auto;
     background: #fff7cc !important;
+}
+
+.mermaid svg[aria-roledescription="sequence"] {
+    width: 1400px !important;
+    min-width: 1400px;
+    max-width: none !important;
+    margin: 0;
 }
 
 .mermaid text,
