@@ -1,12 +1,12 @@
 /* Here is your custom css styles. */
 
-/* Mermaid diagrams need a light canvas; the site's code blocks use a dark theme. */
+/* Keep Mermaid diagrams separate from the site's dark code-block theme. */
 pre.mermaid,
 .mermaid {
     padding: 1.5rem !important;
-    color: #0f172a !important;
-    background: #ffffff !important;
-    border: 1px solid #d7dee8;
+    color: #172033 !important;
+    background: #fff7cc !important;
+    border: 1px solid #dfc45a;
     border-radius: 6px;
 }
 
@@ -16,15 +16,29 @@ pre.mermaid svg,
     max-width: 100%;
     height: auto;
     margin: 0 auto;
-    background: #ffffff;
+    background: #fff7cc !important;
 }
 
 .mermaid text,
 .mermaid .messageText,
 .mermaid .loopText,
 .mermaid .labelText {
-    fill: #0f172a !important;
-    color: #0f172a !important;
+    fill: #172033 !important;
+    color: #172033 !important;
+}
+
+.mermaid .actor,
+.mermaid .labelBox,
+.mermaid .note {
+    fill: #fff2a8 !important;
+    stroke: #8a6d00 !important;
+}
+
+.mermaid .actor-line,
+.mermaid .messageLine0,
+.mermaid .messageLine1,
+.mermaid .loopLine {
+    stroke: #5f520f !important;
 }
 
 /* hexo-filter-github-emojis */
