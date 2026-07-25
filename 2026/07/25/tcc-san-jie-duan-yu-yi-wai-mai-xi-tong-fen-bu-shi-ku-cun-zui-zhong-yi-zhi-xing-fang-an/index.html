@@ -32,8 +32,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -465,9 +465,9 @@ sequenceDiagram
 <p>不能等 MySQL Stock 异步更新完成后才认为在线预扣成功，否则 Kafka 和 MySQL 投影延迟会进入下单关键路径；也不能用 Outbox 的 <code>SENT</code> 代表下游已经落库，<code>SENT</code> 只代表 Kafka Broker 已确认接收。</p>
 <h2 id="2-业务语义try-confirm-cancel"><a class="markdownIt-Anchor" href="#2-业务语义try-confirm-cancel"></a> 2. 业务语义：Try、Confirm、Cancel</h2>
 <p>一次库存事务以 Reservation 的 <code>id</code>（雪花算法预生成）标识，单个菜品操作使用以下业务唯一键：</p>
-<pre class="highlight"><code class="text">order_item_id + attempt_no
+<pre class="highlight"><code class="text">order_item_id + dish_id
 </code></pre>
-<p>其中 <code>order_item_id</code> 唯一标识订单内的一条菜品明细——同一订单点两份相同菜品也会产生不同的 <code>order_item_id</code>；<code>attempt_no</code> 用来区分同一明细的重新下单或重新预扣。已经 Cancel 的预扣不能被复活，如果业务需要再次尝试，必须创建新的 <code>attempt_no</code>。</p>
+<p>其中 <code>order_item_id</code> 唯一标识订单内的一条菜品明细，<code>dish_id</code> 标识被操作的菜品。Try 到达后先按 <code>order_item_id + dish_id</code> 反查 Reservation：不存在才创建，已经存在则根据当前状态幂等返回。已经 Cancel 的 Reservation 不能被复活；如果业务重新创建订单明细，应生成新的 <code>order_item_id</code> 和 Reservation。</p>
 <h3 id="21-try预扣库存"><a class="markdownIt-Anchor" href="#21-try预扣库存"></a> 2.1 Try：预扣库存</h3>
 <p>Try 阶段要完成两件事：</p>
 <ol>
@@ -497,7 +497,7 @@ sold     += quantity
 available += quantity
 </code></pre>
 <p>系统会扫描超过 10 分钟仍处于 <code>RESERVED</code> 的记录，但扫描到记录后不能直接返还库存。它需要先确认订单没有成功，再通过状态机抢占 Cancel 权限。</p>
-<p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。订单侧需要把该订单置为失败，或者使用新的 <code>attempt_no</code> 重新发起库存事务。</p>
+<p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。订单侧需要把该订单置为失败；后续重新下单应创建新的订单明细和 Reservation，不能复用已经 Cancel 的记录。</p>
 <h2 id="3-状态机设计"><a class="markdownIt-Anchor" href="#3-状态机设计"></a> 3. 状态机设计</h2>
 <pre class="mermaid">stateDiagram-v2
     [*] --> PREPARING: 创建Try WAL
@@ -590,7 +590,6 @@ available += quantity
     dish_id         <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;菜品ID，定位Redis库存Key&#x27;</span>,
     stock_bucket_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;绑定的每日库存桶，Confirm/Cancel不得重新计算&#x27;</span>,
     stock_date      <span class="hljs-type">DATE</span> <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家时区下的库存营业日&#x27;</span>,
-    attempt_no      <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span> COMMENT <span class="hljs-string">&#x27;尝试序号，区分同一明细的重新下单或重新预扣&#x27;</span>,
     quantity        <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;本次预扣数量&#x27;</span>,
     order_type      TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;订单类型：1=instant即时单, 2=scheduled预约单&#x27;</span>,
     processing_time DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;预约单履约时间，到点触发Confirm；即时单为空&#x27;</span>,
@@ -603,7 +602,7 @@ available += quantity
     created_at      DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,
     updated_at      DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;更新时间&#x27;</span>,
     <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_order_item_attempt (order_item_id, attempt_no),
+    <span class="hljs-keyword">UNIQUE</span> KEY uk_order_item_dish (order_item_id, dish_id),
     KEY idx_stock_bucket (stock_bucket_id),
     KEY idx_sync_status (sync_status, updated_at),
     KEY idx_expire_scan (status, expire_at),
@@ -867,7 +866,7 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <h3 id="61-第一步创建-reservation-和-wal"><a class="markdownIt-Anchor" href="#61-第一步创建-reservation-和-wal"></a> 6.1 第一步：创建 Reservation 和 WAL</h3>
 <p>Try 请求到达后，先开启 MySQL 本地事务：</p>
 <ol>
-<li>根据 <code>order_item_id + attempt_no</code> 查询或插入 Reservation；</li>
+<li>根据 <code>order_item_id + dish_id</code> 查询 Reservation，不存在才插入；</li>
 <li>新记录状态为 <code>PREPARING</code>；</li>
 <li>插入 <code>TRY</code> 类型 WAL，状态为 <code>INIT</code>；</li>
 <li>提交事务。</li>
@@ -959,12 +958,12 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
   <span class="hljs-attr">&quot;order_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">90000001</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;order_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;INSTANT&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;merchant_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10001</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;inventory_attempt_no&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">&quot;inventory_reservation_ids&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">100123001</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
 <p>库存消费者收到消息后：</p>
 <ol>
-<li>根据 <code>order_id + attempt_no</code> 查询所有 Reservation；</li>
+<li>根据 <code>order_id</code> 查询订单下所有 Reservation，并校验事件携带的 <code>inventory_reservation_ids</code>；</li>
 <li>使用 CAS 把每条 <code>RESERVED</code> 抢占为 <code>CONFIRMING</code>；</li>
 <li>在同一 MySQL 事务中插入 Confirm WAL；</li>
 <li>Executor 执行 Confirm Lua；</li>
@@ -1199,7 +1198,6 @@ LIMIT <span class="hljs-number">100</span>
     <span class="hljs-attr">&quot;dish_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">90001</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;stock_bucket_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bucket_10001_90001_20260726&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;stock_date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-07-26&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;attempt_no&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;order_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;INSTANT&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;processing_time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;reservation_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100123001</span><span class="hljs-punctuation">,</span>
@@ -1224,7 +1222,7 @@ LIMIT <span class="hljs-number">100</span>
 <ul>
 <li><code>event_id</code> 全局唯一，用于消费幂等；</li>
 <li><code>schema_version</code> 支持事件演进；</li>
-<li><code>attempt_no</code> 防止旧事件操作新的预扣；</li>
+<li><code>reservation_id</code> 和 <code>order_item_id + dish_id</code> 防止旧事件操作其他预扣；</li>
 <li>MySQL Stock 同步事件按 <code>stock_bucket_id</code> 分区，并携带 <code>redis_version</code> 和操作后的绝对数量；</li>
 <li>对订单下游发布的生命周期事件仍按 <code>order_id</code> 分区；</li>
 <li>Consumer 可以维护 Inbox 表或消费幂等表，避免重复副作用；</li>
@@ -1551,7 +1549,7 @@ Late Try after Cancel:
 <tr>
 <td>事务标识</td>
 <td>XID + branch_id</td>
-<td>reservation_id + operation_id + attempt_no</td>
+<td>reservation_id + operation_id</td>
 </tr>
 <tr>
 <td>参与者</td>
