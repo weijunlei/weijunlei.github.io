@@ -4,10 +4,9 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="TCC三阶段语义：外卖系统分布式库存最终一致性方案, 小风雷">
-    <meta name="description" content=" TCC三阶段语义：外卖系统分布式库存最终一致性方案
-如果外卖系统的菜品域没有完整的库存能力，就会出现一种尴尬：用户已经成功创建订单，商家备货时却发现菜品售罄，最终只能取消订单。
-这个项目的目标不是简单增加一个 stock 字段，而是从 0">
+    <meta name="keywords" content="基于 TCC 思想的分布式库存一致性方案, 小风雷">
+    <meta name="description" content="基于 TCC 思想的分布式库存一致性方案如果外卖系统的菜品域没有完整的库存能力，就会出现一种尴尬：用户已经成功创建订单，商家备货时却发现菜品售罄，最终只能取消订单。
+这个项目的目标不是简单增加一个 stock 字段，而是从 0 到 1 建设">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>TCC三阶段语义：外卖系统分布式库存最终一致性方案 | 小风雷</title>
+    <title>基于 TCC 思想的分布式库存一致性方案 | 小风雷</title>
     <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
@@ -178,13 +177,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        TCC三阶段语义：外卖系统分布式库存最终一致性方案
+                        基于 TCC 思想的分布式库存一致性方案
                     </div>
                 </div>
             </div>
@@ -352,14 +351,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12k
+                    10.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    49 分
+                    41 分
                 </div>
                 
 				
@@ -370,8 +369,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="tcc三阶段语义外卖系统分布式库存最终一致性方案"><a class="markdownIt-Anchor" href="#tcc三阶段语义外卖系统分布式库存最终一致性方案"></a> TCC三阶段语义：外卖系统分布式库存最终一致性方案</h1>
-<p>如果外卖系统的菜品域没有完整的库存能力，就会出现一种尴尬：用户已经成功创建订单，商家备货时却发现菜品售罄，最终只能取消订单。</p>
+                <h1 id="基于-TCC-思想的分布式库存一致性方案"><a href="#基于-TCC-思想的分布式库存一致性方案" class="headerlink" title="基于 TCC 思想的分布式库存一致性方案"></a>基于 TCC 思想的分布式库存一致性方案</h1><p>如果外卖系统的菜品域没有完整的库存能力，就会出现一种尴尬：用户已经成功创建订单，商家备货时却发现菜品售罄，最终只能取消订单。</p>
 <p>这个项目的目标不是简单增加一个 <code>stock</code> 字段，而是从 0 到 1 建设一套能够支撑真实交易链路的库存系统：</p>
 <ul>
 <li>高并发预扣时不能超卖；</li>
@@ -384,8 +382,7 @@
 <blockquote>
 <p>文中的表名、Topic 名和部分字段经过抽象，重点是说明设计思想和故障恢复方式。</p>
 </blockquote>
-<h2 id="1-整体架构"><a class="markdownIt-Anchor" href="#1-整体架构"></a> 1. 整体架构</h2>
-<pre class="mermaid">flowchart LR
+<h2 id="1-整体架构"><a href="#1-整体架构" class="headerlink" title="1. 整体架构"></a>1. 整体架构</h2><pre class="mermaid">flowchart LR
     Order["订单服务"] -->|"1. Reserve请求"| StockAPI["StockSvr API"]
 
     subgraph StockSvr["StockSvr"]
@@ -407,8 +404,8 @@
 
     Reconciler["对账与修复任务"] --> OnlineStock
     Reconciler --> MySQLDB</pre>
-<h3 id="11-正常预扣流程"><a class="markdownIt-Anchor" href="#11-正常预扣流程"></a> 1.1 正常预扣流程</h3>
-<p>下面是整体架构对应的正常预扣时序。在线预扣在 Reservation 和 Outbox 的本地事务提交后即可返回，MySQL Stock 投影通过 Kafka 异步完成。</p>
+
+<h3 id="1-1-正常预扣流程"><a href="#1-1-正常预扣流程" class="headerlink" title="1.1 正常预扣流程"></a>1.1 正常预扣流程</h3><p>下面是整体架构对应的正常预扣时序。在线预扣在 Reservation 和 Outbox 的本地事务提交后即可返回，MySQL Stock 投影通过 Kafka 异步完成。</p>
 <pre class="mermaid">%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#f8fafc","primaryTextColor":"#0f172a","primaryBorderColor":"#475569","lineColor":"#475569","signalColor":"#334155","signalTextColor":"#0f172a","actorBkg":"#ffffff","actorBorder":"#475569","actorTextColor":"#0f172a","labelBoxBkgColor":"#f8fafc","labelBoxBorderColor":"#64748b","labelTextColor":"#0f172a","noteBkgColor":"#fef3c7","noteTextColor":"#111827","activationBkgColor":"#dbeafe","activationBorderColor":"#2563eb"}}}%%
 sequenceDiagram
     participant O as Order Service
@@ -440,6 +437,7 @@ sequenceDiagram
     C->>M: 10. TX: INSERT Inbox<br/>UPDATE Stock Snapshot<br/>INSERT Ledger<br/>sync_status=SYNCED
     M-->>C: commit
     C-->>K: 11. Commit Offset</pre>
+
 <p>这套架构里有两个不同维度的事实源：</p>
 <ul>
 <li><strong>Redis 是在线可售数量的事实源</strong>：下单时是否还有库存，以 Redis Lua 的原子执行结果为准；</li>
@@ -463,25 +461,22 @@ sequenceDiagram
 <li><code>reservation.sync_status=SYNCED</code>：Redis 的变更已经通过 Kafka 落入 MySQL Stock 投影。</li>
 </ul>
 <p>不能等 MySQL Stock 异步更新完成后才认为在线预扣成功，否则 Kafka 和 MySQL 投影延迟会进入下单关键路径；也不能用 Outbox 的 <code>SENT</code> 代表下游已经落库，<code>SENT</code> 只代表 Kafka Broker 已确认接收。</p>
-<h2 id="2-业务语义try-confirm-cancel"><a class="markdownIt-Anchor" href="#2-业务语义try-confirm-cancel"></a> 2. 业务语义：Try、Confirm、Cancel</h2>
-<p>一次库存事务以 Reservation 的 <code>id</code>（雪花算法预生成）标识，单个菜品操作使用以下业务唯一键：</p>
-<pre class="highlight"><code class="text">order_item_id + dish_id
+<h2 id="2-业务语义：Try、Confirm、Cancel"><a href="#2-业务语义：Try、Confirm、Cancel" class="headerlink" title="2. 业务语义：Try、Confirm、Cancel"></a>2. 业务语义：Try、Confirm、Cancel</h2><p>一次库存事务以 Reservation 的 <code>id</code>（雪花算法预生成）标识，单个菜品操作使用以下业务唯一键：</p>
+<pre class=" language-language-text"><code class="language-language-text">order_item_id + dish_id
 </code></pre>
 <p>其中 <code>order_item_id</code> 唯一标识订单内的一条菜品明细，<code>dish_id</code> 标识被操作的菜品。Try 到达后先按 <code>order_item_id + dish_id</code> 反查 Reservation：不存在才创建，已经存在则根据当前状态幂等返回。已经 Cancel 的 Reservation 不能被复活；如果业务重新创建订单明细，应生成新的 <code>order_item_id</code> 和 Reservation。</p>
-<h3 id="21-try预扣库存"><a class="markdownIt-Anchor" href="#21-try预扣库存"></a> 2.1 Try：预扣库存</h3>
-<p>Try 阶段要完成两件事：</p>
+<h3 id="2-1-Try：预扣库存"><a href="#2-1-Try：预扣库存" class="headerlink" title="2.1 Try：预扣库存"></a>2.1 Try：预扣库存</h3><p>Try 阶段要完成两件事：</p>
 <ol>
 <li>判断菜品当前是否有足够的可售库存；</li>
 <li>将库存从 <code>available</code> 转移到 <code>reserved</code>，为当前订单冻结资源。</li>
 </ol>
 <p>数量变化为：</p>
-<pre class="highlight"><code class="text">available -= quantity
+<pre class=" language-language-text"><code class="language-language-text">available -= quantity
 reserved  += quantity
 </code></pre>
 <p>注意，这两个变化必须在同一段 Redis Lua 中完成。不能先 <code>GET available</code>，再由应用执行 <code>DECR</code>，否则并发请求可能同时读到相同余量并一起扣减，造成超卖。</p>
-<h3 id="22-confirm正式确认"><a class="markdownIt-Anchor" href="#22-confirm正式确认"></a> 2.2 Confirm：正式确认</h3>
-<p>Confirm 表示订单已经成功，预扣库存正式转为已售库存。</p>
-<pre class="highlight"><code class="text">reserved -= quantity
+<h3 id="2-2-Confirm：正式确认"><a href="#2-2-Confirm：正式确认" class="headerlink" title="2.2 Confirm：正式确认"></a>2.2 Confirm：正式确认</h3><p>Confirm 表示订单已经成功，预扣库存正式转为已售库存。</p>
+<pre class=" language-language-text"><code class="language-language-text">reserved -= quantity
 sold     += quantity
 </code></pre>
 <p>Confirm 不再减少 <code>available</code>，因为库存已经在 Try 阶段从可售池中移出。</p>
@@ -491,15 +486,13 @@ sold     += quantity
 <li><strong>预约单</strong>：Try 成功后等待 <code>processing_time</code>，由时间轮触发 Confirm。</li>
 </ul>
 <p>预约单不能过早 Confirm，否则库存会长时间占用并降低商家当前可售率；但也不能完全不预留，否则履约时间到达时可能无货。</p>
-<h3 id="23-cancel释放预扣"><a class="markdownIt-Anchor" href="#23-cancel释放预扣"></a> 2.3 Cancel：释放预扣</h3>
-<p>订单创建失败、订单主动取消或预扣超时后执行 Cancel：</p>
-<pre class="highlight"><code class="text">reserved  -= quantity
+<h3 id="2-3-Cancel：释放预扣"><a href="#2-3-Cancel：释放预扣" class="headerlink" title="2.3 Cancel：释放预扣"></a>2.3 Cancel：释放预扣</h3><p>订单创建失败、订单主动取消或预扣超时后执行 Cancel：</p>
+<pre class=" language-language-text"><code class="language-language-text">reserved  -= quantity
 available += quantity
 </code></pre>
 <p>系统会扫描超过 10 分钟仍处于 <code>RESERVED</code> 的记录，但扫描到记录后不能直接返还库存。它需要先确认订单没有成功，再通过状态机抢占 Cancel 权限。</p>
 <p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。订单侧需要把该订单置为失败；后续重新下单应创建新的订单明细和 Reservation，不能复用已经 Cancel 的记录。</p>
-<h2 id="3-状态机设计"><a class="markdownIt-Anchor" href="#3-状态机设计"></a> 3. 状态机设计</h2>
-<pre class="mermaid">stateDiagram-v2
+<h2 id="3-状态机设计"><a href="#3-状态机设计" class="headerlink" title="3. 状态机设计"></a>3. 状态机设计</h2><pre class="mermaid">stateDiagram-v2
     [*] --> PREPARING: 创建Try WAL
     PREPARING --> RESERVED: Redis预扣成功
     PREPARING --> REJECTED: 库存不足
@@ -517,6 +510,7 @@ available += quantity
     REJECTED --> [*]
     CONFIRMED --> [*]
     CANCELED --> [*]</pre>
+
 <p>核心规则如下：</p>
 <ul>
 <li><code>CONFIRMING</code> 和 <code>CANCELING</code> 只能有一个从 <code>RESERVED</code> 抢占成功；</li>
@@ -526,13 +520,13 @@ available += quantity
 <li>重复请求读取当前状态后返回历史结果，不重新执行完整流程。</li>
 </ul>
 <p>例如 Confirm 抢占状态可以使用：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">UPDATE</span> inventory_reservation
-<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-number">30</span>,
-    version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>,
-    updated_at <span class="hljs-operator">=</span> NOW(<span class="hljs-number">3</span>)
-<span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> ?
-  <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">20</span>
-  <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> ?;
+<pre class=" language-language-sql"><code class="language-language-sql">UPDATE inventory_reservation
+SET status = 30,
+    version = version + 1,
+    updated_at = NOW(3)
+WHERE id = ?
+  AND status = 20
+  AND version = ?;
 </code></pre>
 <p>如果影响行数为 0，需要重新读取记录：</p>
 <ul>
@@ -541,179 +535,170 @@ available += quantity
 <li>当前是 <code>CANCELING/CANCELED</code>：Confirm 与既有终态冲突；</li>
 <li>版本变化但仍为 <code>RESERVED</code>：重新获取版本后再竞争。</li>
 </ul>
-<h2 id="4-mysql-schema"><a class="markdownIt-Anchor" href="#4-mysql-schema"></a> 4. MySQL Schema</h2>
-<p>MySQL 不承担下单链路的热点库存扣减，而是负责记录库存事务生命周期，并保存 Redis 库存的可审计投影。建议至少包含七类表。</p>
-<h3 id="41-菜品库存基线表"><a class="markdownIt-Anchor" href="#41-菜品库存基线表"></a> 4.1 菜品库存基线表</h3>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> dish_stock_baseline (
-    id               <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;自增主键&#x27;</span>,
-    stock_bucket_id  <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;库存桶ID，贯穿MySQL、Redis和Kafka&#x27;</span>,
-    merchant_id      <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家ID&#x27;</span>,
-    dish_id          <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;菜品ID&#x27;</span>,
-    stock_date       <span class="hljs-type">DATE</span> <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家时区下的营业日&#x27;</span>,
-    timezone         <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;营业日计算时区&#x27;</span>,
-    total_stock      <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家设置的库存总量基线&#x27;</span>,
-    baseline_version <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span> COMMENT <span class="hljs-string">&#x27;基线版本号，基线调整时递增，用于对账与Redis重建&#x27;</span>,
-    stock_status     TINYINT <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span> COMMENT <span class="hljs-string">&#x27;菜品库存状态：1=enabled, 2=disabled&#x27;</span>,
-    created_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,
-    updated_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;更新时间&#x27;</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_stock_bucket_id (stock_bucket_id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_merchant_dish_date (merchant_id, dish_id, stock_date)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+<h2 id="4-MySQL-Schema"><a href="#4-MySQL-Schema" class="headerlink" title="4. MySQL Schema"></a>4. MySQL Schema</h2><p>MySQL 不承担下单链路的热点库存扣减，而是负责记录库存事务生命周期，并保存 Redis 库存的可审计投影。建议至少包含七类表。</p>
+<h3 id="4-1-菜品库存基线表"><a href="#4-1-菜品库存基线表" class="headerlink" title="4.1 菜品库存基线表"></a>4.1 菜品库存基线表</h3><pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE dish_stock_baseline (
+    id               BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    stock_bucket_id  VARCHAR(64) NOT NULL COMMENT '库存桶ID，贯穿MySQL、Redis和Kafka',
+    merchant_id      BIGINT UNSIGNED NOT NULL COMMENT '商家ID',
+    dish_id          BIGINT UNSIGNED NOT NULL COMMENT '菜品ID',
+    stock_date       DATE NOT NULL COMMENT '商家时区下的营业日',
+    timezone         VARCHAR(32) NOT NULL COMMENT '营业日计算时区',
+    total_stock      BIGINT NOT NULL COMMENT '商家设置的库存总量基线',
+    baseline_version BIGINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '基线版本号，基线调整时递增，用于对账与Redis重建',
+    stock_status     TINYINT NOT NULL DEFAULT 1 COMMENT '菜品库存状态：1=enabled, 2=disabled',
+    created_at       DATETIME(3) NOT NULL COMMENT '创建时间',
+    updated_at       DATETIME(3) NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_stock_bucket_id (stock_bucket_id),
+    UNIQUE KEY uk_merchant_dish_date (merchant_id, dish_id, stock_date)
+) ENGINE=InnoDB;
 </code></pre>
 <p>该表保存商家设置的库存基线和版本，用于审计、对账与 Redis 重建。在线下单不直接锁这张表扣库存，否则热门菜品会形成 MySQL 热点行。</p>
-<h3 id="42-mysql-stock-投影表"><a class="markdownIt-Anchor" href="#42-mysql-stock-投影表"></a> 4.2 MySQL Stock 投影表</h3>
-<p>Redis 是在线数量事实源，MySQL Stock 则异步保存一份可查询、可审计的数量投影：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> dish_stock_snapshot (
-    stock_bucket_id   <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;库存桶ID&#x27;</span>,
-    merchant_id       <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家ID&#x27;</span>,
-    dish_id           <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;菜品ID&#x27;</span>,
-    stock_date        <span class="hljs-type">DATE</span> <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;营业日&#x27;</span>,
-    total_stock       <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span>,
-    available_stock   <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span>,
-    reserved_stock    <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span>,
-    sold_stock        <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span>,
-    redis_version     <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;已投影的Redis版本&#x27;</span>,
-    updated_at        DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (stock_bucket_id),
+<h3 id="4-2-MySQL-Stock-投影表"><a href="#4-2-MySQL-Stock-投影表" class="headerlink" title="4.2 MySQL Stock 投影表"></a>4.2 MySQL Stock 投影表</h3><p>Redis 是在线数量事实源，MySQL Stock 则异步保存一份可查询、可审计的数量投影：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE dish_stock_snapshot (
+    stock_bucket_id   VARCHAR(64) NOT NULL COMMENT '库存桶ID',
+    merchant_id       BIGINT UNSIGNED NOT NULL COMMENT '商家ID',
+    dish_id           BIGINT UNSIGNED NOT NULL COMMENT '菜品ID',
+    stock_date        DATE NOT NULL COMMENT '营业日',
+    total_stock       BIGINT NOT NULL,
+    available_stock   BIGINT NOT NULL,
+    reserved_stock    BIGINT NOT NULL,
+    sold_stock        BIGINT NOT NULL,
+    redis_version     BIGINT UNSIGNED NOT NULL COMMENT '已投影的Redis版本',
+    updated_at        DATETIME(3) NOT NULL,
+    PRIMARY KEY (stock_bucket_id),
     KEY idx_dish_date (merchant_id, dish_id, stock_date)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+) ENGINE=InnoDB;
 </code></pre>
 <p>Kafka Consumer 只接受更大的 <code>redis_version</code>，防止旧消息覆盖新库存。该表用于后台查询、审计和对账，不参与在线 Try 的余量判断。</p>
-<h3 id="43-库存预扣状态表"><a class="markdownIt-Anchor" href="#43-库存预扣状态表"></a> 4.3 库存预扣状态表</h3>
-<p>每个订单明细一条记录：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> inventory_reservation (
-    id              <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;库存事务ID，雪花算法预生成，跨服务/Redis/Kafka统一引用&#x27;</span>,
-    order_id        <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;订单ID，用于按订单聚合查询所有明细&#x27;</span>,
-    order_item_id   <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;订单明细ID，唯一标识订单内一条菜品行；同一订单点两份相同菜品也有不同order_item_id&#x27;</span>,
-    merchant_id     <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家ID，用于分片与按商家查询&#x27;</span>,
-    dish_id         <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;菜品ID，定位Redis库存Key&#x27;</span>,
-    stock_bucket_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;绑定的每日库存桶，Confirm/Cancel不得重新计算&#x27;</span>,
-    stock_date      <span class="hljs-type">DATE</span> <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家时区下的库存营业日&#x27;</span>,
-    quantity        <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;本次预扣数量&#x27;</span>,
-    order_type      TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;订单类型：1=instant即时单, 2=scheduled预约单&#x27;</span>,
-    processing_time DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;预约单履约时间，到点触发Confirm；即时单为空&#x27;</span>,
-    expire_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;预扣过期时间，超时未确认则触发Cancel扫描&#x27;</span>,
-    status          TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;事务状态：10=preparing, 20=reserved, 30=confirming, 40=confirmed, 50=canceling, 60=canceled, 70=rejected&#x27;</span>,
-    sync_status     TINYINT <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">10</span> COMMENT <span class="hljs-string">&#x27;MySQL Stock同步状态：10=pending, 20=synced, 30=retry, 40=dead&#x27;</span>,
-    expected_redis_version <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;当前业务状态期望投影到MySQL Stock的Redis版本&#x27;</span>,
-    synced_redis_version   <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;MySQL Stock已经完成投影的Redis版本&#x27;</span>,
-    version         <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span> COMMENT <span class="hljs-string">&#x27;乐观锁版本号，配合status做CAS状态转换&#x27;</span>,
-    created_at      DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,
-    updated_at      DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;更新时间&#x27;</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_order_item_dish (order_item_id, dish_id),
+<h3 id="4-3-库存预扣状态表"><a href="#4-3-库存预扣状态表" class="headerlink" title="4.3 库存预扣状态表"></a>4.3 库存预扣状态表</h3><p>每个订单明细一条记录：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_reservation (
+    id              BIGINT UNSIGNED NOT NULL COMMENT '库存事务ID，雪花算法预生成，跨服务/Redis/Kafka统一引用',
+    order_id        BIGINT UNSIGNED NOT NULL COMMENT '订单ID，用于按订单聚合查询所有明细',
+    order_item_id   BIGINT UNSIGNED NOT NULL COMMENT '订单明细ID，唯一标识订单内一条菜品行；同一订单点两份相同菜品也有不同order_item_id',
+    merchant_id     BIGINT UNSIGNED NOT NULL COMMENT '商家ID，用于分片与按商家查询',
+    dish_id         BIGINT UNSIGNED NOT NULL COMMENT '菜品ID，定位Redis库存Key',
+    stock_bucket_id VARCHAR(64) NOT NULL COMMENT '绑定的每日库存桶，Confirm/Cancel不得重新计算',
+    stock_date      DATE NOT NULL COMMENT '商家时区下的库存营业日',
+    quantity        INT UNSIGNED NOT NULL COMMENT '本次预扣数量',
+    order_type      TINYINT NOT NULL COMMENT '订单类型：1=instant即时单, 2=scheduled预约单',
+    processing_time DATETIME(3) DEFAULT NULL COMMENT '预约单履约时间，到点触发Confirm；即时单为空',
+    expire_at       DATETIME(3) NOT NULL COMMENT '预扣过期时间，超时未确认则触发Cancel扫描',
+    status          TINYINT NOT NULL COMMENT '事务状态：10=preparing, 20=reserved, 30=confirming, 40=confirmed, 50=canceling, 60=canceled, 70=rejected',
+    sync_status     TINYINT NOT NULL DEFAULT 10 COMMENT 'MySQL Stock同步状态：10=pending, 20=synced, 30=retry, 40=dead',
+    expected_redis_version BIGINT UNSIGNED DEFAULT NULL COMMENT '当前业务状态期望投影到MySQL Stock的Redis版本',
+    synced_redis_version   BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'MySQL Stock已经完成投影的Redis版本',
+    version         INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '乐观锁版本号，配合status做CAS状态转换',
+    created_at      DATETIME(3) NOT NULL COMMENT '创建时间',
+    updated_at      DATETIME(3) NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_order_item_dish (order_item_id, dish_id),
     KEY idx_stock_bucket (stock_bucket_id),
     KEY idx_sync_status (sync_status, updated_at),
     KEY idx_expire_scan (status, expire_at),
     KEY idx_schedule_scan (status, processing_time),
     KEY idx_order_id (order_id)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+) ENGINE=InnoDB;
 </code></pre>
 <p>这张表回答的是：“这张订单对这个菜品的库存事务现在进行到哪一步？”</p>
 <p>它不是库存数量表，也不应该使用它的记录数直接回答在线可售库存。</p>
-<h3 id="44-库存业务流水表"><a class="markdownIt-Anchor" href="#44-库存业务流水表"></a> 4.4 库存业务流水表</h3>
-<p>流水表只追加，不原地修改历史记录：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> inventory_ledger (
-    id               <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;自增主键&#x27;</span>,
-    ledger_id        <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;流水记录ID，全局唯一&#x27;</span>,
-    operation_id     <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;对应的WAL操作ID，关联Redis幂等键&#x27;</span>,
-    reservation_id   <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;所属库存事务ID；每日初始化和人工调整可为空&#x27;</span>,
-    stock_bucket_id  <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;所属每日库存桶&#x27;</span>,
-    order_id         <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;订单ID；非订单类库存操作可为空&#x27;</span>,
-    order_item_id    <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;订单明细ID；非订单类库存操作可为空&#x27;</span>,
-    merchant_id      <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;商家ID&#x27;</span>,
-    dish_id          <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;菜品ID&#x27;</span>,
-    action           TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;流水动作：1=init, 2=try, 3=confirm, 4=cancel, 5=adjust&#x27;</span>,
-    quantity         <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;本次操作数量&#x27;</span>,
-    available_delta  <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;可售库存变化量&#x27;</span>,
-    reserved_delta   <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;预扣库存变化量&#x27;</span>,
-    sold_delta       <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;已售库存变化量&#x27;</span>,
-    redis_version    <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;执行该操作后Redis返回的库存版本，用于对账&#x27;</span>,
-    created_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_ledger_id (ledger_id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_operation_id (operation_id),
+<h3 id="4-4-库存业务流水表"><a href="#4-4-库存业务流水表" class="headerlink" title="4.4 库存业务流水表"></a>4.4 库存业务流水表</h3><p>流水表只追加，不原地修改历史记录：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_ledger (
+    id               BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    ledger_id        VARCHAR(64) NOT NULL COMMENT '流水记录ID，全局唯一',
+    operation_id     VARCHAR(64) NOT NULL COMMENT '对应的WAL操作ID，关联Redis幂等键',
+    reservation_id   BIGINT UNSIGNED DEFAULT NULL COMMENT '所属库存事务ID；每日初始化和人工调整可为空',
+    stock_bucket_id  VARCHAR(64) NOT NULL COMMENT '所属每日库存桶',
+    order_id         BIGINT UNSIGNED DEFAULT NULL COMMENT '订单ID；非订单类库存操作可为空',
+    order_item_id    BIGINT UNSIGNED DEFAULT NULL COMMENT '订单明细ID；非订单类库存操作可为空',
+    merchant_id      BIGINT UNSIGNED NOT NULL COMMENT '商家ID',
+    dish_id          BIGINT UNSIGNED NOT NULL COMMENT '菜品ID',
+    action           TINYINT NOT NULL COMMENT '流水动作：1=init, 2=try, 3=confirm, 4=cancel, 5=adjust',
+    quantity         INT UNSIGNED NOT NULL COMMENT '本次操作数量',
+    available_delta  BIGINT NOT NULL DEFAULT 0 COMMENT '可售库存变化量',
+    reserved_delta   BIGINT NOT NULL DEFAULT 0 COMMENT '预扣库存变化量',
+    sold_delta       BIGINT NOT NULL DEFAULT 0 COMMENT '已售库存变化量',
+    redis_version    BIGINT UNSIGNED DEFAULT NULL COMMENT '执行该操作后Redis返回的库存版本，用于对账',
+    created_at       DATETIME(3) NOT NULL COMMENT '创建时间',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_ledger_id (ledger_id),
+    UNIQUE KEY uk_operation_id (operation_id),
     KEY idx_bucket_created (stock_bucket_id, created_at),
     KEY idx_dish_created (merchant_id, dish_id, created_at)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+) ENGINE=InnoDB;
 </code></pre>
 <p>三种核心流水的 delta 如下：</p>
 <table>
 <thead>
 <tr>
 <th>Action</th>
-<th style="text-align:right">available_delta</th>
-<th style="text-align:right">reserved_delta</th>
-<th style="text-align:right">sold_delta</th>
+<th align="right">available_delta</th>
+<th align="right">reserved_delta</th>
+<th align="right">sold_delta</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Try</td>
-<td style="text-align:right"><code>-quantity</code></td>
-<td style="text-align:right"><code>+quantity</code></td>
-<td style="text-align:right">0</td>
+<td align="right"><code>-quantity</code></td>
+<td align="right"><code>+quantity</code></td>
+<td align="right">0</td>
 </tr>
 <tr>
 <td>Confirm</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right"><code>-quantity</code></td>
-<td style="text-align:right"><code>+quantity</code></td>
+<td align="right">0</td>
+<td align="right"><code>-quantity</code></td>
+<td align="right"><code>+quantity</code></td>
 </tr>
 <tr>
 <td>Cancel</td>
-<td style="text-align:right"><code>+quantity</code></td>
-<td style="text-align:right"><code>-quantity</code></td>
-<td style="text-align:right">0</td>
+<td align="right"><code>+quantity</code></td>
+<td align="right"><code>-quantity</code></td>
+<td align="right">0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>流水用于审计和对账，也可以结合库存基线重建 Redis。<code>operation_id</code> 唯一键保证同一个 Redis 操作不会重复落账。</p>
-<h3 id="45-operation-wal-表"><a class="markdownIt-Anchor" href="#45-operation-wal-表"></a> 4.5 Operation WAL 表</h3>
-<p>这里的 WAL 是应用层 Write-Ahead Log：<strong>先记录要做什么，再调用 Redis</strong>。WAL 只负责 Redis 操作的执行与恢复，不和消息发布状态混在一起。</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> inventory_operation_wal (
-    id                <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> AUTO_INCREMENT COMMENT <span class="hljs-string">&#x27;自增主键&#x27;</span>,
-    operation_id      <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;操作ID，作为Redis幂等键，保证同一动作不重复扣减&#x27;</span>,
-    reservation_id    <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;所属库存事务ID，关联inventory_reservation.id&#x27;</span>,
-    action            TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;操作类型：1=try, 2=confirm, 3=cancel&#x27;</span>,
-    status            TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;Redis执行状态：10=init, 20=executing, 30=succeeded, 40=retry, 50=dead&#x27;</span>,
-    request_payload   JSON <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;调用Redis前的操作意图参数&#x27;</span>,
-    result_payload    JSON <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;Redis返回的执行结果&#x27;</span>,
-    retry_count       <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;Redis执行重试次数&#x27;</span>,
-    next_retry_at     DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;下次Redis重试时间，指数退避&#x27;</span>,
-    lease_owner       <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;当前持有执行租约的Worker标识&#x27;</span>,
-    lease_expire_at   DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;执行租约到期时间，到期可被其他Worker抢占&#x27;</span>,
-    last_error        <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">1024</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;最近一次执行错误信息&#x27;</span>,
-    created_at        DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,
-    updated_at        DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;更新时间&#x27;</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_operation_id (operation_id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_reservation_action (reservation_id, action),
+<h3 id="4-5-Operation-WAL-表"><a href="#4-5-Operation-WAL-表" class="headerlink" title="4.5 Operation WAL 表"></a>4.5 Operation WAL 表</h3><p>这里的 WAL 是应用层 Write-Ahead Log：<strong>先记录要做什么，再调用 Redis</strong>。WAL 只负责 Redis 操作的执行与恢复，不和消息发布状态混在一起。</p>
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_operation_wal (
+    id                BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    operation_id      VARCHAR(64) NOT NULL COMMENT '操作ID，作为Redis幂等键，保证同一动作不重复扣减',
+    reservation_id    BIGINT UNSIGNED NOT NULL COMMENT '所属库存事务ID，关联inventory_reservation.id',
+    action            TINYINT NOT NULL COMMENT '操作类型：1=try, 2=confirm, 3=cancel',
+    status            TINYINT NOT NULL COMMENT 'Redis执行状态：10=init, 20=executing, 30=succeeded, 40=retry, 50=dead',
+    request_payload   JSON NOT NULL COMMENT '调用Redis前的操作意图参数',
+    result_payload    JSON DEFAULT NULL COMMENT 'Redis返回的执行结果',
+    retry_count       INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Redis执行重试次数',
+    next_retry_at     DATETIME(3) NOT NULL COMMENT '下次Redis重试时间，指数退避',
+    lease_owner       VARCHAR(64) DEFAULT NULL COMMENT '当前持有执行租约的Worker标识',
+    lease_expire_at   DATETIME(3) DEFAULT NULL COMMENT '执行租约到期时间，到期可被其他Worker抢占',
+    last_error        VARCHAR(1024) DEFAULT NULL COMMENT '最近一次执行错误信息',
+    created_at        DATETIME(3) NOT NULL COMMENT '创建时间',
+    updated_at        DATETIME(3) NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_operation_id (operation_id),
+    UNIQUE KEY uk_reservation_action (reservation_id, action),
     KEY idx_retry (status, next_retry_at),
     KEY idx_lease (status, lease_expire_at)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+) ENGINE=InnoDB;
 </code></pre>
 <p>同步请求可以在提交 WAL 后立即执行，降低正常链路延迟；后台 Worker 则持续扫描 <code>INIT/RETRY</code> 记录，处理超时、进程退出或网络错误留下的任务。</p>
 <p>Worker 抢任务时可以使用 <code>SELECT ... FOR UPDATE SKIP LOCKED</code>，也可以通过带租约的条件更新获取执行权。即使多个 Worker 重复执行同一条 WAL，Redis <code>operation_id</code> 幂等键也会阻止重复扣减。</p>
-<h3 id="46-transactional-outbox-与-consumer-inbox"><a class="markdownIt-Anchor" href="#46-transactional-outbox-与-consumer-inbox"></a> 4.6 Transactional Outbox 与 Consumer Inbox</h3>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> inventory_outbox (
-    id              <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> AUTO_INCREMENT,
-    event_id        <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;全局唯一事件ID&#x27;</span>,
-    aggregate_id    <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;reservation_id&#x27;</span>,
-    event_type      <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span>,
-    partition_key   <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;通常使用order_id&#x27;</span>,
-    schema_version  <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1</span>,
-    payload         JSON <span class="hljs-keyword">NOT NULL</span>,
-    status          TINYINT <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">10</span> COMMENT <span class="hljs-string">&#x27;10=pending, 20=sending, 30=sent, 40=retry&#x27;</span>,
-    retry_count     <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>,
-    next_retry_at   DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span>,
-    created_at      DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span>,
-    sent_at         DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (id),
-    <span class="hljs-keyword">UNIQUE</span> KEY uk_event_id (event_id),
+<h3 id="4-6-Transactional-Outbox-与-Consumer-Inbox"><a href="#4-6-Transactional-Outbox-与-Consumer-Inbox" class="headerlink" title="4.6 Transactional Outbox 与 Consumer Inbox"></a>4.6 Transactional Outbox 与 Consumer Inbox</h3><pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_outbox (
+    id              BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    event_id        VARCHAR(64) NOT NULL COMMENT '全局唯一事件ID',
+    aggregate_id    BIGINT UNSIGNED NOT NULL COMMENT 'reservation_id',
+    event_type      VARCHAR(64) NOT NULL,
+    partition_key   VARCHAR(64) NOT NULL COMMENT '通常使用order_id',
+    schema_version  INT UNSIGNED NOT NULL DEFAULT 1,
+    payload         JSON NOT NULL,
+    status          TINYINT NOT NULL DEFAULT 10 COMMENT '10=pending, 20=sending, 30=sent, 40=retry',
+    retry_count     INT UNSIGNED NOT NULL DEFAULT 0,
+    next_retry_at   DATETIME(3) NOT NULL,
+    created_at      DATETIME(3) NOT NULL,
+    sent_at         DATETIME(3) DEFAULT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_event_id (event_id),
     KEY idx_publish (status, next_retry_at)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+) ENGINE=InnoDB;
 </code></pre>
 <p>Redis 成功后，以下三项必须在同一个 MySQL 本地事务中提交：</p>
 <ol>
@@ -722,17 +707,15 @@ available += quantity
 <li>Outbox 插入 <code>InventoryRedisReserved</code> 事件。</li>
 </ol>
 <p>Publisher 扫描 Outbox，Kafka Broker 返回 ACK 后才把 <code>status</code> 更新为 <code>SENT</code>。Publisher 在 ACK 后、更新 Outbox 前崩溃会造成重复消息，因此 MySQL Stock Consumer 还需要一张 Inbox 表：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">CREATE TABLE</span> inventory_consumer_inbox (
-    event_id       <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span>,
-    consumer_group <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT NULL</span>,
-    consumed_at    DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span>,
-    <span class="hljs-keyword">PRIMARY KEY</span> (event_id, consumer_group)
-) ENGINE<span class="hljs-operator">=</span>InnoDB;
+<pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE inventory_consumer_inbox (
+    event_id       VARCHAR(64) NOT NULL,
+    consumer_group VARCHAR(64) NOT NULL,
+    consumed_at    DATETIME(3) NOT NULL,
+    PRIMARY KEY (event_id, consumer_group)
+) ENGINE=InnoDB;
 </code></pre>
 <p>Consumer 在同一个 MySQL Stock 本地事务中插入 Inbox、更新 <code>dish_stock_snapshot</code>、追加 <code>inventory_ledger</code>，最后将 Reservation 的 <code>sync_status</code> 更新为 <code>SYNCED</code>。Inbox 唯一键保证 Kafka 重复投递不会重复修改 MySQL Stock。</p>
-<h2 id="5-redis-schema"><a class="markdownIt-Anchor" href="#5-redis-schema"></a> 5. Redis Schema</h2>
-<h3 id="51-库存数量-hash"><a class="markdownIt-Anchor" href="#51-库存数量-hash"></a> 5.1 库存数量 Hash</h3>
-<pre class="highlight"><code class="text">Key: inv:{merchant_id:dish_id:stock_date}:stock
+<h2 id="5-Redis-Schema"><a href="#5-Redis-Schema" class="headerlink" title="5. Redis Schema"></a>5. Redis Schema</h2><h3 id="5-1-库存数量-Hash"><a href="#5-1-库存数量-Hash" class="headerlink" title="5.1 库存数量 Hash"></a>5.1 库存数量 Hash</h3><pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id:stock_date}:stock
 
 Fields:
   total       100
@@ -743,29 +726,28 @@ Fields:
   updated_at   1784982600123
 </code></pre>
 <p>Redis Cluster 中，Lua 涉及的所有 Key 必须在同一个 Slot。这里使用 <code>{merchant_id:dish_id:stock_date}</code> 作为 hash tag：</p>
-<pre class="highlight"><code class="text">inv:{10001:90001:2026-07-26}:stock
+<pre class=" language-language-text"><code class="language-language-text">inv:{10001:90001:2026-07-26}:stock
 inv:{10001:90001:2026-07-26}:reservation:100123001
 inv:{10001:90001:2026-07-26}:op:op_try_abc
 inv:{10001:90001:2026-07-26}:op:op_confirm_abc
 </code></pre>
-<h3 id="52-reservation-fence"><a class="markdownIt-Anchor" href="#52-reservation-fence"></a> 5.2 Reservation Fence</h3>
-<p>仅有每个动作自己的 <code>operation_id</code> 还不够。Try 和 Cancel 是两个不同的操作，如果 Cancel 先执行、Try 后到达，它们各自都可能认为自己是第一次执行。</p>
+<h3 id="5-2-Reservation-Fence"><a href="#5-2-Reservation-Fence" class="headerlink" title="5.2 Reservation Fence"></a>5.2 Reservation Fence</h3><p>仅有每个动作自己的 <code>operation_id</code> 还不够。Try 和 Cancel 是两个不同的操作，如果 Cancel 先执行、Try 后到达，它们各自都可能认为自己是第一次执行。</p>
 <p>因此需要增加一条以 <code>reservation_id</code> 为维度的事务栅栏：</p>
-<pre class="highlight"><code class="text">Key: inv:{merchant_id:dish_id:stock_date}:reservation:{reservation_id}
+<pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id:stock_date}:reservation:{reservation_id}
 
 Fields:
   phase         RESERVED
   quantity      2
   try_op_id     op_try_abc
-  confirm_op_id &quot;&quot;
-  cancel_op_id  &quot;&quot;
+  confirm_op_id ""
+  cancel_op_id  ""
   version       392
   updated_at    1784982600456
 </code></pre>
 <p><code>phase</code> 只允许单向转换：</p>
-<pre class="highlight"><code class="text">NONE -&gt; RESERVED -&gt; CONFIRMED
-NONE -&gt; CANCELED
-RESERVED -&gt; CANCELED
+<pre class=" language-language-text"><code class="language-language-text">NONE -> RESERVED -> CONFIRMED
+NONE -> CANCELED
+RESERVED -> CANCELED
 </code></pre>
 <p>其中 <code>NONE -&gt; CANCELED</code> 是一条空回滚栅栏：它不修改库存数量，但会阻止晚到的 Try 再次冻结库存。</p>
 <p>Try、Confirm、Cancel 的 Lua 都必须同时检查并更新这条 Fence：</p>
@@ -776,8 +758,7 @@ RESERVED -&gt; CANCELED
 <li>Cancel 发现 <code>phase=RESERVED</code>，才执行 <code>reserved -&gt; available</code>；</li>
 <li>任意终态被重复调用，都返回第一次执行结果。</li>
 </ul>
-<h3 id="53-redis-操作幂等记录"><a class="markdownIt-Anchor" href="#53-redis-操作幂等记录"></a> 5.3 Redis 操作幂等记录</h3>
-<pre class="highlight"><code class="text">Key: inv:{merchant_id:dish_id:stock_date}:op:{operation_id}
+<h3 id="5-3-Redis-操作幂等记录"><a href="#5-3-Redis-操作幂等记录" class="headerlink" title="5.3 Redis 操作幂等记录"></a>5.3 Redis 操作幂等记录</h3><pre class=" language-language-text"><code class="language-language-text">Key: inv:{merchant_id:dish_id:stock_date}:op:{operation_id}
 
 Fields:
   action       TRY
@@ -788,68 +769,67 @@ Fields:
 </code></pre>
 <p>该记录必须和库存数量在同一段 Lua 中写入。如果服务在 Redis 扣减成功后、更新 MySQL 前崩溃，重试相同 <code>operation_id</code> 时，Lua 会返回第一次结果，不再扣减第二次。</p>
 <p>幂等 Key 的 TTL 应覆盖：</p>
-<pre class="highlight"><code class="text">订单最长生命周期 + 消息最大重试时间 + 对账修复窗口 + 安全余量
+<pre class=" language-language-text"><code class="language-language-text">订单最长生命周期 + 消息最大重试时间 + 对账修复窗口 + 安全余量
 </code></pre>
 <p>对于审计要求较高的交易，也可以不单独创建大量 Key，而是在同 Slot 的 Hash 中保存近期操作，终态归档后再清理。</p>
-<h3 id="54-try-lua-的核心逻辑"><a class="markdownIt-Anchor" href="#54-try-lua-的核心逻辑"></a> 5.4 Try Lua 的核心逻辑</h3>
-<p>下面是简化后的伪代码：</p>
-<pre class="highlight"><code class="lua"><span class="hljs-comment">-- KEYS[1] = stock key</span>
-<span class="hljs-comment">-- KEYS[2] = operation idempotency key</span>
-<span class="hljs-comment">-- KEYS[3] = reservation fence key</span>
-<span class="hljs-comment">-- ARGV[1] = quantity</span>
-<span class="hljs-comment">-- ARGV[2] = now</span>
-<span class="hljs-comment">-- ARGV[3] = operation ttl</span>
+<h3 id="5-4-Try-Lua-的核心逻辑"><a href="#5-4-Try-Lua-的核心逻辑" class="headerlink" title="5.4 Try Lua 的核心逻辑"></a>5.4 Try Lua 的核心逻辑</h3><p>下面是简化后的伪代码：</p>
+<pre class=" language-language-lua"><code class="language-language-lua">-- KEYS[1] = stock key
+-- KEYS[2] = operation idempotency key
+-- KEYS[3] = reservation fence key
+-- ARGV[1] = quantity
+-- ARGV[2] = now
+-- ARGV[3] = operation ttl
 
-<span class="hljs-keyword">local</span> previous = redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;result&quot;</span>)
-<span class="hljs-keyword">if</span> previous <span class="hljs-keyword">then</span>
-    <span class="hljs-keyword">local</span> version = redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;version&quot;</span>)
-    <span class="hljs-keyword">return</span> {previous, version}
-<span class="hljs-keyword">end</span>
+local previous = redis.call("HGET", KEYS[2], "result")
+if previous then
+    local version = redis.call("HGET", KEYS[2], "version")
+    return {previous, version}
+end
 
-<span class="hljs-keyword">local</span> phase = redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">3</span>], <span class="hljs-string">&quot;phase&quot;</span>)
-<span class="hljs-keyword">if</span> phase == <span class="hljs-string">&quot;CANCELED&quot;</span> <span class="hljs-keyword">or</span> phase == <span class="hljs-string">&quot;CONFIRMED&quot;</span> <span class="hljs-keyword">then</span>
-    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;FENCED&quot;</span>, redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">3</span>], <span class="hljs-string">&quot;version&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;0&quot;</span>}
-<span class="hljs-keyword">end</span>
-<span class="hljs-keyword">if</span> phase == <span class="hljs-string">&quot;RESERVED&quot;</span> <span class="hljs-keyword">then</span>
-    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;SUCCEEDED&quot;</span>, redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">3</span>], <span class="hljs-string">&quot;version&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;0&quot;</span>}
-<span class="hljs-keyword">end</span>
+local phase = redis.call("HGET", KEYS[3], "phase")
+if phase == "CANCELED" or phase == "CONFIRMED" then
+    return {"FENCED", redis.call("HGET", KEYS[3], "version") or "0"}
+end
+if phase == "RESERVED" then
+    return {"SUCCEEDED", redis.call("HGET", KEYS[3], "version") or "0"}
+end
 
-<span class="hljs-keyword">local</span> available = <span class="hljs-built_in">tonumber</span>(redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;available&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;-1&quot;</span>)
-<span class="hljs-keyword">local</span> quantity = <span class="hljs-built_in">tonumber</span>(ARGV[<span class="hljs-number">1</span>])
+local available = tonumber(redis.call("HGET", KEYS[1], "available") or "-1")
+local quantity = tonumber(ARGV[1])
 
-<span class="hljs-keyword">if</span> available &lt; quantity <span class="hljs-keyword">then</span>
-    <span class="hljs-keyword">local</span> version = redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;version&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;0&quot;</span>
-    redis.call(<span class="hljs-string">&quot;HSET&quot;</span>, KEYS[<span class="hljs-number">2</span>],
-        <span class="hljs-string">&quot;action&quot;</span>, <span class="hljs-string">&quot;TRY&quot;</span>,
-        <span class="hljs-string">&quot;result&quot;</span>, <span class="hljs-string">&quot;INSUFFICIENT&quot;</span>,
-        <span class="hljs-string">&quot;quantity&quot;</span>, quantity,
-        <span class="hljs-string">&quot;version&quot;</span>, version,
-        <span class="hljs-string">&quot;operated_at&quot;</span>, ARGV[<span class="hljs-number">2</span>])
-    redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span class="hljs-number">2</span>], ARGV[<span class="hljs-number">3</span>])
-    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;INSUFFICIENT&quot;</span>, version}
-<span class="hljs-keyword">end</span>
+if available < quantity then
+    local version = redis.call("HGET", KEYS[1], "version") or "0"
+    redis.call("HSET", KEYS[2],
+        "action", "TRY",
+        "result", "INSUFFICIENT",
+        "quantity", quantity,
+        "version", version,
+        "operated_at", ARGV[2])
+    redis.call("PEXPIRE", KEYS[2], ARGV[3])
+    return {"INSUFFICIENT", version}
+end
 
-redis.call(<span class="hljs-string">&quot;HINCRBY&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;available&quot;</span>, -quantity)
-redis.call(<span class="hljs-string">&quot;HINCRBY&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;reserved&quot;</span>, quantity)
-<span class="hljs-keyword">local</span> version = redis.call(<span class="hljs-string">&quot;HINCRBY&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;version&quot;</span>, <span class="hljs-number">1</span>)
-redis.call(<span class="hljs-string">&quot;HSET&quot;</span>, KEYS[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;updated_at&quot;</span>, ARGV[<span class="hljs-number">2</span>])
+redis.call("HINCRBY", KEYS[1], "available", -quantity)
+redis.call("HINCRBY", KEYS[1], "reserved", quantity)
+local version = redis.call("HINCRBY", KEYS[1], "version", 1)
+redis.call("HSET", KEYS[1], "updated_at", ARGV[2])
 
-redis.call(<span class="hljs-string">&quot;HSET&quot;</span>, KEYS[<span class="hljs-number">3</span>],
-    <span class="hljs-string">&quot;phase&quot;</span>, <span class="hljs-string">&quot;RESERVED&quot;</span>,
-    <span class="hljs-string">&quot;quantity&quot;</span>, quantity,
-    <span class="hljs-string">&quot;try_op_id&quot;</span>, KEYS[<span class="hljs-number">2</span>],
-    <span class="hljs-string">&quot;version&quot;</span>, version,
-    <span class="hljs-string">&quot;updated_at&quot;</span>, ARGV[<span class="hljs-number">2</span>])
+redis.call("HSET", KEYS[3],
+    "phase", "RESERVED",
+    "quantity", quantity,
+    "try_op_id", KEYS[2],
+    "version", version,
+    "updated_at", ARGV[2])
 
-redis.call(<span class="hljs-string">&quot;HSET&quot;</span>, KEYS[<span class="hljs-number">2</span>],
-    <span class="hljs-string">&quot;action&quot;</span>, <span class="hljs-string">&quot;TRY&quot;</span>,
-    <span class="hljs-string">&quot;result&quot;</span>, <span class="hljs-string">&quot;SUCCEEDED&quot;</span>,
-    <span class="hljs-string">&quot;quantity&quot;</span>, quantity,
-    <span class="hljs-string">&quot;version&quot;</span>, version,
-    <span class="hljs-string">&quot;operated_at&quot;</span>, ARGV[<span class="hljs-number">2</span>])
-redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span class="hljs-number">2</span>], ARGV[<span class="hljs-number">3</span>])
+redis.call("HSET", KEYS[2],
+    "action", "TRY",
+    "result", "SUCCEEDED",
+    "quantity", quantity,
+    "version", version,
+    "operated_at", ARGV[2])
+redis.call("PEXPIRE", KEYS[2], ARGV[3])
 
-<span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;SUCCEEDED&quot;</span>, version}
+return {"SUCCEEDED", version}
 </code></pre>
 <p>Confirm 和 Cancel 使用相同模式：</p>
 <ul>
@@ -861,10 +841,8 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <li>保存操作结果；</li>
 <li>返回新的库存版本。</li>
 </ul>
-<h2 id="6-try-完整时序"><a class="markdownIt-Anchor" href="#6-try-完整时序"></a> 6. Try 完整时序</h2>
-<p>第 1.1 节已经给出正常成功路径。在线预扣在 Reservation 和 Outbox 的本地事务提交后成立，后续 MySQL Stock 落账不阻塞下单。本节继续拆解每一步的持久化边界和异常恢复方式。</p>
-<h3 id="61-第一步创建-reservation-和-wal"><a class="markdownIt-Anchor" href="#61-第一步创建-reservation-和-wal"></a> 6.1 第一步：创建 Reservation 和 WAL</h3>
-<p>Try 请求到达后，先开启 MySQL 本地事务：</p>
+<h2 id="6-Try-完整时序"><a href="#6-Try-完整时序" class="headerlink" title="6. Try 完整时序"></a>6. Try 完整时序</h2><p>第 1.1 节已经给出正常成功路径。在线预扣在 Reservation 和 Outbox 的本地事务提交后成立，后续 MySQL Stock 落账不阻塞下单。本节继续拆解每一步的持久化边界和异常恢复方式。</p>
+<h3 id="6-1-第一步：创建-Reservation-和-WAL"><a href="#6-1-第一步：创建-Reservation-和-WAL" class="headerlink" title="6.1 第一步：创建 Reservation 和 WAL"></a>6.1 第一步：创建 Reservation 和 WAL</h3><p>Try 请求到达后，先开启 MySQL 本地事务：</p>
 <ol>
 <li>根据 <code>order_item_id + dish_id</code> 查询 Reservation，不存在才插入；</li>
 <li>新记录状态为 <code>PREPARING</code>；</li>
@@ -878,8 +856,7 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <li><code>PREPARING</code>：触发或等待 WAL 执行；</li>
 <li>已进入终态：返回历史结果，不创建第二次预扣。</li>
 </ul>
-<h3 id="62-第二步执行-redis-lua"><a class="markdownIt-Anchor" href="#62-第二步执行-redis-lua"></a> 6.2 第二步：执行 Redis Lua</h3>
-<p>API 在正常链路中直接执行 WAL，以减少用户等待时间。后台 Worker 和同步 API 使用完全相同的 Executor。</p>
+<h3 id="6-2-第二步：执行-Redis-Lua"><a href="#6-2-第二步：执行-Redis-Lua" class="headerlink" title="6.2 第二步：执行 Redis Lua"></a>6.2 第二步：执行 Redis Lua</h3><p>API 在正常链路中直接执行 WAL，以减少用户等待时间。后台 Worker 和同步 API 使用完全相同的 Executor。</p>
 <p>Redis 返回三类结果：</p>
 <ul>
 <li><code>SUCCEEDED</code>：预扣成功；</li>
@@ -887,8 +864,7 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <li><code>UNKNOWN</code>：超时、连接断开等导致客户端不知道 Redis 是否已执行。</li>
 </ul>
 <p>对于 <code>UNKNOWN</code>，不能假设失败后直接再扣一次，也不能直接返还库存。正确做法是使用相同 <code>operation_id</code> 重试，让 Lua 通过 Redis 操作记录返回第一次结果。</p>
-<h3 id="63-第三步落-reservation-状态和-outbox"><a class="markdownIt-Anchor" href="#63-第三步落-reservation-状态和-outbox"></a> 6.3 第三步：落 Reservation 状态和 Outbox</h3>
-<p>Redis 成功后，再开启一个 MySQL 本地事务：</p>
+<h3 id="6-3-第三步：落-Reservation-状态和-Outbox"><a href="#6-3-第三步：落-Reservation-状态和-Outbox" class="headerlink" title="6.3 第三步：落 Reservation 状态和 Outbox"></a>6.3 第三步：落 Reservation 状态和 Outbox</h3><p>Redis 成功后，再开启一个 MySQL 本地事务：</p>
 <ol>
 <li><code>PREPARING -&gt; RESERVED</code>；</li>
 <li><code>sync_status</code> 设为 <code>PENDING</code>；</li>
@@ -897,12 +873,10 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 </ol>
 <p>如果此时 MySQL 失败，Reservation 仍然是 <code>PREPARING</code>，WAL 也没有完成。后台 Worker 重试 Redis 时会命中操作幂等记录，然后补齐 MySQL。</p>
 <p>这就是 WAL 的价值：<strong>Redis 成功但 MySQL 未确认，不会变成一笔无人知道如何处理的悬挂库存。</strong></p>
-<h3 id="64-第四步outbox-发布-kafka"><a class="markdownIt-Anchor" href="#64-第四步outbox-发布-kafka"></a> 6.4 第四步：Outbox 发布 Kafka</h3>
-<p>Outbox Publisher 扫描 <code>PENDING/RETRY</code> 记录，把 <code>event_id</code> 作为消息唯一标识发送到 Kafka。</p>
+<h3 id="6-4-第四步：Outbox-发布-Kafka"><a href="#6-4-第四步：Outbox-发布-Kafka" class="headerlink" title="6.4 第四步：Outbox 发布 Kafka"></a>6.4 第四步：Outbox 发布 Kafka</h3><p>Outbox Publisher 扫描 <code>PENDING/RETRY</code> 记录，把 <code>event_id</code> 作为消息唯一标识发送到 Kafka。</p>
 <p>只有收到 Kafka Broker ACK 后，Publisher 才把 Outbox 标记为 <code>SENT</code>。这里的 <code>SENT</code> 只说明 Kafka 已经持久化消息，不代表 MySQL Stock Consumer 已经处理完成。</p>
 <p>Publisher 可能在收到 ACK 后、更新 Outbox 前崩溃，因此同一 <code>event_id</code> 可能被重复发送。Kafka 使用 at-least-once 语义，消费端必须幂等。</p>
-<h3 id="65-第五步mysql-stock-异步落账"><a class="markdownIt-Anchor" href="#65-第五步mysql-stock-异步落账"></a> 6.5 第五步：MySQL Stock 异步落账</h3>
-<p>MySQL Stock Consumer 收到 <code>InventoryRedisReserved</code> 后，在一个本地事务内：</p>
+<h3 id="6-5-第五步：MySQL-Stock-异步落账"><a href="#6-5-第五步：MySQL-Stock-异步落账" class="headerlink" title="6.5 第五步：MySQL Stock 异步落账"></a>6.5 第五步：MySQL Stock 异步落账</h3><p>MySQL Stock Consumer 收到 <code>InventoryRedisReserved</code> 后，在一个本地事务内：</p>
 <ol>
 <li>插入 Inbox；唯一键冲突表示事件已经处理，直接幂等返回；</li>
 <li>按事件中的 delta 更新 <code>dish_stock_snapshot</code>；</li>
@@ -911,22 +885,20 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <li>提交事务后再提交 Kafka Offset。</li>
 </ol>
 <p>更新 Snapshot 时需要带 <code>redis_version</code>：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">UPDATE</span> dish_stock_snapshot
-<span class="hljs-keyword">SET</span> total_stock <span class="hljs-operator">=</span> ?,
-    available_stock <span class="hljs-operator">=</span> ?,
-    reserved_stock <span class="hljs-operator">=</span> ?,
-    sold_stock <span class="hljs-operator">=</span> ?,
-    redis_version <span class="hljs-operator">=</span> ?,
-    updated_at <span class="hljs-operator">=</span> NOW(<span class="hljs-number">3</span>)
-<span class="hljs-keyword">WHERE</span> stock_bucket_id <span class="hljs-operator">=</span> ?
-  <span class="hljs-keyword">AND</span> redis_version <span class="hljs-operator">&lt;</span> ?;
+<pre class=" language-language-sql"><code class="language-language-sql">UPDATE dish_stock_snapshot
+SET total_stock = ?,
+    available_stock = ?,
+    reserved_stock = ?,
+    sold_stock = ?,
+    redis_version = ?,
+    updated_at = NOW(3)
+WHERE stock_bucket_id = ?
+  AND redis_version < ?;
 </code></pre>
 <p>库存投影事件携带 Redis 操作后的绝对数量快照，而不只携带 delta。这样即使版本 12 比版本 11 先到，Consumer 也可以直接把 MySQL Stock 推进到版本 12；随后到达的版本 11 会被条件更新拒绝，不会漏算一次 delta。</p>
 <p>如果 Consumer 失败，Kafka 会重新投递；如果消息乱序，<code>redis_version</code> 会阻止旧事件覆盖新状态。长期未同步的 Reservation 可以通过 <code>sync_status=PENDING/RETRY</code> 被扫描和告警。</p>
-<h2 id="7-多菜品订单如何处理"><a class="markdownIt-Anchor" href="#7-多菜品订单如何处理"></a> 7. 多菜品订单如何处理</h2>
-<p>单个订单通常包含多个菜品，而 Redis Cluster 无法在不同 Slot 的 Key 上执行一段 Lua。这里有两种选择。</p>
-<h3 id="71-每个菜品独立预扣订单级补偿"><a class="markdownIt-Anchor" href="#71-每个菜品独立预扣订单级补偿"></a> 7.1 每个菜品独立预扣，订单级补偿</h3>
-<p>默认方案是每个菜品独立执行 Try：</p>
+<h2 id="7-多菜品订单如何处理"><a href="#7-多菜品订单如何处理" class="headerlink" title="7. 多菜品订单如何处理"></a>7. 多菜品订单如何处理</h2><p>单个订单通常包含多个菜品，而 Redis Cluster 无法在不同 Slot 的 Key 上执行一段 Lua。这里有两种选择。</p>
+<h3 id="7-1-每个菜品独立预扣，订单级补偿"><a href="#7-1-每个菜品独立预扣，订单级补偿" class="headerlink" title="7.1 每个菜品独立预扣，订单级补偿"></a>7.1 每个菜品独立预扣，订单级补偿</h3><p>默认方案是每个菜品独立执行 Try：</p>
 <pre class="mermaid">flowchart TD
     A["创建订单级库存事务"] --> B["并发预扣Dish A"]
     A --> C["并发预扣Dish B"]
@@ -937,29 +909,27 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
     E -->|是| F["订单级Try成功"]
     E -->|否| G["Cancel所有已成功菜品"]
     G --> H["订单级Try失败"]</pre>
+
 <p>它不是跨菜品瞬时原子，而是 TCC 内部结合 Saga 补偿：</p>
 <ul>
 <li>所有菜品 Try 成功，订单级预扣成功；</li>
 <li>任意菜品库存不足，对已经成功的菜品执行 Cancel；</li>
 <li>Cancel 失败时保留 <code>CANCELING</code>，由 WAL 重试直到释放。</li>
 </ul>
-<h3 id="72-同商家菜品放入同一-slot"><a class="markdownIt-Anchor" href="#72-同商家菜品放入同一-slot"></a> 7.2 同商家菜品放入同一 Slot</h3>
-<p>也可以使用 <code>{merchant_id}</code> 作为 hash tag，把同一商家的所有菜品放在同一 Redis Slot，然后用一段 Lua 原子预扣整单菜品。</p>
+<h3 id="7-2-同商家菜品放入同一-Slot"><a href="#7-2-同商家菜品放入同一-Slot" class="headerlink" title="7.2 同商家菜品放入同一 Slot"></a>7.2 同商家菜品放入同一 Slot</h3><p>也可以使用 <code>{merchant_id}</code> 作为 hash tag，把同一商家的所有菜品放在同一 Redis Slot，然后用一段 Lua 原子预扣整单菜品。</p>
 <p>这种方案原子性更强，但一个热门商家的全部库存会集中到同一个 Redis Slot，容易形成热点。是否采用，需要结合商家流量分布、单订单菜品数和 Redis Cluster 容量评估。</p>
-<h2 id="8-confirm-流程"><a class="markdownIt-Anchor" href="#8-confirm-流程"></a> 8. Confirm 流程</h2>
-<h3 id="81-即时单"><a class="markdownIt-Anchor" href="#81-即时单"></a> 8.1 即时单</h3>
-<p>订单创建成功后，订单域发布事件：</p>
-<pre class="highlight"><code class="json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;event_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;evt_order_created_01&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;event_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;OrderCreated&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;schema_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;occurred_at&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-07-25T20:30:00.123+08:00&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;trace_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;trace_abc&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;order_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">90000001</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;order_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;INSTANT&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;merchant_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10001</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;inventory_reservation_ids&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">100123001</span><span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span>
+<h2 id="8-Confirm-流程"><a href="#8-Confirm-流程" class="headerlink" title="8. Confirm 流程"></a>8. Confirm 流程</h2><h3 id="8-1-即时单"><a href="#8-1-即时单" class="headerlink" title="8.1 即时单"></a>8.1 即时单</h3><p>订单创建成功后，订单域发布事件：</p>
+<pre class=" language-language-json"><code class="language-language-json">{
+  "event_id": "evt_order_created_01",
+  "event_type": "OrderCreated",
+  "schema_version": 1,
+  "occurred_at": "2026-07-25T20:30:00.123+08:00",
+  "trace_id": "trace_abc",
+  "order_id": 90000001,
+  "order_type": "INSTANT",
+  "merchant_id": 10001,
+  "inventory_reservation_ids": [100123001]
+}
 </code></pre>
 <p>库存消费者收到消息后：</p>
 <ol>
@@ -972,37 +942,35 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 <li>MySQL Stock Consumer 异步更新 Snapshot、Ledger 和 <code>sync_status</code>。</li>
 </ol>
 <p>Kafka 可能重复投递，Confirm 消费必须幂等。重复消息最终会读取到 <code>CONFIRMED</code> 并直接返回成功。</p>
-<h3 id="82-预约单"><a class="markdownIt-Anchor" href="#82-预约单"></a> 8.2 预约单</h3>
-<p>预约单 Try 成功后，Reservation 保存 <code>processing_time</code>。时间轮在接近履约时间时触发 Confirm。</p>
+<h3 id="8-2-预约单"><a href="#8-2-预约单" class="headerlink" title="8.2 预约单"></a>8.2 预约单</h3><p>预约单 Try 成功后，Reservation 保存 <code>processing_time</code>。时间轮在接近履约时间时触发 Confirm。</p>
 <p>时间轮只负责“准时触发”，不能成为唯一可靠来源。系统还需要一个补偿扫描任务：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">SELECT</span> id
-<span class="hljs-keyword">FROM</span> inventory_reservation
-<span class="hljs-keyword">WHERE</span> order_type <span class="hljs-operator">=</span> <span class="hljs-number">2</span>
-  <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">20</span>
-  <span class="hljs-keyword">AND</span> processing_time <span class="hljs-operator">&lt;=</span> NOW(<span class="hljs-number">3</span>)
-<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> processing_time
-LIMIT <span class="hljs-number">500</span>;
+<pre class=" language-language-sql"><code class="language-language-sql">SELECT id
+FROM inventory_reservation
+WHERE order_type = 2
+  AND status = 20
+  AND processing_time <= NOW(3)
+ORDER BY processing_time
+LIMIT 500;
 </code></pre>
 <p>这样即使时间轮分片迁移、进程重启或触发消息丢失，扫描任务仍能补发 Confirm。</p>
-<h2 id="9-cancel-流程"><a class="markdownIt-Anchor" href="#9-cancel-流程"></a> 9. Cancel 流程</h2>
-<p>Cancel 有三类入口：</p>
+<h2 id="9-Cancel-流程"><a href="#9-Cancel-流程" class="headerlink" title="9. Cancel 流程"></a>9. Cancel 流程</h2><p>Cancel 有三类入口：</p>
 <ol>
 <li>订单域发布 <code>OrderCreateFailed</code> 或 <code>OrderCanceled</code>；</li>
 <li>Try 成功后超过 10 分钟仍未确认；</li>
 <li>多菜品 Try 部分失败，对已成功菜品执行补偿。</li>
 </ol>
 <p>Cancel 的关键不是“把数量加回去”，而是先获得合法的状态转换权：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">UPDATE</span> inventory_reservation
-<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-number">50</span>,
-    version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>,
-    updated_at <span class="hljs-operator">=</span> NOW(<span class="hljs-number">3</span>)
-<span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">=</span> ?
-  <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">20</span>
-  <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> ?;
+<pre class=" language-language-sql"><code class="language-language-sql">UPDATE inventory_reservation
+SET status = 50,
+    version = version + 1,
+    updated_at = NOW(3)
+WHERE id = ?
+  AND status = 20
+  AND version = ?;
 </code></pre>
 <p>只有 <code>RESERVED -&gt; CANCELING</code> 成功的任务才能创建 Cancel WAL。Confirm 同时到达时，也会竞争同一个 <code>RESERVED</code> 状态，因此只有一方可以成功。</p>
 <p>Cancel Lua 使用独立的 <code>operation_id</code>：</p>
-<pre class="highlight"><code class="text">op_cancel_{reservation_id}
+<pre class=" language-language-text"><code class="language-language-text">op_cancel_{reservation_id}
 </code></pre>
 <p>Lua 需要同时检查 Reservation Fence：</p>
 <ul>
@@ -1012,21 +980,19 @@ LIMIT <span class="hljs-number">500</span>;
 <li>Fence 为 <code>CONFIRMED</code>：拒绝 Cancel，并上报终态冲突。</li>
 </ul>
 <p>第二种情况非常重要。Cancel 不能因为没有找到 Try 记录就直接增加 <code>available</code>，否则会产生空回滚，凭空增加库存。Cancel 写入的 <code>CANCELED</code> Fence 还会阻止正在路上或稍后重试的 Try，避免库存事务悬挂。</p>
-<h2 id="10-wal-如何保证可重入"><a class="markdownIt-Anchor" href="#10-wal-如何保证可重入"></a> 10. WAL 如何保证可重入</h2>
-<p>幂等和可重入不是同一个概念：</p>
+<h2 id="10-WAL-如何保证可重入"><a href="#10-WAL-如何保证可重入" class="headerlink" title="10. WAL 如何保证可重入"></a>10. WAL 如何保证可重入</h2><p>幂等和可重入不是同一个概念：</p>
 <ul>
 <li><strong>幂等</strong>：同一个动作执行多次，只产生一次业务效果；</li>
 <li><strong>可重入</strong>：动作执行到一半失败后，再次进入时能够从持久化状态继续。</li>
 </ul>
-<h3 id="101-wal-worker"><a class="markdownIt-Anchor" href="#101-wal-worker"></a> 10.1 WAL Worker</h3>
-<p>Worker 周期扫描：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
-<span class="hljs-keyword">FROM</span> inventory_operation_wal
-<span class="hljs-keyword">WHERE</span> status <span class="hljs-keyword">IN</span> (<span class="hljs-number">10</span>, <span class="hljs-number">40</span>)
-  <span class="hljs-keyword">AND</span> next_retry_at <span class="hljs-operator">&lt;=</span> NOW(<span class="hljs-number">3</span>)
-<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> next_retry_at
-LIMIT <span class="hljs-number">100</span>
-<span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">SKIP</span> LOCKED;
+<h3 id="10-1-WAL-Worker"><a href="#10-1-WAL-Worker" class="headerlink" title="10.1 WAL Worker"></a>10.1 WAL Worker</h3><p>Worker 周期扫描：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">SELECT *
+FROM inventory_operation_wal
+WHERE status IN (10, 40)
+  AND next_retry_at <= NOW(3)
+ORDER BY next_retry_at
+LIMIT 100
+FOR UPDATE SKIP LOCKED;
 </code></pre>
 <p>执行流程：</p>
 <ol>
@@ -1038,8 +1004,7 @@ LIMIT <span class="hljs-number">100</span>
 <li>成功后标记 WAL 为 <code>SUCCEEDED</code>；</li>
 <li>失败则指数退避，超过阈值进入 <code>DEAD</code> 并告警。</li>
 </ol>
-<h3 id="102-各故障窗口如何恢复"><a class="markdownIt-Anchor" href="#102-各故障窗口如何恢复"></a> 10.2 各故障窗口如何恢复</h3>
-<table>
+<h3 id="10-2-各故障窗口如何恢复"><a href="#10-2-各故障窗口如何恢复" class="headerlink" title="10.2 各故障窗口如何恢复"></a>10.2 各故障窗口如何恢复</h3><table>
 <thead>
 <tr>
 <th>故障窗口</th>
@@ -1047,8 +1012,7 @@ LIMIT <span class="hljs-number">100</span>
 <th>恢复方式</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Reservation 写入失败</td>
 <td>MySQL 无记录</td>
 <td>整个 Try 失败，订单重试</td>
@@ -1079,16 +1043,13 @@ LIMIT <span class="hljs-number">100</span>
 <td>使用相同 <code>event_id</code> 重发，消费者通过 Inbox 幂等</td>
 </tr>
 <tr>
-<td>Confirm/Cancel 执行中进程退出</td>
+<td>Confirm&#x2F;Cancel 执行中进程退出</td>
 <td><code>CONFIRMING/CANCELING</code></td>
 <td>WAL 从中间态继续</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>所谓可重入，就是每次重试都先查看这些持久化状态，而不是从头盲目执行整段代码。</p>
-<h2 id="11-kafka-topic-与事件设计"><a class="markdownIt-Anchor" href="#11-kafka-topic-与事件设计"></a> 11. Kafka Topic 与事件设计</h2>
-<h3 id="111-入站事件"><a class="markdownIt-Anchor" href="#111-入站事件"></a> 11.1 入站事件</h3>
-<p>库存服务主要消费订单域事件：</p>
+<h2 id="11-Kafka-Topic-与事件设计"><a href="#11-Kafka-Topic-与事件设计" class="headerlink" title="11. Kafka Topic 与事件设计"></a>11. Kafka Topic 与事件设计</h2><h3 id="11-1-入站事件"><a href="#11-1-入站事件" class="headerlink" title="11.1 入站事件"></a>11.1 入站事件</h3><p>库存服务主要消费订单域事件：</p>
 <table>
 <thead>
 <tr>
@@ -1097,8 +1058,7 @@ LIMIT <span class="hljs-number">100</span>
 <th>用途</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>order.lifecycle.v1</code></td>
 <td><code>OrderCreated</code></td>
 <td>即时单触发 Confirm</td>
@@ -1118,11 +1078,9 @@ LIMIT <span class="hljs-number">100</span>
 <td><code>InventoryConfirmDue</code></td>
 <td>预约单到期触发 Confirm</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>同一订单的事件使用 <code>order_id</code> 作为 Kafka Partition Key，尽量保持订单内顺序。但消费端仍然必须校验状态和版本，不能把正确性完全建立在消息顺序上。</p>
-<h3 id="112-出站事件"><a class="markdownIt-Anchor" href="#112-出站事件"></a> 11.2 出站事件</h3>
-<table>
+<h3 id="11-2-出站事件"><a href="#11-2-出站事件" class="headerlink" title="11.2 出站事件"></a>11.2 出站事件</h3><table>
 <thead>
 <tr>
 <th>Topic</th>
@@ -1130,8 +1088,7 @@ LIMIT <span class="hljs-number">100</span>
 <th>用途</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>inventory.stock-change.v1</code></td>
 <td><code>InventoryRedisReserved</code></td>
 <td>Redis Try 成功，同步 MySQL Stock</td>
@@ -1181,42 +1138,41 @@ LIMIT <span class="hljs-number">100</span>
 <td><code>InventoryOperationDead</code></td>
 <td>自动恢复失败，需要介入</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>统一事件 Envelope：</p>
-<pre class="highlight"><code class="json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;event_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;evt_inventory_reserved_01&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;event_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;InventoryRedisReserved&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;schema_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;occurred_at&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-07-25T20:30:00.456+08:00&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;producer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;inventory-service&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;trace_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;trace_abc&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;partition_key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bucket_10001_90001_20260726&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;order_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">90000001</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;merchant_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10001</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;dish_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">90001</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;stock_bucket_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bucket_10001_90001_20260726&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;stock_date&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-07-26&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;order_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;INSTANT&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;processing_time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;reservation_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100123001</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;order_item_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50000001</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TRY&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;quantity&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;available_delta&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">-2</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;reserved_delta&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;sold_delta&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;redis_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">392</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;after&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">&quot;total&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">100</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;available&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;reserved&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;sold&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;reason_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span>
-  <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
+<pre class=" language-language-json"><code class="language-language-json">{
+  "event_id": "evt_inventory_reserved_01",
+  "event_type": "InventoryRedisReserved",
+  "schema_version": 1,
+  "occurred_at": "2026-07-25T20:30:00.456+08:00",
+  "producer": "inventory-service",
+  "trace_id": "trace_abc",
+  "partition_key": "bucket_10001_90001_20260726",
+  "data": {
+    "order_id": 90000001,
+    "merchant_id": 10001,
+    "dish_id": 90001,
+    "stock_bucket_id": "bucket_10001_90001_20260726",
+    "stock_date": "2026-07-26",
+    "order_type": "INSTANT",
+    "processing_time": null,
+    "reservation_id": 100123001,
+    "order_item_id": 50000001,
+    "action": "TRY",
+    "quantity": 2,
+    "available_delta": -2,
+    "reserved_delta": 2,
+    "sold_delta": 0,
+    "redis_version": 392,
+    "after": {
+      "total": 100,
+      "available": 72,
+      "reserved": 8,
+      "sold": 20
+    },
+    "reason_code": null
+  }
+}
 </code></pre>
 <p>设计时注意：</p>
 <ul>
@@ -1228,19 +1184,17 @@ LIMIT <span class="hljs-number">100</span>
 <li>Consumer 可以维护 Inbox 表或消费幂等表，避免重复副作用；</li>
 <li>Kafka 采用 at-least-once 语义，系统设计目标是“允许重复，不能丢失”。</li>
 </ul>
-<h2 id="12-每日库存如何更新"><a class="markdownIt-Anchor" href="#12-每日库存如何更新"></a> 12. 每日库存如何更新</h2>
-<p>每日库存不能在零点直接执行：</p>
-<pre class="highlight"><code class="text">available = total
+<h2 id="12-每日库存如何更新"><a href="#12-每日库存如何更新" class="headerlink" title="12. 每日库存如何更新"></a>12. 每日库存如何更新</h2><p>每日库存不能在零点直接执行：</p>
+<pre class=" language-language-text"><code class="language-language-text">available = total
 </code></pre>
 <p>因为昨天的 Reservation 可能仍在 Confirm 或 Cancel。直接覆盖同一个 Redis Key，会把尚未完成的预扣抹掉，造成库存多卖或少卖。</p>
 <p>正确做法是使用<strong>按营业日隔离的库存桶</strong>：</p>
-<pre class="highlight"><code class="text">stock_bucket_id = merchant_id + dish_id + stock_date + baseline_version
+<pre class=" language-language-text"><code class="language-language-text">stock_bucket_id = merchant_id + dish_id + stock_date + baseline_version
 </code></pre>
 <p>Redis Key 也携带营业日：</p>
-<pre class="highlight"><code class="text">inv:{10001:90001:2026-07-26}:stock
+<pre class=" language-language-text"><code class="language-language-text">inv:{10001:90001:2026-07-26}:stock
 </code></pre>
-<h3 id="121-每日初始化正常流程"><a class="markdownIt-Anchor" href="#121-每日初始化正常流程"></a> 12.1 每日初始化正常流程</h3>
-<pre class="mermaid">sequenceDiagram
+<h3 id="12-1-每日初始化正常流程"><a href="#12-1-每日初始化正常流程" class="headerlink" title="12.1 每日初始化正常流程"></a>12.1 每日初始化正常流程</h3><pre class="mermaid">sequenceDiagram
     participant J as Daily Stock Job
     participant S as StockSvr
     participant M as Stock MySQL
@@ -1259,6 +1213,7 @@ LIMIT <span class="hljs-number">100</span>
     P->>K: 5. 发布库存桶初始化事件
     K-->>P: Broker ACK
     P->>M: 6. Outbox=SENT</pre>
+
 <p>每天的更新流程是：</p>
 <ol>
 <li>按商家所在时区，在营业日前一天提前生成次日 <code>dish_stock_baseline</code>；</li>
@@ -1269,39 +1224,36 @@ LIMIT <span class="hljs-number">100</span>
 <li>扫描任务持续重试初始化失败的库存桶。</li>
 </ol>
 <p>为了防止定时任务遗漏，可以增加懒加载兜底：订单第一次访问不存在的库存桶时，从 MySQL Baseline 发起初始化，但仍然必须走相同 WAL 和 Lua，不能由请求线程直接 <code>SET</code> 一份库存。并发懒加载通过 <code>stock_bucket_id</code> 唯一键和 Lua 幂等收敛。</p>
-<h3 id="122-即时单和预约单选择哪个库存桶"><a class="markdownIt-Anchor" href="#122-即时单和预约单选择哪个库存桶"></a> 12.2 即时单和预约单选择哪个库存桶</h3>
-<p>即时单按商家时区的当前营业日选择库存：</p>
-<pre class="highlight"><code class="text">stock_date = merchantBusinessDate(now, timezone)
+<h3 id="12-2-即时单和预约单选择哪个库存桶"><a href="#12-2-即时单和预约单选择哪个库存桶" class="headerlink" title="12.2 即时单和预约单选择哪个库存桶"></a>12.2 即时单和预约单选择哪个库存桶</h3><p>即时单按商家时区的当前营业日选择库存：</p>
+<pre class=" language-language-text"><code class="language-language-text">stock_date = merchantBusinessDate(now, timezone)
 </code></pre>
 <p>预约单按 <code>processing_time</code> 所在营业日选择：</p>
-<pre class="highlight"><code class="text">stock_date = merchantBusinessDate(processing_time, timezone)
+<pre class=" language-language-text"><code class="language-language-text">stock_date = merchantBusinessDate(processing_time, timezone)
 </code></pre>
 <p>例如用户在 7 月 25 日预订 7 月 27 日的订单，Try 应操作：</p>
-<pre class="highlight"><code class="text">inv:{merchant_id:dish_id:2026-07-27}:stock
+<pre class=" language-language-text"><code class="language-language-text">inv:{merchant_id:dish_id:2026-07-27}:stock
 </code></pre>
 <p>Reservation 创建时就要保存 <code>stock_bucket_id</code> 和 <code>stock_date</code>。后续 Confirm、Cancel 必须继续操作这个库存桶，不能根据执行当天的日期重新计算，否则跨天 Cancel 会把库存返还到错误日期。</p>
-<h3 id="123-商家当天调整库存"><a class="markdownIt-Anchor" href="#123-商家当天调整库存"></a> 12.3 商家当天调整库存</h3>
-<p>商家把库存从 100 修改为 120 时，不能直接把 <code>available</code> 设置为 120，因为已经存在 <code>reserved</code> 和 <code>sold</code>。</p>
+<h3 id="12-3-商家当天调整库存"><a href="#12-3-商家当天调整库存" class="headerlink" title="12.3 商家当天调整库存"></a>12.3 商家当天调整库存</h3><p>商家把库存从 100 修改为 120 时，不能直接把 <code>available</code> 设置为 120，因为已经存在 <code>reserved</code> 和 <code>sold</code>。</p>
 <p>调整库存也需要：</p>
-<pre class="highlight"><code class="text">ADJUST WAL -&gt; Redis Lua -&gt; Outbox -&gt; Kafka -&gt; MySQL Stock
+<pre class=" language-language-text"><code class="language-language-text">ADJUST WAL -> Redis Lua -> Outbox -> Kafka -> MySQL Stock
 </code></pre>
 <p>Lua 根据期望版本原子计算：</p>
-<pre class="highlight"><code class="text">new_total = merchant_input
+<pre class=" language-language-text"><code class="language-language-text">new_total = merchant_input
 new_available = max(0, new_total - reserved - sold)
 version += 1
 </code></pre>
 <p>例如：</p>
-<pre class="highlight"><code class="text">修改前：total=100, available=70, reserved=10, sold=20
+<pre class=" language-language-text"><code class="language-language-text">修改前：total=100, available=70, reserved=10, sold=20
 修改后：total=120, available=90, reserved=10, sold=20
 </code></pre>
 <p>如果新总量小于 <code>reserved + sold</code>，已经接受的订单不能被撤销：</p>
-<pre class="highlight"><code class="text">total=20, reserved=10, sold=20
+<pre class=" language-language-text"><code class="language-language-text">total=20, reserved=10, sold=20
 available=0, deficit=10
 </code></pre>
 <p>系统把可售库存置为 0，并记录 <code>deficit</code> 告警，由商家或运营处理，不能为了满足新配置而取消已经确认的库存。</p>
-<h3 id="124-旧库存桶何时删除"><a class="markdownIt-Anchor" href="#124-旧库存桶何时删除"></a> 12.4 旧库存桶何时删除</h3>
-<p>旧库存桶的生命周期是：</p>
-<pre class="highlight"><code class="text">OPEN -&gt; CLOSED -&gt; ARCHIVED
+<h3 id="12-4-旧库存桶何时删除"><a href="#12-4-旧库存桶何时删除" class="headerlink" title="12.4 旧库存桶何时删除"></a>12.4 旧库存桶何时删除</h3><p>旧库存桶的生命周期是：</p>
+<pre class=" language-language-text"><code class="language-language-text">OPEN -> CLOSED -> ARCHIVED
 </code></pre>
 <ul>
 <li><code>OPEN</code>：允许新的 Try、Confirm 和 Cancel；</li>
@@ -1309,23 +1261,20 @@ available=0, deficit=10
 <li><code>ARCHIVED</code>：不存在未完成 Reservation 后，MySQL 归档并给 Redis Key 设置清理 TTL。</li>
 </ul>
 <p>零点只负责切换新请求使用的库存桶，不删除旧桶。旧桶必须等 <code>PREPARING/RESERVED/CONFIRMING/CANCELING</code> 全部清零以后才能归档。</p>
-<h2 id="13-对账-修复与-redis-重建"><a class="markdownIt-Anchor" href="#13-对账-修复与-redis-重建"></a> 13. 对账、修复与 Redis 重建</h2>
-<h3 id="121-对账公式"><a class="markdownIt-Anchor" href="#121-对账公式"></a> 12.1 对账公式</h3>
-<p>对于一个菜品，在同一库存基线版本下：</p>
-<pre class="highlight"><code class="text">expected_available =
+<h2 id="13-对账、修复与-Redis-重建"><a href="#13-对账、修复与-Redis-重建" class="headerlink" title="13. 对账、修复与 Redis 重建"></a>13. 对账、修复与 Redis 重建</h2><h3 id="12-1-对账公式"><a href="#12-1-对账公式" class="headerlink" title="12.1 对账公式"></a>12.1 对账公式</h3><p>对于一个菜品，在同一库存基线版本下：</p>
+<pre class=" language-language-text"><code class="language-language-text">expected_available =
     baseline_total
     + sum(adjust_delta)
     - sum(valid_try_quantity)
     + sum(canceled_quantity)
 </code></pre>
 <p>或者直接根据 Ledger delta 聚合：</p>
-<pre class="highlight"><code class="text">expected_available = baseline_total + sum(available_delta)
+<pre class=" language-language-text"><code class="language-language-text">expected_available = baseline_total + sum(available_delta)
 expected_reserved  = sum(reserved_delta)
 expected_sold      = sum(sold_delta)
 </code></pre>
 <p>对账任务按 <code>merchant_id + dish_id</code> 分片，比较 MySQL 期望值和 Redis 实际值。</p>
-<h3 id="122-在线修复"><a class="markdownIt-Anchor" href="#122-在线修复"></a> 12.2 在线修复</h3>
-<p>不能在发现差异后直接 <code>SET available = expected</code>，因为修复期间可能还有在线 Try。</p>
+<h3 id="12-2-在线修复"><a href="#12-2-在线修复" class="headerlink" title="12.2 在线修复"></a>12.2 在线修复</h3><p>不能在发现差异后直接 <code>SET available = expected</code>，因为修复期间可能还有在线 Try。</p>
 <p>安全修复方式是：</p>
 <ol>
 <li>读取 Redis 当前 <code>version</code>；</li>
@@ -1335,8 +1284,7 @@ expected_sold      = sum(sold_delta)
 <li>修复操作本身也生成 <code>operation_id</code> 和 Ledger；</li>
 <li>大批量差异限速处理，避免影响下单链路。</li>
 </ol>
-<h3 id="123-redis-整体丢失"><a class="markdownIt-Anchor" href="#123-redis-整体丢失"></a> 12.3 Redis 整体丢失</h3>
-<p>如果发生极端故障，需要从 MySQL 重建 Redis：</p>
+<h3 id="12-3-Redis-整体丢失"><a href="#12-3-Redis-整体丢失" class="headerlink" title="12.3 Redis 整体丢失"></a>12.3 Redis 整体丢失</h3><p>如果发生极端故障，需要从 MySQL 重建 Redis：</p>
 <ol>
 <li>暂停受影响库存分片的新 Try，库存安全优先；</li>
 <li>加载 <code>dish_stock_baseline</code>；</li>
@@ -1346,9 +1294,7 @@ expected_sold      = sum(sold_delta)
 <li>小流量恢复写入，再逐步放开。</li>
 </ol>
 <p>MySQL 之所以必须保留完整操作记录，就是为了在 Redis 数据损坏、主从回退或误操作后，系统仍然有可审计、可重建的依据。</p>
-<h2 id="14-超卖与少卖分别如何避免"><a class="markdownIt-Anchor" href="#14-超卖与少卖分别如何避免"></a> 14. 超卖与少卖分别如何避免</h2>
-<h3 id="131-超卖"><a class="markdownIt-Anchor" href="#131-超卖"></a> 13.1 超卖</h3>
-<p>超卖通常来自并发检查和扣减不原子，或者重复消息造成重复扣减。</p>
+<h2 id="14-超卖与少卖分别如何避免"><a href="#14-超卖与少卖分别如何避免" class="headerlink" title="14. 超卖与少卖分别如何避免"></a>14. 超卖与少卖分别如何避免</h2><h3 id="13-1-超卖"><a href="#13-1-超卖" class="headerlink" title="13.1 超卖"></a>13.1 超卖</h3><p>超卖通常来自并发检查和扣减不原子，或者重复消息造成重复扣减。</p>
 <p>本方案通过以下机制避免：</p>
 <ul>
 <li>Redis Lua 原子执行“检查 available + 转入 reserved”；</li>
@@ -1357,8 +1303,7 @@ expected_sold      = sum(sold_delta)
 <li>Confirm 和 Cancel 使用 CAS 竞争终态；</li>
 <li>Redis 故障时失败关闭，不绕过库存继续下单。</li>
 </ul>
-<h3 id="132-少卖"><a class="markdownIt-Anchor" href="#132-少卖"></a> 13.2 少卖</h3>
-<p>少卖通常表现为库存被预扣后没有及时释放，Redis 数量长期低于真实可售数量。</p>
+<h3 id="13-2-少卖"><a href="#13-2-少卖" class="headerlink" title="13.2 少卖"></a>13.2 少卖</h3><p>少卖通常表现为库存被预扣后没有及时释放，Redis 数量长期低于真实可售数量。</p>
 <p>本方案通过以下机制避免：</p>
 <ul>
 <li>Reservation 保存 <code>expire_at</code>；</li>
@@ -1368,8 +1313,7 @@ expected_sold      = sum(sold_delta)
 <li>MySQL Ledger 与 Redis 定期对账；</li>
 <li>Redis op 记录解决“实际已执行但调用方误以为失败”的不确定窗口。</li>
 </ul>
-<h2 id="15-性能与容量设计"><a class="markdownIt-Anchor" href="#15-性能与容量设计"></a> 15. 性能与容量设计</h2>
-<p>正常 Try 链路包含：</p>
+<h2 id="15-性能与容量设计"><a href="#15-性能与容量设计" class="headerlink" title="15. 性能与容量设计"></a>15. 性能与容量设计</h2><p>正常 Try 链路包含：</p>
 <ol>
 <li>一次 MySQL 本地事务：写 Reservation 和 WAL；</li>
 <li>一次 Redis Lua；</li>
@@ -1382,14 +1326,13 @@ expected_sold      = sum(sold_delta)
 <li>MySQL 期望库存与 Redis 实际库存一致的校验比例；</li>
 <li>超卖订单数；</li>
 <li>少卖差异数；</li>
-<li>P95/P99 差异修复时长；</li>
+<li>P95&#x2F;P99 差异修复时长；</li>
 <li>WAL 积压量和最老任务年龄；</li>
 <li>Outbox 发布延迟和 MySQL Stock 投影延迟；</li>
-<li>Try/Confirm/Cancel 成功率和 TP99。</li>
+<li>Try&#x2F;Confirm&#x2F;Cancel 成功率和 TP99。</li>
 </ul>
 <p>“零资损”不能只靠一句结果描述，需要由超卖监控、库存对账、异常补偿和长期业务指标共同证明。</p>
-<h2 id="16-标准-tcc-的正常流程"><a class="markdownIt-Anchor" href="#16-标准-tcc-的正常流程"></a> 16. 标准 TCC 的正常流程</h2>
-<p>标准 TCC 是一种由全局事务协调器驱动的两阶段分布式事务方案。虽然业务接口被命名为 Try、Confirm、Cancel，但从协调流程看，它仍然是“准备阶段 + 提交或回滚阶段”。</p>
+<h2 id="16-标准-TCC-的正常流程"><a href="#16-标准-TCC-的正常流程" class="headerlink" title="16. 标准 TCC 的正常流程"></a>16. 标准 TCC 的正常流程</h2><p>标准 TCC 是一种由全局事务协调器驱动的两阶段分布式事务方案。虽然业务接口被命名为 Try、Confirm、Cancel，但从协调流程看，它仍然是“准备阶段 + 提交或回滚阶段”。</p>
 <p>参与角色通常包括：</p>
 <ul>
 <li><strong>事务发起方</strong>：开启一个全局事务；</li>
@@ -1426,6 +1369,7 @@ expected_sold      = sum(sold_delta)
         C->>P: Cancel
         Note over C,P: Cancel失败会持续重试
     end</pre>
+
 <p>每个阶段的职责是：</p>
 <ol>
 <li><strong>Try</strong>：检查业务条件并预留资源，例如冻结库存、冻结余额，但不完成最终业务提交；</li>
@@ -1434,26 +1378,21 @@ expected_sold      = sum(sold_delta)
 <li><strong>Coordinator Recovery</strong>：协调器持久化最终决议，进程重启后继续重试 Confirm 或 Cancel，直到所有分支收敛。</li>
 </ol>
 <p>标准 TCC 还要求参与者使用 <code>XID + branch_id</code> 建立分支事务记录，并处理重复调用、空回滚和悬挂问题。只实现三个同名接口，并不自动等于实现了 TCC。</p>
-<h2 id="17-为什么这里不使用标准-tcc"><a class="markdownIt-Anchor" href="#17-为什么这里不使用标准-tcc"></a> 17. 为什么这里不使用标准 TCC</h2>
-<p>这套库存方案使用了 Try、Confirm、Cancel 的业务语义，但没有直接引入标准 TCC 协调器，主要有以下原因。</p>
-<h3 id="161-事务生命周期不适合"><a class="markdownIt-Anchor" href="#161-事务生命周期不适合"></a> 16.1 事务生命周期不适合</h3>
-<p>标准 TCC 更适合生命周期较短、参与者边界明确的业务事务。例如一次下单同时冻结账户、优惠券和库存，所有 Try 在一个短时间窗口内完成，然后由协调器统一做出 Commit 或 Rollback 决议。</p>
+<h2 id="17-为什么这里不使用标准-TCC"><a href="#17-为什么这里不使用标准-TCC" class="headerlink" title="17. 为什么这里不使用标准 TCC"></a>17. 为什么这里不使用标准 TCC</h2><p>这套库存方案使用了 Try、Confirm、Cancel 的业务语义，但没有直接引入标准 TCC 协调器，主要有以下原因。</p>
+<h3 id="16-1-事务生命周期不适合"><a href="#16-1-事务生命周期不适合" class="headerlink" title="16.1 事务生命周期不适合"></a>16.1 事务生命周期不适合</h3><p>标准 TCC 更适合生命周期较短、参与者边界明确的业务事务。例如一次下单同时冻结账户、优惠券和库存，所有 Try 在一个短时间窗口内完成，然后由协调器统一做出 Commit 或 Rollback 决议。</p>
 <p>预约单的库存可能在下单后很久才到 <code>processing_time</code> 正式确认。如果让全局 TCC 事务和分支上下文维持几个小时，会带来大量长事务状态、超时配置和协调器存储压力，也会让业务取消、改约等状态很难表达。</p>
-<h3 id="162-库存是独立领域事务"><a class="markdownIt-Anchor" href="#162-库存是独立领域事务"></a> 16.2 库存是独立领域事务</h3>
-<p>本文的核心一致性边界在库存服务内部：</p>
+<h3 id="16-2-库存是独立领域事务"><a href="#16-2-库存是独立领域事务" class="headerlink" title="16.2 库存是独立领域事务"></a>16.2 库存是独立领域事务</h3><p>本文的核心一致性边界在库存服务内部：</p>
 <ul>
 <li>MySQL 保存库存操作生命周期；</li>
 <li>Redis 保存在线数量；</li>
 <li>Kafka 接收订单事实变化。</li>
 </ul>
 <p>订单创建是否成功已经由订单域自己提交，库存服务根据订单事件推进自己的状态。这里没有一个协调器同时控制订单数据库、Redis 和所有下游资源，也没有让多个参与者共同等待同一个全局决议。</p>
-<h3 id="163-需要事件驱动和长时间补偿"><a class="markdownIt-Anchor" href="#163-需要事件驱动和长时间补偿"></a> 16.3 需要事件驱动和长时间补偿</h3>
-<p>即时单由 <code>OrderCreated</code> 触发 Confirm，预约单由时间轮触发 Confirm，超时和订单取消触发 Cancel。这些决策来自业务事件和状态，而不是一个全局 TCC Coordinator。</p>
+<h3 id="16-3-需要事件驱动和长时间补偿"><a href="#16-3-需要事件驱动和长时间补偿" class="headerlink" title="16.3 需要事件驱动和长时间补偿"></a>16.3 需要事件驱动和长时间补偿</h3><p>即时单由 <code>OrderCreated</code> 触发 Confirm，预约单由时间轮触发 Confirm，超时和订单取消触发 Cancel。这些决策来自业务事件和状态，而不是一个全局 TCC Coordinator。</p>
 <p>WAL、重试和对账更适合表达这种长生命周期、事件驱动的最终一致性流程。它允许订单主链路先完成本域事务，也不会因为库存后续通知或某个下游暂时异常而长期占用一个全局事务上下文。</p>
-<h3 id="164-降低协调器和框架耦合"><a class="markdownIt-Anchor" href="#164-降低协调器和框架耦合"></a> 16.4 降低协调器和框架耦合</h3>
-<p>引入标准 TCC 除了增加一个协调器，还要求所有参与者实现统一分支协议、全局事务传播、事务日志、恢复任务和防悬挂机制。对于只有库存内部双存储需要收敛的场景，这部分复杂度和收益不一定匹配。</p>
+<h3 id="16-4-降低协调器和框架耦合"><a href="#16-4-降低协调器和框架耦合" class="headerlink" title="16.4 降低协调器和框架耦合"></a>16.4 降低协调器和框架耦合</h3><p>引入标准 TCC 除了增加一个协调器，还要求所有参与者实现统一分支协议、全局事务传播、事务日志、恢复任务和防悬挂机制。对于只有库存内部双存储需要收敛的场景，这部分复杂度和收益不一定匹配。</p>
 <p>因此这里选择的是：</p>
-<pre class="highlight"><code class="text">TCC业务语义
+<pre class=" language-language-text"><code class="language-language-text">TCC业务语义
 + 库存领域状态机
 + Operation WAL
 + Transactional Outbox / Consumer Inbox
@@ -1462,10 +1401,8 @@ expected_sold      = sum(sold_delta)
 + 补偿与对账
 </code></pre>
 <p>它更接近一个<strong>借用 TCC 三阶段语义的状态机驱动 Saga</strong>，而不是标准 TCC 分布式事务。</p>
-<h2 id="18-为什么这套方案能够保证最终一致性"><a class="markdownIt-Anchor" href="#18-为什么这套方案能够保证最终一致性"></a> 18. 为什么这套方案能够保证最终一致性</h2>
-<p>最终一致性不表示“过一段时间大概会一致”，而是需要同时具备安全性和活性。</p>
-<h3 id="171-安全性错误结果不能发生"><a class="markdownIt-Anchor" href="#171-安全性错误结果不能发生"></a> 17.1 安全性：错误结果不能发生</h3>
-<p>系统通过以下不变量保证不会多扣或多返：</p>
+<h2 id="18-为什么这套方案能够保证最终一致性"><a href="#18-为什么这套方案能够保证最终一致性" class="headerlink" title="18. 为什么这套方案能够保证最终一致性"></a>18. 为什么这套方案能够保证最终一致性</h2><p>最终一致性不表示“过一段时间大概会一致”，而是需要同时具备安全性和活性。</p>
+<h3 id="17-1-安全性：错误结果不能发生"><a href="#17-1-安全性：错误结果不能发生" class="headerlink" title="17.1 安全性：错误结果不能发生"></a>17.1 安全性：错误结果不能发生</h3><p>系统通过以下不变量保证不会多扣或多返：</p>
 <ol>
 <li>同一个 <code>reservation_id + action</code> 只有一条 MySQL 业务流水；</li>
 <li>同一个 <code>operation_id</code> 在 Redis 只产生一次数量变化；</li>
@@ -1477,8 +1414,7 @@ expected_sold      = sum(sold_delta)
 <li>MySQL Stock Consumer 通过 Inbox 和 <code>redis_version</code> 幂等更新 Snapshot 与 Ledger。</li>
 </ol>
 <p>这些约束保证系统即使发生重复消息、请求超时和并发竞争，也不会进入一个业务上非法的数量状态。</p>
-<h3 id="172-活性中间状态最终会继续推进"><a class="markdownIt-Anchor" href="#172-活性中间状态最终会继续推进"></a> 17.2 活性：中间状态最终会继续推进</h3>
-<p>系统通过以下机制保证未完成动作不会永久停留：</p>
+<h3 id="17-2-活性：中间状态最终会继续推进"><a href="#17-2-活性：中间状态最终会继续推进" class="headerlink" title="17.2 活性：中间状态最终会继续推进"></a>17.2 活性：中间状态最终会继续推进</h3><p>系统通过以下机制保证未完成动作不会永久停留：</p>
 <ol>
 <li>每次调用 Redis 前先写 WAL，未完成操作一定可以被扫描出来；</li>
 <li>同步 API 失败后，后台 Worker 使用原 <code>operation_id</code> 重试；</li>
@@ -1490,13 +1426,11 @@ expected_sold      = sum(sold_delta)
 <li>自动重试超过阈值后进入 Dead 状态并告警，由人工或修复任务继续处理。</li>
 </ol>
 <p>在满足“MySQL 和 Redis 最终恢复、重试任务持续运行、永久失败能够被人工处理”这些前提时，每条 Reservation 最终都会进入：</p>
-<pre class="highlight"><code class="text">REJECTED / CONFIRMED / CANCELED
+<pre class=" language-language-text"><code class="language-language-text">REJECTED / CONFIRMED / CANCELED
 </code></pre>
 <p>同时 Redis 数量会和 MySQL Ledger 推导出的期望值收敛。这才是本方案最终一致性的完整含义。</p>
-<h2 id="19-空回滚与悬挂问题"><a class="markdownIt-Anchor" href="#19-空回滚与悬挂问题"></a> 19. 空回滚与悬挂问题</h2>
-<p>虽然它不是标准 TCC，但只要存在 Try 和 Cancel 的异步竞态，就仍然会遇到与 TCC 类似的空回滚和悬挂风险。</p>
-<h3 id="181-空回滚"><a class="markdownIt-Anchor" href="#181-空回滚"></a> 18.1 空回滚</h3>
-<p>典型时序如下：</p>
+<h2 id="19-空回滚与悬挂问题"><a href="#19-空回滚与悬挂问题" class="headerlink" title="19. 空回滚与悬挂问题"></a>19. 空回滚与悬挂问题</h2><p>虽然它不是标准 TCC，但只要存在 Try 和 Cancel 的异步竞态，就仍然会遇到与 TCC 类似的空回滚和悬挂风险。</p>
+<h3 id="18-1-空回滚"><a href="#18-1-空回滚" class="headerlink" title="18.1 空回滚"></a>18.1 空回滚</h3><p>典型时序如下：</p>
 <ol>
 <li>Try 请求已经发出，但还没有执行到 Redis；</li>
 <li>订单侧超时，先发起 Cancel；</li>
@@ -1505,11 +1439,10 @@ expected_sold      = sum(sold_delta)
 </ol>
 <p>这就是空回滚。</p>
 <p>本方案的处理方式是：Cancel 发现 Redis Fence 不存在时，不修改数量，只创建：</p>
-<pre class="highlight"><code class="text">reservation.phase = CANCELED
+<pre class=" language-language-text"><code class="language-language-text">reservation.phase = CANCELED
 </code></pre>
 <p>重复 Cancel 读取到相同终态后直接返回成功，所以空回滚既不会增加库存，也不会无限报错。</p>
-<h3 id="182-悬挂"><a class="markdownIt-Anchor" href="#182-悬挂"></a> 18.2 悬挂</h3>
-<p>悬挂是空回滚之后的迟到 Try：</p>
+<h3 id="18-2-悬挂"><a href="#18-2-悬挂" class="headerlink" title="18.2 悬挂"></a>18.2 悬挂</h3><p>悬挂是空回滚之后的迟到 Try：</p>
 <ol>
 <li>Cancel 已经把事务判定为回滚；</li>
 <li>因为网络延迟，原 Try 此时才到达 Redis；</li>
@@ -1517,21 +1450,19 @@ expected_sold      = sum(sold_delta)
 </ol>
 <p>Try Lua 在修改库存前必须读取 Reservation Fence。只要发现 <code>phase=CANCELED</code>，就返回 <code>FENCED</code>，不能再执行 <code>available -&gt; reserved</code>。</p>
 <p>因此：</p>
-<pre class="highlight"><code class="text">Cancel before Try:
+<pre class=" language-language-text"><code class="language-language-text">Cancel before Try:
     只写CANCELED Fence，不返还数量
 
 Late Try after Cancel:
     看到CANCELED Fence，拒绝预扣
 </code></pre>
-<h3 id="183-重复调用和阶段乱序"><a class="markdownIt-Anchor" href="#183-重复调用和阶段乱序"></a> 18.3 重复调用和阶段乱序</h3>
-<p>Fence 之外还需要两层保护：</p>
+<h3 id="18-3-重复调用和阶段乱序"><a href="#18-3-重复调用和阶段乱序" class="headerlink" title="18.3 重复调用和阶段乱序"></a>18.3 重复调用和阶段乱序</h3><p>Fence 之外还需要两层保护：</p>
 <ul>
 <li><code>operation_id</code> 解决同一阶段重复调用，例如 Try 重试三次只能预扣一次；</li>
 <li>MySQL <code>status + version</code> CAS 解决 Confirm 和 Cancel 并发竞争。</li>
 </ul>
 <p>Redis Fence 和 MySQL 状态机都采用单向状态转换。两边任何一方暂时落后，都可以通过 WAL 和对账补齐，但不能执行逆向状态扭转。</p>
-<h3 id="184-为什么有三个阶段仍不能称为标准-tcc"><a class="markdownIt-Anchor" href="#184-为什么有三个阶段仍不能称为标准-tcc"></a> 18.4 为什么有三个阶段仍不能称为标准 TCC</h3>
-<p>判断是否为标准 TCC，关键不在接口名字，而在事务协议：</p>
+<h3 id="18-4-为什么有三个阶段仍不能称为标准-TCC"><a href="#18-4-为什么有三个阶段仍不能称为标准-TCC" class="headerlink" title="18.4 为什么有三个阶段仍不能称为标准 TCC"></a>18.4 为什么有三个阶段仍不能称为标准 TCC</h3><p>判断是否为标准 TCC，关键不在接口名字，而在事务协议：</p>
 <table>
 <thead>
 <tr>
@@ -1540,8 +1471,7 @@ Late Try after Cancel:
 <th>本文方案</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>最终决议者</td>
 <td>全局事务协调器</td>
 <td>订单事件、状态机、时间轮和超时任务</td>
@@ -1576,14 +1506,12 @@ Late Try after Cancel:
 <td>协调器驱动的业务两阶段提交</td>
 <td>状态机驱动的事件最终一致性</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>所以更准确的描述是：</p>
 <blockquote>
 <p>该方案借用了 TCC 的预留、确认和释放语义，但没有采用全局事务协调器和标准分支事务协议；它本质上是一套基于状态机、WAL、Transactional Outbox、幂等 Fence 和补偿对账实现的最终一致性库存方案。</p>
 </blockquote>
-<h2 id="20-方案总结"><a class="markdownIt-Anchor" href="#20-方案总结"></a> 20. 方案总结</h2>
-<p>这套库存系统最核心的设计不是 TCC 三个英文单词，而是把分布式事务中的每一个不确定窗口都变成可观察、可重试的状态：</p>
+<h2 id="20-方案总结"><a href="#20-方案总结" class="headerlink" title="20. 方案总结"></a>20. 方案总结</h2><p>这套库存系统最核心的设计不是 TCC 三个英文单词，而是把分布式事务中的每一个不确定窗口都变成可观察、可重试的状态：</p>
 <ul>
 <li>Try 用 Redis Lua 保证高并发下不超卖；</li>
 <li>MySQL Reservation 和 Ledger 保存事务生命周期与审计记录；</li>
@@ -1752,9 +1680,9 @@ Late Try after Cancel:
                     <div class="card-image">
                         
                         
-                        <img src="https://s3.bmp.ovh/2026/03/16/tjx0qXOc.jpg" class="responsive-img" alt="TCC三阶段语义：外卖系统分布式库存最终一致性方案">
+                        <img src="https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg" class="responsive-img" alt="基于 TCC 思想的分布式库存一致性方案">
                         
-                        <span class="card-title">TCC三阶段语义：外卖系统分布式库存最终一致性方案</span>
+                        <span class="card-title">基于 TCC 思想的分布式库存一致性方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -2052,7 +1980,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">72.2k</span>&nbsp;字
+                    class="white-color">70.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
