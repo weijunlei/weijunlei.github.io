@@ -1,5 +1,32 @@
 /* Here is your custom css styles. */
 
+/* Mermaid diagrams need a light canvas; the site's code blocks use a dark theme. */
+pre.mermaid,
+.mermaid {
+    padding: 1.5rem !important;
+    color: #0f172a !important;
+    background: #ffffff !important;
+    border: 1px solid #d7dee8;
+    border-radius: 6px;
+}
+
+pre.mermaid svg,
+.mermaid svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+.mermaid text,
+.mermaid .messageText,
+.mermaid .loopText,
+.mermaid .labelText {
+    fill: #0f172a !important;
+    color: #0f172a !important;
+}
+
 /* hexo-filter-github-emojis */
 .github-emoji{
     height: 2em;
