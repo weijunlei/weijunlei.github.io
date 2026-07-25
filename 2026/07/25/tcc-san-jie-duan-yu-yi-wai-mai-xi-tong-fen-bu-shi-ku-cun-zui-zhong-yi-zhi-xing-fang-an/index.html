@@ -352,14 +352,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12.1k
+                    13k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    50 分
+                    54 分
                 </div>
                 
 				
@@ -475,39 +475,49 @@ sold     += quantity
 <p>不同订单的 Confirm 时机不同：</p>
 <ul>
 <li><strong>即时单</strong>：消费订单域发布的 <code>OrderCreated</code> 或等价的“订单创建成功”事件后 Confirm；</li>
-<li><strong>预约单</strong>：Try 成功后等待 <code>processing_time</code>，由时间轮触发 Confirm。</li>
+<li><strong>预约单</strong>：消费 <code>OrderCreated</code> 后先从 <code>RESERVED</code> 进入 <code>CREATED_RESERVED</code>，表示订单已经创建但库存仍在预约占用池；到 <code>processing_time</code> 再由时间轮触发 Confirm。</li>
 </ul>
 <p>预约单不能过早 Confirm，否则库存会长时间占用并降低商家当前可售率；但也不能完全不预留，否则履约时间到达时可能无货。</p>
 <h3 id="23-cancel释放预扣"><a class="markdownIt-Anchor" href="#23-cancel释放预扣"></a> 2.3 Cancel：释放预扣</h3>
-<p>订单创建失败、订单主动取消或预扣超时后执行 Cancel：</p>
+<p>Cancel 只处理<strong>订单创建失败</strong>这一种业务结果。订单域完成创建失败落库后发布 <code>OrderCreatedFailed</code>，库存服务消费该事件并释放 Try 阶段的预扣：</p>
 <pre class="highlight"><code class="text">reserved  -= quantity
 available += quantity
 </code></pre>
-<p>系统会扫描超过 10 分钟仍处于 <code>RESERVED</code> 的记录，但扫描到记录后不能直接返还库存。它需要先确认订单没有成功，再通过状态机抢占 Cancel 权限。</p>
-<p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。订单侧需要把该订单置为失败；后续重新下单应创建新的订单明细和 Reservation，不能复用已经 Cancel 的记录。</p>
+<p><code>OrderCanceled</code> 不能触发 Cancel。因为订单一旦创建成功，Try 阶段已经结束，后续用户取消属于退款语义，应进入独立的 Refund 流程。即时单通常执行 <code>sold -&gt; available</code>；预约单如果尚未到 Confirm 时间，则由 Refund 流程释放仍被占用的 <code>reserved</code>，但业务状态仍应记录为 <code>REFUNDED</code>，不能伪装成订单创建失败。</p>
+<p>系统可以扫描长时间停留在 <code>RESERVED</code> 的记录，但扫描任务只能告警、补拉订单事件或向订单域核验状态，不能仅凭超时自行执行 Cancel。库存域不能替订单域判断订单创建是否失败。</p>
+<p>如果 Cancel 已经完成，晚到的 Confirm 不能重新扣减库存。后续重新下单应创建新的订单明细和 Reservation，不能复用已经 Cancel 的记录。</p>
 <h2 id="3-状态机设计"><a class="markdownIt-Anchor" href="#3-状态机设计"></a> 3. 状态机设计</h2>
 <pre class="mermaid">stateDiagram-v2
     [*] --> PREPARING: 创建Try WAL
     PREPARING --> RESERVED: Redis预扣成功
     PREPARING --> REJECTED: 库存不足
-    PREPARING --> CANCELING: 请求放弃未完成Try
+    PREPARING --> CANCELING: OrderCreatedFailed
 
-    RESERVED --> CONFIRMING: Confirm CAS抢占成功
-    RESERVED --> CANCELING: Cancel CAS抢占成功
+    RESERVED --> CONFIRMING: 即时单OrderCreated
+    RESERVED --> CREATED_RESERVED: 预约单OrderCreated
+    RESERVED --> CANCELING: OrderCreatedFailed CAS抢占
+    CREATED_RESERVED --> CONFIRMING: 到processing_time
+    CREATED_RESERVED --> REFUNDING: 预约单退款
 
     CONFIRMING --> CONFIRMED: Redis确认成功
     CANCELING --> CANCELED: Redis释放成功
+    CONFIRMED --> REFUNDING: 订单退款
+    REFUNDING --> REFUNDED: Redis回补成功
 
     CONFIRMING --> CONFIRMING: 失败后重试
     CANCELING --> CANCELING: 失败后重试
+    REFUNDING --> REFUNDING: 失败后重试
 
     REJECTED --> [*]
-    CONFIRMED --> [*]
-    CANCELED --> [*]</pre>
+    CANCELED --> [*]
+    REFUNDED --> [*]</pre>
 <p>核心规则如下：</p>
 <ul>
 <li><code>CONFIRMING</code> 和 <code>CANCELING</code> 只能有一个从 <code>RESERVED</code> 抢占成功；</li>
-<li><code>CONFIRMED</code>、<code>CANCELED</code>、<code>REJECTED</code> 都是终态；</li>
+<li>预约单收到 <code>OrderCreated</code> 后必须进入 <code>CREATED_RESERVED</code>，该状态禁止再进入 <code>CANCELING</code>；</li>
+<li>Cancel 只能由 <code>OrderCreatedFailed</code> 驱动，<code>OrderCanceled</code> 只能进入 Refund；</li>
+<li><code>CANCELED</code> 表示订单创建失败后的预扣释放，<code>REFUNDED</code> 表示订单创建成功后的库存回补；</li>
+<li><code>CANCELED</code>、<code>REFUNDED</code>、<code>REJECTED</code> 都是终态；</li>
 <li>状态更新必须使用 <code>status + version</code> 做 CAS；</li>
 <li>执行到一半失败时保留中间态，由 WAL 重试继续推进；</li>
 <li>重复请求读取当前状态后返回历史结果，不重新执行完整流程。</li>
@@ -526,6 +536,7 @@ available += quantity
 <li>当前已经是 <code>CONFIRMED</code>：按幂等成功返回；</li>
 <li>当前是 <code>CONFIRMING</code>：说明已有任务执行，当前请求可以等待或返回处理中；</li>
 <li>当前是 <code>CANCELING/CANCELED</code>：Confirm 与既有终态冲突；</li>
+<li>当前是 <code>REFUNDING/REFUNDED</code>：订单已经进入逆向流程，拒绝 Confirm；</li>
 <li>版本变化但仍为 <code>RESERVED</code>：重新获取版本后再竞争。</li>
 </ul>
 <h2 id="4-mysql-schema"><a class="markdownIt-Anchor" href="#4-mysql-schema"></a> 4. MySQL Schema</h2>
@@ -580,8 +591,8 @@ available += quantity
     quantity        <span class="hljs-type">INT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;本次预扣数量&#x27;</span>,
     order_type      TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;订单类型：1=instant即时单, 2=scheduled预约单&#x27;</span>,
     processing_time DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;预约单履约时间，到点触发Confirm；即时单为空&#x27;</span>,
-    expire_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;预扣过期时间，超时未确认则触发Cancel扫描&#x27;</span>,
-    status          TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;事务状态：10=preparing, 20=reserved, 30=confirming, 40=confirmed, 50=canceling, 60=canceled, 70=rejected&#x27;</span>,
+    expire_at       DATETIME(<span class="hljs-number">3</span>) <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;预扣关注时间，超时仅告警、补拉事件或向订单域核验，不直接Cancel&#x27;</span>,
+    status          TINYINT <span class="hljs-keyword">NOT NULL</span> COMMENT <span class="hljs-string">&#x27;事务状态：10=preparing, 20=reserved, 25=created_reserved, 30=confirming, 40=confirmed, 50=canceling, 60=canceled, 70=rejected, 80=refunding, 90=refunded&#x27;</span>,
     sync_status     TINYINT <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">10</span> COMMENT <span class="hljs-string">&#x27;MySQL Stock同步状态：10=pending, 20=synced, 30=retry, 40=dead&#x27;</span>,
     expected_redis_version <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;当前业务状态期望投影到MySQL Stock的Redis版本&#x27;</span>,
     synced_redis_version   <span class="hljs-type">BIGINT</span> UNSIGNED <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> COMMENT <span class="hljs-string">&#x27;MySQL Stock已经完成投影的Redis版本&#x27;</span>,
@@ -746,6 +757,7 @@ Fields:
   try_op_id     op_try_abc
   confirm_op_id &quot;&quot;
   cancel_op_id  &quot;&quot;
+  refund_op_id  &quot;&quot;
   version       392
   updated_at    1784982600456
 </code></pre>
@@ -753,14 +765,17 @@ Fields:
 <pre class="highlight"><code class="text">NONE -&gt; RESERVED -&gt; CONFIRMED
 NONE -&gt; CANCELED
 RESERVED -&gt; CANCELED
+RESERVED -&gt; REFUNDED
+CONFIRMED -&gt; REFUNDED
 </code></pre>
 <p>其中 <code>NONE -&gt; CANCELED</code> 是一条空回滚栅栏：它不修改库存数量，但会阻止晚到的 Try 再次冻结库存。</p>
-<p>Try、Confirm、Cancel 的 Lua 都必须同时检查并更新这条 Fence：</p>
+<p>Try、Confirm、Cancel、Refund 的 Lua 都必须同时检查并更新这条 Fence：</p>
 <ul>
-<li>Try 发现 <code>phase=CANCELED/CONFIRMED</code>，直接拒绝执行；</li>
+<li>Try 发现 <code>phase=CANCELED/CONFIRMED/REFUNDED</code>，直接拒绝执行；</li>
 <li>Confirm 只有在 <code>phase=RESERVED</code> 时才移动数量；</li>
 <li>Cancel 发现 <code>phase=NONE</code>，只写 <code>CANCELED</code> Fence，不增加 available；</li>
 <li>Cancel 发现 <code>phase=RESERVED</code>，才执行 <code>reserved -&gt; available</code>；</li>
+<li>Refund 发现 <code>phase=RESERVED</code> 时执行 <code>reserved -&gt; available</code>，发现 <code>phase=CONFIRMED</code> 时执行 <code>sold -&gt; available</code>，最终统一进入 <code>REFUNDED</code>；</li>
 <li>任意终态被重复调用，都返回第一次执行结果。</li>
 </ul>
 <h3 id="53-redis-操作幂等记录"><a class="markdownIt-Anchor" href="#53-redis-操作幂等记录"></a> 5.3 Redis 操作幂等记录</h3>
@@ -794,7 +809,7 @@ Fields:
 <span class="hljs-keyword">end</span>
 
 <span class="hljs-keyword">local</span> phase = redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">3</span>], <span class="hljs-string">&quot;phase&quot;</span>)
-<span class="hljs-keyword">if</span> phase == <span class="hljs-string">&quot;CANCELED&quot;</span> <span class="hljs-keyword">or</span> phase == <span class="hljs-string">&quot;CONFIRMED&quot;</span> <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> phase == <span class="hljs-string">&quot;CANCELED&quot;</span> <span class="hljs-keyword">or</span> phase == <span class="hljs-string">&quot;CONFIRMED&quot;</span> <span class="hljs-keyword">or</span> phase == <span class="hljs-string">&quot;REFUNDED&quot;</span> <span class="hljs-keyword">then</span>
     <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;FENCED&quot;</span>, redis.call(<span class="hljs-string">&quot;HGET&quot;</span>, KEYS[<span class="hljs-number">3</span>], <span class="hljs-string">&quot;version&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;0&quot;</span>}
 <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">if</span> phase == <span class="hljs-string">&quot;RESERVED&quot;</span> <span class="hljs-keyword">then</span>
@@ -968,12 +983,14 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
     C --> E
     D --> E
     E -->|是| F["订单级Try成功"]
-    E -->|否| G["Cancel所有已成功菜品"]
-    G --> H["订单级Try失败"]</pre>
+    E -->|否| G["订单域落订单创建失败"]
+    G --> H["发布OrderCreatedFailed"]
+    H --> I["Cancel所有已成功菜品"]</pre>
 <p>它不是跨菜品瞬时原子，而是 TCC 内部结合 Saga 补偿：</p>
 <ul>
 <li>所有菜品 Try 成功，订单级预扣成功；</li>
-<li>任意菜品库存不足，对已经成功的菜品执行 Cancel；</li>
+<li>任意菜品库存不足，库存服务只返回失败结果，不自行决定 Cancel；</li>
+<li>订单域确认整单创建失败并发布 <code>OrderCreatedFailed</code>，库存服务再对已经成功的菜品执行 Cancel；</li>
 <li>Cancel 失败时保留 <code>CANCELING</code>，由 WAL 重试直到释放。</li>
 </ul>
 <h3 id="72-同商家菜品放入同一-slot"><a class="markdownIt-Anchor" href="#72-同商家菜品放入同一-slot"></a> 7.2 同商家菜品放入同一 Slot</h3>
@@ -1006,24 +1023,27 @@ redis.call(<span class="hljs-string">&quot;PEXPIRE&quot;</span>, KEYS[<span clas
 </ol>
 <p>Kafka 可能重复投递，Confirm 消费必须幂等。重复消息最终会读取到 <code>CONFIRMED</code> 并直接返回成功。</p>
 <h3 id="82-预约单"><a class="markdownIt-Anchor" href="#82-预约单"></a> 8.2 预约单</h3>
-<p>预约单 Try 成功后，Reservation 保存 <code>processing_time</code>。时间轮在接近履约时间时触发 Confirm。</p>
+<p>预约单 Try 成功后，Reservation 保存 <code>processing_time</code>。收到 <code>OrderCreated</code> 时，库存服务先通过 CAS 把 <code>RESERVED</code> 更新为 <code>CREATED_RESERVED</code>，明确记录订单已经创建成功。时间轮在接近履约时间时再从 <code>CREATED_RESERVED</code> 触发 Confirm。</p>
 <p>时间轮只负责“准时触发”，不能成为唯一可靠来源。系统还需要一个补偿扫描任务：</p>
 <pre class="highlight"><code class="sql"><span class="hljs-keyword">SELECT</span> id
 <span class="hljs-keyword">FROM</span> inventory_reservation
 <span class="hljs-keyword">WHERE</span> order_type <span class="hljs-operator">=</span> <span class="hljs-number">2</span>
-  <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">20</span>
+  <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">25</span>
   <span class="hljs-keyword">AND</span> processing_time <span class="hljs-operator">&lt;=</span> NOW(<span class="hljs-number">3</span>)
 <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> processing_time
 LIMIT <span class="hljs-number">500</span>;
 </code></pre>
 <p>这样即使时间轮分片迁移、进程重启或触发消息丢失，扫描任务仍能补发 Confirm。</p>
 <h2 id="9-cancel-流程"><a class="markdownIt-Anchor" href="#9-cancel-流程"></a> 9. Cancel 流程</h2>
-<p>Cancel 有三类入口：</p>
+<p>Cancel 只有一个业务入口：<strong>订单域发布 <code>OrderCreatedFailed</code></strong>。</p>
+<p>多菜品 Try 部分失败、订单服务写库失败或订单创建流程超时，都必须先由订单域形成明确的“创建失败”事实，再发布 <code>OrderCreatedFailed</code>。库存服务不能根据局部失败或本地超时自行推断整张订单失败。</p>
+<p>长时间没有收到 <code>OrderCreated</code> 或 <code>OrderCreatedFailed</code> 时，扫描任务只允许：</p>
 <ol>
-<li>订单域发布 <code>OrderCreateFailed</code> 或 <code>OrderCanceled</code>；</li>
-<li>Try 成功后超过 10 分钟仍未确认；</li>
-<li>多菜品 Try 部分失败，对已成功菜品执行补偿。</li>
+<li>告警并记录卡住的 Reservation；</li>
+<li>重放或补拉订单生命周期事件；</li>
+<li>查询订单域的权威状态。</li>
 </ol>
+<p>即使查询发现订单创建失败，也应由订单域补发 <code>OrderCreatedFailed</code>，再进入统一 Cancel 消费链路，避免两个领域同时拥有订单最终状态的决策权。</p>
 <p>Cancel 的关键不是“把数量加回去”，而是先获得合法的状态转换权：</p>
 <pre class="highlight"><code class="sql"><span class="hljs-keyword">UPDATE</span> inventory_reservation
 <span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-number">50</span>,
@@ -1033,7 +1053,7 @@ LIMIT <span class="hljs-number">500</span>;
   <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-number">20</span>
   <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> ?;
 </code></pre>
-<p>只有 <code>RESERVED -&gt; CANCELING</code> 成功的任务才能创建 Cancel WAL。Confirm 同时到达时，也会竞争同一个 <code>RESERVED</code> 状态，因此只有一方可以成功。</p>
+<p>只有 <code>RESERVED -&gt; CANCELING</code> 成功的任务才能创建 Cancel WAL。即时单 <code>OrderCreated</code> 触发的 Confirm 与 <code>OrderCreatedFailed</code> 会竞争同一个 <code>RESERVED</code> 状态，因此只有一方可以成功。预约单一旦由 <code>OrderCreated</code> 推进到 <code>CREATED_RESERVED</code>，Cancel 的 CAS 就必然失败，后续逆向只能进入 Refund。</p>
 <p>Cancel Lua 使用独立的 <code>operation_id</code>：</p>
 <pre class="highlight"><code class="text">op_cancel_{reservation_id}
 </code></pre>
@@ -1045,6 +1065,18 @@ LIMIT <span class="hljs-number">500</span>;
 <li>Fence 为 <code>CONFIRMED</code>：拒绝 Cancel，并上报终态冲突。</li>
 </ul>
 <p>第二种情况非常重要。Cancel 不能因为没有找到 Try 记录就直接增加 <code>available</code>，否则会产生空回滚，凭空增加库存。Cancel 写入的 <code>CANCELED</code> Fence 还会阻止正在路上或稍后重试的 Try，避免库存事务悬挂。</p>
+<h3 id="91-为什么-ordercanceled-必须走-refund"><a class="markdownIt-Anchor" href="#91-为什么-ordercanceled-必须走-refund"></a> 9.1 为什么 OrderCanceled 必须走 Refund</h3>
+<p><code>OrderCanceled</code> 表示订单已经创建成功，已经越过 Try/Cancel 的业务边界。库存服务收到订单取消或退款事件后，应创建独立的 Refund WAL 和 <code>operation_id</code>：</p>
+<pre class="highlight"><code class="text">op_refund_{reservation_id}
+</code></pre>
+<p>Refund 根据库存所处阶段执行回补：</p>
+<ul>
+<li>即时单已经 <code>CONFIRMED</code>：执行 <code>sold -= quantity</code>、<code>available += quantity</code>；</li>
+<li>预约单处于 <code>CREATED_RESERVED</code>：执行 <code>reserved -= quantity</code>、<code>available += quantity</code>；</li>
+<li>已经 <code>REFUNDED</code>：幂等返回首次结果；</li>
+<li>退款数量、部分退款和是否允许恢复可售库存，以退款事件和业务策略为准。</li>
+</ul>
+<p>Refund 完成后状态进入 <code>REFUNDED</code>，并写入独立的 Refund Ledger 和 Outbox。它和 Cancel 的数量变化可能相似，但业务含义完全不同：Cancel 表示订单没有创建成功，Refund 表示订单创建成功后发生逆向交易。</p>
 <h2 id="10-wal-如何保证可重入"><a class="markdownIt-Anchor" href="#10-wal-如何保证可重入"></a> 10. WAL 如何保证可重入</h2>
 <p>幂等和可重入不是同一个概念：</p>
 <ul>
@@ -1112,8 +1144,8 @@ LIMIT <span class="hljs-number">100</span>
 <td>使用相同 <code>event_id</code> 重发，消费者通过 Inbox 幂等</td>
 </tr>
 <tr>
-<td>Confirm/Cancel 执行中进程退出</td>
-<td><code>CONFIRMING/CANCELING</code></td>
+<td>Confirm/Cancel/Refund 执行中进程退出</td>
+<td><code>CONFIRMING/CANCELING/REFUNDING</code></td>
 <td>WAL 从中间态继续</td>
 </tr>
 </tbody>
@@ -1138,13 +1170,13 @@ LIMIT <span class="hljs-number">100</span>
 </tr>
 <tr>
 <td><code>order.lifecycle.v1</code></td>
-<td><code>OrderCreateFailed</code></td>
+<td><code>OrderCreatedFailed</code></td>
 <td>创建失败触发 Cancel</td>
 </tr>
 <tr>
 <td><code>order.lifecycle.v1</code></td>
-<td><code>OrderCanceled</code></td>
-<td>订单取消触发 Cancel</td>
+<td><code>OrderCanceled</code> / <code>RefundRequested</code></td>
+<td>订单创建后的逆向交易触发 Refund</td>
 </tr>
 <tr>
 <td><code>inventory.schedule.v1</code></td>
@@ -1341,7 +1373,7 @@ available=0, deficit=10
 <li><code>CLOSED</code>：禁止新的 Try，但允许已有 Reservation 继续 Confirm 或 Cancel；</li>
 <li><code>ARCHIVED</code>：不存在未完成 Reservation 后，MySQL 归档并给 Redis Key 设置清理 TTL。</li>
 </ul>
-<p>零点只负责切换新请求使用的库存桶，不删除旧桶。旧桶必须等 <code>PREPARING/RESERVED/CONFIRMING/CANCELING</code> 全部清零以后才能归档。</p>
+<p>零点只负责切换新请求使用的库存桶，不删除旧桶。旧桶必须等 <code>PREPARING/RESERVED/CREATED_RESERVED/CONFIRMING/CANCELING/REFUNDING</code> 全部清零以后才能归档。</p>
 <h2 id="13-对账-修复与-redis-重建"><a class="markdownIt-Anchor" href="#13-对账-修复与-redis-重建"></a> 13. 对账、修复与 Redis 重建</h2>
 <h3 id="121-对账公式"><a class="markdownIt-Anchor" href="#121-对账公式"></a> 12.1 对账公式</h3>
 <p>对于一个菜品，在同一库存基线版本下：</p>
@@ -1394,10 +1426,11 @@ expected_sold      = sum(sold_delta)
 <p>少卖通常表现为库存被预扣后没有及时释放，Redis 数量长期低于真实可售数量。</p>
 <p>本方案通过以下机制避免：</p>
 <ul>
-<li>Reservation 保存 <code>expire_at</code>；</li>
-<li>10 分钟扫描未确认预扣；</li>
+<li>Reservation 保存 <code>expire_at</code>，用于发现长时间未收到订单终态事件的记录；</li>
+<li>扫描任务负责告警、补拉事件或向订单域核验，但不直接 Cancel；</li>
+<li>订单域通过 Outbox 可靠发布 <code>OrderCreatedFailed</code>；</li>
 <li>Cancel WAL 持续重试；</li>
-<li>多菜品 Try 部分失败后主动补偿；</li>
+<li>多菜品 Try 部分失败后，由订单域发布 <code>OrderCreatedFailed</code> 驱动补偿；</li>
 <li>MySQL Ledger 与 Redis 定期对账；</li>
 <li>Redis op 记录解决“实际已执行但调用方误以为失败”的不确定窗口。</li>
 </ul>
@@ -1481,7 +1514,7 @@ expected_sold      = sum(sold_delta)
 </ul>
 <p>订单创建是否成功已经由订单域自己提交，库存服务根据订单事件推进自己的状态。这里没有一个协调器同时控制订单数据库、Redis 和所有下游资源，也没有让多个参与者共同等待同一个全局决议。</p>
 <h3 id="163-需要事件驱动和长时间补偿"><a class="markdownIt-Anchor" href="#163-需要事件驱动和长时间补偿"></a> 16.3 需要事件驱动和长时间补偿</h3>
-<p>即时单由 <code>OrderCreated</code> 触发 Confirm，预约单由时间轮触发 Confirm，超时和订单取消触发 Cancel。这些决策来自业务事件和状态，而不是一个全局 TCC Coordinator。</p>
+<p>即时单由 <code>OrderCreated</code> 触发 Confirm，预约单由时间轮触发 Confirm，只有 <code>OrderCreatedFailed</code> 才触发 Cancel。订单创建后的 <code>OrderCanceled</code> 属于逆向交易，由 Refund 流程处理。这些决策来自业务事件和状态，而不是一个全局 TCC Coordinator。</p>
 <p>WAL、重试和对账更适合表达这种长生命周期、事件驱动的最终一致性流程。它允许订单主链路先完成本域事务，也不会因为库存后续通知或某个下游暂时异常而长期占用一个全局事务上下文。</p>
 <h3 id="164-降低协调器和框架耦合"><a class="markdownIt-Anchor" href="#164-降低协调器和框架耦合"></a> 16.4 降低协调器和框架耦合</h3>
 <p>引入标准 TCC 除了增加一个协调器，还要求所有参与者实现统一分支协议、全局事务传播、事务日志、恢复任务和防悬挂机制。对于只有库存内部双存储需要收敛的场景，这部分复杂度和收益不一定匹配。</p>
@@ -1503,9 +1536,11 @@ expected_sold      = sum(sold_delta)
 <li>同一个 <code>reservation_id + action</code> 只有一条 MySQL 业务流水；</li>
 <li>同一个 <code>operation_id</code> 在 Redis 只产生一次数量变化；</li>
 <li>Try 只能执行 <code>available -&gt; reserved</code>；</li>
-<li>Confirm 和 Cancel 只能从 <code>RESERVED</code> 竞争，终态不能互相转换；</li>
-<li>Cancel 没有看到 Try 时只写 Fence，不能增加 available；</li>
-<li>Cancel 已经形成终态后，迟到 Try 会被 Fence 拒绝；</li>
+<li>即时单的 Confirm 和 Cancel 通过 <code>RESERVED</code> 上的 CAS 竞争订单创建终态；</li>
+<li>预约单收到 <code>OrderCreated</code> 后进入 <code>CREATED_RESERVED</code>，不能再转为 Cancel；</li>
+<li>Cancel 只能由 <code>OrderCreatedFailed</code> 驱动，没有看到 Try 时只写 Fence，不能增加 available；</li>
+<li>Refund 只能从 <code>CREATED_RESERVED</code> 或 <code>CONFIRMED</code> 进入，不能伪装成 Cancel；</li>
+<li>Cancel 或 Refund 已经形成终态后，迟到 Try/Confirm 会被 Fence 拒绝；</li>
 <li>Reservation 状态、WAL 和 Outbox 在一个本地事务中提交；</li>
 <li>MySQL Stock Consumer 通过 Inbox 和 <code>redis_version</code> 幂等更新 Snapshot 与 Ledger。</li>
 </ol>
@@ -1515,15 +1550,15 @@ expected_sold      = sum(sold_delta)
 <ol>
 <li>每次调用 Redis 前先写 WAL，未完成操作一定可以被扫描出来；</li>
 <li>同步 API 失败后，后台 Worker 使用原 <code>operation_id</code> 重试；</li>
-<li><code>CONFIRMING/CANCELING</code> 都有明确的恢复入口；</li>
+<li><code>CONFIRMING/CANCELING/REFUNDING</code> 都有明确的恢复入口；</li>
 <li>Outbox Publisher 持续重试未发送事件；</li>
 <li>时间轮丢失时，数据库扫描补触发预约单；</li>
-<li>超时 Reservation 会被 Cancel 扫描任务发现；</li>
+<li>超时 Reservation 会被扫描任务发现并告警、补拉订单事件，但只有 <code>OrderCreatedFailed</code> 能推进 Cancel；</li>
 <li>对账任务发现 Redis 和 MySQL 长期差异并执行版本化修复；</li>
 <li>自动重试超过阈值后进入 Dead 状态并告警，由人工或修复任务继续处理。</li>
 </ol>
 <p>在满足“MySQL 和 Redis 最终恢复、重试任务持续运行、永久失败能够被人工处理”这些前提时，每条 Reservation 最终都会进入：</p>
-<pre class="highlight"><code class="text">REJECTED / CONFIRMED / CANCELED
+<pre class="highlight"><code class="text">REJECTED / CONFIRMED / CANCELED / REFUNDED
 </code></pre>
 <p>同时 Redis 数量会和 MySQL Ledger 推导出的期望值收敛。这才是本方案最终一致性的完整含义。</p>
 <h2 id="19-空回滚与悬挂问题"><a class="markdownIt-Anchor" href="#19-空回滚与悬挂问题"></a> 19. 空回滚与悬挂问题</h2>
@@ -1532,7 +1567,7 @@ expected_sold      = sum(sold_delta)
 <p>典型时序如下：</p>
 <ol>
 <li>Try 请求已经发出，但还没有执行到 Redis；</li>
-<li>订单侧超时，先发起 Cancel；</li>
+<li>订单域已经确认创建失败，并发布 <code>OrderCreatedFailed</code>；</li>
 <li>Cancel 没有找到预扣记录；</li>
 <li>如果 Cancel 直接执行 <code>available += quantity</code>，库存会凭空增加。</li>
 </ol>
@@ -1577,7 +1612,7 @@ Late Try after Cancel:
 <tr>
 <td>最终决议者</td>
 <td>全局事务协调器</td>
-<td>订单事件、状态机、时间轮和超时任务</td>
+<td>订单事件、状态机和时间轮</td>
 </tr>
 <tr>
 <td>事务标识</td>
@@ -1597,7 +1632,7 @@ Late Try after Cancel:
 <tr>
 <td>Cancel 时机</td>
 <td>全局事务失败或超时</td>
-<td>订单失败、订单取消、预扣超时或局部补偿</td>
+<td>仅由订单域 <code>OrderCreatedFailed</code> 触发</td>
 </tr>
 <tr>
 <td>恢复中心</td>
@@ -1621,9 +1656,9 @@ Late Try after Cancel:
 <li>Try 用 Redis Lua 保证高并发下不超卖；</li>
 <li>MySQL Reservation 和 Ledger 保存事务生命周期与审计记录；</li>
 <li>Operation WAL 解决 Redis 调用前后的故障恢复；</li>
-<li>状态机和 CAS 解决 Confirm、Cancel 并发竞争；</li>
+<li>状态机和 CAS 解决 Confirm、Cancel、Refund 的并发竞争与语义隔离；</li>
+<li>只有 <code>OrderCreatedFailed</code> 能触发 Cancel，<code>OrderCanceled</code> 必须进入 Refund；</li>
 <li>Redis <code>operation_id</code> 解决重复执行和结果未知；</li>
-<li>Operation WAL 解决 Redis 调用前后的故障恢复；</li>
 <li>Transactional Outbox 和 Consumer Inbox 解决数据库状态、Kafka 与 MySQL Stock 投影的一致性；</li>
 <li>时间轮加扫描补偿解决预约单触发丢失；</li>
 <li>对账和重建机制兜住双存储的长期一致性。</li>
@@ -2085,7 +2120,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">72.3k</span>&nbsp;字
+                    class="white-color">73.2k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
