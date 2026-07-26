@@ -1270,45 +1270,37 @@ FOR UPDATE SKIP LOCKED;
 <li>Kafka 采用 at-least-once 语义，系统设计目标是“允许重复，不能丢失”。</li>
 </ul>
 <h2 id="12-每日库存如何更新"><a href="#12-每日库存如何更新" class="headerlink" title="12. 每日库存如何更新"></a>12. 每日库存如何更新</h2><p>每日库存不能在零点直接执行：</p>
-<pre class=" language-language-text"><code class="language-language-text">available = total
+<pre class=" language-language-text"><code class="language-language-text">SET total = 库存总量
 </code></pre>
-<p>因为昨天的 Reservation 可能仍在 Confirm 或 Cancel。直接覆盖同一个 Redis Key，会把尚未完成的预扣抹掉，造成库存多卖或少卖。</p>
+<p>因为昨天的 Reservation 可能仍在 Confirm 或 Cancel。直接覆盖同一个库存记录，会把尚未完成的预扣抹掉，造成库存多卖或少卖。</p>
 <p>正确做法是使用<strong>按营业日隔离的库存桶</strong>：</p>
 <pre class=" language-language-text"><code class="language-language-text">stock_bucket_id = merchant_id + dish_id + stock_date + baseline_version
-</code></pre>
-<p>Redis Key 也携带营业日：</p>
-<pre class=" language-language-text"><code class="language-language-text">inv:{10001:90001:2026-07-26}:stock
 </code></pre>
 <h3 id="12-1-每日初始化正常流程"><a href="#12-1-每日初始化正常流程" class="headerlink" title="12.1 每日初始化正常流程"></a>12.1 每日初始化正常流程</h3><pre class="mermaid">sequenceDiagram
     participant J as Daily Stock Job
     participant S as StockSvr
     participant M as Stock MySQL
-    participant R as Redis
     participant P as Outbox Publisher
     participant K as Kafka
 
     J->>S: 1. 初始化次日库存(商家时区)
     S->>M: 2. TX: INSERT baseline<br/>INSERT WAL(INIT_BUCKET)
     M-->>S: commit
-    S->>R: 3. Lua初始化带日期的库存桶
-    R->>R: SET total/available<br/>reserved=0, sold=0, version=1
-    R-->>S: SUCCEEDED
-    S->>M: 4. TX: WAL=SUCCEEDED<br/>INSERT Outbox(StockBucketInitialized)
+    S->>M: 3. TX: WAL=SUCCEEDED<br/>INSERT Outbox(StockBucketInitialized)
     M-->>S: commit
-    P->>K: 5. 发布库存桶初始化事件
+    P->>K: 4. 发布库存桶初始化事件
     K-->>P: Broker ACK
-    P->>M: 6. Outbox=SENT</pre>
+    P->>M: 5. Outbox=SENT</pre>
 
 <p>每天的更新流程是：</p>
 <ol>
 <li>按商家所在时区，在营业日前一天提前生成次日 <code>dish_stock_baseline</code>；</li>
 <li>Baseline 和 <code>INIT_BUCKET</code> WAL 在同一个 MySQL 事务中提交；</li>
-<li>Executor 使用 Lua 初始化新的 Redis Key；</li>
-<li>Lua 使用 <code>stock_bucket_id + baseline_version</code> 幂等，重复初始化不会覆盖已发生交易的库存桶；</li>
-<li>Redis 初始化成功后写 Outbox，异步建立 MySQL Stock Snapshot 和 Ledger；</li>
+<li>WAL 成功后写 Outbox，发布 <code>StockBucketInitialized</code> 事件；</li>
+<li>MySQL Stock Consumer 消费事件，在 MySQL 中创建对应的 Stock Snapshot 和 Ledger 初始记录；</li>
 <li>扫描任务持续重试初始化失败的库存桶。</li>
 </ol>
-<p>为了防止定时任务遗漏，可以增加懒加载兜底：订单第一次访问不存在的库存桶时，从 MySQL Baseline 发起初始化，但仍然必须走相同 WAL 和 Lua，不能由请求线程直接 <code>SET</code> 一份库存。并发懒加载通过 <code>stock_bucket_id</code> 唯一键和 Lua 幂等收敛。</p>
+<p>为了防止定时任务遗漏，可以增加懒加载兜底：订单第一次访问不存在的库存桶时，从 MySQL Baseline 发起初始化，但仍然必须走相同 WAL 和 Outbox 流程，不能由请求线程直接绕过 WAL 插入库存记录。并发懒加载通过 <code>stock_bucket_id</code> 唯一键保证。</p>
 <h3 id="12-2-即时单和预约单选择哪个库存桶"><a href="#12-2-即时单和预约单选择哪个库存桶" class="headerlink" title="12.2 即时单和预约单选择哪个库存桶"></a>12.2 即时单和预约单选择哪个库存桶</h3><p>即时单按商家时区的当前营业日选择库存：</p>
 <pre class=" language-language-text"><code class="language-language-text">stock_date = merchantBusinessDate(now, timezone)
 </code></pre>
