@@ -31,8 +31,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 <body>
@@ -1307,13 +1307,11 @@ FOR UPDATE SKIP LOCKED;
 <p>预约单按 <code>processing_time</code> 所在营业日选择：</p>
 <pre class=" language-language-text"><code class="language-language-text">stock_date = merchantBusinessDate(processing_time, timezone)
 </code></pre>
-<p>例如用户在 7 月 25 日预订 7 月 27 日的订单，Try 应操作：</p>
-<pre class=" language-language-text"><code class="language-language-text">inv:{merchant_id:dish_id:2026-07-27}:stock
-</code></pre>
+<p>例如用户在 7 月 25 日预订 7 月 27 日的订单，Try 应操作对应 <code>stock_date</code> 为 <code>2026-07-27</code> 的库存桶。</p>
 <p>Reservation 创建时就要保存 <code>stock_bucket_id</code> 和 <code>stock_date</code>。后续 Confirm、Cancel 必须继续操作这个库存桶，不能根据执行当天的日期重新计算，否则跨天 Cancel 会把库存返还到错误日期。</p>
 <h3 id="12-3-商家当天调整库存"><a href="#12-3-商家当天调整库存" class="headerlink" title="12.3 商家当天调整库存"></a>12.3 商家当天调整库存</h3><p>商家把库存从 100 修改为 120 时，不能直接把 <code>available</code> 设置为 120，因为已经存在 <code>reserved</code> 和 <code>sold</code>。</p>
 <p>调整库存属于低频管理操作，直接更新 MySQL 即可：</p>
-<pre class=" language-language-text"><code class="language-language-text">ADJUST WAL -> MySQL 直接更新 -> Outbox -> Kafka -> Redis
+<pre class=" language-language-text"><code class="language-language-text">ADJUST WAL -> MySQL 直接更新 -> Outbox -> Kafka -> MySQL Stock
 </code></pre>
 <p>流程如下：</p>
 <ol>
@@ -1330,21 +1328,21 @@ new_available = max(0, new_total - reserved - sold)
 修改后：total=120, available=90, reserved=10, sold=20
 </code></pre>
 <ol start="5">
-<li>Consumer 同时更新 MySQL Stock 投影和 Redis（写入新的 available + 自增 version）；</li>
+<li>Consumer 更新 MySQL Stock 投影中的 available 和 version；</li>
 <li>如果新总量小于 <code>reserved + sold</code>，已经接受的订单不能被撤销：</li>
 </ol>
 <pre class=" language-language-text"><code class="language-language-text">total=20, reserved=10, sold=20
 available=0, deficit=10
 </code></pre>
 <p>系统把可售库存置为 0，并记录 <code>deficit</code> 告警，由商家或运营处理，不能为了满足新配置而取消已经确认的库存。</p>
-<p>调整库存之所以不走 Redis Lua，是因为商家调整库存的频率很低（每日几次甚至几天一次），不值得引入 Lua 逻辑来保证原子性。直接更新 MySQL，再通过 Consumer 驱动 Redis 同步，既保持了 MySQL 作为记录真源的地位，又降低了代码复杂度。</p>
+<p>调整库存属于低频操作，直接更新 MySQL 即可，不需要经过额外的缓存层。MySQL 本身就是库存记录的真源，所有读写都围绕 MySQL 进行，简化了链路。</p>
 <h3 id="12-4-旧库存桶何时删除"><a href="#12-4-旧库存桶何时删除" class="headerlink" title="12.4 旧库存桶何时删除"></a>12.4 旧库存桶何时删除</h3><p>旧库存桶的生命周期是：</p>
 <pre class=" language-language-text"><code class="language-language-text">OPEN -> CLOSED -> ARCHIVED
 </code></pre>
 <ul>
 <li><code>OPEN</code>：允许新的 Try、Confirm 和 Cancel；</li>
 <li><code>CLOSED</code>：禁止新的 Try，但允许已有 Reservation 继续 Confirm 或 Cancel；</li>
-<li><code>ARCHIVED</code>：不存在未完成 Reservation 后，MySQL 归档并给 Redis Key 设置清理 TTL。</li>
+<li><code>ARCHIVED</code>：不存在未完成 Reservation 后，MySQL 归档旧数据。</li>
 </ul>
 <p>零点只负责切换新请求使用的库存桶，不删除旧桶。旧桶必须等 <code>PREPARING/RESERVED/CREATED_RESERVED/CONFIRMING/CANCELING/REFUNDING</code> 全部清零以后才能归档。</p>
 <h2 id="13-对账、修复与-Redis-重建"><a href="#13-对账、修复与-Redis-重建" class="headerlink" title="13. 对账、修复与 Redis 重建"></a>13. 对账、修复与 Redis 重建</h2><h3 id="12-1-对账公式"><a href="#12-1-对账公式" class="headerlink" title="12.1 对账公式"></a>12.1 对账公式</h3><p>对于一个菜品，在同一库存基线版本下：</p>
@@ -2072,7 +2070,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">71.5k</span>&nbsp;字
+                    class="white-color">71.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
