@@ -767,14 +767,13 @@ func handleRefundOld(event OrderRefundEvent) {
 <li><strong>循环复用</strong>：号段循环，从999回到1</li>
 </ol>
 <h4 id="4-1-1-方案一：号段模式（Leaf-Segment）"><a href="#4-1-1-方案一：号段模式（Leaf-Segment）" class="headerlink" title="4.1.1 方案一：号段模式（Leaf Segment）"></a>4.1.1 方案一：号段模式（Leaf Segment）</h4><p><strong>原理：</strong> 每次从数据库获取一段号码，内存中逐个分配，耗尽后再去数据库获取新号段。</p>
-<pre class="mermaid">flowchart TD
-    direction LR
-    A[Database] -->|1. Get segment[1-1000]| B[Leaf Service]
-    B -->|2. Allocate| C[Store]
-    C -->|3. Request number| B
-    B -->|Return: 5| C
-    C -->|4. Exhausted| B
-    B -->|5. Async fetch new[1001-2000]| A</pre>
+<pre class="mermaid">flowchart LR
+    A["Database"] -->|"1. Get segment 1-1000"| B["Leaf Service"]
+    B -->|"2. Allocate"| C["Store"]
+    C -->|"3. Request number"| B
+    B -->|"Return 5"| C
+    C -->|"4. Exhausted"| B
+    B -->|"5. Async fetch 1001-2000"| A</pre>
 
 <p><strong>数据库表设计：</strong></p>
 <pre class=" language-language-sql"><code class="language-language-sql">CREATE TABLE `meal_number_segment` (
