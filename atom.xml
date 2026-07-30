@@ -74,11 +74,11 @@
     
     <category term="TypeScript" scheme="https://xiaofenglei.cn/tags/TypeScript/"/>
     
+    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
     <category term="ReAct" scheme="https://xiaofenglei.cn/tags/ReAct/"/>
     
     <category term="Plan-and-Execute" scheme="https://xiaofenglei.cn/tags/Plan-and-Execute/"/>
-    
-    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
@@ -109,9 +109,9 @@
     
     <category term="TypeScript" scheme="https://xiaofenglei.cn/tags/TypeScript/"/>
     
-    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
-    
     <category term="Memory" scheme="https://xiaofenglei.cn/tags/Memory/"/>
+    
+    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
     
   </entry>
   
@@ -151,7 +151,7 @@
     <link href="https://xiaofenglei.cn/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/"/>
     <id>https://xiaofenglei.cn/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/</id>
     <published>2026-03-15T09:45:00.000Z</published>
-    <updated>2026-04-04T15:44:06.425Z</updated>
+    <updated>2026-07-30T13:25:28.174Z</updated>
     
     
       
@@ -281,9 +281,9 @@
     
     <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
     
-    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
-    
     <category term="回溯" scheme="https://xiaofenglei.cn/tags/%E5%9B%9E%E6%BA%AF/"/>
+    
+    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
     
     <category term="剪枝" scheme="https://xiaofenglei.cn/tags/%E5%89%AA%E6%9E%9D/"/>
     
@@ -312,11 +312,11 @@
     
     <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
     
-    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
-    
     <category term="回溯" scheme="https://xiaofenglei.cn/tags/%E5%9B%9E%E6%BA%AF/"/>
     
     <category term="DFS" scheme="https://xiaofenglei.cn/tags/DFS/"/>
+    
+    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
     
   </entry>
   

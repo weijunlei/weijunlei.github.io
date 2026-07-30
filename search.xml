@@ -57,11 +57,11 @@
             
             <tag> TypeScript </tag>
             
+            <tag> 工程实践 </tag>
+            
             <tag> ReAct </tag>
             
             <tag> Plan-and-Execute </tag>
-            
-            <tag> 工程实践 </tag>
             
         </tags>
       
@@ -92,9 +92,9 @@
             
             <tag> TypeScript </tag>
             
-            <tag> 工程实践 </tag>
-            
             <tag> Memory </tag>
+            
+            <tag> 工程实践 </tag>
             
         </tags>
       
@@ -138,7 +138,7 @@
       <link href="/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/"/>
       <url>/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/</url>
       
-        <content type="html"><![CDATA[<h1 id="From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用"><a href="#From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用" class="headerlink" title="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用"></a>From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</h1><blockquote><p><strong>发表信息</strong>：本文发表于 <strong>ICASSP 2023</strong>（CCF-B 类会议）</p></blockquote><h2 id="1-什么是多跳阅读理解？"><a href="#1-什么是多跳阅读理解？" class="headerlink" title="1. 什么是多跳阅读理解？"></a>1. 什么是多跳阅读理解？</h2><p>多跳阅读理解（Multi-hop Question Answering）是自然语言处理领域中的一个极具挑战性的任务。与单跳问答不同，多跳问答需要模型在<strong>多个文档</strong>中进行推理，找到关联信息后才能给出正确答案。</p><h3 id="1-1-跳-的含义"><a href="#1-1-跳-的含义" class="headerlink" title="1.1 &quot;跳&quot;的含义"></a>1.1 &quot;跳&quot;的含义</h3><p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p><h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>中文示例：</strong></p><pre class="mermaid">flowchart TD    subgraph Hop1    Q1[Q: Who directed The Wandering Earth]    D1[Doc A: The Wandering Earth directed by Guo Fan]    end        subgraph Hop2    Q2[Q: When was Guo Fan born]    D2[Doc B: Guo Fan was born in 1980]    end        subgraph Answer    Answer[Answer: Guo Fan, 1980]    end        Q1 --> D1    D1 --> Q2    Q2 --> D2    D2 --> Answer        style Q1 fill:#f9f,color:#333    style D1 fill:#bbf,color:#333    style Q2 fill:#ff9,color:#333    style D2 fill:#bbf,color:#333    style Answer fill:#bfb,color:#333</pre><p><strong>问题解析：</strong></p><table><thead><tr><th>跳数</th><th>任务</th><th>涉及的文档</th></tr></thead><tbody><tr><td>第一跳</td><td>找出《流浪地球》的导演</td><td>文档A</td></tr><tr><td>第二跳</td><td>查找该导演的出生年份</td><td>文档B</td></tr><tr><td>最终</td><td>整合两跳信息给出完整答案</td><td>合并结果</td></tr></tbody></table><p><strong>多跳体现在哪里？</strong></p><ol><li><strong>无法直接回答</strong>：看第一个文档只能知道导演是谁，但问题问的是出生年份</li><li><strong>需要链式推理</strong>：第一跳的结果（导演名）是第二跳的输入</li><li><strong>两步信息整合</strong>：必须把两个文档的信息合在一起才能完整回答问题</li></ol><hr><h2 id="2-论文摘要"><a href="#2-论文摘要" class="headerlink" title="2. 论文摘要"></a>2. 论文摘要</h2><p><strong>Title</strong>: From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</p><p><strong>作者</strong>: Weijun Lei et al. (南京大学)</p><p><strong>Abstract</strong>: </p><p>多跳问答是一个具有挑战性的任务，需要QA系统在多个文档上进行复杂推理并提供支持性事实和准确答案。现有方法倾向于使用基于图的推理和问题分解来获取推理链，但这不可避免地引入了额外的复杂性和累积误差。</p><p>为了解决上述问题，我们提出了一个简单而有效的新框架——<strong>From Easy to Hard (FE2H)</strong>，该框架通过移除干扰信息来获得更好的多跳QA任务上下文表示。</p><p>FE2H的核心理念：</p><ul><li>借鉴人类迭代文档选择过程和渐进式学习习惯</li><li>将文档选择器和阅读器分为两个阶段，遵循从易到难的方式</li></ul><p>具体来说：</p><ol><li><strong>文档筛选阶段</strong>：首先选择与问题最相关的文档，然后利用该文档进一步选择其他相关文档</li><li><strong>问答阶段</strong>：阅读器首先在单跳QA数据集上训练，然后迁移到多跳QA任务</li></ol><p>我们在流行的多跳QA基准测试HotpotQA上进行了全面评估，实验结果表明，我们的方法在HotpotQA排行榜（distractor设置）上优于所有其他方法。</p><p><strong>论文链接</strong>: <a href="https://arxiv.org/abs/2205.11729">arXiv:2205.11729</a></p><p><strong>代码链接</strong>: <a href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></p><p><strong>HotpotQA排行榜</strong>: <a href="https://hotpotqa.github.io/">https://hotpotqa.github.io/</a></p><hr><h2 id="3-核心创新点"><a href="#3-核心创新点" class="headerlink" title="3. 核心创新点"></a>3. 核心创新点</h2><h3 id="3-1-创新点一：两阶段文档筛选器"><a href="#3-1-创新点一：两阶段文档筛选器" class="headerlink" title="3.1 创新点一：两阶段文档筛选器"></a>3.1 创新点一：两阶段文档筛选器</h3><h4 id="3-1-1-传统方法的痛点"><a href="#3-1-1-传统方法的痛点" class="headerlink" title="3.1.1 传统方法的痛点"></a>3.1.1 传统方法的痛点</h4><p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p><ol><li><strong>直接全局推理</strong>：将所有文档一起输入模型</li><li><strong>一次性选择</strong>：一次性选出所有相关文档</li></ol><p>这会导致：</p><ul><li>无关信息带来的噪声干扰</li><li>推理复杂度呈指数级增长</li><li>错误在多跳推理过程中累积</li></ul><h4 id="3-1-2-FE2H-的解决方案：渐进式筛选"><a href="#3-1-2-FE2H-的解决方案：渐进式筛选" class="headerlink" title="3.1.2 FE2H 的解决方案：渐进式筛选"></a>3.1.2 FE2H 的解决方案：渐进式筛选</h4><pre class="mermaid">flowchart TD    subgraph Traditional    T1[Q + 10 docs] --> T2[Select all at once]    T2 --> T3[Multi-hop reasoning]    end        subgraph FE2H    F1[Q + 10 docs] --> F2[Stage 1: Select relevant doc]    F2 --> F3[Combine Q + doc1]    F3 --> F4[Stage 2: Select 2nd hop]    F4 --> F5[Reason on filtered docs]    end        style F2 fill:#bfb,color:#333    style F4 fill:#bfb,color:#333</pre><p><strong>核心思想</strong>：借鉴人类的迭代阅读习惯，先找到&quot;入口文档&quot;，再基于它找到后续相关文档。</p><h4 id="3-1-3-为什么这样更有效？"><a href="#3-1-3-为什么这样更有效？" class="headerlink" title="3.1.3 为什么这样更有效？"></a>3.1.3 为什么这样更有效？</h4><table><thead><tr><th>特性</th><th>传统方法</th><th>FE2H两阶段</th></tr></thead><tbody><tr><td>信息利用</td><td>全局搜索</td><td>聚焦式检索</td></tr><tr><td>噪声引入</td><td>高（10个文档全量）</td><td>低（逐阶段筛选）</td></tr><tr><td>推理难度</td><td>O(n²)</td><td>O(n)</td></tr><tr><td>错误累积</td><td>多跳同时推理</td><td>分步验证</td></tr></tbody></table><hr><h3 id="3-2-创新点二：从易到难的渐进式学习"><a href="#3-2-创新点二：从易到难的渐进式学习" class="headerlink" title="3.2 创新点二：从易到难的渐进式学习"></a>3.2 创新点二：从易到难的渐进式学习</h3><h4 id="3-2-1-核心灵感"><a href="#3-2-1-核心灵感" class="headerlink" title="3.2.1 核心灵感"></a>3.2.1 核心灵感</h4><p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p><pre class="mermaid">flowchart LR    subgraph Human Learning    H1[Learn to speak] --> H2[Learn to read] --> H3[Learn comprehension] --> H4[Learn to write]    end        subgraph FE2H Training    E1[Single-hop QA] --> E2[Simple reasoning] --> E3[Multi-hop QA]    end        style E1 fill:#bbf,color:#333    style E3 fill:#f9f,color:#333</pre><h4 id="3-2-2-渐进式训练策略"><a href="#3-2-2-渐进式训练策略" class="headerlink" title="3.2.2 渐进式训练策略"></a>3.2.2 渐进式训练策略</h4><pre class="mermaid">flowchart TD    subgraph Stage 1: Single-hop Pre-training    P1[Train on SQuAD]    P1 --> P2[Learn basic reading comprehension]    P2 --> P3[Understand question intent]    P3 --> P4[Locate answer boundaries]    end        subgraph Stage 2: Multi-hop Transfer    P4 --> M1[Transfer to HotpotQA]    M1 --> M2[Two-stage document selection]    M2 --> M3[Multi-hop reasoning]    end        style P1 fill:#bbf,color:#333    style M1 fill:#f9f,color:#333</pre><h4 id="3-2-3-为什么单跳数据很重要？"><a href="#3-2-3-为什么单跳数据很重要？" class="headerlink" title="3.2.3 为什么单跳数据很重要？"></a>3.2.3 为什么单跳数据很重要？</h4><ol><li><strong>数据规模大</strong>：单跳问答数据集（如SQuAD）规模远大于多跳数据集</li><li><strong>噪声少</strong>：单跳文档通常直接包含答案，干扰较少</li><li><strong>学习基础能力</strong>：<ul><li>问题理解</li><li>实体识别</li><li>答案定位</li><li>上下文推理</li></ul></li></ol><hr><h3 id="3-3-创新点三：简洁有效的框架设计"><a href="#3-3-创新点三：简洁有效的框架设计" class="headerlink" title="3.3 创新点三：简洁有效的框架设计"></a>3.3 创新点三：简洁有效的框架设计</h3><h4 id="3-3-1-拒绝复杂，拥抱简单"><a href="#3-3-1-拒绝复杂，拥抱简单" class="headerlink" title="3.3.1 拒绝复杂，拥抱简单"></a>3.3.1 拒绝复杂，拥抱简单</h4><table><thead><tr><th>特性</th><th>主流方法</th><th>FE2H</th></tr></thead><tbody><tr><td>图结构</td><td>需要构建实体关系图</td><td>无需图结构</td></tr><tr><td>问题分解</td><td>需要显式分解问题</td><td>无需分解</td></tr><tr><td>预训练模型</td><td>复杂的多任务学习</td><td>简单的两阶段训练</td></tr><tr><td>推理复杂度</td><td>O(n²) 甚至更高</td><td>O(n)</td></tr></tbody></table><h4 id="3-3-2-框架对比"><a href="#3-3-2-框架对比" class="headerlink" title="3.3.2 框架对比"></a>3.3.2 框架对比</h4><pre class="mermaid">flowchart TD    subgraph Traditional (Graph-based)    G1[Build knowledge graph] --> G2[Entity linking]    G2 --> G3[GNN reasoning]    G3 --> G4[Multi-hop aggregation]    end        subgraph FE2H (Selection + Reader)    F1[Document selection] --> F2[Single-hop pretrain]    F2 --> F3[Multi-hop fine-tune]    F3 --> F4[Answer generation]    end        style G1 fill:#fbb,color:#333    style F1 fill:#bfb,color:#333</pre><h4 id="3-3-3-消融实验结果"><a href="#3-3-3-消融实验结果" class="headerlink" title="3.3.3 消融实验结果"></a>3.3.3 消融实验结果</h4><p>论文中的消融实验证明了各组件的有效性：</p><table><thead><tr><th>模型变体</th><th>Joint F1</th><th>提升</th></tr></thead><tbody><tr><td>基础模型</td><td>74.2</td><td>-</td></tr><tr><td>+ 第一阶段筛选</td><td>75.8</td><td>+1.6</td></tr><tr><td>+ 第二阶段筛选</td><td>76.1</td><td>+0.3</td></tr><tr><td>+ 渐进式学习</td><td><strong>76.5</strong></td><td>+0.4</td></tr></tbody></table><hr><h2 id="4-FE2H框架详解"><a href="#4-FE2H框架详解" class="headerlink" title="4. FE2H框架详解"></a>4. FE2H框架详解</h2><h3 id="4-1-整体架构"><a href="#4-1-整体架构" class="headerlink" title="4.1 整体架构"></a>4.1 整体架构</h3><pre class="mermaid">flowchart TD    Q[Question] --> DS1[Stage 1 Doc Selector]        subgraph Document Selection Stage    DS1 -->|Select relevant doc| D1[Relevant Doc 1]    DS1 -->|Combine Q + Doc1| DS2[Stage 2 Doc Selector]    DS2 -->|Select 2nd hop doc| D2[Relevant Doc 2]    end        subgraph QA Stage    D1 --> Reader[Two-stage Reader]    D2 --> Reader    Reader -->|Single-hop mode| Output1[Answer + Support]    Reader -->|Multi-hop mode| Output2[Final Answer]    end        style DS1 fill:#f9f,color:#333    style DS2 fill:#f9f,color:#333    style Reader fill:#ff9,color:#333</pre><h3 id="4-2-两阶段文档选择器"><a href="#4-2-两阶段文档选择器" class="headerlink" title="4.2 两阶段文档选择器"></a>4.2 两阶段文档选择器</h3><p><strong>第一阶段</strong>：</p><ul><li>输入：问题 + 所有候选文档</li><li>输出：选择最相关的文档（top-k）</li></ul><p><strong>第二阶段</strong>：</p><ul><li>输入：问题 + 第一阶段选中的文档</li><li>输出：进一步筛选出与推理链相关的其他文档</li></ul><h3 id="4-3-两阶段阅读器"><a href="#4-3-两阶段阅读器" class="headerlink" title="4.3 两阶段阅读器"></a>4.3 两阶段阅读器</h3><p><strong>第一阶段（单跳模式）</strong>：</p><ul><li>在单跳问答数据集（如SQuAD）上进行预训练</li><li>学习基础的问答能力</li></ul><p><strong>第二阶段（多跳模式）</strong>：</p><ul><li>迁移到多跳问答任务</li><li>利用第一阶段学到的知识进行更复杂的推理</li></ul><hr><h2 id="5-与大模型Chain-of-Thought的联系与区别"><a href="#5-与大模型Chain-of-Thought的联系与区别" class="headerlink" title="5. 与大模型Chain-of-Thought的联系与区别"></a>5. 与大模型Chain-of-Thought的联系与区别</h2><h3 id="5-1-Chain-of-Thought-CoT-简介"><a href="#5-1-Chain-of-Thought-CoT-简介" class="headerlink" title="5.1 Chain-of-Thought (CoT) 简介"></a>5.1 Chain-of-Thought (CoT) 简介</h3><p>Chain-of-Thought（思维链）是近年来大语言模型（如GPT-4、PaLM）的重要推理范式。其核心思想是：</p><pre class="mermaid">flowchart LR    Q1[Question] --> CoT1[Step-by-step reasoning<br/>Step 1: ...<br/>Step 2: ...<br/>Step 3: ...]    CoT1 --> A1[Final Answer]        style Q1 fill:#f9f,color:#333    style CoT1 fill:#ff9,color:#333    style A1 fill:#bfb,color:#333</pre><p>CoT的优势：</p><ul><li>显式展示推理过程</li><li>提高模型的可解释性</li><li>在数学、逻辑推理任务上效果显著</li></ul><h3 id="5-2-FE2H-vs-Chain-of-Thought"><a href="#5-2-FE2H-vs-Chain-of-Thought" class="headerlink" title="5.2 FE2H vs Chain-of-Thought"></a>5.2 FE2H vs Chain-of-Thought</h3><table><thead><tr><th>特性</th><th>FE2H</th><th>Chain-of-Thought</th></tr></thead><tbody><tr><td><strong>推理方式</strong></td><td>显式的文档筛选+阅读</td><td>隐式的思维链</td></tr><tr><td><strong>信息利用</strong></td><td>筛选相关文档，减少干扰</td><td>使用全部上下文</td></tr><tr><td><strong>可解释性</strong></td><td>高（清晰的文档选择过程）</td><td>中（推理步骤可见）</td></tr><tr><td><strong>计算成本</strong></td><td>较低（筛选减少输入）</td><td>较高（完整上下文）</td></tr><tr><td><strong>适用场景</strong></td><td>结构化文档检索</td><td>开放域推理</td></tr></tbody></table><h3 id="5-3-两者的联系"><a href="#5-3-两者的联系" class="headerlink" title="5.3 两者的联系"></a>5.3 两者的联系</h3><ol><li><p><strong>渐进式推理</strong>：两者都采用&quot;逐步推理&quot;的思想</p><ul><li>FE2H：从简单文档到复杂文档，从单跳到多跳</li><li>CoT：从简单推理步骤到复杂推理步骤</li></ul></li><li><p><strong>中间结果</strong>：都依赖中间结果来增强最终答案</p><ul><li>FE2H：筛选出的相关文档</li><li>CoT：推理过程中的中间结论</li></ul></li><li><p><strong>减少幻觉</strong>：通过结构化信息减少模型编造答案的风险</p></li></ol><h3 id="5-4-未来结合方向"><a href="#5-4-未来结合方向" class="headerlink" title="5.4 未来结合方向"></a>5.4 未来结合方向</h3><pre class="mermaid">flowchart TD    Q[Question] --> Selector[Doc Selector]        Selector -->|Filter relevant docs| Context[Filtered Context]    Context --> CoT[Chain-of-Thought]    CoT -->|Verify intermediate steps| Selector        CoT --> Answer[Final Answer]        style Q fill:#f9f,color:#333    style Selector fill:#bbf,color:#333    style CoT fill:#ff9,color:#333    style Answer fill:#bfb,color:#333</pre><p><strong>可能的结合方向</strong>：</p><ul><li>用CoT来解释为什么选择某些文档</li><li>用文档筛选结果来约束CoT的推理空间</li><li>迭代式：筛选 → 推理 → 验证 → 再筛选</li></ul><hr><h2 id="6-实验结果"><a href="#6-实验结果" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h2><p>在HotpotQA数据集（distractor设置）上的表现：</p><table><thead><tr><th>模型</th><th>Answer EM</th><th>Answer F1</th><th>Support EM</th><th>Support F1</th><th>Joint EM</th><th>Joint F1</th></tr></thead><tbody><tr><td>FE2H (ALBERT)</td><td><strong>71.89</strong></td><td><strong>84.44</strong></td><td><strong>64.98</strong></td><td><strong>89.14</strong></td><td><strong>50.04</strong></td><td><strong>76.54</strong></td></tr><tr><td>R3</td><td>71.27</td><td>83.57</td><td>65.25</td><td>88.98</td><td>49.81</td><td>76.02</td></tr><tr><td>SAE+</td><td>70.74</td><td>83.61</td><td>63.70</td><td>88.95</td><td>48.15</td><td>75.72</td></tr></tbody></table><p>FE2H在排行榜上取得了<strong>Joint F1 76.54</strong>的成绩，位列第一。</p><hr><h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>FE2H的核心贡献：</p><ol><li><strong>两阶段文档筛选</strong>：通过渐进式筛选有效减少干扰信息，提高信息利用率</li><li><strong>从易到难的学习范式</strong>：先在简单任务上学习，再迁移到复杂任务</li><li><strong>简洁有效</strong>：不依赖复杂的图结构或问题分解，方法简单但效果显著</li></ol><p>这种方法为多跳问答提供了一种新的思路，同时也为大型语言模型的推理能力增强提供了参考。</p><hr><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol><li><a href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></li><li><a href="https://hotpotqa.github.io/">HotpotQA数据集</a></li><li><a href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li><li><a href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用"><a href="#From-Easy-to-Hard-两阶段选择器与阅读器在多跳问答中的应用" class="headerlink" title="From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用"></a>From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</h1><blockquote><p><strong>发表信息</strong>：本文发表于 <strong>ICASSP 2023</strong>（CCF-B 类会议）</p></blockquote><h2 id="1-什么是多跳阅读理解？"><a href="#1-什么是多跳阅读理解？" class="headerlink" title="1. 什么是多跳阅读理解？"></a>1. 什么是多跳阅读理解？</h2><p>多跳阅读理解（Multi-hop Question Answering）是自然语言处理领域中的一个极具挑战性的任务。与单跳问答不同，多跳问答需要模型在<strong>多个文档</strong>中进行推理，找到关联信息后才能给出正确答案。</p><h3 id="1-1-跳-的含义"><a href="#1-1-跳-的含义" class="headerlink" title="1.1 &quot;跳&quot;的含义"></a>1.1 &quot;跳&quot;的含义</h3><p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p><h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>示例问题</strong>：奥巴马妻子毕业于哪所学校？</p><pre class="mermaid">flowchart TD    subgraph Hop1    Q1[Q: 奥巴马的妻子是谁？]    D1[Doc A: 米歇尔·奥巴马，美国第44任总统奥巴马的妻子]    end        subgraph Hop2    Q2[Q: 米歇尔·奥巴马本科毕业于哪所学校？]    D2[Doc B: 米歇尔·奥巴马1985年毕业于普林斯顿大学，1991年获得哈佛法学院博士学位]    end        subgraph Answer    Answer[Answer: 普林斯顿大学（本科）/ 哈佛大学（法学院）]    end        Q1 --> D1    D1 --> Q2    Q2 --> D2    D2 --> Answer        style Q1 fill:#f9f,color:#333    style D1 fill:#bbf,color:#333    style Q2 fill:#ff9,color:#333    style D2 fill:#bbf,color:#333    style Answer fill:#bfb,color:#333</pre><p><strong>问题解析：</strong></p><table><thead><tr><th>跳数</th><th>任务</th><th>涉及的文档</th></tr></thead><tbody><tr><td>第一跳</td><td>找出奥巴马的妻子（米歇尔·奥巴马）</td><td>文档A</td></tr><tr><td>第二跳</td><td>查找她的毕业院校</td><td>文档B</td></tr><tr><td>最终</td><td>整合两跳信息给出完整答案</td><td>合并结果</td></tr></tbody></table><p><strong>多跳体现在哪里？</strong></p><ol><li><strong>无法直接回答</strong>：看第一个文档只能知道奥巴马的妻子是谁，但问题问的是毕业院校</li><li><strong>需要链式推理</strong>：第一跳的结果（&quot;米歇尔·奥巴马&quot;）是第二跳问题的关键实体</li><li><strong>两步信息整合</strong>：必须把两个文档的信息合在一起才能完整回答问题</li><li><strong>桥接实体（Bridge Entity）</strong>：&quot;米歇尔·奥巴马&quot;是把两跳串起来的桥梁，也是 FE2H 两阶段选择器重点捕捉的对象</li></ol><hr><h2 id="2-论文摘要"><a href="#2-论文摘要" class="headerlink" title="2. 论文摘要"></a>2. 论文摘要</h2><p><strong>Title</strong>: From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</p><p><strong>作者</strong>: Weijun Lei et al. (南京大学)</p><p><strong>Abstract</strong>: </p><p>多跳问答是一个具有挑战性的任务，需要QA系统在多个文档上进行复杂推理并提供支持性事实和准确答案。现有方法倾向于使用基于图的推理和问题分解来获取推理链，但这不可避免地引入了额外的复杂性和累积误差。</p><p>为了解决上述问题，我们提出了一个简单而有效的新框架——<strong>From Easy to Hard (FE2H)</strong>，该框架通过移除干扰信息来获得更好的多跳QA任务上下文表示。</p><p>FE2H的核心理念：</p><ul><li>借鉴人类迭代文档选择过程和渐进式学习习惯</li><li>将文档选择器和阅读器分为两个阶段，遵循从易到难的方式</li></ul><p>具体来说：</p><ol><li><strong>文档筛选阶段</strong>：首先选择与问题最相关的文档，然后利用该文档进一步选择其他相关文档</li><li><strong>问答阶段</strong>：阅读器首先在单跳QA数据集上训练，然后迁移到多跳QA任务</li></ol><p>我们在流行的多跳QA基准测试HotpotQA上进行了全面评估，实验结果表明，我们的方法在HotpotQA排行榜（distractor设置）上优于所有其他方法。</p><p><strong>论文链接</strong>: <a href="https://arxiv.org/abs/2205.11729">arXiv:2205.11729</a></p><p><strong>代码链接</strong>: <a href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></p><p><strong>HotpotQA排行榜</strong>: <a href="https://hotpotqa.github.io/">https://hotpotqa.github.io/</a></p><hr><h2 id="3-核心创新点"><a href="#3-核心创新点" class="headerlink" title="3. 核心创新点"></a>3. 核心创新点</h2><h3 id="3-1-创新点一：两阶段文档筛选器"><a href="#3-1-创新点一：两阶段文档筛选器" class="headerlink" title="3.1 创新点一：两阶段文档筛选器"></a>3.1 创新点一：两阶段文档筛选器</h3><h4 id="3-1-1-传统方法的痛点"><a href="#3-1-1-传统方法的痛点" class="headerlink" title="3.1.1 传统方法的痛点"></a>3.1.1 传统方法的痛点</h4><p>在多跳问答任务中，每个问题通常配有10个干扰文档（distractors）。传统方法通常：</p><ol><li><strong>直接全局推理</strong>：将所有文档一起输入模型</li><li><strong>一次性选择</strong>：一次性选出所有相关文档</li></ol><p>这会导致：</p><ul><li>无关信息带来的噪声干扰</li><li>推理复杂度呈指数级增长</li><li>错误在多跳推理过程中累积</li></ul><h4 id="3-1-2-FE2H-的解决方案：渐进式筛选"><a href="#3-1-2-FE2H-的解决方案：渐进式筛选" class="headerlink" title="3.1.2 FE2H 的解决方案：渐进式筛选"></a>3.1.2 FE2H 的解决方案：渐进式筛选</h4><pre class="mermaid">flowchart TD    subgraph Traditional    T1[Q + 10 docs] --> T2[Select all at once]    T2 --> T3[Multi-hop reasoning]    end        subgraph FE2H    F1[Q + 10 docs] --> F2[Stage 1: Select relevant doc]    F2 --> F3[Combine Q + doc1]    F3 --> F4[Stage 2: Select 2nd hop]    F4 --> F5[Reason on filtered docs]    end        style F2 fill:#bfb,color:#333    style F4 fill:#bfb,color:#333</pre><p><strong>核心思想</strong>：借鉴人类的迭代阅读习惯，先找到&quot;入口文档&quot;，再基于它找到后续相关文档。</p><h4 id="3-1-3-为什么这样更有效？"><a href="#3-1-3-为什么这样更有效？" class="headerlink" title="3.1.3 为什么这样更有效？"></a>3.1.3 为什么这样更有效？</h4><table><thead><tr><th>特性</th><th>传统方法</th><th>FE2H两阶段</th></tr></thead><tbody><tr><td>信息利用</td><td>全局搜索</td><td>聚焦式检索</td></tr><tr><td>噪声引入</td><td>高（10个文档全量）</td><td>低（逐阶段筛选）</td></tr><tr><td>推理难度</td><td>O(n²)</td><td>O(n)</td></tr><tr><td>错误累积</td><td>多跳同时推理</td><td>分步验证</td></tr></tbody></table><hr><h3 id="3-2-创新点二：从易到难的渐进式学习"><a href="#3-2-创新点二：从易到难的渐进式学习" class="headerlink" title="3.2 创新点二：从易到难的渐进式学习"></a>3.2 创新点二：从易到难的渐进式学习</h3><h4 id="3-2-1-核心灵感"><a href="#3-2-1-核心灵感" class="headerlink" title="3.2.1 核心灵感"></a>3.2.1 核心灵感</h4><p>人类在学习复杂任务时，天然地采用&quot;从易到难&quot;的方式：</p><pre class="mermaid">flowchart LR    subgraph Human Learning    H1[Learn to speak] --> H2[Learn to read] --> H3[Learn comprehension] --> H4[Learn to write]    end        subgraph FE2H Training    E1[Single-hop QA] --> E2[Simple reasoning] --> E3[Multi-hop QA]    end        style E1 fill:#bbf,color:#333    style E3 fill:#f9f,color:#333</pre><h4 id="3-2-2-渐进式训练策略"><a href="#3-2-2-渐进式训练策略" class="headerlink" title="3.2.2 渐进式训练策略"></a>3.2.2 渐进式训练策略</h4><pre class="mermaid">flowchart TD    subgraph Stage 1: Single-hop Pre-training    P1[Train on SQuAD]    P1 --> P2[Learn basic reading comprehension]    P2 --> P3[Understand question intent]    P3 --> P4[Locate answer boundaries]    end        subgraph Stage 2: Multi-hop Transfer    P4 --> M1[Transfer to HotpotQA]    M1 --> M2[Two-stage document selection]    M2 --> M3[Multi-hop reasoning]    end        style P1 fill:#bbf,color:#333    style M1 fill:#f9f,color:#333</pre><h4 id="3-2-3-为什么单跳数据很重要？"><a href="#3-2-3-为什么单跳数据很重要？" class="headerlink" title="3.2.3 为什么单跳数据很重要？"></a>3.2.3 为什么单跳数据很重要？</h4><ol><li><strong>数据规模大</strong>：单跳问答数据集（如SQuAD）规模远大于多跳数据集</li><li><strong>噪声少</strong>：单跳文档通常直接包含答案，干扰较少</li><li><strong>学习基础能力</strong>：<ul><li>问题理解</li><li>实体识别</li><li>答案定位</li><li>上下文推理</li></ul></li></ol><hr><h3 id="3-3-创新点三：简洁有效的框架设计"><a href="#3-3-创新点三：简洁有效的框架设计" class="headerlink" title="3.3 创新点三：简洁有效的框架设计"></a>3.3 创新点三：简洁有效的框架设计</h3><h4 id="3-3-1-拒绝复杂，拥抱简单"><a href="#3-3-1-拒绝复杂，拥抱简单" class="headerlink" title="3.3.1 拒绝复杂，拥抱简单"></a>3.3.1 拒绝复杂，拥抱简单</h4><table><thead><tr><th>特性</th><th>主流方法</th><th>FE2H</th></tr></thead><tbody><tr><td>图结构</td><td>需要构建实体关系图</td><td>无需图结构</td></tr><tr><td>问题分解</td><td>需要显式分解问题</td><td>无需分解</td></tr><tr><td>预训练模型</td><td>复杂的多任务学习</td><td>简单的两阶段训练</td></tr><tr><td>推理复杂度</td><td>O(n²) 甚至更高</td><td>O(n)</td></tr></tbody></table><h4 id="3-3-2-框架对比"><a href="#3-3-2-框架对比" class="headerlink" title="3.3.2 框架对比"></a>3.3.2 框架对比</h4><pre class="mermaid">flowchart TD    subgraph Traditional (Graph-based)    G1[Build knowledge graph] --> G2[Entity linking]    G2 --> G3[GNN reasoning]    G3 --> G4[Multi-hop aggregation]    end        subgraph FE2H (Selection + Reader)    F1[Document selection] --> F2[Single-hop pretrain]    F2 --> F3[Multi-hop fine-tune]    F3 --> F4[Answer generation]    end        style G1 fill:#fbb,color:#333    style F1 fill:#bfb,color:#333</pre><h4 id="3-3-3-消融实验结果"><a href="#3-3-3-消融实验结果" class="headerlink" title="3.3.3 消融实验结果"></a>3.3.3 消融实验结果</h4><p>论文中的消融实验证明了各组件的有效性：</p><table><thead><tr><th>模型变体</th><th>Joint F1</th><th>提升</th></tr></thead><tbody><tr><td>基础模型</td><td>74.2</td><td>-</td></tr><tr><td>+ 第一阶段筛选</td><td>75.8</td><td>+1.6</td></tr><tr><td>+ 第二阶段筛选</td><td>76.1</td><td>+0.3</td></tr><tr><td>+ 渐进式学习</td><td><strong>76.5</strong></td><td>+0.4</td></tr></tbody></table><hr><h2 id="4-FE2H框架详解"><a href="#4-FE2H框架详解" class="headerlink" title="4. FE2H框架详解"></a>4. FE2H框架详解</h2><h3 id="4-1-整体架构"><a href="#4-1-整体架构" class="headerlink" title="4.1 整体架构"></a>4.1 整体架构</h3><pre class="mermaid">flowchart TD    Q[Question] --> DS1[Stage 1 Doc Selector]        subgraph Document Selection Stage    DS1 -->|Select relevant doc| D1[Relevant Doc 1]    DS1 -->|Combine Q + Doc1| DS2[Stage 2 Doc Selector]    DS2 -->|Select 2nd hop doc| D2[Relevant Doc 2]    end        subgraph QA Stage    D1 --> Reader[Two-stage Reader]    D2 --> Reader    Reader -->|Single-hop mode| Output1[Answer + Support]    Reader -->|Multi-hop mode| Output2[Final Answer]    end        style DS1 fill:#f9f,color:#333    style DS2 fill:#f9f,color:#333    style Reader fill:#ff9,color:#333</pre><h3 id="4-2-两阶段文档选择器"><a href="#4-2-两阶段文档选择器" class="headerlink" title="4.2 两阶段文档选择器"></a>4.2 两阶段文档选择器</h3><p><strong>第一阶段</strong>：</p><ul><li>输入：问题 + 所有候选文档</li><li>输出：选择最相关的文档（top-k）</li></ul><p><strong>第二阶段</strong>：</p><ul><li>输入：问题 + 第一阶段选中的文档</li><li>输出：进一步筛选出与推理链相关的其他文档</li></ul><h3 id="4-3-两阶段阅读器"><a href="#4-3-两阶段阅读器" class="headerlink" title="4.3 两阶段阅读器"></a>4.3 两阶段阅读器</h3><p><strong>第一阶段（单跳模式）</strong>：</p><ul><li>在单跳问答数据集（如SQuAD）上进行预训练</li><li>学习基础的问答能力</li></ul><p><strong>第二阶段（多跳模式）</strong>：</p><ul><li>迁移到多跳问答任务</li><li>利用第一阶段学到的知识进行更复杂的推理</li></ul><hr><h2 id="5-与大模型Chain-of-Thought的联系与区别"><a href="#5-与大模型Chain-of-Thought的联系与区别" class="headerlink" title="5. 与大模型Chain-of-Thought的联系与区别"></a>5. 与大模型Chain-of-Thought的联系与区别</h2><h3 id="5-1-Chain-of-Thought-CoT-简介"><a href="#5-1-Chain-of-Thought-CoT-简介" class="headerlink" title="5.1 Chain-of-Thought (CoT) 简介"></a>5.1 Chain-of-Thought (CoT) 简介</h3><p>Chain-of-Thought（思维链）是近年来大语言模型（如GPT-4、PaLM）的重要推理范式。其核心思想是：</p><pre class="mermaid">flowchart LR    Q1[Question] --> CoT1[Step-by-step reasoning<br/>Step 1: ...<br/>Step 2: ...<br/>Step 3: ...]    CoT1 --> A1[Final Answer]        style Q1 fill:#f9f,color:#333    style CoT1 fill:#ff9,color:#333    style A1 fill:#bfb,color:#333</pre><p>CoT的优势：</p><ul><li>显式展示推理过程</li><li>提高模型的可解释性</li><li>在数学、逻辑推理任务上效果显著</li></ul><h3 id="5-2-FE2H-vs-Chain-of-Thought"><a href="#5-2-FE2H-vs-Chain-of-Thought" class="headerlink" title="5.2 FE2H vs Chain-of-Thought"></a>5.2 FE2H vs Chain-of-Thought</h3><table><thead><tr><th>特性</th><th>FE2H</th><th>Chain-of-Thought</th></tr></thead><tbody><tr><td><strong>推理方式</strong></td><td>显式的文档筛选+阅读</td><td>隐式的思维链</td></tr><tr><td><strong>信息利用</strong></td><td>筛选相关文档，减少干扰</td><td>使用全部上下文</td></tr><tr><td><strong>可解释性</strong></td><td>高（清晰的文档选择过程）</td><td>中（推理步骤可见）</td></tr><tr><td><strong>计算成本</strong></td><td>较低（筛选减少输入）</td><td>较高（完整上下文）</td></tr><tr><td><strong>适用场景</strong></td><td>结构化文档检索</td><td>开放域推理</td></tr></tbody></table><h3 id="5-3-两者的联系"><a href="#5-3-两者的联系" class="headerlink" title="5.3 两者的联系"></a>5.3 两者的联系</h3><ol><li><p><strong>渐进式推理</strong>：两者都采用&quot;逐步推理&quot;的思想</p><ul><li>FE2H：从简单文档到复杂文档，从单跳到多跳</li><li>CoT：从简单推理步骤到复杂推理步骤</li></ul></li><li><p><strong>中间结果</strong>：都依赖中间结果来增强最终答案</p><ul><li>FE2H：筛选出的相关文档</li><li>CoT：推理过程中的中间结论</li></ul></li><li><p><strong>减少幻觉</strong>：通过结构化信息减少模型编造答案的风险</p></li></ol><h3 id="5-4-未来结合方向"><a href="#5-4-未来结合方向" class="headerlink" title="5.4 未来结合方向"></a>5.4 未来结合方向</h3><pre class="mermaid">flowchart TD    Q[Question] --> Selector[Doc Selector]        Selector -->|Filter relevant docs| Context[Filtered Context]    Context --> CoT[Chain-of-Thought]    CoT -->|Verify intermediate steps| Selector        CoT --> Answer[Final Answer]        style Q fill:#f9f,color:#333    style Selector fill:#bbf,color:#333    style CoT fill:#ff9,color:#333    style Answer fill:#bfb,color:#333</pre><p><strong>可能的结合方向</strong>：</p><ul><li>用CoT来解释为什么选择某些文档</li><li>用文档筛选结果来约束CoT的推理空间</li><li>迭代式：筛选 → 推理 → 验证 → 再筛选</li></ul><hr><h2 id="6-与-ReAct-的对比"><a href="#6-与-ReAct-的对比" class="headerlink" title="6. 与 ReAct 的对比"></a>6. 与 ReAct 的对比</h2><h3 id="6-1-ReAct-是什么"><a href="#6-1-ReAct-是什么" class="headerlink" title="6.1 ReAct 是什么"></a>6.1 ReAct 是什么</h3><blockquote><p><strong>论文</strong>: <a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a></p><p><strong>作者</strong>: Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao</p><p><strong>会议</strong>: ICLR 2023</p></blockquote><p>ReAct 和 FE2H 都以 <strong>HotpotQA</strong> 作为多跳问答的评测基准，但选择了完全不同的技术路线。</p><p>ReAct 的核心思想是让大语言模型在 <strong>Thought → Action → Observation</strong> 的循环中自行推进推理：</p><ul><li><strong>Thought（思考）</strong>：LLM 分析当前状态，决定下一步需要什么信息；</li><li><strong>Action（行动）</strong>：调用外部工具，例如 <code>Search[米歇尔·奥巴马]</code> 这种 Wikipedia API 查询；</li><li><strong>Observation（观察）</strong>：拿到 API 返回的段落，把关键实体融入下一轮 Thought。</li></ul><p>整个过程不需要任何针对任务的微调，只靠 few-shot 提示让 LLM 学会&quot;生成启发式子问题&quot;。这也是题目里&quot;启发式问题&quot;的来源——LLM 在 Thought 阶段动态构造下一跳的查询，而不是预定义规则。</p><h3 id="6-2-用奥巴马妻子的例子看-ReAct"><a href="#6-2-用奥巴马妻子的例子看-ReAct" class="headerlink" title="6.2 用奥巴马妻子的例子看 ReAct"></a>6.2 用奥巴马妻子的例子看 ReAct</h3><p>把前面那个问题放进 ReAct 框架里执行一遍：</p><pre class=" language-language-text"><code class="language-language-text">Q: 奥巴马妻子毕业于哪所学校？Thought 1: 我需要先知道奥巴马的妻子是谁。Action 1:  Search[Barack Obama wife]Obs 1:     米歇尔·奥巴马 (Michelle Obama)，美国第44任第一夫人。Thought 2: 现在需要查找米歇尔·奥巴马的教育背景。Action 2:  Search[Michelle Obama education Princeton Harvard]Obs 2:     米歇尔·奥巴马1985年毕业于普林斯顿大学，1991年获得哈佛法学院博士学位。Thought 3: 已经拿到本科与法学院信息，可以给出答案。Answer:   普林斯顿大学（本科）/ 哈佛大学（法学院）</code></pre><p>可以看到，每一跳的 Thought 都是 LLM <strong>当场生成</strong>的子问题，Action 对应一次外部检索，Observation 把新实体送入下一轮。整条推理链是 LLM 自己走出来的。</p><h3 id="6-3-FE2H-vs-ReAct"><a href="#6-3-FE2H-vs-ReAct" class="headerlink" title="6.3 FE2H vs ReAct"></a>6.3 FE2H vs ReAct</h3><table><thead><tr><th>维度</th><th>FE2H</th><th>ReAct</th></tr></thead><tbody><tr><td>范式</td><td>BERT 风格的有监督微调</td><td>LLM + few-shot 提示，无需训练</td></tr><tr><td>推理结构</td><td>显式两阶段文档选择器</td><td>Thought-Action-Observation 循环</td></tr><tr><td>信息源</td><td>闭域：题面给定的 10 个候选文档</td><td>开放域：实时调用 Wikipedia API</td></tr><tr><td>启发式问题的来源</td><td>选择器对候选文档打分排序</td><td>LLM 自由生成自然语言子问题</td></tr><tr><td>推理链生成</td><td>隐式：阅读器一次性产出答案</td><td>显式：每一跳 Thought 都是可见的中间步骤</td></tr><tr><td>训练数据</td><td>单跳 SQuAD → 多跳 HotpotQA</td><td>仅靠几条 few-shot 示例</td></tr><tr><td>可解释性</td><td>选择出来的 top-k 文档</td><td>完整的 Thought-Action-Observation 轨迹</td></tr><tr><td>适用场景</td><td>闭域 QA、有标注数据</td><td>开放域工具调用、零样本能力</td></tr></tbody></table><h3 id="6-4-两者的内在联系"><a href="#6-4-两者的内在联系" class="headerlink" title="6.4 两者的内在联系"></a>6.4 两者的内在联系</h3><p>虽然技术路线完全不同，但 FE2H 和 ReAct 在抽象层面是同一种思路：</p><ol><li><p><strong>都是&quot;启发式问题驱动&quot;的迭代过程</strong></p><ul><li>FE2H：选择器在每一步选出与&quot;当前问题 + 已选文档&quot;最相关的下一跳文档，本质上是在回答&quot;下一跳应该关注哪个文档&quot;这个问题；</li><li>ReAct：LLM 在 Thought 阶段直接生成子问题，作为下一步 Action 的查询。</li></ul><p>两者都在用一个启发式信号决定&quot;下一跳往哪里跳&quot;，只是信号的生成主体不同。</p></li><li><p><strong>都是&quot;观察 → 行动 → 观察&quot;的循环</strong></p><ul><li>FE2H：观察（已选文档）→ 行动（再选下一跳文档）→ 观察（再选文档）…；</li><li>ReAct：观察（API 返回）→ 行动（生成下一 Thought）→ 观察（再次 API 调用）…。</li></ul></li><li><p><strong>都强调&quot;渐进&quot;</strong></p><ul><li>FE2H：从单跳预训练迁移到多跳微调，能力是渐进获得的；</li><li>ReAct：Thought 由粗到细，每一步在前一步 Observation 的基础上推进。</li></ul></li></ol><h3 id="6-5-落地取舍"><a href="#6-5-落地取舍" class="headerlink" title="6.5 落地取舍"></a>6.5 落地取舍</h3><table><thead><tr><th>场景</th><th>选 FE2H</th><th>选 ReAct</th></tr></thead><tbody><tr><td>候选文档已经确定（10 篇阅读理解）</td><td>✅</td><td></td></tr><tr><td>需要从整个 Wikipedia 检索证据</td><td></td><td>✅</td></tr><tr><td>模型资源受限，只能用 BERT 类小模型</td><td>✅</td><td></td></tr><tr><td>有大模型推理预算，希望零样本上线</td><td></td><td>✅</td></tr><tr><td>需要严格可解释的中间步骤</td><td></td><td>✅</td></tr><tr><td>有大量单跳 + 多跳标注数据</td><td>✅</td><td></td></tr></tbody></table><p>从研究谱系上看，FE2H 属于&quot;在小模型 + 闭域标注数据&quot;上把多跳 QA 推到极致的工作；ReAct 则代表&quot;用大模型的推理 + 工具调用能力解决多跳问题&quot;的另一条路线。两者在 HotpotQA 这个共同基准上互相印证了同一个直觉：<strong>多跳问答的本质，是用启发式信号把推理链串起来</strong>。</p><hr><h2 id="7-实验结果"><a href="#7-实验结果" class="headerlink" title="7. 实验结果"></a>7. 实验结果</h2><p>在HotpotQA数据集（distractor设置）上的表现：</p><table><thead><tr><th>模型</th><th>Answer EM</th><th>Answer F1</th><th>Support EM</th><th>Support F1</th><th>Joint EM</th><th>Joint F1</th></tr></thead><tbody><tr><td>FE2H (ALBERT)</td><td><strong>71.89</strong></td><td><strong>84.44</strong></td><td><strong>64.98</strong></td><td><strong>89.14</strong></td><td><strong>50.04</strong></td><td><strong>76.54</strong></td></tr><tr><td>R3</td><td>71.27</td><td>83.57</td><td>65.25</td><td>88.98</td><td>49.81</td><td>76.02</td></tr><tr><td>SAE+</td><td>70.74</td><td>83.61</td><td>63.70</td><td>88.95</td><td>48.15</td><td>75.72</td></tr></tbody></table><p>FE2H在排行榜上取得了<strong>Joint F1 76.54</strong>的成绩，位列第一。</p><hr><h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>FE2H的核心贡献：</p><ol><li><strong>两阶段文档筛选</strong>：通过渐进式筛选有效减少干扰信息，提高信息利用率</li><li><strong>从易到难的学习范式</strong>：先在简单任务上学习，再迁移到复杂任务</li><li><strong>简洁有效</strong>：不依赖复杂的图结构或问题分解，方法简单但效果显著</li></ol><p>这种方法为多跳问答提供了一种新的思路，同时也为大型语言模型的推理能力增强提供了参考。</p><hr><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol><li><a href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></li><li><a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a></li><li><a href="https://hotpotqa.github.io/">HotpotQA数据集</a></li><li><a href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li><li><a href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></li></ol>]]></content>
       
       
       <categories>
@@ -264,9 +264,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 剪枝 </tag>
             
@@ -295,11 +295,11 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
             
             <tag> DFS </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -732,11 +732,11 @@
             
             <tag> Leetcode </tag>
             
+            <tag> DFS </tag>
+            
             <tag> Medium </tag>
             
             <tag> BFS </tag>
-            
-            <tag> DFS </tag>
             
         </tags>
       
@@ -763,11 +763,11 @@
             
             <tag> Leetcode </tag>
             
+            <tag> DFS </tag>
+            
             <tag> Medium </tag>
             
             <tag> BFS </tag>
-            
-            <tag> DFS </tag>
             
         </tags>
       
@@ -823,9 +823,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DFS </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -883,9 +883,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -912,9 +912,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 贪心 </tag>
             
@@ -945,11 +945,11 @@
             
             <tag> Leetcode </tag>
             
+            <tag> 动态规划 </tag>
+            
             <tag> Medium </tag>
             
             <tag> BFS </tag>
-            
-            <tag> 动态规划 </tag>
             
             <tag> 数学公式 </tag>
             
@@ -1222,9 +1222,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -1251,9 +1251,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -1429,9 +1429,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> Collection </tag>
             
@@ -1460,9 +1460,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -1763,9 +1763,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> DFS </tag>
+            
+            <tag> Medium </tag>
             
         </tags>
       
@@ -2332,9 +2332,9 @@
             
             <tag> Leetcode </tag>
             
-            <tag> Medium </tag>
-            
             <tag> 回溯 </tag>
+            
+            <tag> Medium </tag>
             
             <tag> 前缀树 </tag>
             
@@ -2423,11 +2423,11 @@
             
             <tag> Leetcode </tag>
             
+            <tag> 回溯 </tag>
+            
             <tag> Medium </tag>
             
             <tag> BFS </tag>
-            
-            <tag> 回溯 </tag>
             
             <tag> DP </tag>
             

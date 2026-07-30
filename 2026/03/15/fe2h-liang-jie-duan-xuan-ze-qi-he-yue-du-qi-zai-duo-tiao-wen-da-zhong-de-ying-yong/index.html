@@ -349,14 +349,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    15 分
                 </div>
                 
 				
@@ -372,20 +372,20 @@
 </blockquote>
 <h2 id="1-什么是多跳阅读理解？"><a href="#1-什么是多跳阅读理解？" class="headerlink" title="1. 什么是多跳阅读理解？"></a>1. 什么是多跳阅读理解？</h2><p>多跳阅读理解（Multi-hop Question Answering）是自然语言处理领域中的一个极具挑战性的任务。与单跳问答不同，多跳问答需要模型在<strong>多个文档</strong>中进行推理，找到关联信息后才能给出正确答案。</p>
 <h3 id="1-1-跳-的含义"><a href="#1-1-跳-的含义" class="headerlink" title="1.1 &quot;跳&quot;的含义"></a>1.1 &quot;跳&quot;的含义</h3><p>&quot;跳&quot;指的是推理的步骤数量。每一跳都需要从文档中提取相关信息，并将这些信息连接起来形成最终答案。</p>
-<h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>中文示例：</strong></p>
+<h3 id="1-2-多跳问题示例"><a href="#1-2-多跳问题示例" class="headerlink" title="1.2 多跳问题示例"></a>1.2 多跳问题示例</h3><p><strong>示例问题</strong>：奥巴马妻子毕业于哪所学校？</p>
 <pre class="mermaid">flowchart TD
     subgraph Hop1
-    Q1[Q: Who directed The Wandering Earth]
-    D1[Doc A: The Wandering Earth directed by Guo Fan]
+    Q1[Q: 奥巴马的妻子是谁？]
+    D1[Doc A: 米歇尔·奥巴马，美国第44任总统奥巴马的妻子]
     end
     
     subgraph Hop2
-    Q2[Q: When was Guo Fan born]
-    D2[Doc B: Guo Fan was born in 1980]
+    Q2[Q: 米歇尔·奥巴马本科毕业于哪所学校？]
+    D2[Doc B: 米歇尔·奥巴马1985年毕业于普林斯顿大学，1991年获得哈佛法学院博士学位]
     end
     
     subgraph Answer
-    Answer[Answer: Guo Fan, 1980]
+    Answer[Answer: 普林斯顿大学（本科）/ 哈佛大学（法学院）]
     end
     
     Q1 --> D1
@@ -410,12 +410,12 @@
 </thead>
 <tbody><tr>
 <td>第一跳</td>
-<td>找出《流浪地球》的导演</td>
+<td>找出奥巴马的妻子（米歇尔·奥巴马）</td>
 <td>文档A</td>
 </tr>
 <tr>
 <td>第二跳</td>
-<td>查找该导演的出生年份</td>
+<td>查找她的毕业院校</td>
 <td>文档B</td>
 </tr>
 <tr>
@@ -426,9 +426,10 @@
 </tbody></table>
 <p><strong>多跳体现在哪里？</strong></p>
 <ol>
-<li><strong>无法直接回答</strong>：看第一个文档只能知道导演是谁，但问题问的是出生年份</li>
-<li><strong>需要链式推理</strong>：第一跳的结果（导演名）是第二跳的输入</li>
+<li><strong>无法直接回答</strong>：看第一个文档只能知道奥巴马的妻子是谁，但问题问的是毕业院校</li>
+<li><strong>需要链式推理</strong>：第一跳的结果（&quot;米歇尔·奥巴马&quot;）是第二跳问题的关键实体</li>
 <li><strong>两步信息整合</strong>：必须把两个文档的信息合在一起才能完整回答问题</li>
+<li><strong>桥接实体（Bridge Entity）</strong>：&quot;米歇尔·奥巴马&quot;是把两跳串起来的桥梁，也是 FE2H 两阶段选择器重点捕捉的对象</li>
 </ol>
 <hr>
 <h2 id="2-论文摘要"><a href="#2-论文摘要" class="headerlink" title="2. 论文摘要"></a>2. 论文摘要</h2><p><strong>Title</strong>: From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</p>
@@ -754,7 +755,147 @@
 <li>迭代式：筛选 → 推理 → 验证 → 再筛选</li>
 </ul>
 <hr>
-<h2 id="6-实验结果"><a href="#6-实验结果" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h2><p>在HotpotQA数据集（distractor设置）上的表现：</p>
+<h2 id="6-与-ReAct-的对比"><a href="#6-与-ReAct-的对比" class="headerlink" title="6. 与 ReAct 的对比"></a>6. 与 ReAct 的对比</h2><h3 id="6-1-ReAct-是什么"><a href="#6-1-ReAct-是什么" class="headerlink" title="6.1 ReAct 是什么"></a>6.1 ReAct 是什么</h3><blockquote>
+<p><strong>论文</strong>: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a></p>
+<p><strong>作者</strong>: Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao</p>
+<p><strong>会议</strong>: ICLR 2023</p>
+</blockquote>
+<p>ReAct 和 FE2H 都以 <strong>HotpotQA</strong> 作为多跳问答的评测基准，但选择了完全不同的技术路线。</p>
+<p>ReAct 的核心思想是让大语言模型在 <strong>Thought → Action → Observation</strong> 的循环中自行推进推理：</p>
+<ul>
+<li><strong>Thought（思考）</strong>：LLM 分析当前状态，决定下一步需要什么信息；</li>
+<li><strong>Action（行动）</strong>：调用外部工具，例如 <code>Search[米歇尔·奥巴马]</code> 这种 Wikipedia API 查询；</li>
+<li><strong>Observation（观察）</strong>：拿到 API 返回的段落，把关键实体融入下一轮 Thought。</li>
+</ul>
+<p>整个过程不需要任何针对任务的微调，只靠 few-shot 提示让 LLM 学会&quot;生成启发式子问题&quot;。这也是题目里&quot;启发式问题&quot;的来源——LLM 在 Thought 阶段动态构造下一跳的查询，而不是预定义规则。</p>
+<h3 id="6-2-用奥巴马妻子的例子看-ReAct"><a href="#6-2-用奥巴马妻子的例子看-ReAct" class="headerlink" title="6.2 用奥巴马妻子的例子看 ReAct"></a>6.2 用奥巴马妻子的例子看 ReAct</h3><p>把前面那个问题放进 ReAct 框架里执行一遍：</p>
+<pre class=" language-language-text"><code class="language-language-text">Q: 奥巴马妻子毕业于哪所学校？
+
+Thought 1: 我需要先知道奥巴马的妻子是谁。
+Action 1:  Search[Barack Obama wife]
+Obs 1:     米歇尔·奥巴马 (Michelle Obama)，美国第44任第一夫人。
+
+Thought 2: 现在需要查找米歇尔·奥巴马的教育背景。
+Action 2:  Search[Michelle Obama education Princeton Harvard]
+Obs 2:     米歇尔·奥巴马1985年毕业于普林斯顿大学，1991年获得哈佛法学院博士学位。
+
+Thought 3: 已经拿到本科与法学院信息，可以给出答案。
+Answer:   普林斯顿大学（本科）/ 哈佛大学（法学院）
+</code></pre>
+<p>可以看到，每一跳的 Thought 都是 LLM <strong>当场生成</strong>的子问题，Action 对应一次外部检索，Observation 把新实体送入下一轮。整条推理链是 LLM 自己走出来的。</p>
+<h3 id="6-3-FE2H-vs-ReAct"><a href="#6-3-FE2H-vs-ReAct" class="headerlink" title="6.3 FE2H vs ReAct"></a>6.3 FE2H vs ReAct</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>FE2H</th>
+<th>ReAct</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>范式</td>
+<td>BERT 风格的有监督微调</td>
+<td>LLM + few-shot 提示，无需训练</td>
+</tr>
+<tr>
+<td>推理结构</td>
+<td>显式两阶段文档选择器</td>
+<td>Thought-Action-Observation 循环</td>
+</tr>
+<tr>
+<td>信息源</td>
+<td>闭域：题面给定的 10 个候选文档</td>
+<td>开放域：实时调用 Wikipedia API</td>
+</tr>
+<tr>
+<td>启发式问题的来源</td>
+<td>选择器对候选文档打分排序</td>
+<td>LLM 自由生成自然语言子问题</td>
+</tr>
+<tr>
+<td>推理链生成</td>
+<td>隐式：阅读器一次性产出答案</td>
+<td>显式：每一跳 Thought 都是可见的中间步骤</td>
+</tr>
+<tr>
+<td>训练数据</td>
+<td>单跳 SQuAD → 多跳 HotpotQA</td>
+<td>仅靠几条 few-shot 示例</td>
+</tr>
+<tr>
+<td>可解释性</td>
+<td>选择出来的 top-k 文档</td>
+<td>完整的 Thought-Action-Observation 轨迹</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>闭域 QA、有标注数据</td>
+<td>开放域工具调用、零样本能力</td>
+</tr>
+</tbody></table>
+<h3 id="6-4-两者的内在联系"><a href="#6-4-两者的内在联系" class="headerlink" title="6.4 两者的内在联系"></a>6.4 两者的内在联系</h3><p>虽然技术路线完全不同，但 FE2H 和 ReAct 在抽象层面是同一种思路：</p>
+<ol>
+<li><p><strong>都是&quot;启发式问题驱动&quot;的迭代过程</strong></p>
+<ul>
+<li>FE2H：选择器在每一步选出与&quot;当前问题 + 已选文档&quot;最相关的下一跳文档，本质上是在回答&quot;下一跳应该关注哪个文档&quot;这个问题；</li>
+<li>ReAct：LLM 在 Thought 阶段直接生成子问题，作为下一步 Action 的查询。</li>
+</ul>
+<p>两者都在用一个启发式信号决定&quot;下一跳往哪里跳&quot;，只是信号的生成主体不同。</p>
+</li>
+<li><p><strong>都是&quot;观察 → 行动 → 观察&quot;的循环</strong></p>
+<ul>
+<li>FE2H：观察（已选文档）→ 行动（再选下一跳文档）→ 观察（再选文档）…；</li>
+<li>ReAct：观察（API 返回）→ 行动（生成下一 Thought）→ 观察（再次 API 调用）…。</li>
+</ul>
+</li>
+<li><p><strong>都强调&quot;渐进&quot;</strong></p>
+<ul>
+<li>FE2H：从单跳预训练迁移到多跳微调，能力是渐进获得的；</li>
+<li>ReAct：Thought 由粗到细，每一步在前一步 Observation 的基础上推进。</li>
+</ul>
+</li>
+</ol>
+<h3 id="6-5-落地取舍"><a href="#6-5-落地取舍" class="headerlink" title="6.5 落地取舍"></a>6.5 落地取舍</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>选 FE2H</th>
+<th>选 ReAct</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>候选文档已经确定（10 篇阅读理解）</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>需要从整个 Wikipedia 检索证据</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>模型资源受限，只能用 BERT 类小模型</td>
+<td>✅</td>
+<td></td>
+</tr>
+<tr>
+<td>有大模型推理预算，希望零样本上线</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>需要严格可解释的中间步骤</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>有大量单跳 + 多跳标注数据</td>
+<td>✅</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>从研究谱系上看，FE2H 属于&quot;在小模型 + 闭域标注数据&quot;上把多跳 QA 推到极致的工作；ReAct 则代表&quot;用大模型的推理 + 工具调用能力解决多跳问题&quot;的另一条路线。两者在 HotpotQA 这个共同基准上互相印证了同一个直觉：<strong>多跳问答的本质，是用启发式信号把推理链串起来</strong>。</p>
+<hr>
+<h2 id="7-实验结果"><a href="#7-实验结果" class="headerlink" title="7. 实验结果"></a>7. 实验结果</h2><p>在HotpotQA数据集（distractor设置）上的表现：</p>
 <table>
 <thead>
 <tr>
@@ -797,7 +938,7 @@
 </tbody></table>
 <p>FE2H在排行榜上取得了<strong>Joint F1 76.54</strong>的成绩，位列第一。</p>
 <hr>
-<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2><p>FE2H的核心贡献：</p>
+<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h2><p>FE2H的核心贡献：</p>
 <ol>
 <li><strong>两阶段文档筛选</strong>：通过渐进式筛选有效减少干扰信息，提高信息利用率</li>
 <li><strong>从易到难的学习范式</strong>：先在简单任务上学习，再迁移到复杂任务</li>
@@ -807,6 +948,7 @@
 <hr>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a></li>
 <li><a target="_blank" rel="noopener" href="https://hotpotqa.github.io/">HotpotQA数据集</a></li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2201.11903">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/weijunlei/hotpotqa_mrc">GitHub: hotpotqa_mrc</a></li>
@@ -1248,7 +1390,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">64k</span>&nbsp;字
+                    class="white-color">65.3k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
