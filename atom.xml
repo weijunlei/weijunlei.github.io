@@ -6,7 +6,7 @@
   <link href="https://xiaofenglei.cn/atom.xml" rel="self"/>
   
   <link href="https://xiaofenglei.cn/"/>
-  <updated>2026-07-26T13:29:51.212Z</updated>
+  <updated>2026-07-30T13:15:49.502Z</updated>
   <id>https://xiaofenglei.cn/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/"/>
     <id>https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/</id>
     <published>2026-07-25T12:30:00.000Z</published>
-    <updated>2026-07-26T13:29:51.212Z</updated>
+    <updated>2026-07-30T13:15:49.502Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;基于-tcc-思想的分布式库存一致性方案&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基于-tcc-思想的分布式库存一致性方案&quot;&gt;&lt;/a&gt; 基于 TCC</summary>
+    <summary type="html">&lt;h1 id=&quot;基于-TCC-思想的分布式库存一致性方案&quot;&gt;&lt;a href=&quot;#基于-TCC-思想的分布式库存一致性方案&quot; class=&quot;headerlink&quot; title=&quot;基于 TCC 思想的分布式库存一致性方案&quot;&gt;&lt;/a&gt;基于 TCC</summary>
         
       
     
@@ -41,9 +41,9 @@
     
     <category term="TCC" scheme="https://xiaofenglei.cn/tags/TCC/"/>
     
-    <category term="Kafka" scheme="https://xiaofenglei.cn/tags/Kafka/"/>
+    <category term="状态机" scheme="https://xiaofenglei.cn/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
     
-    <category term="MySQL" scheme="https://xiaofenglei.cn/tags/MySQL/"/>
+    <category term="最终一致性" scheme="https://xiaofenglei.cn/tags/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/"/>
     
   </entry>
   
@@ -281,9 +281,9 @@
     
     <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
     
-    <category term="回溯" scheme="https://xiaofenglei.cn/tags/%E5%9B%9E%E6%BA%AF/"/>
-    
     <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
+    
+    <category term="回溯" scheme="https://xiaofenglei.cn/tags/%E5%9B%9E%E6%BA%AF/"/>
     
     <category term="剪枝" scheme="https://xiaofenglei.cn/tags/%E5%89%AA%E6%9E%9D/"/>
     
@@ -312,11 +312,11 @@
     
     <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
     
+    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
+    
     <category term="回溯" scheme="https://xiaofenglei.cn/tags/%E5%9B%9E%E6%BA%AF/"/>
     
     <category term="DFS" scheme="https://xiaofenglei.cn/tags/DFS/"/>
-    
-    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
     
   </entry>
   
