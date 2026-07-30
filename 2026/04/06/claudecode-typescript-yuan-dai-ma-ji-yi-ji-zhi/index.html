@@ -5,8 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解, 小风雷">
-    <meta name="description" content="ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解这篇文章基于 claude-code 的 TypeScript 源码，系统梳理 ClaudeCode 是怎么“记住东西”的。
-很多人会直觉把“记忆”理解成一个统一的 m">
+    <meta name="description" content=" ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解
+这篇文章基于 claude-code 的 TypeScript 源码，系统梳理 ClaudeCode 是怎么“记住东西”的。
+很多人会直觉把“记忆”理解成一个统一的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -313,12 +314,12 @@
                                 <span class="chip bg-color">TypeScript</span>
                             </a>
                         
-                            <a href="/tags/Memory/">
-                                <span class="chip bg-color">Memory</span>
-                            </a>
-                        
                             <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
                                 <span class="chip bg-color">工程实践</span>
+                            </a>
+                        
+                            <a href="/tags/Memory/">
+                                <span class="chip bg-color">Memory</span>
                             </a>
                         
                     </div>
@@ -351,7 +352,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.2k
+                    6.3k
                 </div>
                 
 
@@ -369,7 +370,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ClaudeCode-的记忆机制：短期记忆、长期记忆与模型输入全链路拆解"><a href="#ClaudeCode-的记忆机制：短期记忆、长期记忆与模型输入全链路拆解" class="headerlink" title="ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解"></a>ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解</h1><p>这篇文章基于 <code>claude-code</code> 的 TypeScript 源码，系统梳理 ClaudeCode 是怎么“记住东西”的。</p>
+                <h1 id="claudecode-的记忆机制短期记忆-长期记忆与模型输入全链路拆解"><a class="markdownIt-Anchor" href="#claudecode-的记忆机制短期记忆-长期记忆与模型输入全链路拆解"></a> ClaudeCode 的记忆机制：短期记忆、长期记忆与模型输入全链路拆解</h1>
+<p>这篇文章基于 <code>claude-code</code> 的 TypeScript 源码，系统梳理 ClaudeCode 是怎么“记住东西”的。</p>
 <p>很多人会直觉把“记忆”理解成一个统一的 memory 模块，但 ClaudeCode 实际上不是这么实现的。它把“记忆”拆成了几层：</p>
 <ol>
 <li><strong>短期记忆</strong>：当前会话正在发生的上下文，核心是内存里的消息数组、transcript JSONL，以及 session memory；</li>
@@ -380,8 +382,10 @@
 <blockquote>
 <p>ClaudeCode 不是用一个数据库来统一记忆，而是用“内存态消息 + 增量 transcript + 会话摘要 + 文件化长期记忆”拼出一套可恢复、可压缩、可跨会话重用的机制。</p>
 </blockquote>
-<hr>
-<h2 id="1-先说结论：ClaudeCode-是怎么实现短期记忆和长期记忆的"><a href="#1-先说结论：ClaudeCode-是怎么实现短期记忆和长期记忆的" class="headerlink" title="1. 先说结论：ClaudeCode 是怎么实现短期记忆和长期记忆的"></a>1. 先说结论：ClaudeCode 是怎么实现短期记忆和长期记忆的</h2><h3 id="1-1-短期记忆是什么"><a href="#1-1-短期记忆是什么" class="headerlink" title="1.1 短期记忆是什么"></a>1.1 短期记忆是什么</h3><p>ClaudeCode 的短期记忆，不只是“当前 prompt 上下文”。</p>
+<hr />
+<h2 id="1-先说结论claudecode-是怎么实现短期记忆和长期记忆的"><a class="markdownIt-Anchor" href="#1-先说结论claudecode-是怎么实现短期记忆和长期记忆的"></a> 1. 先说结论：ClaudeCode 是怎么实现短期记忆和长期记忆的</h2>
+<h3 id="11-短期记忆是什么"><a class="markdownIt-Anchor" href="#11-短期记忆是什么"></a> 1.1 短期记忆是什么</h3>
+<p>ClaudeCode 的短期记忆，不只是“当前 prompt 上下文”。</p>
 <p>它至少包含三层：</p>
 <ol>
 <li><strong>运行态内存消息</strong>：当前进程里真实参与推理和渲染的 <code>messages</code>；</li>
@@ -394,7 +398,8 @@
 <li><strong>transcript</strong>负责恢复和留痕；</li>
 <li><strong>session memory</strong>负责压缩和续航。</li>
 </ul>
-<h3 id="1-2-长期记忆是什么"><a href="#1-2-长期记忆是什么" class="headerlink" title="1.2 长期记忆是什么"></a>1.2 长期记忆是什么</h3><p>ClaudeCode 的长期记忆是一套 <strong>文件化 memory system</strong>。</p>
+<h3 id="12-长期记忆是什么"><a class="markdownIt-Anchor" href="#12-长期记忆是什么"></a> 1.2 长期记忆是什么</h3>
+<p>ClaudeCode 的长期记忆是一套 <strong>文件化 memory system</strong>。</p>
 <p>它不是把长期记忆塞到数据库，也不是直接复用 transcript，而是在项目对应的 memory 目录下维护：</p>
 <ul>
 <li>一个 <code>MEMORY.md</code> 作为索引；</li>
@@ -403,32 +408,34 @@
 <li>一个后台抽取机制，把当前会话里“值得长期保留”的信息写回 memory 文件。</li>
 </ul>
 <p>从产品视角看，这是一种“把值得保留的信息，从一次对话里沉淀成未来还可复用的知识文件”的设计。</p>
-<hr>
-<h2 id="2-短期记忆：当前会话到底怎么被记住"><a href="#2-短期记忆：当前会话到底怎么被记住" class="headerlink" title="2. 短期记忆：当前会话到底怎么被记住"></a>2. 短期记忆：当前会话到底怎么被记住</h2><h2 id="2-1-第一层：会话首先是运行在内存里的"><a href="#2-1-第一层：会话首先是运行在内存里的" class="headerlink" title="2.1 第一层：会话首先是运行在内存里的"></a>2.1 第一层：会话首先是运行在内存里的</h2><p>ClaudeCode 在运行时并不是每一步都去磁盘读 transcript，而是先把当前消息保存在内存里。</p>
+<hr />
+<h2 id="2-短期记忆当前会话到底怎么被记住"><a class="markdownIt-Anchor" href="#2-短期记忆当前会话到底怎么被记住"></a> 2. 短期记忆：当前会话到底怎么被记住</h2>
+<h2 id="21-第一层会话首先是运行在内存里的"><a class="markdownIt-Anchor" href="#21-第一层会话首先是运行在内存里的"></a> 2.1 第一层：会话首先是运行在内存里的</h2>
+<p>ClaudeCode 在运行时并不是每一步都去磁盘读 transcript，而是先把当前消息保存在内存里。</p>
 <p><code>query()</code> 的输入就明确带了 <code>messages: Message[]</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export type QueryParams = {
-  messages: Message[]
-  systemPrompt: SystemPrompt
-  userContext: { [k: string]: string }
-  systemContext: { [k: string]: string }
-  canUseTool: CanUseToolFn
-  toolUseContext: ToolUseContext
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">QueryParams</span> = {
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[]
+  <span class="hljs-attr">systemPrompt</span>: <span class="hljs-title class_">SystemPrompt</span>
+  <span class="hljs-attr">userContext</span>: { [<span class="hljs-attr">k</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> }
+  <span class="hljs-attr">systemContext</span>: { [<span class="hljs-attr">k</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> }
+  <span class="hljs-attr">canUseTool</span>: <span class="hljs-title class_">CanUseToolFn</span>
+  <span class="hljs-attr">toolUseContext</span>: <span class="hljs-title class_">ToolUseContext</span>
   ...
 }
 
-type State = {
-  messages: Message[]
-  toolUseContext: ToolUseContext
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">State</span> = {
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[]
+  <span class="hljs-attr">toolUseContext</span>: <span class="hljs-title class_">ToolUseContext</span>
   ...
 }
 </code></pre>
 <p>这段代码在 <code>src/query.ts</code> 里，说明查询主循环天然就是以内存中的 <code>messages</code> 作为输入。</p>
 <p>前端 REPL 这边也明确把 <code>messagesRef</code> 当作当前真实状态：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">// ref is source of truth, React state is the render projection.
-const setMessages = useCallback((action: React.SetStateAction<MessageType[]>) => {
-  const prev = messagesRef.current;
-  const next = typeof action === 'function' ? action(messagesRef.current) : action;
-  messagesRef.current = next;
+<pre class="highlight"><code class="ts"><span class="hljs-comment">// ref is source of truth, React state is the render projection.</span>
+<span class="hljs-keyword">const</span> setMessages = <span class="hljs-title function_">useCallback</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">action</span>: <span class="hljs-title class_">React</span>.<span class="hljs-title class_">SetStateAction</span>&lt;<span class="hljs-title class_">MessageType</span>[]&gt;</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> prev = messagesRef.<span class="hljs-property">current</span>;
+  <span class="hljs-keyword">const</span> next = <span class="hljs-keyword">typeof</span> action === <span class="hljs-string">&#x27;function&#x27;</span> ? <span class="hljs-title function_">action</span>(messagesRef.<span class="hljs-property">current</span>) : action;
+  messagesRef.<span class="hljs-property">current</span> = next;
   ...
 });
 </code></pre>
@@ -437,34 +444,35 @@ const setMessages = useCallback((action: React.SetStateAction<MessageType[]>) =>
 <blockquote>
 <p>ClaudeCode 当前会话的“活上下文”首先是放在内存里的，不是每次都从 transcript 读回再推理。</p>
 </blockquote>
-<hr>
-<h2 id="2-2-第二层：会话原始历史会持续写到-transcript-JSONL"><a href="#2-2-第二层：会话原始历史会持续写到-transcript-JSONL" class="headerlink" title="2.2 第二层：会话原始历史会持续写到 transcript JSONL"></a>2.2 第二层：会话原始历史会持续写到 transcript JSONL</h2><p>虽然运行态在内存里，但 ClaudeCode 也会把会话历史持续写到磁盘 transcript。</p>
+<hr />
+<h2 id="22-第二层会话原始历史会持续写到-transcript-jsonl"><a class="markdownIt-Anchor" href="#22-第二层会话原始历史会持续写到-transcript-jsonl"></a> 2.2 第二层：会话原始历史会持续写到 transcript JSONL</h2>
+<p>虽然运行态在内存里，但 ClaudeCode 也会把会话历史持续写到磁盘 transcript。</p>
 <p>主会话 transcript 路径生成逻辑：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function getTranscriptPath(): string {
-  const projectDir = getSessionProjectDir() ?? getProjectDir(getOriginalCwd())
-  return join(projectDir, `${getSessionId()}.jsonl`)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getTranscriptPath</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">string</span> {
+  <span class="hljs-keyword">const</span> projectDir = <span class="hljs-title function_">getSessionProjectDir</span>() ?? <span class="hljs-title function_">getProjectDir</span>(<span class="hljs-title function_">getOriginalCwd</span>())
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">join</span>(projectDir, <span class="hljs-string">`<span class="hljs-subst">${getSessionId()}</span>.jsonl`</span>)
 }
 </code></pre>
 <p>子 agent transcript 路径生成逻辑：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function getAgentTranscriptPath(agentId: AgentId): string {
-  const projectDir = getSessionProjectDir() ?? getProjectDir(getOriginalCwd())
-  const sessionId = getSessionId()
-  const subdir = agentTranscriptSubdirs.get(agentId)
-  const base = subdir
-    ? join(projectDir, sessionId, 'subagents', subdir)
-    : join(projectDir, sessionId, 'subagents')
-  return join(base, `agent-${agentId}.jsonl`)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getAgentTranscriptPath</span>(<span class="hljs-params"><span class="hljs-attr">agentId</span>: <span class="hljs-title class_">AgentId</span></span>): <span class="hljs-built_in">string</span> {
+  <span class="hljs-keyword">const</span> projectDir = <span class="hljs-title function_">getSessionProjectDir</span>() ?? <span class="hljs-title function_">getProjectDir</span>(<span class="hljs-title function_">getOriginalCwd</span>())
+  <span class="hljs-keyword">const</span> sessionId = <span class="hljs-title function_">getSessionId</span>()
+  <span class="hljs-keyword">const</span> subdir = agentTranscriptSubdirs.<span class="hljs-title function_">get</span>(agentId)
+  <span class="hljs-keyword">const</span> base = subdir
+    ? <span class="hljs-title function_">join</span>(projectDir, sessionId, <span class="hljs-string">&#x27;subagents&#x27;</span>, subdir)
+    : <span class="hljs-title function_">join</span>(projectDir, sessionId, <span class="hljs-string">&#x27;subagents&#x27;</span>)
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">join</span>(base, <span class="hljs-string">`agent-<span class="hljs-subst">${agentId}</span>.jsonl`</span>)
 }
 </code></pre>
 <p>sidechain 写入入口：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export async function recordSidechainTranscript(
-  messages: Message[],
-  agentId?: string,
-  startingParentUuid?: UUID | null,
-) {
-  await getProject().insertMessageChain(
-    cleanMessagesForLogging(messages),
-    true,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">recordSidechainTranscript</span>(<span class="hljs-params">
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[],
+  <span class="hljs-attr">agentId</span>?: <span class="hljs-built_in">string</span>,
+  <span class="hljs-attr">startingParentUuid</span>?: UUID | <span class="hljs-literal">null</span>,
+</span>) {
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">getProject</span>().<span class="hljs-title function_">insertMessageChain</span>(
+    <span class="hljs-title function_">cleanMessagesForLogging</span>(messages),
+    <span class="hljs-literal">true</span>,
     agentId,
     startingParentUuid,
   )
@@ -480,8 +488,9 @@ const setMessages = useCallback((action: React.SetStateAction<MessageType[]>) =>
 <blockquote>
 <p>ClaudeCode 会把主会话和子 agent 会话分别写到各自的 transcript JSONL 中，形成可恢复的原始历史流。</p>
 </blockquote>
-<hr>
-<h2 id="2-3-transcript-会不会放在内存里？"><a href="#2-3-transcript-会不会放在内存里？" class="headerlink" title="2.3 transcript 会不会放在内存里？"></a>2.3 transcript 会不会放在内存里？</h2><p>这个问题很容易误解。</p>
+<hr />
+<h2 id="23-transcript-会不会放在内存里"><a class="markdownIt-Anchor" href="#23-transcript-会不会放在内存里"></a> 2.3 transcript 会不会放在内存里？</h2>
+<p>这个问题很容易误解。</p>
 <p>答案不是“只放磁盘”，而是：</p>
 <ul>
 <li><strong>会放在内存里</strong>，因为当前推理循环直接依赖 <code>messages</code>；</li>
@@ -489,57 +498,59 @@ const setMessages = useCallback((action: React.SetStateAction<MessageType[]>) =>
 </ul>
 <p>更准确地说，ClaudeCode 的做法是“双写”：</p>
 <ol>
-<li>当前轮消息先进入内存里的 <code>mutableMessages</code> &#x2F; <code>messagesRef</code>；</li>
+<li>当前轮消息先进入内存里的 <code>mutableMessages</code> / <code>messagesRef</code>；</li>
 <li>然后按规则增量写到 transcript JSONL。</li>
 </ol>
 <p>例如工具执行时：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (!alreadyPresent) {
-  mutableMessages.push(assistantMessage)
-  if (persistSession) {
-    await recordTranscript(mutableMessages)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (!alreadyPresent) {
+  mutableMessages.<span class="hljs-title function_">push</span>(assistantMessage)
+  <span class="hljs-keyword">if</span> (persistSession) {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">recordTranscript</span>(mutableMessages)
   }
 }
 
 ...
 
-if (update.message) {
-  mutableMessages.push(update.message)
-  if (persistSession) {
-    await recordTranscript(mutableMessages)
+<span class="hljs-keyword">if</span> (update.<span class="hljs-property">message</span>) {
+  mutableMessages.<span class="hljs-title function_">push</span>(update.<span class="hljs-property">message</span>)
+  <span class="hljs-keyword">if</span> (persistSession) {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">recordTranscript</span>(mutableMessages)
   }
 }
 </code></pre>
 <p>这段在 <code>src/utils/queryHelpers.ts</code>。</p>
 <p>所以短期记忆里的 transcript 更像一份 <strong>增量日志副本</strong>，不是替代内存，而是补足恢复能力。</p>
-<hr>
-<h2 id="2-4-transcript-是每次聊天都会加上吗？"><a href="#2-4-transcript-是每次聊天都会加上吗？" class="headerlink" title="2.4 transcript 是每次聊天都会加上吗？"></a>2.4 transcript 是每次聊天都会加上吗？</h2><p>是，但要更精确地说，是“<strong>持续追加</strong>”，而不是“每轮结束后整段重写”。</p>
-<h3 id="2-4-1-什么时候真正创建-session-file"><a href="#2-4-1-什么时候真正创建-session-file" class="headerlink" title="2.4.1 什么时候真正创建 session file"></a>2.4.1 什么时候真正创建 session file</h3><p>ClaudeCode 刚启动时，并不会立刻创建 <code>.jsonl</code> transcript 文件。</p>
+<hr />
+<h2 id="24-transcript-是每次聊天都会加上吗"><a class="markdownIt-Anchor" href="#24-transcript-是每次聊天都会加上吗"></a> 2.4 transcript 是每次聊天都会加上吗？</h2>
+<p>是，但要更精确地说，是“<strong>持续追加</strong>”，而不是“每轮结束后整段重写”。</p>
+<h3 id="241-什么时候真正创建-session-file"><a class="markdownIt-Anchor" href="#241-什么时候真正创建-session-file"></a> 2.4.1 什么时候真正创建 session file</h3>
+<p>ClaudeCode 刚启动时，并不会立刻创建 <code>.jsonl</code> transcript 文件。</p>
 <p>关键逻辑在 <code>materializeSessionFile()</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">/**
+<pre class="highlight"><code class="ts"><span class="hljs-comment">/**
  * Create the session file, write cached startup metadata, and flush
  * buffered entries. Called on the first user/assistant message.
- */
-private async materializeSessionFile(): Promise<void> {
-  if (this.shouldSkipPersistence()) return
-  this.ensureCurrentSessionFile()
-  this.reAppendSessionMetadata()
-  if (this.pendingEntries.length > 0) {
-    const buffered = this.pendingEntries
-    this.pendingEntries = []
-    for (const entry of buffered) {
-      await this.appendEntry(entry)
+ */</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">async</span> <span class="hljs-title function_">materializeSessionFile</span>(): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-title function_">shouldSkipPersistence</span>()) <span class="hljs-keyword">return</span>
+  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">ensureCurrentSessionFile</span>()
+  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">reAppendSessionMetadata</span>()
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">pendingEntries</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">const</span> buffered = <span class="hljs-variable language_">this</span>.<span class="hljs-property">pendingEntries</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">pendingEntries</span> = []
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> entry <span class="hljs-keyword">of</span> buffered) {
+      <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">appendEntry</span>(entry)
     }
   }
 }
 </code></pre>
 <p>真正触发它的判断：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">// First user/assistant message materializes the session file.
-// Hook progress/attachment messages alone stay buffered.
-if (
-  this.sessionFile === null &&
-  messages.some(m => m.type === 'user' || m.type === 'assistant')
+<pre class="highlight"><code class="ts"><span class="hljs-comment">// First user/assistant message materializes the session file.</span>
+<span class="hljs-comment">// Hook progress/attachment messages alone stay buffered.</span>
+<span class="hljs-keyword">if</span> (
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">sessionFile</span> === <span class="hljs-literal">null</span> &amp;&amp;
+  messages.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> m.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;user&#x27;</span> || m.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;assistant&#x27;</span>)
 ) {
-  await this.materializeSessionFile()
+  <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">materializeSessionFile</span>()
 }
 </code></pre>
 <p>这两段都在 <code>src/utils/sessionStorage.ts</code>。</p>
@@ -551,7 +562,8 @@ if (
 <ol>
 <li>在会话刚启动时，它<strong>不会立刻创建</strong> <code>.jsonl</code> transcript 文件；</li>
 <li>一些启动阶段的元数据、状态更新会先缓存在内存里；</li>
-<li>第一次出现真正的 <code>user</code> 或 <code>assistant</code> 消息时，它才：<ul>
+<li>第一次出现真正的 <code>user</code> 或 <code>assistant</code> 消息时，它才：
+<ul>
 <li>创建 session transcript 文件；</li>
 <li>把之前缓存的元数据补写进去；</li>
 <li>再把缓冲区里的 entry flush 到文件。</li>
@@ -559,7 +571,8 @@ if (
 </li>
 </ol>
 <p>这么设计主要是为了避免生成很多“只有元数据、没有真实对话内容”的空壳 session 文件。</p>
-<h3 id="2-4-2-什么叫“真正的-user-assistant-消息”"><a href="#2-4-2-什么叫“真正的-user-assistant-消息”" class="headerlink" title="2.4.2 什么叫“真正的 user &#x2F; assistant 消息”"></a>2.4.2 什么叫“真正的 user &#x2F; assistant 消息”</h3><p>这里指的是进入消息模型的正式对话消息，不是所有 UI 状态。</p>
+<h3 id="242-什么叫真正的-user-assistant-消息"><a class="markdownIt-Anchor" href="#242-什么叫真正的-user-assistant-消息"></a> 2.4.2 什么叫“真正的 user / assistant 消息”</h3>
+<p>这里指的是进入消息模型的正式对话消息，不是所有 UI 状态。</p>
 <p>通常会发生在这些时刻：</p>
 <ol>
 <li>你在 REPL 中按回车提交一条问题，生成 <code>user</code> message；</li>
@@ -574,32 +587,33 @@ if (
 <li><code>queue operation</code></li>
 </ul>
 <p>所以如果只有启动提示、hook 进度、附件提示，而没有真正的问答，它不会建 transcript 文件。</p>
-<h3 id="2-4-3-真正写盘时，是不是每次整段重写"><a href="#2-4-3-真正写盘时，是不是每次整段重写" class="headerlink" title="2.4.3 真正写盘时，是不是每次整段重写"></a>2.4.3 真正写盘时，是不是每次整段重写</h3><p>不是。ClaudeCode 这里更像一条 <strong>增量日志流</strong>。</p>
+<h3 id="243-真正写盘时是不是每次整段重写"><a class="markdownIt-Anchor" href="#243-真正写盘时是不是每次整段重写"></a> 2.4.3 真正写盘时，是不是每次整段重写</h3>
+<p>不是。ClaudeCode 这里更像一条 <strong>增量日志流</strong>。</p>
 <p>看 <code>recordTranscript()</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export async function recordTranscript(
-  messages: Message[],
-  teamInfo?: TeamInfo,
-  startingParentUuidHint?: UUID,
-  allMessages?: readonly Message[],
-): Promise<UUID | null> {
-  const cleanedMessages = cleanMessagesForLogging(messages, allMessages)
-  const sessionId = getSessionId() as UUID
-  const messageSet = await getSessionMessages(sessionId)
-  const newMessages: typeof cleanedMessages = []
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">recordTranscript</span>(<span class="hljs-params">
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[],
+  <span class="hljs-attr">teamInfo</span>?: <span class="hljs-title class_">TeamInfo</span>,
+  <span class="hljs-attr">startingParentUuidHint</span>?: UUID,
+  <span class="hljs-attr">allMessages</span>?: <span class="hljs-keyword">readonly</span> <span class="hljs-title class_">Message</span>[],
+</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-variable constant_">UUID</span> | <span class="hljs-literal">null</span>&gt; {
+  <span class="hljs-keyword">const</span> cleanedMessages = <span class="hljs-title function_">cleanMessagesForLogging</span>(messages, allMessages)
+  <span class="hljs-keyword">const</span> sessionId = <span class="hljs-title function_">getSessionId</span>() <span class="hljs-keyword">as</span> <span class="hljs-variable constant_">UUID</span>
+  <span class="hljs-keyword">const</span> messageSet = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getSessionMessages</span>(sessionId)
+  <span class="hljs-keyword">const</span> <span class="hljs-attr">newMessages</span>: <span class="hljs-keyword">typeof</span> cleanedMessages = []
   ...
-  for (const m of cleanedMessages) {
-    if (messageSet.has(m.uuid as UUID)) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> m <span class="hljs-keyword">of</span> cleanedMessages) {
+    <span class="hljs-keyword">if</span> (messageSet.<span class="hljs-title function_">has</span>(m.<span class="hljs-property">uuid</span> <span class="hljs-keyword">as</span> <span class="hljs-variable constant_">UUID</span>)) {
       ...
-    } else {
-      newMessages.push(m)
-      seenNewMessage = true
+    } <span class="hljs-keyword">else</span> {
+      newMessages.<span class="hljs-title function_">push</span>(m)
+      seenNewMessage = <span class="hljs-literal">true</span>
     }
   }
-  if (newMessages.length > 0) {
-    await getProject().insertMessageChain(
+  <span class="hljs-keyword">if</span> (newMessages.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">getProject</span>().<span class="hljs-title function_">insertMessageChain</span>(
       newMessages,
-      false,
-      undefined,
+      <span class="hljs-literal">false</span>,
+      <span class="hljs-literal">undefined</span>,
       startingParentUuid,
       teamInfo,
     )
@@ -607,15 +621,15 @@ if (
 }
 </code></pre>
 <p>再看 <code>cleanMessagesForLogging()</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function cleanMessagesForLogging(
-  messages: Message[],
-  allMessages: readonly Message[] = messages,
-): Transcript {
-  const filtered = messages.filter(isLoggableMessage) as Transcript
-  return getUserType() !== 'ant'
-    ? transformMessagesForExternalTranscript(
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">cleanMessagesForLogging</span>(<span class="hljs-params">
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[],
+  <span class="hljs-attr">allMessages</span>: <span class="hljs-keyword">readonly</span> <span class="hljs-title class_">Message</span>[] = messages,
+</span>): <span class="hljs-title class_">Transcript</span> {
+  <span class="hljs-keyword">const</span> filtered = messages.<span class="hljs-title function_">filter</span>(isLoggableMessage) <span class="hljs-keyword">as</span> <span class="hljs-title class_">Transcript</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">getUserType</span>() !== <span class="hljs-string">&#x27;ant&#x27;</span>
+    ? <span class="hljs-title function_">transformMessagesForExternalTranscript</span>(
         filtered,
-        collectReplIds(allMessages),
+        <span class="hljs-title function_">collectReplIds</span>(allMessages),
       )
     : filtered
 }
@@ -643,35 +657,36 @@ if (
 <blockquote>
 <p>这个 transcript 更像“增量日志流”，不是“每轮结束后存一份快照”。</p>
 </blockquote>
-<hr>
-<h2 id="2-5-第三层：session-memory-是短期记忆的压缩层"><a href="#2-5-第三层：session-memory-是短期记忆的压缩层" class="headerlink" title="2.5 第三层：session memory 是短期记忆的压缩层"></a>2.5 第三层：session memory 是短期记忆的压缩层</h2><p>当会话变长时，仅靠完整 transcript 和当前内存消息不够高效，ClaudeCode 又加了一层 <code>session memory</code>。</p>
+<hr />
+<h2 id="25-第三层session-memory-是短期记忆的压缩层"><a class="markdownIt-Anchor" href="#25-第三层session-memory-是短期记忆的压缩层"></a> 2.5 第三层：session memory 是短期记忆的压缩层</h2>
+<p>当会话变长时，仅靠完整 transcript 和当前内存消息不够高效，ClaudeCode 又加了一层 <code>session memory</code>。</p>
 <p>这层本质上是“<strong>同一会话内的摘要记忆</strong>”，它并不是长期知识库，而是为了解决上下文膨胀。</p>
 <p>先看配置：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export const DEFAULT_SESSION_MEMORY_CONFIG: SessionMemoryConfig = {
-  minimumMessageTokensToInit: 10000,
-  minimumTokensBetweenUpdate: 5000,
-  toolCallsBetweenUpdates: 3,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">DEFAULT_SESSION_MEMORY_CONFIG</span>: <span class="hljs-title class_">SessionMemoryConfig</span> = {
+  <span class="hljs-attr">minimumMessageTokensToInit</span>: <span class="hljs-number">10000</span>,
+  <span class="hljs-attr">minimumTokensBetweenUpdate</span>: <span class="hljs-number">5000</span>,
+  <span class="hljs-attr">toolCallsBetweenUpdates</span>: <span class="hljs-number">3</span>,
 }
 
-let lastSummarizedMessageId: string | undefined
-let extractionStartedAt: number | undefined
-let tokensAtLastExtraction = 0
-let sessionMemoryInitialized = false
+<span class="hljs-keyword">let</span> <span class="hljs-attr">lastSummarizedMessageId</span>: <span class="hljs-built_in">string</span> | <span class="hljs-literal">undefined</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">extractionStartedAt</span>: <span class="hljs-built_in">number</span> | <span class="hljs-literal">undefined</span>
+<span class="hljs-keyword">let</span> tokensAtLastExtraction = <span class="hljs-number">0</span>
+<span class="hljs-keyword">let</span> sessionMemoryInitialized = <span class="hljs-literal">false</span>
 </code></pre>
 <p>读取 session memory 文件：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export async function getSessionMemoryContent(): Promise<string | null> {
-  const fs = getFsImplementation()
-  const memoryPath = getSessionMemoryPath()
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getSessionMemoryContent</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span>&gt; {
+  <span class="hljs-keyword">const</span> fs = <span class="hljs-title function_">getFsImplementation</span>()
+  <span class="hljs-keyword">const</span> memoryPath = <span class="hljs-title function_">getSessionMemoryPath</span>()
 
-  try {
-    const content = await fs.readFile(memoryPath, { encoding: 'utf-8' })
-    logEvent('tengu_session_memory_loaded', {
-      content_length: content.length,
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> content = <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(memoryPath, { <span class="hljs-attr">encoding</span>: <span class="hljs-string">&#x27;utf-8&#x27;</span> })
+    <span class="hljs-title function_">logEvent</span>(<span class="hljs-string">&#x27;tengu_session_memory_loaded&#x27;</span>, {
+      <span class="hljs-attr">content_length</span>: content.<span class="hljs-property">length</span>,
     })
-    return content
-  } catch (e: unknown) {
-    if (isFsInaccessible(e)) return null
-    throw e
+    <span class="hljs-keyword">return</span> content
+  } <span class="hljs-keyword">catch</span> (<span class="hljs-attr">e</span>: <span class="hljs-built_in">unknown</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isFsInaccessible</span>(e)) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">throw</span> e
   }
 }
 </code></pre>
@@ -683,20 +698,21 @@ let sessionMemoryInitialized = false
 <li>距离上次摘要后又增长了多少上下文。</li>
 </ol>
 <p>也就是说，session memory 并不是“固定每轮都重做”，而是一个带阈值、带游标、带更新间隔的会话摘要机制。</p>
-<h3 id="2-5-1-compact-时为什么优先尝试-session-memory-compaction"><a href="#2-5-1-compact-时为什么优先尝试-session-memory-compaction" class="headerlink" title="2.5.1 compact 时为什么优先尝试 session memory compaction"></a>2.5.1 compact 时为什么优先尝试 session memory compaction</h3><p><code>/compact</code> 的逻辑里，ClaudeCode 优先尝试 session memory compaction：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (!customInstructions) {
-  const sessionMemoryResult = await trySessionMemoryCompaction(
+<h3 id="251-compact-时为什么优先尝试-session-memory-compaction"><a class="markdownIt-Anchor" href="#251-compact-时为什么优先尝试-session-memory-compaction"></a> 2.5.1 compact 时为什么优先尝试 session memory compaction</h3>
+<p><code>/compact</code> 的逻辑里，ClaudeCode 优先尝试 session memory compaction：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (!customInstructions) {
+  <span class="hljs-keyword">const</span> sessionMemoryResult = <span class="hljs-keyword">await</span> <span class="hljs-title function_">trySessionMemoryCompaction</span>(
     messages,
-    context.agentId,
+    context.<span class="hljs-property">agentId</span>,
   )
-  if (sessionMemoryResult) {
-    getUserContext.cache.clear?.()
-    runPostCompactCleanup()
+  <span class="hljs-keyword">if</span> (sessionMemoryResult) {
+    getUserContext.<span class="hljs-property">cache</span>.<span class="hljs-property">clear</span>?.()
+    <span class="hljs-title function_">runPostCompactCleanup</span>()
     ...
-    return {
-      type: 'compact',
-      compactionResult: sessionMemoryResult,
-      displayText: buildDisplayText(context),
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;compact&#x27;</span>,
+      <span class="hljs-attr">compactionResult</span>: sessionMemoryResult,
+      <span class="hljs-attr">displayText</span>: <span class="hljs-title function_">buildDisplayText</span>(context),
     }
   }
 }
@@ -709,28 +725,30 @@ let sessionMemoryInitialized = false
 <li>压缩旧上下文；</li>
 <li>让当前会话还能自然续跑。</li>
 </ul>
-<h3 id="2-5-2-query-时怎么把-session-memory-再注回当前轮"><a href="#2-5-2-query-时怎么把-session-memory-再注回当前轮" class="headerlink" title="2.5.2 query 时怎么把 session memory 再注回当前轮"></a>2.5.2 query 时怎么把 session memory 再注回当前轮</h3><p><code>query()</code> 里有 memory prefetch consume：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (
-  pendingMemoryPrefetch &&
-  pendingMemoryPrefetch.settledAt !== null &&
-  pendingMemoryPrefetch.consumedOnIteration === -1
+<h3 id="252-query-时怎么把-session-memory-再注回当前轮"><a class="markdownIt-Anchor" href="#252-query-时怎么把-session-memory-再注回当前轮"></a> 2.5.2 query 时怎么把 session memory 再注回当前轮</h3>
+<p><code>query()</code> 里有 memory prefetch consume：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (
+  pendingMemoryPrefetch &amp;&amp;
+  pendingMemoryPrefetch.<span class="hljs-property">settledAt</span> !== <span class="hljs-literal">null</span> &amp;&amp;
+  pendingMemoryPrefetch.<span class="hljs-property">consumedOnIteration</span> === -<span class="hljs-number">1</span>
 ) {
-  const memoryAttachments = filterDuplicateMemoryAttachments(
-    await pendingMemoryPrefetch.promise,
-    toolUseContext.readFileState,
+  <span class="hljs-keyword">const</span> memoryAttachments = <span class="hljs-title function_">filterDuplicateMemoryAttachments</span>(
+    <span class="hljs-keyword">await</span> pendingMemoryPrefetch.<span class="hljs-property">promise</span>,
+    toolUseContext.<span class="hljs-property">readFileState</span>,
   )
-  for (const memAttachment of memoryAttachments) {
-    const msg = createAttachmentMessage(memAttachment)
-    yield msg
-    toolResults.push(msg)
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> memAttachment <span class="hljs-keyword">of</span> memoryAttachments) {
+    <span class="hljs-keyword">const</span> msg = <span class="hljs-title function_">createAttachmentMessage</span>(memAttachment)
+    <span class="hljs-keyword">yield</span> msg
+    toolResults.<span class="hljs-title function_">push</span>(msg)
   }
-  pendingMemoryPrefetch.consumedOnIteration = turnCount - 1
+  pendingMemoryPrefetch.<span class="hljs-property">consumedOnIteration</span> = turnCount - <span class="hljs-number">1</span>
 }
 </code></pre>
 <p>这段在 <code>src/query.ts</code>。</p>
 <p>这说明 session memory 和 memory files 并不是只存在磁盘里，它们会在合适的时机被重新转成 attachment，注回当前轮推理上下文。</p>
-<hr>
-<h2 id="3-长期记忆：ClaudeCode-为什么不用-transcript-直接做长期记忆"><a href="#3-长期记忆：ClaudeCode-为什么不用-transcript-直接做长期记忆" class="headerlink" title="3. 长期记忆：ClaudeCode 为什么不用 transcript 直接做长期记忆"></a>3. 长期记忆：ClaudeCode 为什么不用 transcript 直接做长期记忆</h2><p>先说结论：<strong>transcript 不是长期记忆。</strong></p>
+<hr />
+<h2 id="3-长期记忆claudecode-为什么不用-transcript-直接做长期记忆"><a class="markdownIt-Anchor" href="#3-长期记忆claudecode-为什么不用-transcript-直接做长期记忆"></a> 3. 长期记忆：ClaudeCode 为什么不用 transcript 直接做长期记忆</h2>
+<p>先说结论：<strong>transcript 不是长期记忆。</strong></p>
 <p>transcript 的职责是“完整留痕”，而长期记忆的职责是“保留未来会复用的高价值知识”。</p>
 <p>这两者并不一样：</p>
 <ul>
@@ -740,48 +758,51 @@ let sessionMemoryInitialized = false
 <li>长期记忆记录的是“未来还值得知道什么”。</li>
 </ul>
 <p>所以 ClaudeCode 单独设计了一套 file-based memory system。</p>
-<hr>
-<h2 id="4-长期记忆的实现：file-based-memory-system"><a href="#4-长期记忆的实现：file-based-memory-system" class="headerlink" title="4. 长期记忆的实现：file-based memory system"></a>4. 长期记忆的实现：file-based memory system</h2><h2 id="4-1-memory-目录怎么组织"><a href="#4-1-memory-目录怎么组织" class="headerlink" title="4.1 memory 目录怎么组织"></a>4.1 memory 目录怎么组织</h2><p>ClaudeCode 的 auto memory 默认落到：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export const getAutoMemPath = memoize(
-  (): string => {
-    const override = getAutoMemPathOverride() ?? getAutoMemPathSetting()
-    if (override) {
-      return override
+<hr />
+<h2 id="4-长期记忆的实现file-based-memory-system"><a class="markdownIt-Anchor" href="#4-长期记忆的实现file-based-memory-system"></a> 4. 长期记忆的实现：file-based memory system</h2>
+<h2 id="41-memory-目录怎么组织"><a class="markdownIt-Anchor" href="#41-memory-目录怎么组织"></a> 4.1 memory 目录怎么组织</h2>
+<p>ClaudeCode 的 auto memory 默认落到：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getAutoMemPath = <span class="hljs-title function_">memoize</span>(
+  (): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">override</span> = <span class="hljs-title function_">getAutoMemPathOverride</span>() ?? <span class="hljs-title function_">getAutoMemPathSetting</span>()
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">override</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">override</span>
     }
-    const projectsDir = join(getMemoryBaseDir(), 'projects')
-    return (
-      join(projectsDir, sanitizePath(getAutoMemBase()), AUTO_MEM_DIRNAME) + sep
-    ).normalize('NFC')
+    <span class="hljs-keyword">const</span> projectsDir = <span class="hljs-title function_">join</span>(<span class="hljs-title function_">getMemoryBaseDir</span>(), <span class="hljs-string">&#x27;projects&#x27;</span>)
+    <span class="hljs-keyword">return</span> (
+      <span class="hljs-title function_">join</span>(projectsDir, <span class="hljs-title function_">sanitizePath</span>(<span class="hljs-title function_">getAutoMemBase</span>()), <span class="hljs-variable constant_">AUTO_MEM_DIRNAME</span>) + sep
+    ).<span class="hljs-title function_">normalize</span>(<span class="hljs-string">&#x27;NFC&#x27;</span>)
   },
-  () => getProjectRoot(),
+  <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">getProjectRoot</span>(),
 )
 </code></pre>
 <p>这段在 <code>src/memdir/paths.ts</code>。</p>
 <p>默认路径可以理解成：</p>
-<pre class=" language-language-text"><code class="language-language-text">~/.claude/projects/<sanitized-git-root>/memory/
+<pre class="highlight"><code class="text">~/.claude/projects/&lt;sanitized-git-root&gt;/memory/
 </code></pre>
 <p>这很关键，因为它意味着长期记忆是按项目 git root 做隔离的，而不是全局混在一起。</p>
-<hr>
-<h2 id="4-2-长期记忆的结构不是一个文件，而是索引-主题文件"><a href="#4-2-长期记忆的结构不是一个文件，而是索引-主题文件" class="headerlink" title="4.2 长期记忆的结构不是一个文件，而是索引 + 主题文件"></a>4.2 长期记忆的结构不是一个文件，而是索引 + 主题文件</h2><p>ClaudeCode 明确要求 memory 用 <code>MEMORY.md + topic files</code> 的结构来维护。</p>
+<hr />
+<h2 id="42-长期记忆的结构不是一个文件而是索引-主题文件"><a class="markdownIt-Anchor" href="#42-长期记忆的结构不是一个文件而是索引-主题文件"></a> 4.2 长期记忆的结构不是一个文件，而是索引 + 主题文件</h2>
+<p>ClaudeCode 明确要求 memory 用 <code>MEMORY.md + topic files</code> 的结构来维护。</p>
 <p>核心提示构造在 <code>buildMemoryLines()</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">'Saving a memory is a two-step process:',
+<pre class="highlight"><code class="ts"><span class="hljs-string">&#x27;Saving a memory is a two-step process:&#x27;</span>,
 
-'**Step 1** — write the memory to its own file...',
+<span class="hljs-string">&#x27;**Step 1** — write the memory to its own file...&#x27;</span>,
 
-`**Step 2** — add a pointer to that file in \`${ENTRYPOINT_NAME}\`. \`${ENTRYPOINT_NAME}\` is an index, not a memory ... Never write memory content directly into \`${ENTRYPOINT_NAME}\`.`,
+<span class="hljs-string">`**Step 2** — add a pointer to that file in \`<span class="hljs-subst">${ENTRYPOINT_NAME}</span>\`. \`<span class="hljs-subst">${ENTRYPOINT_NAME}</span>\` is an index, not a memory ... Never write memory content directly into \`<span class="hljs-subst">${ENTRYPOINT_NAME}</span>\`.`</span>,
 
-`- \`${ENTRYPOINT_NAME}\` is always loaded into your conversation context ...`,
+<span class="hljs-string">`- \`<span class="hljs-subst">${ENTRYPOINT_NAME}</span>\` is always loaded into your conversation context ...`</span>,
 </code></pre>
 <p>以及：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (entrypointContent.trim()) {
-  const t = truncateEntrypointContent(entrypointContent)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (entrypointContent.<span class="hljs-title function_">trim</span>()) {
+  <span class="hljs-keyword">const</span> t = <span class="hljs-title function_">truncateEntrypointContent</span>(entrypointContent)
   ...
-  lines.push(`## ${ENTRYPOINT_NAME}`, '', t.content)
-} else {
-  lines.push(
-    `## ${ENTRYPOINT_NAME}`,
-    '',
-    `Your ${ENTRYPOINT_NAME} is currently empty. When you save new memories, they will appear here.`,
+  lines.<span class="hljs-title function_">push</span>(<span class="hljs-string">`## <span class="hljs-subst">${ENTRYPOINT_NAME}</span>`</span>, <span class="hljs-string">&#x27;&#x27;</span>, t.<span class="hljs-property">content</span>)
+} <span class="hljs-keyword">else</span> {
+  lines.<span class="hljs-title function_">push</span>(
+    <span class="hljs-string">`## <span class="hljs-subst">${ENTRYPOINT_NAME}</span>`</span>,
+    <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-string">`Your <span class="hljs-subst">${ENTRYPOINT_NAME}</span> is currently empty. When you save new memories, they will appear here.`</span>,
   )
 }
 </code></pre>
@@ -793,33 +814,34 @@ let sessionMemoryInitialized = false
 <li><code>MEMORY.md</code> 在新会话里总是优先加载；</li>
 <li>索引文件有行数和字节数上限，防止它自己失控膨胀。</li>
 </ol>
-<hr>
-<h2 id="4-3-长期记忆是怎么在新会话中自动加载的"><a href="#4-3-长期记忆是怎么在新会话中自动加载的" class="headerlink" title="4.3 长期记忆是怎么在新会话中自动加载的"></a>4.3 长期记忆是怎么在新会话中自动加载的</h2><p>ClaudeCode 会把 memory prompt 放进 system prompt。</p>
+<hr />
+<h2 id="43-长期记忆是怎么在新会话中自动加载的"><a class="markdownIt-Anchor" href="#43-长期记忆是怎么在新会话中自动加载的"></a> 4.3 长期记忆是怎么在新会话中自动加载的</h2>
+<p>ClaudeCode 会把 memory prompt 放进 system prompt。</p>
 <p>看 <code>src/constants/prompts.ts</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">return [
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">return</span> [
   ...
-  await loadMemoryPrompt(),
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadMemoryPrompt</span>(),
   envInfo,
   ...
-].filter(s => s !== null)
+].<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s !== <span class="hljs-literal">null</span>)
 
 ...
 
-const dynamicSections = [
-  systemPromptSection('memory', () => loadMemoryPrompt()),
+<span class="hljs-keyword">const</span> dynamicSections = [
+  <span class="hljs-title function_">systemPromptSection</span>(<span class="hljs-string">&#x27;memory&#x27;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">loadMemoryPrompt</span>()),
   ...
 ]
 </code></pre>
 <p>而 <code>loadMemoryPrompt()</code> 会返回 auto memory 的说明与内容：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (autoEnabled) {
-  const autoDir = getAutoMemPath()
-  await ensureMemoryDirExists(autoDir)
-  return buildMemoryLines(
-    'auto memory',
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (autoEnabled) {
+  <span class="hljs-keyword">const</span> autoDir = <span class="hljs-title function_">getAutoMemPath</span>()
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">ensureMemoryDirExists</span>(autoDir)
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">buildMemoryLines</span>(
+    <span class="hljs-string">&#x27;auto memory&#x27;</span>,
     autoDir,
     extraGuidelines,
     skipIndex,
-  ).join('\n')
+  ).<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;\n&#x27;</span>)
 }
 </code></pre>
 <p>这段在 <code>src/memdir/memdir.ts</code>。</p>
@@ -828,28 +850,29 @@ const dynamicSections = [
 <li>ClaudeCode 不是“等用户提到记忆”才去读，而是会在 system prompt 层把 memory 机制接入；</li>
 <li>长期记忆目录会在会话开始时准备好，这样模型后续可以直接写，不需要先 <code>mkdir</code>。</li>
 </ol>
-<hr>
-<h2 id="4-4-长期记忆不是全量加载，而是“索引常驻-相关记忆按需召回”"><a href="#4-4-长期记忆不是全量加载，而是“索引常驻-相关记忆按需召回”" class="headerlink" title="4.4 长期记忆不是全量加载，而是“索引常驻 + 相关记忆按需召回”"></a>4.4 长期记忆不是全量加载，而是“索引常驻 + 相关记忆按需召回”</h2><p>ClaudeCode 对长期记忆的处理很克制，并不是每次把所有 topic files 全塞进去。</p>
+<hr />
+<h2 id="44-长期记忆不是全量加载而是索引常驻-相关记忆按需召回"><a class="markdownIt-Anchor" href="#44-长期记忆不是全量加载而是索引常驻-相关记忆按需召回"></a> 4.4 长期记忆不是全量加载，而是“索引常驻 + 相关记忆按需召回”</h2>
+<p>ClaudeCode 对长期记忆的处理很克制，并不是每次把所有 topic files 全塞进去。</p>
 <p>它先扫 memory headers，再让一个 side query 去选相关记忆：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">/**
+<pre class="highlight"><code class="ts"><span class="hljs-comment">/**
  * Find memory files relevant to a query by scanning memory file headers
  * and asking Sonnet to select the most relevant ones.
- */
-export async function findRelevantMemories(
-  query: string,
-  memoryDir: string,
-  signal: AbortSignal,
-  recentTools: readonly string[] = [],
-  alreadySurfaced: ReadonlySet<string> = new Set(),
-): Promise<RelevantMemory[]> {
-  const memories = (await scanMemoryFiles(memoryDir, signal)).filter(
-    m => !alreadySurfaced.has(m.filePath),
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">findRelevantMemories</span>(<span class="hljs-params">
+  <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>,
+  <span class="hljs-attr">memoryDir</span>: <span class="hljs-built_in">string</span>,
+  <span class="hljs-attr">signal</span>: <span class="hljs-title class_">AbortSignal</span>,
+  <span class="hljs-attr">recentTools</span>: <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span>[] = [],
+  <span class="hljs-attr">alreadySurfaced</span>: <span class="hljs-title class_">ReadonlySet</span>&lt;<span class="hljs-built_in">string</span>&gt; = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>(),
+</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">RelevantMemory</span>[]&gt; {
+  <span class="hljs-keyword">const</span> memories = (<span class="hljs-keyword">await</span> <span class="hljs-title function_">scanMemoryFiles</span>(memoryDir, signal)).<span class="hljs-title function_">filter</span>(
+    <span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> !alreadySurfaced.<span class="hljs-title function_">has</span>(m.<span class="hljs-property">filePath</span>),
   )
-  if (memories.length === 0) {
-    return []
+  <span class="hljs-keyword">if</span> (memories.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> []
   }
   ...
-  return selected.map(m => ({ path: m.filePath, mtimeMs: m.mtimeMs }))
+  <span class="hljs-keyword">return</span> selected.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> ({ <span class="hljs-attr">path</span>: m.<span class="hljs-property">filePath</span>, <span class="hljs-attr">mtimeMs</span>: m.<span class="hljs-property">mtimeMs</span> }))
 }
 </code></pre>
 <p>这段在 <code>src/memdir/findRelevantMemories.ts</code>。</p>
@@ -866,23 +889,24 @@ export async function findRelevantMemories(
 <li>也不是完全依赖模型盲搜；</li>
 <li>而是把“结构化索引 + relevance selection”结合起来。</li>
 </ul>
-<hr>
-<h2 id="4-5-长期记忆怎么从当前会话里沉淀出来"><a href="#4-5-长期记忆怎么从当前会话里沉淀出来" class="headerlink" title="4.5 长期记忆怎么从当前会话里沉淀出来"></a>4.5 长期记忆怎么从当前会话里沉淀出来</h2><p>ClaudeCode 有一个后台的 extract memories 机制。</p>
+<hr />
+<h2 id="45-长期记忆怎么从当前会话里沉淀出来"><a class="markdownIt-Anchor" href="#45-长期记忆怎么从当前会话里沉淀出来"></a> 4.5 长期记忆怎么从当前会话里沉淀出来</h2>
+<p>ClaudeCode 有一个后台的 extract memories 机制。</p>
 <p>文件开头已经把意图写得很清楚：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">/**
+<pre class="highlight"><code class="ts"><span class="hljs-comment">/**
  * Extracts durable memories from the current session transcript
- * and writes them to the auto-memory directory (~/.claude/projects/<path>/memory/).
+ * and writes them to the auto-memory directory (~/.claude/projects/&lt;path&gt;/memory/).
  *
  * It runs once at the end of each complete query loop (when the model produces
  * a final response with no tool calls) via handleStopHooks in stopHooks.ts.
  *
  * Uses the forked agent pattern (runForkedAgent) — a perfect fork of the main
- * conversation that shares the parent's prompt cache.
- */
+ * conversation that shares the parent&#x27;s prompt cache.
+ */</span>
 </code></pre>
 <p>并且它只看“模型可见消息”：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">function isModelVisibleMessage(message: Message): boolean {
-  return message.type === 'user' || message.type === 'assistant'
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isModelVisibleMessage</span>(<span class="hljs-params"><span class="hljs-attr">message</span>: <span class="hljs-title class_">Message</span></span>): <span class="hljs-built_in">boolean</span> {
+  <span class="hljs-keyword">return</span> message.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;user&#x27;</span> || message.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;assistant&#x27;</span>
 }
 </code></pre>
 <p>这段在 <code>src/services/extractMemories/extractMemories.ts</code>。</p>
@@ -894,40 +918,41 @@ export async function findRelevantMemories(
 <li>它沉淀的是 durable memories，而不是所有对话碎片。</li>
 </ol>
 <p>换句话说，长期记忆不是“自动把聊天记录存一份”，而是“自动从聊天记录中抽取值得长期保留的部分”。</p>
-<hr>
-<h2 id="5-Agent-级长期记忆：某个-agent-自己也可以有-memory"><a href="#5-Agent-级长期记忆：某个-agent-自己也可以有-memory" class="headerlink" title="5. Agent 级长期记忆：某个 agent 自己也可以有 memory"></a>5. Agent 级长期记忆：某个 agent 自己也可以有 memory</h2><p>除了项目级 auto memory，ClaudeCode 还支持 agent 自己带一份长期记忆。</p>
+<hr />
+<h2 id="5-agent-级长期记忆某个-agent-自己也可以有-memory"><a class="markdownIt-Anchor" href="#5-agent-级长期记忆某个-agent-自己也可以有-memory"></a> 5. Agent 级长期记忆：某个 agent 自己也可以有 memory</h2>
+<p>除了项目级 auto memory，ClaudeCode 还支持 agent 自己带一份长期记忆。</p>
 <p>agent memory 支持三种 scope：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">// Persistent agent memory scope: 'user' (~/.claude/agent-memory/), 'project' (.claude/agent-memory/), or 'local' (.claude/agent-memory-local/)
-export type AgentMemoryScope = 'user' | 'project' | 'local'
+<pre class="highlight"><code class="ts"><span class="hljs-comment">// Persistent agent memory scope: &#x27;user&#x27; (~/.claude/agent-memory/), &#x27;project&#x27; (.claude/agent-memory/), or &#x27;local&#x27; (.claude/agent-memory-local/)</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">AgentMemoryScope</span> = <span class="hljs-string">&#x27;user&#x27;</span> | <span class="hljs-string">&#x27;project&#x27;</span> | <span class="hljs-string">&#x27;local&#x27;</span>
 </code></pre>
 <p>目录规则：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function getAgentMemoryDir(
-  agentType: string,
-  scope: AgentMemoryScope,
-): string {
-  const dirName = sanitizeAgentTypeForPath(agentType)
-  switch (scope) {
-    case 'project':
-      return join(getCwd(), '.claude', 'agent-memory', dirName) + sep
-    case 'local':
-      return getLocalAgentMemoryDir(dirName)
-    case 'user':
-      return join(getMemoryBaseDir(), 'agent-memory', dirName) + sep
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getAgentMemoryDir</span>(<span class="hljs-params">
+  <span class="hljs-attr">agentType</span>: <span class="hljs-built_in">string</span>,
+  <span class="hljs-attr">scope</span>: <span class="hljs-title class_">AgentMemoryScope</span>,
+</span>): <span class="hljs-built_in">string</span> {
+  <span class="hljs-keyword">const</span> dirName = <span class="hljs-title function_">sanitizeAgentTypeForPath</span>(agentType)
+  <span class="hljs-keyword">switch</span> (scope) {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;project&#x27;</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">join</span>(<span class="hljs-title function_">getCwd</span>(), <span class="hljs-string">&#x27;.claude&#x27;</span>, <span class="hljs-string">&#x27;agent-memory&#x27;</span>, dirName) + sep
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;local&#x27;</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">getLocalAgentMemoryDir</span>(dirName)
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;user&#x27;</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">join</span>(<span class="hljs-title function_">getMemoryBaseDir</span>(), <span class="hljs-string">&#x27;agent-memory&#x27;</span>, dirName) + sep
   }
 }
 </code></pre>
 <p>加载 prompt：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function loadAgentMemoryPrompt(
-  agentType: string,
-  scope: AgentMemoryScope,
-): string {
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">loadAgentMemoryPrompt</span>(<span class="hljs-params">
+  <span class="hljs-attr">agentType</span>: <span class="hljs-built_in">string</span>,
+  <span class="hljs-attr">scope</span>: <span class="hljs-title class_">AgentMemoryScope</span>,
+</span>): <span class="hljs-built_in">string</span> {
   ...
-  const memoryDir = getAgentMemoryDir(agentType, scope)
-  void ensureMemoryDirExists(memoryDir)
-  return buildMemoryPrompt({
-    displayName: 'Persistent Agent Memory',
+  <span class="hljs-keyword">const</span> memoryDir = <span class="hljs-title function_">getAgentMemoryDir</span>(agentType, scope)
+  <span class="hljs-built_in">void</span> <span class="hljs-title function_">ensureMemoryDirExists</span>(memoryDir)
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">buildMemoryPrompt</span>({
+    <span class="hljs-attr">displayName</span>: <span class="hljs-string">&#x27;Persistent Agent Memory&#x27;</span>,
     memoryDir,
-    extraGuidelines: ...,
+    <span class="hljs-attr">extraGuidelines</span>: ...,
   })
 }
 </code></pre>
@@ -936,20 +961,33 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <blockquote>
 <p>某个 agent 也可以拥有自己的长期记忆目录，并按 scope 决定它是全局共享、项目共享，还是本地私有。</p>
 </blockquote>
-<hr>
-<h2 id="6-把整条链路串起来：ClaudeCode-的记忆分层模型"><a href="#6-把整条链路串起来：ClaudeCode-的记忆分层模型" class="headerlink" title="6. 把整条链路串起来：ClaudeCode 的记忆分层模型"></a>6. 把整条链路串起来：ClaudeCode 的记忆分层模型</h2><p>如果把整条链路合并来看，我会把 ClaudeCode 的记忆机制总结成下面这张逻辑图：</p>
+<hr />
+<h2 id="6-把整条链路串起来claudecode-的记忆分层模型"><a class="markdownIt-Anchor" href="#6-把整条链路串起来claudecode-的记忆分层模型"></a> 6. 把整条链路串起来：ClaudeCode 的记忆分层模型</h2>
+<p>如果把整条链路合并来看，我会把 ClaudeCode 的记忆机制总结成下面这张逻辑图：</p>
 <ol>
-<li><p><strong>当前会话先跑在内存里</strong><br><code>messagesRef / mutableMessages / query state.messages</code></p>
+<li>
+<p><strong>当前会话先跑在内存里</strong><br />
+<code>messagesRef / mutableMessages / query state.messages</code></p>
 </li>
-<li><p><strong>当前会话持续写 transcript JSONL</strong><br>主会话与子 agent 各自写自己的 transcript</p>
+<li>
+<p><strong>当前会话持续写 transcript JSONL</strong><br />
+主会话与子 agent 各自写自己的 transcript</p>
 </li>
-<li><p><strong>会话过长后抽出 session memory</strong><br>用于 compact、续跑和上下文压缩</p>
+<li>
+<p><strong>会话过长后抽出 session memory</strong><br />
+用于 compact、续跑和上下文压缩</p>
 </li>
-<li><p><strong>会话结束后抽取 durable memories</strong><br>进入 <code>MEMORY.md + topic files</code></p>
+<li>
+<p><strong>会话结束后抽取 durable memories</strong><br />
+进入 <code>MEMORY.md + topic files</code></p>
 </li>
-<li><p><strong>新会话再自动加载长期记忆</strong><br><code>MEMORY.md</code> 常驻，相关 topic files 按需召回</p>
+<li>
+<p><strong>新会话再自动加载长期记忆</strong><br />
+<code>MEMORY.md</code> 常驻，相关 topic files 按需召回</p>
 </li>
-<li><p><strong>特定 agent 还能有自己的独立 memory scope</strong><br><code>user / project / local</code></p>
+<li>
+<p><strong>特定 agent 还能有自己的独立 memory scope</strong><br />
+<code>user / project / local</code></p>
 </li>
 </ol>
 <p>这套设计比“统一数据库存 memory”复杂，但也更符合 ClaudeCode 这种本地 agent 工具的实际需求：</p>
@@ -962,8 +1000,9 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <li>可压缩；</li>
 <li>可增量追加。</li>
 </ul>
-<hr>
-<h2 id="7-最后的总结"><a href="#7-最后的总结" class="headerlink" title="7. 最后的总结"></a>7. 最后的总结</h2><p>ClaudeCode 的记忆机制，最值得学的地方不是某一个函数，而是它把“记忆”做成了一套分层系统：</p>
+<hr />
+<h2 id="7-最后的总结"><a class="markdownIt-Anchor" href="#7-最后的总结"></a> 7. 最后的总结</h2>
+<p>ClaudeCode 的记忆机制，最值得学的地方不是某一个函数，而是它把“记忆”做成了一套分层系统：</p>
 <ol>
 <li><strong>短期记忆不是只有内存</strong>，而是内存态消息、transcript JSONL、session memory 三层协作；</li>
 <li><strong>长期记忆不是 transcript 回放</strong>，而是结构化、文件化、可筛选、可沉淀的 memory system；</li>
@@ -976,8 +1015,9 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <p>ClaudeCode 的“记忆”并不是一个模块，而是一套跨运行态、持久化、摘要层和文件知识库的分层设计。</p>
 </blockquote>
 <p>这也是为什么它既能在当前会话里保持上下文，又能在未来会话里“记得你是谁、你偏好什么、这个项目曾经发生过什么”。</p>
-<hr>
-<h2 id="8-这些记忆最终是怎么用到大模型里的"><a href="#8-这些记忆最终是怎么用到大模型里的" class="headerlink" title="8. 这些记忆最终是怎么用到大模型里的"></a>8. 这些记忆最终是怎么用到大模型里的</h2><p>前面讲的是“记忆怎么存”。这一节补上“记忆怎么喂给模型”。</p>
+<hr />
+<h2 id="8-这些记忆最终是怎么用到大模型里的"><a class="markdownIt-Anchor" href="#8-这些记忆最终是怎么用到大模型里的"></a> 8. 这些记忆最终是怎么用到大模型里的</h2>
+<p>前面讲的是“记忆怎么存”。这一节补上“记忆怎么喂给模型”。</p>
 <p>这是理解 ClaudeCode 很关键的一层，因为很多人会问：</p>
 <ol>
 <li>这些 memory 会不会全部原样塞给模型？</li>
@@ -988,12 +1028,13 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <blockquote>
 <p>ClaudeCode 不会把所有记忆全量塞给模型。它会把不同层级的记忆，分别以 <code>systemPrompt</code> 和 <code>meta user message</code> 两种方式送给模型。</p>
 </blockquote>
-<h3 id="8-1-模型调用入口长什么样"><a href="#8-1-模型调用入口长什么样" class="headerlink" title="8.1 模型调用入口长什么样"></a>8.1 模型调用入口长什么样</h3><p>真正调用模型时，ClaudeCode 传进去的是两块：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">for await (const message of deps.callModel({
-  messages: prependUserContext(messagesForQuery, userContext),
-  systemPrompt: fullSystemPrompt,
-  thinkingConfig: toolUseContext.options.thinkingConfig,
-  tools: toolUseContext.options.tools,
+<h3 id="81-模型调用入口长什么样"><a class="markdownIt-Anchor" href="#81-模型调用入口长什么样"></a> 8.1 模型调用入口长什么样</h3>
+<p>真正调用模型时，ClaudeCode 传进去的是两块：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">for</span> <span class="hljs-title function_">await</span> (<span class="hljs-keyword">const</span> message <span class="hljs-keyword">of</span> deps.<span class="hljs-title function_">callModel</span>({
+  <span class="hljs-attr">messages</span>: <span class="hljs-title function_">prependUserContext</span>(messagesForQuery, userContext),
+  <span class="hljs-attr">systemPrompt</span>: fullSystemPrompt,
+  <span class="hljs-attr">thinkingConfig</span>: toolUseContext.<span class="hljs-property">options</span>.<span class="hljs-property">thinkingConfig</span>,
+  <span class="hljs-attr">tools</span>: toolUseContext.<span class="hljs-property">options</span>.<span class="hljs-property">tools</span>,
   ...
 })) {
 </code></pre>
@@ -1004,8 +1045,9 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <li>一部分上下文是走 <code>messages</code>；</li>
 <li>最终模型 API 并不是“直接读内存目录”，而是读 ClaudeCode 组装好的 prompt 和消息序列。</li>
 </ol>
-<hr>
-<h3 id="8-2-长期记忆不会全量输出给模型"><a href="#8-2-长期记忆不会全量输出给模型" class="headerlink" title="8.2 长期记忆不会全量输出给模型"></a>8.2 长期记忆不会全量输出给模型</h3><p>不会。</p>
+<hr />
+<h3 id="82-长期记忆不会全量输出给模型"><a class="markdownIt-Anchor" href="#82-长期记忆不会全量输出给模型"></a> 8.2 长期记忆不会全量输出给模型</h3>
+<p>不会。</p>
 <p>ClaudeCode 对长期记忆是分层注入的：</p>
 <ol>
 <li><strong><code>MEMORY.md</code> 索引</strong>：作为 memory prompt 的一部分，进入 <code>systemPrompt</code>；</li>
@@ -1024,14 +1066,14 @@ export type AgentMemoryScope = 'user' | 'project' | 'local'
 <li>已读记忆做去重。</li>
 </ul>
 <p>这点从 <code>findRelevantMemories()</code> 就能看出来：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">/**
+<pre class="highlight"><code class="ts"><span class="hljs-comment">/**
  * Find memory files relevant to a query by scanning memory file headers
  * and asking Sonnet to select the most relevant ones.
  *
  * Returns absolute file paths + mtime of the most relevant memories
  * (up to 5). Excludes MEMORY.md (already loaded in system prompt).
- */
-export async function findRelevantMemories(...) { ... }
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">findRelevantMemories</span>(<span class="hljs-params">...</span>) { ... }
 </code></pre>
 <p>这里最关键的一句其实是注释：</p>
 <blockquote>
@@ -1043,18 +1085,19 @@ export async function findRelevantMemories(...) { ... }
 <li>额外召回的相关记忆最多只取少量候选；</li>
 <li>不是全量。</li>
 </ul>
-<hr>
-<h3 id="8-3-哪些记忆是通过-system-prompt-进入模型的"><a href="#8-3-哪些记忆是通过-system-prompt-进入模型的" class="headerlink" title="8.3 哪些记忆是通过 system prompt 进入模型的"></a>8.3 哪些记忆是通过 system prompt 进入模型的</h3><p>项目级 auto memory 的“机制说明 + MEMORY.md 索引”主要是走 <code>systemPrompt</code>。</p>
+<hr />
+<h3 id="83-哪些记忆是通过-system-prompt-进入模型的"><a class="markdownIt-Anchor" href="#83-哪些记忆是通过-system-prompt-进入模型的"></a> 8.3 哪些记忆是通过 system prompt 进入模型的</h3>
+<p>项目级 auto memory 的“机制说明 + <a target="_blank" rel="noopener" href="http://MEMORY.md">MEMORY.md</a> 索引”主要是走 <code>systemPrompt</code>。</p>
 <p>看 <code>prompts.ts</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">return [
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">return</span> [
   ...
-  await loadMemoryPrompt(),
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadMemoryPrompt</span>(),
   envInfo,
   ...
-].filter(s => s !== null)
+].<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s !== <span class="hljs-literal">null</span>)
 
-const dynamicSections = [
-  systemPromptSection('memory', () => loadMemoryPrompt()),
+<span class="hljs-keyword">const</span> dynamicSections = [
+  <span class="hljs-title function_">systemPromptSection</span>(<span class="hljs-string">&#x27;memory&#x27;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">loadMemoryPrompt</span>()),
   ...
 ]
 </code></pre>
@@ -1069,49 +1112,51 @@ const dynamicSections = [
 <p>ClaudeCode 会先把“怎么使用记忆系统 + 当前索引内容”放进 system prompt，让模型在整轮对话里都带着这份长期记忆索引。</p>
 </blockquote>
 <p>这也是为什么 <code>MEMORY.md</code> 不应该写太长。它本质上是一份常驻的 prompt 资产，而不是无限增长的原始知识库。</p>
-<hr>
-<h3 id="8-4-哪些记忆是通过消息-attachment-进入模型的"><a href="#8-4-哪些记忆是通过消息-attachment-进入模型的" class="headerlink" title="8.4 哪些记忆是通过消息 attachment 进入模型的"></a>8.4 哪些记忆是通过消息 attachment 进入模型的</h3><p>更细的记忆内容，比如相关 topic files、nested memory，并不是放进 <code>systemPrompt</code>，而是转成 attachment，再在 API 预处理阶段转成 <code>user message</code>。</p>
+<hr />
+<h3 id="84-哪些记忆是通过消息-attachment-进入模型的"><a class="markdownIt-Anchor" href="#84-哪些记忆是通过消息-attachment-进入模型的"></a> 8.4 哪些记忆是通过消息 attachment 进入模型的</h3>
+<p>更细的记忆内容，比如相关 topic files、nested memory，并不是放进 <code>systemPrompt</code>，而是转成 attachment，再在 API 预处理阶段转成 <code>user message</code>。</p>
 <p>先看 attachment 是怎么创建的：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function createAttachmentMessage(
-  attachment: Attachment,
-): AttachmentMessage {
-  return {
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">createAttachmentMessage</span>(<span class="hljs-params">
+  <span class="hljs-attr">attachment</span>: <span class="hljs-title class_">Attachment</span>,
+</span>): <span class="hljs-title class_">AttachmentMessage</span> {
+  <span class="hljs-keyword">return</span> {
     attachment,
-    type: 'attachment',
-    uuid: randomUUID(),
-    timestamp: new Date().toISOString(),
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;attachment&#x27;</span>,
+    <span class="hljs-attr">uuid</span>: <span class="hljs-title function_">randomUUID</span>(),
+    <span class="hljs-attr">timestamp</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>(),
   }
 }
 </code></pre>
 <p>这段在 <code>src/utils/attachments.ts</code>。</p>
 <p>再看 memory files 怎么变 attachment：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">attachments.push({
-  type: 'nested_memory',
-  path: memoryFile.path,
-  content: memoryFile,
-  displayPath: relative(getCwd(), memoryFile.path),
+<pre class="highlight"><code class="ts">attachments.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;nested_memory&#x27;</span>,
+  <span class="hljs-attr">path</span>: memoryFile.<span class="hljs-property">path</span>,
+  <span class="hljs-attr">content</span>: memoryFile,
+  <span class="hljs-attr">displayPath</span>: <span class="hljs-title function_">relative</span>(<span class="hljs-title function_">getCwd</span>(), memoryFile.<span class="hljs-property">path</span>),
 })
 </code></pre>
 <p>这段在 <code>src/utils/attachments.ts</code> 的 <code>memoryFilesToAttachments()</code> 里。</p>
 <p>而真正送 API 前，attachment 会被 <code>normalizeMessagesForAPI()</code> 转成普通消息：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">case 'attachment': {
-  const rawAttachmentMessage = normalizeAttachmentForAPI(
-    message.attachment,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;attachment&#x27;</span>: {
+  <span class="hljs-keyword">const</span> rawAttachmentMessage = <span class="hljs-title function_">normalizeAttachmentForAPI</span>(
+    message.<span class="hljs-property">attachment</span>,
   )
   ...
-  result.push(...attachmentMessage)
-  return
+  result.<span class="hljs-title function_">push</span>(...attachmentMessage)
+  <span class="hljs-keyword">return</span>
 }
 </code></pre>
 <p>这段在 <code>src/utils/messages.ts</code>。</p>
 <p>所以 attachment 本身不是 API 终态。它只是 ClaudeCode 内部的一种消息中间形态。</p>
-<hr>
-<h3 id="8-5-记忆在-API-层有没有-user-assistant-这样的标记"><a href="#8-5-记忆在-API-层有没有-user-assistant-这样的标记" class="headerlink" title="8.5 记忆在 API 层有没有 user / assistant 这样的标记"></a>8.5 记忆在 API 层有没有 <code>user / assistant</code> 这样的标记</h3><p>有。</p>
+<hr />
+<h3 id="85-记忆在-api-层有没有-user-assistant-这样的标记"><a class="markdownIt-Anchor" href="#85-记忆在-api-层有没有-user-assistant-这样的标记"></a> 8.5 记忆在 API 层有没有 <code>user / assistant</code> 这样的标记</h3>
+<p>有。</p>
 <p>ClaudeCode 在真正发给模型之前，会把内部消息归一化成：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function normalizeMessagesForAPI(
-  messages: Message[],
-  tools: Tools = [],
-): (UserMessage | AssistantMessage)[] { ... }
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">normalizeMessagesForAPI</span>(<span class="hljs-params">
+  <span class="hljs-attr">messages</span>: <span class="hljs-title class_">Message</span>[],
+  <span class="hljs-attr">tools</span>: <span class="hljs-title class_">Tools</span> = [],
+</span>): (<span class="hljs-title class_">UserMessage</span> | <span class="hljs-title class_">AssistantMessage</span>)[] { ... }
 </code></pre>
 <p>也就是说，到模型 API 那一层，最终只剩：</p>
 <ul>
@@ -1121,23 +1166,23 @@ const dynamicSections = [
 <p>attachment 不会以“attachment”这种内部类型直接出现在 API 请求里。</p>
 <p>更具体一点，memory attachment 会被转成带 <code>isMeta: true</code> 的 <code>user</code> message。</p>
 <p>比如 <code>nested_memory</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">case 'nested_memory': {
-  return wrapMessagesInSystemReminder([
-    createUserMessage({
-      content: `Contents of ${attachment.content.path}:\n\n${attachment.content.content}`,
-      isMeta: true,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;nested_memory&#x27;</span>: {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">wrapMessagesInSystemReminder</span>([
+    <span class="hljs-title function_">createUserMessage</span>({
+      <span class="hljs-attr">content</span>: <span class="hljs-string">`Contents of <span class="hljs-subst">${attachment.content.path}</span>:\n\n<span class="hljs-subst">${attachment.content.content}</span>`</span>,
+      <span class="hljs-attr">isMeta</span>: <span class="hljs-literal">true</span>,
     }),
   ])
 }
 </code></pre>
 <p>相关记忆 <code>relevant_memories</code> 也是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">case 'relevant_memories': {
-  return wrapMessagesInSystemReminder(
-    attachment.memories.map(m => {
-      const header = m.header ?? memoryHeader(m.path, m.mtimeMs)
-      return createUserMessage({
-        content: `${header}\n\n${m.content}`,
-        isMeta: true,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;relevant_memories&#x27;</span>: {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">wrapMessagesInSystemReminder</span>(
+    attachment.<span class="hljs-property">memories</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">m</span> =&gt;</span> {
+      <span class="hljs-keyword">const</span> header = m.<span class="hljs-property">header</span> ?? <span class="hljs-title function_">memoryHeader</span>(m.<span class="hljs-property">path</span>, m.<span class="hljs-property">mtimeMs</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-title function_">createUserMessage</span>({
+        <span class="hljs-attr">content</span>: <span class="hljs-string">`<span class="hljs-subst">${header}</span>\n\n<span class="hljs-subst">${m.content}</span>`</span>,
+        <span class="hljs-attr">isMeta</span>: <span class="hljs-literal">true</span>,
       })
     }),
   )
@@ -1161,12 +1206,13 @@ const dynamicSections = [
 <blockquote>
 <p>把记忆包装成带角色、带 meta 标记、带 system reminder 包裹的上下文消息，再送入标准的消息数组。</p>
 </blockquote>
-<hr>
-<h3 id="8-6-userContext-也是以-meta-user-message-的方式进模型的"><a href="#8-6-userContext-也是以-meta-user-message-的方式进模型的" class="headerlink" title="8.6 userContext 也是以 meta user message 的方式进模型的"></a>8.6 userContext 也是以 meta user message 的方式进模型的</h3><p>除了长期记忆 attachment，ClaudeCode 还有一类上下文会直接 prepend 到消息最前面：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">return [
-  createUserMessage({
-    content: `<system-reminder>\nAs you answer the user's questions, you can use the following context:\n${...}\n</system-reminder>\n`,
-    isMeta: true,
+<hr />
+<h3 id="86-usercontext-也是以-meta-user-message-的方式进模型的"><a class="markdownIt-Anchor" href="#86-usercontext-也是以-meta-user-message-的方式进模型的"></a> 8.6 userContext 也是以 meta user message 的方式进模型的</h3>
+<p>除了长期记忆 attachment，ClaudeCode 还有一类上下文会直接 prepend 到消息最前面：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">return</span> [
+  <span class="hljs-title function_">createUserMessage</span>({
+    <span class="hljs-attr">content</span>: <span class="hljs-string">`&lt;system-reminder&gt;\nAs you answer the user&#x27;s questions, you can use the following context:\n<span class="hljs-subst">${...}</span>\n&lt;/system-reminder&gt;\n`</span>,
+    <span class="hljs-attr">isMeta</span>: <span class="hljs-literal">true</span>,
   }),
   ...messages,
 ]
@@ -1176,23 +1222,24 @@ const dynamicSections = [
 <blockquote>
 <p>ClaudeCode 很多“辅助上下文”并不是挂在独立 memory channel 上，而是被包装成带 <code>isMeta: true</code> 的 user message，再和普通对话消息一起送给模型。</p>
 </blockquote>
-<hr>
-<h3 id="8-7-session-memory-怎么进入模型"><a href="#8-7-session-memory-怎么进入模型" class="headerlink" title="8.7 session memory 怎么进入模型"></a>8.7 session memory 怎么进入模型</h3><p>session memory 的消费逻辑在 <code>query.ts</code> 里：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (
-  pendingMemoryPrefetch &&
-  pendingMemoryPrefetch.settledAt !== null &&
-  pendingMemoryPrefetch.consumedOnIteration === -1
+<hr />
+<h3 id="87-session-memory-怎么进入模型"><a class="markdownIt-Anchor" href="#87-session-memory-怎么进入模型"></a> 8.7 session memory 怎么进入模型</h3>
+<p>session memory 的消费逻辑在 <code>query.ts</code> 里：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (
+  pendingMemoryPrefetch &amp;&amp;
+  pendingMemoryPrefetch.<span class="hljs-property">settledAt</span> !== <span class="hljs-literal">null</span> &amp;&amp;
+  pendingMemoryPrefetch.<span class="hljs-property">consumedOnIteration</span> === -<span class="hljs-number">1</span>
 ) {
-  const memoryAttachments = filterDuplicateMemoryAttachments(
-    await pendingMemoryPrefetch.promise,
-    toolUseContext.readFileState,
+  <span class="hljs-keyword">const</span> memoryAttachments = <span class="hljs-title function_">filterDuplicateMemoryAttachments</span>(
+    <span class="hljs-keyword">await</span> pendingMemoryPrefetch.<span class="hljs-property">promise</span>,
+    toolUseContext.<span class="hljs-property">readFileState</span>,
   )
-  for (const memAttachment of memoryAttachments) {
-    const msg = createAttachmentMessage(memAttachment)
-    yield msg
-    toolResults.push(msg)
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> memAttachment <span class="hljs-keyword">of</span> memoryAttachments) {
+    <span class="hljs-keyword">const</span> msg = <span class="hljs-title function_">createAttachmentMessage</span>(memAttachment)
+    <span class="hljs-keyword">yield</span> msg
+    toolResults.<span class="hljs-title function_">push</span>(msg)
   }
-  pendingMemoryPrefetch.consumedOnIteration = turnCount - 1
+  pendingMemoryPrefetch.<span class="hljs-property">consumedOnIteration</span> = turnCount - <span class="hljs-number">1</span>
 }
 </code></pre>
 <p>这说明 session memory 并不是只存在于磁盘摘要文件里。它在合适时机会转成 attachment，再像其他辅助上下文一样进入当前轮消息序列。</p>
@@ -1202,16 +1249,25 @@ const dynamicSections = [
 <li><code>readFileState</code> 会记录已经注入过的内容；</li>
 <li>所以不会每一轮都把同一份记忆反复重放给模型。</li>
 </ul>
-<hr>
-<h3 id="8-8-最后的工程化总结"><a href="#8-8-最后的工程化总结" class="headerlink" title="8.8 最后的工程化总结"></a>8.8 最后的工程化总结</h3><p>如果从“输入给大模型的最终形态”来总结，ClaudeCode 的记忆使用方式大致是：</p>
+<hr />
+<h3 id="88-最后的工程化总结"><a class="markdownIt-Anchor" href="#88-最后的工程化总结"></a> 8.8 最后的工程化总结</h3>
+<p>如果从“输入给大模型的最终形态”来总结，ClaudeCode 的记忆使用方式大致是：</p>
 <ol>
-<li><p><strong>memory system 规则 + MEMORY.md 索引</strong><br>主要进入 <code>systemPrompt</code></p>
+<li>
+<p><strong>memory system 规则 + <a target="_blank" rel="noopener" href="http://MEMORY.md">MEMORY.md</a> 索引</strong><br />
+主要进入 <code>systemPrompt</code></p>
 </li>
-<li><p><strong>相关长期记忆 &#x2F; nested memory &#x2F; session memory</strong><br>先变成内部 attachment，再在 API 归一化时转成 <code>meta user message</code></p>
+<li>
+<p><strong>相关长期记忆 / nested memory / session memory</strong><br />
+先变成内部 attachment，再在 API 归一化时转成 <code>meta user message</code></p>
 </li>
-<li><p><strong>最终发给模型的消息形态</strong><br>只有 <code>UserMessage | AssistantMessage</code></p>
+<li>
+<p><strong>最终发给模型的消息形态</strong><br />
+只有 <code>UserMessage | AssistantMessage</code></p>
 </li>
-<li><p><strong>不是全量输出</strong><br>而是“索引常驻 + 相关内容按需召回 + 已读去重”</p>
+<li>
+<p><strong>不是全量输出</strong><br />
+而是“索引常驻 + 相关内容按需召回 + 已读去重”</p>
 </li>
 </ol>
 <p>所以如果要用一句非常工程化的话概括：</p>
@@ -1293,12 +1349,12 @@ const dynamicSections = [
                                     <span class="chip bg-color">TypeScript</span>
                                 </a>
                             
-                                <a href="/tags/Memory/">
-                                    <span class="chip bg-color">Memory</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
                                     <span class="chip bg-color">工程实践</span>
+                                </a>
+                            
+                                <a href="/tags/Memory/">
+                                    <span class="chip bg-color">Memory</span>
                                 </a>
                             
                         </div>
@@ -1415,16 +1471,16 @@ const dynamicSections = [
                         <span class="chip bg-color">TypeScript</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                        <span class="chip bg-color">工程实践</span>
-                    </a>
-                    
                     <a href="/tags/ReAct/">
                         <span class="chip bg-color">ReAct</span>
                     </a>
                     
                     <a href="/tags/Plan-and-Execute/">
                         <span class="chip bg-color">Plan-and-Execute</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
                     </a>
                     
                 </div>
@@ -1668,7 +1724,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">65.3k</span>&nbsp;字
+                    class="white-color">72.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
