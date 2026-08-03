@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>小风雷</title>
   
-  <subtitle>得之坦然，失之淡然</subtitle>
+  <subtitle>流水不争先，争的是涛涛不绝</subtitle>
   <link href="https://xiaofenglei.cn/atom.xml" rel="self"/>
   
   <link href="https://xiaofenglei.cn/"/>
-  <updated>2026-07-30T13:15:49.502Z</updated>
+  <updated>2026-08-03T16:30:38.179Z</updated>
   <id>https://xiaofenglei.cn/</id>
   
   <author>
@@ -17,18 +17,98 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证</title>
+    <link href="https://xiaofenglei.cn/2026/08/04/anthropic-engineer-bo-ke-tong-du-26-pian-agent-gong-cheng-yan-jin-di-tu-yu-claudecode-yuan-ma-jiao-cha-yan-zheng/"/>
+    <id>https://xiaofenglei.cn/2026/08/04/anthropic-engineer-bo-ke-tong-du-26-pian-agent-gong-cheng-yan-jin-di-tu-yu-claudecode-yuan-ma-jiao-cha-yan-zheng/</id>
+    <published>2026-08-04T02:00:00.000Z</published>
+    <updated>2026-08-03T16:30:38.179Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;做-Agent-也需要向大师学习：Anthropic-Engineering-26-篇博客通读-Claude-Code-泄露源码交叉验证&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://xiaofenglei.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Agent" scheme="https://xiaofenglei.cn/tags/Agent/"/>
+    
+    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+    <category term="LLM" scheme="https://xiaofenglei.cn/tags/LLM/"/>
+    
+    <category term="Skill" scheme="https://xiaofenglei.cn/tags/Skill/"/>
+    
+    <category term="上下文工程" scheme="https://xiaofenglei.cn/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"/>
+    
+    <category term="Anthropic" scheme="https://xiaofenglei.cn/tags/Anthropic/"/>
+    
+    <category term="Claude Code" scheme="https://xiaofenglei.cn/tags/Claude-Code/"/>
+    
+    <category term="MCP" scheme="https://xiaofenglei.cn/tags/MCP/"/>
+    
+    <category term="沙箱" scheme="https://xiaofenglei.cn/tags/%E6%B2%99%E7%AE%B1/"/>
+    
+    <category term="Evals" scheme="https://xiaofenglei.cn/tags/Evals/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈</title>
+    <link href="https://xiaofenglei.cn/2026/08/02/wen-jian-li-cai-zhu-li-agent-zheng-liu-da-shi-skill-yu-duo-kong-bo-yi-tradingagent/"/>
+    <id>https://xiaofenglei.cn/2026/08/02/wen-jian-li-cai-zhu-li-agent-zheng-liu-da-shi-skill-yu-duo-kong-bo-yi-tradingagent/</id>
+    <published>2026-08-02T07:00:00.000Z</published>
+    <updated>2026-08-02T15:42:53.558Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;稳健理财助理-agent把-11-位投资大师蒸馏成-skill再让-tradingagent-替你多空博弈&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="https://xiaofenglei.cn/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Agent" scheme="https://xiaofenglei.cn/tags/Agent/"/>
+    
+    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
+    
+    <category term="Memory" scheme="https://xiaofenglei.cn/tags/Memory/"/>
+    
+    <category term="LLM" scheme="https://xiaofenglei.cn/tags/LLM/"/>
+    
+    <category term="Skill" scheme="https://xiaofenglei.cn/tags/Skill/"/>
+    
+    <category term="投资" scheme="https://xiaofenglei.cn/tags/%E6%8A%95%E8%B5%84/"/>
+    
+    <category term="上下文工程" scheme="https://xiaofenglei.cn/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基于 TCC 思想的分布式库存一致性方案</title>
     <link href="https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/"/>
     <id>https://xiaofenglei.cn/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/</id>
     <published>2026-07-25T12:30:00.000Z</published>
-    <updated>2026-07-30T13:15:49.502Z</updated>
+    <updated>2026-08-02T15:02:23.411Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;基于-TCC-思想的分布式库存一致性方案&quot;&gt;&lt;a href=&quot;#基于-TCC-思想的分布式库存一致性方案&quot; class=&quot;headerlink&quot; title=&quot;基于 TCC 思想的分布式库存一致性方案&quot;&gt;&lt;/a&gt;基于 TCC</summary>
+    <summary type="html">&lt;h1 id=&quot;基于-tcc-思想的分布式库存一致性方案&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基于-tcc-思想的分布式库存一致性方案&quot;&gt;&lt;/a&gt; 基于 TCC</summary>
         
       
     
@@ -59,7 +139,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;ClaudeCode-的执行机制：ReAct-与-Plan-and-Execute-在-TypeScript-源码中的实现&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;claudecode-的执行机制react-与-plan-and-execute-在-typescript-源码中的实现&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
         
       
     
@@ -94,7 +174,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;ClaudeCode-的记忆机制：短期记忆、长期记忆与模型输入全链路拆解&quot;&gt;&lt;a href=&quot;#ClaudeCode-的记忆机制：短期记忆、长期记忆与模型输入全链路拆解&quot; class=&quot;headerlink&quot; title=&quot;ClaudeCode</summary>
+    <summary type="html">&lt;h1 id=&quot;claudecode-的记忆机制短期记忆-长期记忆与模型输入全链路拆解&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#claudecode-的记忆机制短期记忆-长期记忆与模型输入全链路拆解&quot;&gt;&lt;/a&gt; ClaudeCode</summary>
         
       
     
@@ -116,42 +196,11 @@
   </entry>
   
   <entry>
-    <title>代码-&gt;PRD阅读器的Agent小试牛刀</title>
-    <link href="https://xiaofenglei.cn/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/"/>
-    <id>https://xiaofenglei.cn/2026/04/05/dai-ma-dao-prd-yue-du-qi-de-agent-chang-shi/</id>
-    <published>2026-04-05T02:30:00.000Z</published>
-    <updated>2026-07-25T12:54:42.649Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;代码-PRD阅读器的Agent小试牛刀&quot;&gt;&lt;a href=&quot;#代码-PRD阅读器的Agent小试牛刀&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="https://xiaofenglei.cn/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="Agent" scheme="https://xiaofenglei.cn/tags/Agent/"/>
-    
-    <category term="工程实践" scheme="https://xiaofenglei.cn/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/"/>
-    
-    <category term="LLM" scheme="https://xiaofenglei.cn/tags/LLM/"/>
-    
-    <category term="后端架构" scheme="https://xiaofenglei.cn/tags/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>From Easy to Hard: 两阶段选择器与阅读器在多跳问答中的应用</title>
     <link href="https://xiaofenglei.cn/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/"/>
     <id>https://xiaofenglei.cn/2026/03/15/fe2h-liang-jie-duan-xuan-ze-qi-he-yue-du-qi-zai-duo-tiao-wen-da-zhong-de-ying-yong/</id>
     <published>2026-03-15T09:45:00.000Z</published>
-    <updated>2026-07-30T13:25:28.174Z</updated>
+    <updated>2026-08-02T11:37:37.504Z</updated>
     
     
       
@@ -189,7 +238,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;订单号生成方案&quot;&gt;&lt;a href=&quot;#订单号生成方案&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;订单号生成方案&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#订单号生成方案&quot;&gt;&lt;/a&gt;</summary>
         
       
     
@@ -216,7 +265,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;雪球特别版：段永平投资问答录（商业逻辑篇）&quot;&gt;&lt;a href=&quot;#雪球特别版：段永平投资问答录（商业逻辑篇）&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;雪球特别版段永平投资问答录商业逻辑篇&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#雪球特别版段永平投资问答录商业逻辑篇&quot;&gt;&lt;/a&gt; 雪球特别版：段永平投资问答录（商业逻辑篇）&lt;/h1&gt;
+&lt;h2 id=&quot;书籍地址&quot;&gt;&lt;a</summary>
         
       
     
@@ -241,7 +291,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-42-接雨水&quot;&gt;&lt;a href=&quot;#Leetcode-42-接雨水&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:42. 接雨水&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode42-接雨水&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode42-接雨水&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -270,7 +320,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-40-组合总和-II&quot;&gt;&lt;a href=&quot;#Leetcode-40-组合总和-II&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 40. 组合总和 II&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-40-组合总和-ii&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-40-组合总和-ii&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -301,7 +351,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-Leetcode-39-组合总和&quot;&gt;&lt;a href=&quot;#Leetcode-Leetcode-39-组合总和&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode](Leetcode: 39.</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcodeleetcode-39-组合总和&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcodeleetcode-39-组合总和&quot;&gt;&lt;/a&gt; [Leetcode](Leetcode: 39.</summary>
         
       
     
@@ -332,7 +382,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-37-解数独&quot;&gt;&lt;a href=&quot;#Leetcode-37-解数独&quot; class=&quot;headerlink&quot; title=&quot;Leetcode: 37.解数独&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-37解数独&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-37解数独&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -361,7 +411,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-146-LRU缓存机制&quot;&gt;&lt;a href=&quot;#Leetcode-146-LRU缓存机制&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:146. LRU缓存机制&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode146-lru缓存机制&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode146-lru缓存机制&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -390,7 +440,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-134-加油站&quot;&gt;&lt;a href=&quot;#Leetcode-134-加油站&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode: 134. 加油站]&quot;&gt;&lt;/a&gt;[Leetcode: 134. 加油站]&lt;/h1&gt;&lt;h2</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-134-加油站&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-134-加油站&quot;&gt;&lt;/a&gt; [Leetcode: 134. 加油站]&lt;/h1&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a</summary>
         
       
     
@@ -417,7 +468,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-371-两整数之和&quot;&gt;&lt;a href=&quot;#Leetcode-371-两整数之和&quot; class=&quot;headerlink&quot; title=&quot;[Leetcode: 371. 两整数之和]&quot;&gt;&lt;/a&gt;[Leetcode: 371.</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode-371-两整数之和&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode-371-两整数之和&quot;&gt;&lt;/a&gt; [Leetcode: 371. 两整数之和]&lt;/h1&gt;
+&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a</summary>
         
       
     
@@ -446,7 +498,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-202-快乐数&quot;&gt;&lt;a href=&quot;#Leetcode-202-快乐数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:202. 快乐数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode202-快乐数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode202-快乐数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -475,7 +527,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-326-3的幂&quot;&gt;&lt;a href=&quot;#Leetcode-326-3的幂&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:326. 3的幂&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode326-3的幂&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode326-3的幂&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -504,7 +556,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-268-缺失数字&quot;&gt;&lt;a href=&quot;#Leetcode-268-缺失数字&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:268. 缺失数字&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode268-缺失数字&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode268-缺失数字&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -533,7 +585,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-190-颠倒二进制位&quot;&gt;&lt;a href=&quot;#Leetcode-190-颠倒二进制位&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:190. 颠倒二进制位&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode190-颠倒二进制位&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode190-颠倒二进制位&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -562,7 +614,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Leetcode-204-计数质数&quot;&gt;&lt;a href=&quot;#Leetcode-204-计数质数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:204. 计数质数&quot;&gt;&lt;/a&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;leetcode204-计数质数&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#leetcode204-计数质数&quot;&gt;&lt;/a&gt; &lt;a</summary>
         
       
     
@@ -574,35 +626,6 @@
     <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
     
     <category term="Easy" scheme="https://xiaofenglei.cn/tags/Easy/"/>
-    
-    <category term="数计算" scheme="https://xiaofenglei.cn/tags/%E6%95%B0%E8%AE%A1%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode:166. 分数到小数</title>
-    <link href="https://xiaofenglei.cn/2020/05/04/leetcode-166-fen-shu-dao-xiao-shu/"/>
-    <id>https://xiaofenglei.cn/2020/05/04/leetcode-166-fen-shu-dao-xiao-shu/</id>
-    <published>2020-05-04T15:34:13.000Z</published>
-    <updated>2026-04-04T15:44:06.428Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Leetcode-166-分数到小数&quot;&gt;&lt;a href=&quot;#Leetcode-166-分数到小数&quot; class=&quot;headerlink&quot; title=&quot;Leetcode:166. 分数到小数&quot;&gt;&lt;/a&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Leetcode" scheme="https://xiaofenglei.cn/categories/Leetcode/"/>
-    
-    
-    <category term="Leetcode" scheme="https://xiaofenglei.cn/tags/Leetcode/"/>
-    
-    <category term="Medium" scheme="https://xiaofenglei.cn/tags/Medium/"/>
     
     <category term="数计算" scheme="https://xiaofenglei.cn/tags/%E6%95%B0%E8%AE%A1%E7%AE%97/"/>
     

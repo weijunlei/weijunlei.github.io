@@ -1,0 +1,1873 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈, 小风雷">
+    <meta name="description" content=" 稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈
+最近在做（并且一直在用）一个个人项目：稳健理财助理 Agent。它是一个跑在微信小程序 + Web 双端的投资研究助手，后端是">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈 | 小风雷</title>
+    <link rel="icon" type="image/png" href="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/5.11.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="小风雷" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小风雷</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://i.loli.net/2020/04/07/lfkYXQarHJn6vjS.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小风雷</div>
+        <div class="logo-desc">
+            
+              There are roads regardless of the height of mountains and ferries regardless of the depth of river
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        // if (pwd && pwd.length > 0) {
+        //     if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+        //         alert('密码错误，将返回主页！');
+        //         location.href = '/';
+        //     }
+        // }
+        if (pwd && pwd.length > 0) {
+            if (pwd !== prompt('请输入访问本文章的密码')) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/2026/03/16/eX89pwqK.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Agent/">
+                                <span class="chip bg-color">Agent</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                <span class="chip bg-color">工程实践</span>
+                            </a>
+                        
+                            <a href="/tags/Memory/">
+                                <span class="chip bg-color">Memory</span>
+                            </a>
+                        
+                            <a href="/tags/LLM/">
+                                <span class="chip bg-color">LLM</span>
+                            </a>
+                        
+                            <a href="/tags/Skill/">
+                                <span class="chip bg-color">Skill</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%8A%95%E8%B5%84/">
+                                <span class="chip bg-color">投资</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
+                                <span class="chip bg-color">上下文工程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-08-02
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    15.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    58 分
+                </div>
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="稳健理财助理-agent把-11-位投资大师蒸馏成-skill再让-tradingagent-替你多空博弈"><a class="markdownIt-Anchor" href="#稳健理财助理-agent把-11-位投资大师蒸馏成-skill再让-tradingagent-替你多空博弈"></a> 稳健理财助理 Agent：把 11 位投资大师蒸馏成 Skill，再让 TradingAgent 替你多空博弈</h1>
+<p>最近在做（并且一直在用）一个个人项目：<strong>稳健理财助理 Agent</strong>。它是一个跑在微信小程序 + Web 双端的投资研究助手，后端是 FastAPI，里面内置了一个多 Agent 的 TradingAgents 框架。<strong>在线版本部署在 <a target="_blank" rel="noopener" href="https://agent.xiaofenglei.cn"><code>agent.xiaofenglei.cn</code></a>，可以直接体验。</strong></p>
+<p>这篇文章想做三件事：</p>
+<ol>
+<li>交代清楚它<strong>有哪些功能、为什么这么做、为什么这么做是有效的</strong>；</li>
+<li>把几个核心功能的<strong>实现</strong>拆开看——尤其是「持仓怎么进上下文」「红黑榜综合了哪些因素」「为什么只看市值前 200」；</li>
+<li>重点聊三个技术点：<strong>Skill 系统</strong>（大师人格怎么提取 / 怎么加载）、<strong>记忆机制</strong>（什么时候记 / 记什么 / 怎么存 / 什么时候用 / 什么时候更新）、<strong>上下文管理</strong>，并且都拿来和 ClaudeCode 对比，讲讲我为什么这么取舍。</li>
+</ol>
+<blockquote>
+<p>代码基于本仓库（<code>SoundFinancialPlanning</code>，下称「本项目」），文中所有结论我都给了 <code>文件:行号</code> 证据。核心是后端 <code>SoundFinancialPlanningBE</code>（Python 3.11 / FastAPI）。</p>
+</blockquote>
+<hr />
+<h2 id="〇-一句话架构"><a class="markdownIt-Anchor" href="#〇-一句话架构"></a> 〇、一句话架构</h2>
+<p>先给一张总览图，后面所有章节都是对它的展开：</p>
+<pre class="mermaid">flowchart TD
+    subgraph CLIENT["客户端"]
+        MP["微信小程序"]
+        WEB["Next.js Web"]
+    end
+
+    subgraph BE["FastAPI 后端 SoundFinancialPlanningBE"]
+        RT["大师圆桌<br/>roundtable_pipeline"]
+        TA["TradingAgents 多空博弈<br/>vendored LangGraph"]
+        RB["红黑榜<br/>research_leaderboard"]
+        DR["持仓深度复盘<br/>deep_review: 1 Lead + 4 Teammate"]
+        MEM["四层记忆<br/>agent_memory"]
+        SKILL["大师人格 Skill<br/>.claude/skills/*.md"]
+    end
+
+    subgraph DATA["数据与存储"]
+        DS["东财 / 腾讯 / 通达信mootdx / 新浪 / 同花顺 / 财联社<br/>零 akshare 依赖"]
+        DB[("MySQL + Redis RQ / pubsub / 缓存")]
+    end
+
+    MP --> BE
+    WEB --> BE
+    RT --> SKILL
+    RT --> TA
+    RT --> MEM
+    DR --> MEM
+    RB --> TA
+    TA --> DS
+    RB --> DS
+    BE --> DB</pre>
+<p>四大功能块：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>干什么</th>
+<th>入口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>个股大师圆桌</strong></td>
+<td>多位大师并行对一只股票/一个问题发言，合成结论</td>
+<td><code>POST /web/tradingagent/chat</code></td>
+</tr>
+<tr>
+<td><strong>TradingAgent 多空博弈</strong></td>
+<td>7 个分析师 + 多空研究员辩论 + 风险三方辩论，产出 BUY/SELL/HOLD 评级</td>
+<td>内嵌于圆桌 / 独立 <code>/analysis</code></td>
+</tr>
+<tr>
+<td><strong>红黑榜</strong></td>
+<td>每日扫描市值前 200，出多头最强 top10 + 空头最强 bottom10</td>
+<td><code>GET /web/research/red-black-list</code></td>
+</tr>
+<tr>
+<td><strong>持仓分析 / 深度复盘</strong></td>
+<td>导入持仓 → 1 Lead + 4 Teammate 复盘集中度/估值/现金/板块</td>
+<td><code>POST /web/portfolio/deep-review</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="一-为什么做这个项目以及为什么这么做是有效的"><a class="markdownIt-Anchor" href="#一-为什么做这个项目以及为什么这么做是有效的"></a> 一、为什么做这个项目，以及为什么这么做是有效的</h2>
+<p>在拆实现之前，先把「为什么」讲清楚，因为后面很多设计取舍都源于此。</p>
+<h3 id="11-普通投资者的真实处境在不擅长的地方赚钱"><a class="markdownIt-Anchor" href="#11-普通投资者的真实处境在不擅长的地方赚钱"></a> 1.1 普通投资者的真实处境：在不擅长的地方赚钱</h3>
+<p>大多数人投资的状态是这样的：</p>
+<ul>
+<li><strong>容易冲动</strong>。看到一根大阳线、一条小道消息、一个「朋友说」就冲进去，买卖靠情绪不靠框架。</li>
+<li><strong>花在投资上的时间极少</strong>。白天要上班，晚上要带娃，真正能静下来研究一家公司财报、读完一份年报的时间，一年可能不到十个小时。</li>
+<li>于是本质是：<strong>你在一个你并不擅长、投入也极少的领域，试图赚到钱。</strong> 这个期望本身就是不现实的——这跟一个没怎么写过代码的人想靠写代码接单赚钱是一样的。</li>
+</ul>
+<p>投资这件事，门槛不在「买卖」这个动作（点两下屏幕就完成了），门槛在<strong>认知</strong>：你得理解商业模式、会看财务三张表、懂得估值、控制得住仓位和情绪。这些恰恰是需要长期积累的「专业知识」。</p>
+<h3 id="12-大师的公开言论是可以被蒸馏的"><a class="markdownIt-Anchor" href="#12-大师的公开言论是可以被蒸馏的"></a> 1.2 大师的公开言论，是可以被「蒸馏」的</h3>
+<p>那普通人的出路是什么？一个被反复验证过的答案是：<strong>站在巨人的肩膀上</strong>。</p>
+<p>巴菲特、芒格、段永平、达利欧、彼得·林奇、霍华德·马克斯……这些人几十年如一日地公开输出：致股东信、股东大会问答、演讲、访谈、专栏。他们的<strong>思维框架</strong>其实高度稳定、可复用：</p>
+<ul>
+<li>段永平就两句话：「做对的事，把事做对」；</li>
+<li>巴菲特就看四样：护城河、管理层、财务、安全边际；</li>
+<li>芒格就一套多元思维模型 + 逆向思考 + 25 种误判心理学。</li>
+</ul>
+<p>这些东西<strong>不是秘密</strong>，它们被充分公开、反复讲过。问题在于：普通人没有时间去读完、消化、并且在<strong>自己做决策的那一刻</strong>能调用出来。</p>
+<p>而「把一个人反复公开表达的思维框架提炼出来」，恰好是 LLM 极其擅长的事情。这就是本项目的第一个支点：</p>
+<blockquote>
+<p><strong>把大师的公开言论蒸馏成一份份可运行的 Skill，让 LLM 在你做决策的当下，以大师的视角替你想一遍。</strong></p>
+</blockquote>
+<p>「如何提取人格 Skill」是本文第四章的重点（用了女娲 + 达尔文两个工具），这里先记住结论：这是可行的，而且效果可以被量化地优化。</p>
+<h3 id="13-ai-在打破信息壁垒-从-coding-类比"><a class="markdownIt-Anchor" href="#13-ai-在打破信息壁垒-从-coding-类比"></a> 1.3 AI 在打破信息壁垒 —— 从 Coding 类比</h3>
+<p>我自己是程序员，对这一点体会很深。在 <strong>Coding</strong> 领域，AI 已经是一个「孜孜不倦的专家」：</p>
+<ul>
+<li>你给它一个模糊需求，它能帮你<strong>出方案</strong>；</li>
+<li>你确认方案，它能帮你<strong>写代码</strong>；</li>
+<li>它 24 小时不累，读过全世界的开源代码，知识没有盲区。</li>
+</ul>
+<p>作为程序员，我其实<strong>知道问题的边界在哪</strong>——我知道这个需求能不能做、大概多复杂、AI 给的方案靠不靠谱、哪一行可能有问题。我和 AI 是「内行 + 超级外挂」的关系，我能驾驭它。</p>
+<p><strong>但投资不一样。</strong> 投资是我（以及大多数人）的<strong>能力圈之外</strong>：</p>
+<ul>
+<li>我没有受过系统的财务训练，看不穿财报里的门道；</li>
+<li>我不具备宏观、行业、估值的专业知识；</li>
+<li>而且投资<strong>容错率极低</strong>——代码写错了可以改、可以回滚，钱亏掉了就是真的亏掉了。</li>
+</ul>
+<p>所以投资比 Coding <strong>更需要谨慎、更需要专业知识</strong>。两个最典型的、普通投资者最容易踩坑的问题恰恰是：</p>
+<ol>
+<li><strong>持仓占整体财富的比例</strong>——单票 / 单板块押多重？加杠杆了吗？这决定了你会不会一次归零；</li>
+<li><strong>到底投哪只股票</strong>——这个需要真研究，而不是听消息。</li>
+</ol>
+<p>这两件事，恰恰是 AI 能帮上忙、且能帮到点子上的地方。这就是本项目要做的：<strong>让一个不懂投资的普通人，也能在做决策的那一刻，调动起一群「大师级」的、谨慎的、有框架的视角，帮他把关「买哪只」和「押多重」。</strong></p>
+<p>这，就是「为什么这么做是有效的」：<strong>它把一个你不擅长、没时间、容错率又低的决策，交给了一个被蒸馏过的、24 小时在线的、永远克制的大师圆桌。</strong></p>
+<hr />
+<h2 id="二-功能实现拆解一个股大师圆桌"><a class="markdownIt-Anchor" href="#二-功能实现拆解一个股大师圆桌"></a> 二、功能实现拆解（一）：个股大师圆桌</h2>
+<p>这是用户感知最强的功能。先讲它跑起来的完整流程，再讲一个很多人会误解的关键点。</p>
+<h3 id="21-完整流水线"><a class="markdownIt-Anchor" href="#21-完整流水线"></a> 2.1 完整流水线</h3>
+<p>圆桌的主流水线在 <code>run_roundtable_sync</code>（<code>SoundFinancialPlanningBE/app/services/roundtable_pipeline.py:947</code>）。一次圆桌分析按顺序经历这些阶段：</p>
+<pre class="mermaid">sequenceDiagram
+    participant U as 用户
+    participant P as run_roundtable_sync
+    participant F as 基本面采集
+    participant M as 大师们
+    participant T as TradingAgents
+    participant W as WebSocket
+
+    U->>P: 提问(可带持仓上下文)
+    P->>P: 记忆注入(四层记忆拼到prompt头)
+    P->>P: 从原始query解析ticker
+    P->>F: _load_roundtable_fundamentals
+    F-->>P: 共享基本面底稿 shared_analysis
+    P->>W: 推送基本面底稿帧
+    par 大师并发(信号量=3)
+        loop 每位大师
+            P->>M: drain steer + 共享底稿
+            M-->>W: 流式发言(report_delta逐token)
+        end
+    end
+    P->>T: 命中缓存? 否→run_analysis_sync跑图
+    T-->>P: final_trade_decision (5档评级)
+    P->>P: _build_final_text/_build_final_decision
+    P->>W: 圆桌结论帧 + done帧</pre>
+<p>逐步说明：</p>
+<p><strong>① 记忆注入 + 持仓追加</strong>（<code>roundtable_pipeline.py:965-982</code>）：把四层记忆（后面第五章详述）拼到 prompt 头部；如果带了持仓，再追加一段「持仓上下文」。</p>
+<p><strong>② 解析标的</strong>（<code>roundtable_pipeline.py:985-994</code>）：从<strong>用户原始 query</strong> 解析出股票代码。这里有个刻意的设计——注释明确说不能用拼了记忆的 prompt 去解析，否则用户档案里的 <code>preferred_tickers: [&quot;600519.SH&quot;]</code>（贵州茅台）会「劫持」解析器，用户明明问的是「蜜雪冰城」却返回茅台的数据。<strong>从裸 query 解析，让解析器忠于意图而非历史</strong>（<code>roundtable_pipeline.py:987-993</code>）。</p>
+<p><strong>③ 基本面预加载</strong>（<code>_load_roundtable_fundamentals</code>，<code>roundtable_pipeline.py:780-843</code>）：先采集一份共享基本面底稿（估值、财务、资金流、概念板块等），<strong>这份底稿之后会广播给每一位大师</strong>，避免每个大师重复采数据。</p>
+<p><strong>④ 大师并发发言</strong>（<code>roundtable_pipeline.py:1006-1086</code>）：用 <code>asyncio.Semaphore</code> 限流，默认并发 3（<code>MASTER_CONCURRENCY=3</code>，<code>roundtable_pipeline.py:44</code>）。每位大师拿到槽位后：先「drain」运行中用户追加的 steer 指令、合并共享底稿，然后<strong>流式</strong>生成发言，逐 token 通过 Redis pub/sub → WebSocket 推给前端。</p>
+<p><strong>⑤ TradingAgents 阶段</strong>（<code>roundtable_pipeline.py:1140-1235</code>）：大师发言全部结束后，如果识别到了 ticker，就调用 TradingAgents 引擎（见第三章）。这里有个重要的性能设计——<strong>先查缓存</strong>：<code>ta_cache</code> 夜间已经批量预热过，命中就直接复用（「burning 10+ LLM minutes to re-run it would be wasteful」，<code>roundtable_pipeline.py:1150-1156</code>）；没命中才现场跑图，超时 30 分钟。</p>
+<p><strong>⑥ 合成结论</strong>（<code>_build_final_text</code> / <code>_build_final_decision</code>，<code>roundtable_pipeline.py:1359-1435</code>）：产出最终的圆桌结论和 BUY/SELL/HOLD 信号。</p>
+<h3 id="22-一个关键洞察大师负责叙事tradingagent-负责打分"><a class="markdownIt-Anchor" href="#22-一个关键洞察大师负责叙事tradingagent-负责打分"></a> 2.2 一个关键洞察：大师负责「叙事」，TradingAgent 负责「打分」</h3>
+<p>这是我最想强调、也最反直觉的一点。很多人以为「圆桌」是大师们你一言我一语地辩论，最后投票出结果。<strong>实际不是。</strong></p>
+<p><strong>圆桌里的多位大师，是「各自独立并行发言 + 最后程序性汇总」，不是互相辩论。</strong> 证据：</p>
+<ul>
+<li>每位大师拿到的是<strong>同一份</strong> prompt + 同一份基本面底稿，<strong>互相看不到对方的发言</strong>（<code>roundtable_pipeline.py:1033-1052</code>，<code>master_prompt</code> 里只有用户问题 + 记忆 + steer，不含其他大师的输出）；</li>
+<li>全流程没有任何「大师 A 反驳大师 B」的 prompt 或逻辑；</li>
+<li>真正的多空辩论发生在 TradingAgents 子系统里，和大师人格圆桌是<strong>解耦的两套多智能体</strong>。</li>
+</ul>
+<p>更关键的是<strong>最终的 BUY/SELL/HOLD 信号，完全来自 TradingAgents，不从大师的发言聚合</strong>。看 <code>_build_final_decision</code>（<code>roundtable_pipeline.py:1400-1435</code>）：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">if</span> ta_result:
+    decision = _extract_ta_decision(ta_result)
+    ...
+    signal = <span class="hljs-built_in">str</span>(decision.get(<span class="hljs-string">&quot;signal&quot;</span>) <span class="hljs-keyword">or</span> decision.get(<span class="hljs-string">&quot;action&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;HOLD&quot;</span>).upper()
+    <span class="hljs-keyword">if</span> signal <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> {<span class="hljs-string">&quot;BUY&quot;</span>, <span class="hljs-string">&quot;SELL&quot;</span>, <span class="hljs-string">&quot;HOLD&quot;</span>}:
+        signal = <span class="hljs-string">&quot;HOLD&quot;</span>
+    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;signal&quot;</span>: signal, <span class="hljs-string">&quot;title&quot;</span>: title, <span class="hljs-string">&quot;text&quot;</span>: summary, <span class="hljs-string">&quot;ticker&quot;</span>: ticker}
+<span class="hljs-comment"># 没有 ta_result 时:</span>
+<span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;signal&quot;</span>: <span class="hljs-string">&quot;HOLD&quot;</span>, ...}   <span class="hljs-comment"># 大师观点只进 text，不进 signal</span>
+</code></pre>
+<p>也就是说：<strong>有 TradingAgents 结果时，signal 直接取自 TA；大师们的发言只作为「核心观点」文字展示。</strong> 没有 TA 结果时，signal 一律兜底成 <code>HOLD</code>。</p>
+<p><strong>为什么这么设计？</strong> 因为「大师人格」擅长的是<strong>叙事、视角、框架</strong>——它能用巴菲特的口吻讲清楚「这门生意好不好」，但你不能让一个角色扮演去给出可执行的、可量化的买卖信号，那既不可靠也不负责。真正可量化的多空判断，交给一套专门的多 Agent 打分引擎（TradingAgents）去做，它有结构化的评级 schema、有风险辩论、有事后复盘。</p>
+<blockquote>
+<p>一句话：<strong>大师给你「想清楚」，TradingAgent 给你「打分」，最后程序把两者拼成一页结论。</strong> 叙事层和决策层分离，是这个系统能既「像大师」又「不乱喊单」的关键。</p>
+</blockquote>
+<hr />
+<h2 id="三-功能实现拆解二tradingagent-多空博弈多-agent-怎么博弈-消息怎么传递"><a class="markdownIt-Anchor" href="#三-功能实现拆解二tradingagent-多空博弈多-agent-怎么博弈-消息怎么传递"></a> 三、功能实现拆解（二）：TradingAgent 多空博弈——多 Agent 怎么&quot;博弈&quot;、消息怎么传递</h2>
+<p>这是整个系统的「打分引擎」，也是最终 BUY/SELL/HOLD 的真正来源。它基于开源 <strong>TradingAgents</strong>（LangGraph 多智能体交易框架）深度改造成 A 股专用，vendored 在 <code>app/agents/tradingagents/</code>。这一章不光列角色，重点讲清楚<strong>这么多 Agent 之间是怎么传递和共享消息的</strong>——这是看懂任何多 Agent 系统的关键。</p>
+<h3 id="31-编排底座langgraph-stategraph-一块共享黑板"><a class="markdownIt-Anchor" href="#31-编排底座langgraph-stategraph-一块共享黑板"></a> 3.1 编排底座：LangGraph <code>StateGraph</code> + 一块共享黑板</h3>
+<p>整个博弈跑在一张 LangGraph 的 <code>StateGraph</code> 上（<code>graph/setup.py:117</code>）：节点是 Agent，边是执行顺序。<strong>而所有 Agent 之间交换信息，靠的不是互相发私信，而是读写同一块「共享状态」</strong>——<code>AgentState</code>（<code>agents/utils/agent_states.py:46</code>）。</p>
+<p><code>AgentState</code> 继承 LangGraph 的 <code>MessagesState</code>，在上面挂了一排<strong>类型化字段</strong>，每个字段就是黑板上的一栏「公告」：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AgentState</span>(<span class="hljs-title class_ inherited__">MessagesState</span>):
+    company_of_interest: <span class="hljs-built_in">str</span>      <span class="hljs-comment"># 分析哪只票</span>
+    trade_date: <span class="hljs-built_in">str</span>
+    sender: <span class="hljs-built_in">str</span>                   <span class="hljs-comment"># 上一个发言者</span>
+    <span class="hljs-comment"># —— 7 份分析师报告（每个分析师写自己那一栏）——</span>
+    market_report: <span class="hljs-built_in">str</span>            <span class="hljs-comment"># 技术面</span>
+    sentiment_report: <span class="hljs-built_in">str</span>         <span class="hljs-comment"># 情绪面</span>
+    news_report: <span class="hljs-built_in">str</span>              <span class="hljs-comment"># 新闻</span>
+    fundamentals_report: <span class="hljs-built_in">str</span>      <span class="hljs-comment"># 基本面</span>
+    policy_report: <span class="hljs-built_in">str</span>            <span class="hljs-comment"># 政策（A股特有）</span>
+    hot_money_report: <span class="hljs-built_in">str</span>         <span class="hljs-comment"># 游资资金（A股特有）</span>
+    lockup_report: <span class="hljs-built_in">str</span>            <span class="hljs-comment"># 解禁减持（A股特有）</span>
+    data_quality_summary: <span class="hljs-built_in">str</span>     <span class="hljs-comment"># 质量门评级</span>
+    <span class="hljs-comment"># —— 两轮辩论各自的子状态 ——</span>
+    investment_debate_state: InvestDebateState
+    investment_plan: <span class="hljs-built_in">str</span>
+    trader_investment_plan: <span class="hljs-built_in">str</span>
+    risk_debate_state: RiskDebateState
+    final_trade_decision: <span class="hljs-built_in">str</span>
+    past_context: <span class="hljs-built_in">str</span>             <span class="hljs-comment"># 历史教训（事后复盘注入）</span>
+</code></pre>
+<p>这是典型的<strong>黑板（blackboard）架构</strong>：每个 Agent 干完活，把产出写到黑板对应栏；下游 Agent 要用什么，直接从黑板读。<strong>没有点对点私信</strong>，协作全靠这块共享状态解耦。整体流程：</p>
+<pre class="mermaid">flowchart TD
+    START((START)) --> AN["7 个分析师串行<br/>各自 ReAct 工具循环, 把报告写到黑板"]
+    AN --> QG["Quality Gate<br/>给 7 份报告打 A-F 评级"]
+    QG --> DEB["多空辩论 Bull ⇄ Bear<br/>(读写 InvestDebateState)"]
+    DEB --> RM["Research Manager 裁判<br/>deep model · 5 档"]
+    RM --> TR["Trader 交易员<br/>3 档 + 价位/止损/仓位"]
+    TR --> RD["风险三方辩论<br/>Aggressive ⇄ Conservative ⇄ Neutral"]
+    RD --> PM["Portfolio Manager 终裁<br/>deep model · 5 档"]
+    PM --> END((END))</pre>
+<h3 id="32-消息共享的三种机制重点"><a class="markdownIt-Anchor" href="#32-消息共享的三种机制重点"></a> 3.2 消息共享的三种机制（重点）</h3>
+<p>这块共享状态上其实跑着<strong>三种粒度不同的消息</strong>，搞混了就看不懂这个框架：</p>
+<p><strong>① 持久的「黑板报告」——分析师的产出，全流程可见。</strong><br />
+7 个分析师<strong>串行</strong>执行（<code>setup.py:144-162</code>），各自把报告写进黑板对应字段。一旦写上，<strong>后面所有 Agent（辩论者、裁判、交易员、组合经理）都能读</strong>。它是持久的、累积的。</p>
+<p><strong>② 易变的「工具调用消息」——每个分析师用完即清。</strong><br />
+<code>AgentState</code> 还继承了 <code>messages</code> 通道（<code>MessagesState</code> 自带），用来跑每个分析师的 <strong>ReAct 工具循环</strong>：分析师发工具调用 → <code>tools_x</code> 节点执行 → 结果回到分析师 → 直到不再调工具（<code>setup.py:150-155</code>）。关键是，<strong>每换一个分析师，上一个的工具消息会被一个 <code>Msg Clear</code> 节点清空</strong>（<code>create_msg_delete</code>，<code>setup.py:56,122-124</code>）。为什么？因为工具消息又长又占 context，下一个分析师根本不需要看上一个「调了几次 API、返回了什么原始 JSON」——它只需要黑板上那份<strong>提炼后的报告</strong>。</p>
+<blockquote>
+<p>这一手很讲究：<strong>框架刻意把「易变的过程消息」和「持久的结论文档」分开</strong>——前者每个阶段后丢弃，后者沉淀到黑板。这和第八章「上下文管理」的思想一脉相承：不该带进下一阶段的，果断丢。</p>
+</blockquote>
+<p><strong>③ 辩论的「子状态」——两轮辩论各维护一份对话状态。</strong><br />
+多空、风险两轮辩论各有一个子对象。以多空为例（<code>agent_states.py:7-17</code>）：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">InvestDebateState</span>(<span class="hljs-title class_ inherited__">TypedDict</span>):
+    bull_history: <span class="hljs-built_in">str</span>       <span class="hljs-comment"># 多头发言史</span>
+    bear_history: <span class="hljs-built_in">str</span>       <span class="hljs-comment"># 空头发言史</span>
+    history: <span class="hljs-built_in">str</span>            <span class="hljs-comment"># 整段辩论史（双方合并）</span>
+    current_response: <span class="hljs-built_in">str</span>   <span class="hljs-comment"># 最新一条发言（对方刚说了什么）</span>
+    judge_decision: <span class="hljs-built_in">str</span>     <span class="hljs-comment"># 裁判结论</span>
+    count: <span class="hljs-built_in">int</span>              <span class="hljs-comment"># 发言计数（控制轮数）</span>
+</code></pre>
+<h3 id="33-多空博弈是怎么博弈的读黑板-反驳对方-写回黑板"><a class="markdownIt-Anchor" href="#33-多空博弈是怎么博弈的读黑板-反驳对方-写回黑板"></a> 3.3 多空博弈是怎么&quot;博弈&quot;的：读黑板 → 反驳对方 → 写回黑板</h3>
+<p>现在能精确回答「多空怎么博弈」了。以多头为例，它的节点函数 <code>bull_node</code>（<code>bull_researcher.py:4-64</code>）干三件事：</p>
+<p><strong>第一步：读黑板。</strong> 读全部 7 份报告 + 数据质量摘要 + <code>history</code>（整段辩论史）+ <code>current_response</code>（<strong>对方空头上一轮的论点</strong>）。</p>
+<p><strong>第二步：构造 prompt，显式要求反驳。</strong> prompt 里有一句决定性的话：</p>
+<pre class="highlight"><code class="python">prompt = <span class="hljs-string">f&quot;&quot;&quot;You are a Bull Analyst advocating for investing in this A-share stock ...
+Conversation history of the debate: <span class="hljs-subst">{history}</span>
+Last bear argument: <span class="hljs-subst">{current_response}</span>     ← 把对方上一轮论点喂进来
+<span class="hljs-meta">... </span>Refute the bear&#x27;s concerns ... engaging directly with the bear analyst&#x27;s points ...&quot;&quot;&quot;</span>
+</code></pre>
+<p>注意 <code>Last bear argument: {current_response}</code>——<strong>它把空头上一轮的发言显式塞进多头的 prompt，并要求「Refute（反驳）」</strong>。这就是「真博弈」和「各说各话」的分水岭：多头不是自说自话喊多，而是<strong>针对空头刚提出的具体质疑逐条反驳</strong>。空头完全对称（它的 prompt 里是 <code>Last bull argument</code>）。</p>
+<p><strong>第三步：写回黑板。</strong> 调完 LLM，把发言追加到共享辩论状态：</p>
+<pre class="highlight"><code class="python">argument = <span class="hljs-string">f&quot;Bull Analyst: <span class="hljs-subst">{response.content}</span>&quot;</span>
+<span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;investment_debate_state&quot;</span>: {
+    <span class="hljs-string">&quot;history&quot;</span>: history + <span class="hljs-string">&quot;\n&quot;</span> + argument,           <span class="hljs-comment"># 追加整段辩论史</span>
+    <span class="hljs-string">&quot;bull_history&quot;</span>: bull_history + <span class="hljs-string">&quot;\n&quot;</span> + argument, <span class="hljs-comment"># 追加多头史</span>
+    <span class="hljs-string">&quot;current_response&quot;</span>: argument,                   <span class="hljs-comment"># 覆盖&quot;最新发言&quot;, 供空头读</span>
+    <span class="hljs-string">&quot;count&quot;</span>: investment_debate_state[<span class="hljs-string">&quot;count&quot;</span>] + <span class="hljs-number">1</span>,  <span class="hljs-comment"># 轮数 +1</span>
+}}
+</code></pre>
+<p>LangGraph 把这个 partial dict merge 回全局 <code>AgentState</code>，<strong>空头下一轮就能从 <code>current_response</code> 读到多头这段反驳</strong>——消息就是这样&quot;传&quot;过去的。</p>
+<p><strong>轮到谁说，谁说了算？</strong> 不是 Agent 自己，而是图里的<strong>条件边</strong> <code>should_continue_debate</code>（<code>conditional_logic.py:70-79</code>）：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">should_continue_debate</span>(<span class="hljs-params">self, state</span>):
+    <span class="hljs-keyword">if</span> state[<span class="hljs-string">&quot;investment_debate_state&quot;</span>][<span class="hljs-string">&quot;count&quot;</span>] &gt;= <span class="hljs-number">2</span> * <span class="hljs-variable language_">self</span>.max_debate_rounds:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Research Manager&quot;</span>          <span class="hljs-comment"># 到轮数 → 交裁判</span>
+    <span class="hljs-keyword">if</span> state[<span class="hljs-string">&quot;investment_debate_state&quot;</span>][<span class="hljs-string">&quot;current_response&quot;</span>].startswith(<span class="hljs-string">&quot;Bull&quot;</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Bear Researcher&quot;</span>           <span class="hljs-comment"># 多头刚说完 → 该空头反驳</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Bull Researcher&quot;</span>               <span class="hljs-comment"># 否则 → 该多头</span>
+</code></pre>
+<p>它看 <code>current_response</code> 的前缀判断「上一句是谁说的」，路由给另一方——<strong>多头说一句、空头驳一句</strong>，直到 <code>count</code> 到阈值（默认 <code>max_debate_rounds=1</code>，多空各一轮）就移交 Research Manager。</p>
+<p>还有个细节证明「质量门」不是摆设：多/空头的 prompt 里都写了「⚠️ 若数据质量评估把某份报告标为 C/D/F，就减少采信并注明数据局限」（<code>bull_researcher.py:47</code>）。<strong>质量门评级会实时影响辩论者对每份报告的信任权重。</strong></p>
+<h3 id="34-两轮辩论-三级结构化产出"><a class="markdownIt-Anchor" href="#34-两轮辩论-三级结构化产出"></a> 3.4 两轮辩论 + 三级结构化产出</h3>
+<p>多空辩论只是第一轮。完整打分是<strong>两轮辩论 + 三级结构化产出</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>角色</th>
+<th>职责</th>
+<th>用的模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分析师层 ×7</td>
+<td>Market / Social / News / Fundamentals / <strong>Policy</strong> / <strong>Hot Money</strong> / <strong>Lockup</strong></td>
+<td>技术面、情绪、新闻、基本面、<strong>政策</strong>、<strong>游资</strong>、<strong>解禁</strong>（后三个 A 股特有）</td>
+<td>quick</td>
+</tr>
+<tr>
+<td>质量门</td>
+<td>Quality Gate</td>
+<td>给 7 份报告打 A–F</td>
+<td>quick</td>
+</tr>
+<tr>
+<td><strong>多空辩论</strong></td>
+<td><strong>Bull ⇄ Bear</strong></td>
+<td>多头 vs 空头交锋</td>
+<td>quick</td>
+</tr>
+<tr>
+<td>裁判</td>
+<td>Research Manager</td>
+<td>裁决多空 → 投资计划（5 档）</td>
+<td><strong>deep</strong></td>
+</tr>
+<tr>
+<td>交易员</td>
+<td>Trader</td>
+<td>变成提案（入场价/止损/仓位，3 档）</td>
+<td>quick</td>
+</tr>
+<tr>
+<td><strong>风险辩论</strong></td>
+<td><strong>Aggressive / Conservative / Neutral</strong></td>
+<td>激进/保守/中性三方风险交锋</td>
+<td>quick</td>
+</tr>
+<tr>
+<td>终裁</td>
+<td>Portfolio Manager</td>
+<td>综合两轮 → 最终决策（5 档）</td>
+<td><strong>deep</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>产出全是结构化的</strong>，不是自由文本。三个决策型 Agent 用 LangChain 的 <code>with_structured_output</code> 产出 Pydantic 对象（<code>agents/schemas.py</code>，带熔断：连续 3 次结构化失败退回自由文本）：</p>
+<ol>
+<li><strong>ResearchPlan</strong>（研究经理）：<code>recommendation</code>（Buy/Overweight/Hold/Underweight/Sell 5 档）+ rationale + strategic_actions；</li>
+<li><strong>TraderProposal</strong>（交易员）：<code>action</code>（<strong>只有 Buy/Hold/Sell 3 档</strong>）+ entry_price / stop_loss / position_sizing；</li>
+<li><strong>PortfolioDecision</strong>（组合经理，终裁）：<code>rating</code>（5 档）+ executive_summary + investment_thesis + price_target + time_horizon。</li>
+</ol>
+<p>第二轮风险辩论的机制与多空<strong>同构</strong>，只是子状态换成 <code>RiskDebateState</code>、轮转逻辑换成 <code>should_continue_risk_analysis</code>（Aggressive→Conservative→Neutral 轮替，<code>conditional_logic.py:81-91</code>）。组合经理读<strong>风险三方辩论史 + 投资计划 + 交易提案 + 历史教训 past_context</strong>，并把 A 股硬约束写进 prompt（T+1、涨跌停、ST 风险、融资融券资格，<code>portfolio_manager.py:48-54</code>）。</p>
+<p>最后 <code>process_signal</code> 用<strong>确定性正则</strong>从组合经理的 markdown 提取评级（先找 <code>Rating: X</code> 标签再找评级词，默认 Hold），<strong>不再额外调 LLM</strong>——打分这一步是纯解析，不花 token。</p>
+<h3 id="35-双模型分工快脑干活慢脑拍板"><a class="markdownIt-Anchor" href="#35-双模型分工快脑干活慢脑拍板"></a> 3.5 双模型分工：快脑干活，慢脑拍板</h3>
+<p>框架用了两个 LLM（<code>trading_graph.py</code>）：<strong><code>quick_thinking_llm</code></strong> 给 7 个分析师、多空研究员、交易员、风险三方（调用量大、要快）；<strong><code>deep_thinking_llm</code></strong> 只给两个&quot;裁判&quot;——Research Manager 和 Portfolio Manager（<code>setup.py:107,114</code>）。道理很直接：<strong>裁判要做权衡拍板，值得用更强的慢模型；一线大量调用用快模型压成本。</strong></p>
+<h3 id="36-事后复盘闭环-基本面数据零-akshare"><a class="markdownIt-Anchor" href="#36-事后复盘闭环-基本面数据零-akshare"></a> 3.6 事后复盘闭环 + 基本面数据（零 akshare）</h3>
+<p><strong>它会&quot;事后复盘&quot;自己</strong>（<code>trading_graph.py:265</code> + <code>graph/reflection.py</code>）：每次分析一只新票前，先回补<strong>同一只票之前的 pending 决策</strong>，用 yfinance 拉它之后的真实收益（基准沪深 300 算 alpha），生成一段「反思」写回 memory log；下一次组合经理做决策时，这段历史教训作为 <code>past_context</code> 注入。也就是 <strong>决策 → 用真实收益复盘 → 注入下次决策</strong>，让这个 Agent 能随时间积累对某只票的判断质量。</p>
+<p>数据层（<code>dataflows/a_stock.py:1-13</code> 文件头明确「no akshare」）直连一批公开源：<strong>mootdx</strong>（通达信协议，K线/财务/F10）、<strong>腾讯财经</strong>（PE/PB/市值/换手）、<strong>东方财富</strong>（龙虎榜/解禁，带节流防封）、<strong>新浪/同花顺/财联社</strong>（财报/一致预期 EPS/北向/新闻）。选直连而非 akshare，是因为这些接口各有封 IP 脾气，自己控制节流和兜底更可控——对一个要 7×24 预热几百只票的系统很重要。</p>
+<h2 id="四-功能实现拆解三持仓分析"><a class="markdownIt-Anchor" href="#四-功能实现拆解三持仓分析"></a> 四、功能实现拆解（三）：持仓分析</h2>
+<p>持仓是最「私人」的功能，也是最能体现「AI 帮普通人把关」的地方。它回答的核心问题正是第一章说的那两件：「买哪只」和「押多重」。</p>
+<h3 id="41-持仓怎么进来7-种录入方式"><a class="markdownIt-Anchor" href="#41-持仓怎么进来7-种录入方式"></a> 4.1 持仓怎么进来：7 种录入方式</h3>
+<p>为了把「录入持仓」这件事的门槛降到几乎为零，系统支持了一长串导入方式（Web 端 <code>/portfolio/new</code>）：手动录入、CSV、XLSX、富途 JSON、富途实盘、<strong>图片 OCR</strong>、<strong>多图 OCR</strong>。</p>
+<p>后端统一汇入 <code>save_import_rows</code>（<code>holding_import_service.py:9-76</code>），按 <code>(owner, account, ticker, cost, qty)</code> 查重后插入或更新 <code>Holding</code> 表。几个细节：</p>
+<ul>
+<li><strong>CSV</strong>（<code>csv_parser.py</code>）：自动尝试 <code>utf-8-sig/utf-8/gb18030/gbk</code> 解码；并用正则把 16–19 位卡号、邮箱、手机号<strong>打码成 <code>***</code></strong>（<code>csv_parser.py:8-12</code>）——脱敏是内建在第一道的。</li>
+<li><strong>图片 OCR</strong>（<code>ocr.py</code>）：默认走 MiniMax 视觉模型，可切 Anthropic，key 缺失降级 mock。prompt 特意要求「忽略顶部总资产/今日收益/总盈亏等汇总信息，只提取单个持仓行」，返回结构化 JSON。识别不出时 fallback 到中文文本解析。</li>
+<li><strong>富途</strong>：<code>fetch_from_futu_bridge</code> 注释明说「not wired in this build」——实际是把富途持仓 JSON <strong>粘贴</strong>进来解析，不是真的 API 同步（<code>futu.py:31-40</code>）。这是很务实的取舍：个人项目不碰券商 API 的合规和稳定性。</li>
+</ul>
+<p>每次写入后，都会 fire-and-forget 触发一次「持仓快照写记忆」（见 4.2 的路径 B）。</p>
+<h3 id="42-重点持仓是怎么进上下文的"><a class="markdownIt-Anchor" href="#42-重点持仓是怎么进上下文的"></a> 4.2 重点：持仓是怎么「进上下文」的</h3>
+<p>这是本章的核心。持仓进入 LLM 上下文有<strong>两条独立路径</strong>：</p>
+<p><strong>路径 A —— 直接拼成 prompt 块（深度复盘专用）。</strong> <code>_format_portfolio_context</code>（<code>portfolio_deep_review.py:107-132</code>）把当前账户持仓渲染成一段中文上下文，注入到每个 teammate 和 Lead 的 system prompt：</p>
+<pre class="highlight"><code class="">【账户】我的美股账户（共 6 只持仓）
+【汇总】总市值 1,234,567  持仓成本 1,100,000  浮动盈亏 +134,567 (+12.23%)
+【逐只持仓】
+  1. 苹果 (AAPL us)  数量 100  成本 180.0  现价 210.5  市值 21,050  盈亏 +3,050 (+16.9%)
+  2. ...
+</code></pre>
+<p><strong>路径 B —— 通过「长期记忆快照」注入（更通用）。</strong> 这条路更精巧：</p>
+<ol>
+<li><code>portfolio_snapshot.py:24-63</code> 把持仓 + 现金序列化成一个结构化快照，<strong>显式算出现金占比 <code>cash_pct</code> 和每只票的权重 <code>weight = 市值 / 总资产</code></strong>；</li>
+<li><code>snapshot_portfolio_to_memory</code>（<code>portfolio_snapshot.py:66-82</code>）把它作为一条 <code>type=&quot;fact&quot;</code> 的长期记忆写进 <code>agent_user_memories</code> 表（按天去重，一天只留最新一条）；</li>
+<li>之后任何一次对话，这条快照都会随「记忆块」一起注入 prompt 头部（第五章详述注入机制）。</li>
+</ol>
+<p><strong>为什么要算 <code>weight</code> 和 <code>cash_pct</code>？</strong> 因为这正是回答「押多重」的原始数据。有了每只票占总资产的比例和现金比例，模型才能判断「这只票是不是已经过重了」「现金是不是太少、没有子弹补仓」。<strong>把「占比」在数据层算好再喂给模型，比让模型自己拿着市值和总资产去算要可靠得多</strong>（LLM 算术不可靠，这是常识）。</p>
+<h3 id="43-持仓深度复盘1-lead-4-teammate-的-agent-teams"><a class="markdownIt-Anchor" href="#43-持仓深度复盘1-lead-4-teammate-的-agent-teams"></a> 4.3 持仓深度复盘：1 Lead + 4 Teammate 的 Agent Teams</h3>
+<p>持仓的「深度复盘」（<code>POST /web/portfolio/deep-review</code>）用的是<strong>多 Agent 协作（Agent Teams）<strong>模式：1 个 Lead + 4 个 Teammate，全部并发协程 + Redis 共享状态。这和大师圆桌的「独立发言」不同——这里是</strong>真协作</strong>。</p>
+<p>4 个 Teammate 角色（<code>teammate_role.py:38-125</code>），<strong>明确覆盖了「财富比例 / 集中度」这个核心关切</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>focus</th>
+<th>涉及比例/集中度？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🌐 板块轮动</td>
+<td>板块资金流向、行业 beta、景气度拐点</td>
+<td>板块暴露</td>
+</tr>
+<tr>
+<td>📊 个股估值</td>
+<td>逐仓 PE/PB/PS/PEG + 目标价/止损</td>
+<td>—</td>
+</tr>
+<tr>
+<td>⚠️ <strong>风险敞口</strong></td>
+<td><strong>单股集中度、行业集中度、相关系数、Beta、回撤情景、尾部风险</strong></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>💰 <strong>现金管理</strong></td>
+<td><strong>现金比例</strong>、机会成本、加减仓触发价</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>协作机制用 Redis 实现（<code>inbox.py</code>）：每个 Teammate 每一轮先「drain」收件箱读队友私信、读队友已写的共享草稿，再调 LLM，最后把自己的分析写进共享草稿的自己的 field。4 个 Teammate 全部完成后，<strong>Lead</strong> 先轮询等 4 份草稿齐（最多 300s），再多轮综合，输出一份带「共识 / 冲突（标出谁说 A 谁说 B）/ 调仓方案（每只持仓动作 + 比例 + 触发价）/ 尾部风险」的报告。</p>
+<p>所以整个持仓分析是这样闭环的：<strong>7 种方式把持仓弄进来 → 算好每只票的权重和现金占比 → 两条路径注入上下文 → 4 个专家并行从板块/估值/风险/现金四个角度分析（其中两个专盯「押多重」）→ Lead 汇总成调仓方案。</strong></p>
+<hr />
+<h2 id="五-功能实现拆解四红黑榜以及为什么只看前-200"><a class="markdownIt-Anchor" href="#五-功能实现拆解四红黑榜以及为什么只看前-200"></a> 五、功能实现拆解（四）：红黑榜，以及为什么只看前 200</h2>
+<p>红黑榜是一个<strong>每日全市场扫描榜单</strong>：对每个市场（A股/港股/美股）的「市值前 200」股票池，用 LLM 批量打分，选出<strong>多头最强的红榜 top10</strong> 和<strong>空头最强的黑榜 bottom10</strong>，并对每只票做深度详情页。</p>
+<h3 id="51-红黑榜综合了哪些因素"><a class="markdownIt-Anchor" href="#51-红黑榜综合了哪些因素"></a> 5.1 红黑榜综合了哪些因素</h3>
+<p>打分是<strong>多层叠加</strong>的，最终一个 <code>compositeScore</code> 决定红与黑（核心在 <code>research_leaderboard.py</code>）：</p>
+<p><strong>第 1 层 —— 初筛（screen）。</strong> 每 10 只一批喂给 LLM，直接产出 <code>bullScore</code>（0–100 多头）和 <code>bearScore</code>（0–100 空头）。此时 <code>compositeScore = bull - bear</code>（分差）。</p>
+<p><strong>第 2 层 —— 大师精评（refine）。</strong> 取分差最高/最低各 15 只进精评，每 3 只一批让 <strong>5 位大师</strong>（段永平/巴菲特/达利欧/林奇/芒格，<code>DEFAULT_MASTERS</code>，<code>research_leaderboard.py:54</code>）各打 0–100 分 + 一句理由。合并公式：</p>
+<pre class="highlight"><code class="">compositeScore = spread + (avg_master_score - 50.0)
+</code></pre>
+<p><strong>第 3 层 —— Berkshire 研究注入（50% 权重）。</strong> 这是最明确的一个权重（<code>_blend_berkshire_into_existing</code>，<code>research_leaderboard.py:1249-1259</code>）：</p>
+<pre class="highlight"><code class="">blended = Berkshire四维分(0-100) * 0.5 + 原多空分差(0-100) * 0.5
+</code></pre>
+<p>而 <strong>Berkshire 四维</strong>本身就是一个「四大师并行研究」的 prompt（<code>ai_berkshire_service.py:99-190</code>），四个维度各由一位大师负责：</p>
+<ul>
+<li><strong>段永平 → 商业模式 &amp; 护城河</strong>（收入结构/飞轮/品牌/转换成本/网络效应）；</li>
+<li><strong>巴菲特 → 财务 &amp; 估值</strong>（ROE/毛利率/现金流/负债率/PE/安全边际）；</li>
+<li><strong>芒格 → 行业格局 &amp; 风险反转</strong>（市场规模/竞争格局/5+ 失败场景）；</li>
+<li><strong>李录 → 管理层 &amp; 长期确定性</strong>（CEO 能力圈/治理/10 年确定性）。</li>
+</ul>
+<p>外加一张 10 项巴菲特买入 checklist（护城河已验证 / 管理层诚信 / 现金充足 / 负债可控 / ROE 可持续 / 现金流为正 / 估值合理 / 业务可懂 / 长期视角 / 整体通过）。</p>
+<p><strong>其他因子</strong>：财务健康度（PE/PB/ROE/营收利润增速/资产负债率/现金流，带启发式规则如 <code>ROE≥10 盈利可接受</code>、<code>PE≥60 估值偏贵</code>、<code>负债率≥60 杠杆偏高</code>）；舆情新闻（利好/利空，仅展示不计分）；市值排名本身甚至作为一个多头理由（「市值排名靠前，流动性和关注度更强」，<code>research_leaderboard.py:1636</code>）。</p>
+<p>还有一个工程细节值得提：<strong>指标防污染</strong>（<code>_is_metric_polluted</code>，<code>research_leaderboard.py:882-977</code>）。它专门剔除「把股票代码数字当成指标」这类抽取错误（比如 00700 被解析成 PE=700）和超界值（PE&gt;500、PB&gt;50）。因为红黑榜是批量、自动化跑的，<strong>一旦脏数据进榜，整个榜单就没法看了</strong>——这是自动化 LLM 榜单必须做的脏活。</p>
+<p><strong>小结</strong>：红黑榜的打分 = ①LLM 多空分差 ②5 大师精评分 ③Berkshire 四维（护城河/财务估值/行业风险/管理层，占 50% 权重）④财务健康因子 ⑤舆情（仅展示）。最明确的数值权重是 <strong>Berkshire 研究 50% + 多空分差 50%</strong>。</p>
+<h3 id="52-为什么只看市值前-200-一个值得展开的设计决策"><a class="markdownIt-Anchor" href="#52-为什么只看市值前-200-一个值得展开的设计决策"></a> 5.2 为什么只看「市值前 200」—— 一个值得展开的设计决策</h3>
+<p>这是我被问得最多的一个问题：为什么不扫全市场，只看前 200？答案分<strong>工程</strong>和<strong>投资逻辑</strong>两层，后者更值得展开。</p>
+<p>先看代码事实：前 200 来自配置 <code>leaderboard_top_n = 200</code>（<code>config.py:61</code>）。universe 的获取（<code>prewarm_universe.py</code>）也很说明问题——</p>
+<ul>
+<li><strong>A股/港股</strong>：用东方财富公开接口<strong>按总市值降序</strong>（<code>fid:&quot;f20&quot;</code>，f20 就是总市值排序字段）拉前 N 名；</li>
+<li><strong>美股</strong>：<code>prewarm_universe.py</code> 里硬编码的 <code>FALLBACK_US_TOP200</code>，注释写明「<strong>基于 S&amp;P 500 成分股市值权重 + 主要科技/金融消费龙头</strong>」。</li>
+</ul>
+<p>注意美股这个 fallback 的措辞——它直接锚定<strong>标普 500</strong>。这不是巧合，正是设计意图所在。下面展开讲投资逻辑。</p>
+<h4 id="521-标普-500-本身就是按市值选头部的机器"><a class="markdownIt-Anchor" href="#521-标普-500-本身就是按市值选头部的机器"></a> 5.2.1 标普 500 本身就是「按市值选头部」的机器</h4>
+<p>先想清楚一个事实：<strong>标普 500 指数本身就是一台「按市值选头部公司」的机器。</strong> 它是市值加权的——公司越大、涨得越多，权重越高。买标普 500，约等于自动、持续地把筹码向「涨得最多的大公司」集中。</p>
+<p>而标普 500 的长期收益，<strong>高度集中在头部</strong>。这就是著名的「Magnificent 7 / 七巨头」现象：近几年标普 500 的涨幅越来越由苹果、微软、英伟达等少数头部公司贡献，前十大成分股的权重常年在 30% 以上（2023–2025 年更高）。换句话说，<strong>指数的收益大头，本来就来自市值最靠前的那一小撮。</strong></p>
+<h4 id="522-学术证据绝大多数个股长期是价值毁灭"><a class="markdownIt-Anchor" href="#522-学术证据绝大多数个股长期是价值毁灭"></a> 5.2.2 学术证据：绝大多数个股长期是「价值毁灭」</h4>
+<p>更硬核的证据来自学术界。Hendrik Bessembinder 那篇被广泛引用的研究 <em>Do Stocks Outperform Treasury Bills?</em>（2018）统计了 1926 年以来的美股全样本，结论相当反直觉：</p>
+<ul>
+<li><strong>大约 58% 的股票，整个生命周期的收益跑输一个月期国库券</strong>——也就是说，一大半个股长期看是负贡献；</li>
+<li><strong>股市创造的全部净财富，几乎集中在前约 4% 的公司身上</strong>——极少数头部赢家贡献了全部净收益。</li>
+</ul>
+<p>这两个结论合起来指向一件事：<strong>股票市场的收益分布是极度右偏的，长尾的几千只小票整体上是「价值毁灭区」，真正的钱集中在头部少数公司。</strong></p>
+<h4 id="523-把这个事实翻译成设计决策"><a class="markdownIt-Anchor" href="#523-把这个事实翻译成设计决策"></a> 5.2.3 把这个事实翻译成设计决策</h4>
+<p>把这个事实放到「一个普通人 + 有限算力」的约束下，结论就很自然了：</p>
+<ol>
+<li><strong>押注胜率最高的池子。</strong> 既然超额收益高度集中在头部大公司，那么把 LLM 的算力集中在市值前 200，就是「把有限的 token 预算，押在全市场胜率最高、信息最透明的池子」。对 A 股同理：妖股、壳股、ST 股噪声极大、基本面数据质量差、还容易被「代码数字当 PE」这类脏数据污染；而前 200 是机构主战场，研报覆盖、数据可得性、信息透明度都是最好的。</li>
+<li><strong>工程可行性的甜点。</strong> 每只上榜票要做初筛 + 精评 + Berkshire 四维 + 5 大师圆桌 + 深度详情页，单票是 10 分钟级的 LLM 调用（<code>redblack_cache.py:5-6</code> 注释）。全市场几千只根本跑不动；前 200 × 3 个市场，是「覆盖度 vs 成本」之间一个刚刚好的甜点。代码注释也说，拉 500 行对 top-200 是「plenty of headroom」（<code>prewarm_universe.py:398-401</code>）。</li>
+<li><strong>前 200 本身就是多头信号。</strong> 如前面提到的，市值排名靠前被直接写进了多头理由——流动性好、关注度高、踩雷概率低。对一个面向普通人的「稳健」理财助手来说，<strong>主动把长尾的赌博区排除掉，本身就是一种风控。</strong></li>
+</ol>
+<p>所以「只看前 200」不是一个偷懒的妥协，而是一个被收益集中度事实 + 工程成本共同推导出来的、主动的风控设计：<strong>稳健理财，先在胜率最高的池子里把功课做深，而不是在全市场大海捞针。</strong></p>
+<hr />
+<h2 id="六-技术深潜一skill-系统"><a class="markdownIt-Anchor" href="#六-技术深潜一skill-系统"></a> 六、技术深潜（一）：Skill 系统</h2>
+<p>前面反复提到「大师人格 Skill」，这是整个系统最有意思的技术资产。这一章讲三件事：Skill 是什么、人格怎么生产出来、为什么把它塞进大模型会有效。</p>
+<h3 id="61-skill-到底是什么"><a class="markdownIt-Anchor" href="#61-skill-到底是什么"></a> 6.1 Skill 到底是什么</h3>
+<p>在本项目里，一个 Skill 就是一份<strong>带 YAML frontmatter 的 Markdown 文件</strong>，路径是 <code>.claude/skills/&lt;key&gt;-skill/SKILL.md</code>。它描述一位投资大师的：思维模型、表达 DNA（话术风格）、决策框架、工作流、检查点、失败模式、黑名单。</p>
+<p>一共 11 位大师，每位对应一个 skill 文件（注册表在 <code>app/master_skills/catalog.py:28-101</code>）：段永平、巴菲特、芒格、达利欧、索罗斯、彼得·林奇、霍华德·马克斯、约翰·博格、彼得·蒂尔、格雷厄姆、李录。</p>
+<p>可以把它理解成：<strong>把一个人的「认知操作系统」外置成一份可版本管理、可迭代、可被 LLM 加载的文档。</strong> 模型本身不动，改的是这份外置文档——这就是「冻结模型 + 外置可训练状态」的思路。</p>
+<h3 id="62-人格是怎么生产出来的女娲提取-达尔文进化"><a class="markdownIt-Anchor" href="#62-人格是怎么生产出来的女娲提取-达尔文进化"></a> 6.2 人格是怎么生产出来的：女娲提取 → 达尔文进化</h3>
+<p>这是生产管线，用到了两个外部工具（都是 GitHub 上的开源 skill）。</p>
+<h4 id="第一步女娲nuwa-把公开言论蒸馏成人格"><a class="markdownIt-Anchor" href="#第一步女娲nuwa-把公开言论蒸馏成人格"></a> 第一步：女娲（nuwa）—— 把公开言论「蒸馏」成人格</h4>
+<p>女娲（<code>nuwa-skill</code>，GitHub <code>alchaincyf/nuwa-skill</code>）的定位一句话说得很漂亮：<strong>「女娲不是复制人，是提炼思维框架」</strong>，而且**「捕捉的是 HOW they think，不是 WHAT they said」**。</p>
+<p>它把一个人拆成五层（这正好对应第一节说的「大师言论可蒸馏」）：</p>
+<ul>
+<li><strong>心智模型</strong>：他用什么镜片看世界？</li>
+<li><strong>决策启发式</strong>：他靠什么直觉规则做判断？</li>
+<li><strong>表达 DNA</strong>：他怎么说话？</li>
+<li><strong>反模式</strong>：他绝对不做什么？</li>
+<li><strong>诚实边界</strong>：这个 Skill 做不到什么？</li>
+</ul>
+<p>执行流程是一条多 Agent 流水线：Phase 1 <strong>六路并行</strong>采集（①著作 ②对话 ③表达 ④他者评价 ⑤决策 ⑥时间线，且<strong>知乎/微信公众号/百度百科进黑名单，永远排除</strong>）→ Phase 2 <strong>三重验证</strong>（一个观点要收录，必须跨 2+ 领域复现 + 有生成力——能推断他对新问题的立场 + 有排他性）→ Phase 3 组装成 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a> → Phase 4 质量验证（用已知问题做 sanity check，要求心智模型 3–7 个、内在张力 ≥2 对、一手来源占比 &gt;50%）→ Phase 5 双 Agent 精炼。</p>
+<p>本项目的证据很硬：pre-Darwin 的芒格 skill（<code>app/master_skills/library.deprecated/munger/SKILL.md</code>）和女娲官方示例 <code>nuwa-skill/examples/munger-perspective/SKILL.md</code> <strong>逐字一致</strong>，catalog 也标注 <code>repo=&quot;alchaincyf/munger-skill&quot;</code>（<code>catalog.py:91</code>）。其余 10 位大师多来自 <code>Panmax/*-skill</code> 的社区 fork（同样遵循女娲方法论）。</p>
+<h4 id="第二步达尔文darwin-把人格进化到可用"><a class="markdownIt-Anchor" href="#第二步达尔文darwin-把人格进化到可用"></a> 第二步：达尔文（darwin）—— 把人格「进化」到可用</h4>
+<p>提取出来的初版人格，往往「有料但不好用」。达尔文（<code>darwin-skill</code>，GitHub <code>alchaincyf/darwin-skill</code>）负责把它打磨到生产可用。核心理念是把 <strong>Skill 当作「冻结模型的外部可训练状态」</strong>，用一套循环持续优化：<strong>评估 → 改进 → 实测验证 → 人类确认 → 保留或回滚</strong>。</p>
+<p>它用一把 <strong>9 维评分量规</strong>（满分 100），其中几个维度特别能说明问题：</p>
+<ul>
+<li><strong>d5 可执行具体性（17 分，权重最高）</strong>：<strong>禁止「建议 / 可以考虑 / 根据情况 / 灵活把握」这类软化措辞</strong>——skill 必须可直接执行；</li>
+<li><strong>d3 失败模式编码（12 分）</strong>：必须显式写「如果 X 失败 → Y」的分支，只写正向流程要扣分；</li>
+<li><strong>d4 检查点设计（6 分）</strong>：关键决策前要暂停确认，且<strong>必须显式标记 🔴 / STOP / CHECKPOINT</strong>，光靠「如果…建议…」不算；</li>
+<li><strong>d9 反例与黑名单（6 分）</strong>：必须有「不要做什么」的反例清单，只写「应该做 X」要扣分；</li>
+<li><strong>d8 实测表现（23 分）</strong>：不能只看文档规不规范，要拿测试 prompt 真跑，看输出质量是否真的变好。</li>
+</ul>
+<p>几个机制保证了它不会越改越差：<strong>棘轮机制</strong>（用 git 版本控制，改进必须严格高于旧分才保留，退步自动回滚）、<strong>独立子 Agent 盲评</strong>（避免「自己改自己评」的偏差）、<strong>人在回路</strong>（每个 skill 优化完暂停，人确认再继续）。</p>
+<p>这套量规不是拍脑袋，背后有论文支撑：它吸收了微软研究院 SkillLens（arXiv 2605.23899）的发现——<strong>LLM-as-judge 评估 skill 的准确率只有 46.4%（接近随机），加入 meta-skill 维度后能提到 73.8%</strong>——所以量规刻意强化了「失败模式」「可执行具体性」「黑名单」这几个 meta 维度。</p>
+<h4 id="本项目的实战证据git-log-不会说谎"><a class="markdownIt-Anchor" href="#本项目的实战证据git-log-不会说谎"></a> 本项目的实战证据（git log 不会说谎）</h4>
+<p>这条「女娲提取 → 达尔文进化」的管线，在本项目 git 历史里留下了完整痕迹：</p>
+<pre class="highlight"><code class="">8fb053d  sync 11 master-perspective skills        ← 女娲/社区提取的初版
+5bd9ec4  darwin v2.0 round-1 — d3/d9/d1           ← 均分 44.1 → 60.9 (+16.8)
+b8f075c  darwin round-2 — d2 workflow + d4 🔴 checkpoints  ← 60.9 → 71.0 (+10.1)
+3c4fdfe  route loader to .claude/skills/&lt;key&gt;-skill/SKILL.md
+</code></pre>
+<p>Round 1 给 11 个 skill 统一加了「失败模式表」和「黑名单」；Round 2 加了「🔴 工作流」5 步流水线和「🔴 检查点」，<strong>11 个 skill × 5 个 = 55 个显式 🔴 STOP</strong>。而且 commit 明确说 d5/d7 这两维<strong>刻意不动</strong>，「以免磨掉人格语气」——既要工程上的可执行，又要保住人格的味道，这个平衡很讲究。</p>
+<h4 id="show-一下达尔文化之后的段永平-skill-长什么样"><a class="markdownIt-Anchor" href="#show-一下达尔文化之后的段永平-skill-长什么样"></a> show 一下：达尔文化之后的段永平 Skill 长什么样</h4>
+<p>以段永平为例（<code>.claude/skills/duanyongping-skill/SKILL.md</code>），达尔文化之后的结构是这样的——它已经不是一个「人物介绍」，而是一套<strong>可运行的决策程序</strong>：</p>
+<ul>
+<li><strong>角色定义</strong>：「步步高创始人、OPPO/vivo 幕后推手、第一个与巴菲特共进午餐的中国人。整套思想压缩为两句：做对的事，把事做对。回答时请克制、留余地，用反问引导而非直接下判断。」</li>
+<li><strong>思维模型（6 个）</strong>：本分哲学 / 价值投资（只买看得懂的、不借钱不做空不做波段）/ 极度克制（&quot;不做什么&quot;比&quot;做什么&quot;更重要）/ 用户导向（看用户不看对手）/ 诚信经营 / 分权管理。</li>
+<li><strong>表达 DNA</strong>：极度克制 / 反问引导 / <strong>不确定就说不确定</strong>（常带「可能」「我觉得」）/ 价值观先行。</li>
+<li><strong>🔴 工作流（5 步流水线）</strong>：对错判定 → 能力圈判定 → 长期视角（十年后回头看）→ 列不做清单 → 简洁建议，每步都有明确的输入/处理/输出。</li>
+<li><strong>🔴 检查点（5 个显式 STOP）</strong>：比如「用户问具体股票代码/买卖时点 → <strong>STOP</strong>，明说不推荐个股」「用户想打价格战 → <strong>STOP</strong>，明说这不是对的事」。</li>
+<li><strong>失败模式表</strong>：8 行「用户场景 | 失败信号 | 应对路径」，比如「问到不懂的领域（加密货币/量化高频）→ 明确说不懂 + 推荐 buffett-skill」。</li>
+<li><strong>黑名单（8 条 🚫）</strong>：不推荐股票代码、不鼓励投机套利、不在不懂的领域强给意见、不说「一定赚钱」、不支持烧钱补贴大战……</li>
+</ul>
+<p>注意这里面有多少是「<strong>不做什么</strong>」。这正是价值投资人格的精髓，也是达尔文量规（d3/d4/d9）刻意强化的方向：<strong>一个稳健理财助手，「克制」比「聪明」重要得多。</strong> 一个动不动就喊「买入」「一定赚」的大师，是这个系统最不需要的。</p>
+<h3 id="63-为什么把-skill-塞进大模型是有效的塞在哪"><a class="markdownIt-Anchor" href="#63-为什么把-skill-塞进大模型是有效的塞在哪"></a> 6.3 为什么把 Skill 塞进大模型是有效的？塞在哪？</h3>
+<h4 id="为什么有效"><a class="markdownIt-Anchor" href="#为什么有效"></a> 为什么有效</h4>
+<p>这背后的道理其实和「提示词工程为什么有效」是同一个：<strong>大模型在预训练时已经「读过」这些大师的东西，但它不会在你提问的当下，自动以那个特定人格、那套特定框架来回答。</strong> Skill 的作用是<strong>在推理时，把模型「引导」到那个已被它内化、但需要被显式激活的知识子空间</strong>。</p>
+<p>更具体地：</p>
+<ol>
+<li><strong>降维</strong>：把一个人几十年的思想，压缩成「6 个思维模型 + 决策框架 + 表达 DNA」这几页纸，模型不需要重新「读完」所有语料，就能抓住骨架；</li>
+<li><strong>纠偏</strong>：黑名单和失败模式，是在<strong>负向</strong>约束模型——它把「一个像段永平的人绝不会说的话」提前堵死，这比正向描述更能防止人格崩坏；</li>
+<li><strong>可执行</strong>：工作流和检查点把「怎么想」变成了「按哪几步走」，让输出从「谈谈感想」变成「按框架给结论」。</li>
+</ol>
+<h4 id="塞在哪system-prompt不是-user-prompt"><a class="markdownIt-Anchor" href="#塞在哪system-prompt不是-user-prompt"></a> 塞在哪：system prompt，不是 user prompt</h4>
+<p>这是个很实际的问题，答案在代码里很明确：<strong>Skill 原文被拼进 system prompt</strong>（<code>build_master_system_prompt</code>，<code>master_skill_loader.py:71-101</code>）：</p>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">return</span> (
+    <span class="hljs-string">f&quot;你现在扮演<span class="hljs-subst">{spec.name}</span>风格的投资研究助手。\n&quot;</span>
+    <span class="hljs-string">&quot;下面是必须遵循的 skill 原文，请把它作为你的主要行为和风格约束。\n\n&quot;</span>
+    <span class="hljs-string">f&quot;<span class="hljs-subst">{skill_text}</span>\n\n&quot;</span>          <span class="hljs-comment"># ← 整份 SKILL.md 原文，进 system</span>
+    <span class="hljs-string">&quot;额外约束：\n&quot;</span>
+    <span class="hljs-string">&quot;1. 使用中文回答。\n&quot;</span>
+    <span class="hljs-string">&quot;2. 面向投资研究场景，优先讨论商业模式、估值、风险和仓位。\n&quot;</span>
+    <span class="hljs-string">&quot;3. 不要编造数据…\n&quot;</span>
+    <span class="hljs-string">&quot;5. 【输出节制】同一只股票的基本面只在首次给出…&quot;</span>
+)
+</code></pre>
+<p><strong>为什么是 system 而不是 user？</strong> 因为 Skill 定义的是「<strong>你是谁、你怎么行为</strong>」——这是<strong>身份和行为约束</strong>，属于模型的「人格设定」，天然该放在 system。而 user prompt 放的是「<strong>这次要处理什么</strong>」——用户的具体问题、持仓、行情数据。把「人格」和「任务」分到 system / user 两层，是让模型既稳定保持人格、又能灵活处理不同任务的标准做法。</p>
+<h4 id="补充曾经的反差点已经修掉了"><a class="markdownIt-Anchor" href="#补充曾经的反差点已经修掉了"></a> 补充：曾经的「反差点」已经修掉了</h4>
+<p>这里原本有个坑值得记录：早期版本里，默认的 MiniMax 链路，大师发言用的是一段<strong>轻量人设 prompt</strong>（<code>_system_prompt</code>，只用大师姓名 + 风格 + 原则拼一段，<strong>不读 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a></strong>）；只有回落到 Anthropic 时才走 <code>build_master_system_prompt</code> 注入完整 skill——精心达尔文化的 11 份 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a>，在默认链路上其实没被完整吃到。</p>
+<p><strong>这个坑后来修掉了</strong>（commit <code>d0f08ed</code>）：所有发言链路统一改成走 <code>build_master_system_prompt</code>——不管是 MiniMax、Anthropic 还是现在的 DeepSeek，<strong>每条链路都注入完整的 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a> 原文</strong>，而那段轻量的 <code>_system_prompt</code> 函数被整个删除。现在「人格资产」和「人格是否真的进了 prompt」终于对上了。这个教训值得留下：<strong>Skill 资产和「Skill 是否真的进了 prompt」是两件事，后者必须在运行时被验证。</strong></p>
+<hr />
+<h2 id="七-记忆机制4-层存储模型-5-个问题-对比-claudecode"><a class="markdownIt-Anchor" href="#七-记忆机制4-层存储模型-5-个问题-对比-claudecode"></a> 七、记忆机制：4 层存储模型 + 5 个问题 + 对比 ClaudeCode</h2>
+<p>记忆是这个 Agent「越用越懂你」的关键。先直接回答一个问题：<strong>这套记忆到底是&quot;几层&quot;？</strong> 答案是——<strong>存储侧是 4 层（外加 1 张独立的长期记忆表）</strong>，代码里就注释为「Agent 四层记忆」（<code>agent_memory.py:1-19</code>）；而<strong>注入侧（真正喂给模型时）是 5 层</strong>，那是下一章的事。把「存储」和「注入」分开，是看懂整套系统的钥匙。</p>
+<h3 id="71-存储侧4-层记忆-1-张长期记忆表"><a class="markdownIt-Anchor" href="#71-存储侧4-层记忆-1-张长期记忆表"></a> 7.1 存储侧：4 层记忆 + 1 张长期记忆表</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>存什么</th>
+<th>落在哪</th>
+<th>持久化</th>
+<th>何时写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1 会话归属</strong></td>
+<td>这次分析属于哪个用户</td>
+<td><code>analysis_tasks.user_id</code></td>
+<td>是</td>
+<td>建任务时</td>
+</tr>
+<tr>
+<td><strong>L2 用户档案卡</strong></td>
+<td>语言/风格/风险偏好/关注标的/历史决策/画像（1 行/人）</td>
+<td><code>agent_user_profile_cards</code></td>
+<td>是</td>
+<td><strong>每 5 轮</strong>抽一次</td>
+</tr>
+<tr>
+<td><strong>L3 对话摘要</strong></td>
+<td>近期对话摘要（LRU 5 条）</td>
+<td><code>agent_conversation_summaries</code></td>
+<td>是</td>
+<td><strong>每轮</strong>都抽</td>
+</tr>
+<tr>
+<td><strong>L4 运行时注入</strong></td>
+<td>当前交互窗口（拼装中的 prompt）</td>
+<td>不落表</td>
+<td><strong>否</strong></td>
+<td>每轮临时拼</td>
+</tr>
+<tr>
+<td><strong>（独立）长期记忆</strong></td>
+<td>用户偏好/指令/事实/出处（≤50 条）</td>
+<td><code>agent_user_memories</code></td>
+<td>是</td>
+<td>每 5 轮抽 + 用户手动钉</td>
+</tr>
+</tbody>
+</table>
+<p>注意 L4 这一层<strong>不落库</strong>——它只是&quot;本轮把 L2/L3/长期记忆拼进 prompt&quot;这个动作，拼完就丢。这也是为什么我说「存储 4 层、注入 5 层」不是一回事：L4 是存储和注入的交界。</p>
+<p>下面用 5 个问题把这套记忆的生命周期讲完。</p>
+<h3 id="72-什么时候决定需要记忆-触发式-llm-判断"><a class="markdownIt-Anchor" href="#72-什么时候决定需要记忆-触发式-llm-判断"></a> 7.2 什么时候决定需要记忆？—— 触发式 + LLM 判断</h3>
+<p><strong>触发点</strong>：每轮圆桌分析发完 <code>done</code> 帧之后，异步调一次 <code>extract_and_persist_after_done</code>（<code>roundtable_pipeline.py:1343-1352</code>），而且<strong>分频率</strong>：对话摘要（L3）每轮都抽，用户档案（L2）+ 长期记忆<strong>每 5 轮才抽一次</strong>（<code>PROFILE_FRESH_TURNS=5</code>，<code>agent_memory.py:38,488</code>），并发用 Redis <code>SET NX EX 30</code> 抢锁防重复抽取。</p>
+<p>除了这条「对话后抽取」的主触发流，后来还补了<strong>三个让长期记忆真正「喂得饱」的触发点</strong>（commit <code>22edad5</code>）：① <strong>onboarding 完成时</strong>（<code>POST /web/agent/onboarding-complete</code>）一次性写入 3 条——风险画像（fact）、决策偏好（preference）、禁区（preference）；② <strong>持仓快照自动回写</strong>——持仓/现金的 6 个写端点 commit 后 fire-and-forget，把最新持仓按天去重写成一条 <code>fact</code> 记忆（<code>portfolio_snapshot_{date}</code>），不占满 50 条上限；③ <strong>抽取 prompt 增强</strong>——明确识别「我决定 / 我打算 / 我计划 / 暂不 / 不投 / 以后再说」这类结构为 <code>instruction</code>，并把「触发重新评估的条件」也记进去。</p>
+<p>最关键的是：<strong>「要不要记、记什么」不是规则硬编码，而是交给一个专门的 LLM extractor 判断</strong>（<code>_PROFILE_EXTRACT_SYSTEM</code>，<code>agent_memory.py:415-448</code>）。prompt 明确写了「<strong>不要</strong>收录：一次性提问、当前价格/净值等可重算数据、寒暄」。整个抽取全程 try/except 吞异常，绝不阻塞主流程。</p>
+<h3 id="73-记哪些东西-结构化档案-四类长期记忆"><a class="markdownIt-Anchor" href="#73-记哪些东西-结构化档案-四类长期记忆"></a> 7.3 记哪些东西？—— 结构化档案 + 四类长期记忆</h3>
+<ul>
+<li><strong>用户档案（L2）</strong>：语言、投资风格一句话、风险承受度（conservative/balanced/aggressive）、关注标的、历史关键决策（带 BUY/HOLD/SELL 信号 + 时间）、一段 ≤80 字画像（直接喂下轮 LLM）。</li>
+<li><strong>用户长期记忆</strong>：分四类 <code>preference / instruction / fact / reference</code>，每条 ≤12 字标题 + ≤60 字内容（含原因 Why）。prompt 特别强调识别「<strong>我决定… / 我打算… / 暂不… / 等…再…</strong>」（<code>agent_memory.py:444-446</code>）——因为<strong>用户做过的决策和计划</strong>最值得长期记住、也最该被将来尊重。第四章的「持仓快照」就是作为一种 <code>fact</code> 存进来的。</li>
+</ul>
+<h3 id="74-记忆怎么存储-关系型数据库不是-redis"><a class="markdownIt-Anchor" href="#74-记忆怎么存储-关系型数据库不是-redis"></a> 7.4 记忆怎么存储？—— 关系型数据库，不是 Redis</h3>
+<p>存<strong>关系型数据库</strong>（raw SQL + <code>text()</code>，刻意绕开 ORM——因为 gunicorn/uvicorn 多 worker 下 ORM session 会跨 event loop 报错，<code>agent_memory.py:15-18</code>）。三张表（<code>db.py:225-277</code>）。形态是<strong>结构化字段 + JSON 列混合</strong>（关注标的、关键决策这些列表存 JSON 字符串）。Redis 只用于抽取锁，不存记忆本体。</p>
+<h3 id="75-记忆什么时候更新-合并-去重"><a class="markdownIt-Anchor" href="#75-记忆什么时候更新-合并-去重"></a> 7.5 记忆什么时候更新 / 合并 / 去重？</h3>
+<ul>
+<li><strong>档案卡 upsert</strong>：关键决策去重只留最近 20 条、关注标的留最近 30 个、<code>turn_count</code> 每次 +1（驱动&quot;每 5 轮抽一次&quot;）；</li>
+<li><strong>长期记忆去重</strong>：同 <code>(user, type, title)</code> 已存在则更新，否则新增；</li>
+<li><strong>容量淘汰</strong>：长期记忆 ≥50 条时<strong>先淘汰最老的一条 agent 自动记忆</strong>，用户手动钉的（user 来源）优先保留；</li>
+<li><strong>摘要 LRU</strong>：插新摘要后删掉不在「最近 5 条」里的旧摘要；</li>
+<li><strong>用户可改/删</strong>：<code>/web/agent/memories</code> CRUD + onboarding 一键写入。</li>
+</ul>
+<h3 id="76-对比-claudecode存储侧理念借鉴形态重写"><a class="markdownIt-Anchor" href="#76-对比-claudecode存储侧理念借鉴形态重写"></a> 7.6 对比 ClaudeCode（存储侧）：理念借鉴，形态重写</h3>
+<p>这套记忆在<strong>理念上大量借鉴 ClaudeCode</strong>（注释明说 taxonomy 借鉴 memdir），但<strong>存储形态</strong>走了不同的路。</p>
+<p><strong>相同</strong>：① 都是后台 LLM 抽取，不让用户手动维护；② 都有记忆类型 taxonomy（ClaudeCode 分 <code>user/feedback/project/reference</code>，本项目分 <code>preference/instruction/fact/reference</code>）；③ 都有去重、容量上限、注入上限；④ 都是「长期记忆」和「短期历史」分离，从不混合压缩。</p>
+<p><strong>不同（存储侧）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ClaudeCode</th>
+<th>本项目</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>载体</td>
+<td><strong>文件</strong>（<code>MEMORY.md</code> + topic files），人类可读可编辑</td>
+<td><strong>关系型数据库</strong>（3 表，结构化 + JSON 列）</td>
+<td>本项目是多用户产品，记忆要按 <code>user_id</code> 隔离、高并发读写、和持仓/账户 join。文件适合单机 CLI，DB 适合多租户服务。</td>
+</tr>
+<tr>
+<td>短期记忆</td>
+<td>内存消息 + transcript JSONL + session memory <strong>三层协作</strong></td>
+<td>不存短期原文进记忆层，短期历史走另一条路（见第八章）</td>
+<td>聊天轮次短，不需要 transcript/session-memory 那套恢复机制。</td>
+</tr>
+<tr>
+<td>触发</td>
+<td>一轮完整 query 结束时 extract</td>
+<td>「每 5 轮抽档案、每轮抽摘要」分频触发</td>
+<td>短聊天用「固定频率 + LLM 判断」更主动、成本更可控。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="八-上下文管理5-层注入模型-历史管理-对比-claudecode"><a class="markdownIt-Anchor" href="#八-上下文管理5-层注入模型-历史管理-对比-claudecode"></a> 八、上下文管理：5 层注入模型 + 历史管理 + 对比 ClaudeCode</h2>
+<p>存储是 4 层，<strong>注入是 5 层</strong>。每一次对话，真正组装进 LLM 的上下文是 <strong>1 层人格（system）+ 5 层情境（user）</strong>。这一章把这 6 层讲清楚，再和 ClaudeCode 的分层对照。</p>
+<h3 id="81-注入侧总览1-5-层"><a class="markdownIt-Anchor" href="#81-注入侧总览1-5-层"></a> 8.1 注入侧总览：1 + 5 层</h3>
+<pre class="mermaid">flowchart TD
+    SYS["<b>system prompt（1 层人格）</b><br/>L0 人格层: 大师 Skill 原文 + 输出约束"]
+    SYS --> U1
+    subgraph USER["<b>user prompt（5 层情境, 自顶向下）</b>"]
+        U1["L1 长期记忆层<br/>top 15 · 来自 agent_user_memories"]
+        U1 --> U2["L2 用户档案层<br/>画像/风险偏好/关注标的/历史决策 · 来自 profile_cards"]
+        U2 --> U3["L3 对话摘要层<br/>最近 5 条 · 来自 conversation_summaries"]
+        U3 --> U4["L4 短期历史层<br/>圆桌 8 条 / 单大师阈值压缩 · 前端带或 DB"]
+        U4 --> U5["L5 当前输入层<br/>本轮提问 + 持仓 + 实时行情 + steer"]
+    end</pre>
+<p>注意它们和第七章存储层的对应关系：<strong>存储侧的 L2 档案 → 注入侧 L2，存储侧 L3 摘要 → 注入侧 L3，独立的长期记忆表 → 注入侧 L1</strong>；而注入侧的 L4（短期历史）不来自记忆层，来自会话本身；L5（当前输入 + 实时数据）是每轮现取的。<strong>人格（L0）永远在 system，情境（L1–L5）永远在 user</strong>——这条边界和第六章「Skill 进 system」是同一个设计。</p>
+<h3 id="82-5-层情境各是什么-给多少"><a class="markdownIt-Anchor" href="#82-5-层情境各是什么-给多少"></a> 8.2 5 层情境各是什么、给多少</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>内容</th>
+<th>来自</th>
+<th>数量上限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1 长期记忆</strong></td>
+<td>用户明确偏好/指令/事实/出处（含持仓快照）</td>
+<td><code>agent_user_memories</code></td>
+<td><strong>top 15</strong>（全量 ≤50）</td>
+</tr>
+<tr>
+<td><strong>L2 用户档案</strong></td>
+<td>画像 + 结构化档案卡</td>
+<td><code>agent_user_profile_cards</code></td>
+<td>关注标的 ≤10、关键决策 ≤5</td>
+</tr>
+<tr>
+<td><strong>L3 对话摘要</strong></td>
+<td>近期对话摘要</td>
+<td><code>agent_conversation_summaries</code></td>
+<td>最近 <strong>5</strong> 条，每条截 240 字</td>
+</tr>
+<tr>
+<td><strong>L4 短期历史</strong></td>
+<td>当前会话原文</td>
+<td>圆桌=前端带 / 单大师=DB 全量+阈值压缩</td>
+<td><strong>8</strong> 条（圆桌）/ 阈值触发（单大师）</td>
+</tr>
+<tr>
+<td><strong>L5 当前输入</strong></td>
+<td>本轮提问 + 持仓 + 实时基本面/行情 + steer</td>
+<td>每轮现取</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>组装代码（<code>roundtable_pipeline.py:965-982</code>）就是把 L1–L3 拼成 <code>memory_block</code>、 prepend 到 user prompt 头部，再叠上历史（L4）和本轮问题+持仓+实时数据（L5）。每一层都有硬上限——<strong>这是上下文不膨胀的关键</strong>。</p>
+<h3 id="83-对话历史怎么管两条链路-阈值触发的多层压缩"><a class="markdownIt-Anchor" href="#83-对话历史怎么管两条链路-阈值触发的多层压缩"></a> 8.3 对话历史怎么管：两条链路 + 阈值触发的多层压缩</h3>
+<p>L4（短期历史）有两条策略不同的链路：</p>
+<ul>
+<li><strong>圆桌链路</strong>：历史<strong>由前端带给后端，后端不持久化</strong>，每次只取<strong>最近 8 条</strong>（<code>history[-8:]</code>）。跨会话的长期连续性交给 L3 摘要层补足。</li>
+<li><strong>单大师聊天链路</strong>：历史<strong>全量落库</strong>（<code>master_chat_messages</code> 表，含压缩摘要），prompt 时<strong>不再用粗暴的滑动窗口</strong>，而是走一套 <strong>Claude Code 风格的阈值触发多层压缩</strong>（<code>chat_compaction.build_llm_history</code>）。<strong>持仓上下文不落库</strong>，只作 system preamble 每次临时注入，避免堆积过期持仓（<code>master_chat_service.py:341-345</code>）。</li>
+</ul>
+<p>这套压缩（<code>chat_compaction.py</code>）替代了旧的 <code>history[-12:]</code> 一刀切，核心规则是：</p>
+<ul>
+<li><strong>阈值触发</strong>：默认 200K 上下文窗口，估算 token 超过「有效窗口 − 摘要预留 − 缓冲」（≈167K）才压缩；<strong>低于阈值不压缩、不滑窗</strong>，全量保留——这是和旧滑窗「第 12 条之后就无条件丢弃」的本质区别。token 估算是 CJK 感知的（中文≈1 token、其他≈1/4），无第三方依赖。</li>
+<li><strong>多层降级</strong>：L0 阈值门 → L1 单条过长消息预算（规则截断，防超长粘贴）→ 时间触发（闲置 &gt;60min 走零成本规则层，省一次 LLM 调用）→ L4 自动压缩（LLM 生成结构化摘要，主机制）→ L2 微压缩兜底（规则：把更老的长回复换成占位符）→ L5 snip（最老直接丢）。</li>
+<li><strong>失败熔断</strong>：自动摘要连续失败 N 次（默认 3）就停手，改走零成本规则层，避免上下文不可救药时每轮白打一次摘要 LLM。</li>
+<li><strong>不删历史、可链式再压缩</strong>：摘要以 <code>compact_summary</code> 角色<strong>追加</strong>进 DB（原始对话不动，UI 仍展示全量）；发给 LLM 的上下文 = 「最近一次摘要 + 其后的近期原样消息」。下次再超限，就把「上次摘要 + 新增旧消息」再压成新摘要，形成压缩链。</li>
+</ul>
+<p>摘要 prompt 也针对投资场景定制了 9 段：核心问题与意图 / 讨论过的标的 / 各大师结论 / 涉及的框架（护城河、估值、安全边际）/ 用户补充的关键信息（买入价、仓位、风险偏好）/ 逐条用户消息要点 / 待跟进问题 / 最近焦点 / 建议下一步。</p>
+<h3 id="84-对比-claudecode注入侧都是分层但分层方式不同"><a class="markdownIt-Anchor" href="#84-对比-claudecode注入侧都是分层但分层方式不同"></a> 8.4 对比 ClaudeCode（注入侧）：都是分层，但分层方式不同</h3>
+<p>如果按「进入模型的内容」来分，<strong>ClaudeCode 的上下文大致也是 5 层</strong>，正好可以和本项目对照：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>ClaudeCode（注入侧）</th>
+<th>本项目（注入侧）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人格/指令</td>
+<td>系统指令（identity/tools/env：git status、date、cwd）</td>
+<td><strong>L0</strong> 大师 Skill 原文（system）</td>
+</tr>
+<tr>
+<td>长期记忆</td>
+<td><code>MEMORY.md</code> 索引，进 <strong>system prompt</strong></td>
+<td><strong>L1</strong> 长期记忆 top 15，进 <strong>user 头部</strong></td>
+</tr>
+<tr>
+<td>辅助上下文</td>
+<td>相关记忆/session memory/userContext，包成 <code>&lt;system-reminder&gt;</code> 的 <strong>meta user message</strong></td>
+<td><strong>L2</strong> 档案 + <strong>L3</strong> 摘要，进 user 头部</td>
+</tr>
+<tr>
+<td>会话历史</td>
+<td>经 session memory <strong>压缩</strong>的 messages + 工具结果</td>
+<td><strong>L4</strong> 阈值触发多层压缩（<strong>现在也压缩了</strong>）</td>
+</tr>
+<tr>
+<td>当前输入</td>
+<td>当前 user turn</td>
+<td><strong>L5</strong> 提问 + 持仓 + 实时行情 + steer</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到，<strong>两边都是「分层 + 索引/摘要常驻 + 按需召回 + 不全量塞」</strong>，但有两个关键差异：</p>
+<ol>
+<li><strong>长期记忆的注入位置</strong>：ClaudeCode 把 <code>MEMORY.md</code> 索引放进 <strong>system prompt</strong>；本项目把人格放 system、记忆/情境放 user。动机不同——ClaudeCode 的 system 里没有&quot;人格&quot;要占座，所以记忆索引可以进 system；本项目的 system 被大师人格占了，记忆只能去 user。</li>
+<li><strong>历史压缩</strong>：这一点<strong>后来对齐了</strong>——早期本项目不压缩历史、只靠滑动窗口 + 独立摘要层；现在单大师聊天链路也引入了 Claude Code 风格的<strong>阈值触发多层压缩</strong>（见 8.3），思路和 CC 的 session memory compaction 同源。区别只剩范围：CC 压的是含工具结果的长任务历史，本项目压的是纯对话（只有 user/assistant 消息，没有工具结果/大文件/计划态，所以 CC 的&quot;大文件层&quot;被去掉了）。</li>
+</ol>
+<h3 id="85-为什么我不需要任务规划"><a class="markdownIt-Anchor" href="#85-为什么我不需要任务规划"></a> 8.5 为什么我不需要任务规划</h3>
+<p>这是和 ClaudeCode 最本质的区别，也是本项目「简单」的根源。</p>
+<p><strong>ClaudeCode 的上下文管理之所以复杂</strong>，是因为它要支撑<strong>长程、多步、会分叉的 agentic 任务</strong>：需要 TodoWrite 跟踪进度、需要任务状态、需要子 agent sidechain、需要在上下文快满时 auto-compaction、还要把工具结果/system-reminder/hook 输出都纳入。它管理的是一个<strong>正在执行中的、有状态的工程任务</strong>。</p>
+<p><strong>而本项目可以非常简单</strong>，因为场景本质不同——<strong>我做的是「聊天类交互」，不是「任务执行」</strong>：</p>
+<ol>
+<li><strong>没有任务规划、没有 todo、没有任务状态机。</strong> 在 <code>master_agent.py</code> / <code>roundtable_pipeline.py</code> / <code>master_chat_service.py</code> 全文搜 <code>todo | task_plan | plan_step | task_state | checklist</code>，<strong>零匹配</strong>。</li>
+<li><strong>「复杂的部分」不在对话里，而在确定性流水线里。</strong> 用户说「分析一下茅台」，这句话很简单；真正复杂的多空博弈、7 个分析师、风险辩论，全由 <code>run_roundtable_sync</code> / TradingAgents 这条<strong>程序编排的流水线</strong>去跑，<strong>不是让 LLM 去&quot;规划&quot;步骤</strong>。LLM 不需要 todo list——流程是代码写死的，它只需在指定节点把指定那件事做好。</li>
+<li><strong>所以不需要「任务状态 vs 普通聊天」的区分。</strong> 每轮都是独立的「问 → 答」，长期连续性由<strong>记忆层</strong>（而非历史窗口）负责。</li>
+</ol>
+<p>结论很干净：<strong>当「智能的编排」由代码（而非 LLM 的规划）承担时，上下文管理可以收敛成「按需压缩的历史 + 独立记忆层」这样的形态。</strong> 我把复杂度从「运行时上下文」挪到了「设计时流水线」，这是这个项目能保持简单、可控、便宜的根本原因。这不是说我的方案更优——<strong>两者面向的场景不同</strong>：ClaudeCode 必须处理开放式、跨几十步的工程任务，所以需要那套复杂机制；本项目处理一次投资咨询对话，一套简单机制就够。<strong>按需设计，不盲目照搬，这本身也是「本分」。</strong></p>
+<h2 id="九-其他值得一提的技术点"><a class="markdownIt-Anchor" href="#九-其他值得一提的技术点"></a> 九、其他值得一提的技术点</h2>
+<p>除了上面三大块，还有几个工程细节，虽然不显眼，但都是让一个 LLM 产品「能用」和「好用」拉开差距的地方：</p>
+<ol>
+<li>
+<p><strong>Steer：运行中改需求。</strong> 用户可以在一次分析<strong>跑到一半时</strong>追加指令（「再帮我看看现金流」「别讲技术面了」）。这些指令缓冲在 Redis list 里，流水线在大师发言的「检查点」把它们 drain 出来、合并进<strong>还没发言</strong>的大师的 prompt（<code>roundtable_pipeline.py:1029-1049</code>）。语义和 ChatGPT 的 steer 一致：<strong>只影响还没发生的工作</strong>，不打扰正在流式输出的大师。</p>
+</li>
+<li>
+<p><strong>缓存体系：LLM 产品的成本生命线。</strong> 这个系统大量用缓存把「贵」的 LLM 调用摊薄：<code>ta_cache</code> 夜间对几百只票批量预热 TradingAgents 结果，圆桌命中就免去 10+ 分钟的现场跑图；红黑榜用 write-on-update 避免冷启动 502；行情有独立的 quote cache。对于一个「每日扫前 200 × 3 市场 + 每个详情页 10 分钟」的系统，<strong>没有这层缓存，成本根本撑不住。</strong></p>
+</li>
+<li>
+<p><strong>Provider 链降级 + 熔断。</strong> 现在用的是一条可配的 provider 链（<code>FailoverOpenAIClient</code>，openai 客户端的 drop-in 替换）：<strong>DeepSeek 主、MiniMax 备</strong>，调用先走主链，遇到配额 / 鉴权 / 5xx / 超时这类<strong>值得降级</strong>的错误，就切到备链并<strong>自动把模型 id 换成备链自己的</strong>（MiniMax 的模型 id 会被 DeepSeek 拒，反之亦然）。整条链共享一个进程级<strong>熔断器</strong>（<code>is_primary_down</code> / <code>trip_primary</code>），一次故障全进程感知；发言一旦流出第一个 token 就不再重试（避免两半拼接），保证「即使 LLM 全挂，页面也不会白屏」。另外 DeepSeek 链路会显式关掉 thinking 模式——推理 token 也计入 <code>max_tokens</code>，预算紧的对话会被顶空。</p>
+</li>
+<li>
+<p><strong>数据脱敏内建在第一道。</strong> CSV 导入时就把卡号、邮箱、手机号打码（<code>csv_parser.py:8-12</code>）；红黑榜有专门的指标防污染（<code>research_leaderboard.py:882-977</code>）剔除「把股票代码当 PE」这类脏数据。这些「脏活」不性感，但对一个自动化处理真实持仓、批量生成榜单的系统是生死线。</p>
+</li>
+<li>
+<p><strong>大师名单的「三个版本」坑。</strong> 代码里有三份不一致的大师名单：catalog 注册了 11 位、圆桌默认轮换 10 位（不含李录）、Web 端默认 5 位。李录注册了却进不了默认圆桌。这是一个典型的「演进中留下的不一致」，属于我知道但还没来得及收敛的技术债——写出来提醒自己，也提醒读者：<strong>配置分散在多处时，要以 catalog 为唯一事实源收敛。</strong></p>
+</li>
+</ol>
+<hr />
+<h2 id="十-结尾这套系统到底在解决什么"><a class="markdownIt-Anchor" href="#十-结尾这套系统到底在解决什么"></a> 十、结尾：这套系统到底在解决什么</h2>
+<p>回看整个项目，它其实就干了一件事：<strong>把一个普通人「不擅长、没时间、容错率又低」的投资决策，交给一套被精心设计过的 AI 系统去把关。</strong></p>
+<ul>
+<li>用<strong>女娲 + 达尔文</strong>，把 11 位大师几十年公开的言论，蒸馏并进化成可运行的 Skill；</li>
+<li>用<strong>大师圆桌</strong>提供「叙事和视角」，用 <strong>TradingAgents 多空博弈</strong>提供「可量化的打分」，两者分离，既不啰嗦也不乱喊单；</li>
+<li>用<strong>红黑榜</strong>在市值前 200 这个「胜率最高的池子」里做每日扫描——这个「只看前 200」的决定，背后是收益集中度的事实和工程成本的双重推导；</li>
+<li>用<strong>持仓分析</strong>（7 种导入 + 1 Lead 4 Teammate）盯住普通人最容易踩的两个坑：「买哪只」和「押多重」；</li>
+<li>用一套<strong>数据库化的四层记忆</strong>让它越用越懂你，又用<strong>极简的上下文管理</strong>保持整个系统的简单和便宜。</li>
+</ul>
+<p>如果说有什么贯穿始终的设计哲学，那大概就是段永平 Skill 里被反复强化的那两个字——<strong>本分</strong>：知道自己能力圈的边界（不看长尾小票、不乱给买卖建议、不确定就说不确定）、把复杂留给设计时而不是运行时、把「不做什么」看得比「做什么」更重。</p>
+<p>这套系统还在持续迭代（大师名单要收敛、MiniMax 链路要吃全量 Skill、红黑榜要接更多维度）。如果你也在做类似的「把专家知识蒸馏成 Agent」的尝试，希望这篇拆解对你有用。</p>
+<hr />
+<blockquote>
+<p><strong>附：核心代码索引</strong></p>
+<ul>
+<li>圆桌流水线：<code>SoundFinancialPlanningBE/app/services/roundtable_pipeline.py:947</code></li>
+<li>TradingAgents：<code>SoundFinancialPlanningBE/app/agents/tradingagents/</code>（编排 <code>graph/trading_graph.py</code>）</li>
+<li>红黑榜：<code>SoundFinancialPlanningBE/app/services/research_leaderboard.py</code>、<code>prewarm_universe.py</code></li>
+<li>持仓/复盘：<code>holding_import_service.py</code>、<code>portfolio_snapshot.py</code>、<code>deep_review/coordinator.py</code></li>
+<li>Skill：<code>master_skills/catalog.py</code>、<code>services/master_skill_loader.py</code>、<code>.claude/skills/*-skill/SKILL.md</code></li>
+<li>记忆：<code>services/agent_memory.py</code>、<code>services/agent_user_memories.py</code>、<code>db.py:225-277</code></li>
+<li>人格生产管线：外部 <code>nuwa-skill</code>（女娲提取）+ <code>darwin-skill</code>（达尔文进化）</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://xiaofenglei.cn" rel="external nofollow noreferrer">小风雷</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://xiaofenglei.cn/2026/08/02/wen-jian-li-cai-zhu-li-agent-zheng-liu-da-shi-skill-yu-duo-kong-bo-yi-tradingagent/">https://xiaofenglei.cn/2026/08/02/wen-jian-li-cai-zhu-li-agent-zheng-liu-da-shi-skill-yu-duo-kong-bo-yi-tradingagent/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://xiaofenglei.cn" target="_blank">小风雷</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Agent/">
+                                    <span class="chip bg-color">Agent</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                    <span class="chip bg-color">工程实践</span>
+                                </a>
+                            
+                                <a href="/tags/Memory/">
+                                    <span class="chip bg-color">Memory</span>
+                                </a>
+                            
+                                <a href="/tags/LLM/">
+                                    <span class="chip bg-color">LLM</span>
+                                </a>
+                            
+                                <a href="/tags/Skill/">
+                                    <span class="chip bg-color">Skill</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%8A%95%E8%B5%84/">
+                                    <span class="chip bg-color">投资</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
+                                    <span class="chip bg-color">上下文工程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '7878399d8bff0d88848b',
+        clientSecret: '96eaba695092f18c65833528c2ef63ad74696f00',
+        repo: 'weijunlei.github.io',
+        owner: 'weijunlei',
+        admin: "weijunlei",
+        id: '2026-08-02T15-00-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2026/08/04/anthropic-engineer-bo-ke-tong-du-26-pian-agent-gong-cheng-yan-jin-di-tu-yu-claudecode-yuan-ma-jiao-cha-yan-zheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://s3.bmp.ovh/2026/03/16/sa8PsCyf.jpg" class="responsive-img" alt="做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证">
+                        
+                        <span class="card-title">做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            把 Anthropic Engineering 2024-09 到 2026-04 的 26 篇工程师博客按时间升序通读一遍，再交叉比对 2026-03-31 泄露的 Claude Code 源码与 CL4R1T4S 泄露的 Claude/Claude Code 系统提示词，看哪些想法真正落地、哪些还停在 PPT 上。整篇文章结论先行：大师给咱们画了一张「Agent 工程的演进地图」——先证明可行、再做厚基建、最后补治理与评测。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-08-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Agent/">
+                        <span class="chip bg-color">Agent</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
+                    </a>
+                    
+                    <a href="/tags/LLM/">
+                        <span class="chip bg-color">LLM</span>
+                    </a>
+                    
+                    <a href="/tags/Skill/">
+                        <span class="chip bg-color">Skill</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">上下文工程</span>
+                    </a>
+                    
+                    <a href="/tags/Anthropic/">
+                        <span class="chip bg-color">Anthropic</span>
+                    </a>
+                    
+                    <a href="/tags/Claude-Code/">
+                        <span class="chip bg-color">Claude Code</span>
+                    </a>
+                    
+                    <a href="/tags/MCP/">
+                        <span class="chip bg-color">MCP</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B2%99%E7%AE%B1/">
+                        <span class="chip bg-color">沙箱</span>
+                    </a>
+                    
+                    <a href="/tags/Evals/">
+                        <span class="chip bg-color">Evals</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/07/25/tcc-san-jie-duan-yu-yi-wai-mai-xi-tong-fen-bu-shi-ku-cun-zui-zhong-yi-zhi-xing-fang-an/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://s3.bmp.ovh/2026/03/16/ztRCBA6e.jpg" class="responsive-img" alt="基于 TCC 思想的分布式库存一致性方案">
+                        
+                        <span class="card-title">基于 TCC 思想的分布式库存一致性方案</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从库存预扣到事务补偿，结合 TCC 业务语义、Reservation 状态机和定时对账，完整拆解高并发库存系统的最终一致性设计。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-07-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">分布式系统</span>
+                    </a>
+                    
+                    <a href="/tags/TCC/">
+                        <span class="chip bg-color">TCC</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/">
+                        <span class="chip bg-color">状态机</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7/">
+                        <span class="chip bg-color">最终一致性</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小风雷<br />'
+            + '文章作者: 小风雷<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy; 2026 WeijunLei. All Rights Reserved.
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                    class="white-color">94.4k</span>&nbsp;字
+                
+            <span id="sitetime"></span>
+
+            
+            
+            
+            <br>
+            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+                赣ICP备2026004021号-1
+            </a>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/weijunlei" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:weijunlei01@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+    $(document).ready(function () {
+        var int = setInterval(fixCount, 50);
+        var pvcountOffset = 80000;
+        var uvcountOffset = 20000;
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int);
+            }
+        }
+    });
+</script>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2019, 12, 12, 00, 00, 00); 
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js"></script>
+    <script src="/js/matery.js"></script>
+    
+    <!-- Mermaid 支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            flowchart: { useMaxWidth: false, htmlLabels: true },
+            sequence: {
+                useMaxWidth: false,
+                actorMargin: 80,
+                width: 160,
+                height: 65,
+                messageMargin: 45
+            },
+            themeVariables: {
+                fontSize: '18px',
+                actorFontSize: '18px',
+                noteFontSize: '18px',
+                background: '#fff7cc',
+                primaryColor: '#fff2a8',
+                primaryTextColor: '#172033',
+                primaryBorderColor: '#8a6d00',
+                lineColor: '#5f520f',
+                signalColor: '#5f520f',
+                signalTextColor: '#172033',
+                actorBkg: '#fff2a8',
+                actorBorder: '#8a6d00',
+                actorTextColor: '#172033',
+                labelBoxBkgColor: '#fff2a8',
+                labelBoxBorderColor: '#8a6d00',
+                labelTextColor: '#172033',
+                noteBkgColor: '#ffe98a',
+                noteTextColor: '#172033',
+                activationBkgColor: '#ffe98a',
+                activationBorderColor: '#8a6d00'
+            }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>

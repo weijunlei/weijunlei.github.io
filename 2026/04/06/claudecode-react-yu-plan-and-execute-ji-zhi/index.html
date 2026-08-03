@@ -5,8 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现, 小风雷">
-    <meta name="description" content="ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现这篇文章继续沿着 claude-code 的 TypeScript 源码往下拆。
-如果上一篇文章回答的是 Claude">
+    <meta name="description" content=" ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现
+这篇文章继续沿着 claude-code 的 TypeScript 源码往下拆。
+如果上一篇文章回答的是 Clau">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -373,7 +374,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="ClaudeCode-的执行机制：ReAct-与-Plan-and-Execute-在-TypeScript-源码中的实现"><a href="#ClaudeCode-的执行机制：ReAct-与-Plan-and-Execute-在-TypeScript-源码中的实现" class="headerlink" title="ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现"></a>ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现</h1><p>这篇文章继续沿着 <code>claude-code</code> 的 TypeScript 源码往下拆。</p>
+                <h1 id="claudecode-的执行机制react-与-plan-and-execute-在-typescript-源码中的实现"><a class="markdownIt-Anchor" href="#claudecode-的执行机制react-与-plan-and-execute-在-typescript-源码中的实现"></a> ClaudeCode 的执行机制：ReAct 与 Plan-and-Execute 在 TypeScript 源码中的实现</h1>
+<p>这篇文章继续沿着 <code>claude-code</code> 的 TypeScript 源码往下拆。</p>
 <p>如果上一篇文章回答的是 ClaudeCode “怎么记住上下文”，那这篇文章回答的是另一个更核心的问题：</p>
 <ol>
 <li>ClaudeCode 到底是不是按 <strong>ReAct</strong> 在跑；</li>
@@ -384,15 +386,16 @@
 <p>先说结论：</p>
 <blockquote>
 <p>ClaudeCode 的默认执行内核是一个典型的 ReAct 式主循环：模型输出、发现 <code>tool_use</code>、执行工具、把 <code>tool_result</code> 追加回上下文、继续下一轮。</p>
-<p>而所谓 Plan-and-Execute，并不是另一套完全独立的 agent runtime。它本质上是在同一个 ReAct 主循环上，再叠加一层 <strong>plan mode 权限模式 + plan file + 用户审批流 + 额外提示词&#x2F;attachment</strong>。</p>
+<p>而所谓 Plan-and-Execute，并不是另一套完全独立的 agent runtime。它本质上是在同一个 ReAct 主循环上，再叠加一层 <strong>plan mode 权限模式 + plan file + 用户审批流 + 额外提示词/attachment</strong>。</p>
 </blockquote>
 <p>换句话说：</p>
 <ul>
 <li><strong>ReAct</strong> 是 ClaudeCode 的“基础发动机”；</li>
 <li><strong>Plan-and-Execute</strong> 是这个发动机上的“受控规划挡位”。</li>
 </ul>
-<hr>
-<h2 id="1-先看大图：ClaudeCode-其实是“两层机制”"><a href="#1-先看大图：ClaudeCode-其实是“两层机制”" class="headerlink" title="1. 先看大图：ClaudeCode 其实是“两层机制”"></a>1. 先看大图：ClaudeCode 其实是“两层机制”</h2><p>很多人第一次看 ClaudeCode，会以为：</p>
+<hr />
+<h2 id="1-先看大图claudecode-其实是两层机制"><a class="markdownIt-Anchor" href="#1-先看大图claudecode-其实是两层机制"></a> 1. 先看大图：ClaudeCode 其实是“两层机制”</h2>
+<p>很多人第一次看 ClaudeCode，会以为：</p>
 <ol>
 <li>简单任务走普通 agent；</li>
 <li>复杂任务走另一个 planner executor 系统。</li>
@@ -404,36 +407,38 @@
 <li><strong>是否处于 plan mode</strong>，只会改变这轮循环的约束、提示和权限，不会换掉底层循环本身。</li>
 </ol>
 <p>所以它的真实结构更像这样：</p>
-<pre class=" language-language-text"><code class="language-language-text">用户请求
-  -> query() 主循环
-     -> 模型输出 assistant
-     -> 如果出现 tool_use，则执行工具
-     -> 把 tool_result 追加回上下文
-     -> 继续下一轮
+<pre class="highlight"><code class="text">用户请求
+  -&gt; query() 主循环
+     -&gt; 模型输出 assistant
+     -&gt; 如果出现 tool_use，则执行工具
+     -&gt; 把 tool_result 追加回上下文
+     -&gt; 继续下一轮
 
 如果进入 plan mode：
-  -> 还是同一个 query() 主循环
-  -> 只是变成“只读探索 + 写 plan file + AskUserQuestion/ExitPlanMode”
-  -> 计划获批后，退出 plan mode
-  -> 再回到同一个 query() 主循环继续真正实施
+  -&gt; 还是同一个 query() 主循环
+  -&gt; 只是变成“只读探索 + 写 plan file + AskUserQuestion/ExitPlanMode”
+  -&gt; 计划获批后，退出 plan mode
+  -&gt; 再回到同一个 query() 主循环继续真正实施
 </code></pre>
 <p>这也是为什么，从工程实现上说，Plan-and-Execute 更像：</p>
 <blockquote>
 <p>“ReAct loop + planning constraints + approval boundary”</p>
 </blockquote>
 <p>而不是一个和普通执行完全分开的执行器。</p>
-<hr>
-<h2 id="2-ReAct：ClaudeCode-的默认执行内核"><a href="#2-ReAct：ClaudeCode-的默认执行内核" class="headerlink" title="2. ReAct：ClaudeCode 的默认执行内核"></a>2. ReAct：ClaudeCode 的默认执行内核</h2><h2 id="2-1-query-就是主循环"><a href="#2-1-query-就是主循环" class="headerlink" title="2.1 query() 就是主循环"></a>2.1 <code>query()</code> 就是主循环</h2><p>ClaudeCode 最核心的执行循环在 <code>src/query.ts</code>。</p>
+<hr />
+<h2 id="2-reactclaudecode-的默认执行内核"><a class="markdownIt-Anchor" href="#2-reactclaudecode-的默认执行内核"></a> 2. ReAct：ClaudeCode 的默认执行内核</h2>
+<h2 id="21-query-就是主循环"><a class="markdownIt-Anchor" href="#21-query-就是主循环"></a> 2.1 <code>query()</code> 就是主循环</h2>
+<p>ClaudeCode 最核心的执行循环在 <code>src/query.ts</code>。</p>
 <p>它先把当前运行态状态放进一个 <code>state</code>，然后直接进入一个无限循环：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">let state: State = {
-  messages: params.messages,
-  toolUseContext: params.toolUseContext,
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">let</span> <span class="hljs-attr">state</span>: <span class="hljs-title class_">State</span> = {
+  <span class="hljs-attr">messages</span>: params.<span class="hljs-property">messages</span>,
+  <span class="hljs-attr">toolUseContext</span>: params.<span class="hljs-property">toolUseContext</span>,
   ...
 }
 
-while (true) {
-  let { toolUseContext } = state
-  const { messages, turnCount, ... } = state
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+  <span class="hljs-keyword">let</span> { toolUseContext } = state
+  <span class="hljs-keyword">const</span> { messages, turnCount, ... } = state
   ...
 }
 </code></pre>
@@ -447,56 +452,58 @@ while (true) {
 <li>再带着新结果继续下一轮。</li>
 </ol>
 <p>如果从模式上看，这就是一个非常标准的 ReAct runtime。</p>
-<hr>
-<h2 id="2-2-ClaudeCode-里的-ReAct，不是概念，而是“assistant-tool-use-tool-result-next-turn”"><a href="#2-2-ClaudeCode-里的-ReAct，不是概念，而是“assistant-tool-use-tool-result-next-turn”" class="headerlink" title="2.2 ClaudeCode 里的 ReAct，不是概念，而是“assistant -&gt; tool_use -&gt; tool_result -&gt; next turn”"></a>2.2 ClaudeCode 里的 ReAct，不是概念，而是“assistant -&gt; tool_use -&gt; tool_result -&gt; next turn”</h2><p>ReAct 的关键不是“模型会思考”，而是：</p>
+<hr />
+<h2 id="22-claudecode-里的-react不是概念而是assistant-tool_use-tool_result-next-turn"><a class="markdownIt-Anchor" href="#22-claudecode-里的-react不是概念而是assistant-tool_use-tool_result-next-turn"></a> 2.2 ClaudeCode 里的 ReAct，不是概念，而是“assistant -&gt; tool_use -&gt; tool_result -&gt; next turn”</h2>
+<p>ReAct 的关键不是“模型会思考”，而是：</p>
 <ol>
 <li>模型先给出当前轮响应；</li>
 <li>如果响应里有工具调用，就进入行动；</li>
 <li>把行动结果再喂回模型继续推理。</li>
 </ol>
 <p>ClaudeCode 在流式消费模型输出时，会显式收集这轮 assistant 里出现的 <code>tool_use</code> block：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (message.type === 'assistant') {
-  assistantMessages.push(message)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (message.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;assistant&#x27;</span>) {
+  assistantMessages.<span class="hljs-title function_">push</span>(message)
 
-  const msgToolUseBlocks = message.message.content.filter(
-    content => content.type === 'tool_use',
-  ) as ToolUseBlock[]
+  <span class="hljs-keyword">const</span> msgToolUseBlocks = message.<span class="hljs-property">message</span>.<span class="hljs-property">content</span>.<span class="hljs-title function_">filter</span>(
+    <span class="hljs-function"><span class="hljs-params">content</span> =&gt;</span> content.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;tool_use&#x27;</span>,
+  ) <span class="hljs-keyword">as</span> <span class="hljs-title class_">ToolUseBlock</span>[]
 
-  if (msgToolUseBlocks.length > 0) {
-    toolUseBlocks.push(...msgToolUseBlocks)
-    needsFollowUp = true
+  <span class="hljs-keyword">if</span> (msgToolUseBlocks.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    toolUseBlocks.<span class="hljs-title function_">push</span>(...msgToolUseBlocks)
+    needsFollowUp = <span class="hljs-literal">true</span>
   }
 }
 </code></pre>
 <p>这里有两个很关键的点：</p>
 <ol>
 <li>只要 assistant 消息里出现了 <code>tool_use</code>，就会把 <code>needsFollowUp = true</code>；</li>
-<li>ClaudeCode 不依赖 API 返回的 <code>stop_reason === &#39;tool_use&#39;</code>，因为源码里明确写了这个值“不可靠”。</li>
+<li>ClaudeCode 不依赖 API 返回的 <code>stop_reason === 'tool_use'</code>，因为源码里明确写了这个值“不可靠”。</li>
 </ol>
 <p>源码原注释非常直白：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">// Note: stop_reason === 'tool_use' is unreliable -- it's not always set correctly.
-// Set during streaming whenever a tool_use block arrives — the sole
-// loop-exit signal.
+<pre class="highlight"><code class="ts"><span class="hljs-comment">// Note: stop_reason === &#x27;tool_use&#x27; is unreliable -- it&#x27;s not always set correctly.</span>
+<span class="hljs-comment">// Set during streaming whenever a tool_use block arrives — the sole</span>
+<span class="hljs-comment">// loop-exit signal.</span>
 </code></pre>
 <p>这意味着 ClaudeCode 在工程上真正判断“这一轮是不是要继续 ReAct”的依据，不是 stop_reason，而是：</p>
 <blockquote>
 <p><strong>流里有没有真实到达 <code>tool_use</code> block。</strong></p>
 </blockquote>
 <p>这点很重要，因为它说明 ClaudeCode 的 ReAct continuation 是按消息内容判定的，不是按 API 元数据盲信的。</p>
-<hr>
-<h2 id="2-3-工具执行之后，结果会被重新塞回下一轮上下文"><a href="#2-3-工具执行之后，结果会被重新塞回下一轮上下文" class="headerlink" title="2.3 工具执行之后，结果会被重新塞回下一轮上下文"></a>2.3 工具执行之后，结果会被重新塞回下一轮上下文</h2><p>ClaudeCode 在拿到 <code>toolUseBlocks</code> 之后，会执行工具：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">const toolUpdates = streamingToolExecutor
-  ? streamingToolExecutor.getRemainingResults()
-  : runTools(toolUseBlocks, assistantMessages, canUseTool, toolUseContext)
+<hr />
+<h2 id="23-工具执行之后结果会被重新塞回下一轮上下文"><a class="markdownIt-Anchor" href="#23-工具执行之后结果会被重新塞回下一轮上下文"></a> 2.3 工具执行之后，结果会被重新塞回下一轮上下文</h2>
+<p>ClaudeCode 在拿到 <code>toolUseBlocks</code> 之后，会执行工具：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">const</span> toolUpdates = streamingToolExecutor
+  ? streamingToolExecutor.<span class="hljs-title function_">getRemainingResults</span>()
+  : <span class="hljs-title function_">runTools</span>(toolUseBlocks, assistantMessages, canUseTool, toolUseContext)
 
-for await (const update of toolUpdates) {
-  if (update.message) {
-    yield update.message
-    toolResults.push(
-      ...normalizeMessagesForAPI(
-        [update.message],
-        toolUseContext.options.tools,
-      ).filter(_ => _.type === 'user'),
+<span class="hljs-keyword">for</span> <span class="hljs-title function_">await</span> (<span class="hljs-keyword">const</span> update <span class="hljs-keyword">of</span> toolUpdates) {
+  <span class="hljs-keyword">if</span> (update.<span class="hljs-property">message</span>) {
+    <span class="hljs-keyword">yield</span> update.<span class="hljs-property">message</span>
+    toolResults.<span class="hljs-title function_">push</span>(
+      ...<span class="hljs-title function_">normalizeMessagesForAPI</span>(
+        [update.<span class="hljs-property">message</span>],
+        toolUseContext.<span class="hljs-property">options</span>.<span class="hljs-property">tools</span>,
+      ).<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> _.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;user&#x27;</span>),
     )
   }
 }
@@ -507,19 +514,19 @@ for await (const update of toolUpdates) {
 <li>把工具结果规范化成可以重新送回模型的消息，塞进 <code>toolResults</code>。</li>
 </ol>
 <p>然后在需要继续下一轮时，它会构造新的状态：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">state = {
+<pre class="highlight"><code class="ts">state = {
   ...state,
-  messages: [...messagesForQuery, ...assistantMessages, ...toolResults],
-  toolUseContext: updatedToolUseContext,
-  turnCount: turnCount + 1,
-  pendingToolUseSummary: nextPendingToolUseSummary,
+  <span class="hljs-attr">messages</span>: [...messagesForQuery, ...assistantMessages, ...toolResults],
+  <span class="hljs-attr">toolUseContext</span>: updatedToolUseContext,
+  <span class="hljs-attr">turnCount</span>: turnCount + <span class="hljs-number">1</span>,
+  <span class="hljs-attr">pendingToolUseSummary</span>: nextPendingToolUseSummary,
 }
-continue
+<span class="hljs-keyword">continue</span>
 </code></pre>
 <p>这就是最典型的 ReAct 闭环：</p>
 <ol>
 <li><code>messagesForQuery</code> 是上一轮已有上下文；</li>
-<li><code>assistantMessages</code> 是这轮模型刚刚输出的推理&#x2F;工具调用；</li>
+<li><code>assistantMessages</code> 是这轮模型刚刚输出的推理/工具调用；</li>
 <li><code>toolResults</code> 是执行后的观察结果；</li>
 <li>三者拼起来进入下一轮。</li>
 </ol>
@@ -527,10 +534,11 @@ continue
 <blockquote>
 <p>ClaudeCode 把每一轮 assistant 产出的 <code>tool_use</code> 视作 continuation signal，执行后把 <code>tool_result</code> 追加回消息流，再进入下一轮 <code>query()</code>。</p>
 </blockquote>
-<hr>
-<h2 id="2-4-什么时候会停下，不再继续-ReAct"><a href="#2-4-什么时候会停下，不再继续-ReAct" class="headerlink" title="2.4 什么时候会停下，不再继续 ReAct"></a>2.4 什么时候会停下，不再继续 ReAct</h2><p>如果这一轮没有出现工具调用，<code>needsFollowUp</code> 就会保持为 <code>false</code>：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (!needsFollowUp) {
-  const lastMessage = assistantMessages.at(-1)
+<hr />
+<h2 id="24-什么时候会停下不再继续-react"><a class="markdownIt-Anchor" href="#24-什么时候会停下不再继续-react"></a> 2.4 什么时候会停下，不再继续 ReAct</h2>
+<p>如果这一轮没有出现工具调用，<code>needsFollowUp</code> 就会保持为 <code>false</code>：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (!needsFollowUp) {
+  <span class="hljs-keyword">const</span> lastMessage = assistantMessages.<span class="hljs-title function_">at</span>(-<span class="hljs-number">1</span>)
   ...
 }
 </code></pre>
@@ -546,8 +554,9 @@ continue
 <blockquote>
 <p><strong>只要模型还在发工具调用，它就继续；一旦本轮没有工具调用，就把这轮当成完成。</strong></p>
 </blockquote>
-<hr>
-<h2 id="2-5-ClaudeCode-什么时候会走-ReAct"><a href="#2-5-ClaudeCode-什么时候会走-ReAct" class="headerlink" title="2.5 ClaudeCode 什么时候会走 ReAct"></a>2.5 ClaudeCode 什么时候会走 ReAct</h2><p>答案其实很简单：</p>
+<hr />
+<h2 id="25-claudecode-什么时候会走-react"><a class="markdownIt-Anchor" href="#25-claudecode-什么时候会走-react"></a> 2.5 ClaudeCode 什么时候会走 ReAct</h2>
+<p>答案其实很简单：</p>
 <blockquote>
 <p><strong>几乎所有正常的 ClaudeCode 任务，默认都在走 ReAct。</strong></p>
 </blockquote>
@@ -561,17 +570,19 @@ continue
 </ul>
 <p>最后都还是走到同一个 <code>query()</code> 主循环里，由 assistant 消息决定要不要发工具调用。</p>
 <p>所以 ReAct 不是 ClaudeCode 的“某种高级模式”，而是它的默认操作系统。</p>
-<hr>
-<h2 id="3-Plan-and-Execute：不是第二套引擎，而是-ReAct-上叠加的-planning-模式"><a href="#3-Plan-and-Execute：不是第二套引擎，而是-ReAct-上叠加的-planning-模式" class="headerlink" title="3. Plan-and-Execute：不是第二套引擎，而是 ReAct 上叠加的 planning 模式"></a>3. Plan-and-Execute：不是第二套引擎，而是 ReAct 上叠加的 planning 模式</h2><h2 id="3-1-Plan-mode-的本质：切换-toolPermissionContext-mode"><a href="#3-1-Plan-mode-的本质：切换-toolPermissionContext-mode" class="headerlink" title="3.1 Plan mode 的本质：切换 toolPermissionContext.mode"></a>3.1 Plan mode 的本质：切换 <code>toolPermissionContext.mode</code></h2><p>ClaudeCode 用 <code>ToolPermissionContext</code> 表示当前工具权限状态：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export type ToolPermissionContext = {
-  mode: PermissionMode
+<hr />
+<h2 id="3-plan-and-execute不是第二套引擎而是-react-上叠加的-planning-模式"><a class="markdownIt-Anchor" href="#3-plan-and-execute不是第二套引擎而是-react-上叠加的-planning-模式"></a> 3. Plan-and-Execute：不是第二套引擎，而是 ReAct 上叠加的 planning 模式</h2>
+<h2 id="31-plan-mode-的本质切换-toolpermissioncontextmode"><a class="markdownIt-Anchor" href="#31-plan-mode-的本质切换-toolpermissioncontextmode"></a> 3.1 Plan mode 的本质：切换 <code>toolPermissionContext.mode</code></h2>
+<p>ClaudeCode 用 <code>ToolPermissionContext</code> 表示当前工具权限状态：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">ToolPermissionContext</span> = {
+  <span class="hljs-attr">mode</span>: <span class="hljs-title class_">PermissionMode</span>
   ...
-  prePlanMode?: PermissionMode
+  <span class="hljs-attr">prePlanMode</span>?: <span class="hljs-title class_">PermissionMode</span>
 }
 </code></pre>
 <p>这里的 <code>prePlanMode</code> 注释写得很清楚：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">/** Stores the permission mode before model-initiated plan mode entry,
- * so it can be restored on exit */
+<pre class="highlight"><code class="ts"><span class="hljs-comment">/** Stores the permission mode before model-initiated plan mode entry,
+ * so it can be restored on exit */</span>
 </code></pre>
 <p>也就是说，plan mode 不是一个抽象概念，而是一个真实的运行态权限模式：</p>
 <ul>
@@ -580,19 +591,20 @@ continue
 <li>退出 plan mode 时再恢复回去。</li>
 </ul>
 <p>这就是 Plan-and-Execute 的第一层实现基础。</p>
-<hr>
-<h2 id="3-2-手动进入-plan-mode：-plan"><a href="#3-2-手动进入-plan-mode：-plan" class="headerlink" title="3.2 手动进入 plan mode：/plan"></a>3.2 手动进入 plan mode：<code>/plan</code></h2><p>用户可以直接通过 <code>/plan</code> 命令手动进入 plan mode。</p>
+<hr />
+<h2 id="32-手动进入-plan-modeplan"><a class="markdownIt-Anchor" href="#32-手动进入-plan-modeplan"></a> 3.2 手动进入 plan mode：<code>/plan</code></h2>
+<p>用户可以直接通过 <code>/plan</code> 命令手动进入 plan mode。</p>
 <p><code>src/commands/plan/plan.tsx</code> 里的逻辑很直接：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (currentMode !== 'plan') {
-  handlePlanModeTransition(currentMode, 'plan')
-  setAppState(prev => ({
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (currentMode !== <span class="hljs-string">&#x27;plan&#x27;</span>) {
+  <span class="hljs-title function_">handlePlanModeTransition</span>(currentMode, <span class="hljs-string">&#x27;plan&#x27;</span>)
+  <span class="hljs-title function_">setAppState</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> ({
     ...prev,
-    toolPermissionContext: applyPermissionUpdate(
-      prepareContextForPlanMode(prev.toolPermissionContext),
+    <span class="hljs-attr">toolPermissionContext</span>: <span class="hljs-title function_">applyPermissionUpdate</span>(
+      <span class="hljs-title function_">prepareContextForPlanMode</span>(prev.<span class="hljs-property">toolPermissionContext</span>),
       {
-        type: 'setMode',
-        mode: 'plan',
-        destination: 'session',
+        <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;setMode&#x27;</span>,
+        <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;plan&#x27;</span>,
+        <span class="hljs-attr">destination</span>: <span class="hljs-string">&#x27;session&#x27;</span>,
       },
     ),
   }))
@@ -608,22 +620,23 @@ continue
 <blockquote>
 <p><strong>用户显式要求规划。</strong></p>
 </blockquote>
-<hr>
-<h2 id="3-3-模型主动进入-plan-mode：EnterPlanModeTool"><a href="#3-3-模型主动进入-plan-mode：EnterPlanModeTool" class="headerlink" title="3.3 模型主动进入 plan mode：EnterPlanModeTool"></a>3.3 模型主动进入 plan mode：<code>EnterPlanModeTool</code></h2><p>ClaudeCode 还允许模型自己调用 <code>EnterPlanModeTool</code>。</p>
+<hr />
+<h2 id="33-模型主动进入-plan-modeenterplanmodetool"><a class="markdownIt-Anchor" href="#33-模型主动进入-plan-modeenterplanmodetool"></a> 3.3 模型主动进入 plan mode：<code>EnterPlanModeTool</code></h2>
+<p>ClaudeCode 还允许模型自己调用 <code>EnterPlanModeTool</code>。</p>
 <p><code>src/tools/EnterPlanModeTool/EnterPlanModeTool.ts</code> 的说明是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">return 'Requests permission to enter plan mode for complex tasks requiring exploration and design'
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Requests permission to enter plan mode for complex tasks requiring exploration and design&#x27;</span>
 </code></pre>
 <p>真正切模式的逻辑也是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">context.setAppState(prev => ({
+<pre class="highlight"><code class="ts">context.<span class="hljs-title function_">setAppState</span>(<span class="hljs-function"><span class="hljs-params">prev</span> =&gt;</span> ({
   ...prev,
-  toolPermissionContext: applyPermissionUpdate(
-    prepareContextForPlanMode(prev.toolPermissionContext),
-    { type: 'setMode', mode: 'plan', destination: 'session' },
+  <span class="hljs-attr">toolPermissionContext</span>: <span class="hljs-title function_">applyPermissionUpdate</span>(
+    <span class="hljs-title function_">prepareContextForPlanMode</span>(prev.<span class="hljs-property">toolPermissionContext</span>),
+    { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;setMode&#x27;</span>, <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;plan&#x27;</span>, <span class="hljs-attr">destination</span>: <span class="hljs-string">&#x27;session&#x27;</span> },
   ),
 }))
 </code></pre>
 <p>这个工具的返回结果还会进一步告诉模型：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Entered plan mode. You should now focus on exploring the codebase and
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Entered</span> plan mode. <span class="hljs-title class_">You</span> should now focus on exploring the codebase and
 designing an implementation approach.
 </code></pre>
 <p>并且明确限制：</p>
@@ -638,13 +651,15 @@ designing an implementation approach.
 <blockquote>
 <p><strong>模型认为当前任务足够复杂，主动请求进入 plan mode。</strong></p>
 </blockquote>
-<hr>
-<h2 id="4-模型什么时候会主动进入-plan-mode"><a href="#4-模型什么时候会主动进入-plan-mode" class="headerlink" title="4. 模型什么时候会主动进入 plan mode"></a>4. 模型什么时候会主动进入 plan mode</h2><p>这部分是最关键的，因为用户真正关心的是：</p>
+<hr />
+<h2 id="4-模型什么时候会主动进入-plan-mode"><a class="markdownIt-Anchor" href="#4-模型什么时候会主动进入-plan-mode"></a> 4. 模型什么时候会主动进入 plan mode</h2>
+<p>这部分是最关键的，因为用户真正关心的是：</p>
 <blockquote>
 <p>ClaudeCode 凭什么判断“这次要先规划，不要直接干”？</p>
 </blockquote>
 <p>答案其实直接写在 <code>EnterPlanModeTool</code> 的 prompt 里。</p>
-<h2 id="4-1-External-版本的判断标准：偏积极进入-plan-mode"><a href="#4-1-External-版本的判断标准：偏积极进入-plan-mode" class="headerlink" title="4.1 External 版本的判断标准：偏积极进入 plan mode"></a>4.1 External 版本的判断标准：偏积极进入 plan mode</h2><p>在 <code>src/tools/EnterPlanModeTool/prompt.ts</code> 里，external 版本写得很细。</p>
+<h2 id="41-external-版本的判断标准偏积极进入-plan-mode"><a class="markdownIt-Anchor" href="#41-external-版本的判断标准偏积极进入-plan-mode"></a> 4.1 External 版本的判断标准：偏积极进入 plan mode</h2>
+<p>在 <code>src/tools/EnterPlanModeTool/prompt.ts</code> 里，external 版本写得很细。</p>
 <p>它明确说：下面这些情况，<strong>任意一个成立</strong> 都应该优先考虑进入 plan mode：</p>
 <ol>
 <li><strong>新功能实现</strong>；</li>
@@ -656,16 +671,17 @@ designing an implementation approach.
 <li><strong>用户偏好会影响实现选择</strong>。</li>
 </ol>
 <p>原文核心意思是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Use this tool proactively when you're about to start a non-trivial
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Use</span> <span class="hljs-variable language_">this</span> tool proactively when you<span class="hljs-string">&#x27;re about to start a non-trivial
 implementation task.
 
-Prefer using EnterPlanMode for implementation tasks unless they're simple.
-Use it when ANY of these conditions apply:
+Prefer using EnterPlanMode for implementation tasks unless they&#x27;</span>re simple.
+<span class="hljs-title class_">Use</span> it when <span class="hljs-variable constant_">ANY</span> <span class="hljs-keyword">of</span> these conditions <span class="hljs-attr">apply</span>:
 ...
 </code></pre>
 <p>这相当于一种“宁可先对齐方案，也不要返工”的策略。</p>
-<hr>
-<h2 id="4-2-Ant-版本的判断标准：更保守，更偏“先做事”"><a href="#4-2-Ant-版本的判断标准：更保守，更偏“先做事”" class="headerlink" title="4.2 Ant 版本的判断标准：更保守，更偏“先做事”"></a>4.2 Ant 版本的判断标准：更保守，更偏“先做事”</h2><p>同一个文件里，<code>ant</code> 版本明显更保守。</p>
+<hr />
+<h2 id="42-ant-版本的判断标准更保守更偏先做事"><a class="markdownIt-Anchor" href="#42-ant-版本的判断标准更保守更偏先做事"></a> 4.2 Ant 版本的判断标准：更保守，更偏“先做事”</h2>
+<p>同一个文件里，<code>ant</code> 版本明显更保守。</p>
 <p>它强调的是：</p>
 <ol>
 <li>只有当实现路径存在<strong>真正的重大歧义</strong>时才进入 plan mode；</li>
@@ -673,26 +689,27 @@ Use it when ANY of these conditions apply:
 <li>能问具体问题就别开完整 planning phase。</li>
 </ol>
 <p>最关键的几句是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Use this tool when a task has genuine ambiguity about the right approach...
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Use</span> <span class="hljs-variable language_">this</span> tool when a task has genuine ambiguity about the right approach...
 
-Skip plan mode when you can reasonably infer the right approach:
-- The task is straightforward even if it touches multiple files
-- The user's request is specific enough that the implementation path is clear
+<span class="hljs-title class_">Skip</span> plan mode when you can reasonably infer the right <span class="hljs-attr">approach</span>:
+- <span class="hljs-title class_">The</span> task is straightforward even <span class="hljs-keyword">if</span> it touches multiple files
+- <span class="hljs-title class_">The</span> user<span class="hljs-string">&#x27;s request is specific enough that the implementation path is clear
 ...
 When in doubt, prefer starting work and using AskUserQuestion
 for specific questions over entering a full planning phase.
-</code></pre>
+</span></code></pre>
 <p>所以如果用一句话概括两种风格：</p>
 <ul>
 <li><strong>external</strong>：复杂实现任务，倾向先 plan；</li>
 <li><strong>ant</strong>：只有存在明显歧义和高返工风险时，才 plan；否则先做。</li>
 </ul>
-<hr>
-<h2 id="4-3-明确不该进入-plan-mode-的情况"><a href="#4-3-明确不该进入-plan-mode-的情况" class="headerlink" title="4.3 明确不该进入 plan mode 的情况"></a>4.3 明确不该进入 plan mode 的情况</h2><p>无论 external 还是 ant 版本，其实都明确列了“不该进入 plan mode”的任务类型：</p>
+<hr />
+<h2 id="43-明确不该进入-plan-mode-的情况"><a class="markdownIt-Anchor" href="#43-明确不该进入-plan-mode-的情况"></a> 4.3 明确不该进入 plan mode 的情况</h2>
+<p>无论 external 还是 ant 版本，其实都明确列了“不该进入 plan mode”的任务类型：</p>
 <ol>
 <li>小修小补；</li>
 <li>明确、直接、实现路径显然的任务；</li>
-<li>纯研究&#x2F;纯阅读代码任务；</li>
+<li>纯研究/纯阅读代码任务；</li>
 <li>只是想知道某个实现位置，而不是要改代码。</li>
 </ol>
 <p>比如 prompt 里直接举例：</p>
@@ -706,52 +723,55 @@ for specific questions over entering a full planning phase.
 <blockquote>
 <p><strong>当任务的歧义、影响面、返工风险、用户偏好敏感度足够高时，才切 plan mode。</strong></p>
 </blockquote>
-<hr>
-<h2 id="5-进入-plan-mode-后，模型实际会被怎样约束"><a href="#5-进入-plan-mode-后，模型实际会被怎样约束" class="headerlink" title="5. 进入 plan mode 后，模型实际会被怎样约束"></a>5. 进入 plan mode 后，模型实际会被怎样约束</h2><h2 id="5-1-plan-mode-不只是一个-flag，还会注入额外-instructions"><a href="#5-1-plan-mode-不只是一个-flag，还会注入额外-instructions" class="headerlink" title="5.1 plan mode 不只是一个 flag，还会注入额外 instructions"></a>5.1 plan mode 不只是一个 flag，还会注入额外 instructions</h2><p>进入 plan mode 后，ClaudeCode 不是只把 <code>mode</code> 改成 <code>plan</code> 就完了。</p>
+<hr />
+<h2 id="5-进入-plan-mode-后模型实际会被怎样约束"><a class="markdownIt-Anchor" href="#5-进入-plan-mode-后模型实际会被怎样约束"></a> 5. 进入 plan mode 后，模型实际会被怎样约束</h2>
+<h2 id="51-plan-mode-不只是一个-flag还会注入额外-instructions"><a class="markdownIt-Anchor" href="#51-plan-mode-不只是一个-flag还会注入额外-instructions"></a> 5.1 plan mode 不只是一个 flag，还会注入额外 instructions</h2>
+<p>进入 plan mode 后，ClaudeCode 不是只把 <code>mode</code> 改成 <code>plan</code> 就完了。</p>
 <p>它还会把 plan mode 指令注入到消息流里。</p>
 <p><code>src/services/compact/compact.ts</code> 里有一个很关键的函数：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export async function createPlanModeAttachmentIfNeeded(
-  context: ToolUseContext,
-): Promise<AttachmentMessage | null> {
-  const appState = context.getAppState()
-  if (appState.toolPermissionContext.mode !== 'plan') {
-    return null
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">createPlanModeAttachmentIfNeeded</span>(<span class="hljs-params">
+  <span class="hljs-attr">context</span>: <span class="hljs-title class_">ToolUseContext</span>,
+</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">AttachmentMessage</span> | <span class="hljs-literal">null</span>&gt; {
+  <span class="hljs-keyword">const</span> appState = context.<span class="hljs-title function_">getAppState</span>()
+  <span class="hljs-keyword">if</span> (appState.<span class="hljs-property">toolPermissionContext</span>.<span class="hljs-property">mode</span> !== <span class="hljs-string">&#x27;plan&#x27;</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
   }
 
-  return createAttachmentMessage({
-    type: 'plan_mode',
-    reminderType: 'full',
-    isSubAgent: !!context.agentId,
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">createAttachmentMessage</span>({
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;plan_mode&#x27;</span>,
+    <span class="hljs-attr">reminderType</span>: <span class="hljs-string">&#x27;full&#x27;</span>,
+    <span class="hljs-attr">isSubAgent</span>: !!context.<span class="hljs-property">agentId</span>,
     planFilePath,
     planExists,
   })
 }
 </code></pre>
 <p>注释也写得非常明确：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">This ensures the model continues to operate in plan mode after compaction
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">This</span> ensures the model continues to operate <span class="hljs-keyword">in</span> plan mode after compaction
 </code></pre>
 <p>也就是说，plan mode 不是只靠“之前模型还记得”来维持，而是：</p>
 <blockquote>
 <p><strong>ClaudeCode 会显式创建 <code>plan_mode</code> attachment，把规划约束重新灌给模型。</strong></p>
 </blockquote>
-<hr>
-<h2 id="5-2-这些约束是怎么传给模型的"><a href="#5-2-这些约束是怎么传给模型的" class="headerlink" title="5.2 这些约束是怎么传给模型的"></a>5.2 这些约束是怎么传给模型的</h2><p><code>src/utils/messages.ts</code> 会把 <code>plan_mode</code> attachment 变成真正发给模型的消息。</p>
+<hr />
+<h2 id="52-这些约束是怎么传给模型的"><a class="markdownIt-Anchor" href="#52-这些约束是怎么传给模型的"></a> 5.2 这些约束是怎么传给模型的</h2>
+<p><code>src/utils/messages.ts</code> 会把 <code>plan_mode</code> attachment 变成真正发给模型的消息。</p>
 <p>在 attachment 分发里：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">case 'plan_mode': {
-  return getPlanModeInstructions(attachment)
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;plan_mode&#x27;</span>: {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">getPlanModeInstructions</span>(attachment)
 }
 </code></pre>
 <p>而这些 instructions 最终会被包装成：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">createUserMessage({ content, isMeta: true })
+<pre class="highlight"><code class="ts"><span class="hljs-title function_">createUserMessage</span>({ content, <span class="hljs-attr">isMeta</span>: <span class="hljs-literal">true</span> })
 </code></pre>
 <p>并进一步包上：</p>
-<pre class=" language-language-ts"><code class="language-language-ts"><system-reminder>
+<pre class="highlight"><code class="ts">&lt;system-reminder&gt;
 ...
-</system-reminder>
+&lt;/system-reminder&gt;
 </code></pre>
 <p>对应工具函数是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">export function wrapInSystemReminder(content: string): string {
-  return `<system-reminder>\n${content}\n</system-reminder>`
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">wrapInSystemReminder</span>(<span class="hljs-params"><span class="hljs-attr">content</span>: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;system-reminder&gt;\n<span class="hljs-subst">${content}</span>\n&lt;/system-reminder&gt;`</span>
 }
 </code></pre>
 <p>这说明在模型视角里，plan mode instruction 并不是一个神秘内部状态，而是：</p>
@@ -761,13 +781,14 @@ for specific questions over entering a full planning phase.
 <li>内容被 <code>&lt;system-reminder&gt;</code> 包住；</li>
 <li>明确告诉模型自己当前在 plan mode，哪些事能做，哪些事不能做。</li>
 </ol>
-<hr>
-<h2 id="5-3-plan-mode-下实际要求模型怎么做"><a href="#5-3-plan-mode-下实际要求模型怎么做" class="headerlink" title="5.3 plan mode 下实际要求模型怎么做"></a>5.3 plan mode 下实际要求模型怎么做</h2><p>在 <code>messages.ts</code> 里，plan mode 的说明非常具体。</p>
+<hr />
+<h2 id="53-plan-mode-下实际要求模型怎么做"><a class="markdownIt-Anchor" href="#53-plan-mode-下实际要求模型怎么做"></a> 5.3 plan mode 下实际要求模型怎么做</h2>
+<p>在 <code>messages.ts</code> 里，plan mode 的说明非常具体。</p>
 <p>尤其是 interview 版 workflow，核心要求是：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Plan mode is active. The user indicated that they do not want you to
-execute yet -- you MUST NOT make any edits (with the exception of the
-plan file mentioned below), run any non-readonly tools ... or otherwise
-make any changes to the system.
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Plan</span> mode is active. <span class="hljs-title class_">The</span> user indicated that they <span class="hljs-keyword">do</span> not want you to
+execute yet -- you <span class="hljs-variable constant_">MUST</span> <span class="hljs-variable constant_">NOT</span> make <span class="hljs-built_in">any</span> <span class="hljs-title function_">edits</span> (<span class="hljs-keyword">with</span> the exception <span class="hljs-keyword">of</span> the
+plan file mentioned below), run <span class="hljs-built_in">any</span> non-<span class="hljs-keyword">readonly</span> tools ... or otherwise
+make <span class="hljs-built_in">any</span> changes to the system.
 </code></pre>
 <p>然后要求模型循环执行：</p>
 <ol>
@@ -784,11 +805,13 @@ make any changes to the system.
 <blockquote>
 <p><strong>读代码、写计划、问用户，但不真正实施。</strong></p>
 </blockquote>
-<hr>
-<h2 id="6-Plan-and-Execute-里的-“Execute”-是什么时候开始的"><a href="#6-Plan-and-Execute-里的-“Execute”-是什么时候开始的" class="headerlink" title="6. Plan-and-Execute 里的 “Execute” 是什么时候开始的"></a>6. Plan-and-Execute 里的 “Execute” 是什么时候开始的</h2><h2 id="6-1-必须通过-ExitPlanMode"><a href="#6-1-必须通过-ExitPlanMode" class="headerlink" title="6.1 必须通过 ExitPlanMode"></a>6.1 必须通过 <code>ExitPlanMode</code></h2><p>当计划准备好之后，模型必须调用 <code>ExitPlanModeV2Tool</code>。</p>
+<hr />
+<h2 id="6-plan-and-execute-里的-execute-是什么时候开始的"><a class="markdownIt-Anchor" href="#6-plan-and-execute-里的-execute-是什么时候开始的"></a> 6. Plan-and-Execute 里的 “Execute” 是什么时候开始的</h2>
+<h2 id="61-必须通过-exitplanmode"><a class="markdownIt-Anchor" href="#61-必须通过-exitplanmode"></a> 6.1 必须通过 <code>ExitPlanMode</code></h2>
+<p>当计划准备好之后，模型必须调用 <code>ExitPlanModeV2Tool</code>。</p>
 <p>它的 prompt 直接写着：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Use this tool when you are in plan mode and have finished writing your
-plan to the plan file and are ready for user approval.
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Use</span> <span class="hljs-variable language_">this</span> tool when you are <span class="hljs-keyword">in</span> plan mode and have finished writing your
+plan to the plan file and are ready <span class="hljs-keyword">for</span> user approval.
 </code></pre>
 <p>并且特别强调：</p>
 <ol>
@@ -804,16 +827,17 @@ plan to the plan file and are ready for user approval.
 <blockquote>
 <p><strong>计划做完后，必须跨过一个明确的 approval boundary。</strong></p>
 </blockquote>
-<hr>
-<h2 id="6-2-普通用户场景：需要本地确认"><a href="#6-2-普通用户场景：需要本地确认" class="headerlink" title="6.2 普通用户场景：需要本地确认"></a>6.2 普通用户场景：需要本地确认</h2><p>对普通非 teammate 场景，<code>ExitPlanModeV2Tool</code> 会要求用户确认：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">requiresUserInteraction() {
-  return true
+<hr />
+<h2 id="62-普通用户场景需要本地确认"><a class="markdownIt-Anchor" href="#62-普通用户场景需要本地确认"></a> 6.2 普通用户场景：需要本地确认</h2>
+<p>对普通非 teammate 场景，<code>ExitPlanModeV2Tool</code> 会要求用户确认：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-title function_">requiresUserInteraction</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
 }
 
-checkPermissions(...) {
-  return {
-    behavior: 'ask',
-    message: 'Exit plan mode?',
+<span class="hljs-title function_">checkPermissions</span>(<span class="hljs-params">...</span>) {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">behavior</span>: <span class="hljs-string">&#x27;ask&#x27;</span>,
+    <span class="hljs-attr">message</span>: <span class="hljs-string">&#x27;Exit plan mode?&#x27;</span>,
   }
 }
 </code></pre>
@@ -823,46 +847,48 @@ checkPermissions(...) {
 <li>通过 <code>ExitPlanMode</code> 请求退出；</li>
 <li>用户确认后，ClaudeCode 才真正退出 planning phase。</li>
 </ol>
-<hr>
-<h2 id="6-3-teammate-场景：可能要求-team-lead-审批"><a href="#6-3-teammate-场景：可能要求-team-lead-审批" class="headerlink" title="6.3 teammate 场景：可能要求 team lead 审批"></a>6.3 teammate 场景：可能要求 team lead 审批</h2><p>如果当前 session 是 teammate，并且带了 <code>plan_mode_required</code>，逻辑会更严格。</p>
+<hr />
+<h2 id="63-teammate-场景可能要求-team-lead-审批"><a class="markdownIt-Anchor" href="#63-teammate-场景可能要求-team-lead-审批"></a> 6.3 teammate 场景：可能要求 team lead 审批</h2>
+<p>如果当前 session 是 teammate，并且带了 <code>plan_mode_required</code>，逻辑会更严格。</p>
 <p>在 <code>ExitPlanModeV2Tool.ts</code> 里：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">if (isTeammate() && isPlanModeRequired()) {
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">if</span> (<span class="hljs-title function_">isTeammate</span>() &amp;&amp; <span class="hljs-title function_">isPlanModeRequired</span>()) {
   ...
-  const approvalRequest = {
-    type: 'plan_approval_request',
+  <span class="hljs-keyword">const</span> approvalRequest = {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;plan_approval_request&#x27;</span>,
     ...
   }
-  await writeToMailbox('team-lead', ...)
-  return {
-    data: {
-      awaitingLeaderApproval: true,
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">writeToMailbox</span>(<span class="hljs-string">&#x27;team-lead&#x27;</span>, ...)
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">data</span>: {
+      <span class="hljs-attr">awaitingLeaderApproval</span>: <span class="hljs-literal">true</span>,
       ...
     },
   }
 }
 </code></pre>
-<p>这说明对于 swarm&#x2F;team 协作场景：</p>
+<p>这说明对于 swarm/team 协作场景：</p>
 <blockquote>
 <p><strong>plan-and-execute 甚至可以不是“用户审批”，而是“leader 审批”。</strong></p>
 </blockquote>
 <p>而 <code>--plan-mode-required</code> 这个 CLI 参数，则是从运行时上强制该 teammate 必须先 plan 再 implement。</p>
 <p>在 <code>src/main.tsx</code> 里也能看到这个选项：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">program.addOption(
-  new Option('--plan-mode-required', 'Require plan mode before implementation')
+<pre class="highlight"><code class="ts">program.<span class="hljs-title function_">addOption</span>(
+  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Option</span>(<span class="hljs-string">&#x27;--plan-mode-required&#x27;</span>, <span class="hljs-string">&#x27;Require plan mode before implementation&#x27;</span>)
 )
 </code></pre>
-<hr>
-<h2 id="6-4-退出-plan-mode-后，不是切到另一个-executor，而是回到原来的-ReAct-主循环"><a href="#6-4-退出-plan-mode-后，不是切到另一个-executor，而是回到原来的-ReAct-主循环" class="headerlink" title="6.4 退出 plan mode 后，不是切到另一个 executor，而是回到原来的 ReAct 主循环"></a>6.4 退出 plan mode 后，不是切到另一个 executor，而是回到原来的 ReAct 主循环</h2><p>退出 plan mode 时，ClaudeCode 会恢复进入前的权限模式：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">let restoreMode = prev.toolPermissionContext.prePlanMode ?? 'default'
+<hr />
+<h2 id="64-退出-plan-mode-后不是切到另一个-executor而是回到原来的-react-主循环"><a class="markdownIt-Anchor" href="#64-退出-plan-mode-后不是切到另一个-executor而是回到原来的-react-主循环"></a> 6.4 退出 plan mode 后，不是切到另一个 executor，而是回到原来的 ReAct 主循环</h2>
+<p>退出 plan mode 时，ClaudeCode 会恢复进入前的权限模式：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-keyword">let</span> restoreMode = prev.<span class="hljs-property">toolPermissionContext</span>.<span class="hljs-property">prePlanMode</span> ?? <span class="hljs-string">&#x27;default&#x27;</span>
 ...
-toolPermissionContext: {
+<span class="hljs-attr">toolPermissionContext</span>: {
   ...baseContext,
-  mode: restoreMode,
-  prePlanMode: undefined,
+  <span class="hljs-attr">mode</span>: restoreMode,
+  <span class="hljs-attr">prePlanMode</span>: <span class="hljs-literal">undefined</span>,
 }
 </code></pre>
 <p>同时还会注入一个 <code>plan_mode_exit</code> 提示：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">You have exited plan mode. You can now make edits, run tools, and take actions.
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">You</span> have exited plan mode. <span class="hljs-title class_">You</span> can now make edits, run tools, and take actions.
 </code></pre>
 <p>所以 Execute 阶段本质上就是：</p>
 <ol>
@@ -874,17 +900,20 @@ toolPermissionContext: {
 <blockquote>
 <p>ClaudeCode 的 Plan-and-Execute 不是 “planner 线程 + executor 线程” 两套引擎，而是 “先在 ReAct 里受限规划，再在同一个 ReAct 里恢复执行”。</p>
 </blockquote>
-<hr>
-<h2 id="7-ClaudeCode-到底依据什么判断“该直接做，还是先-plan”"><a href="#7-ClaudeCode-到底依据什么判断“该直接做，还是先-plan”" class="headerlink" title="7. ClaudeCode 到底依据什么判断“该直接做，还是先 plan”"></a>7. ClaudeCode 到底依据什么判断“该直接做，还是先 plan”</h2><p>把前面的代码合起来，判断依据其实可以总结成四层。</p>
-<h2 id="7-1-第一层：显式用户意图"><a href="#7-1-第一层：显式用户意图" class="headerlink" title="7.1 第一层：显式用户意图"></a>7.1 第一层：显式用户意图</h2><p>如果用户：</p>
+<hr />
+<h2 id="7-claudecode-到底依据什么判断该直接做还是先-plan"><a class="markdownIt-Anchor" href="#7-claudecode-到底依据什么判断该直接做还是先-plan"></a> 7. ClaudeCode 到底依据什么判断“该直接做，还是先 plan”</h2>
+<p>把前面的代码合起来，判断依据其实可以总结成四层。</p>
+<h2 id="71-第一层显式用户意图"><a class="markdownIt-Anchor" href="#71-第一层显式用户意图"></a> 7.1 第一层：显式用户意图</h2>
+<p>如果用户：</p>
 <ul>
 <li>手动敲了 <code>/plan</code>；</li>
 <li>明确要求“先给方案”“先规划一下”“别急着改代码”；</li>
 </ul>
 <p>那么 ClaudeCode 会直接进入 plan mode。</p>
 <p>这是最硬的一层信号。</p>
-<hr>
-<h2 id="7-2-第二层：任务特征是否足够复杂-模糊"><a href="#7-2-第二层：任务特征是否足够复杂-模糊" class="headerlink" title="7.2 第二层：任务特征是否足够复杂&#x2F;模糊"></a>7.2 第二层：任务特征是否足够复杂&#x2F;模糊</h2><p>如果是模型主动判断，核心依据就是 <code>EnterPlanModeTool</code> prompt 里列出来的那几类任务特征：</p>
+<hr />
+<h2 id="72-第二层任务特征是否足够复杂模糊"><a class="markdownIt-Anchor" href="#72-第二层任务特征是否足够复杂模糊"></a> 7.2 第二层：任务特征是否足够复杂/模糊</h2>
+<p>如果是模型主动判断，核心依据就是 <code>EnterPlanModeTool</code> prompt 里列出来的那几类任务特征：</p>
 <ol>
 <li>新功能；</li>
 <li>多种合理路径；</li>
@@ -899,10 +928,11 @@ toolPermissionContext: {
 <p><strong>歧义度、影响面、结构性风险、返工成本</strong></p>
 </blockquote>
 <p>来判断。</p>
-<hr>
-<h2 id="7-3-第三层：当前模式本身也会影响判断"><a href="#7-3-第三层：当前模式本身也会影响判断" class="headerlink" title="7.3 第三层：当前模式本身也会影响判断"></a>7.3 第三层：当前模式本身也会影响判断</h2><p>如果处于 auto mode，源码里还会额外注入一句很强的指导：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Prefer action over planning — Do not enter plan mode unless the user
-explicitly asks. When in doubt, start coding.
+<hr />
+<h2 id="73-第三层当前模式本身也会影响判断"><a class="markdownIt-Anchor" href="#73-第三层当前模式本身也会影响判断"></a> 7.3 第三层：当前模式本身也会影响判断</h2>
+<p>如果处于 auto mode，源码里还会额外注入一句很强的指导：</p>
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Prefer</span> action over planning — <span class="hljs-title class_">Do</span> not enter plan mode unless the user
+explicitly asks. <span class="hljs-title class_">When</span> <span class="hljs-keyword">in</span> doubt, start coding.
 </code></pre>
 <p>这意味着在 auto mode 里，ClaudeCode 的默认倾向是：</p>
 <ol>
@@ -912,14 +942,16 @@ explicitly asks. When in doubt, start coding.
 <li>除非用户明确要求，或者确实存在重大歧义。</li>
 </ol>
 <p>所以“要不要 plan”不是静态判断，还会被当前 permission mode 改写。</p>
-<hr>
-<h2 id="7-4-第四层：协作-团队约束"><a href="#7-4-第四层：协作-团队约束" class="headerlink" title="7.4 第四层：协作&#x2F;团队约束"></a>7.4 第四层：协作&#x2F;团队约束</h2><p>如果是 teammate 且 <code>plan_mode_required=true</code>，那这个判断已经不是模型自由选择了，而是被运行环境强制：</p>
+<hr />
+<h2 id="74-第四层协作团队约束"><a class="markdownIt-Anchor" href="#74-第四层协作团队约束"></a> 7.4 第四层：协作/团队约束</h2>
+<p>如果是 teammate 且 <code>plan_mode_required=true</code>，那这个判断已经不是模型自由选择了，而是被运行环境强制：</p>
 <blockquote>
 <p><strong>必须先进 plan mode，拿到 approval 才能实施。</strong></p>
 </blockquote>
 <p>这种场景更像企业流程管控，而不是 agent 自己的自由判断。</p>
-<hr>
-<h2 id="8-ReAct-和-Plan-and-Execute-的关系，可以怎么理解"><a href="#8-ReAct-和-Plan-and-Execute-的关系，可以怎么理解" class="headerlink" title="8. ReAct 和 Plan-and-Execute 的关系，可以怎么理解"></a>8. ReAct 和 Plan-and-Execute 的关系，可以怎么理解</h2><p>如果把这两套机制放在一起看，可以把 ClaudeCode 理解成下面这张图：</p>
+<hr />
+<h2 id="8-react-和-plan-and-execute-的关系可以怎么理解"><a class="markdownIt-Anchor" href="#8-react-和-plan-and-execute-的关系可以怎么理解"></a> 8. ReAct 和 Plan-and-Execute 的关系，可以怎么理解</h2>
+<p>如果把这两套机制放在一起看，可以把 ClaudeCode 理解成下面这张图：</p>
 <pre class="mermaid">flowchart TD
     A["用户请求"] --> B["query() 主循环"]
     B --> C["模型输出 assistant"]
@@ -936,17 +968,17 @@ explicitly asks. When in doubt, start coding.
     J --> K{"审批通过?"}
     K -->|否| I
     K -->|是| B</pre>
-
 <p>这张图其实表达了一个很实用的工程事实：</p>
 <ol>
 <li><strong>ReAct 是底层循环</strong>；</li>
 <li><strong>Plan-and-Execute 是这层循环上的 gating 和 workflow</strong>；</li>
 <li>“Plan”阶段和“Execute”阶段，本质上都还是同一个 <code>query()</code> 在跑，只是上下文约束不同。</li>
 </ol>
-<hr>
-<h2 id="9-扩展：ClaudeCode-里还有更重型的-planning-形态"><a href="#9-扩展：ClaudeCode-里还有更重型的-planning-形态" class="headerlink" title="9. 扩展：ClaudeCode 里还有更重型的 planning 形态"></a>9. 扩展：ClaudeCode 里还有更重型的 planning 形态</h2><p>除了本地 plan mode，ClaudeCode 还有一个更重型的 <code>/ultraplan</code>。</p>
+<hr />
+<h2 id="9-扩展claudecode-里还有更重型的-planning-形态"><a class="markdownIt-Anchor" href="#9-扩展claudecode-里还有更重型的-planning-形态"></a> 9. 扩展：ClaudeCode 里还有更重型的 planning 形态</h2>
+<p>除了本地 plan mode，ClaudeCode 还有一个更重型的 <code>/ultraplan</code>。</p>
 <p><code>src/commands/ultraplan.tsx</code> 里直接写了：</p>
-<pre class=" language-language-ts"><code class="language-language-ts">Advanced multi-agent plan mode with our most powerful model
+<pre class="highlight"><code class="ts"><span class="hljs-title class_">Advanced</span> multi-agent plan mode <span class="hljs-keyword">with</span> our most powerful model
 </code></pre>
 <p>它会把 planning 放到 Claude Code on the web 侧远程跑，甚至支持更长时间、多 agent 的 planning。</p>
 <p>不过从本文主题看，<code>/ultraplan</code> 更像是：</p>
@@ -960,14 +992,21 @@ explicitly asks. When in doubt, start coding.
 <li>需要方案对齐：进入本地 plan mode；</li>
 <li>获批后：回到 ReAct 执行。</li>
 </ul>
-<hr>
-<h2 id="10-最后总结"><a href="#10-最后总结" class="headerlink" title="10. 最后总结"></a>10. 最后总结</h2><p>如果只记住三句话，我觉得最重要的是这三句：</p>
+<hr />
+<h2 id="10-最后总结"><a class="markdownIt-Anchor" href="#10-最后总结"></a> 10. 最后总结</h2>
+<p>如果只记住三句话，我觉得最重要的是这三句：</p>
 <ol>
-<li><p><strong>ClaudeCode 默认就是 ReAct。</strong><br><code>query.ts</code> 的主循环本质上就是 assistant 产出 <code>tool_use</code>，系统执行工具，再把 <code>tool_result</code> 回灌给下一轮。</p>
+<li>
+<p><strong>ClaudeCode 默认就是 ReAct。</strong><br />
+<code>query.ts</code> 的主循环本质上就是 assistant 产出 <code>tool_use</code>，系统执行工具，再把 <code>tool_result</code> 回灌给下一轮。</p>
 </li>
-<li><p><strong>Plan-and-Execute 不是第二套执行器。</strong><br>它是在同一个 ReAct runtime 上，加了一层 <code>plan mode + plan file + approval flow + system reminder</code>。</p>
+<li>
+<p><strong>Plan-and-Execute 不是第二套执行器。</strong><br />
+它是在同一个 ReAct runtime 上，加了一层 <code>plan mode + plan file + approval flow + system reminder</code>。</p>
 </li>
-<li><p><strong>什么时候进入 plan mode，取决于歧义、影响面、返工风险和显式用户意图。</strong><br>任务足够明确时，ClaudeCode 倾向直接做；任务存在重大路径分歧或需要先对齐方案时，ClaudeCode 才会切到 planning phase。</p>
+<li>
+<p><strong>什么时候进入 plan mode，取决于歧义、影响面、返工风险和显式用户意图。</strong><br />
+任务足够明确时，ClaudeCode 倾向直接做；任务存在重大路径分歧或需要先对齐方案时，ClaudeCode 才会切到 planning phase。</p>
 </li>
 </ol>
 <p>如果从 agent 工程角度看，这套设计其实很聪明：</p>
@@ -1430,7 +1469,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">64.9k</span>&nbsp;字
+                    class="white-color">94.4k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
