@@ -419,42 +419,34 @@
                             <i class="fa fa-address-book"></i>&nbsp;&nbsp;个人简历
                         </div>
                         <div id="articleContent" data-aos="fade-up">
-                            <h1 id="关于我"><a class="markdownIt-Anchor" href="#关于我"></a> 关于我</h1>
-<blockquote>
+                            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><blockquote>
 <p>致力于成为一个靠谱的工程师</p>
 </blockquote>
-<h2 id="基本信息"><a class="markdownIt-Anchor" href="#基本信息"></a> 基本信息</h2>
-<ul>
+<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><ul>
 <li><strong>雷伟俊</strong> | Agent 应用工程师</li>
-<li>个人网站：<a href="https://xiaofenglei.cn">xiaofenglei.cn</a></li>
+<li>个人网站：<a href="https://xiaofenglei.cn/">xiaofenglei.cn</a></li>
 </ul>
-<h2 id="教育经历"><a class="markdownIt-Anchor" href="#教育经历"></a> 教育经历</h2>
-<ul>
-<li><strong>南京大学</strong> | 计算机技术（保研）| 硕士 | 计算机科学与技术系 | 2019.09 - 2022.06
-<ul>
+<h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><ul>
+<li><strong>南京大学</strong> | 计算机技术（保研）| 硕士 | 计算机科学与技术系 | 2019.09 - 2022.06<ul>
 <li>研究方向：自然语言处理 - 多跳阅读理解</li>
 </ul>
 </li>
 <li><strong>电子科技大学</strong> | 软件工程 | 本科 | 信息与软件工程学院 | 2015.09 - 2019.06</li>
 </ul>
-<h2 id="工作与实习经历"><a class="markdownIt-Anchor" href="#工作与实习经历"></a> 工作与实习经历</h2>
-<h3 id="shopee-高级后台开发工程师-shopeefood-202207-至今"><a class="markdownIt-Anchor" href="#shopee-高级后台开发工程师-shopeefood-202207-至今"></a> Shopee | 高级后台开发工程师 | ShopeeFood | 2022.07 - 至今</h3>
-<p><strong>团队介绍</strong>：隶属 ShopeeFood Order Team（订单核心研发团队），聚焦订单全生命周期（正向交易 + 逆向退款）的系统设计与开发，支撑大规模订单量的履约需求。团队通过分布式架构、高并发处理、数据一致性保障等技术手段，解决高可用、实时性挑战。</p>
-<p><strong>工作职责</strong>：订单核心流程 PIC，主导订单正向（下单 / 支付 / 履约）与逆向（退款 / 售后）全流程的系统设计与开发。</p>
+<h2 id="工作与实习经历"><a href="#工作与实习经历" class="headerlink" title="工作与实习经历"></a>工作与实习经历</h2><h3 id="Shopee-高级后台开发工程师-ShopeeFood-2022-07-至今"><a href="#Shopee-高级后台开发工程师-ShopeeFood-2022-07-至今" class="headerlink" title="Shopee | 高级后台开发工程师 | ShopeeFood | 2022.07 - 至今"></a>Shopee | 高级后台开发工程师 | ShopeeFood | 2022.07 - 至今</h3><p><strong>团队介绍</strong>：隶属 ShopeeFood Order Team（订单核心研发团队），聚焦订单全生命周期（正向交易 + 逆向退款）的系统设计与开发，支撑大规模订单量的履约需求。团队通过分布式架构、高并发处理、数据一致性保障等技术手段，解决高可用、实时性挑战。</p>
+<p><strong>工作职责</strong>：订单核心流程 PIC，主导订单正向（下单 &#x2F; 支付 &#x2F; 履约）与逆向（退款 &#x2F; 售后）全流程的系统设计与开发。</p>
 <p><strong>核心产出</strong>：</p>
 <ul>
-<li>
-<p><strong>AI Agent 系统研发</strong></p>
+<li><p><strong>AI Agent 系统研发</strong></p>
 <ul>
 <li>基于 Eino 框架搭建 Workflow + Agent ReAct 兜底的故障排查系统，串联告警触发、Skill 选择、工具选择、工具调用、AI 故障定位以及 AI 问答机器人</li>
 <li>上下文管理与长短期记忆机制，实现多轮诊断状态追踪、关键信息压缩、历史操作复用及故障定位结果</li>
 <li>以代码为事实库，实现业务问答</li>
 <li>MCP 工具链建设：封装代码、监控、ChangeLog 等查询能力，实现统一工具抽象，支持 AI Agent 自动化故障分析与诊断</li>
-<li>基于在线反馈 + 离线评估搭建系统评估体系，延迟发送待评价 + 手动 / 模型评估结合，基于数据驱动实现系统自进化</li>
+<li>基于在线反馈 + 离线评估搭建系统评估体系，延迟发送待评价 + 手动 &#x2F; 模型评估结合，基于数据驱动实现系统自进化</li>
 </ul>
 </li>
-<li>
-<p><strong>订单表无停机分库迁移</strong></p>
+<li><p><strong>订单表无停机分库迁移</strong></p>
 <ul>
 <li>订单核心库单库数据量远超运维上限容量，高峰期 MySQL 负载高，DDL 操作耗时长，无法满足订单增长需求</li>
 <li>DB 分阶段双写，逻辑表改成物理表，读写迁移覆盖率验证，多阶段校验和可回滚</li>
@@ -464,23 +456,20 @@
 <li>效果：高峰期 MySQL CPU 使用率显著下降，单库容量控制在合理范围内，DDL 耗时大幅降低</li>
 </ul>
 </li>
-<li>
-<p><strong>TCC 三阶段语义最终一致性库存方案落地</strong></p>
+<li><p><strong>TCC 三阶段语义最终一致性库存方案落地</strong></p>
 <ul>
 <li>从 0 到 1 构建库存系统，解决商品的&quot;超卖&quot;和&quot;少卖&quot;问题</li>
-<li>TCC 三阶段模型：
-<ul>
+<li>TCC 三阶段模型：<ul>
 <li>Try：用 Order Item ID + Dish ID + quantity 预扣库存（冻结至&quot;预扣池&quot;），通过数据库行锁校验余量，避免超卖</li>
 <li>Confirm：即时单消费&quot;订单创建&quot;Kafka 消息扣减库存；预约单监听 processing_time 时间轮，到期正式扣减</li>
 <li>Cancel：定时扫描预扣记录，若订单未成功则返还库存，通过重试机制保障最终一致性</li>
 </ul>
 </li>
 <li>MySQL 为库存记录源，Redis 为库存数量源，状态机 + 幂等保证分布式事务的一致性</li>
-<li>效果：库存一致性达高标准，彻底解决超卖 / 少卖问题，相关库存不足取消率大幅下降</li>
+<li>效果：库存一致性达高标准，彻底解决超卖 &#x2F; 少卖问题，相关库存不足取消率大幅下降</li>
 </ul>
 </li>
-<li>
-<p><strong>订单异构数据同步优化</strong></p>
+<li><p><strong>订单异构数据同步优化</strong></p>
 <ul>
 <li>表名 Sharding 分片，保证单表消息内部有序</li>
 <li>多协程并发消费，每个协程只消费固定分片的消息</li>
@@ -490,50 +479,42 @@
 </li>
 </ul>
 <p><strong>技术栈</strong>：Go、MySQL、Kafka、ElasticSearch、Eino、Milvus、MCP、Python</p>
-<h3 id="华为-算法实习生-公共开发部-202010-202107"><a class="markdownIt-Anchor" href="#华为-算法实习生-公共开发部-202010-202107"></a> 华为 | 算法实习生 | 公共开发部 | 2020.10 - 2021.07</h3>
-<ul>
-<li>时间序列算法集成与优化：针对云化告警业务人工排查效率低的问题，将 WaveNet / MQRNN 等时序算法集成至时间序列检测库，实现告警日志异常自动检测</li>
+<h3 id="华为-算法实习生-公共开发部-2020-10-2021-07"><a href="#华为-算法实习生-公共开发部-2020-10-2021-07" class="headerlink" title="华为 | 算法实习生 | 公共开发部 | 2020.10 - 2021.07"></a>华为 | 算法实习生 | 公共开发部 | 2020.10 - 2021.07</h3><ul>
+<li>时间序列算法集成与优化：针对云化告警业务人工排查效率低的问题，将 WaveNet &#x2F; MQRNN 等时序算法集成至时间序列检测库，实现告警日志异常自动检测</li>
 <li>模型效果优化：通过特征工程调优 + 超参数搜索提升检测准确率</li>
 </ul>
 <p><strong>技术栈</strong>：Python、WaveNet、MQRNN、时间序列分析</p>
-<h3 id="百度-算法实习生-知识图谱部-201811-201905"><a class="markdownIt-Anchor" href="#百度-算法实习生-知识图谱部-201811-201905"></a> 百度 | 算法实习生 | 知识图谱部 | 2018.11 - 2019.05</h3>
-<ul>
+<h3 id="百度-算法实习生-知识图谱部-2018-11-2019-05"><a href="#百度-算法实习生-知识图谱部-2018-11-2019-05" class="headerlink" title="百度 | 算法实习生 | 知识图谱部 | 2018.11 - 2019.05"></a>百度 | 算法实习生 | 知识图谱部 | 2018.11 - 2019.05</h3><ul>
 <li>事件图谱归一算法研发：针对多源异构事件数据难以统一检索的问题，基于 BERT 预训练完成事件判别、事件名生成、事件归一全流程 pipeline，业务上线至时空 Top 卡片，覆盖大规模事件数据</li>
 <li>鹰眼热点发现系统：针对核心站点热点资讯人工发现效率低的问题，开发热点事件粗召回功能供内部使用，支持多个核心站点实时监控</li>
 </ul>
 <p><strong>技术栈</strong>：Python、BERT、ElasticSearch、知识图谱、NLP</p>
-<h3 id="sap-后端开发实习生-ibs-部-201712-201806"><a class="markdownIt-Anchor" href="#sap-后端开发实习生-ibs-部-201712-201806"></a> SAP | 后端开发实习生 | IBS 部 | 2017.12 - 2018.06</h3>
-<ul>
+<h3 id="SAP-后端开发实习生-IBS-部-2017-12-2018-06"><a href="#SAP-后端开发实习生-IBS-部-2017-12-2018-06" class="headerlink" title="SAP | 后端开发实习生 | IBS 部 | 2017.12 - 2018.06"></a>SAP | 后端开发实习生 | IBS 部 | 2017.12 - 2018.06</h3><ul>
 <li>某汽车主机厂 CRM 的后端开发工作，主要使用 C4C 针对到店、试驾等任务进行数据处理和接口定义工作</li>
 </ul>
-<h2 id="比赛经历"><a class="markdownIt-Anchor" href="#比赛经历"></a> 比赛经历</h2>
-<ul>
-<li>
-<p><strong>华为 Digix AI 全球校园 AI 算法精英大赛</strong> | 第 6 名 / 1000+（前 0.6%）| 2020.08 - 2020.11</p>
+<h2 id="比赛经历"><a href="#比赛经历" class="headerlink" title="比赛经历"></a>比赛经历</h2><ul>
+<li><p><strong>华为 Digix AI 全球校园 AI 算法精英大赛</strong> | 第 6 名 &#x2F; 1000+（前 0.6%）| 2020.08 - 2020.11</p>
 <ul>
 <li>主导广告 CTR 预测任务，针对正负样本严重不均衡（负样本量为正样本 30 倍）问题，设计负样本采样策略 + 模型融合方案，最终 AUC 达 0.81</li>
 <li>使用 Word2Vec 序列建模对广告 ID 进行 Embedding 表征，挖掘用户 - 广告序列依赖关系，配合 Target Encoding 与交叉特征，使用 LightGBM 训练，获奖金 1.2 万元</li>
 </ul>
 </li>
-<li>
-<p><strong>莱斯杯：全国第二届&quot;军事阅读理解&quot;挑战赛</strong> | 第 4 名 / 65 / 653 | 2019.09 - 2019.10</p>
+<li><p><strong>莱斯杯：全国第二届&quot;军事阅读理解&quot;挑战赛</strong> | 第 4 名 &#x2F; 65 &#x2F; 653 | 2019.09 - 2019.10</p>
 <ul>
 <li>军事阅读理解任务，包含单答案问题、多答案问题、推理问题。根据每个问题和其对应的文章，抽取出正确的答案</li>
 <li>模型层使用百度 ERNIE 1.0 + 3 层 Query-Context CoAttention 对答案进行预测</li>
 </ul>
 </li>
 </ul>
-<h2 id="论文成果"><a class="markdownIt-Anchor" href="#论文成果"></a> 论文成果</h2>
-<ul>
+<h2 id="论文成果"><a href="#论文成果" class="headerlink" title="论文成果"></a>论文成果</h2><ul>
 <li><strong>ICASSP 2023（CCF-B）</strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11729">From Easy to Hard: Two-stage Selector and Reader for Multi-hop Question Answering</a></strong></li>
 <li>多跳阅读理解 SOTA</li>
 </ul>
-<h2 id="专业技能"><a class="markdownIt-Anchor" href="#专业技能"></a> 专业技能</h2>
-<ul>
+<h2 id="专业技能"><a href="#专业技能" class="headerlink" title="专业技能"></a>专业技能</h2><ul>
 <li><strong>编程语言</strong>：Golang、Python，扎实掌握数据结构、算法、网络编程</li>
 <li><strong>系统能力</strong>：深耕高并发交易系统架构，具备高可用、高性能、分布式一致性及资损防控方案设计能力；负责订单交易链路稳定性建设，完善监控、告警、SOP、故障应急等稳定性治理体系</li>
-<li><strong>Agent / LLM</strong>：熟悉 Harness Agent 设计理念，具备从 0 到 1 构建 Agent 系统落地经验</li>
+<li><strong>Agent &#x2F; LLM</strong>：熟悉 Harness Agent 设计理念，具备从 0 到 1 构建 Agent 系统落地经验</li>
 <li><strong>算法</strong>：特征工程、LightGBM、NN、BERT、ERNIE、Word2Vec、时间序列分析</li>
 <li><strong>英语水平</strong>：CET-6，具备英文论文读写能力</li>
 </ul>
@@ -552,7 +533,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">96.3k</span>&nbsp;字
+                    class="white-color">89.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

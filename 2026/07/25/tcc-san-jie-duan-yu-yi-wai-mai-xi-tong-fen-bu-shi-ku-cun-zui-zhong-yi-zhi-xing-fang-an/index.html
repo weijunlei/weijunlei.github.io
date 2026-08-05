@@ -5,10 +5,9 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="基于 TCC 思想的分布式库存一致性方案, 小风雷">
-    <meta name="description" content=" 基于 TCC 思想的分布式库存一致性方案
-外卖系统从下单到出餐涉及订单、库存、营销等多个服务。在大流量下，&amp;quot;用户成功下单，商家却发现菜品售罄&amp;quot;是最尴尬的事故之一。库存系统需要承担三件事：
+    <meta name="description" content="基于 TCC 思想的分布式库存一致性方案外卖系统从下单到出餐涉及订单、库存、营销等多个服务。在大流量下，&amp;quot;用户成功下单，商家却发现菜品售罄&amp;quot;是最尴尬的事故之一。库存系统需要承担三件事：
 
-预扣环节必须严格不超卖，并发">
+预扣环节必须严格不超卖，并发 1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -349,7 +348,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.1k
+                    7.2k
                 </div>
                 
 
@@ -367,17 +366,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="基于-tcc-思想的分布式库存一致性方案"><a class="markdownIt-Anchor" href="#基于-tcc-思想的分布式库存一致性方案"></a> 基于 TCC 思想的分布式库存一致性方案</h1>
-<p>外卖系统从下单到出餐涉及订单、库存、营销等多个服务。在大流量下，&quot;用户成功下单，商家却发现菜品售罄&quot;是最尴尬的事故之一。库存系统需要承担三件事：</p>
+                <h1 id="基于-TCC-思想的分布式库存一致性方案"><a href="#基于-TCC-思想的分布式库存一致性方案" class="headerlink" title="基于 TCC 思想的分布式库存一致性方案"></a>基于 TCC 思想的分布式库存一致性方案</h1><p>外卖系统从下单到出餐涉及订单、库存、营销等多个服务。在大流量下，&quot;用户成功下单，商家却发现菜品售罄&quot;是最尴尬的事故之一。库存系统需要承担三件事：</p>
 <ul>
 <li>预扣环节必须<strong>严格不超卖</strong>，并发 10 万级 QPS 也不能漏放；</li>
 <li>订单创建失败时，库存必须在<strong>秒级</strong>退还，避免长时间占库；</li>
 <li>订单创建成功后，预扣库存要<strong>准实时</strong> Confirm，最终准确无误、不多扣也不少扣。</li>
 </ul>
 <p>本文以 TCC 的三阶段业务语义为基础，结合 Reservation 状态机、定时对账和事件驱动，拆解这套方案如何落地。</p>
-<hr />
-<h2 id="一-目标与约束"><a class="markdownIt-Anchor" href="#一-目标与约束"></a> 一、目标与约束</h2>
-<p>业务对库存事务有四个硬性要求：</p>
+<hr>
+<h2 id="一、目标与约束"><a href="#一、目标与约束" class="headerlink" title="一、目标与约束"></a>一、目标与约束</h2><p>业务对库存事务有四个硬性要求：</p>
 <table>
 <thead>
 <tr>
@@ -385,8 +382,7 @@
 <th>要求</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>一致性</td>
 <td>订单与库存数据最终一致，不能出现多卖少卖</td>
 </tr>
@@ -402,33 +398,30 @@
 <td>失败补偿</td>
 <td>订单创建失败时，预扣库存要快速释放</td>
 </tr>
-</tbody>
-</table>
-<p>这四点直接决定了方案必须在 “准实时 + 强一致 + 防超卖” 的三角中寻找平衡。</p>
-<hr />
-<h2 id="二-业界方案对比"><a class="markdownIt-Anchor" href="#二-业界方案对比"></a> 二、业界方案对比</h2>
-<p>库存是&quot;<strong>高并发 + 不能超卖 + 要准实时</strong>&quot;的场景，常见的分布式一致性方案往这三条硬约束上一套，很快就会被筛掉一大半。先看总表，再逐个说清为什么。</p>
+</tbody></table>
+<p>这四点直接决定了方案必须在 &quot;准实时 + 强一致 + 防超卖&quot; 的三角中寻找平衡。</p>
+<hr>
+<h2 id="二、业界方案对比"><a href="#二、业界方案对比" class="headerlink" title="二、业界方案对比"></a>二、业界方案对比</h2><p>库存是&quot;<strong>高并发 + 不能超卖 + 要准实时</strong>&quot;的场景，常见的分布式一致性方案往这三条硬约束上一套，很快就会被筛掉一大半。先看总表，再逐个说清为什么。</p>
 <table>
 <thead>
 <tr>
 <th>方案</th>
 <th>一致性</th>
-<th>实时性 / 性能</th>
+<th>实时性 &#x2F; 性能</th>
 <th>隔离性</th>
 <th>适合场景</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>2PC</td>
-<td>强（正常时）/ 故障时可能不一致</td>
+<td>强（正常时）&#x2F; 故障时可能不一致</td>
 <td><strong>差（同步阻塞 + 持锁）</strong></td>
 <td>强（靠数据库锁）</td>
 <td>单库多资源、低并发</td>
 </tr>
 <tr>
 <td>3PC</td>
-<td>强（正常时）/ 分区时仍可能不一致</td>
+<td>强（正常时）&#x2F; 分区时仍可能不一致</td>
 <td>较差（多一轮交互）</td>
 <td>强</td>
 <td>几乎无人用于生产</td>
@@ -441,7 +434,7 @@
 <td>长流程、松耦合</td>
 </tr>
 <tr>
-<td>本地消息表 / MQ 事务 / 最大努力通知</td>
+<td>本地消息表 &#x2F; MQ 事务 &#x2F; 最大努力通知</td>
 <td>最终一致</td>
 <td>依赖 MQ</td>
 <td>好</td>
@@ -454,10 +447,8 @@
 <td><strong>好（业务层预留）</strong></td>
 <td><strong>库存扣减、资金类操作</strong></td>
 </tr>
-</tbody>
-</table>
-<h3 id="21-2pc高并发下的致命伤是同步阻塞-锁定资源"><a class="markdownIt-Anchor" href="#21-2pc高并发下的致命伤是同步阻塞-锁定资源"></a> 2.1 2PC：高并发下的致命伤是&quot;同步阻塞 + 锁定资源&quot;</h3>
-<p>2PC（两阶段提交）的流程：协调器先让所有参与者 <strong>Prepare</strong>（各自执行本地事务、<strong>持有锁</strong>、写好 redo/undo，但不提交、只投票），全部投赞成票后再统一 <strong>Commit</strong>。</p>
+</tbody></table>
+<h3 id="2-1-2PC：高并发下的致命伤是-同步阻塞-锁定资源"><a href="#2-1-2PC：高并发下的致命伤是-同步阻塞-锁定资源" class="headerlink" title="2.1 2PC：高并发下的致命伤是&quot;同步阻塞 + 锁定资源&quot;"></a>2.1 2PC：高并发下的致命伤是&quot;同步阻塞 + 锁定资源&quot;</h3><p>2PC（两阶段提交）的流程：协调器先让所有参与者 <strong>Prepare</strong>（各自执行本地事务、<strong>持有锁</strong>、写好 redo&#x2F;undo，但不提交、只投票），全部投赞成票后再统一 <strong>Commit</strong>。</p>
 <p>它的问题在库存这种场景是致命的：</p>
 <ul>
 <li><strong>同步阻塞、长时间锁资源</strong>：从 Prepare 到 Commit 的整个窗口里，参与者<strong>一直持有数据库行锁</strong>，被锁住的库存行对其他请求完全不可用。10 万 QPS 抢同一批菜，等于把并发全部串行化——<strong>性能直接被打垮</strong>，这就是常说的&quot;2PC 会锁事务、高并发不行&quot;。</li>
@@ -465,8 +456,7 @@
 <li><strong>故障时仍可能不一致</strong>：Commit 阶段协调器或网络出问题，可能出现&quot;一部分参与者已提交、另一部分没收到指令&quot;，数据照样不一致。</li>
 </ul>
 <p>一句话：<strong>2PC 是拿&quot;可用性和并发&quot;换&quot;强一致&quot;</strong>，而库存要的恰恰是&quot;高并发 + 准实时&quot;，方向正好相反。</p>
-<h3 id="22-3pc想救-2pc但代价更大-也没救彻底"><a class="markdownIt-Anchor" href="#22-3pc想救-2pc但代价更大-也没救彻底"></a> 2.2 3PC：想救 2PC，但代价更大、也没救彻底</h3>
-<p>3PC 在 2PC 基础上加了一个 <strong>CanCommit</strong> 预询问阶段，并引入<strong>超时机制</strong>：参与者等不到协调器指令时，可以自行超时中止（或提交），从而缓解&quot;协调器一宕机就一直阻塞&quot;。</p>
+<h3 id="2-2-3PC：想救-2PC，但代价更大、也没救彻底"><a href="#2-2-3PC：想救-2PC，但代价更大、也没救彻底" class="headerlink" title="2.2 3PC：想救 2PC，但代价更大、也没救彻底"></a>2.2 3PC：想救 2PC，但代价更大、也没救彻底</h3><p>3PC 在 2PC 基础上加了一个 <strong>CanCommit</strong> 预询问阶段，并引入<strong>超时机制</strong>：参与者等不到协调器指令时，可以自行超时中止（或提交），从而缓解&quot;协调器一宕机就一直阻塞&quot;。</p>
 <p>但它并没有真正解决问题：</p>
 <ul>
 <li><strong>网络往返更多</strong>（三个阶段），延迟更高；</li>
@@ -474,11 +464,10 @@
 <li><strong>网络分区下依旧会不一致</strong>：分区两侧可能一侧提交、一侧中止，脑裂问题 3PC 同样搞不定。</li>
 </ul>
 <p>所以生产环境几乎没人上 3PC——它更像教科书里&quot;如何缓解 2PC 阻塞&quot;的思路，而不是一个真用的方案。</p>
-<h3 id="23-saga和本方案最像但输在没有预留"><a class="markdownIt-Anchor" href="#23-saga和本方案最像但输在没有预留"></a> 2.3 Saga：和本方案最像，但输在&quot;没有预留&quot;</h3>
-<p>Saga 把一个长事务拆成一串<strong>各自独立提交</strong>的本地事务 T1→T2→…→Tn，每一步都<strong>立即真实提交</strong>，并配一个<strong>补偿事务</strong> Ci 用于事后反向抵消；某步失败，就逆序跑补偿。</p>
+<h3 id="2-3-Saga：和本方案最像，但输在-没有预留"><a href="#2-3-Saga：和本方案最像，但输在-没有预留" class="headerlink" title="2.3 Saga：和本方案最像，但输在&quot;没有预留&quot;"></a>2.3 Saga：和本方案最像，但输在&quot;没有预留&quot;</h3><p>Saga 把一个长事务拆成一串<strong>各自独立提交</strong>的本地事务 T1→T2→…→Tn，每一步都<strong>立即真实提交</strong>，并配一个<strong>补偿事务</strong> Ci 用于事后反向抵消；某步失败，就逆序跑补偿。</p>
 <p>它和本方案的&quot;事件驱动 + 补偿&quot;听起来很像，但有一个<strong>本质区别</strong>：</p>
 <blockquote>
-<p><strong>Saga 没有&quot;预留 / 冻结&quot;这一步，每个本地事务都是立即提交、立即对外可见。</strong></p>
+<p><strong>Saga 没有&quot;预留 &#x2F; 冻结&quot;这一步，每个本地事务都是立即提交、立即对外可见。</strong></p>
 </blockquote>
 <p><strong>那 Saga 到底什么时候会超卖？</strong> 看一个最极端的例子——<strong>库存只剩 1 份，两个用户同时下单</strong>（两个并发 Saga，各自 T1 创建订单、T2 扣库存）：</p>
 <table>
@@ -490,8 +479,7 @@
 <th>可售库存</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>t1</td>
 <td>T1 创建订单甲，<strong>立即提交</strong></td>
 <td>—</td>
@@ -521,15 +509,14 @@
 <td>逆序补偿 C1：<strong>取消订单乙</strong></td>
 <td>0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>关键在 <strong>t2 这个窗口</strong>：乙创建订单时，甲扣库存那一步还没跑，乙读到的是&quot;还没被扣&quot;的旧库存，于是乙也以为自己抢到了。<strong>因为 Saga 各步独立提交、互不隔离，&quot;看到还有货&quot;和&quot;下单成功&quot;不是原子的</strong>，这个窗口在并发下必然存在。于是乙经历的是&quot;<strong>先下单成功、后被退单</strong>&quot;——如果乙已付款、商家已接单出餐，补偿 C1 根本没法干净收场。</p>
 <p>所以 Saga 的超卖，<strong>不一定是把库存扣成负数，而是让&quot;超过库存数量的订单&quot;在一段时间内同时成立，只能事后靠补偿把多余订单退掉</strong>。这带来两个硬后果：</p>
 <ol>
 <li><strong>隔离性差、会超卖</strong>：如上面的例子——订单已提交、库存还没扣的<strong>中间态对外是可见的</strong>，并发请求同时抢到同一批库存。本场景恰恰把&quot;不能超卖&quot;列为硬约束，Saga 这点是<strong>一票否决</strong>。</li>
 <li><strong>补偿是&quot;事后补救&quot;，不一定救得回来</strong>：补偿是语义上的反向操作，如果中间态已经被下游消费（比如超卖的菜已经出餐），补偿也无力回天。</li>
 </ol>
-<p>而 TCC 的 <strong>Try 是&quot;先预留、再确认&quot;</strong>：Try 阶段就把库存&quot;冻结&quot;（扣可售、加冻结），在 Confirm / Cancel 之前，这部分库存对其他请求是锁定的、拿不走的。回到上面的例子：换成 TCC，甲在 Try 时就把那 1 份冻结（可售 1→0、冻结 0→1），乙 Try 时发现可售已是 0，<strong>当场失败</strong>——乙的订单根本不会创建成功，自然也没有&quot;先成功后退单&quot;这一说。对比下来：</p>
+<p>而 TCC 的 <strong>Try 是&quot;先预留、再确认&quot;</strong>：Try 阶段就把库存&quot;冻结&quot;（扣可售、加冻结），在 Confirm &#x2F; Cancel 之前，这部分库存对其他请求是锁定的、拿不走的。回到上面的例子：换成 TCC，甲在 Try 时就把那 1 份冻结（可售 1→0、冻结 0→1），乙 Try 时发现可售已是 0，<strong>当场失败</strong>——乙的订单根本不会创建成功，自然也没有&quot;先成功后退单&quot;这一说。对比下来：</p>
 <table>
 <thead>
 <tr>
@@ -538,8 +525,7 @@
 <th>TCC（本方案借用的语义）</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>资源是否预留</td>
 <td><strong>否</strong>，每步立即提交</td>
 <td><strong>是</strong>，Try 先冻结</td>
@@ -564,18 +550,15 @@
 <td>长流程、松耦合、对隔离性要求低</td>
 <td>库存、资金这类&quot;先占位&quot;的短事务</td>
 </tr>
-</tbody>
-</table>
-<h3 id="24-为什么是-tcc"><a class="markdownIt-Anchor" href="#24-为什么是-tcc"></a> 2.4 为什么是 TCC</h3>
-<p>把三条硬约束代进去，只有 TCC 全中：</p>
+</tbody></table>
+<h3 id="2-4-为什么是-TCC"><a href="#2-4-为什么是-TCC" class="headerlink" title="2.4 为什么是 TCC"></a>2.4 为什么是 TCC</h3><p>把三条硬约束代进去，只有 TCC 全中：</p>
 <ol>
 <li><strong>不能超卖</strong> → 需要 Try 阶段的资源预留（2PC 靠锁但太慢，Saga 压根没有预留）；</li>
 <li><strong>准实时</strong> → Try 用业务层的 <code>update where</code> 冻结，<strong>不持有数据库行锁、不傻等协调器</strong>，性能高（2PC 因此出局）；</li>
 <li><strong>失败快速释放</strong> → Cancel 只是把预留放掉，本来就没真正扣，秒级回退。</li>
 </ol>
-<p><strong>因此我们选择 TCC 的 Try / Confirm / Cancel 语义作为基础思路</strong>——但正如后文会讲的，我们只借它&quot;预留 / 确认 / 释放&quot;的语义骨架，并不照搬那套全局协调器（第八节会专门讲为什么）。</p>
-<h2 id="三-tcc-核心思路"><a class="markdownIt-Anchor" href="#三-tcc-核心思路"></a> 三、TCC 核心思路</h2>
-<p>TCC 将一个分布式事务拆成三个阶段，由<strong>事务发起方</strong>协调<strong>事务参与方</strong>完成：</p>
+<p><strong>因此我们选择 TCC 的 Try &#x2F; Confirm &#x2F; Cancel 语义作为基础思路</strong>——但正如后文会讲的，我们只借它&quot;预留 &#x2F; 确认 &#x2F; 释放&quot;的语义骨架，并不照搬那套全局协调器（第八节会专门讲为什么）。</p>
+<h2 id="三、TCC-核心思路"><a href="#三、TCC-核心思路" class="headerlink" title="三、TCC 核心思路"></a>三、TCC 核心思路</h2><p>TCC 将一个分布式事务拆成三个阶段，由<strong>事务发起方</strong>协调<strong>事务参与方</strong>完成：</p>
 <table>
 <thead>
 <tr>
@@ -584,8 +567,7 @@
 <th>操作</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>Try</strong></td>
 <td>资源检查和预留</td>
 <td>冻结资源，但不真正扣减</td>
@@ -600,16 +582,14 @@
 <td>释放预留资源</td>
 <td>释放 Try 阶段冻结的资源</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>和 2PC 的区别在于：TCC 的 Try 不依赖数据库的行锁等待，而是把资源冻结操作下沉到业务层（通过 update where 条件），把分布式协调变成业务表达。</p>
-<hr />
-<h2 id="四-标准-tcc-是什么"><a class="markdownIt-Anchor" href="#四-标准-tcc-是什么"></a> 四、标准 TCC 是什么</h2>
-<p>在介绍本方案之前，先明确<strong>标准 TCC</strong> 的协议。它由一个全局事务协调器（Coordinator）驱动，参与角色包括：</p>
+<hr>
+<h2 id="四、标准-TCC-是什么"><a href="#四、标准-TCC-是什么" class="headerlink" title="四、标准 TCC 是什么"></a>四、标准 TCC 是什么</h2><p>在介绍本方案之前，先明确<strong>标准 TCC</strong> 的协议。它由一个全局事务协调器（Coordinator）驱动，参与角色包括：</p>
 <ul>
 <li><strong>事务发起方</strong>：发起全局事务，决定何时 Confirm 或 Cancel；</li>
 <li><strong>事务协调器</strong>：持久化全局事务状态和分支事务状态；</li>
-<li><strong>事务参与者</strong>：订单、库存、营销等资源服务，对外暴露 Try/Confirm/Cancel 三个接口；</li>
+<li><strong>事务参与者</strong>：订单、库存、营销等资源服务，对外暴露 Try&#x2F;Confirm&#x2F;Cancel 三个接口；</li>
 <li><strong>业务资源</strong>：参与者各自管理的数据库和冻结资源。</li>
 </ul>
 <p>标准 TCC 流程如下：</p>
@@ -643,18 +623,17 @@
         C->>P: Cancel
         Note over C,P: Cancel 失败持续重试
     end</pre>
+
 <p>标准 TCC 的硬性约束：</p>
 <ol>
 <li><strong>Try</strong> 在一个短时间窗口内全部完成；</li>
-<li><strong>Confirm / Cancel</strong> 由协调器统一决策，全局事务超时即触发 Cancel；</li>
+<li><strong>Confirm &#x2F; Cancel</strong> 由协调器统一决策，全局事务超时即触发 Cancel；</li>
 <li>每个参与者使用 <code>XID + branch_id</code> 标识分支事务；</li>
 <li>协调器持久化全局决议，进程重启后继续推进。</li>
 </ol>
 <p>只实现三个同名接口，并不等同于实现了 TCC。</p>
-<hr />
-<h2 id="五-本方案设计"><a class="markdownIt-Anchor" href="#五-本方案设计"></a> 五、本方案设计</h2>
-<h3 id="51-事务角色"><a class="markdownIt-Anchor" href="#51-事务角色"></a> 5.1 事务角色</h3>
-<table>
+<hr>
+<h2 id="五、本方案设计"><a href="#五、本方案设计" class="headerlink" title="五、本方案设计"></a>五、本方案设计</h2><h3 id="5-1-事务角色"><a href="#5-1-事务角色" class="headerlink" title="5.1 事务角色"></a>5.1 事务角色</h3><table>
 <thead>
 <tr>
 <th>角色</th>
@@ -662,8 +641,7 @@
 <th>选择理由</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>事务发起方</td>
 <td><strong>订单服务</strong></td>
 <td>已有下单主链路，作为事务中心最自然</td>
@@ -678,11 +656,9 @@
 <td>库存服务</td>
 <td>库存预扣是 Try 的核心</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>为什么不让 BuyerAPI 网关做发起方？网关承担了太多职责（路由、限流、鉴权），再加上事务协调会很难维护。新建独立协调服务又成本过高。订单服务天然就是下单主链路的承担者，由它做发起方最简单。</p>
-<h3 id="52-try-confirm-cancel-映射"><a class="markdownIt-Anchor" href="#52-try-confirm-cancel-映射"></a> 5.2 Try / Confirm / Cancel 映射</h3>
-<table>
+<h3 id="5-2-Try-Confirm-Cancel-映射"><a href="#5-2-Try-Confirm-Cancel-映射" class="headerlink" title="5.2 Try &#x2F; Confirm &#x2F; Cancel 映射"></a>5.2 Try &#x2F; Confirm &#x2F; Cancel 映射</h3><table>
 <thead>
 <tr>
 <th>服务</th>
@@ -691,8 +667,7 @@
 <th>Cancel</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>订单服务</td>
 <td>订单落库（待确认）</td>
 <td>提交本地事务</td>
@@ -704,11 +679,9 @@
 <td>确认库存扣减，状态置为 <code>Completed</code></td>
 <td>释放预扣库存，状态置为 <code>Canceled</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><code>Created / Completed / Canceled</code> 是库存使用记录表的状态机字段，每次操作对应一次状态变更。</p>
-<h3 id="53-流程全景"><a class="markdownIt-Anchor" href="#53-流程全景"></a> 5.3 流程全景</h3>
-<p>下图展示库存事务的完整时序，与标准 TCC 不同，本方案不依赖协调器，而是由订单事件驱动 Confirm，由定时任务兜底补偿：</p>
+<h3 id="5-3-流程全景"><a href="#5-3-流程全景" class="headerlink" title="5.3 流程全景"></a>5.3 流程全景</h3><p>下图展示库存事务的完整时序，与标准 TCC 不同，本方案不依赖协调器，而是由订单事件驱动 Confirm，由定时任务兜底补偿：</p>
 <pre class="mermaid">sequenceDiagram
     autonumber
     participant ODB as 订单服务DB
@@ -746,27 +719,24 @@
     else 订单存在
         CR->>IDB: Confirm：库存使用记录 -> Completed
     end</pre>
-<hr />
-<h2 id="六-补偿机制"><a class="markdownIt-Anchor" href="#六-补偿机制"></a> 六、补偿机制</h2>
-<h3 id="61-为什么需要补偿"><a class="markdownIt-Anchor" href="#61-为什么需要补偿"></a> 6.1 为什么需要补偿</h3>
-<p>正常路径下，订单创建成功后会通过 MQ 触发库存 Confirm。但以下场景会留下&quot;孤儿&quot;：</p>
+
+<hr>
+<h2 id="六、补偿机制"><a href="#六、补偿机制" class="headerlink" title="六、补偿机制"></a>六、补偿机制</h2><h3 id="6-1-为什么需要补偿"><a href="#6-1-为什么需要补偿" class="headerlink" title="6.1 为什么需要补偿"></a>6.1 为什么需要补偿</h3><p>正常路径下，订单创建成功后会通过 MQ 触发库存 Confirm。但以下场景会留下&quot;孤儿&quot;：</p>
 <ul>
 <li>Try 预扣库存成功，但接口超时返回失败（库存实际已扣）；</li>
 <li>订单落库失败，但库存已预扣；</li>
-<li>订单创建成功事件推送失败 / 消费失败；</li>
+<li>订单创建成功事件推送失败 &#x2F; 消费失败；</li>
 <li>库存服务的 Confirm 处理失败。</li>
 </ul>
 <p>这些场景必须靠<strong>补偿</strong>收敛，而不是靠重试整个流程。补偿的本质是：定期扫描&quot;应该被处理但还没被处理&quot;的记录，主动推进。</p>
-<h3 id="62-补偿设计"><a class="markdownIt-Anchor" href="#62-补偿设计"></a> 6.2 补偿设计</h3>
-<table>
+<h3 id="6-2-补偿设计"><a href="#6-2-补偿设计" class="headerlink" title="6.2 补偿设计"></a>6.2 补偿设计</h3><table>
 <thead>
 <tr>
 <th>维度</th>
 <th>决策</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>补偿对象</td>
 <td>库存 DB 中状态为 <code>Created</code> 的库存使用记录</td>
 </tr>
@@ -782,11 +752,9 @@
 <td>Cancel 补偿条件</td>
 <td>对应订单未创建（订单 DB 中查不到）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>补偿不是由库存服务单方面决定，而是<strong>通过查询订单 DB 的事实</strong>。这避免了库存域误判订单状态造成错补。</p>
-<h3 id="63-补偿流程"><a class="markdownIt-Anchor" href="#63-补偿流程"></a> 6.3 补偿流程</h3>
-<pre class="mermaid">flowchart TD
+<h3 id="6-3-补偿流程"><a href="#6-3-补偿流程" class="headerlink" title="6.3 补偿流程"></a>6.3 补偿流程</h3><pre class="mermaid">flowchart TD
     A[Cron 触发扫描] --> B[查询状态=Created 的库存使用记录]
     B --> C{记录存在?}
     C -->|否| Z[结束]
@@ -798,20 +766,18 @@
     G --> H
     H --> I[处理下一条记录]
     I --> C</pre>
+
 <p>注意：补偿流程只处理 <code>Created</code> 状态的记录。<code>Completed</code> 和 <code>Canceled</code> 都是终态，不会被再次推进。</p>
-<hr />
-<h2 id="七-tcc-的三大经典问题本方案只需正面解决一个"><a class="markdownIt-Anchor" href="#七-tcc-的三大经典问题本方案只需正面解决一个"></a> 七、TCC 的三大经典问题：本方案只需正面解决一个</h2>
-<p>幂等、空回滚、悬挂，是任何带 Try/Confirm/Cancel 异步竞态的方案都绕不开的三个经典坑。标准 TCC 需要一个统一框架来同时防住这三个。</p>
+<hr>
+<h2 id="七、TCC-的三大经典问题：本方案只需正面解决一个"><a href="#七、TCC-的三大经典问题：本方案只需正面解决一个" class="headerlink" title="七、TCC 的三大经典问题：本方案只需正面解决一个"></a>七、TCC 的三大经典问题：本方案只需正面解决一个</h2><p>幂等、空回滚、悬挂，是任何带 Try&#x2F;Confirm&#x2F;Cancel 异步竞态的方案都绕不开的三个经典坑。标准 TCC 需要一个统一框架来同时防住这三个。</p>
 <p>但在本方案里，情况不太一样：<strong>这三个里有两个（空回滚、悬挂）被「事件驱动 + 预扣模型」从结构上消除了，真正需要主动处理的只有幂等。</strong> 这也是第八节敢说&quot;不用上标准 TCC 框架&quot;的底气之一。</p>
-<h3 id="71-幂等唯一必须主动处理的"><a class="markdownIt-Anchor" href="#71-幂等唯一必须主动处理的"></a> 7.1 幂等：唯一必须主动处理的</h3>
-<p><strong>场景</strong>：上游可能重复调用 Try / Confirm / Cancel——接口超时重试、MQ 消息重复投递、定时补偿和事件驱动并发撞车。</p>
+<h3 id="7-1-幂等：唯一必须主动处理的"><a href="#7-1-幂等：唯一必须主动处理的" class="headerlink" title="7.1 幂等：唯一必须主动处理的"></a>7.1 幂等：唯一必须主动处理的</h3><p><strong>场景</strong>：上游可能重复调用 Try &#x2F; Confirm &#x2F; Cancel——接口超时重试、MQ 消息重复投递、定时补偿和事件驱动并发撞车。</p>
 <ul>
 <li><strong>Try 重复</strong>：订单服务调用 Try 超时后重试，如果不防，同一盘菜可能被预扣两次 → 直接超卖；</li>
-<li><strong>Confirm / Cancel 重复</strong>：<code>OrderCreated</code> / <code>OrderCreatedFailed</code> 重复消费，或事件驱动和定时补偿同时命中同一条 <code>Created</code> 记录。</li>
+<li><strong>Confirm &#x2F; Cancel 重复</strong>：<code>OrderCreated</code> &#x2F; <code>OrderCreatedFailed</code> 重复消费，或事件驱动和定时补偿同时命中同一条 <code>Created</code> 记录。</li>
 </ul>
 <p><strong>解决方案</strong>：MySQL 层面用「<strong>状态机 + 乐观锁（CAS）</strong>」做幂等，<strong>三层防护叠加</strong>：</p>
-<h4 id="第一层operation_id-唯一键约束"><a class="markdownIt-Anchor" href="#第一层operation_id-唯一键约束"></a> 第一层：<code>operation_id</code> 唯一键约束</h4>
-<p>每个事务操作绑定唯一 <code>operation_id</code>：</p>
+<h4 id="第一层：operation-id-唯一键约束"><a href="#第一层：operation-id-唯一键约束" class="headerlink" title="第一层：operation_id 唯一键约束"></a>第一层：<code>operation_id</code> 唯一键约束</h4><p>每个事务操作绑定唯一 <code>operation_id</code>：</p>
 <table>
 <thead>
 <tr>
@@ -819,8 +785,7 @@
 <th>operation_id 格式</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Try</td>
 <td><code>op_try_{order_item_id}_{dish_id}</code></td>
 </tr>
@@ -832,11 +797,9 @@
 <td>Cancel</td>
 <td><code>op_cancel_{reservation_id}</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>库存使用记录表 <code>reservation_usage_record</code> 的 <code>operation_id</code> 字段加<strong>唯一索引</strong>。重复请求第二次插入时直接触发 <code>Duplicate entry</code> 异常，应用层捕获后查询已有记录、按其状态返回结果——这层靠数据库唯一键防住&quot;完全相同的重复请求&quot;。</p>
-<h4 id="第二层状态终态判断"><a class="markdownIt-Anchor" href="#第二层状态终态判断"></a> 第二层：状态终态判断</h4>
-<p><code>reservation_usage_record</code> 表的状态机只有三条合法路径：</p>
+<h4 id="第二层：状态终态判断"><a href="#第二层：状态终态判断" class="headerlink" title="第二层：状态终态判断"></a>第二层：状态终态判断</h4><p><code>reservation_usage_record</code> 表的状态机只有三条合法路径：</p>
 <table>
 <thead>
 <tr>
@@ -845,8 +808,7 @@
 <th>目标状态</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>Created</code></td>
 <td>Confirm</td>
 <td><code>Completed</code></td>
@@ -857,35 +819,37 @@
 <td><code>Canceled</code></td>
 </tr>
 <tr>
-<td><code>Completed</code> / <code>Canceled</code></td>
+<td><code>Completed</code> &#x2F; <code>Canceled</code></td>
 <td>——</td>
 <td><strong>终态</strong>，重复请求直接返回成功</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>执行任何状态变更前先 <code>SELECT status, version FROM reservation_usage_record WHERE operation_id = ?</code>：</p>
 <ul>
-<li>命中<strong>终态</strong>（<code>Completed</code> / <code>Canceled</code>）→ 直接返回成功，<strong>不再改库存</strong>；</li>
+<li>命中<strong>终态</strong>（<code>Completed</code> &#x2F; <code>Canceled</code>）→ 直接返回成功，<strong>不再改库存</strong>；</li>
 <li>命中 <code>Created</code> → 继续走第三层的 CAS。</li>
 </ul>
-<h4 id="第三层cas-乐观锁更新"><a class="markdownIt-Anchor" href="#第三层cas-乐观锁更新"></a> 第三层：CAS 乐观锁更新</h4>
-<p>状态变更的 UPDATE 带 <code>version</code> 做 CAS，保证只有一个并发请求能推进成功：</p>
-<pre class="highlight"><code class="sql"><span class="hljs-comment">-- Confirm 的 CAS 更新</span>
-<span class="hljs-keyword">UPDATE</span> reservation_usage_record
-<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Completed&#x27;</span>, version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, updated_at <span class="hljs-operator">=</span> NOW()
-<span class="hljs-keyword">WHERE</span> operation_id <span class="hljs-operator">=</span> ? <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Created&#x27;</span> <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> #{expected_version};
+<h4 id="第三层：状态机自身的-CAS"><a href="#第三层：状态机自身的-CAS" class="headerlink" title="第三层：状态机自身的 CAS"></a>第三层：状态机自身的 CAS</h4><p><code>reservation_usage_record</code> 表的 <code>status</code> 字段本身就是乐观锁——状态从 <code>Created</code> 到 <code>Completed</code> &#x2F; <code>Canceled</code> 的转换是<strong>单调推进</strong>的，且只能由 <code>Created</code> 出发：</p>
+<pre class=" language-language-sql"><code class="language-language-sql">-- Confirm 的 CAS 更新
+UPDATE reservation_usage_record
+SET status = 'Completed', updated_at = NOW()
+WHERE operation_id = ? AND status = 'Created';
 
-<span class="hljs-comment">-- Cancel 的 CAS 更新</span>
-<span class="hljs-keyword">UPDATE</span> reservation_usage_record
-<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Canceled&#x27;</span>, version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, updated_at <span class="hljs-operator">=</span> NOW()
-<span class="hljs-keyword">WHERE</span> operation_id <span class="hljs-operator">=</span> ? <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Created&#x27;</span> <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> #{expected_version};
+-- Cancel 的 CAS 更新
+UPDATE reservation_usage_record
+SET status = 'Canceled', updated_at = NOW()
+WHERE operation_id = ? AND status = 'Created';
 </code></pre>
-<p>若 <code>affected rows = 0</code>，说明并发请求已经把记录推进到终态，当前请求直接返回成功，<strong>不重试、不报错</strong>——这层靠 <code>WHERE status = 'Created' AND version = ?</code> 防住&quot;并发撞车&quot;。</p>
+<p>若 <code>affected rows = 0</code>，说明：</p>
+<ul>
+<li>记录已被推进到 <code>Completed</code> &#x2F; <code>Canceled</code> 终态，或</li>
+<li>并发请求的 UPDATE 拿到行锁后，发现 <code>status</code> 已不再是 <code>Created</code></li>
+</ul>
+<p>两种情况都意味着&quot;已被处理过&quot;，当前请求直接返回成功，<strong>不重试、不报错</strong>。</p>
 <blockquote>
-<p><strong>关键点</strong>：CAS 里同时绑了 <code>status</code> 和 <code>version</code> 两个条件。<code>status = 'Created'</code> 是<strong>业务态</strong>校验（只能从 <code>Created</code> 推进），<code>version = ?</code> 是<strong>乐观锁</strong>校验（防止两个并发请求基于同一个 <code>version</code> 推进）。少了 <code>status</code>，可能把已终态的记录又改回去；少了 <code>version</code>，并发下会两个请求都成功推进、库存被重复改。</p>
+<p><strong>关键点</strong>：<code>status</code> 字段本身就是乐观锁，<strong>不需要额外的 <code>version</code> 列</strong>。MySQL UPDATE 在执行时会先获取行锁，再读出最新值并应用 WHERE 条件——两个并发请求同时尝试推进同一条记录时，后到者拿锁后会读到已被前一个请求改掉的 <code>status</code>，WHERE 不匹配、affected rows &#x3D; 0。<strong>状态机 + 行锁</strong>天然构成 CAS，无需引入版本号字段。</p>
 </blockquote>
-<h4 id="三层叠加的防护矩阵"><a class="markdownIt-Anchor" href="#三层叠加的防护矩阵"></a> 三层叠加的防护矩阵</h4>
-<table>
+<h4 id="三层叠加的防护矩阵"><a href="#三层叠加的防护矩阵" class="headerlink" title="三层叠加的防护矩阵"></a>三层叠加的防护矩阵</h4><table>
 <thead>
 <tr>
 <th>并发场景</th>
@@ -894,8 +858,7 @@
 <th>第三层 CAS</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>完全相同的重复请求（同一个 <code>operation_id</code>）</td>
 <td>✅ 拦住</td>
 <td>—</td>
@@ -913,11 +876,9 @@
 <td>—</td>
 <td>✅ 拦住</td>
 </tr>
-</tbody>
-</table>
-<p>一句话：<strong>MySQL 层面靠「唯一键 + 状态终态 + CAS 乐观锁」三层叠加做幂等，状态机管语义、CAS 管并发</strong>。<strong>这是本方案唯一必须靠机制硬防的一个。</strong> 空回滚和悬挂则被流程设计结构性消除（见 7.2、7.3）。</p>
-<h3 id="72-空回滚本方案不存在"><a class="markdownIt-Anchor" href="#72-空回滚本方案不存在"></a> 7.2 空回滚：本方案不存在</h3>
-<p><strong>什么是空回滚</strong>（标准 TCC 的经典坑）：Try 还没真正落库（或压根失败），Cancel 先到了；如果 Cancel 盲目执行&quot;退回库存&quot;，就会凭空把库存加上去。</p>
+</tbody></table>
+<p>一句话：<strong>MySQL 层面靠「唯一键 + 状态终态 + 状态机 CAS」三层叠加做幂等，<code>status</code> 字段本身就是乐观锁，配合行锁天然防止并发撞车</strong>。<strong>这是本方案唯一必须靠机制硬防的一个。</strong> 空回滚和悬挂则被流程设计结构性消除（见 7.2、7.3）。</p>
+<h3 id="7-2-空回滚：本方案不存在"><a href="#7-2-空回滚：本方案不存在" class="headerlink" title="7.2 空回滚：本方案不存在"></a>7.2 空回滚：本方案不存在</h3><p><strong>什么是空回滚</strong>（标准 TCC 的经典坑）：Try 还没真正落库（或压根失败），Cancel 先到了；如果 Cancel 盲目执行&quot;退回库存&quot;，就会凭空把库存加上去。</p>
 <p><strong>为什么本方案不会发生</strong>：本方案里 Cancel 只在两种情况下被触发，而这两种情况<strong>都以&quot;Try 已经成功、<code>Created</code> 记录确实存在&quot;为前提</strong>——</p>
 <ul>
 <li>消费 <code>OrderCreatedFailed</code>：订单创建失败。但订单是在&quot;库存预扣成功&quot;<strong>之后</strong>才开始创建的，所以此刻 <code>Created</code> 记录一定已经落库；</li>
@@ -927,12 +888,10 @@
 <blockquote>
 <p>那 <code>Canceled</code> 状态的 Fence 记录是干嘛的？它不是用来防空回滚的，而是<strong>幂等的载体</strong>：重复 Cancel 读到 <code>Canceled</code> 终态就直接返回成功，不会重复退库存（见 7.1）。</p>
 </blockquote>
-<h3 id="73-悬挂本方案也不会发生"><a class="markdownIt-Anchor" href="#73-悬挂本方案也不会发生"></a> 7.3 悬挂：本方案也不会发生</h3>
-<p><strong>什么是悬挂</strong>（标准 TCC 的经典坑）：Cancel 先于 Try 执行完毕——Cancel 已把事务标记为回滚，迟到的 Try 才到达，又把资源预扣了，形成&quot;已回滚却又预扣&quot;的矛盾。</p>
+<h3 id="7-3-悬挂：本方案也不会发生"><a href="#7-3-悬挂：本方案也不会发生" class="headerlink" title="7.3 悬挂：本方案也不会发生"></a>7.3 悬挂：本方案也不会发生</h3><p><strong>什么是悬挂</strong>（标准 TCC 的经典坑）：Cancel 先于 Try 执行完毕——Cancel 已把事务标记为回滚，迟到的 Try 才到达，又把资源预扣了，形成&quot;已回滚却又预扣&quot;的矛盾。</p>
 <p><strong>为什么本方案不会发生</strong>：悬挂的前提是&quot;Cancel 和 Try 乱序&quot;。但本方案是<strong>预扣模型</strong>，<strong>回滚动作永远是&quot;成功预扣&quot;的下游</strong>：先有一次成功的 Try（预扣 + 写 <code>Created</code> 记录），才可能有后续的 <code>OrderCreatedFailed</code> 或补偿扫描去回滚它。<strong>不存在&quot;Cancel 先于 Try 到达&quot;的时序窗口</strong>——没有预扣成功，就没有任何后续回滚可言。</p>
 <p>所以标准 TCC 里&quot;Try 必须先检查是否已存在 <code>Canceled</code> Fence、命中即拒绝&quot;那套防悬挂逻辑，在本方案里是用不到的。</p>
-<h3 id="74-三者在本方案里的真实状态"><a class="markdownIt-Anchor" href="#74-三者在本方案里的真实状态"></a> 7.4 三者在本方案里的真实状态</h3>
-<table>
+<h3 id="7-4-三者在本方案里的真实状态"><a href="#7-4-三者在本方案里的真实状态" class="headerlink" title="7.4 三者在本方案里的真实状态"></a>7.4 三者在本方案里的真实状态</h3><table>
 <thead>
 <tr>
 <th>经典问题</th>
@@ -940,11 +899,10 @@
 <th>本方案</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>幂等</td>
 <td>框架统一幂等</td>
-<td><strong>必须主动处理</strong>：MySQL 层面用「唯一键 + 状态终态判断 + <code>status+version</code> CAS 乐观锁」三层叠加做幂等，状态机管语义、CAS 管并发</td>
+<td><strong>必须主动处理</strong>：MySQL 层面用「唯一键 + 状态终态判断 + 状态机 CAS」三层叠加做幂等，状态机管语义也管并发，无需 <code>version</code> 字段</td>
 </tr>
 <tr>
 <td>空回滚</td>
@@ -956,31 +914,23 @@
 <td>框架统一防（Try 查 Fence）</td>
 <td><strong>结构性不存在</strong>：回滚永远是成功预扣的下游</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>一句话：<strong>标准 TCC 要靠一个框架同时防住三个问题，而本方案靠流程设计让其中两个根本不发生，只需为幂等写一处防护。</strong> 这正是&quot;实现更简单&quot;的又一条证据。</p>
-<hr />
-<h2 id="八-为什么不用标准-tcc"><a class="markdownIt-Anchor" href="#八-为什么不用标准-tcc"></a> 八、为什么不用标准 TCC</h2>
-<p>本方案借用了 TCC 的 Try/Confirm/Cancel 业务语义，但<strong>没有引入全局事务协调器</strong>。既然都讲 Try/Confirm/Cancel 了，为什么不直接上一套标准 TCC 框架？</p>
+<hr>
+<h2 id="八、为什么不用标准-TCC"><a href="#八、为什么不用标准-TCC" class="headerlink" title="八、为什么不用标准 TCC"></a>八、为什么不用标准 TCC</h2><p>本方案借用了 TCC 的 Try&#x2F;Confirm&#x2F;Cancel 业务语义，但<strong>没有引入全局事务协调器</strong>。既然都讲 Try&#x2F;Confirm&#x2F;Cancel 了，为什么不直接上一套标准 TCC 框架？</p>
 <p>答案可以归结成一句话：<strong>这个场景的一致性边界很小（只有订单 + 库存两个域，且库存的 Confirm 能由订单事件异步驱动），标准 TCC 那套复杂度在这里拿不到对应的收益。</strong> 而标准 TCC 的成本，几乎全在「实现和运维的复杂度」上。拆开看：</p>
-<h3 id="81-不用新增一个协调器服务"><a class="markdownIt-Anchor" href="#81-不用新增一个协调器服务"></a> 8.1 不用新增一个协调器服务</h3>
-<p>标准 TCC 的核心是一个<strong>独立的全局事务协调器</strong>：它要持久化全局事务和每个分支事务的状态、要在宕机重启后恢复推进、要集群化保证高可用。这是一个<strong>全新的、有状态的、要 7×24 运维的服务</strong>——部署、监控、扩容、故障演练，一样都少不了。</p>
+<h3 id="8-1-不用新增一个协调器服务"><a href="#8-1-不用新增一个协调器服务" class="headerlink" title="8.1 不用新增一个协调器服务"></a>8.1 不用新增一个协调器服务</h3><p>标准 TCC 的核心是一个<strong>独立的全局事务协调器</strong>：它要持久化全局事务和每个分支事务的状态、要在宕机重启后恢复推进、要集群化保证高可用。这是一个<strong>全新的、有状态的、要 7×24 运维的服务</strong>——部署、监控、扩容、故障演练，一样都少不了。</p>
 <p>而本方案根本不需要这个角色：<strong>&quot;决议&quot;就是订单事实本身</strong>——订单 DB 里有没有这条订单，就是唯一的真相。库存该 Confirm 还是 Cancel，查一下订单 DB 就知道了，不需要一个协调器专门记录&quot;全局事务到底该提交还是回滚&quot;。<strong>少一个服务，就少一整个故障域和运维面。</strong></p>
-<h3 id="82-不用给每个参与者维护-tryconfirmcancel-三套接口"><a class="markdownIt-Anchor" href="#82-不用给每个参与者维护-tryconfirmcancel-三套接口"></a> 8.2 不用给每个参与者维护 Try/Confirm/Cancel 三套接口</h3>
-<p>标准 TCC 要求<strong>所有参与者</strong>（订单、库存、营销……）都按统一的分支协议，对外暴露 <strong>Try / Confirm / Cancel 三套接口</strong>，并且这三套接口<strong>每一套都要各自处理好幂等、防空回滚、防悬挂</strong>。参与者越多，接口数量和一致性约束就按倍数增长，任何一套实现错了都可能踩坑。</p>
-<p>本方案里，库存服务对外只暴露<strong>一个「预扣」接口</strong>（就是 Try 的业务动作）。至于 Confirm 和 Cancel，它们是库存域<strong>内部</strong>根据订单事件和状态机自己推进的，<strong>根本不需要再对外开 Confirm / Cancel 两个接口</strong>。接口面从「3 套 × N 个参与者」收敛到「1 个预扣接口 + 1 个内部状态机」，实现和测试的负担都小了一个量级。</p>
+<h3 id="8-2-不用给每个参与者维护-Try-Confirm-Cancel-三套接口"><a href="#8-2-不用给每个参与者维护-Try-Confirm-Cancel-三套接口" class="headerlink" title="8.2 不用给每个参与者维护 Try&#x2F;Confirm&#x2F;Cancel 三套接口"></a>8.2 不用给每个参与者维护 Try&#x2F;Confirm&#x2F;Cancel 三套接口</h3><p>标准 TCC 要求<strong>所有参与者</strong>（订单、库存、营销……）都按统一的分支协议，对外暴露 <strong>Try &#x2F; Confirm &#x2F; Cancel 三套接口</strong>，并且这三套接口<strong>每一套都要各自处理好幂等、防空回滚、防悬挂</strong>。参与者越多，接口数量和一致性约束就按倍数增长，任何一套实现错了都可能踩坑。</p>
+<p>本方案里，库存服务对外只暴露<strong>一个「预扣」接口</strong>（就是 Try 的业务动作）。至于 Confirm 和 Cancel，它们是库存域<strong>内部</strong>根据订单事件和状态机自己推进的，<strong>根本不需要再对外开 Confirm &#x2F; Cancel 两个接口</strong>。接口面从「3 套 × N 个参与者」收敛到「1 个预扣接口 + 1 个内部状态机」，实现和测试的负担都小了一个量级。</p>
 <p>而且正如第七节所说，<strong>空回滚和悬挂在本方案里结构性不存在</strong>——所以连&quot;每套接口都要防悬挂、防空回滚&quot;这部分最烧脑的负担，也一并省掉了。</p>
-<h3 id="83-一致性边界就在库存域内单库本地事务就够了"><a class="markdownIt-Anchor" href="#83-一致性边界就在库存域内单库本地事务就够了"></a> 8.3 一致性边界就在库存域内，单库本地事务就够了</h3>
-<p>仔细想，库存的 Try / Confirm / Cancel，落到存储上<strong>都只是对库存 DB 的几次本地事务</strong>：预扣是&quot;扣减可售 + 插一条 <code>Created</code> 记录&quot;，Confirm 是&quot;把记录改成 <code>Completed</code>&quot;，Cancel 是&quot;退回库存 + 把记录改成 <code>Canceled</code>&quot;。<strong>每一步都是一个本地事务，天然原子。</strong></p>
+<h3 id="8-3-一致性边界就在库存域内，单库本地事务就够了"><a href="#8-3-一致性边界就在库存域内，单库本地事务就够了" class="headerlink" title="8.3 一致性边界就在库存域内，单库本地事务就够了"></a>8.3 一致性边界就在库存域内，单库本地事务就够了</h3><p>仔细想，库存的 Try &#x2F; Confirm &#x2F; Cancel，落到存储上<strong>都只是对库存 DB 的几次本地事务</strong>：预扣是&quot;扣减可售 + 插一条 <code>Created</code> 记录&quot;，Confirm 是&quot;把记录改成 <code>Completed</code>&quot;，Cancel 是&quot;退回库存 + 把记录改成 <code>Canceled</code>&quot;。<strong>每一步都是一个本地事务，天然原子。</strong></p>
 <p>标准 TCC 的协调器要解决的，是「多个独立资源如何原子提交」——而这里真正需要原子性的只有库存 DB 这一处。既然单库本地事务就能保证，再引入一个跨库的两阶段协调，就是为一个不存在的问题买复杂度。</p>
-<h3 id="84-恢复依据是订单事实不是协调器状态"><a class="markdownIt-Anchor" href="#84-恢复依据是订单事实不是协调器状态"></a> 8.4 恢复依据是&quot;订单事实&quot;，不是&quot;协调器状态&quot;</h3>
-<p>标准 TCC 的恢复，靠协调器把全局决议（commit / rollback）持久化下来，重启后照着推进。这就要求协调器的存储本身高可用，又引入一层&quot;协调器的数据也要一致&quot;的问题。</p>
+<h3 id="8-4-恢复依据是-订单事实-，不是-协调器状态"><a href="#8-4-恢复依据是-订单事实-，不是-协调器状态" class="headerlink" title="8.4 恢复依据是&quot;订单事实&quot;，不是&quot;协调器状态&quot;"></a>8.4 恢复依据是&quot;订单事实&quot;，不是&quot;协调器状态&quot;</h3><p>标准 TCC 的恢复，靠协调器把全局决议（commit &#x2F; rollback）持久化下来，重启后照着推进。这就要求协调器的存储本身高可用，又引入一层&quot;协调器的数据也要一致&quot;的问题。</p>
 <p>本方案的恢复依据要简单得多：定时任务扫一遍 <code>Created</code> 状态的库存记录，<strong>去订单 DB 查这条订单到底成没成</strong>——成了补 Confirm，没成补 Cancel。事实只有一个来源（订单 DB），不需要再维护一份协调器的全局事务日志，更不用为它做高可用。</p>
-<h3 id="85-确认之后的取消标准-tcc-也管不了"><a class="markdownIt-Anchor" href="#85-确认之后的取消标准-tcc-也管不了"></a> 8.5 确认之后的取消，标准 TCC 也管不了</h3>
-<p>标准 TCC 的 Cancel，只管 <strong>Try → Confirm 这个窗口内</strong>的失败：Try 成功了、但全局事务要回滚，于是 Cancel 释放预留。可一旦 <strong>Confirm 完成、订单进入履约</strong>，再发生取消（用户反悔、商家拒单、出餐或配送异常）——这就超出 TCC Cancel 的覆盖范围了。本方案里这对应的是 <code>Refund</code>（确认之后的逆向），它<strong>本来就不在 TCC 的语义里</strong>，只能靠事件 + 状态机单独做。</p>
+<h3 id="8-5-确认之后的取消，标准-TCC-也管不了"><a href="#8-5-确认之后的取消，标准-TCC-也管不了" class="headerlink" title="8.5 确认之后的取消，标准 TCC 也管不了"></a>8.5 确认之后的取消，标准 TCC 也管不了</h3><p>标准 TCC 的 Cancel，只管 <strong>Try → Confirm 这个窗口内</strong>的失败：Try 成功了、但全局事务要回滚，于是 Cancel 释放预留。可一旦 <strong>Confirm 完成、订单进入履约</strong>，再发生取消（用户反悔、商家拒单、出餐或配送异常）——这就超出 TCC Cancel 的覆盖范围了。本方案里这对应的是 <code>Refund</code>（确认之后的逆向），它<strong>本来就不在 TCC 的语义里</strong>，只能靠事件 + 状态机单独做。</p>
 <p>既然&quot;确认之后的取消&quot;反正要用事件驱动兜底，那前面那截很短的 Try → Confirm（下单到创建成功，秒级）又何必单独引入一个协调器？<strong>统一用一套状态机 + 事件驱动表达，反而更一致。</strong></p>
-<h3 id="86-和标准-tcc-的对比"><a class="markdownIt-Anchor" href="#86-和标准-tcc-的对比"></a> 8.6 和标准 TCC 的对比</h3>
-<table>
+<h3 id="8-6-和标准-TCC-的对比"><a href="#8-6-和标准-TCC-的对比" class="headerlink" title="8.6 和标准 TCC 的对比"></a>8.6 和标准 TCC 的对比</h3><table>
 <thead>
 <tr>
 <th>对比项</th>
@@ -988,16 +938,15 @@
 <th>本方案</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>协调器</td>
 <td>需要独立协调器集群</td>
 <td><strong>不需要</strong>，决议依据是订单事实</td>
 </tr>
 <tr>
 <td>参与者接口</td>
-<td>每个参与者实现 Try/Confirm/Cancel 三套</td>
-<td>库存只暴露<strong>预扣</strong>一个接口，Confirm/Cancel 由内部状态机推进</td>
+<td>每个参与者实现 Try&#x2F;Confirm&#x2F;Cancel 三套</td>
+<td>库存只暴露<strong>预扣</strong>一个接口，Confirm&#x2F;Cancel 由内部状态机推进</td>
 </tr>
 <tr>
 <td>事务标识</td>
@@ -1017,7 +966,7 @@
 <tr>
 <td>Cancel 时机</td>
 <td>全局事务失败或超时</td>
-<td>订单创建失败事件 / 定时补偿触发</td>
+<td>订单创建失败事件 &#x2F; 定时补偿触发</td>
 </tr>
 <tr>
 <td>恢复中心</td>
@@ -1029,14 +978,12 @@
 <td>协调器驱动的两阶段提交</td>
 <td>状态机驱动的事件最终一致性</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>所以本方案的准确定义是：</p>
 <blockquote>
-<p><strong>借鉴 TCC 的预留 / 确认 / 释放语义，但没有采用全局事务协调器和标准分支事务协议；本质上是一套基于 Reservation 状态机、Transactional Outbox、幂等 Fence 和定时补偿实现的最终一致性库存方案。选它的根本原因是实现和运维都更简单：不用新增协调器服务，不用给每个参与者维护三套接口，甚至连空回滚和悬挂都不用防。</strong></p>
+<p><strong>借鉴 TCC 的预留 &#x2F; 确认 &#x2F; 释放语义，但没有采用全局事务协调器和标准分支事务协议；本质上是一套基于 Reservation 状态机、Transactional Outbox、幂等 Fence 和定时补偿实现的最终一致性库存方案。选它的根本原因是实现和运维都更简单：不用新增协调器服务，不用给每个参与者维护三套接口，甚至连空回滚和悬挂都不用防。</strong></p>
 </blockquote>
-<h2 id="九-方案总结"><a class="markdownIt-Anchor" href="#九-方案总结"></a> 九、方案总结</h2>
-<p>这套方案的核心是把分布式事务中的每一个不确定窗口都变成<strong>可观察、可重试、可补偿</strong>的状态：</p>
+<h2 id="九、方案总结"><a href="#九、方案总结" class="headerlink" title="九、方案总结"></a>九、方案总结</h2><p>这套方案的核心是把分布式事务中的每一个不确定窗口都变成<strong>可观察、可重试、可补偿</strong>的状态：</p>
 <ul>
 <li><strong>Try 阶段</strong>：库存预扣 + 写 <code>Created</code> 状态记录，单次本地事务完成；</li>
 <li><strong>Confirm 阶段</strong>：由订单成功事件驱动，库存使用记录从 <code>Created</code> 推进到 <code>Completed</code>；</li>
@@ -1230,10 +1177,6 @@
                         <span class="chip bg-color">Agent</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                        <span class="chip bg-color">工程实践</span>
-                    </a>
-                    
                     <a href="/tags/LLM/">
                         <span class="chip bg-color">LLM</span>
                     </a>
@@ -1244,6 +1187,10 @@
                     
                     <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
                         <span class="chip bg-color">上下文工程</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
                     </a>
                     
                     <a href="/tags/Memory/">
@@ -1299,12 +1246,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ClaudeCode/">
-                        <span class="chip bg-color">ClaudeCode</span>
-                    </a>
-                    
                     <a href="/tags/Agent/">
                         <span class="chip bg-color">Agent</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
+                    </a>
+                    
+                    <a href="/tags/ClaudeCode/">
+                        <span class="chip bg-color">ClaudeCode</span>
                     </a>
                     
                     <a href="/tags/TypeScript/">
@@ -1317,10 +1268,6 @@
                     
                     <a href="/tags/Plan-and-Execute/">
                         <span class="chip bg-color">Plan-and-Execute</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                        <span class="chip bg-color">工程实践</span>
                     </a>
                     
                 </div>
@@ -1503,7 +1450,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">96.3k</span>&nbsp;字
+                    class="white-color">89.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 

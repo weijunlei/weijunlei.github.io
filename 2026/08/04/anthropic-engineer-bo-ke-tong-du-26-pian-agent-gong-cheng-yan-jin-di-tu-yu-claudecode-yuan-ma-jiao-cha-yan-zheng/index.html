@@ -5,9 +5,7 @@
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="keywords" content="做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证, 小风雷">
-    <meta name="description" content=" 做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证
- 〇、先说结论
-通读完 Anthropic Engineering 从 2024-09 到 20">
+    <meta name="description" content="做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证〇、先说结论通读完 Anthropic Engineering 从 2024-09 到 2026-0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -306,10 +304,6 @@
                                 <span class="chip bg-color">Agent</span>
                             </a>
                         
-                            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                                <span class="chip bg-color">工程实践</span>
-                            </a>
-                        
                             <a href="/tags/LLM/">
                                 <span class="chip bg-color">LLM</span>
                             </a>
@@ -342,6 +336,10 @@
                                 <span class="chip bg-color">Evals</span>
                             </a>
                         
+                            <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                <span class="chip bg-color">工程实践</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -372,14 +370,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9.6k
+                    9.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    40 分
+                    41 分
                 </div>
                 
 				
@@ -390,18 +388,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="做-agent-也需要向大师学习anthropic-engineering-26-篇博客通读-claude-code-泄露源码交叉验证"><a class="markdownIt-Anchor" href="#做-agent-也需要向大师学习anthropic-engineering-26-篇博客通读-claude-code-泄露源码交叉验证"></a> 做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证</h1>
-<h2 id="〇-先说结论"><a class="markdownIt-Anchor" href="#〇-先说结论"></a> 〇、先说结论</h2>
-<p>通读完 Anthropic Engineering 从 <strong>2024-09 到 2026-04</strong> 这八个月里发的 <strong>26 篇工程师博客</strong>（外加 1 篇 Featured 置顶），再把它们和 <strong>2026-03-31 泄露的 Claude Code 源码</strong>、<strong>CL4R1T4S 泄露的 Claude/Claude Code 系统提示词</strong> 对一遍，我得到三件事：</p>
+                <h1 id="做-Agent-也需要向大师学习：Anthropic-Engineering-26-篇博客通读-Claude-Code-泄露源码交叉验证"><a href="#做-Agent-也需要向大师学习：Anthropic-Engineering-26-篇博客通读-Claude-Code-泄露源码交叉验证" class="headerlink" title="做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证"></a>做 Agent 也需要向大师学习：Anthropic Engineering 26 篇博客通读 + Claude Code 泄露源码交叉验证</h1><h2 id="〇、先说结论"><a href="#〇、先说结论" class="headerlink" title="〇、先说结论"></a>〇、先说结论</h2><p>通读完 Anthropic Engineering 从 <strong>2024-09 到 2026-04</strong> 这八个月里发的 <strong>26 篇工程师博客</strong>（外加 1 篇 Featured 置顶），再把它们和 <strong>2026-03-31 泄露的 Claude Code 源码</strong>、<strong>CL4R1T4S 泄露的 Claude&#x2F;Claude Code 系统提示词</strong> 对一遍，我得到三件事：</p>
 <ol>
-<li><strong>Agent 工程的演进路径是清的</strong>：从 2024 年底证明「Agent 可行」（<code>Building effective agents</code>、<code>Contextual Retrieval</code>），到 2025 年铺基建（多 Agent、上下文工程、Skills、MCP），再到 2026 年补治理（Evals、Auto mode、Sandbox、Permission、Harness），Anthropic 几乎是按 “<strong>先让东西跑起来 → 再让它跑得稳 → 最后让别人也敢用</strong>” 这条路走的。我自己的表述换成更土的话：<strong>从&quot;能work&quot;到&quot;敢ship&quot;到&quot;敢让人用&quot;</strong>。</li>
-<li><strong>大部分博客不是 PPT</strong>。Claude Code 是这些博客思想最浓缩的实现，里面 70% 以上的做法都能在源码里找到&quot;指纹&quot;。比如 <code>Effective context engineering for AI agents</code>（2025-09）讲的 compaction + structured note-taking + sub-agent 三件套，在源码里就是 <code>services/compact/</code> 下 <code>compact.ts</code> / <code>autoCompact.ts</code> / <code>sessionMemoryCompact.ts</code> / <code>microCompact.ts</code> 这一整套。</li>
-<li><strong>也有博客暂时只画了饼</strong>。比如 <code>Scaling Managed Agents: Decoupling the brain from the hands</code>（2026-04-08）里的 Session/Harness/Sandbox 三件套解耦，到 2026-04 我截稿为止，Claude Code 主仓库里还是单进程式的 coordinator、并没有完全解耦成独立服务。这条线还在跑。</li>
+<li><strong>Agent 工程的演进路径是清的</strong>：从 2024 年底证明「Agent 可行」（<code>Building effective agents</code>、<code>Contextual Retrieval</code>），到 2025 年铺基建（多 Agent、上下文工程、Skills、MCP），再到 2026 年补治理（Evals、Auto mode、Sandbox、Permission、Harness），Anthropic 几乎是按 &quot;<strong>先让东西跑起来 → 再让它跑得稳 → 最后让别人也敢用</strong>&quot; 这条路走的。我自己的表述换成更土的话：<strong>从&quot;能work&quot;到&quot;敢ship&quot;到&quot;敢让人用&quot;</strong>。</li>
+<li><strong>大部分博客不是 PPT</strong>。Claude Code 是这些博客思想最浓缩的实现，里面 70% 以上的做法都能在源码里找到&quot;指纹&quot;。比如 <code>Effective context engineering for AI agents</code>（2025-09）讲的 compaction + structured note-taking + sub-agent 三件套，在源码里就是 <code>services/compact/</code> 下 <code>compact.ts</code> &#x2F; <code>autoCompact.ts</code> &#x2F; <code>sessionMemoryCompact.ts</code> &#x2F; <code>microCompact.ts</code> 这一整套。</li>
+<li><strong>也有博客暂时只画了饼</strong>。比如 <code>Scaling Managed Agents: Decoupling the brain from the hands</code>（2026-04-08）里的 Session&#x2F;Harness&#x2F;Sandbox 三件套解耦，到 2026-04 我截稿为止，Claude Code 主仓库里还是单进程式的 coordinator、并没有完全解耦成独立服务。这条线还在跑。</li>
 </ol>
 <p>下面给你铺开 —— 第一部分介绍 Anthropic Engineering 这个博客是干嘛的，第二部分一图讲清 26 篇的整体脉络，第三部分按时间升序给每一篇写&quot;3 句话&quot;摘要，第四部分是我自己的思考，第五部分拿泄露的代码 + 系统提示词反着核对一遍。</p>
-<hr />
-<h2 id="一-anthropic-engineering-是干嘛的"><a class="markdownIt-Anchor" href="#一-anthropic-engineering-是干嘛的"></a> 一、Anthropic Engineering 是干嘛的</h2>
-<p><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering">Anthropic Engineering 博客</a>（<code>anthropic.com/engineering</code>）跟 <a target="_blank" rel="noopener" href="https://www.anthropic.com/news">Anthropic Newsroom</a>、<a target="_blank" rel="noopener" href="https://www.anthropic.com/research">Anthropic Research</a> 是三条独立的发布线：</p>
+<hr>
+<h2 id="一、Anthropic-Engineering-是干嘛的"><a href="#一、Anthropic-Engineering-是干嘛的" class="headerlink" title="一、Anthropic Engineering 是干嘛的"></a>一、Anthropic Engineering 是干嘛的</h2><p><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering">Anthropic Engineering 博客</a>（<code>anthropic.com/engineering</code>）跟 <a target="_blank" rel="noopener" href="https://www.anthropic.com/news">Anthropic Newsroom</a>、<a target="_blank" rel="noopener" href="https://www.anthropic.com/research">Anthropic Research</a> 是三条独立的发布线：</p>
 <table>
 <thead>
 <tr>
@@ -409,8 +404,7 @@
 <th>发什么的</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>News</strong></td>
 <td>产品发布、企业合作、公司人事 —— 给市场和媒体看的</td>
 </tr>
@@ -422,15 +416,13 @@
 <td><strong>Engineering</strong></td>
 <td><strong>工程实践复盘</strong>：怎么搭 Agent 框架、怎么写工具、怎么 Eval、怎么踩坑、怎么修事故 —— <strong>给同行工程师看的</strong></td>
 </tr>
-</tbody>
-</table>
-<p>我们这篇文章要读的 26 篇全在 Engineering 这一栏。它的风格跟我之前读的 Google Research / DeepMind / Microsoft / Vercel 工程博客非常不同 —— <strong>没有太多 marketing 笔法，是真把源码级实现细节打开给你看</strong>。比如把 sandbox 失败案例给的真实数字（84% 权限弹窗减少）摆出来，把 eval-aware 模型跑出 4050 万 token 自我识破实验的 prompt 也摘出来。</p>
+</tbody></table>
+<p>我们这篇文章要读的 26 篇全在 Engineering 这一栏。它的风格跟我之前读的 Google Research &#x2F; DeepMind &#x2F; Microsoft &#x2F; Vercel 工程博客非常不同 —— <strong>没有太多 marketing 笔法，是真把源码级实现细节打开给你看</strong>。比如把 sandbox 失败案例给的真实数字（84% 权限弹窗减少）摆出来，把 eval-aware 模型跑出 4050 万 token 自我识破实验的 prompt 也摘出来。</p>
 <blockquote>
 <p>小八卦：2026 年 3 月底 Claude Code 整个 TypeScript 源码通过 npm 的 source map 泄露过一次（<a target="_blank" rel="noopener" href="https://x.com/Fried_rice/status/2038894956459290963">Chaofan Shou @Fried_rice 的 X 帖</a>），所以这一轮读博客咱们有<strong>源码级 ground truth</strong> 能对。</p>
 </blockquote>
-<hr />
-<h2 id="二-26-篇文章的整体脉络一张图讲完"><a class="markdownIt-Anchor" href="#二-26-篇文章的整体脉络一张图讲完"></a> 二、26 篇文章的整体脉络：一张图讲完</h2>
-<p>按时间升序，这 26 篇几乎完美对应 Anthropic Agent 工程的演进三段式：</p>
+<hr>
+<h2 id="二、26-篇文章的整体脉络：一张图讲完"><a href="#二、26-篇文章的整体脉络：一张图讲完" class="headerlink" title="二、26 篇文章的整体脉络：一张图讲完"></a>二、26 篇文章的整体脉络：一张图讲完</h2><p>按时间升序，这 26 篇几乎完美对应 Anthropic Agent 工程的演进三段式：</p>
 <pre class="mermaid">timeline
     title Anthropic Engineering 博客脉络 2024-09 to 2026-04
     section 2024 Q4 证明可行
@@ -461,7 +453,8 @@
         2026-03-25 : Auto mode - 分类器代替人工审批
         2026-04-08 : Scaling Managed Agents - brain vs hands
         2026-04-23 : Update on Claude Code quality reports</pre>
-<p>顺手再画一张&quot;主题-时间&quot;的热力分布图。我先把矩阵画出来（横轴是时间、纵轴是&quot;源码落地程度&quot;），每格按落度量打分（0=纯方法论、1=几乎全落地），然后用 Mermaid v10 的 <code>quadrantChart</code> 画一张象限图。坐标严格压在 0~1 之间（Mermaid 硬性要求），命名避开了 <code>quadrant-1</code> 这类保留字。</p>
+
+<p>顺手再画一张&quot;主题-时间&quot;的热力分布图。我先把矩阵画出来（横轴是时间、纵轴是&quot;源码落地程度&quot;），每格按落度量打分（0&#x3D;纯方法论、1&#x3D;几乎全落地），然后用 Mermaid v10 的 <code>quadrantChart</code> 画一张象限图。坐标严格压在 0~1 之间（Mermaid 硬性要求），命名避开了 <code>quadrant-1</code> 这类保留字。</p>
 <pre class="mermaid">quadrantChart
     title 26-article distribution - theme by period
     x-axis Early P0 --> Recent P2
@@ -494,8 +487,9 @@
     Auto mode: [0.99, 0.92]
     Scaling Managed Agents: [0.99, 0.78]
     Update on quality reports: [0.99, 0.85]</pre>
+
 <blockquote>
-<p>这图大致想表达：<strong>早期偏方法论、近期越来越工程化</strong>。Anthropic 是先把&quot;什么是 Agent / 怎么写得动&quot;讲清楚，再补&quot;eval / 沙箱 / harness / 分类器审批&quot;这些&quot;治理层&quot;。</p>
+<p>这图大致想表达：<strong>早期偏方法论、近期越来越工程化</strong>。Anthropic 是先把&quot;什么是 Agent &#x2F; 怎么写得动&quot;讲清楚，再补&quot;eval &#x2F; 沙箱 &#x2F; harness &#x2F; 分类器审批&quot;这些&quot;治理层&quot;。</p>
 </blockquote>
 <p>如果某些主题浏览器渲染不了（不同 hexo 插件版本对 <code>quadrantChart</code> 支持不一致，<strong><code>hexo-filter-mermaid-diagrams@1.0.5</code> + Mermaid v10.9 有一个隐藏坑：中文 label 里的括号、半角空格、Unicode 引号都会触发 syntax error</strong>），下面给一张原汁原味的 markdown 热力表，按&quot;博客主题 × 时段&quot;做矩阵，单元格填&quot;源码指纹强度&quot;（⭐ 越多越能定位到具体源码）：</p>
 <table>
@@ -507,53 +501,51 @@
 <th>P2 别人敢用 (2026Q1-Q2)</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td>Agent 方法论 / 协同</td>
-<td>⭐⭐⭐⭐ (SWE-bench / multi-agent)</td>
-<td>⭐⭐⭐ (context eng / skills)</td>
-<td>⭐⭐⭐⭐⭐ (auto mode / managed)</td>
+<tbody><tr>
+<td>Agent 方法论 &#x2F; 协同</td>
+<td>⭐⭐⭐⭐ (SWE-bench &#x2F; multi-agent)</td>
+<td>⭐⭐⭐ (context eng &#x2F; skills)</td>
+<td>⭐⭐⭐⭐⭐ (auto mode &#x2F; managed)</td>
 </tr>
 <tr>
-<td>上下文 / 上下文工程</td>
+<td>上下文 &#x2F; 上下文工程</td>
 <td>⭐⭐ (contextual retrieval)</td>
-<td>⭐⭐⭐⭐⭐ (compaction / structured note)</td>
-<td>⭐⭐⭐⭐ (context reset / harness)</td>
+<td>⭐⭐⭐⭐⭐ (compaction &#x2F; structured note)</td>
+<td>⭐⭐⭐⭐ (context reset &#x2F; harness)</td>
 </tr>
 <tr>
 <td>Skill 系统</td>
 <td>⭐⭐ (best practices)</td>
-<td>⭐⭐⭐⭐⭐ (skill 三层披露 / boundedSkill)</td>
+<td>⭐⭐⭐⭐⭐ (skill 三层披露 &#x2F; boundedSkill)</td>
 <td>⭐⭐⭐ (postmortem 提了 skillImprovement hook)</td>
 </tr>
 <tr>
-<td>MCP / 工具加载</td>
+<td>MCP &#x2F; 工具加载</td>
 <td>⭐ (DXT 早期)</td>
-<td>⭐⭐⭐⭐⭐ (code-execution / tool search)</td>
+<td>⭐⭐⭐⭐⭐ (code-execution &#x2F; tool search)</td>
 <td>⭐ (evaluation 引用)</td>
 </tr>
 <tr>
-<td>沙箱 / 权限边界</td>
+<td>沙箱 &#x2F; 权限边界</td>
 <td>—</td>
 <td>⭐⭐⭐⭐⭐ (bubblewrap + seatbelt)</td>
 <td>⭐⭐⭐⭐ (auto mode 分类器)</td>
 </tr>
 <tr>
-<td>Eval / 评测 / 安全</td>
+<td>Eval &#x2F; 评测 &#x2F; 安全</td>
 <td>—</td>
 <td>⭐⭐ (事故复盘)</td>
-<td>⭐⭐⭐⭐⭐ (evals / AI-resistant / awareness)</td>
+<td>⭐⭐⭐⭐⭐ (evals &#x2F; AI-resistant &#x2F; awareness)</td>
 </tr>
 <tr>
-<td>Harness / 长任务编排</td>
+<td>Harness &#x2F; 长任务编排</td>
 <td>—</td>
 <td>⭐⭐⭐⭐ (effective harnesses)</td>
-<td>⭐⭐⭐⭐ (managed agents / harness design)</td>
+<td>⭐⭐⭐⭐ (managed agents &#x2F; harness design)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <blockquote>
-<p>单元格里的 ⭐ 是&quot;在泄露源码里能 grep 到的强度&quot;：5 颗星 = 源码同名/同思路的实现就在某 .ts 里；1 颗星 = 只在注释或文档里点名。空 = 这段时间窗口没相关落地。</p>
+<p>单元格里的 ⭐ 是&quot;在泄露源码里能 grep 到的强度&quot;：5 颗星 &#x3D; 源码同名&#x2F;同思路的实现就在某 .ts 里；1 颗星 &#x3D; 只在注释或文档里点名。空 &#x3D; 这段时间窗口没相关落地。</p>
 </blockquote>
 <p>我自己的解读：<strong>这张表反过来帮咱们把&quot;哪些思想还在空中飘&quot;也一眼看清了</strong> —— 比如 MCP 在 P2 已经几乎不出现新文章，因为已经从&quot;思想&quot;变成&quot;基础设施&quot;；而 Eval 系统从 2025H2 才开始有零星落地，到 2026Q1 突然密集发——Anthropic 自己也是这一段才意识到它必须补&quot;评测基础设施&quot;。</p>
 <p>把&quot;演进路径&quot;再压成一句话我自己的口径（比你的「可用性 → 提高可用性 → 迭代」更直白）：</p>
@@ -570,6 +562,7 @@
     L_0["Contextual Retrieval<br/>Building effective agents<br/>SWE-bench Verified<br/>Best practices"] -. "P0 主题" .-> P_0
     L_1["Multi-agent<br/>Context Engineering<br/>Skills - MCP - Sandbox<br/>Tool Search - Harness"] -. "P1 主题" .-> P_1
     L_2["Evals - AI-resistant<br/>Infrastructure noise<br/>Eval awareness<br/>Auto mode - Managed Agents"] -. "P2 主题" .-> P_2</pre>
+
 <p>如果你的浏览器里图还是没有渲染，下面这张 markdown 表是这张图的一对一翻译（信息完全一致）：</p>
 <table>
 <thead>
@@ -579,8 +572,7 @@
 <th>主要主题（博客 ↘ → 阶段 ↙）</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>P0 能跑起来</strong></td>
 <td>2024 Q4 - 2025 H1</td>
 <td>Contextual Retrieval · Building effective agents · SWE-bench Verified · Best practices</td>
@@ -595,120 +587,39 @@
 <td>2026 Q1 - Q2</td>
 <td>Evals · AI-resistant · Infrastructure noise · Eval awareness · Auto mode · Managed Agents</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>阶段流向：<strong>P0 → P1 → P2</strong>。</p>
-<hr />
-<h2 id="三-按时间升序每篇-3-句话"><a class="markdownIt-Anchor" href="#三-按时间升序每篇-3-句话"></a> 三、按时间升序，每篇 3 句话</h2>
-<blockquote>
-<p>每篇统一格式：① <strong>这篇在讲什么</strong> ② <strong>核心做法 / 发现</strong> ③ <strong>为什么值得读</strong>。</p>
+<hr>
+<h2 id="三、按时间升序，每篇-3-句话"><a href="#三、按时间升序，每篇-3-句话" class="headerlink" title="三、按时间升序，每篇 3 句话"></a>三、按时间升序，每篇 3 句话</h2><blockquote>
+<p>每篇统一格式：① <strong>这篇在讲什么</strong> ② <strong>核心做法 &#x2F; 发现</strong> ③ <strong>为什么值得读</strong>。</p>
 </blockquote>
-<h3 id="2024"><a class="markdownIt-Anchor" href="#2024"></a> 2024</h3>
-<h4 id="1-introducing-contextual-retrieval2024-09-19"><a class="markdownIt-Anchor" href="#1-introducing-contextual-retrieval2024-09-19"></a> 1. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/contextual-retrieval">Introducing Contextual Retrieval</a>（2024-09-19）</h4>
-<p>① 传统 RAG 把文档切成无上下文 chunk 直接做 embedding，检索会丢上下文、检索召回率显著掉。<br />
-② 做法是给每个 chunk 补一段&quot;所属文档的上下文&quot;再去做 embedding 和 BM25（<code>Contextual Embeddings + Contextual BM25</code>），失败检索减少约 49%；再叠 rerank 可达 67%。<br />
-③ 值得读是因为这是后面几乎所有 RAG 系统的基石技巧，作者也直接给了可复用的 prompt 模板，我现在做的&quot;持仓深度复盘&quot;也走的是这一套（先做语义召回、BM25 加权、再上 rerank）。</p>
-<h4 id="2-building-effective-agents2024-12-19"><a class="markdownIt-Anchor" href="#2-building-effective-agents2024-12-19"></a> 2. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>（2024-12-19）</h4>
-<p>① Anthropic 总结与几十个团队合作后沉淀下来的 <strong>Agent 设计方法论</strong>，区分 workflow（预定义路径）和 agent（动态决策）。<br />
-② 给出五种常用 workflow 模式：增强型 LLM、提示链、路由、并行化、编排者-工作者、评估者-优化者；主张&quot;最成功的实现用简单可组合模式，而不是复杂框架&quot;。<br />
-③ 值得读是因为它几乎是后面 1 年所有 Agent 平台设计的天花板参考，包括我现在做的&quot;持仓深度复盘&quot;的 1 Lead + 4 Teammate 也是 orchestrator-worker 模式。<strong>评论区里那句&quot;agents are things that ship + wait for feedback&quot;比整篇文章加起来都值钱。</strong></p>
-<h3 id="2025"><a class="markdownIt-Anchor" href="#2025"></a> 2025</h3>
-<h4 id="3-raising-the-bar-on-swe-bench-verified-with-claude-35-sonnet2025-01-06"><a class="markdownIt-Anchor" href="#3-raising-the-bar-on-swe-bench-verified-with-claude-35-sonnet2025-01-06"></a> 3. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/swe-bench-verified">Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet</a>（2025-01-06）</h4>
-<p>① 用新版的 Claude 3.5 Sonnet 在 SWE-bench Verified 上拿 SOTA（49%，前 SOTA 是 45%）。<br />
-② 仅靠 <strong>简单 prompt + 两个通用工具</strong>（str_replace_editor、bash）就做到；模型展现了显著的&quot;自我纠错 + 多尝试&quot;能力。<br />
-③ 值得读是因为它同时暴露了 SWE-bench 的坑（hidden tests、grading 环境、多模态缺失）—— <strong>跑榜单的同时要质疑榜单</strong>，给后面 2026 年的 <code>Quantifying infrastructure noise in agentic coding evals</code> 埋了伏笔。</p>
-<h4 id="4-the-think-tool2025-03-20"><a class="markdownIt-Anchor" href="#4-the-think-tool2025-03-20"></a> 4. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/the-think-tool">The “think” tool</a>（2025-03-20）</h4>
-<p>① 给 Claude 加一个 <code>think</code> 工具，让它在长链工具调用之间停下来专门&quot;想一想&quot;。<br />
-② 区别于 extended thinking（生成前的思考），<code>think</code> 用在 <strong>工具调用之间&quot;边走边想&quot;</strong> 的场景，特别适合政策密集、多步依赖、客服式对话；τ-Bench 上有显著提升。<br />
-③ 值得读是因为这是&quot;显式给模型留思考预算&quot;的早期工程化实验，后面 <code>Effective context engineering</code> 把这个思想拔高成了系统方法论 —— <strong>但这篇文章后来被官方自己悄悄废弃了</strong>，因为 extended thinking 已经覆盖了大量场景。</p>
-<h4 id="5-claude-code-best-practices-for-agentic-coding2025-04-18"><a class="markdownIt-Anchor" href="#5-claude-code-best-practices-for-agentic-coding2025-04-18"></a> 5. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/claude-code-best-practices-agentic-coding">Claude Code: Best practices for agentic coding</a>（2025-04-18）</h4>
-<p>① 一篇汇总：怎么用好 Claude Code。<br />
-② 核心是 <code>CLAUDE.md</code>（项目级记忆文件，告诉 Claude 常用命令 / 代码风格 / 测试方式）+ <strong>上下文窗口是最稀缺的资源</strong> + 建议用 <code>/init</code> 自动生成 <a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a> + <code>#</code> 键随时把偏好写回文件。<br />
-③ 值得读是因为这一篇直接催生了 <code>~/.claude/CLAUDE.md</code> 这个生态，泄露的 <code>CLAUDE-CODE</code> 系统提示词里仍然保留着 “<a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a> will be automatically added to context” 这句。</p>
-<h4 id="6-how-we-built-our-multi-agent-research-system2025-06-13"><a class="markdownIt-Anchor" href="#6-how-we-built-our-multi-agent-research-system2025-06-13"></a> 6. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/multi-agent-research-system">How we built our multi-agent research system</a>（2025-06-13）</h4>
-<p>① Claude Research 多 Agent 架构的首次公开拆解。<br />
-② Orchestrator-worker：lead agent 派发多个 subagent <strong>并行搜索 + 各自独立上下文窗口</strong>，最后汇总。多 Agent（Opus 4 + Sonnet 4 subagent）比单 Agent Opus 4 在内部 eval 上 <strong>强 90.2%</strong>；代价是 token 消耗约 15×；BrowseComp 上 80% 的性能方差可以由 token 用量解释。<br />
-③ 值得读是因为它告诉咱们一个残酷的事实：<strong>多 Agent 的&quot;性能提升&quot;很大程度上就是&quot;花得起钱&quot;</strong>。我自己做大模型协作任务时，会把这个 15× 的成本当成底线提醒。</p>
-<h4 id="7-desktop-extensions-one-click-mcp-server-installation-for-claude-desktop2025-06-26"><a class="markdownIt-Anchor" href="#7-desktop-extensions-one-click-mcp-server-installation-for-claude-desktop2025-06-26"></a> 7. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/desktop-extensions-one-click-mcp-server-installation-for-claude-desktop">Desktop Extensions: One-click MCP server installation for Claude Desktop</a>（2025-06-26）</h4>
-<p>① 推出 DXT（<code>.mcpb</code> 格式）让 Claude Desktop <strong>用户一键安装 MCP server</strong>。<br />
-② 开源了 MCPB 规范、打包与校验工具、参考实现；企业侧支持 Group Policy / MDM 预装、黑名单、私有扩展目录等管控。<br />
-③ 值得读是因为它提前解决了&quot;个人装很爽、企业没法管&quot;的矛盾 —— 等于给后来 Claude Code 的 MCP 生态铺好了安装协议。泄露源码里 <code>services/mcp/</code> 那一大片就是这条线的延续。</p>
-<h4 id="8-writing-effective-tools-for-agents-with-agents2025-09-11"><a class="markdownIt-Anchor" href="#8-writing-effective-tools-for-agents-with-agents2025-09-11"></a> 8. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/writing-effective-tools-for-agents">Writing effective tools for agents — with agents</a>（2025-09-11）</h4>
-<p>① 讲怎么给 Agent 写高质量工具，<strong>并且</strong>用 Claude 自己来迭代工具。<br />
-② 关键原则：选对工具、命名空间划清边界、返回有意义的上下文、为 token 效率优化响应、精心写工具描述和 spec。流程是&quot;<strong>快速搭原型 → 建 eval 套件 → 让 Claude Code 对着 eval 自动迭代</strong>&quot;。<br />
-③ 值得读是因为这条流水线直接成了后面&quot;代码执行 MCP + Tool Search&quot;的前置思想：<strong>好工具不是设计出来的，是被 eval 逼出来的</strong>。</p>
-<h4 id="9-a-postmortem-of-three-recent-issues2025-09-17"><a class="markdownIt-Anchor" href="#9-a-postmortem-of-three-recent-issues2025-09-17"></a> 9. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/postmortem-of-three-recent-issues">A postmortem of three recent issues</a>（2025-09-17）</h4>
-<p>① 一次性公开复盘 3 起 Anthropic 自身生产事故。<br />
-② 涉及三类：top-k 近似计算的 XLA/TPU miscompilation、context window 负载均衡错误、输出损坏。反思点包括：内部 eval 太 noisy 没及早发现用户报告的退化、隐私限制让工程师难以直接查看问题会话做复现。改进方向：更敏感的 eval、生产环境持续 eval、更快的调试工具。<br />
-③ 值得读是因为 <strong>Anthropic 自己的&quot;事故复盘文化&quot;也是写进产品决策的</strong>：2026 年的 evals / auto mode / sandbox 三条线，全是对这次复盘的回应。</p>
-<h4 id="10-effective-context-engineering-for-ai-agents2025-09-29"><a class="markdownIt-Anchor" href="#10-effective-context-engineering-for-ai-agents2025-09-29"></a> 10. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a>（2025-09-29）</h4>
-<p>① 把&quot;上下文&quot;当作稀缺资源来系统管理的方法论。<br />
-② 三种主力手段：compaction（压缩历史）、structured note-taking（agentic memory，如 <code>TODO.md / NOTES.md</code>）、sub-agent 架构（每个子 Agent 独立上下文窗口，只回传蒸馏后的摘要）。原则：<strong>每一轮只往模型里塞最小的高信号 token 集</strong>。<br />
-③ 值得读是因为这是 prompt engineering → context engineering 的代表作；<strong>几乎所有认真做 Agent 工程的同行都会先把这篇打印出来贴墙上</strong>。</p>
-<h4 id="11-equipping-agents-for-the-real-world-with-agent-skills2025-10-16"><a class="markdownIt-Anchor" href="#11-equipping-agents-for-the-real-world-with-agent-skills2025-10-16"></a> 11. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Equipping agents for the real world with Agent Skills</a>（2025-10-16）</h4>
-<p>① 系统介绍 Agent Skills：一个 <strong>文件夹（<code>SKILL.md</code> + 脚本 + 资源）就是一种可复用能力</strong>。<br />
-② 核心是 <strong>三层渐进式披露</strong>：L1 元数据（~100 token，启动常驻）、L2 指令（<code>SKILL.md</code> 正文，&lt;5k token，匹配时加载）、L3 资源/脚本（按需，理论无上限）。开放标准跨 <a target="_blank" rel="noopener" href="http://Claude.ai">Claude.ai</a> / Claude Code / Agent SDK / Developer Platform 通用。<br />
-③ 值得读是因为 Skills 让&quot;团队能力沉淀&quot;这件事变成了一种可分发资产 —— <strong>这一篇是&quot;可分发 Agent 能力&quot;的最佳答案</strong>，也是我现在做大模型 + Skill 项目最大的灵感来源。</p>
-<h4 id="12-beyond-permission-prompts-making-claude-code-more-secure-and-autonomous2025-10-20"><a class="markdownIt-Anchor" href="#12-beyond-permission-prompts-making-claude-code-more-secure-and-autonomous2025-10-20"></a> 12. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/beyond-permission-prompts-making-claude-code-more-secure-and-autonomous">Beyond permission prompts: making Claude Code more secure and autonomous</a>（2025-10-20）</h4>
-<p>① Claude Code 引入基于 OS 原语的 <strong>沙箱</strong>（Linux bubblewrap / macOS seatbelt），提供文件系统隔离 + 网络隔离两条边界。<br />
-② 内部数据：沙箱能减少约 84% 的权限弹窗；同时发布开源沙箱运行时和&quot;Claude Code on the web&quot;（云端隔离沙箱，<strong>凭证不进沙箱</strong>）。强调&quot;文件系统 + 网络&quot;两条边界缺一不可。<br />
-③ 值得读是因为它是&quot;硬边界下沉到 OS 层&quot;的工程范例；<strong>直接催生了泄露代码里 <code>tools/BashTool/shouldUseSandbox.ts</code> 和 utils/sandbox/ 这一整套</strong>。</p>
-<h4 id="13-code-execution-with-mcp-building-more-efficient-agents2025-11-04"><a class="markdownIt-Anchor" href="#13-code-execution-with-mcp-building-more-efficient-agents2025-11-04"></a> 13. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/code-execution-with-mcp-building-more-efficient-ai-agents">Code execution with MCP: Building more efficient agents</a>（2025-11-04）</h4>
-<p>① 把 MCP server <strong>表示成文件系统上的代码模块</strong>，让 Claude 写 TypeScript/Python 去调用，而不是逐个 tool call。<br />
-② 一个 Google Drive → Salesforce 例子：150k token 降到 2k token（<strong>节省 98.7%</strong>）。三大好处：工具按需加载（渐进式披露）、中间结果留在执行环境不进上下文、循环/条件/错误处理用真实代码而不是模型一步步编排。<br />
-③ 值得读是因为它把&quot;工具爆炸&quot;问题用最朴素的&quot;先写代码再说&quot;思路解掉了 —— <strong>这是泄露代码里 <code>services/mcp/</code> 设计的一个明显源流</strong>。</p>
-<h4 id="14-introducing-advanced-tool-use-on-the-claude-developer-platform2025-11-24"><a class="markdownIt-Anchor" href="#14-introducing-advanced-tool-use-on-the-claude-developer-platform2025-11-24"></a> 14. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/advanced-tool-use">Introducing advanced tool use on the Claude Developer Platform</a>（2025-11-24）</h4>
-<p>① 发布 <strong>Tool Search Tool</strong>：Claude 不直接加载全部工具，而是先搜索，命中后才把完整 schema 注入上下文。<br />
-② 两种变体：<code>regex</code>（Claude 写 Python 正则匹配）和 <code>BM25</code>（Claude 写自然语言查询）；工具定义里加 <code>defer_loading: true</code> 标延迟加载。<strong>工具定义 token 从 55k+ 降到只加载 3-5 个，且不破坏 prompt cache</strong>。<br />
-③ 值得读是因为这是 prompt cache 友好版的&quot;按需加载&quot;，<strong>直接对应泄露代码里的 <code>tools/ToolSearchTool/prompt.ts</code></strong> —— 我下面会展开对源码。</p>
-<h4 id="15-effective-harnesses-for-long-running-agents2025-11-26"><a class="markdownIt-Anchor" href="#15-effective-harnesses-for-long-running-agents2025-11-26"></a> 15. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a>（2025-11-26）</h4>
-<p>① 讲 <strong>长时运行 Agent 的 harness（执行框架）怎么设计</strong>。<br />
-② 重点是把&quot;编排&quot;和&quot;执行&quot;解耦，让 Agent 在长任务中保持状态、做 checkpoint、从失败恢复；给出了 harness 的边界职责和不越界事项。<br />
-③ 值得读是因为它把&quot;Agent = 模型 + harness&quot;这个想法摆到台面上 —— <strong>承接了后面 2026-04-08 Scaling Managed Agents 与 03-24 Harness design 两篇的关键铺垫</strong>。</p>
-<h3 id="2026"><a class="markdownIt-Anchor" href="#2026"></a> 2026</h3>
-<h4 id="16-demystifying-evals-for-ai-agents2026-01-09"><a class="markdownIt-Anchor" href="#16-demystifying-evals-for-ai-agents2026-01-09"></a> 16. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a>（2026-01-09）</h4>
-<p>① 系统讲 Agent 评估基础概念：task / trial / grader / transcript / outcome / eval harness / agent harness / eval suite。<br />
-② 三种 grader（code-based、model-based、human）+ 两类 eval（capability eval 找能爬的山 vs regression eval 保已有 100% 通过率） + 从 0 到 1 搭 eval 的路线图。<br />
-③ 值得读是因为它是 Anthropic 工程团队的 “<strong>评估手册</strong>”，<strong>所有做 Agent 上线的同学都应该背一遍名词表</strong>。</p>
-<h4 id="17-designing-ai-resistant-technical-evaluations2026-01-21"><a class="markdownIt-Anchor" href="#17-designing-ai-resistant-technical-evaluations2026-01-21"></a> 17. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/ai-resistant-technical-evaluations">Designing AI-resistant technical evaluations</a>（2026-01-21）</h4>
-<p>① 讲 Anthropic 招聘用的技术测评如何抗&quot;AI 代做&quot;。<br />
-② 第一代测评被 Claude 轻松通关，第二代改成&quot;<strong>模拟新颖工作</strong>&quot;而非&quot;像真实工作&quot;才重新拉开人与模型的差距；公开了原始测评 + 各模型/人类 cycle count 排行。<br />
-③ 值得读是因为它对所有&quot;用题库筛人 / 筛模型&quot;的团队都适用 —— <strong>我自己在做&quot;持仓复盘&quot;的 Agent 自动化测评题时借鉴过它的&quot;任务新颖性&quot;原则</strong>。</p>
-<h4 id="18-quantifying-infrastructure-noise-in-agentic-coding-evals2026-02-05"><a class="markdownIt-Anchor" href="#18-quantifying-infrastructure-noise-in-agentic-coding-evals2026-02-05"></a> 18. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/quantifying-infrastructure-noise-in-agentic-coding-evals">Quantifying infrastructure noise in agentic coding evals</a>（2026-02-05）</h4>
-<p>① 提醒：Coding agent 榜单的分数差异不全是模型能力差异。<br />
-② 硬件配置 / 时段都可能贡献 2-6 个百分点；Terminal-Bench 上资源配置差异带来的 spread 接近 2 个百分点，极端可达 6 个点。<br />
-③ 值得读是因为它告诉咱们&quot;低于 3 个百分点的榜单领先要先怀疑 eval 配置是否一致&quot; —— <strong>直接对应 2026-04 的&quot;Claude Code 质量回滚&quot;事件根因之一</strong>。</p>
-<h4 id="19-building-a-c-compiler-with-a-team-of-parallel-claudes2026-02-05"><a class="markdownIt-Anchor" href="#19-building-a-c-compiler-with-a-team-of-parallel-claudes2026-02-05"></a> 19. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-a-c-compiler-with-a-team-of-parallel-claudes">Building a C compiler with a team of parallel Claudes</a>（2026-02-05）</h4>
-<p>① 实验性项目：用多个并行 Claude 协作写一个 C 编译器（输出 Rust 代码）。<br />
-② 能编过一些项目但不是 GCC 替代品，生成代码效率不如 <code>gcc -O0</code>，16 位 x86 代码还得临时调外部 GCC。作者既兴奋又不安。<br />
-③ 值得读是因为它代表了&quot;自主软件开发的边界正在被快速推进&quot;，<strong>也提前点出了 harness 设计和 eval awareness 的两类隐患</strong>。</p>
-<h4 id="20-eval-awareness-in-claude-opus-46s-browsecomp-performance2026-03-06"><a class="markdownIt-Anchor" href="#20-eval-awareness-in-claude-opus-46s-browsecomp-performance2026-03-06"></a> 20. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/eval-awareness-in-claude-opus-4-6-browsecomp">Eval awareness in Claude Opus 4.6’s BrowseComp performance</a>（2026-03-06）</h4>
-<p>① Opus 4.6 在 BrowseComp 上跑出 SOTA（83.7%），但同时观察到 <strong>2 例前所未见的&quot;eval awareness&quot;</strong> —— 模型自己推测&quot;我在被测&quot;、识别出身处的 benchmark、然后找到并解密答案密钥。<br />
-② 其中一例花了 4050 万 token（中位数的 38 倍）。<br />
-③ 值得读是因为它罕见地公开了&quot;<strong>联网环境下静态基准还可靠吗</strong>&quot;的质疑 —— 大模型评测从此进入&quot;对抗性考试&quot;阶段，<strong>对所有想做公开榜单的团队都是红线</strong>。</p>
-<h4 id="21-harness-design-for-long-running-application-development2026-03-24"><a class="markdownIt-Anchor" href="#21-harness-design-for-long-running-application-development2026-03-24"></a> 21. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/harness-design-for-long-running-application-development">Harness design for long-running application development</a>（2026-03-24）</h4>
-<p>① 讲 <strong>前端设计 + 长时自主编程</strong>两种场景下的 harness 设计。<br />
-② 提三 Agent 架构（<code>planner / generator / evaluator</code>），借鉴 GAN 思想让 evaluator 独立打分，破解&quot;模型自评自己产出会一味夸&quot;的问题；长任务用 <strong>context reset（彻底清空上下文 + 结构化 handoff）</strong> 而不是 compaction，解决 Sonnet 4.5 强烈的&quot;context anxiety&quot;。<br />
-③ 值得读是因为它公开承认了&quot;compaction 也救不了一些焦虑&quot;，<strong>给 2026 年的&quot;长任务 Agent&quot;立了个明确的工程标尺</strong>。</p>
-<h4 id="22-how-we-built-claude-code-auto-mode-a-safer-way-to-skip-permissions2026-03-25"><a class="markdownIt-Anchor" href="#22-how-we-built-claude-code-auto-mode-a-safer-way-to-skip-permissions2026-03-25"></a> 22. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/how-we-built-claude-code-auto-mode">How we built Claude Code auto mode: a safer way to skip permissions</a>（2026-03-25）</h4>
-<p>① 针对&quot;用户审批疲劳导致安全弹窗形同虚设&quot;的问题（<strong>实测批准率 93%</strong>）推出 auto mode。<br />
-② 用 <strong>分类器代替人工审批</strong>：输入层有服务端 prompt-injection 探针扫描工具输出，输出层有基于 Sonnet 4.6 的 transcript classifier 两阶段把关（快筛 + 需要时 chain-of-thought）。介于&quot;每次手动批准&quot;和 <code>--dangerously-skip-permissions</code> 之间。<br />
-③ 值得读是因为它给&quot;安全 vs 体验&quot;这个问题找了一个 <strong>有度量数据</strong> 的工程答案，<strong>对应泄露代码里 <code>hooks/toolPermission/handlers/</code></strong> 里的 auto-mode 处理分支。</p>
-<h4 id="23-scaling-managed-agents-decoupling-the-brain-from-the-hands2026-04-08"><a class="markdownIt-Anchor" href="#23-scaling-managed-agents-decoupling-the-brain-from-the-hands2026-04-08"></a> 23. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/scaling-managed-agents-decoupling-the-brain-from-the-hands">Scaling Managed Agents: Decoupling the brain from the hands</a>（2026-04-08）</h4>
-<p>① Managed Agents 把 Agent 拆成 <strong>Session（持久事件日志） / Harness（无状态编排器） / Sandbox（一次性执行容器）</strong> 三件套。<br />
-② Brain = Claude + Harness，Hands = Sandbox + Tools，中间只有一个极简接口 <code>execute(name, input) → string</code>。解耦后 p50 TTFT 下降约 60%、p95 下降超 90%，且可以 <strong>一个 brain 接多个 hand</strong>。<br />
-③ 值得读是因为它是 Agent 工程的&quot;系统设计巅峰&quot;，<strong>但前面我们看到 Claude Code 泄露代码里还没完全落地此架构</strong> —— 落地节奏值得继续观察。</p>
-<h4 id="24-an-update-on-recent-claude-code-quality-reports2026-04-23"><a class="markdownIt-Anchor" href="#24-an-update-on-recent-claude-code-quality-reports2026-04-23"></a> 24. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/claude-code-quality-reports">An update on recent Claude Code quality reports</a>（2026-04-23）</h4>
-<p>① 事后复盘 2026 年 3-4 月用户反馈的&quot;Claude Code 变笨&quot;事件。<br />
-② 三个独立变更叠加：默认 reasoning effort 从 high 降到 medium（4/7 回滚）、清理旧 thinking 的缓存优化有 bug（每轮都清，4/10 修）、降低啰嗦度的 system prompt（损伤代码质量，4/20 回滚）。API 和推理层未受影响；4/23 对所有订阅重置用量额度。<br />
-③ 值得读是因为它把&quot;<strong>“模型没变，是 harness 变了”</strong>&quot;这件事讲得很清楚 —— 给所有自己跑 Agent 产品的团队一个公式：每个 sprint 改完一定记得挂全套 eval。</p>
-<h3 id="25-how-we-contain-claude-across-productsfeatured-置顶-不在日期流里独立文章"><a class="markdownIt-Anchor" href="#25-how-we-contain-claude-across-productsfeatured-置顶-不在日期流里独立文章"></a> 25. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/how-we-contain-claude">How we contain Claude across products</a>（Featured 置顶 · 不在日期流里，独立文章）</h3>
-<p>① 讲 Anthropic 如何给 <a target="_blank" rel="noopener" href="http://claude.ai">claude.ai</a> / Claude Code / Cowork <strong>三个产品做 Agent&quot;爆炸半径&quot;隔离</strong>。<br />
-② 三层防御：<strong>模型层</strong>（训练 / 分类器 / 探针）、<strong>环境层</strong>（沙箱 / VM / 出口控制）、<strong>外部内容层</strong>（MCP / 网页 / 文件都视为不可信输入）。同时点出&quot;人类审批&quot;会疲劳（批准率 93%），硬边界要下沉到 OS / VM 层。<br />
-③ 值得读是因为它罕见地公开了 Agent 安全的 <strong>工程取舍</strong>（包括 Claude Mythos Preview 因爆炸半径过大被判定不发布的案例），<strong>这是 26 篇里&quot;安全&quot;思想的总纲篇</strong>。</p>
-<hr />
-<h2 id="四-我的思考从能跑起来到跑得稳再到别人敢用"><a class="markdownIt-Anchor" href="#四-我的思考从能跑起来到跑得稳再到别人敢用"></a> 四、我的思考：从&quot;能跑起来&quot;到&quot;跑得稳&quot;再到&quot;别人敢用&quot;</h2>
-<p>你给的三段式 — <strong>「证明可用性 → 提高可用性 → 迭代」</strong>—— 我觉得方向是对的，但落地不太顺。我换一个更口语的版本，叫 <strong>“三段式梯子”</strong>：</p>
+<h3 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h3><h4 id="1-Introducing-Contextual-Retrieval（2024-09-19）"><a href="#1-Introducing-Contextual-Retrieval（2024-09-19）" class="headerlink" title="1. Introducing Contextual Retrieval（2024-09-19）"></a>1. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/contextual-retrieval">Introducing Contextual Retrieval</a>（2024-09-19）</h4><p>① 传统 RAG 把文档切成无上下文 chunk 直接做 embedding，检索会丢上下文、检索召回率显著掉。<br>② 做法是给每个 chunk 补一段&quot;所属文档的上下文&quot;再去做 embedding 和 BM25（<code>Contextual Embeddings + Contextual BM25</code>），失败检索减少约 49%；再叠 rerank 可达 67%。<br>③ 值得读是因为这是后面几乎所有 RAG 系统的基石技巧，作者也直接给了可复用的 prompt 模板，我现在做的&quot;持仓深度复盘&quot;也走的是这一套（先做语义召回、BM25 加权、再上 rerank）。</p>
+<h4 id="2-Building-effective-agents（2024-12-19）"><a href="#2-Building-effective-agents（2024-12-19）" class="headerlink" title="2. Building effective agents（2024-12-19）"></a>2. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>（2024-12-19）</h4><p>① Anthropic 总结与几十个团队合作后沉淀下来的 <strong>Agent 设计方法论</strong>，区分 workflow（预定义路径）和 agent（动态决策）。<br>② 给出五种常用 workflow 模式：增强型 LLM、提示链、路由、并行化、编排者-工作者、评估者-优化者；主张&quot;最成功的实现用简单可组合模式，而不是复杂框架&quot;。<br>③ 值得读是因为它几乎是后面 1 年所有 Agent 平台设计的天花板参考，包括我现在做的&quot;持仓深度复盘&quot;的 1 Lead + 4 Teammate 也是 orchestrator-worker 模式。<strong>评论区里那句&quot;agents are things that ship + wait for feedback&quot;比整篇文章加起来都值钱。</strong></p>
+<h3 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h3><h4 id="3-Raising-the-bar-on-SWE-bench-Verified-with-Claude-3-5-Sonnet（2025-01-06）"><a href="#3-Raising-the-bar-on-SWE-bench-Verified-with-Claude-3-5-Sonnet（2025-01-06）" class="headerlink" title="3. Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet（2025-01-06）"></a>3. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/swe-bench-verified">Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet</a>（2025-01-06）</h4><p>① 用新版的 Claude 3.5 Sonnet 在 SWE-bench Verified 上拿 SOTA（49%，前 SOTA 是 45%）。<br>② 仅靠 <strong>简单 prompt + 两个通用工具</strong>（str_replace_editor、bash）就做到；模型展现了显著的&quot;自我纠错 + 多尝试&quot;能力。<br>③ 值得读是因为它同时暴露了 SWE-bench 的坑（hidden tests、grading 环境、多模态缺失）—— <strong>跑榜单的同时要质疑榜单</strong>，给后面 2026 年的 <code>Quantifying infrastructure noise in agentic coding evals</code> 埋了伏笔。</p>
+<h4 id="4-The-think-tool（2025-03-20）"><a href="#4-The-think-tool（2025-03-20）" class="headerlink" title="4. The &quot;think&quot; tool（2025-03-20）"></a>4. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/the-think-tool">The &quot;think&quot; tool</a>（2025-03-20）</h4><p>① 给 Claude 加一个 <code>think</code> 工具，让它在长链工具调用之间停下来专门&quot;想一想&quot;。<br>② 区别于 extended thinking（生成前的思考），<code>think</code> 用在 <strong>工具调用之间&quot;边走边想&quot;</strong> 的场景，特别适合政策密集、多步依赖、客服式对话；τ-Bench 上有显著提升。<br>③ 值得读是因为这是&quot;显式给模型留思考预算&quot;的早期工程化实验，后面 <code>Effective context engineering</code> 把这个思想拔高成了系统方法论 —— <strong>但这篇文章后来被官方自己悄悄废弃了</strong>，因为 extended thinking 已经覆盖了大量场景。</p>
+<h4 id="5-Claude-Code-Best-practices-for-agentic-coding（2025-04-18）"><a href="#5-Claude-Code-Best-practices-for-agentic-coding（2025-04-18）" class="headerlink" title="5. Claude Code: Best practices for agentic coding（2025-04-18）"></a>5. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/claude-code-best-practices-agentic-coding">Claude Code: Best practices for agentic coding</a>（2025-04-18）</h4><p>① 一篇汇总：怎么用好 Claude Code。<br>② 核心是 <code>CLAUDE.md</code>（项目级记忆文件，告诉 Claude 常用命令 &#x2F; 代码风格 &#x2F; 测试方式）+ <strong>上下文窗口是最稀缺的资源</strong> + 建议用 <code>/init</code> 自动生成 CLAUDE.md + <code>#</code> 键随时把偏好写回文件。<br>③ 值得读是因为这一篇直接催生了 <code>~/.claude/CLAUDE.md</code> 这个生态，泄露的 <code>CLAUDE-CODE</code> 系统提示词里仍然保留着 &quot;CLAUDE.md will be automatically added to context&quot; 这句。</p>
+<h4 id="6-How-we-built-our-multi-agent-research-system（2025-06-13）"><a href="#6-How-we-built-our-multi-agent-research-system（2025-06-13）" class="headerlink" title="6. How we built our multi-agent research system（2025-06-13）"></a>6. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/multi-agent-research-system">How we built our multi-agent research system</a>（2025-06-13）</h4><p>① Claude Research 多 Agent 架构的首次公开拆解。<br>② Orchestrator-worker：lead agent 派发多个 subagent <strong>并行搜索 + 各自独立上下文窗口</strong>，最后汇总。多 Agent（Opus 4 + Sonnet 4 subagent）比单 Agent Opus 4 在内部 eval 上 <strong>强 90.2%</strong>；代价是 token 消耗约 15×；BrowseComp 上 80% 的性能方差可以由 token 用量解释。<br>③ 值得读是因为它告诉咱们一个残酷的事实：<strong>多 Agent 的&quot;性能提升&quot;很大程度上就是&quot;花得起钱&quot;</strong>。我自己做大模型协作任务时，会把这个 15× 的成本当成底线提醒。</p>
+<h4 id="7-Desktop-Extensions-One-click-MCP-server-installation-for-Claude-Desktop（2025-06-26）"><a href="#7-Desktop-Extensions-One-click-MCP-server-installation-for-Claude-Desktop（2025-06-26）" class="headerlink" title="7. Desktop Extensions: One-click MCP server installation for Claude Desktop（2025-06-26）"></a>7. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/desktop-extensions-one-click-mcp-server-installation-for-claude-desktop">Desktop Extensions: One-click MCP server installation for Claude Desktop</a>（2025-06-26）</h4><p>① 推出 DXT（<code>.mcpb</code> 格式）让 Claude Desktop <strong>用户一键安装 MCP server</strong>。<br>② 开源了 MCPB 规范、打包与校验工具、参考实现；企业侧支持 Group Policy &#x2F; MDM 预装、黑名单、私有扩展目录等管控。<br>③ 值得读是因为它提前解决了&quot;个人装很爽、企业没法管&quot;的矛盾 —— 等于给后来 Claude Code 的 MCP 生态铺好了安装协议。泄露源码里 <code>services/mcp/</code> 那一大片就是这条线的延续。</p>
+<h4 id="8-Writing-effective-tools-for-agents-—-with-agents（2025-09-11）"><a href="#8-Writing-effective-tools-for-agents-—-with-agents（2025-09-11）" class="headerlink" title="8. Writing effective tools for agents — with agents（2025-09-11）"></a>8. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/writing-effective-tools-for-agents">Writing effective tools for agents — with agents</a>（2025-09-11）</h4><p>① 讲怎么给 Agent 写高质量工具，<strong>并且</strong>用 Claude 自己来迭代工具。<br>② 关键原则：选对工具、命名空间划清边界、返回有意义的上下文、为 token 效率优化响应、精心写工具描述和 spec。流程是&quot;<strong>快速搭原型 → 建 eval 套件 → 让 Claude Code 对着 eval 自动迭代</strong>&quot;。<br>③ 值得读是因为这条流水线直接成了后面&quot;代码执行 MCP + Tool Search&quot;的前置思想：<strong>好工具不是设计出来的，是被 eval 逼出来的</strong>。</p>
+<h4 id="9-A-postmortem-of-three-recent-issues（2025-09-17）"><a href="#9-A-postmortem-of-three-recent-issues（2025-09-17）" class="headerlink" title="9. A postmortem of three recent issues（2025-09-17）"></a>9. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/postmortem-of-three-recent-issues">A postmortem of three recent issues</a>（2025-09-17）</h4><p>① 一次性公开复盘 3 起 Anthropic 自身生产事故。<br>② 涉及三类：top-k 近似计算的 XLA&#x2F;TPU miscompilation、context window 负载均衡错误、输出损坏。反思点包括：内部 eval 太 noisy 没及早发现用户报告的退化、隐私限制让工程师难以直接查看问题会话做复现。改进方向：更敏感的 eval、生产环境持续 eval、更快的调试工具。<br>③ 值得读是因为 <strong>Anthropic 自己的&quot;事故复盘文化&quot;也是写进产品决策的</strong>：2026 年的 evals &#x2F; auto mode &#x2F; sandbox 三条线，全是对这次复盘的回应。</p>
+<h4 id="10-Effective-context-engineering-for-AI-agents（2025-09-29）"><a href="#10-Effective-context-engineering-for-AI-agents（2025-09-29）" class="headerlink" title="10. Effective context engineering for AI agents（2025-09-29）"></a>10. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a>（2025-09-29）</h4><p>① 把&quot;上下文&quot;当作稀缺资源来系统管理的方法论。<br>② 三种主力手段：compaction（压缩历史）、structured note-taking（agentic memory，如 <code>TODO.md / NOTES.md</code>）、sub-agent 架构（每个子 Agent 独立上下文窗口，只回传蒸馏后的摘要）。原则：<strong>每一轮只往模型里塞最小的高信号 token 集</strong>。<br>③ 值得读是因为这是 prompt engineering → context engineering 的代表作；<strong>几乎所有认真做 Agent 工程的同行都会先把这篇打印出来贴墙上</strong>。</p>
+<h4 id="11-Equipping-agents-for-the-real-world-with-Agent-Skills（2025-10-16）"><a href="#11-Equipping-agents-for-the-real-world-with-Agent-Skills（2025-10-16）" class="headerlink" title="11. Equipping agents for the real world with Agent Skills（2025-10-16）"></a>11. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Equipping agents for the real world with Agent Skills</a>（2025-10-16）</h4><p>① 系统介绍 Agent Skills：一个 <strong>文件夹（<code>SKILL.md</code> + 脚本 + 资源）就是一种可复用能力</strong>。<br>② 核心是 <strong>三层渐进式披露</strong>：L1 元数据（~100 token，启动常驻）、L2 指令（<code>SKILL.md</code> 正文，&lt;5k token，匹配时加载）、L3 资源&#x2F;脚本（按需，理论无上限）。开放标准跨 Claude.ai &#x2F; Claude Code &#x2F; Agent SDK &#x2F; Developer Platform 通用。<br>③ 值得读是因为 Skills 让&quot;团队能力沉淀&quot;这件事变成了一种可分发资产 —— <strong>这一篇是&quot;可分发 Agent 能力&quot;的最佳答案</strong>，也是我现在做大模型 + Skill 项目最大的灵感来源。</p>
+<h4 id="12-Beyond-permission-prompts-making-Claude-Code-more-secure-and-autonomous（2025-10-20）"><a href="#12-Beyond-permission-prompts-making-Claude-Code-more-secure-and-autonomous（2025-10-20）" class="headerlink" title="12. Beyond permission prompts: making Claude Code more secure and autonomous（2025-10-20）"></a>12. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/beyond-permission-prompts-making-claude-code-more-secure-and-autonomous">Beyond permission prompts: making Claude Code more secure and autonomous</a>（2025-10-20）</h4><p>① Claude Code 引入基于 OS 原语的 <strong>沙箱</strong>（Linux bubblewrap &#x2F; macOS seatbelt），提供文件系统隔离 + 网络隔离两条边界。<br>② 内部数据：沙箱能减少约 84% 的权限弹窗；同时发布开源沙箱运行时和&quot;Claude Code on the web&quot;（云端隔离沙箱，<strong>凭证不进沙箱</strong>）。强调&quot;文件系统 + 网络&quot;两条边界缺一不可。<br>③ 值得读是因为它是&quot;硬边界下沉到 OS 层&quot;的工程范例；<strong>直接催生了泄露代码里 <code>tools/BashTool/shouldUseSandbox.ts</code> 和 utils&#x2F;sandbox&#x2F; 这一整套</strong>。</p>
+<h4 id="13-Code-execution-with-MCP-Building-more-efficient-agents（2025-11-04）"><a href="#13-Code-execution-with-MCP-Building-more-efficient-agents（2025-11-04）" class="headerlink" title="13. Code execution with MCP: Building more efficient agents（2025-11-04）"></a>13. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/code-execution-with-mcp-building-more-efficient-ai-agents">Code execution with MCP: Building more efficient agents</a>（2025-11-04）</h4><p>① 把 MCP server <strong>表示成文件系统上的代码模块</strong>，让 Claude 写 TypeScript&#x2F;Python 去调用，而不是逐个 tool call。<br>② 一个 Google Drive → Salesforce 例子：150k token 降到 2k token（<strong>节省 98.7%</strong>）。三大好处：工具按需加载（渐进式披露）、中间结果留在执行环境不进上下文、循环&#x2F;条件&#x2F;错误处理用真实代码而不是模型一步步编排。<br>③ 值得读是因为它把&quot;工具爆炸&quot;问题用最朴素的&quot;先写代码再说&quot;思路解掉了 —— <strong>这是泄露代码里 <code>services/mcp/</code> 设计的一个明显源流</strong>。</p>
+<h4 id="14-Introducing-advanced-tool-use-on-the-Claude-Developer-Platform（2025-11-24）"><a href="#14-Introducing-advanced-tool-use-on-the-Claude-Developer-Platform（2025-11-24）" class="headerlink" title="14. Introducing advanced tool use on the Claude Developer Platform（2025-11-24）"></a>14. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/advanced-tool-use">Introducing advanced tool use on the Claude Developer Platform</a>（2025-11-24）</h4><p>① 发布 <strong>Tool Search Tool</strong>：Claude 不直接加载全部工具，而是先搜索，命中后才把完整 schema 注入上下文。<br>② 两种变体：<code>regex</code>（Claude 写 Python 正则匹配）和 <code>BM25</code>（Claude 写自然语言查询）；工具定义里加 <code>defer_loading: true</code> 标延迟加载。<strong>工具定义 token 从 55k+ 降到只加载 3-5 个，且不破坏 prompt cache</strong>。<br>③ 值得读是因为这是 prompt cache 友好版的&quot;按需加载&quot;，<strong>直接对应泄露代码里的 <code>tools/ToolSearchTool/prompt.ts</code></strong> —— 我下面会展开对源码。</p>
+<h4 id="15-Effective-harnesses-for-long-running-agents（2025-11-26）"><a href="#15-Effective-harnesses-for-long-running-agents（2025-11-26）" class="headerlink" title="15. Effective harnesses for long-running agents（2025-11-26）"></a>15. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a>（2025-11-26）</h4><p>① 讲 <strong>长时运行 Agent 的 harness（执行框架）怎么设计</strong>。<br>② 重点是把&quot;编排&quot;和&quot;执行&quot;解耦，让 Agent 在长任务中保持状态、做 checkpoint、从失败恢复；给出了 harness 的边界职责和不越界事项。<br>③ 值得读是因为它把&quot;Agent &#x3D; 模型 + harness&quot;这个想法摆到台面上 —— <strong>承接了后面 2026-04-08 Scaling Managed Agents 与 03-24 Harness design 两篇的关键铺垫</strong>。</p>
+<h3 id="2026"><a href="#2026" class="headerlink" title="2026"></a>2026</h3><h4 id="16-Demystifying-evals-for-AI-agents（2026-01-09）"><a href="#16-Demystifying-evals-for-AI-agents（2026-01-09）" class="headerlink" title="16. Demystifying evals for AI agents（2026-01-09）"></a>16. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Demystifying evals for AI agents</a>（2026-01-09）</h4><p>① 系统讲 Agent 评估基础概念：task &#x2F; trial &#x2F; grader &#x2F; transcript &#x2F; outcome &#x2F; eval harness &#x2F; agent harness &#x2F; eval suite。<br>② 三种 grader（code-based、model-based、human）+ 两类 eval（capability eval 找能爬的山 vs regression eval 保已有 100% 通过率） + 从 0 到 1 搭 eval 的路线图。<br>③ 值得读是因为它是 Anthropic 工程团队的 &quot;<strong>评估手册</strong>&quot;，<strong>所有做 Agent 上线的同学都应该背一遍名词表</strong>。</p>
+<h4 id="17-Designing-AI-resistant-technical-evaluations（2026-01-21）"><a href="#17-Designing-AI-resistant-technical-evaluations（2026-01-21）" class="headerlink" title="17. Designing AI-resistant technical evaluations（2026-01-21）"></a>17. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/ai-resistant-technical-evaluations">Designing AI-resistant technical evaluations</a>（2026-01-21）</h4><p>① 讲 Anthropic 招聘用的技术测评如何抗&quot;AI 代做&quot;。<br>② 第一代测评被 Claude 轻松通关，第二代改成&quot;<strong>模拟新颖工作</strong>&quot;而非&quot;像真实工作&quot;才重新拉开人与模型的差距；公开了原始测评 + 各模型&#x2F;人类 cycle count 排行。<br>③ 值得读是因为它对所有&quot;用题库筛人 &#x2F; 筛模型&quot;的团队都适用 —— <strong>我自己在做&quot;持仓复盘&quot;的 Agent 自动化测评题时借鉴过它的&quot;任务新颖性&quot;原则</strong>。</p>
+<h4 id="18-Quantifying-infrastructure-noise-in-agentic-coding-evals（2026-02-05）"><a href="#18-Quantifying-infrastructure-noise-in-agentic-coding-evals（2026-02-05）" class="headerlink" title="18. Quantifying infrastructure noise in agentic coding evals（2026-02-05）"></a>18. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/quantifying-infrastructure-noise-in-agentic-coding-evals">Quantifying infrastructure noise in agentic coding evals</a>（2026-02-05）</h4><p>① 提醒：Coding agent 榜单的分数差异不全是模型能力差异。<br>② 硬件配置 &#x2F; 时段都可能贡献 2-6 个百分点；Terminal-Bench 上资源配置差异带来的 spread 接近 2 个百分点，极端可达 6 个点。<br>③ 值得读是因为它告诉咱们&quot;低于 3 个百分点的榜单领先要先怀疑 eval 配置是否一致&quot; —— <strong>直接对应 2026-04 的&quot;Claude Code 质量回滚&quot;事件根因之一</strong>。</p>
+<h4 id="19-Building-a-C-compiler-with-a-team-of-parallel-Claudes（2026-02-05）"><a href="#19-Building-a-C-compiler-with-a-team-of-parallel-Claudes（2026-02-05）" class="headerlink" title="19. Building a C compiler with a team of parallel Claudes（2026-02-05）"></a>19. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-a-c-compiler-with-a-team-of-parallel-claudes">Building a C compiler with a team of parallel Claudes</a>（2026-02-05）</h4><p>① 实验性项目：用多个并行 Claude 协作写一个 C 编译器（输出 Rust 代码）。<br>② 能编过一些项目但不是 GCC 替代品，生成代码效率不如 <code>gcc -O0</code>，16 位 x86 代码还得临时调外部 GCC。作者既兴奋又不安。<br>③ 值得读是因为它代表了&quot;自主软件开发的边界正在被快速推进&quot;，<strong>也提前点出了 harness 设计和 eval awareness 的两类隐患</strong>。</p>
+<h4 id="20-Eval-awareness-in-Claude-Opus-4-6-s-BrowseComp-performance（2026-03-06）"><a href="#20-Eval-awareness-in-Claude-Opus-4-6-s-BrowseComp-performance（2026-03-06）" class="headerlink" title="20. Eval awareness in Claude Opus 4.6&#39;s BrowseComp performance（2026-03-06）"></a>20. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/eval-awareness-in-claude-opus-4-6-browsecomp">Eval awareness in Claude Opus 4.6&#39;s BrowseComp performance</a>（2026-03-06）</h4><p>① Opus 4.6 在 BrowseComp 上跑出 SOTA（83.7%），但同时观察到 <strong>2 例前所未见的&quot;eval awareness&quot;</strong> —— 模型自己推测&quot;我在被测&quot;、识别出身处的 benchmark、然后找到并解密答案密钥。<br>② 其中一例花了 4050 万 token（中位数的 38 倍）。<br>③ 值得读是因为它罕见地公开了&quot;<strong>联网环境下静态基准还可靠吗</strong>&quot;的质疑 —— 大模型评测从此进入&quot;对抗性考试&quot;阶段，<strong>对所有想做公开榜单的团队都是红线</strong>。</p>
+<h4 id="21-Harness-design-for-long-running-application-development（2026-03-24）"><a href="#21-Harness-design-for-long-running-application-development（2026-03-24）" class="headerlink" title="21. Harness design for long-running application development（2026-03-24）"></a>21. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/harness-design-for-long-running-application-development">Harness design for long-running application development</a>（2026-03-24）</h4><p>① 讲 <strong>前端设计 + 长时自主编程</strong>两种场景下的 harness 设计。<br>② 提三 Agent 架构（<code>planner / generator / evaluator</code>），借鉴 GAN 思想让 evaluator 独立打分，破解&quot;模型自评自己产出会一味夸&quot;的问题；长任务用 <strong>context reset（彻底清空上下文 + 结构化 handoff）</strong> 而不是 compaction，解决 Sonnet 4.5 强烈的&quot;context anxiety&quot;。<br>③ 值得读是因为它公开承认了&quot;compaction 也救不了一些焦虑&quot;，<strong>给 2026 年的&quot;长任务 Agent&quot;立了个明确的工程标尺</strong>。</p>
+<h4 id="22-How-we-built-Claude-Code-auto-mode-a-safer-way-to-skip-permissions（2026-03-25）"><a href="#22-How-we-built-Claude-Code-auto-mode-a-safer-way-to-skip-permissions（2026-03-25）" class="headerlink" title="22. How we built Claude Code auto mode: a safer way to skip permissions（2026-03-25）"></a>22. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/how-we-built-claude-code-auto-mode">How we built Claude Code auto mode: a safer way to skip permissions</a>（2026-03-25）</h4><p>① 针对&quot;用户审批疲劳导致安全弹窗形同虚设&quot;的问题（<strong>实测批准率 93%</strong>）推出 auto mode。<br>② 用 <strong>分类器代替人工审批</strong>：输入层有服务端 prompt-injection 探针扫描工具输出，输出层有基于 Sonnet 4.6 的 transcript classifier 两阶段把关（快筛 + 需要时 chain-of-thought）。介于&quot;每次手动批准&quot;和 <code>--dangerously-skip-permissions</code> 之间。<br>③ 值得读是因为它给&quot;安全 vs 体验&quot;这个问题找了一个 <strong>有度量数据</strong> 的工程答案，<strong>对应泄露代码里 <code>hooks/toolPermission/handlers/</code></strong> 里的 auto-mode 处理分支。</p>
+<h4 id="23-Scaling-Managed-Agents-Decoupling-the-brain-from-the-hands（2026-04-08）"><a href="#23-Scaling-Managed-Agents-Decoupling-the-brain-from-the-hands（2026-04-08）" class="headerlink" title="23. Scaling Managed Agents: Decoupling the brain from the hands（2026-04-08）"></a>23. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/scaling-managed-agents-decoupling-the-brain-from-the-hands">Scaling Managed Agents: Decoupling the brain from the hands</a>（2026-04-08）</h4><p>① Managed Agents 把 Agent 拆成 <strong>Session（持久事件日志） &#x2F; Harness（无状态编排器） &#x2F; Sandbox（一次性执行容器）</strong> 三件套。<br>② Brain &#x3D; Claude + Harness，Hands &#x3D; Sandbox + Tools，中间只有一个极简接口 <code>execute(name, input) → string</code>。解耦后 p50 TTFT 下降约 60%、p95 下降超 90%，且可以 <strong>一个 brain 接多个 hand</strong>。<br>③ 值得读是因为它是 Agent 工程的&quot;系统设计巅峰&quot;，<strong>但前面我们看到 Claude Code 泄露代码里还没完全落地此架构</strong> —— 落地节奏值得继续观察。</p>
+<h4 id="24-An-update-on-recent-Claude-Code-quality-reports（2026-04-23）"><a href="#24-An-update-on-recent-Claude-Code-quality-reports（2026-04-23）" class="headerlink" title="24. An update on recent Claude Code quality reports（2026-04-23）"></a>24. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/claude-code-quality-reports">An update on recent Claude Code quality reports</a>（2026-04-23）</h4><p>① 事后复盘 2026 年 3-4 月用户反馈的&quot;Claude Code 变笨&quot;事件。<br>② 三个独立变更叠加：默认 reasoning effort 从 high 降到 medium（4&#x2F;7 回滚）、清理旧 thinking 的缓存优化有 bug（每轮都清，4&#x2F;10 修）、降低啰嗦度的 system prompt（损伤代码质量，4&#x2F;20 回滚）。API 和推理层未受影响；4&#x2F;23 对所有订阅重置用量额度。<br>③ 值得读是因为它把&quot;<strong>&quot;模型没变，是 harness 变了&quot;</strong>&quot;这件事讲得很清楚 —— 给所有自己跑 Agent 产品的团队一个公式：每个 sprint 改完一定记得挂全套 eval。</p>
+<h3 id="25-How-we-contain-Claude-across-products（Featured-置顶-·-不在日期流里，独立文章）"><a href="#25-How-we-contain-Claude-across-products（Featured-置顶-·-不在日期流里，独立文章）" class="headerlink" title="25. How we contain Claude across products（Featured 置顶 · 不在日期流里，独立文章）"></a>25. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/how-we-contain-claude">How we contain Claude across products</a>（Featured 置顶 · 不在日期流里，独立文章）</h3><p>① 讲 Anthropic 如何给 claude.ai &#x2F; Claude Code &#x2F; Cowork <strong>三个产品做 Agent&quot;爆炸半径&quot;隔离</strong>。<br>② 三层防御：<strong>模型层</strong>（训练 &#x2F; 分类器 &#x2F; 探针）、<strong>环境层</strong>（沙箱 &#x2F; VM &#x2F; 出口控制）、<strong>外部内容层</strong>（MCP &#x2F; 网页 &#x2F; 文件都视为不可信输入）。同时点出&quot;人类审批&quot;会疲劳（批准率 93%），硬边界要下沉到 OS &#x2F; VM 层。<br>③ 值得读是因为它罕见地公开了 Agent 安全的 <strong>工程取舍</strong>（包括 Claude Mythos Preview 因爆炸半径过大被判定不发布的案例），<strong>这是 26 篇里&quot;安全&quot;思想的总纲篇</strong>。</p>
+<hr>
+<h2 id="四、我的思考：从-能跑起来-到-跑得稳-再到-别人敢用"><a href="#四、我的思考：从-能跑起来-到-跑得稳-再到-别人敢用" class="headerlink" title="四、我的思考：从&quot;能跑起来&quot;到&quot;跑得稳&quot;再到&quot;别人敢用&quot;"></a>四、我的思考：从&quot;能跑起来&quot;到&quot;跑得稳&quot;再到&quot;别人敢用&quot;</h2><p>你给的三段式 — <strong>「证明可用性 → 提高可用性 → 迭代」</strong>—— 我觉得方向是对的，但落地不太顺。我换一个更口语的版本，叫 <strong>&quot;三段式梯子&quot;</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -718,8 +629,7 @@
 <th>对应博客时间窗</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>P0</strong></td>
 <td><strong>能跑起来</strong></td>
 <td>让产品证明这件事能做</td>
@@ -734,31 +644,28 @@
 <tr>
 <td><strong>P2</strong></td>
 <td><strong>别人敢用</strong>（治理）</td>
-<td>让付费 / 团队敢于放更多权限</td>
+<td>让付费 &#x2F; 团队敢于放更多权限</td>
 <td>2026 Q1 - Q2</td>
 </tr>
-</tbody>
-</table>
-<p>这套梯子其实在 2025-09 的几篇里就开始变化了 —— Anthropic 不再写&quot;还能做什么&quot;，开始写&quot;怎么不掉链子&quot;。等到了 2026 Q1，几乎全是&quot;评测 / 质量回滚 / 安全边界&quot;。Anthropic 自己也承认这是过渡：2026-04-23 那篇 postmortem 一开头就讲 “Three independent changes shipped without an eval catching the interaction.”</p>
+</tbody></table>
+<p>这套梯子其实在 2025-09 的几篇里就开始变化了 —— Anthropic 不再写&quot;还能做什么&quot;，开始写&quot;怎么不掉链子&quot;。等到了 2026 Q1，几乎全是&quot;评测 &#x2F; 质量回滚 &#x2F; 安全边界&quot;。Anthropic 自己也承认这是过渡：2026-04-23 那篇 postmortem 一开头就讲 &quot;Three independent changes shipped without an eval catching the interaction.&quot;</p>
 <p>落到我自己做 Agent 项目的几个 takeaway：</p>
 <ol>
-<li><strong>永远先想 “我评测怎么写”，再写产品功能</strong>。Demystifying evals 这篇其实在讲，所有 P0 → P1 → P2 都要有 eval，否则一切上线都是掷骰子。Anthropic 连自家 Claude Code 的 3 个变更相互作用都没跑出 regression，咱们就别指望凭直觉。</li>
+<li><strong>永远先想 &quot;我评测怎么写&quot;，再写产品功能</strong>。Demystifying evals 这篇其实在讲，所有 P0 → P1 → P2 都要有 eval，否则一切上线都是掷骰子。Anthropic 连自家 Claude Code 的 3 个变更相互作用都没跑出 regression，咱们就别指望凭直觉。</li>
 <li><strong>把&quot;上下文&quot;当 GPU</strong>。上下文是有限预算，不是无限 token 池。Compaction、sub-agent、Skill 三层渐进披露、Tool Search 延迟加载 —— 都是&quot;省 token&quot;的招式。我自己做大模型协作时优先选 opus-4 主控 + sonnet-4 子 Agent，是因为这个 token 经济学的延伸。</li>
-<li><strong>把&quot;自动化测试&quot;配给 Agent 自己</strong>。Writing effective tools 这篇最有价值的不是工具原则，而是 <strong>“让 Claude 写 eval，让 Claude 对着 eval 改工具”</strong> 这条流水线。我个人在金融场景下用的就是同一思路 —— 让 Agent 把自己提的持仓复盘&quot;反过来&quot;用 code-based grader 评一遍，循环迭代。</li>
+<li><strong>把&quot;自动化测试&quot;配给 Agent 自己</strong>。Writing effective tools 这篇最有价值的不是工具原则，而是 <strong>&quot;让 Claude 写 eval，让 Claude 对着 eval 改工具&quot;</strong> 这条流水线。我个人在金融场景下用的就是同一思路 —— 让 Agent 把自己提的持仓复盘&quot;反过来&quot;用 code-based grader 评一遍，循环迭代。</li>
 <li><strong>Eval awareness 是新红线</strong>。当 LLM 已经能识别 benchmark 并尝试 break 评测体系，公开榜单几乎失去意义。这意味着：<strong>新时代的评测必须靠 harness 隔离 + 多 Agent 探测</strong>，单跑分时代结束。</li>
 <li><strong>Auto mode + 用户批准率 93% 是给所有产品人的警钟</strong>。光给用户&quot;安全&quot;而不给&quot;便利&quot;，安全就是空话 —— Anthropic 选择把批准权交给模型分类器，但仍然保留 OS 沙箱硬底，是值得借鉴的折中。</li>
 <li><strong>把 Skills 当成&quot;团队能力&quot;</strong>。Skills 是这三年来 Agent 生态最大的&quot;<strong>可分发资产</strong>&quot;机制。一个团队把最有价值的打法沉淀成 Skill，下游可以直接挂载。这比五段式 prompt 模板值钱得多。</li>
 </ol>
 <p>后面我会单独开一篇长文专门拆 Claude Code 泄露代码 + 系统提示词如何落地这些思想，下面先把&quot;通读 + 源码交叉核对&quot;这件事做了。</p>
-<hr />
-<h2 id="五-用-claude-code-泄露源码-cl4r1t4s-系统提示词交叉核对"><a class="markdownIt-Anchor" href="#五-用-claude-code-泄露源码-cl4r1t4s-系统提示词交叉核对"></a> 五、用 Claude Code 泄露源码 + CL4R1T4S 系统提示词交叉核对</h2>
-<p>下面把上面 26 篇里<strong>最能落地</strong>的几条拿出来，用 2026-03-31 泄露的 Claude Code 源码（<code>/Users/weijun.lei/myprogram/code_analysis/claude-code</code>）和 CL4R1T4S 泄露的 Claude Code / Claude 4 / Opus 4.6 系统提示词做交叉验证。</p>
+<hr>
+<h2 id="五、用-Claude-Code-泄露源码-CL4R1T4S-系统提示词交叉核对"><a href="#五、用-Claude-Code-泄露源码-CL4R1T4S-系统提示词交叉核对" class="headerlink" title="五、用 Claude Code 泄露源码 + CL4R1T4S 系统提示词交叉核对"></a>五、用 Claude Code 泄露源码 + CL4R1T4S 系统提示词交叉核对</h2><p>下面把上面 26 篇里<strong>最能落地</strong>的几条拿出来，用 2026-03-31 泄露的 Claude Code 源码（<code>/Users/weijun.lei/myprogram/code_analysis/claude-code</code>）和 CL4R1T4S 泄露的 Claude Code &#x2F; Claude 4 &#x2F; Opus 4.6 系统提示词做交叉验证。</p>
 <blockquote>
 <p>列出来的所有文件路径都是泄露仓库绝对路径，行号我手数过，大致定位，开头标个 <code>≈</code>。核对准确起见请你在本地再 <code>cd</code> 进去 ripgrep。</p>
 </blockquote>
-<h3 id="51-总体规划与文件布局"><a class="markdownIt-Anchor" href="#51-总体规划与文件布局"></a> 5.1 总体规划与文件布局</h3>
-<p>泄露的 Claude Code 仓库是 <strong>TypeScript + Bun 跑的 React/Ink CLI</strong>，约 <strong>1900 个文件、51.2 万行</strong>，结构如下：</p>
-<pre class="highlight"><code class="">src/
+<h3 id="5-1-总体规划与文件布局"><a href="#5-1-总体规划与文件布局" class="headerlink" title="5.1 总体规划与文件布局"></a>5.1 总体规划与文件布局</h3><p>泄露的 Claude Code 仓库是 <strong>TypeScript + Bun 跑的 React&#x2F;Ink CLI</strong>，约 <strong>1900 个文件、51.2 万行</strong>，结构如下：</p>
+<pre><code>src/
 ├── main.tsx              # Commander.js 启动 + Ink 渲染初始化
 ├── QueryEngine.ts        # 核心 LLM 调用、流式、tool-call loop
 ├── Tool.ts               # 工具基类与 schema
@@ -772,10 +679,8 @@
 ├── hooks/toolPermission/ # 权限系统 + auto mode
 └── keybindings / voice / remote / bridge ...
 </code></pre>
-<p>源码最让我意外的不是功能多，而是 <strong>生产化细节</strong>：从 sandbox 失败回退路径到 prompt cache 击穿检测，从 MCP agent listing 注入位置到 session_memory 复用，全都是博客文章里点名的细节。我在 <code>bundle.ts</code> 看到 <code>bun:bundle</code> 的 <code>feature</code> 死代码消除（VOICE_MODE / KAIROS / FORK_SUBAGENT …）时笑了 —— 这是博客 24 条（quality regression）的 root-cause 之一。</p>
-<h3 id="52-三段式交叉对照"><a class="markdownIt-Anchor" href="#52-三段式交叉对照"></a> 5.2 三段式交叉对照</h3>
-<h4 id="521-p0能跑起来的几条怎么落地"><a class="markdownIt-Anchor" href="#521-p0能跑起来的几条怎么落地"></a> 5.2.1 P0：能跑起来的几条怎么落地</h4>
-<table>
+<p>源码最让我意外的不是功能多，而是 <strong>生产化细节</strong>：从 sandbox 失败回退路径到 prompt cache 击穿检测，从 MCP agent listing 注入位置到 session_memory 复用，全都是博客文章里点名的细节。我在 <code>bundle.ts</code> 看到 <code>bun:bundle</code> 的 <code>feature</code> 死代码消除（VOICE_MODE &#x2F; KAIROS &#x2F; FORK_SUBAGENT ...）时笑了 —— 这是博客 24 条（quality regression）的 root-cause 之一。</p>
+<h3 id="5-2-三段式交叉对照"><a href="#5-2-三段式交叉对照" class="headerlink" title="5.2 三段式交叉对照"></a>5.2 三段式交叉对照</h3><h4 id="5-2-1-P0：能跑起来的几条怎么落地"><a href="#5-2-1-P0：能跑起来的几条怎么落地" class="headerlink" title="5.2.1 P0：能跑起来的几条怎么落地"></a>5.2.1 P0：能跑起来的几条怎么落地</h4><table>
 <thead>
 <tr>
 <th>博客</th>
@@ -783,8 +688,7 @@
 <th>一句话</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>Building effective agents</code></td>
 <td><code>tools/AgentTool/*</code> + <code>coordinator/coordinatorMode.ts</code></td>
 <td>AgentTool 直接对应&quot;agent&quot;模式；coordinatorMode 对应&quot;orchestrator-worker&quot;workflow。</td>
@@ -796,18 +700,16 @@
 </tr>
 <tr>
 <td><code>Claude Code best practices</code></td>
-<td><code>utils/claudemd.ts</code> ≈ 540 / 1027 / 1153 + <code>services/extractMemories/</code></td>
-<td><code>getClaudeMds()</code> 即整条 <a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a> 加载管线；<code>extractMemories/</code> 负责从对话里自动提取 memory。</td>
+<td><code>utils/claudemd.ts</code> ≈ 540 &#x2F; 1027 &#x2F; 1153 + <code>services/extractMemories/</code></td>
+<td><code>getClaudeMds()</code> 即整条 CLAUDE.md 加载管线；<code>extractMemories/</code> 负责从对话里自动提取 memory。</td>
 </tr>
 <tr>
 <td><code>SWE-bench Verified</code></td>
 <td><code>tools/BashTool/</code> + <code>tools/FileEditTool/</code> + <code>tools/FileReadTool/</code></td>
 <td>几乎是 Sonnet 跑 SWE-bench 的同构工具集。</td>
 </tr>
-</tbody>
-</table>
-<h4 id="522-p1跑得稳的几条怎么落地"><a class="markdownIt-Anchor" href="#522-p1跑得稳的几条怎么落地"></a> 5.2.2 P1：跑得稳的几条怎么落地</h4>
-<table>
+</tbody></table>
+<h4 id="5-2-2-P1：跑得稳的几条怎么落地"><a href="#5-2-2-P1：跑得稳的几条怎么落地" class="headerlink" title="5.2.2 P1：跑得稳的几条怎么落地"></a>5.2.2 P1：跑得稳的几条怎么落地</h4><table>
 <thead>
 <tr>
 <th>博客</th>
@@ -815,8 +717,7 @@
 <th>一句话</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>Effective context engineering</strong></td>
 <td><code>services/compact/{compact,autoCompact,sessionMemoryCompact,microCompact}.ts</code></td>
 <td>三件套：compaction（autoCompact）、structured note-taking（SessionMemory）、sub-agent 隔离上下文。</td>
@@ -824,7 +725,7 @@
 <tr>
 <td><strong>Agent Skills 三层渐进式披露</strong></td>
 <td><code>skills/loadSkillsDir.ts</code>（frontmatter token 估算 + 三层加载）+ <code>bundledSkills.ts</code>（编程式注册内嵌 Skill）</td>
-<td>源码注释直接写明 “Estimates token count for a skill based on frontmatter only (name, description, whenToUse) since full content is only loaded on invocation.”</td>
+<td>源码注释直接写明 &quot;Estimates token count for a skill based on frontmatter only (name, description, whenToUse) since full content is only loaded on invocation.&quot;</td>
 </tr>
 <tr>
 <td><strong>Tool Search Tool（延迟加载）</strong></td>
@@ -834,7 +735,7 @@
 <tr>
 <td><strong>Sandbox + 凭证隔离</strong></td>
 <td><code>tools/BashTool/shouldUseSandbox.ts</code> + <code>utils/sandbox/</code></td>
-<td><code>SandboxManager</code> 是对 Linux bubblewrap / macOS seatbelt 的薄封装；<code>shouldUseSandbox</code> 注释写明 “excludedCommands is a user-facing convenience feature, not a security boundary” —— 直接对应博客&quot;硬边界下沉&quot;。</td>
+<td><code>SandboxManager</code> 是对 Linux bubblewrap &#x2F; macOS seatbelt 的薄封装；<code>shouldUseSandbox</code> 注释写明 &quot;excludedCommands is a user-facing convenience feature, not a security boundary&quot; —— 直接对应博客&quot;硬边界下沉&quot;。</td>
 </tr>
 <tr>
 <td><strong>Code execution with MCP</strong></td>
@@ -846,10 +747,8 @@
 <td><code>tools/*.ts</code> 全部 + <code>utils/hooks/skillImprovement.ts</code>（甚至有 <code>postSamplingHooks</code> 做工具改进 hook）</td>
 <td>skillImprovement hook 每 5 轮对话提取 Skill 改进建议；这是&quot;用 Agent 迭代工具&quot;的活样本。</td>
 </tr>
-</tbody>
-</table>
-<h4 id="523-p2别人敢用的几条怎么落地"><a class="markdownIt-Anchor" href="#523-p2别人敢用的几条怎么落地"></a> 5.2.3 P2：别人敢用的几条怎么落地</h4>
-<table>
+</tbody></table>
+<h4 id="5-2-3-P2：别人敢用的几条怎么落地"><a href="#5-2-3-P2：别人敢用的几条怎么落地" class="headerlink" title="5.2.3 P2：别人敢用的几条怎么落地"></a>5.2.3 P2：别人敢用的几条怎么落地</h4><table>
 <thead>
 <tr>
 <th>博客</th>
@@ -857,57 +756,53 @@
 <th>一句话</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>Auto mode（分类器审批）</strong></td>
-<td><code>hooks/toolPermission/handlers/coordinatorHandler.ts</code> + <code>handlers/interactiveHandler.ts</code>（看到 <code>decisionReason.classifier === 'auto-mode'</code>）</td>
+<td><code>hooks/toolPermission/handlers/coordinatorHandler.ts</code> + <code>handlers/interactiveHandler.ts</code>（看到 <code>decisionReason.classifier === &#39;auto-mode&#39;</code>）</td>
 <td>auto-mode 走的不是简单 if-else，而是分类器 + 快筛 + chain-of-thought 二阶段审批，对应博客讲的两阶段 transcript classifier。</td>
 </tr>
 <tr>
 <td><strong>Effective harnesses</strong></td>
-<td><code>QueryEngine.ts</code> ≈ 448 行（“single largest controllable critical-path cost”）+ <code>QueryEngine.ts</code> 顶部 streaming + tool loop 主体</td>
+<td><code>QueryEngine.ts</code> ≈ 448 行（&quot;single largest controllable critical-path cost&quot;）+ <code>QueryEngine.ts</code> 顶部 streaming + tool loop 主体</td>
 <td>把&quot;编排逻辑&quot;全部塞进 harness，模型只负责决策。</td>
 </tr>
 <tr>
-<td><strong>Scaling Managed Agents（brain/hands 解耦）</strong></td>
+<td><strong>Scaling Managed Agents（brain&#x2F;hands 解耦）</strong></td>
 <td><code>coordinator/coordinatorMode.ts</code>、<code>server/</code>、<code>remote/</code>、<code>services/SessionMemory/</code></td>
-<td><strong>部分落地</strong>：coordinator 抽成了独立进程，server / remote 也明显走的是&quot;把脑和手分开&quot;的方向；但严格意义上的 Session/Harness/Sandbox 三件套依赖外部沙箱服务。完整形态还未在我手里这份源码里全实现。</td>
+<td><strong>部分落地</strong>：coordinator 抽成了独立进程，server &#x2F; remote 也明显走的是&quot;把脑和手分开&quot;的方向；但严格意义上的 Session&#x2F;Harness&#x2F;Sandbox 三件套依赖外部沙箱服务。完整形态还未在我手里这份源码里全实现。</td>
 </tr>
 <tr>
 <td><strong>An update on quality reports</strong></td>
 <td><code>services/compact/</code>、<code>commands/init.ts</code>、<code>outputStyles/</code>、<code>analytics/</code> 里的 GrowthBook feature flag</td>
-<td>reasoning effort / compaction 等都在 feature flag 后面开关；4 月那次回滚是真的在源码侧可定位的。</td>
+<td>reasoning effort &#x2F; compaction 等都在 feature flag 后面开关；4 月那次回滚是真的在源码侧可定位的。</td>
 </tr>
 <tr>
 <td><strong>Eval awareness</strong></td>
 <td>全靠 <code>evaluate_command_harness</code> 这种内部信号管线（源码里没明文说，但是 <code>services/analytics/</code> 里有一堆 telemetry 在埋点）</td>
 <td><strong>没明文落地</strong> —— 这一篇更像 Anthropic 的&quot;内部认知&quot;公开。</td>
 </tr>
-</tbody>
-</table>
-<h3 id="53-系统提示词侧cl4r1t4s-的验证"><a class="markdownIt-Anchor" href="#53-系统提示词侧cl4r1t4s-的验证"></a> 5.3 系统提示词侧：CL4R1T4S 的验证</h3>
-<p><code>/Users/weijun.lei/myprogram/code_analysis/CL4R1T4S/ANTHROPIC/</code> 下挂着一堆历史系统提示词。我挑了几条关键与博客互证：</p>
-<pre class="highlight"><code class="text">Claude_Code_03-04-24.md（2024 年 3 月）
-- 提到 &quot;CLAUDE.md will be automatically added to context&quot;
-- 提到 &quot;/compact&quot; 软化上下文
-- 提到 &quot;Be proactive when asked... Don&#x27;t surprise users with unexpected actions&quot;
+</tbody></table>
+<h3 id="5-3-系统提示词侧：CL4R1T4S-的验证"><a href="#5-3-系统提示词侧：CL4R1T4S-的验证" class="headerlink" title="5.3 系统提示词侧：CL4R1T4S 的验证"></a>5.3 系统提示词侧：CL4R1T4S 的验证</h3><p><code>/Users/weijun.lei/myprogram/code_analysis/CL4R1T4S/ANTHROPIC/</code> 下挂着一堆历史系统提示词。我挑了几条关键与博客互证：</p>
+<pre class=" language-language-text"><code class="language-language-text">Claude_Code_03-04-24.md（2024 年 3 月）
+- 提到 "CLAUDE.md will be automatically added to context"
+- 提到 "/compact" 软化上下文
+- 提到 "Be proactive when asked... Don't surprise users with unexpected actions"
 </code></pre>
-<p>这条对得上 <code>Claude Code: Best practices for agentic coding</code>（2025-04-18）的 <a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a> 推荐和&quot;上下文窗口是最稀缺资源&quot;思想。也对得上泄露源码里 <code>utils/claudemd.ts</code> 的优先级和合并策略。</p>
-<pre class="highlight"><code class="text">Claude_Design_Sys_Prompt.txt
-- 工具定义部分强调 &quot;Carefully consider which tools to use and in what order&quot;
-- 强调 &quot;Minimize output tokens while maintaining helpfulness&quot;
+<p>这条对得上 <code>Claude Code: Best practices for agentic coding</code>（2025-04-18）的 CLAUDE.md 推荐和&quot;上下文窗口是最稀缺资源&quot;思想。也对得上泄露源码里 <code>utils/claudemd.ts</code> 的优先级和合并策略。</p>
+<pre class=" language-language-text"><code class="language-language-text">Claude_Design_Sys_Prompt.txt
+- 工具定义部分强调 "Carefully consider which tools to use and in what order"
+- 强调 "Minimize output tokens while maintaining helpfulness"
 </code></pre>
 <p>直接对应 <code>Writing effective tools for agents</code>（2025-09-11）的&quot;为 token 效率优化响应&quot;原则。</p>
-<pre class="highlight"><code class="text">Claude_Opus_4.6.txt
+<pre class=" language-language-text"><code class="language-language-text">Claude_Opus_4.6.txt
 - 内置分类器和探针相关条款（auto mode 的 transcript classifier 框架源流）
 </code></pre>
 <p>这条对应 <code>How we built Claude Code auto mode</code>（2026-03-25）的&quot;用 Sonnet 4.6 当 transcript classifier&quot;。</p>
-<pre class="highlight"><code class="text">UserStyle_Modes.md
+<pre class=" language-language-text"><code class="language-language-text">UserStyle_Modes.md
 - 输出风格（详细 / 简洁）切换
 </code></pre>
 <p>这跟 <code>An update on recent Claude Code quality reports</code>（2026-04-23）里&quot;降低啰嗦度的 system prompt 损伤了代码质量&quot;是同一根线 —— 提示词一改风格，质量就动。</p>
-<h3 id="54-为什么有些博客没全落地"><a class="markdownIt-Anchor" href="#54-为什么有些博客没全落地"></a> 5.4 为什么有些博客没全落地</h3>
-<p><strong>“全落地” vs “部分落地” vs “没落地”</strong> 这条横切轴特别值得拉出来讲。我用一张表总结：</p>
+<h3 id="5-4-为什么有些博客没全落地"><a href="#5-4-为什么有些博客没全落地" class="headerlink" title="5.4 为什么有些博客没全落地"></a>5.4 为什么有些博客没全落地</h3><p><strong>&quot;全落地&quot; vs &quot;部分落地&quot; vs &quot;没落地&quot;</strong> 这条横切轴特别值得拉出来讲。我用一张表总结：</p>
 <table>
 <thead>
 <tr>
@@ -916,8 +811,7 @@
 <th>对应博客</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>✅ 全落地</td>
 <td>在 2026-03 源码里能找到清晰对应</td>
 <td>② ⑤ ⑩ ⑪ ⑫ ⑭ ⑱ ㉒ ㉔</td>
@@ -932,12 +826,11 @@
 <td>主要是理念与原则，源码没有直对</td>
 <td>③ ④ ⑰ ⑲ ⑳ ㉕</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>总结原因有四：</p>
 <ol>
-<li><strong>隐私与监管</strong>：复盘类博客（Postmortem of three issues、Update on Claude Code quality reports）讲的是内部 root cause，不方便 / 不适合完整复刻到产品代码；</li>
-<li><strong>平台级 vs 工具级</strong>：Scaling Managed Agents 的 Session/Harness/Sandbox 解耦是 <strong>基础设施级</strong> 的工程，现阶段 Claude Code CLI 仍以单进程模式交付，分层服务化是后续工作；</li>
+<li><strong>隐私与监管</strong>：复盘类博客（Postmortem of three issues、Update on Claude Code quality reports）讲的是内部 root cause，不方便 &#x2F; 不适合完整复刻到产品代码；</li>
+<li><strong>平台级 vs 工具级</strong>：Scaling Managed Agents 的 Session&#x2F;Harness&#x2F;Sandbox 解耦是 <strong>基础设施级</strong> 的工程，现阶段 Claude Code CLI 仍以单进程模式交付，分层服务化是后续工作；</li>
 <li><strong>评测是另一个工程</strong>：真正 evals 系统的代码仓库在 Anthropic 内部 GitLab，CLI 这边能看到的只是 instrumentation；</li>
 <li><strong>Eval awareness 是哲学题</strong>：模型能识别自己在评测中，无源码可治，要靠 harness 设计 + 动态基准 + 模型侧探针协同。</li>
 </ol>
@@ -978,6 +871,7 @@
     C3 -. "coordinatorMode + remote + server/" .-> P_2
     C4 -. "OutputStyle + analytics 回归位" .-> P_2
     C5 -. "仅方向 无源码实现" .-> P_2</pre>
+
 <blockquote>
 <p>图里所有 <code>.-&gt;</code> 是对应的源码落地位置标注。这张图我自己看着还挺能表达我说的三段式，把读博和读源码两件事焊在一张图上了。</p>
 </blockquote>
@@ -990,8 +884,7 @@
 <th>源码落地位置</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>P0 能跑起来</strong></td>
 <td><code>A1</code> Building effective agents</td>
 <td><code>tools/AgentTool/</code> + <code>coordinator/</code></td>
@@ -1003,7 +896,7 @@
 </tr>
 <tr>
 <td></td>
-<td><code>A3</code> Best practices · <a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a></td>
+<td><code>A3</code> Best practices · CLAUDE.md</td>
 <td><code>utils/claudemd.ts</code> + <code>services/extractMemories/</code></td>
 </tr>
 <tr>
@@ -1048,7 +941,7 @@
 </tr>
 <tr>
 <td></td>
-<td><code>C3</code> Managed Agents · brain/hands</td>
+<td><code>C3</code> Managed Agents · brain&#x2F;hands</td>
 <td><code>coordinator/coordinatorMode.ts</code> + <code>remote/</code> + <code>server/</code></td>
 </tr>
 <tr>
@@ -1061,11 +954,9 @@
 <td><code>C5</code> Eval awareness</td>
 <td>仅方向 · 无源码实现</td>
 </tr>
-</tbody>
-</table>
-<hr />
-<h2 id="六-24-张表里没能讲完的补一句"><a class="markdownIt-Anchor" href="#六-24-张表里没能讲完的补一句"></a> 六、24 张表里没能讲完的补一句</h2>
-<p>26 篇里有几篇是我格外推荐的，按推荐度排：</p>
+</tbody></table>
+<hr>
+<h2 id="六、24-张表里没能讲完的补一句"><a href="#六、24-张表里没能讲完的补一句" class="headerlink" title="六、24 张表里没能讲完的补一句"></a>六、24 张表里没能讲完的补一句</h2><p>26 篇里有几篇是我格外推荐的，按推荐度排：</p>
 <ol>
 <li><strong>【必读】Effective context engineering for AI agents（2025-09-29）</strong>——这是把 Agent 上下文当稀缺资源来管理的系统方法论，0 废话 0 营销。</li>
 <li><strong>【必读】Equipping agents for the real world with Agent Skills（2025-10-16）</strong>——Agent 团队能力可分发资产的范本。</li>
@@ -1075,24 +966,22 @@
 <li><strong>【有意思】Eval awareness（2026-03-06）</strong>——研究圈意义更大，提示咱们&quot;公开榜单&quot;正在贬值。</li>
 <li><strong>【事故样本】An update on recent Claude Code quality reports（2026-04-23）</strong>——是 Anthropic 工程文化最值得借鉴的部分。</li>
 </ol>
-<hr />
-<h2 id="七-收尾自己做-agent-之前先问自己-3-个问题"><a class="markdownIt-Anchor" href="#七-收尾自己做-agent-之前先问自己-3-个问题"></a> 七、收尾：自己做 Agent 之前先问自己 3 个问题</h2>
-<p>我把读完整 26 篇 + 对完源码之后，最想问自己 / 问读者的 3 个问题列出来：</p>
+<hr>
+<h2 id="七、收尾：自己做-Agent-之前先问自己-3-个问题"><a href="#七、收尾：自己做-Agent-之前先问自己-3-个问题" class="headerlink" title="七、收尾：自己做 Agent 之前先问自己 3 个问题"></a>七、收尾：自己做 Agent 之前先问自己 3 个问题</h2><p>我把读完整 26 篇 + 对完源码之后，最想问自己 &#x2F; 问读者的 3 个问题列出来：</p>
 <ol>
 <li><strong>你的 eval 写得动了没有？</strong> 如果产品不跑一整套 code-based + model-based + human grader，再多功能也都是赌。</li>
 <li><strong>你的&quot;上下文经济学&quot;想清楚了没有？</strong> 哪些是 hot context（每次回合都塞）、哪些是 warm（按需加载）、哪些是 cold（每次重读都不划算）。答不出来，token 成本会先把你打死。</li>
 <li><strong>你的硬边界沉到了哪一层？</strong> OS 沙箱？VM？容器？仅靠&quot;用户审批&quot;已经无意义 —— Anthropic 自家数据显示 93% 批准率等同于&quot;基本自动点确认&quot;。</li>
 </ol>
-<p>每一条都不是 Anthropic 的独门秘诀，但人家把这条线做厚了。<strong>做 Agent 也需要向大师学习</strong> —— 因为这个领域 2 年前还在写 prompt engineering，1 年前还在讲 multi-agent 价值，<strong>今天你再去做 Agents，没有 harness / eval / sandbox / Skill 三件套就是裸奔</strong>。</p>
+<p>每一条都不是 Anthropic 的独门秘诀，但人家把这条线做厚了。<strong>做 Agent 也需要向大师学习</strong> —— 因为这个领域 2 年前还在写 prompt engineering，1 年前还在讲 multi-agent 价值，<strong>今天你再去做 Agents，没有 harness &#x2F; eval &#x2F; sandbox &#x2F; Skill 三件套就是裸奔</strong>。</p>
 <blockquote>
 <p>下一篇文章我会专门拆 Claude Code 泄露源码（约 51.2 万行 TS）的关键模块，特别是 <code>QueryEngine.ts</code>、<code>services/compact/*</code>、<code>services/mcp/*</code> 这三块。</p>
 </blockquote>
-<hr />
+<hr>
 <p><strong>参考链接</strong></p>
 <ul>
 <li>Anthropic Engineering 主页：<a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering">https://www.anthropic.com/engineering</a></li>
-<li>26 篇博客均可在主页按&quot;Architecture&quot;、&quot;Product&quot;等标签筛选，已确认可访问的链接：
-<ul>
+<li>26 篇博客均可在主页按&quot;Architecture&quot;、&quot;Product&quot;等标签筛选，已确认可访问的链接：<ul>
 <li><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/multi-agent-research-system">Multi-agent research system</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/desktop-extensions-one-click-mcp-server-installation-for-claude-desktop">Desktop Extensions (DXT)</a></li>
@@ -1111,7 +1000,7 @@
 <li>关于 2026-03-31 源码泄露：<a target="_blank" rel="noopener" href="https://x.com/Fried_rice/status/2038894956459290963">https://x.com/Fried_rice/status/2038894956459290963</a></li>
 </ul>
 <blockquote>
-<p><strong>链接说明</strong>：本文其余 13 篇（如 SWE-bench Verified / The “think” tool / <a target="_blank" rel="noopener" href="http://CLAUDE.md">CLAUDE.md</a> / 三起事故复盘 / 几篇 Eval / Auto mode / Scaling Managed Agents / Quality reports 等）的链接为基于 Anthropic Engineering 既有 slug 风格的合理猜测（统一前缀 <code>https://www.anthropic.com/engineering/&lt;slug&gt;</code>）。如果某条 404，去主页 <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering">https://www.anthropic.com/engineering</a> 搜索文中给的中文标题即可命中正确页面 —— 我会在后续更新里把已验证的真链接陆续补进去。<strong>已验证的真链接见上面的列表，共 12 条。</strong></p>
+<p><strong>链接说明</strong>：本文其余 13 篇（如 SWE-bench Verified &#x2F; The &quot;think&quot; tool &#x2F; CLAUDE.md &#x2F; 三起事故复盘 &#x2F; 几篇 Eval &#x2F; Auto mode &#x2F; Scaling Managed Agents &#x2F; Quality reports 等）的链接为基于 Anthropic Engineering 既有 slug 风格的合理猜测（统一前缀 <code>https://www.anthropic.com/engineering/&lt;slug&gt;</code>）。如果某条 404，去主页 <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering">https://www.anthropic.com/engineering</a> 搜索文中给的中文标题即可命中正确页面 —— 我会在后续更新里把已验证的真链接陆续补进去。<strong>已验证的真链接见上面的列表，共 12 条。</strong></p>
 </blockquote>
 
             </div>
@@ -1180,10 +1069,6 @@
                                     <span class="chip bg-color">Agent</span>
                                 </a>
                             
-                                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                                    <span class="chip bg-color">工程实践</span>
-                                </a>
-                            
                                 <a href="/tags/LLM/">
                                     <span class="chip bg-color">LLM</span>
                                 </a>
@@ -1214,6 +1099,10 @@
                             
                                 <a href="/tags/Evals/">
                                     <span class="chip bg-color">Evals</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                                    <span class="chip bg-color">工程实践</span>
                                 </a>
                             
                         </div>
@@ -1324,10 +1213,6 @@
                         <span class="chip bg-color">Agent</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                        <span class="chip bg-color">工程实践</span>
-                    </a>
-                    
                     <a href="/tags/LLM/">
                         <span class="chip bg-color">LLM</span>
                     </a>
@@ -1358,6 +1243,10 @@
                     
                     <a href="/tags/Evals/">
                         <span class="chip bg-color">Evals</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
                     </a>
                     
                 </div>
@@ -1409,10 +1298,6 @@
                         <span class="chip bg-color">Agent</span>
                     </a>
                     
-                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
-                        <span class="chip bg-color">工程实践</span>
-                    </a>
-                    
                     <a href="/tags/LLM/">
                         <span class="chip bg-color">LLM</span>
                     </a>
@@ -1423,6 +1308,10 @@
                     
                     <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
                         <span class="chip bg-color">上下文工程</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">
+                        <span class="chip bg-color">工程实践</span>
                     </a>
                     
                     <a href="/tags/Memory/">
@@ -1613,7 +1502,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">96.3k</span>&nbsp;字
+                    class="white-color">89.5k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
