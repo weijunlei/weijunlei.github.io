@@ -349,14 +349,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.5k
+                    7.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    23 分
+                    26 分
                 </div>
                 
 				
@@ -809,7 +809,113 @@
 <li><strong>Try 重复</strong>：订单服务调用 Try 超时后重试，如果不防，同一盘菜可能被预扣两次 → 直接超卖；</li>
 <li><strong>Confirm / Cancel 重复</strong>：<code>OrderCreated</code> / <code>OrderCreatedFailed</code> 重复消费，或事件驱动和定时补偿同时命中同一条 <code>Created</code> 记录。</li>
 </ul>
-<p><strong>解决方案</strong>：每个事务操作绑定唯一 <code>operation_id</code>（如 <code>op_try_{order_item_id}_{dish_id}</code>），执行前先查是否已执行过；MySQL 层面用 <code>status + version</code> 做 CAS，重复操作命中终态（<code>Completed</code> / <code>Canceled</code>）就直接返回成功，不再改库存。<strong>这是本方案唯一必须靠机制硬防的一个。</strong></p>
+<p><strong>解决方案</strong>：MySQL 层面用「<strong>状态机 + 乐观锁（CAS）</strong>」做幂等，<strong>三层防护叠加</strong>：</p>
+<h4 id="第一层operation_id-唯一键约束"><a class="markdownIt-Anchor" href="#第一层operation_id-唯一键约束"></a> 第一层：<code>operation_id</code> 唯一键约束</h4>
+<p>每个事务操作绑定唯一 <code>operation_id</code>：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>operation_id 格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Try</td>
+<td><code>op_try_{order_item_id}_{dish_id}</code></td>
+</tr>
+<tr>
+<td>Confirm</td>
+<td><code>op_confirm_{reservation_id}</code></td>
+</tr>
+<tr>
+<td>Cancel</td>
+<td><code>op_cancel_{reservation_id}</code></td>
+</tr>
+</tbody>
+</table>
+<p>库存使用记录表 <code>reservation_usage_record</code> 的 <code>operation_id</code> 字段加<strong>唯一索引</strong>。重复请求第二次插入时直接触发 <code>Duplicate entry</code> 异常，应用层捕获后查询已有记录、按其状态返回结果——这层靠数据库唯一键防住&quot;完全相同的重复请求&quot;。</p>
+<h4 id="第二层状态终态判断"><a class="markdownIt-Anchor" href="#第二层状态终态判断"></a> 第二层：状态终态判断</h4>
+<p><code>reservation_usage_record</code> 表的状态机只有三条合法路径：</p>
+<table>
+<thead>
+<tr>
+<th>当前状态</th>
+<th>允许的操作</th>
+<th>目标状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Created</code></td>
+<td>Confirm</td>
+<td><code>Completed</code></td>
+</tr>
+<tr>
+<td><code>Created</code></td>
+<td>Cancel</td>
+<td><code>Canceled</code></td>
+</tr>
+<tr>
+<td><code>Completed</code> / <code>Canceled</code></td>
+<td>——</td>
+<td><strong>终态</strong>，重复请求直接返回成功</td>
+</tr>
+</tbody>
+</table>
+<p>执行任何状态变更前先 <code>SELECT status, version FROM reservation_usage_record WHERE operation_id = ?</code>：</p>
+<ul>
+<li>命中<strong>终态</strong>（<code>Completed</code> / <code>Canceled</code>）→ 直接返回成功，<strong>不再改库存</strong>；</li>
+<li>命中 <code>Created</code> → 继续走第三层的 CAS。</li>
+</ul>
+<h4 id="第三层cas-乐观锁更新"><a class="markdownIt-Anchor" href="#第三层cas-乐观锁更新"></a> 第三层：CAS 乐观锁更新</h4>
+<p>状态变更的 UPDATE 带 <code>version</code> 做 CAS，保证只有一个并发请求能推进成功：</p>
+<pre class="highlight"><code class="sql"><span class="hljs-comment">-- Confirm 的 CAS 更新</span>
+<span class="hljs-keyword">UPDATE</span> reservation_usage_record
+<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Completed&#x27;</span>, version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, updated_at <span class="hljs-operator">=</span> NOW()
+<span class="hljs-keyword">WHERE</span> operation_id <span class="hljs-operator">=</span> ? <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Created&#x27;</span> <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> #{expected_version};
+
+<span class="hljs-comment">-- Cancel 的 CAS 更新</span>
+<span class="hljs-keyword">UPDATE</span> reservation_usage_record
+<span class="hljs-keyword">SET</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Canceled&#x27;</span>, version <span class="hljs-operator">=</span> version <span class="hljs-operator">+</span> <span class="hljs-number">1</span>, updated_at <span class="hljs-operator">=</span> NOW()
+<span class="hljs-keyword">WHERE</span> operation_id <span class="hljs-operator">=</span> ? <span class="hljs-keyword">AND</span> status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Created&#x27;</span> <span class="hljs-keyword">AND</span> version <span class="hljs-operator">=</span> #{expected_version};
+</code></pre>
+<p>若 <code>affected rows = 0</code>，说明并发请求已经把记录推进到终态，当前请求直接返回成功，<strong>不重试、不报错</strong>——这层靠 <code>WHERE status = 'Created' AND version = ?</code> 防住&quot;并发撞车&quot;。</p>
+<blockquote>
+<p><strong>关键点</strong>：CAS 里同时绑了 <code>status</code> 和 <code>version</code> 两个条件。<code>status = 'Created'</code> 是<strong>业务态</strong>校验（只能从 <code>Created</code> 推进），<code>version = ?</code> 是<strong>乐观锁</strong>校验（防止两个并发请求基于同一个 <code>version</code> 推进）。少了 <code>status</code>，可能把已终态的记录又改回去；少了 <code>version</code>，并发下会两个请求都成功推进、库存被重复改。</p>
+</blockquote>
+<h4 id="三层叠加的防护矩阵"><a class="markdownIt-Anchor" href="#三层叠加的防护矩阵"></a> 三层叠加的防护矩阵</h4>
+<table>
+<thead>
+<tr>
+<th>并发场景</th>
+<th>第一层 唯一键</th>
+<th>第二层 终态判断</th>
+<th>第三层 CAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全相同的重复请求（同一个 <code>operation_id</code>）</td>
+<td>✅ 拦住</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>已处理过的请求（状态已到终态）</td>
+<td>—</td>
+<td>✅ 拦住</td>
+<td>—</td>
+</tr>
+<tr>
+<td>并发同时推进（两个请求都看到 <code>Created</code>）</td>
+<td>—</td>
+<td>—</td>
+<td>✅ 拦住</td>
+</tr>
+</tbody>
+</table>
+<p>一句话：<strong>MySQL 层面靠「唯一键 + 状态终态 + CAS 乐观锁」三层叠加做幂等，状态机管语义、CAS 管并发</strong>。<strong>这是本方案唯一必须靠机制硬防的一个。</strong> 空回滚和悬挂则被流程设计结构性消除（见 7.2、7.3）。</p>
 <h3 id="72-空回滚本方案不存在"><a class="markdownIt-Anchor" href="#72-空回滚本方案不存在"></a> 7.2 空回滚：本方案不存在</h3>
 <p><strong>什么是空回滚</strong>（标准 TCC 的经典坑）：Try 还没真正落库（或压根失败），Cancel 先到了；如果 Cancel 盲目执行&quot;退回库存&quot;，就会凭空把库存加上去。</p>
 <p><strong>为什么本方案不会发生</strong>：本方案里 Cancel 只在两种情况下被触发，而这两种情况<strong>都以&quot;Try 已经成功、<code>Created</code> 记录确实存在&quot;为前提</strong>——</p>
@@ -838,7 +944,7 @@
 <tr>
 <td>幂等</td>
 <td>框架统一幂等</td>
-<td><strong>必须主动处理</strong>：<code>operation_id</code> 唯一键 + 状态终态判断</td>
+<td><strong>必须主动处理</strong>：MySQL 层面用「唯一键 + 状态终态判断 + <code>status+version</code> CAS 乐观锁」三层叠加做幂等，状态机管语义、CAS 管并发</td>
 </tr>
 <tr>
 <td>空回滚</td>
@@ -1098,7 +1204,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一个跑在微信小程序和 Web 上的投资研究 Agent。它把巴菲特、芒格、段永平等 11 位大师的公开言论蒸馏成可运行的 Skill（女娲提取 + 达尔文进化），再叠加一套 TradingAgents 多空博弈引擎做打分，外加红黑榜、持仓复盘、四层记忆。本文拆解它为什么有效、四大功能怎么实现，以及 Skill / 记忆 / 上下文管理三块和 ClaudeCode 的异同。
+                            一个跑在微信小程序和 Web 上的投资研究 Agent。它把巴菲特、芒格、段永平等 11 位大师的公开言论蒸馏成可运行的 Skill（女娲提取 + 达尔文进化），再叠加一套 TradingAgents 多空博弈引擎做打分，外加红黑榜、持仓复盘、四层记忆。本文展示真实运行截图，把四大功能的体验、Skill 系统、记忆机制、上下文管理一次性讲清楚。
                         
                     </div>
                     <div class="publish-info">
@@ -1128,10 +1234,6 @@
                         <span class="chip bg-color">工程实践</span>
                     </a>
                     
-                    <a href="/tags/Memory/">
-                        <span class="chip bg-color">Memory</span>
-                    </a>
-                    
                     <a href="/tags/LLM/">
                         <span class="chip bg-color">LLM</span>
                     </a>
@@ -1140,12 +1242,16 @@
                         <span class="chip bg-color">Skill</span>
                     </a>
                     
-                    <a href="/tags/%E6%8A%95%E8%B5%84/">
-                        <span class="chip bg-color">投资</span>
-                    </a>
-                    
                     <a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/">
                         <span class="chip bg-color">上下文工程</span>
+                    </a>
+                    
+                    <a href="/tags/Memory/">
+                        <span class="chip bg-color">Memory</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8A%95%E8%B5%84/">
+                        <span class="chip bg-color">投资</span>
                     </a>
                     
                 </div>
@@ -1397,7 +1503,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                    class="white-color">94.4k</span>&nbsp;字
+                    class="white-color">96.3k</span>&nbsp;字
                 
             <span id="sitetime"></span>
 
